@@ -103,6 +103,14 @@ export function parseWikiShipFacts(wikitext, sourceId, {pageTitle='',revision=nu
   const artist=plain(fields.Artist);
   const voiceActor=plain(fields.VA);
   const augmentType=plain(fields.AugmentType);
+  const pointFields=[
+    intField(fields,'TechPointCollect',{max:1000}),
+    intField(fields,'TechPointMLB',{max:1000}),
+    intField(fields,'TechPoint120',{max:1000})
+  ];
+  const fleetTech=pointFields.every(v=>v!==null)
+    ?{collection:pointFields[0],maxLimitBreak:pointFields[1],maxLevel:pointFields[2],
+      total:pointFields.reduce((sum,v)=>sum+v,0)}:null;
   return {
     source:'Koumakan Wiki',sourceId:String(sourceId),pageTitle,
     revision:Number.isSafeInteger(revision)?revision:null,
@@ -112,7 +120,7 @@ export function parseWikiShipFacts(wikitext, sourceId, {pageTitle='',revision=nu
     constructionTime:/^\d{2}:\d{2}:\d{2}$/.test(constructionTime)?constructionTime:null,
     stats,slots:slots.every(Boolean)?slots:null,
     limitBreaks:limitBreaks.every(Boolean)?limitBreaks:null,
-    skillIcons,dropNote:dropNote||null,augmentType:augmentType||null
+    skillIcons,fleetTech,dropNote:dropNote||null,augmentType:augmentType||null
   };
 }
 export async function loadWikiShipFacts(wikiUrl,sourceId,fetcher=fetch){
