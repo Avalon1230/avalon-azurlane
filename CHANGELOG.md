@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.6] - 2026-11-10
+
+### Fixed
+- Repaired missing ship portraits throughout the **entire Ship Index**, not just Eagle Union. The previous iujab ship thumbnail inventory only matched 746 of 894 indexed ships.
+- Added original in-game `shipyard.png` asset URLs using **source-ID-verified base skin IDs for all 894 ships** from the existing Fernando2603/AzurLane skin manifest; the images remain on the third-party host.
+- Retained lightweight existing thumbnails where mapped and added automatic, single-retry original shipyard image fallback if the first image fails. Unknown or blocked assets still display readable hull/name placeholders instead of unrelated artwork.
+
+### Verification
+- Confirmed upstream `shipyard.png` filenames for missing Eagle Union examples: Collett, Vicksburg and Bennington, plus Royal Navy Griffin.
+- Added regression checks for every indexed ship's base skin ID, exceptional cross-linked skin ordering and missing thumbnails from multiple factions.
+- The 894 count refers to **verified source-ID mappings**, not 894 separately HTTP-validated or visually inspected remote PNG files.
+
 ## [0.7.5] - 2026-11-10
 
 ### Changed

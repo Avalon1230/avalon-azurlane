@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.7.5 ship encyclopedia, verified wiki stats and reconstructed artwork gallery**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
+> **Project status:** **v0.7.6 ship encyclopedia, verified wiki stats and reconstructed artwork gallery**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -46,7 +46,7 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 **Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, numerical fleet optimization and automatic gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
-## Full ship and equipment catalogs (v0.7.5)
+## Full ship and equipment catalogs (v0.7.6)
 
 AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. The **Ship Index opens to a faction registry** with larger, high-contrast, original in-game nationality insignia and source-derived ship counts. Main factions appear first, followed by META, **Bulins** (the source's Universal utility ships), and **Collab** (combined crossover franchises with original franchise names retained on ship records). Full-roster searching recognizes both category labels and original crossover names. Select a nation to open a dense, wiki-inspired gallery of clickable original ship portraits, compact buttons for hull/index and rarity, with rarity-descending sorting by default, optional Name/Rarity/Hull ordering, and continuous scroll that automatically loads the next 60 portraits instead of numbered ship pages. Each portrait leads to a dedicated, deep-linkable ship information page, with a return-to-roster control. A **Nations** button returns to the registry. The **Equipment Index retains** its horizontally scrollable nation chips, type/hull filtering, and 60-record pagination.
 
@@ -69,7 +69,7 @@ The new nationality metadata is a dated compact source snapshot; newly released 
 
 ## Original game artwork (v0.5.1)
 
-The UI now shows **real in-game shipyard portraits and equipment icons**, linked directly to independently hosted original Azur Lane game-client assets—not AI-generated artwork. The sources are [iujab/azurlane-images](https://github.com/iujab/azurlane-images) for ship thumbnails and [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane) for equipment icons. At the November 10 audit, **746/894** indexed ships had validated thumbnails, and all **936/936** equipment records had matching icon paths. Missing/blocked assets fall back to visible names and hull/category markers.
+The UI shows **genuine extracted in-game shipyard portraits and equipment icons**, linked to independently hosted Azur Lane game-client assets, not AI-generated substitutes. The first portrait source is [iujab/azurlane-images](https://github.com/iujab/azurlane-images), with **746/894** matching thumbnail IDs in its previous audit. For the remaining ships—and as a backup when a primary thumbnail fails—the site now links to original **`shipyard.png`** files from [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane), strictly by each character's source-verified base-skin ID. The local skin manifest establishes base-skin IDs for **894/894** ships; that is a *mapping count*, not a claim that every remote image has been visually confirmed or always loads. Equipment icons have **936/936** mapped paths. Failed remote requests retain readable hull/name placeholders.
 
 Artwork remains copyright of the Azur Lane rights holders. These repositories are **community hosts, not official publisher image servers**, and host fan-use statements do not establish formal rights-holder permission. AVALON embeds but does not mirror or bundle their binary image files. See [image sources, restrictions and provenance](docs/IMAGE_ASSETS.md). No synthetic portraits or weapons art are used.
 

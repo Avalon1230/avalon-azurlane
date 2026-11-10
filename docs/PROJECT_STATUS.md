@@ -7,6 +7,7 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 - Repository: https://github.com/Avalon1230/avalon-azurlane
 - v0.7.0 delivered by [PR #4](https://github.com/Avalon1230/avalon-azurlane/pull/4), merged into main. **93/93 tests passed**, JavaScript syntax checks passed on feature branch [Actions run 42809749844](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42809749844). GitHub Pages release deployment must be independently confirmed. See `docs/SHIP_PROFILES.md`.
 - Live site: https://avalon1230.github.io/avalon-azurlane/
+- **v0.7.6 candidate** on `fix/roster-portrait-coverage-all-factions`: restore missing ship index portraits with Fernando extracted `shipyard.png`, keyed by all 894 base-skin GroupIDs verified against `data/ship-artwork.json`. Existing thumbnail source remains primary where available; runtime errors retry the exact default shipyard once; unknowns keep placeholders. Upstream samples Collett, Vicksburg, Bennington, Griffin checked. Tests, PR, merge, Pages deployment and browser visual checks pending.
 - **v0.7.5 delivered** in [PR #9](https://github.com/Avalon1230/avalon-azurlane/pull/9), merged at `d1388d27`. Ship rosters default to rarity-descending and auto-load additional 60-portrait batches on scroll, without numbered ship pages; filters and profile return state are preserved. Equipment pagination is unchanged. Both [main quality checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42828987440) and [GitHub Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42828987419) completed successfully on 2026-11-10. Browser visual validation still recommended.
 - **v0.7.4 delivered** in [PR #8](https://github.com/Avalon1230/avalon-azurlane/pull/8), merged at `c1c01f11`. Globally strips wiki HTML editor comments from the shared ship-infobox parser to prevent section-divider artifacts in voice actors and other fields across all ship profiles; Guam was the example in regression tests, not a ship-specific exception. GitHub Actions quality checks passed on [run 42827328651](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42827328651).
 - Current release: **main / v0.7.5 / d1388d2779c7c3cd9cd8e55539035f78e3cd67cf** (rarity-first continuously scrolling ship rosters, 2026-11-10).
@@ -29,7 +30,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 - `src/app.js`: navigation, state, event delegation, local persistence, data loading, rendering.
 - `src/catalog.js`, `src/remote.js`, `src/catalog-filters.js`: editorial data, optional remote normalization/merge, nation and equipment filters.
 - `src/catalog-index.js`: nation selection and sorting, continuous batch-loaded ship gallery, paginated equipment catalog.
-- `src/ship-roster.js`: dense accessible ship portrait tiles; `src/ship-profiles.js`: ship data, profile rendering, stats/skills/gear/acquisition; `src/remote.js`: lazy full ship data fetch and caching.
+- `src/ship-roster.js`: dense accessible ship portrait tiles; `src/shipyard-assets.js`: exact ID-based game shipyard portrait fallbacks; `src/ship-profiles.js`: ship data, profile rendering, stats/skills/gear/acquisition; `src/remote.js`: lazy full ship data fetch and caching.
 - `src/nation-emblems.js`: authentic nation-emblem mapping, safe markup, unsupported-icon fallbacks (v0.6.1 candidate).
 - `src/media.js`: ship/equipment image host validation and fallback.
 - `src/fleet-suggest.js`, `src/fleet-suggest-view.js`: first deterministic, qualitative, role-based fleet suggestions.
@@ -59,7 +60,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 
 - Lycoris-AzurAPI: ship identities and nationality snapshot.
 - Fernando2603/AzurLane: equipment records and original equipment/nationality icons; see `docs/IMAGE_ASSETS.md`, `docs/CATALOG_FILTERS.md`.
-- iujab/azurlane-images: original ship thumbnails; coverage at previous audit 746 of 894.
+- iujab/azurlane-images: original thumbnails cover 746/894 IDs; Fernando2603/AzurLane now supplies source-ID-verified original shipyard portrait fallback links for all 894 records (mapping coverage, not confirmed image availability).
 - Koumakan Wiki: source confirmation via MediaWiki API was previously demonstrated by GitHub Actions. Automatic ingestion remains disabled pending validated access, schema and reuse rights. See `docs/KOUMAKAN_ACCESS.md`.
 - Community guides and expert assessments are evidence, **not** an unexamined AVALON ranking.
 
