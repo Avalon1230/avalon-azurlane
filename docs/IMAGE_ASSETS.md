@@ -11,9 +11,22 @@ AVALON displays **original game-client assets**, not AI-generated illustrations 
 | Ship thumbnail / shipyard portrait | [iujab/azurlane-images](https://github.com/iujab/azurlane-images/tree/main/thumbnails) | exact ship group ID from [Lycoris-AzurAPI](https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json), or vetted initial name–ID mapping | **746 / 894 indexed ships** |
 | Equipment icon | [Fernando2603/AzurLane equipment assets](https://github.com/Fernando2603/AzurLane/tree/main/images/equipment) | numeric item ID from [equipment.json](https://github.com/Fernando2603/AzurLane/blob/main/equipment.json); cross-checked against [equipment_icon.json](https://github.com/Fernando2603/AzurLane/blob/main/equipment_icon.json) | **936 / 936 equipment records** |
 
-The image endpoints are fixed, trusted `raw.githubusercontent.com` repository paths. Ship asset availability comes from a checked-in manifest of thumbnail filenames; no fuzzy "best guess" image matching is performed. Equipment icons use the upstream equipment numeric ID. For some retrofit entries, the base ship portrait is displayed rather than a distinct retrofit illustration. **No ship portrait is intentionally substituted with another ship's artwork.**
+The image endpoints are fixed, trusted `raw.githubusercontent.com` repository paths. Ship thumbnail availability comes from a checked-in manifest of filenames, and exact source-linked base skin IDs provide a second portrait option; no fuzzy "best guess" image matching is performed. Equipment icons use the upstream equipment numeric ID. For some retrofit entries, the base ship portrait is displayed rather than a distinct retrofit illustration. **No ship portrait is intentionally substituted with another ship's artwork.**
 
 The images are requested directly by the visitor's browser from the upstream community hosts, not downloaded, altered, or bundled in AVALON's repository. Each image is lazily loaded. Missing or blocked art falls back to the ship's hull or a gear glyph, with the item's name preserved.
+
+## Source-ID-verified shipyard portrait fallback (v0.7.6)
+
+The older thumbnail inventory covers **746 of the 894 current ship records**. Missing portraits such as Collett (10156), Vicksburg (10236), and Bennington (10720) are not evidence of missing characters: the separate Fernando2603/AzurLane asset repository contains their extracted `shipyard.png` images at default skin IDs 101560, 102360, and 107200.
+
+Every one of the 894 ships in AVALON's `data/ship-artwork.json` contains its own base skin ID matching `GroupID × 10` (including nontrivial skin ordering, such as Le Malin μ). `src/shipyard-assets.js` stores only these validated group IDs and constructs URLs exclusively on the trusted game-asset host; no unverified name-to-art association or invented illustrations are used.
+
+- Existing thumbnail available: prefer its smaller `thumbnails/<GroupID>.png` file; if it fails, retry `images/skin/<BaseSkinID>/shipyard.png` once.
+- No existing thumbnail: request `images/skin/<BaseSkinID>/shipyard.png` immediately, using a verified source ID.
+- If the second host fails, keep the existing hull/name fallback rather than show the wrong character.
+- Metadata coverage is **894 mapped shipyard skin IDs**, not a guarantee that all 894 third-party images currently exist or render correctly. Source paths were verified for the reported missing Eagle Union examples, and tests check identity mappings across all factions.
+
+The base-skin ID mapping is checked against the source artwork manifest in regression tests. No additional large artwork manifest is fetched just to paint the roster, and no image binary is copied to AVALON.
 
 ## Rights and attribution
 
