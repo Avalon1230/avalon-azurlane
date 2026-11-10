@@ -2,6 +2,17 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.5] - 2026-11-10
+
+### Changed
+- Ship rosters now open **sorted by rarity, highest first** (UR/DR → SR/PR → Elite → Rare → Common). Name and hull sorts and reverse direction remain available.
+- Removed numbered ship pages: scrolling automatically reveals successive 60-portrait batches until every matching ship is accessible, with a manual load-more fallback for browsers without intersection observation.
+- Reset the visible ship batch when nation/hull/rarity/search/sort filters change; preserve the loaded roster and scroll position when returning from a ship dossier.
+- Equipment catalog pagination remains unchanged.
+
+### Tests
+- Verify rarity-first default, continuous reachability of all 894 sample ships, no ship page controls, and continued equipment pagination.
+
 ## [0.7.4] - 2026-11-10
 
 ### Fixed
