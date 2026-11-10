@@ -30,7 +30,7 @@ export function renderSuggestedFleet({mode,ships,workspace,options={},preview=nu
     <div class="suggest-toolbar"><label class="select-wrap">Scenario <select id="suggest-scenario">${scenarioOptions.map(s=>`<option value="${E(s.id)}" ${current===s.id?'selected':''}>${E(s.label)}</option>`).join('')}</select></label>
     <label class="suggest-owned-toggle"><input id="suggest-owned-only" type="checkbox" ${options.ownedOnly?'checked':''}> Use only my checked ships</label>
     <button type="button" class="outline-btn compact" data-action="suggest-generate">Generate suggestion</button></div>
-    <div class="suggest-pool-head"><span>${candidates.length} reviewed candidates · ${candidates.filter(s=>owned.has(s.id)).length} checked as available · ${E(availability)}</span><button type="button" class="ghost-btn" data-action="suggest-toggle-pool">${options.poolOpen?'Hide':'Show'} ship availability</button></div>
+    <div class="suggest-pool-head"><span>${candidates.length} candidate ships · ${candidates.filter(s=>owned.has(s.id)).length} checked as available${E(availability)}</span><button type="button" class="ghost-btn" data-action="suggest-toggle-pool">${options.poolOpen?'Hide':'Show'} ship availability</button></div>
     ${options.poolOpen?`<div class="suggest-pool-actions"><button class="ghost-btn" type="button" data-action="suggest-all-owned">Mark all reviewed ships available</button><button class="ghost-btn" type="button" data-action="suggest-none-owned">Clear available ships</button></div>${checkboxes}`:''}
     ${result}</section>`;
 }
