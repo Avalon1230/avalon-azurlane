@@ -5,6 +5,7 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 ## Source of truth and current development
 
 - Repository: https://github.com/Avalon1230/avalon-azurlane
+- **v0.7.0 development candidate:** `feat/compact-ship-gallery-and-full-profiles`. Adds dense portrait gallery and source-backed full-page ship records with lazy Lycoris full-data loading; awaiting CI and merge. See `docs/SHIP_PROFILES.md`.
 - Live site: https://avalon1230.github.io/avalon-azurlane/
 - Current release: **main / v0.6.2 / 7593cab582c827d8c52a422b5f383d60c0bb37bc** (faction hierarchy, emblem visibility and site-wide presentation cleanup merged 2026-11-10).
 - Release PR [#2](https://github.com/Avalon1230/avalon-azurlane/pull/2) merged into `main`. Main factions → META → Bulins → Collab; authentic emblems enlarged and contrasted; routine source disclaimers consolidated under Sources while functional warnings remain.
@@ -23,6 +24,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 - `src/app.js`: navigation, state, event delegation, local persistence, data loading, rendering.
 - `src/catalog.js`, `src/remote.js`, `src/catalog-filters.js`: editorial data, optional remote normalization/merge, nation and equipment filters.
 - `src/catalog-index.js`: ship/equipment index display, search, pagination and nation selection.
+- `src/ship-roster.js`: dense accessible ship portrait tiles; `src/ship-profiles.js`: ship data, profile rendering, stats/skills/gear/acquisition; `src/remote.js`: lazy full ship data fetch and caching.
 - `src/nation-emblems.js`: authentic nation-emblem mapping, safe markup, unsupported-icon fallbacks (v0.6.1 candidate).
 - `src/media.js`: ship/equipment image host validation and fallback.
 - `src/fleet-suggest.js`, `src/fleet-suggest-view.js`: first deterministic, qualitative, role-based fleet suggestions.
@@ -65,6 +67,8 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 6. External art and data are third-party mirrors and may be incomplete, removed or out of date.
 
 ## Next development steps
+
+0. Verify v0.7.0 CI and desktop/mobile gallery/profile behavior, including bookmarked ship links, original skins, sorting/filtering and returning to the same roster. Merge only on passing checks; confirm GitHub Pages deployment.
 
 0. Verify v0.6.2 GitHub Pages deployment and inspect live desktop/mobile visuals, particularly enlarged faction emblem contrast, category navigation, Collab search, Bulins and the Sources panel. Automated quality checks passed.
 1. Confirm GitHub Pages deployment for the merged v0.6.1 version and visually verify the nation-first interface on desktop/mobile.
