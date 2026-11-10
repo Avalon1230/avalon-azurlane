@@ -14,10 +14,10 @@ export const TIER_BOARDS = Object.freeze({
   },
   equipment: {
     title: 'Equipment', icon: '⚙', kind: 'equipment', label: 'AVALON contextual gear assessments', readOnly: true,
-    subtitle: 'See which gear AVALON recommends for a target, role and mode, with viable alternatives and source-backed reasoning.'
+    subtitle: 'See which gear AVALON recommends for a target, role and mode, with viable alternatives and source-backed reasoning.',
     tiers: ['EX', 'S', 'A', 'B', 'C', 'D'],
     meanings: { EX:'Exceptional', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
-    note: 'AVALON provisional editorial grades, not numerical DPS or verified best-in-slot claims. Use target armor, ship slots, costs and attack timing before investing.'
+    note: 'AVALON provisional editorial grades, not numerical DPS or verified best-in-slot claims. Use target armor, ship slots, costs and attack timing before investing.',
   },
   waifu: {
     title: 'Waifu Favorites', icon: '♥', kind: 'ships', label: 'Personal character favorites',
