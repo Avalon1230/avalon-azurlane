@@ -74,7 +74,7 @@ export function verifiedShipSlots(data,wikiFacts=null) {
 export function loadoutDisplaySlots(data,wikiFacts=null) {
   const sourced=verifiedShipSlots(data,wikiFacts);
   const primary=Array.from({length:3},(_,index)=>sourced[index]?
-    {...sourced[index],kind:'weapon',provisional:false}:
+    {...sourced[index],kind:sourced[index].categories.includes('Auxiliary')?'auxiliary':'weapon',provisional:false}:
     {index,kind:'weapon',type:'Weapon slot · details unavailable',categories:[],
       source:'Ship-specific slot data unavailable',verified:false,provisional:false,
       minEfficiency:null,maxEfficiency:null,maxMounts:null});
