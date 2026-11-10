@@ -9,11 +9,17 @@ AVALON displays **original game-client assets**, not AI-generated illustrations 
 | Item | Community-hosted source | Match method | Audit coverage |
 | --- | --- | --- | --- |
 | Ship thumbnail / shipyard portrait | [iujab/azurlane-images](https://github.com/iujab/azurlane-images/tree/main/thumbnails) | exact ship group ID from [Lycoris-AzurAPI](https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json), or vetted initial name–ID mapping | **746 / 894 indexed ships** |
-| Equipment icon | [Fernando2603/AzurLane equipment assets](https://github.com/Fernando2603/AzurLane/tree/main/images/equipment) | numeric item ID from [equipment.json](https://github.com/Fernando2603/AzurLane/blob/main/equipment.json); cross-checked against [equipment_icon.json](https://github.com/Fernando2603/AzurLane/blob/main/equipment_icon.json) | **936 / 936 equipment records** |
+| Equipment icon | [Fernando2603/AzurLane equipment assets](https://github.com/Fernando2603/AzurLane/tree/main/images/equipment) | exact per-record image filename from [equipment_icon.json](https://github.com/Fernando2603/AzurLane/blob/main/equipment_icon.json); 417 shared-icon aliases verified against asset tree | **936 / 936 source ID mappings** |
 
-The image endpoints are fixed, trusted `raw.githubusercontent.com` repository paths. Ship thumbnail availability comes from a checked-in manifest of filenames, and exact source-linked base skin IDs provide a second portrait option; no fuzzy "best guess" image matching is performed. Equipment icons use the upstream equipment numeric ID. For some retrofit entries, the base ship portrait is displayed rather than a distinct retrofit illustration. **No ship portrait is intentionally substituted with another ship's artwork.**
+The image endpoints are fixed, trusted `raw.githubusercontent.com` repository paths. Ship thumbnail availability comes from a checked-in manifest of filenames, and exact source-linked base skin IDs provide a second portrait option; no fuzzy "best guess" image matching is performed. Equipment icons use the verified equipment-ID-to-image-file mapping supplied by the upstream author (variants may share a base icon filename). For some retrofit entries, the base ship portrait is displayed rather than a distinct retrofit illustration. **No ship portrait is intentionally substituted with another ship's artwork.**
 
 The images are requested directly by the visitor's browser from the upstream community hosts, not downloaded, altered, or bundled in AVALON's repository. Each image is lazily loaded. Missing or blocked art falls back to the ship's hull or a gear glyph, with the item's name preserved.
+
+## Complete equipment-icon mapping (v0.7.7)
+
+The 936-record `Fernando2603/AzurLane/equipment_icon.json` associates every equipment record ID with an exact original game-client icon. Crucially, **417 equipment record IDs intentionally point to another filename**, typically a shared icon for the same equipment line/rarity variant (for example, record `1020` uses `1000.png`, not a nonexistent `1020.png`). The old AVALON renderer incorrectly assembled every image URL from the record ID alone.
+
+AVALON's generated `src/equipment-assets.js` preserves all **936 explicit ID-to-icon mappings**, with each mapped filename verified against the source's `images/equipment` Git tree. The Equipment Index and its inspection drawer now resolve icons through that source mapping, not a speculative formula. Image binaries remain linked from the independent community host and are not copied or changed. Coverage means file paths were verified in Git, **not** that each URL always loads in a visitor's browser; blocked/failed image requests still show readable placeholders. Every game icon remains publisher-copyrighted fan-linked material, never AI-created artwork.
 
 ## Source-ID-verified shipyard portrait fallback (v0.7.6)
 

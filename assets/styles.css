@@ -586,3 +586,43 @@
   .ship-gear-slot>span:last-child{grid-column:2 / -1;white-space:normal}
   .ship-profile-facts{grid-template-columns:1fr}
 }
+
+
+/* v0.7.7 — equipment gallery: source icons, rarity-first scanning and continuous scroll. */
+.equipment-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px;align-items:stretch}
+.equipment-roster-tile{display:flex;flex-direction:column;position:relative;min-width:0;padding:0;
+  border:1px solid #41647b;border-radius:7px;overflow:hidden;background:#17354c;color:#f3fbff;
+  cursor:pointer;text-align:center;transition:border-color .16s,transform .16s,box-shadow .16s}
+.equipment-roster-tile:hover{transform:translateY(-2px);border-color:#8cdefb;box-shadow:0 5px 18px #0008}
+.equipment-roster-tile:focus-visible{outline:2px solid #7ed5f7;outline-offset:3px}
+.equipment-roster-name{display:grid;place-items:center;min-height:52px;max-height:52px;padding:5px;
+  background:#386483;color:#f7fcff;font-size:10px;font-weight:800;line-height:1.15;
+  overflow:hidden;overflow-wrap:anywhere}
+.equipment-roster-art{display:flex;flex:1;min-height:106px;align-items:center;justify-content:center;
+  background:radial-gradient(circle,#304b63,#182f45)}
+.equipment-roster-art .asset-roster-equipment{width:97px;height:97px;max-width:95%;max-height:97px;
+  flex:none;border:0;border-radius:0;background:transparent}
+.equipment-roster-art .asset-roster-equipment>.asset-img{object-fit:contain;background:transparent}
+.equipment-roster-art .asset-fallback{font-size:32px}
+.equipment-roster-footer{display:flex;gap:5px;align-items:center;justify-content:space-between;
+  min-height:26px;padding:5px 7px;background:#10293c;font-size:9px;font-weight:750;color:#cee6f5}
+.equipment-roster-footer>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.equipment-roster-footer>span:last-child{color:#7dcef2}
+.equipment-roster-tile.rarity-ultra-rare{border-color:#9bdde8;box-shadow:0 0 0 1px #f6b8dc50}
+.equipment-roster-tile.rarity-ultra-rare .equipment-roster-name{
+  background:linear-gradient(105deg,#659bca,#9ca9d9 25%,#cfa4d5 47%,#e1b1a5 70%,#98cfc5);
+  color:#172d45;text-shadow:0 1px 1px #ffffff77}
+.equipment-roster-tile.rarity-ultra-rare .equipment-roster-art{
+  background:linear-gradient(145deg,#b4e8ee,#d7c3f1 38%,#f5c2da 68%,#d4e7bb)}
+.equipment-roster-tile.rarity-super-rare .equipment-roster-name{background:#ad8440}
+.equipment-roster-tile.rarity-super-rare .equipment-roster-art{background:linear-gradient(140deg,#d7bd84,#9b784c)}
+.equipment-roster-tile.rarity-elite .equipment-roster-name{background:#79549a}
+.equipment-roster-tile.rarity-elite .equipment-roster-art{background:linear-gradient(145deg,#c3a6e3,#85669e)}
+.equipment-roster-tile.rarity-rare .equipment-roster-name{background:#317e9b}
+.equipment-roster-tile.rarity-rare .equipment-roster-art{background:linear-gradient(145deg,#8accdf,#40778f)}
+.equipment-roster-tile.rarity-normal .equipment-roster-name{background:#5f7886}
+.equipment-roster-tile.rarity-normal .equipment-roster-art{background:linear-gradient(145deg,#9ab6c4,#657a88)}
+.equipment-roster-tile.rarity-unknown .equipment-roster-name{background:#3d5363}
+@media(max-width:760px){.equipment-gallery{grid-template-columns:repeat(auto-fill,minmax(107px,1fr));gap:7px}
+ .equipment-roster-art{min-height:96px}.equipment-roster-art .asset-roster-equipment{width:82px;height:82px}}
+@media(prefers-reduced-motion:reduce){.equipment-roster-tile{transition:none}.equipment-roster-tile:hover{transform:none}}

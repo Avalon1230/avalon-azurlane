@@ -10,8 +10,14 @@ test('verified ship thumbnails use stable game IDs, not generated illustrations'
 });
 test('equipment icons are linked by source-record ID', () => {
   assert.equal(equipmentImageUrl({name:'Beaver Squad Tag',sourceId:'500'}), 'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/equipment/500.png');
+  // Equipment variants can share a base icon filename; never assume <ID>.png.
+  assert.equal(equipmentImageUrl({name:'Variant',sourceId:'1020'}),
+    'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/equipment/1000.png');
+  assert.equal(equipmentImageUrl({name:'Variant',sourceId:'1120'}),
+    'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/equipment/1100.png');
   assert.equal(equipmentImageUrl({name:'Fake',sourceId:'500%20onerror'}), null);
   assert.equal(equipmentImageUrl({name:'Unknown without source'}), null);
+  assert.equal(equipmentImageUrl({name:'Unverified',sourceId:'19999999'}),null);
 });
 test('unknown images show a text fallback, without any broken src request', () => {
   const markup=imageMarkup({name:'Unindexed',sourceId:'99999999',hull:'DD'},'ship');
