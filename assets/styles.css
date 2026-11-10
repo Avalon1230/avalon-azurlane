@@ -712,3 +712,43 @@
   .equipment-category-tab{font-size:10px;padding:6px 10px}
   .equipment-result-summary{align-items:flex-start}
 }
+
+
+/* v0.7.9 — keep the complete detail panel reachable on shorter viewports. */
+.detail-panel{
+  height:100vh;height:100dvh;max-height:100dvh;min-height:0;
+  overflow:hidden;display:flex;flex-direction:column;
+}
+.detail-panel>.picker-head,.detail-panel>.picker-footer{flex:0 0 auto}
+.detail-panel>.picker-head{align-items:flex-start}
+.detail-panel>.picker-head>div{min-width:0}
+.detail-panel>.picker-head .icon-btn{flex:0 0 auto}
+.detail-panel>.detail-scroll{
+  flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;scrollbar-gutter:stable;
+  -webkit-overflow-scrolling:touch;padding-right:9px;
+}
+.detail-panel>.detail-scroll>*{flex:0 0 auto}
+.detail-panel .profile-table{flex-shrink:0}
+.detail-panel .profile-table>div{min-height:0}
+.detail-panel>.picker-footer{padding-top:10px;border-top:1px solid #29485b}
+.equipment-acquisition-panel{
+  flex:none;padding:15px 16px;border:1px solid #3b7188;border-radius:9px;
+  background:#102d42;display:flex;flex-direction:column;gap:10px
+}
+.equipment-acquisition-panel h3{margin:0;color:#eaf9ff;font-size:15px}
+.equipment-acquisition-list{margin:0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:7px}
+.equipment-acquisition-list li{color:#e4f7ff;font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+.equipment-acquisition-muted{color:#b0cddc;font-size:12px;line-height:1.65;margin:0}
+.equipment-acquisition-craft{color:#bce3fa;font-weight:700;font-size:12px;margin:0;line-height:1.5}
+.equipment-acquisition-provenance{color:#95b5c8;font-size:10px;margin:0;line-height:1.6}
+.equipment-acquisition-provenance .text-link{font-size:10px}
+@media(max-height:580px){
+  .detail-panel{padding:12px 16px;gap:9px}
+  .detail-panel .picker-head h2{font-size:18px;line-height:1.15}
+  .detail-panel .profile-art{padding:8px;min-height:0}
+  .detail-panel .asset-profile{width:82px;height:82px}
+}
+.ship-compact-toolbar{margin-top:7px}
+.ship-quick-categories{margin:2px 0 8px}
+.ship-compact-toolbar .equipment-sort-bar{align-items:center}
