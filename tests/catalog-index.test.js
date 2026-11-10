@@ -37,14 +37,18 @@ test('equipment defaults to highest rarity, filters source rarity, and allows ty
     {id:'3',name:'Alpha',nation:'Eagle Union',category:'Fighter',rarity:'Super Rare',typeCode:7,forbiddenHullIds:[]},
     {id:'4',name:'Beta',nation:'Eagle Union',category:'Fighter',rarity:'Normal',typeCode:7,forbiddenHullIds:[]}
   ];
-  const html=renderCatalogIndex({kind:'equipment',records:source,renderCard:card});
-  assert.match(html,/data-action="equipment-sort" data-sort="rarity" aria-pressed="true"/);
-  assert.match(html,/Descending ↓/);
+  const byType=renderCatalogIndex({kind:'equipment',records:source,renderCard:card});
+  assert.match(byType,/id="equipment-group-select"/);
+  assert.match(byType,/<option value="type" selected>Type<\/option>/);
+  assert.match(byType,/id="equipment-sort-select"/);
+  assert.match(byType,/<option value="rarity" selected>Rarity<\/option>/);
+  assert.match(byType,/↓ Descending/);
+  assert.match(byType,/data-action="equipment-broad-type" data-broad="guns"/);
+  assert.match(byType,/id="equipment-advanced-filters"[^>]* hidden/);
+  assert.doesNotMatch(byType,/nation-strip|ship-filter-row/);
+  const html=renderCatalogIndex({kind:'equipment',records:source,equipmentGroup:'none',renderCard:card});
   const order=[...html.matchAll(/data-ship="(\d+)"/g)].map(hit=>hit[1]);
   assert.deepEqual(order,['2','3','1','4']);
-  assert.match(html,/data-action="equipment-type-filter" data-category="Fighter"/);
-  assert.match(html,/data-action="equipment-hull-filter" data-hull="CV"/);
-  assert.match(html,/data-action="equipment-rarity-filter" data-rarity="Ultra Rare"/);
   const filtered=renderCatalogIndex({kind:'equipment',records:source,rarity:'Ultra Rare',renderCard:card});
   assert.match(filtered,/data-ship="2"/);
   assert.doesNotMatch(filtered,/data-ship="3"/);
@@ -62,8 +66,8 @@ test('equipment view filters by type, origin, and hull without fictional equipab
   assert.match(html,/Eagle Fighter/);
   assert.doesNotMatch(html,/Iron Fighter<\/article>/);
   assert.doesNotMatch(html,/Unknown<\/article>/);
-  assert.match(html,/Filter potentially compatible hulls/);
-  assert.match(html,/Filter equipment type/);
+  assert.match(html,/Potentially compatible hull/);
+  assert.match(html,/Specific equipment type/);
 });
 test('search escaping prevents attribute injection in catalog controls',()=>{
   const html=renderCatalogIndex({kind:'ships',records:[],query:'" autofocus onfocus="alert(1)',renderCard:card});
