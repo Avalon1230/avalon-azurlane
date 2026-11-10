@@ -50,7 +50,8 @@ export function renderEquipmentAcquisition(record,{status='idle',index=null,erro
   if(status==='loading'||status==='idle')
     body='<p class="equipment-acquisition-muted" role="status">Looking up documented acquisition sources…</p>';
   else if(status==='error')
-    body='<p class="equipment-acquisition-muted" role="status">Acquisition source is unavailable. The equipment can still be researched through the wiki.</p>';
+    body='<p class="equipment-acquisition-muted" role="status">Acquisition source is unavailable. The equipment can still be researched through the wiki.</p>'+
+      '<button type="button" class="outline-btn compact" data-action="equipment-acquisition-retry">Retry acquisition lookup</button>';
   else if(hasSources)
     body=(match.locations.length?'<ul class="equipment-acquisition-list">'+
       match.locations.map(source=>'<li>'+esc(source)+'</li>').join('')+'</ul>':'')+
