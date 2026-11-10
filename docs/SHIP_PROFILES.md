@@ -8,6 +8,14 @@ The roster offers immediate hull/index buttons (individual hull codes plus Vangu
 
 Direct profile links use `#/ships/<source-id>`, e.g. `#/ships/30715` for Amagi(CV). The URL refers to a source ID, not an unstable editorial array position.
 
+## Artwork behavior (v0.7.1)
+
+The source shipyard portrait is fixed in the profile identity panel; selecting a skin does not change the portrait. A **separate Artwork panel** displays the selected original game illustration with high-contrast skin buttons. Clicking the art opens a centered lightbox with a native-browser **Fullscreen / Exit fullscreen** toggle, Close control and Escape handling. If an artwork fails to load, the viewer tries an explicitly source-listed alternate; otherwise it displays a clear unavailable message. Profile stats and fleet information remain accessible.
+
+Some game-client paintings with `_rw.webp` suffix contain isolated Live2D rendering layers or effects rather than the full assembled character. For these, when the source lists a distinct static `censored` image, the static image is preferred. Source URLs remain allowlisted and escaped. This does **not** mean every upstream artwork is complete; additional visual audits can improve coverage.
+
+Nation logos no longer have source-name abbreviations superimposed. If the source emblem is unavailable, a neutral placeholder is shown instead of inventing a faction insignia.
+
 ## Data contract
 
 The lightweight catalog still reads [Lycoris ship-list.json](https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json).
