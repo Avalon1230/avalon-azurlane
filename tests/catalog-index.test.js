@@ -151,8 +151,8 @@ test('rarity descending is the default ship roster order and remains filterable'
     {...shipRow(4,'Gamma','Eagle Union'),rarity:'Decisive'}
   ];
   const html=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',renderCard:card});
-  assert.match(html,/data-action="ship-sort" data-sort="rarity" aria-pressed="true"/);
-  assert.match(html,/Descending ↓/);
+  assert.match(html,/<option value="rarity" selected>Rarity<\/option>/);
+  assert.match(html,/↓ Descending/);
   const order=[...html.matchAll(/data-ship="(\d+)"/g)].map(match=>match[1]);
   assert.deepEqual(order,['2','4','1','3']);
   const filtered=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',rarity:'Ultra Rare',renderCard:card});
@@ -160,7 +160,7 @@ test('rarity descending is the default ship roster order and remains filterable'
   assert.match(filtered,/data-ship="4"/);
   assert.doesNotMatch(filtered,/data-ship="1"/);
 });
-test('compact ship filters and sorting use clickable buttons with no hull dropdown',()=>{
+test('compact ship filters keep quick hull groups, selectable advanced hull and rarity, and accessible sorting',()=>{
   const records=[
     shipRow(1,'Zeta','Eagle Union','DD'),
     {...shipRow(2,'Alpha','Eagle Union','BB'),rarity:'Ultra Rare'},
@@ -169,11 +169,12 @@ test('compact ship filters and sorting use clickable buttons with no hull dropdo
   const roster=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',
     sort:'rarity',descending:true,renderCard:card});
   assert.match(roster,/data-action="ship-hull-filter" data-hull="Vanguard"/);
-  assert.match(roster,/data-action="ship-hull-filter" data-hull="BB"/);
-  assert.match(roster,/data-action="ship-sort" data-sort="rarity"/);
-  assert.match(roster,/data-action="ship-rarity-filter" data-rarity="Ultra Rare"/);
-  assert.match(roster,/Descending ↓/);
-  assert.doesNotMatch(roster,/id="hull-filter"/);
+  assert.match(roster,/<option value="BB">BB<\/option>/);
+  assert.match(roster,/id="ship-sort-select"/);
+  assert.match(roster,/<option value="Ultra Rare">Ultra Rare<\/option>/);
+  assert.match(roster,/↓ Descending/);
+  assert.match(roster,/id="ship-advanced-filters"[^>]* hidden/);
+  assert.doesNotMatch(roster,/ship-filter-row/);
   assert.ok(roster.indexOf('data-ship="2"') < roster.indexOf('data-ship="3"'));
   assert.ok(roster.indexOf('data-ship="3"') < roster.indexOf('data-ship="1"'));
   const vanguard=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',hull:'Vanguard',renderCard:card});
