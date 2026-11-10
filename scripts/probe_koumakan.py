@@ -19,11 +19,17 @@ PROBES = [
     ("ship page", BASE + "/wiki/Musashi", "html"),
     ("root API", BASE + "/api.php?" + API_QUERY, "api"),
     ("/w API", BASE + "/w/api.php?" + API_QUERY, "api"),
+    ("ship metadata", BASE + "/w/api.php?" + urlencode({
+        "action": "query", "prop": "info", "titles": "Musashi|Unicorn", "format": "json"
+    }), "api-page"),
+    ("ship wikitext", BASE + "/w/api.php?" + urlencode({
+        "action": "parse", "page": "Musashi", "prop": "wikitext", "format": "json"
+    }), "api-wikitext"),
 ]
 
 
 def status_of_response(body: bytes, content_type: str, expectation: str) -> tuple[str, str]:
-    if expectation == "api":
+    if expectation.startswith("api"):
         try:
             obj = json.loads(body.decode("utf-8-sig"))
         except (UnicodeError, json.JSONDecodeError) as exc:
@@ -31,6 +37,16 @@ def status_of_response(body: bytes, content_type: str, expectation: str) -> tupl
         if isinstance(obj, dict) and isinstance(obj.get("query"), dict) and "general" in obj["query"]:
             site = obj["query"]["general"]
             return "MEDIAWIKI_API", str(site.get("sitename", "?"))[:90]
+        if expectation == "api-page" and isinstance(obj, dict) and isinstance(obj.get("query"), dict):
+            pages = obj["query"].get("pages", {})
+            found = [f"{v.get('title','?')} #{v.get('pageid','?')}" for v in pages.values()
+                     if isinstance(v, dict) and "missing" not in v]
+            return ("PAGE_METADATA", ", ".join(found)[:130]) if found else ("PAGE_NOT_FOUND", "No matching title")
+        if expectation == "api-wikitext" and isinstance(obj, dict) and isinstance(obj.get("parse"), dict):
+            parsed = obj["parse"]
+            body = parsed.get("wikitext", {})
+            text = body.get("*", "") if isinstance(body, dict) else ""
+            return ("WIKITEXT_AVAILABLE", f"page={parsed.get('title','?')}, chars={len(text)}") if text else ("EMPTY_WIKITEXT", "No text returned")
         return "UNEXPECTED_JSON", ", ".join(obj.keys())[:80] if isinstance(obj, dict) else "Not a JSON object"
     text = body.decode("utf-8", errors="replace")
     title_match = re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S)
@@ -56,7 +72,7 @@ def run() -> None:
         print("\nPROBE:", title, url)
         req = urllib.request.Request(url, headers={
             "User-Agent": "AVALON-AzurLane-Research/0.1 (GitHub: Avalon1230/avalon-azurlane; low-volume connectivity check)",
-            "Accept": "application/json" if expected == "api" else "text/html",
+            "Accept": "application/json" if expected.startswith("api") else "text/html",
         })
         try:
             with urllib.request.urlopen(req, timeout=12) as response:
