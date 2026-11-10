@@ -752,3 +752,66 @@
 .ship-compact-toolbar{margin-top:7px}
 .ship-quick-categories{margin:2px 0 8px}
 .ship-compact-toolbar .equipment-sort-bar{align-items:center}
+
+
+/* v0.8.0 — Tactical Loadout Intelligence: compact source-backed planner
+   beneath the permanent portrait, never over the official art gallery. */
+.ship-profile-left{display:flex;flex-direction:column;gap:13px;min-width:0}
+.ship-profile-left>.ship-profile-overview{width:100%}
+.ship-loadout-panel{min-width:0;display:flex;flex-direction:column;gap:11px;
+  padding:15px;border:1px solid #3b6581;background:linear-gradient(150deg,#112d43,#0c1e30);
+  border-radius:12px}
+.loadout-heading{display:flex;align-items:start;justify-content:space-between;gap:8px}
+.loadout-heading h2{color:#f1faff;font-size:18px;margin:4px 0 0}
+.loadout-status{font-weight:800;color:#a6e4d7;white-space:nowrap;
+  border:1px solid #468578;background:#163b3d;border-radius:5px;padding:5px 7px;font-size:9px}
+.loadout-modes{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.loadout-mode{background:#112b40;border:1px solid #3f6580;border-radius:6px;color:#bad9ea;
+  font-size:11px;font-weight:750;padding:7px 9px}
+.loadout-mode.active{background:#286f93;border-color:#8ed9f2;color:#fff}
+.loadout-context,.loadout-disclaimer{color:#91b4c8;line-height:1.45;font-size:11px;margin:0}
+.loadout-slots{display:flex;flex-direction:column;gap:8px;min-width:0}
+.loadout-slot{background:#11263a;border:1px solid #294e67;border-radius:8px;
+  padding:9px 10px;min-width:0;display:flex;flex-direction:column;gap:5px}
+.loadout-slot-heading{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px}
+.loadout-slot-heading strong{font-size:11px;color:#e4f9ff}
+.loadout-slot-heading small{font-size:9px;color:#8fbbd1}
+.loadout-gear{display:flex;gap:9px;align-items:center;text-align:left;padding:5px;
+  width:100%;border-radius:6px;border:1px solid #3f647d;background:#18374b;color:#effbff;min-width:0}
+.loadout-gear:not(.unavailable):hover{border-color:#9bd9ee;background:#22526b}
+.loadout-gear.unavailable{cursor:default;opacity:.85}
+.loadout-gear .asset-media{flex:0 0 49px;width:49px;height:49px}
+.loadout-gear .asset-img{object-fit:contain}
+.loadout-gear-name{display:flex;min-width:0;flex:1;flex-direction:column;gap:4px}
+.loadout-gear-name strong{font-size:11px;line-height:1.25;overflow-wrap:anywhere}
+.loadout-gear-name small{font-size:9px;color:#a1bdce}
+.loadout-gear>span:last-child{font-size:15px;color:#87d9f8}
+.loadout-empty-icon{width:49px;height:49px;display:grid;place-items:center;
+  background:#25445b;border-radius:6px;color:#abc4d7;font-size:23px}
+.loadout-slot-explanation{line-height:1.38}
+.loadout-evidence-label{font-size:9px;letter-spacing:.06em;color:#9cd9e5;font-weight:800}
+.loadout-slot-explanation p{font-size:10px;color:#b9cad8;margin:3px 0;overflow-wrap:anywhere}
+.loadout-alternatives,.loadout-reset{background:transparent;border:0;color:#8bdaed;
+  font-size:10px;font-weight:750;cursor:pointer;text-align:left;padding:4px 0}
+.loadout-alternatives:hover,.loadout-reset:hover{text-decoration:underline}
+.loadout-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  border-top:1px solid #325c73;padding-top:8px;gap:8px}
+.loadout-footer>span{color:#e8d4a9;font-size:10px;max-width:240px}
+.loadout-augment{color:#b8d9e6;font-size:11px;margin:0}
+.loadout-empty{font-size:12px;line-height:1.5;color:#b6cad9}
+.loadout-choice{display:flex;align-items:center;gap:8px;border:1px solid #34536d;
+  padding:8px;border-radius:8px;background:#122d43}
+.loadout-choice-inspect{display:flex;align-items:center;min-width:0;flex:1;gap:9px;
+  background:transparent;border:0;text-align:left;color:#edf9ff;padding:0}
+.loadout-choice-inspect>.asset-media{flex:none;width:56px;height:56px}
+.loadout-choice-inspect span:nth-child(2){display:flex;flex-direction:column;gap:5px;min-width:0}
+.loadout-choice-inspect strong{font-size:11px;line-height:1.3;overflow-wrap:anywhere}
+.loadout-choice-inspect small{font-size:10px;color:#a0bcd1}
+.loadout-picker-info{font-size:12px;line-height:1.5;color:#b3cad8;margin:0}
+.loadout-picker-panel{width:min(540px,100%)}
+@media(max-width:650px){
+  .ship-loadout-panel{padding:12px;gap:9px}
+  .loadout-heading h2{font-size:17px}
+  .loadout-slot{padding:8px}
+  .loadout-status{white-space:normal}
+}
