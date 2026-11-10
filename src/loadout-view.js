@@ -25,7 +25,7 @@ function renderSlot(slot) {
     '<div class="loadout-slot-explanation"><span class="loadout-evidence-label">WHY THIS CANDIDATE</span>'+
       '<p>'+E(slot.explanation)+'</p></div>'+
     (slot.candidates.length>1?'<button type="button" class="loadout-alternatives" data-action="loadout-alternatives" data-slot="'+slot.index+
-      '">Explore '+Math.min(slot.candidates.length,50)+'+ source-matched options ↗</button>':'')+
+      '">Explore '+(slot.candidates.length>50?'50+':slot.candidates.length)+' source-matched options ↗</button>':'')+
     '</article>';
 }
 export function renderLoadoutPanel(model) {
