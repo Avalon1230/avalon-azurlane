@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.6.2 faction-first Ship Index**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
+> **Project status:** **v0.7.0 compact Ship Index and detailed ship profiles**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -33,7 +33,7 @@ No build step or external JavaScript dependencies are needed. Serve the reposito
 python -m http.server 8765
 ```
 
-Then open **http://localhost:8765**. The page includes all eight game-mode families, hull-compatible fleet plans (including four OpSi surface fleets), browser-local persistence, JSON export, source status, search, and ship/equipment detail drawers. The app makes optional runtime requests to [Lycoris-AzurAPI](https://github.com/iujab/Lycoris-AzurAPI) (up to **894 source ship records**) and [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane) (up to **936 source equipment records**). These records remain on their upstream servers; the repo does not mirror their raw data or game art. If a source fails, the small editorial index remains available. Consult [data-source contracts](docs/DATA_SOURCES.md) for coverage, limitations, permissions and freshness.
+Then open **http://localhost:8765**. The page includes all eight game-mode families, hull-compatible fleet plans (including four OpSi surface fleets), browser-local persistence, JSON export, source status, search, a detailed ship-profile page and equipment detail drawers. The app makes optional runtime requests to [Lycoris-AzurAPI](https://github.com/iujab/Lycoris-AzurAPI) (up to **894 source ship records**) and [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane) (up to **936 source equipment records**). These records remain on their upstream servers; the repo does not mirror their raw data or game art. If a source fails, the small editorial index remains available. Consult [data-source contracts](docs/DATA_SOURCES.md) for coverage, limitations, permissions and freshness.
 
 Run automated checks with Node.js 20+:
 
@@ -46,12 +46,14 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 **Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, numerical fleet optimization and automatic gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
-## Full ship and equipment catalogs (v0.6.2)
+## Full ship and equipment catalogs (v0.7.0)
 
-AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. The **Ship Index opens to a faction registry** with larger, high-contrast, original in-game nationality insignia and source-derived ship counts. Main factions appear first, followed by META, **Bulins** (the source's Universal utility ships), and **Collab** (combined crossover franchises with original franchise names retained on ship records). Full-roster searching recognizes both category labels and original crossover names. Select a nation to open its roster with hull filtering, inspection, fleet assignment, and 60-record pagination. A **Nations** button returns to the registry. The **Equipment Index retains** its horizontally scrollable nation chips, type/hull filtering, and 60-record pagination.
+AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. The **Ship Index opens to a faction registry** with larger, high-contrast, original in-game nationality insignia and source-derived ship counts. Main factions appear first, followed by META, **Bulins** (the source's Universal utility ships), and **Collab** (combined crossover franchises with original franchise names retained on ship records). Full-roster searching recognizes both category labels and original crossover names. Select a nation to open a dense, wiki-inspired gallery of clickable original ship portraits, compact buttons for hull/index and sorting by Name/Rarity/Hull, and 60-record pagination. Each portrait leads to a dedicated, deep-linkable ship information page, with a return-to-roster control. A **Nations** button returns to the registry. The **Equipment Index retains** its horizontally scrollable nation chips, type/hull filtering, and 60-record pagination.
 
 - **Ships:** filter by nation/faction, hull type (DD, CL, CA, BB, CV, etc.), or search across names, hulls, rarity and nationality. Full nation mapping is sourced from Lycoris-AzurAPI's 894-ship database and joined to the compact live ship index by stable numeric ID.
 - **Equipment:** filter by nation of origin, equipment category, and the hull classes **potentially able to equip** the item. Availability combines equipment `type`, explicit `ship_type_forbidden` exclusions, and equipment-slot types observed in the ship database. This denotes **some ships of the hull type**, not automatic legality for every individual ship or slot. Nation is not an equipment faction lock.
+
+**Detailed ship records:** Opening a ship loads the full Lycoris `ships.json` source on demand (about 5 MB, session-cached), adding Lv.100/Lv.120 stats, skills, equipment efficiencies, ship artwork and skins, construction/acquisition, limit breaks, and fleet tech where provided. The full source is not required for initial catalog loading. Missing source coverage (level 125, detailed barrage damage, augments, exact slot restrictions, and fleet synergy) remains unverified; consult [Ship Profile Data Contract](docs/SHIP_PROFILES.md).
 
 The new nationality metadata is a dated compact source snapshot; newly released IDs without mappings appear as **Unclassified**, never as a guessed nation. See [catalog filter methodology and limitations](docs/CATALOG_FILTERS.md).
 
