@@ -271,3 +271,19 @@
 }
 @media(max-width:360px){.nation-emblem{width:94px;height:94px}.nation-card{min-height:125px}.nation-card-copy strong{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.nation-card{transition:none}.nation-card:hover{transform:none}}
+
+
+/* Optional explanatory material lives under Sources or expandable help, not landing banners. */
+.source-technical{border:1px solid #2a5068;border-radius:12px;padding:23px 25px;margin:0 0 22px;background:linear-gradient(135deg,#10263a,#0c1b2c)}
+.source-technical h2{font-size:20px;margin:0 0 13px;color:#eaf8ff}
+.source-technical p{font-size:13px;color:#aac4d4;line-height:1.65;margin:9px 0}
+.source-disclosure-links{display:flex;flex-wrap:wrap;gap:13px;margin-top:18px}
+.method-disclosure{margin:13px 0 20px;color:#a9c3d4;font-size:12px}
+.method-disclosure>summary{cursor:pointer;display:list-item;list-style-position:inside;padding:10px 13px;border:1px solid #2f5066;border-radius:7px;background:#11283a;width:fit-content;color:#badbed;font-weight:700}
+.method-disclosure>summary:hover{border-color:#64bddf;color:#edfaff}
+.method-disclosure[open]>summary{margin-bottom:12px}
+.method-disclosure .context-panel{margin:0}
+.method-disclosure .tier-notice{margin-top:0}
+.method-disclosure .source-alert{margin:0}
+.source-availability-warning{margin-bottom:20px}
+@media(max-width:600px){.source-technical{padding:17px}.source-disclosure-links{gap:10px;flex-direction:column}}
