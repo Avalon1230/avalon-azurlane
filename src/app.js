@@ -252,7 +252,7 @@ function evidenceLine(record) {
   return `<p><strong>Source:</strong> Editorial placeholder (not validated).</p>${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/DATA_SOURCES.md','Source methodology')}`;
 }
 function refreshEquipmentDetail() {
-  if(state.page!=='equipment'||state.detail?.kind!=='equipment')return;
+  if(state.detail?.kind!=='equipment')return;
   // A network response must not throw the reader back to the top while they
   // are scrolling through the large stats table.
   const previous=document.querySelector('.detail-panel .detail-scroll')?.scrollTop||0;
