@@ -3,16 +3,28 @@ import assert from 'node:assert/strict';
 import { renderCatalogIndex } from '../src/catalog-index.js';
 const shipRow=(id,name,nation,hull='DD')=>({id:String(id),sourceId:String(id),name,nation,hull,rarity:'Super Rare',tags:[]});
 const card=item=>'<article data-ship="'+item.id+'">'+item.name+'</article>';
-test('nation-categorized ship index supports all 894 records with 15 pages',()=>{
+test('ship roster continuously loads all 894 records without numbered pages',()=>{
   const rows=Array.from({length:894},(_,i)=>shipRow(10000+i,'Ship '+i,i%2===0?'Eagle Union':'Royal Navy',i%4===0?'BB':'DD'));
-  const page=renderCatalogIndex({kind:'ships',records:rows,page:15,renderCard:card});
-  assert.match(page,/894 total/);
-  assert.match(page,/Page <select/);
-  assert.match(page,/<option value="15" selected>/);
-  assert.match(page,/data-ship="10893"/);
-  assert.doesNotMatch(page,/data-ship="10000"/);
-  assert.match(page,/Royal Navy/);
-  assert.match(page,/Search all nations/);
+  const first=renderCatalogIndex({kind:'ships',records:rows,query:'Ship',renderCard:card});
+  assert.match(first,/Showing 60 of 894 matching ships · 894 total/);
+  assert.equal((first.match(/data-ship="/g)||[]).length,60);
+  assert.match(first,/data-ship-scroll-sentinel/);
+  assert.match(first,/data-action="ship-load-more"/);
+  assert.doesNotMatch(first,/catalog-pagination|data-catalog-page-select|Page <select|Page [0-9]+ of/);
+  const expanded=renderCatalogIndex({kind:'ships',records:rows,query:'Ship',shipLimit:894,renderCard:card});
+  assert.equal((expanded.match(/data-ship="/g)||[]).length,894);
+  assert.match(expanded,/data-ship="10893"/);
+  assert.match(expanded,/Royal Navy/);
+  assert.doesNotMatch(expanded,/data-ship-scroll-sentinel|catalog-pagination/);
+});
+test('equipment keeps numbered pagination independently from continuous ship roster',()=>{
+  const equipment=Array.from({length:121},(_,i)=>({id:String(i),name:'Gear '+i,nation:'Eagle Union',category:'Auxiliary'}));
+  const second=renderCatalogIndex({kind:'equipment',records:equipment,page:2,renderCard:card});
+  assert.match(second,/Page <select/);
+  assert.match(second,/Page 2 of 3/);
+  assert.match(second,/data-catalog-page-select="equipment"/);
+  assert.match(second,/data-ship="60"/);
+  assert.doesNotMatch(second,/data-ship="0"/);
 });
 test('equipment view filters by type, origin, and hull without fictional equipability',()=>{
   const gear=[
@@ -101,6 +113,23 @@ test('equipment index no longer shows technical method footnotes among its brows
   assert.doesNotMatch(html,/Verify ship-specific slots/);
 });
 
+test('rarity descending is the default ship roster order and remains filterable',()=>{
+  const records=[
+    shipRow(1,'Zeta','Eagle Union'),
+    {...shipRow(2,'Alpha','Eagle Union'),rarity:'Ultra Rare'},
+    {...shipRow(3,'Beta','Eagle Union'),rarity:'Elite'},
+    {...shipRow(4,'Gamma','Eagle Union'),rarity:'Decisive'}
+  ];
+  const html=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',renderCard:card});
+  assert.match(html,/data-action="ship-sort" data-sort="rarity" aria-pressed="true"/);
+  assert.match(html,/Descending ↓/);
+  const order=[...html.matchAll(/data-ship="(\\d+)"/g)].map(match=>match[1]);
+  assert.deepEqual(order,['2','4','1','3']);
+  const filtered=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',rarity:'Ultra Rare',renderCard:card});
+  assert.match(filtered,/data-ship="2"/);
+  assert.match(filtered,/data-ship="4"/);
+  assert.doesNotMatch(filtered,/data-ship="1"/);
+});
 test('compact ship filters and sorting use clickable buttons with no hull dropdown',()=>{
   const records=[
     shipRow(1,'Zeta','Eagle Union','DD'),
