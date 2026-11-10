@@ -7,8 +7,9 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 - Repository: https://github.com/Avalon1230/avalon-azurlane
 - v0.7.0 delivered by [PR #4](https://github.com/Avalon1230/avalon-azurlane/pull/4), merged into main. **93/93 tests passed**, JavaScript syntax checks passed on feature branch [Actions run 42809749844](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42809749844). GitHub Pages release deployment must be independently confirmed. See `docs/SHIP_PROFILES.md`.
 - Live site: https://avalon1230.github.io/avalon-azurlane/
-- **v0.7.4 fix candidate** on `fix/wiki-voice-actor-comment-bleed`: strip HTML editor comments before wiki Ship-field extraction to prevent Guam VA text from swallowing the “Section 2: Stats” divider or commented-out assignments. Added Guam/profile and malformed comment regression cases. PR CI and merge still to confirm.
-- Current release: **main / v0.7.3 / 044cd6eeae83d484c12fc88a9b38bda376cae628** (UR rarity, external profile toolbar, wiki-verified detailed ship facts, 2026-11-10).
+- **v0.7.5 candidate** on `feat/rarity-first-continuous-ship-scroll`: ship index defaults to highest rarity first, loads 60 portraits per automatic scrolling batch without ship pagination, retains filters and scroll on profile return; equipment keeps pagination. PR CI/merge/deployment to verify.
+- **v0.7.4 delivered** in [PR #8](https://github.com/Avalon1230/avalon-azurlane/pull/8), merged at `c1c01f11`. Removes wiki HTML editor comments from ship infobox parsing, fixing Guam's voice actor display. GitHub Actions quality checks passed on [run 42827328651](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42827328651).
+- Current release: **main / v0.7.4 / c1c01f11cda20ae8d9af86c6055bb6e891316989** (wiki infobox editor-comment cleanup, 2026-11-10).
 - v0.7.3 delivered by [PR #7](https://github.com/Avalon1230/avalon-azurlane/pull/7), merged at `044cd6ee`. **110/110 tests passed** on [Actions run 42822930387](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42822930387), and the bounded wiki schema audit passed. UR/DR now has a prismatic rarity palette (Elite remains purple), Back/Assign now live outside the profile identity card, and verified per-ship Wiki `{{Ship}}` data adds Lv.125/affinity-correct Lv100–120/base stats, armor, ASW, oil, mount counts, construction, voice/illustrator, skill icons and progression. Confirm merged deployment and browser visuals separately. Detailed barrages, augment legality and affinity/retrofit variations remain next work.
 - v0.7.2 merged in [PR #6](https://github.com/Avalon1230/avalon-azurlane/pull/6). **105/105 automated tests passed** and wiki metadata diagnostic succeeded on the feature branch ([quality run 42819356511](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42819356511)). GitHub Pages publishing and browser visual confirmation need separate checking. The full 894-ship/2,613-skin artwork manifest is source-ID linked, wiki-backed default file metadata is preferred when verified, and Tulipa/Liga icons are now mapped. Lycoris remains the ship mechanics source pending provenance-aware wiki ingestion.
 - v0.7.1 delivered in [PR #5](https://github.com/Avalon1230/avalon-azurlane/pull/5). **97/97 tests passed** and JavaScript syntax checks passed on [GitHub Actions run 42812385606](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42812385606). Changes are merged; deployment and browser visual verification should be checked independently.
@@ -27,7 +28,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 - `index.html`: shell and navigation; `assets/styles.css`: design system.
 - `src/app.js`: navigation, state, event delegation, local persistence, data loading, rendering.
 - `src/catalog.js`, `src/remote.js`, `src/catalog-filters.js`: editorial data, optional remote normalization/merge, nation and equipment filters.
-- `src/catalog-index.js`: ship/equipment index display, search, pagination and nation selection.
+- `src/catalog-index.js`: nation selection and sorting, continuous batch-loaded ship gallery, paginated equipment catalog.
 - `src/ship-roster.js`: dense accessible ship portrait tiles; `src/ship-profiles.js`: ship data, profile rendering, stats/skills/gear/acquisition; `src/remote.js`: lazy full ship data fetch and caching.
 - `src/nation-emblems.js`: authentic nation-emblem mapping, safe markup, unsupported-icon fallbacks (v0.6.1 candidate).
 - `src/media.js`: ship/equipment image host validation and fallback.
@@ -86,6 +87,12 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 ## Continuity protocol
 
 When a new conversation starts: retrieve relevant prior decisions, inspect latest commits/branches/PRs, read this file and CHANGELOG, compare code against claims, and resume the current task. Never silently reset to older milestones or claim tests/deployment without verification. Update this handoff after substantial development.
+
+## Ship roster UI follow-up
+
+- Verify rarity-descending default and sorting reversal on Eagle Union, Sakura Empire, and global search.
+- Verify automatic batch loading through the final ship on desktop/mobile, especially after searching or changing filters.
+- Verify profile Back restores the previous scroll position and expanded roster; equipment navigation must retain its page controls.
 
 ## Artwork UI follow-up
 
