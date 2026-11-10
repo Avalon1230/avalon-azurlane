@@ -1,0 +1,19 @@
+name: Wiki ship mechanics schema audit
+on:
+  pull_request:
+    paths:
+      - scripts/audit_wiki_ship_schema.py
+      - .github/workflows/wiki-ship-schema.yml
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect bounded wiki ship schema metadata
+        run: python scripts/audit_wiki_ship_schema.py
