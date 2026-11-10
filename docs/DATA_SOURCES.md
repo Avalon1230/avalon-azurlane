@@ -24,7 +24,7 @@ A web crawler's cached/indexed response for Koumakan (`https://azurlane.koumakan
 - The source hull types are mapped to display-compatible hull codes. An unqualified "Sailing Frigate" source entry is **not** assigned a main/vanguard placement automatically because a precise role subtype is needed.
 - Equipment `type` and `rarity` numbers use mappings verified against representative upstream records. An unrecognized value remains explicitly marked Other/Unknown.
 - All user-visible remote fields are escaped as HTML; links go to controlled source domains or encoded wiki search pages.
-- The interface caps simultaneous rendered results to 72 catalog cards (100 picker choices) for performance; type a search term to refine.
+- The ship and equipment indices initially display 60 records and progressively reveal more as the user scrolls, without artificial dataset cutoff; type a search term to refine.
 - Equipment enhancement attributes are read from the highest source-reported enhancement level per record. This is **not** a claim about the best upgrade, damage, or compatibility.
 
 ## Evidence and scoring boundary
@@ -33,10 +33,16 @@ A web crawler's cached/indexed response for Koumakan (`https://azurlane.koumakan
 
 Production scoring would additionally require reliable enemy tables, skill descriptions, enhancement/loadout validation, uptime and targeting assumptions, mode mechanics, tests, uncertainty and reproducible calculations. Every assessment must be dated and attributed. Community opinions are citations to consider, **not votes that define truth**.
 
+## Optional equipment acquisition provenance (v0.7.9)
+
+- [Linuxxy0/AzurLaneData May 2, 2026 snapshot — equipment drops](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/equip_drops.json): a separate, read-only dataset used lazily when inspecting equipment.
+- Original numeric source IDs are matched exactly. In the audited static input, 874/936 Fernando image-record IDs also have acquisition records; the rest remain explicitly **not verified**.
+- Snapshot locations, Gear Lab recipe flags, and source timestamps are reference information only; event windows, availability by server and material costs are not live or fully audited.
+
 ## Known limitations / future work
 
 - Source fetches may fail due to GitHub availability, CORS restrictions, upstream schema changes, or network policy.
 - English ship list may contain collaboration and support units or variants for which fleet slot eligibility cannot be resolved from hull family alone.
-- The equipment data lacks complete, independently audited acquisition locations / recipes; the UI labels these as unverified rather than guessing.
+- The base Fernando equipment source does not contain complete acquisition routes. From v0.7.9, equipment details optionally load the dated May 2, 2026 AzurLaneData `equip_drops.json` snapshot on demand by exact numeric source ID. Known locations and Gear Lab recipe flags are displayed with source provenance; unknown, offline, outdated, or server-dependent availability is **not guessed**. See [Equipment Acquisition Data](EQUIPMENT_ACQUISITION.md).
 - Rarity from the source may reflect a ship's base form, even if the curated label includes "(Retrofit)".
 - Indexed game records are not an endorsement from their authors; the AVALON application remains unaffiliated with game developers, maintainers and the original ECTL.
