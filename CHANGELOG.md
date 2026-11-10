@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.8] - 2026-11-11
+
+### Changed
+- Replaced the Equipment Index's large nation, type, hull, rarity, and sorting control rows with a **compact sticky search/sort toolbar** and eight broad equipment tabs: All, Guns, Torpedoes, Aircraft, AA, Auxiliary, ASW, and Special.
+- Moved detailed nation-of-origin, potentially-compatible hull, source rarity, and exact equipment-type filters into a **collapsible advanced panel**, keeping active selections visible as removable chips and providing a reset control. No filters were discarded.
+- Equipment now defaults to grouping by **specific equipment type** rather than nation; sorting is within each explicit group. Optional **All items (global sort)** compares source rarity (or name/type) across all nations and types. Also added Nation and Rarity grouping modes.
+- Added optional conservative **Exact-name families**: multiple Fernando source records may be collapsed only when their normalized source name, equipment type, and nation agree. Shared icon filenames alone never create a family. Family inspection shows each original item and ID; no upgrade-tree or equivalence claim is made.
+- Preserved original game artwork, accurate source rarity, 60-entry progressive scroll, ship browsing, existing equipment detail inspections, and mode-aware source disclaimers.
+
+### Tests
+- Added focused checks for broad type classification, exact-source family identification, global versus grouped ordering, filter visibility and escaping, family inspection, and scroll reachability.
+
 ## [0.7.7] - 2026-11-11
 
 ### Fixed

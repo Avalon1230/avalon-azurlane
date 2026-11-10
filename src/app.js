@@ -7,7 +7,8 @@ import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, mov
 import { renderTierView } from './tier-view.js';
 import { imageMarkup, assetCoverage } from './media.js';
 import { renderCatalogIndex, SHIP_ROSTER_BATCH_SIZE, EQUIPMENT_ROSTER_BATCH_SIZE } from './catalog-index.js';
-import { renderEquipmentRosterTile } from './equipment-roster.js';
+import { renderEquipmentRosterTile, renderEquipmentFamilyDetails } from './equipment-roster.js';
+import { equipmentFamilyMembers, EQUIPMENT_GROUP_MODES, EQUIPMENT_BROAD_TYPES } from './equipment-browse.js';
 import { renderShipRosterTile } from './ship-roster.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
@@ -36,7 +37,7 @@ const pages = [
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   shipNation:'all', gearNation:'all', gearHull:'all', shipVisibleCount:SHIP_ROSTER_BATCH_SIZE, shipRosterScrollY:0, gearVisibleCount:EQUIPMENT_ROSTER_BATCH_SIZE,
-  shipSort:'rarity', shipDescending:true, shipRarity:'all', gearSort:'rarity', gearDescending:true, gearRarity:'all', profileLevel:'level120',profileSkin:0,artViewerOpen:false,
+  shipSort:'rarity', shipDescending:true, shipRarity:'all', gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
   shipDetails:{status:'idle',data:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
@@ -143,7 +144,7 @@ function go(page) {
   state.category = 'all';
   state.shipNation='all';state.gearNation='all';state.gearHull='all';
   state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;state.shipRosterScrollY=0;state.gearVisibleCount=EQUIPMENT_ROSTER_BATCH_SIZE;
-  state.shipSort='rarity';state.shipDescending=true;state.shipRarity='all';state.gearSort='rarity';state.gearDescending=true;state.gearRarity='all';
+  state.shipSort='rarity';state.shipDescending=true;state.shipRarity='all';state.gearSort='rarity';state.gearDescending=true;state.gearRarity='all';state.gearBroadType='all';state.gearGroup='type';state.gearAdvancedOpen=false;
   state.picker = null;
   state.detail = null;
   state.artViewerOpen=false;
@@ -241,7 +242,7 @@ function renderShips() {
 }
 function renderEquipment() {
   return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Browse equipment by origin, type, or compatible hull.')}${warning()}
-  ${renderCatalogIndex({kind:'equipment',records:EQUIPMENT,query:state.query,nation:state.gearNation,hull:state.gearHull,category:state.category,equipmentLimit:state.gearVisibleCount,rarity:state.gearRarity,sort:state.gearSort,descending:state.gearDescending,renderCard:renderEquipmentRosterTile,sourceStatus:state.sync.status})}`;
+  ${renderCatalogIndex({kind:'equipment',records:EQUIPMENT,query:state.query,nation:state.gearNation,hull:state.gearHull,category:state.category,equipmentLimit:state.gearVisibleCount,rarity:state.gearRarity,sort:state.gearSort,descending:state.gearDescending,broadType:state.gearBroadType,equipmentGroup:state.gearGroup,equipmentAdvancedOpen:state.gearAdvancedOpen,renderCard:renderEquipmentRosterTile,sourceStatus:state.sync.status})}`;
 }
 function evidenceLine(record) {
   if(record?.source === 'lycoris') return `<p><strong>Source:</strong> Lycoris-AzurAPI ship-list.json (independent community snapshot).</p>${link('https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json','Inspect source data')}`;
@@ -250,6 +251,8 @@ function evidenceLine(record) {
 }
 function renderDetails() {
   const d=state.detail;
+  if(d?.kind==='equipment-family')
+    return renderEquipmentFamilyDetails(equipmentFamilyMembers(EQUIPMENT,d.id));
   const item=d.kind==='ship'?SHIP_MAP.get(d.id):EQUIPMENT.find(x=>x.id===d.id);
   if (!item) return '';
   const ship=d.kind==='ship';
@@ -516,6 +519,37 @@ function handleAction(target) {
     state.shipDescending=!state.shipDescending;state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'ship-load-more') {loadMoreShips();return;}
+
+  if (action === 'equipment-broad-type') {
+    const broad=target.dataset.broad;
+    if(!EQUIPMENT_BROAD_TYPES.some(x=>x.id===broad))return;
+    state.gearBroadType=broad;state.category='all';resetEquipmentBatch();render();
+    document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
+  }
+  if (action === 'equipment-toggle-filters') {
+    state.gearAdvancedOpen=!state.gearAdvancedOpen;render();
+    document.querySelector('[data-action="equipment-toggle-filters"]')?.focus();
+    return;
+  }
+  if (action === 'equipment-reset-filters') {
+    state.gearNation='all';state.gearHull='all';state.gearRarity='all';
+    state.category='all';state.gearBroadType='all';resetEquipmentBatch();render();return;
+  }
+  if (action === 'equipment-clear-filter') {
+    const field=target.dataset.field;
+    if(field==='nation')state.gearNation='all';
+    else if(field==='hull')state.gearHull='all';
+    else if(field==='rarity')state.gearRarity='all';
+    else if(field==='category')state.category='all';
+    else return;
+    resetEquipmentBatch();render();return;
+  }
+  if (action === 'equipment-family-open') {
+    const id=target.dataset.familyId;
+    if(!id||equipmentFamilyMembers(EQUIPMENT,id).length<2)return;
+    state.detail={kind:'equipment-family',id};render();
+    document.querySelector('.detail-panel .icon-btn')?.focus();return;
+  }
   if (action === 'equipment-type-filter') {
     state.category=target.dataset.category||'all';resetEquipmentBatch();render();
     document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
@@ -663,6 +697,27 @@ document.addEventListener('click', event => {
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  const id=event.target.id, value=event.target.value;
+  if(id==='equipment-sort-select') {
+    if(!['rarity','name','type'].includes(value))return;
+    state.gearSort=value;state.gearDescending=value==='rarity';resetEquipmentBatch();render();return;
+  }
+  if(id==='equipment-group-select') {
+    if(!EQUIPMENT_GROUP_MODES.some(x=>x.value===value))return;
+    state.gearGroup=value;resetEquipmentBatch();render();return;
+  }
+  if(id==='equipment-nation-select') {
+    state.gearNation=value||'all';resetEquipmentBatch();render();return;
+  }
+  if(id==='equipment-hull-select') {
+    state.gearHull=value||'all';resetEquipmentBatch();render();return;
+  }
+  if(id==='equipment-rarity-select') {
+    state.gearRarity=value||'all';resetEquipmentBatch();render();return;
+  }
+  if(id==='equipment-subtype-select') {
+    state.category=value||'all';resetEquipmentBatch();render();return;
+  }
   if(event.target.id==='suggest-scenario') { state.suggestOptions.scenario=event.target.value;state.suggestPreview=null;saveSuggestOptions();render();return; }
   if(event.target.id==='suggest-owned-only') { state.suggestOptions.ownedOnly=event.target.checked;state.suggestPreview=null;saveSuggestOptions();render();return; }
   if(event.target.matches('[data-suggest-owned]')) {
