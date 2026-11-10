@@ -12,7 +12,8 @@ test('verified nations map to original in-game nationality icon assets',()=>{
   assert.match(nationEmblemUrl('To LOVE-Ru'),/\/nationality\/100\.png$/);
   assert.match(nationEmblemUrl('Bulins'),/\/nationality\/0\.png$/);
   assert.match(nationEmblemUrl('Collab'),/\/nationality\/100\.png$/);
-  assert.equal(nationEmblemUrl('Kingdom of Tulipa'),null);
+  assert.match(nationEmblemUrl('Kingdom of Tulipa'),/\/Nl_1\.png$/);
+  assert.match(nationEmblemUrl('Liga de Pedrería'),/\/Ldp_1\.png$/);
 });
 test('nation emblem markup retains text fallback and escapes untrusted names',()=>{
   assert.match(nationEmblemMarkup('Eagle Union'),/nation-emblem-fallback/);
