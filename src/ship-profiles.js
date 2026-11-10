@@ -35,29 +35,87 @@ function profilePanel(title, body, id = '') {
   return '<section class="ship-profile-panel"' + (id ? ' id="' + E(id) + '"' : '') +
     '><h2>' + E(title) + '</h2>' + body + '</section>';
 }
+
+/**
+ * A number of game-client *_rw.webp paintings are Live2D/render-layer
+ * components rather than the assembled skin image. Prefer the separately
+ * sourced static variant where one is listed; retain the other as fallback.
+ * Neither image is assumed to contain a complete assembled illustration.
+ */
+export function resolveSkinArtwork(skin) {
+  const urls = skin?.images || {};
+  const original = trustedShipPainting(urls.default || skin?.image);
+  const staticVersion = trustedShipPainting(urls.censored);
+  const isLayer = original && /_rw\.webp$/i.test(original);
+  const primary = isLayer && staticVersion && staticVersion !== original
+    ? staticVersion : original || staticVersion;
+  const fallback = primary !== original ? original : (staticVersion !== primary ? staticVersion : null);
+  return { primary: primary || null, fallback: fallback || null };
+}
+function artImage(skin, className, shipName, lazy = true) {
+  const {primary,fallback} = resolveSkinArtwork(skin);
+  if (!primary) return '';
+  return '<img class="' + E(className) + '" src="' + E(primary) + '"' +
+    (fallback ? ' data-fallback-src="' + E(fallback) + '"' : '') +
+    ' alt="' + E(shipName + ' — ' + (skin?.name || 'Artwork')) +
+    '" ' + (lazy ? 'loading="lazy" ' : '') +
+    'decoding="async" referrerpolicy="no-referrer">';
+}
+function artworkPanel(data, skinIndex) {
+  const skins=Array.isArray(data?.skins)?data.skins:[];
+  const index=Math.max(0,Math.min(Math.max(0,skins.length-1),skinIndex));
+  const current=skins[index];
+  const name=data.names?.en || 'Ship';
+  const image=artImage(current,'ship-art-preview-image',name);
+  return '<section class="ship-art-panel" aria-labelledby="ship-artwork-heading">' +
+    '<div class="ship-art-panel-head"><div><span class="eyebrow">OFFICIAL ARTWORK</span>' +
+    '<h2 id="ship-artwork-heading">Artwork</h2></div>' +
+    '<span class="ship-art-current">' + E(current?.name || 'No artwork available') + '</span></div>' +
+    '<button type="button" class="ship-art-preview" data-action="profile-art-open" ' +
+    (image ? 'aria-label="Enlarge ' + E(current?.name || name) + ' artwork"' : 'disabled') + '>' +
+    image +
+    '<span class="ship-art-missing">Artwork unavailable for this skin</span>' +
+    (image ? '<span class="ship-art-zoom-hint">Enlarge artwork ↗</span>' : '') +
+    '</button>' +
+    (skins.length > 1 ? '<div class="ship-art-variants" role="group" aria-label="Choose character artwork">' +
+      skins.map((skin,i) => '<button type="button" class="ship-art-variant' +
+        (i===index?' active':'') + '" data-action="profile-skin" data-index="' + i +
+        '" aria-pressed="' + (i===index) + '">' + E(skin.name || 'Skin '+(i+1)) +
+        '</button>').join('') + '</div>' : '') +
+    '</section>';
+}
+function artworkViewer(data, skinIndex) {
+  const skins=Array.isArray(data.skins)?data.skins:[];
+  const current=skins[Math.max(0,Math.min(skins.length-1,skinIndex))];
+  const name=data.names?.en || 'Ship';
+  const image=artImage(current,'ship-art-viewer-image',name,false);
+  return '<div class="ship-art-overlay" data-action="profile-art-close">' +
+    '<section id="ship-art-lightbox" class="ship-art-lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer">' +
+    '<header class="ship-art-viewer-head"><div><span class="eyebrow">ARTWORK VIEWER</span>' +
+    '<h2>' + E(name) + ' · ' + E(current?.name || 'Artwork') + '</h2></div>' +
+    '<div class="ship-art-viewer-actions">' +
+    '<button type="button" class="outline-btn compact" data-action="profile-art-fullscreen">⛶ Fullscreen</button>' +
+    '<button type="button" class="outline-btn compact" data-action="profile-art-close">✕ Close</button></div></header>' +
+    '<div class="ship-art-viewer-canvas">' + image +
+    '<span class="ship-art-missing">Artwork unavailable for this skin</span></div>' +
+    '</section></div>';
+}
 function profileHead(ship, data, skinIndex) {
-  const skins = Array.isArray(data?.skins) ? data.skins : [];
-  const safeIndex = Math.max(0,Math.min(skins.length-1,skinIndex));
-  const picture = trustedShipPainting(skins[safeIndex]?.images?.default || skins[safeIndex]?.image);
-  const cover = picture
-    ? '<img class="ship-profile-painting" src="' + E(picture) + '" alt="' + E(data.names?.en || ship?.name || 'Ship') + ' artwork" loading="lazy" decoding="async" referrerpolicy="no-referrer">'
-    : imageMarkup(ship || data?.names?.en || 'Ship','ship','asset-profile');
   const fallbackName = data?.names?.en || ship?.name || 'Unknown ship';
   const identity = ship ? shipBrowseDisplayNation(ship) : data?.nationality || 'Unclassified';
   const metadata = [identity,data?.class,data?.hullType, data?.rarity || ship?.rarity].filter(Boolean);
-  return '<div class="ship-profile-top"><div class="ship-profile-cover">' + cover + '</div>' +
+  // Keep the shipyard thumbnail/portrait constant; skins only change the
+  // independent artwork panel.
+  return '<div class="ship-profile-top"><section class="ship-profile-overview">' +
+    '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
     '<div class="ship-profile-actions"><button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>' +
     (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
-    '</div>' +
-    (skins.length>1 ? '<div class="ship-profile-skin-selector"><span>Artwork</span><div class="ship-profile-choices">' +
-      skins.map((skin,i) => '<button type="button" class="filter-chip' + (i===safeIndex?' active':'') +
-        '" data-action="profile-skin" data-index="' + i + '" aria-pressed="' + (i===safeIndex) + '">' + E(skin.name || 'Skin '+(i+1)) + '</button>').join('') +
-      '</div></div>' : '') +
-    '</div></div>';
+    '</div></div></section>' + artworkPanel(data,skinIndex) + '</div>';
 }
+
 function statPanel(data, level) {
   const levels=['level100','level120','level100Retrofit','level120Retrofit'].filter(k=>data.stats?.[k]);
   if(!levels.length) return profilePanel('Statistics','<p class="profile-unavailable">No verified stat block loaded.</p>');
@@ -125,7 +183,7 @@ function sourcePanel(data, ship) {
     '<a class="outline-btn compact" href="https://github.com/iujab/Lycoris-AzurAPI" target="_blank" rel="noopener noreferrer">Game-data source ↗</a></div>'+
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, error='' } = {}) {
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
@@ -148,5 +206,5 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
     statPanel(data,level)+gearPanel(data)+skillsPanel(data)+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data)+progressionPanel(data)+sourcePanel(data,ship)+
-    '</div></div></div>';
+    '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex):'')+'</div>';
 }
