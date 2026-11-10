@@ -112,15 +112,27 @@ test('enlarge viewer is a separate opt-in layer with a fullscreen control',()=>{
 test('reconstructed paintings supersede all broken raw image layers',()=>{
   const layer='https://raw.githubusercontent.com/iujab/azurlane-images/main/paintings/xinzexi_4_rw.webp';
   const source={name:'New Jersey',images:{default:layer,censored:layer}};
-  assert.deepEqual(resolveSkinArtwork(source),{primary:null,fallback:null});
+  assert.deepEqual(resolveSkinArtwork(source),{primary:null,fallback:null,secondFallback:null});
   const first='https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/105173/painting.png';
   const noBg='https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/105173/painting_n.png';
   const reconstructed={name:'Dancing in the Moonlight',images:{painting:first,paintingNoBackground:noBg}};
-  assert.deepEqual(resolveSkinArtwork(reconstructed),{primary:first,fallback:noBg});
+  assert.deepEqual(resolveSkinArtwork(reconstructed),{primary:first,fallback:noBg,secondFallback:null});
   const html=renderShipProfile({ship,data:details,artworkSkins:[reconstructed]});
   assert.match(html,/105173\/painting\.png/);
   assert.match(html,/data-fallback-src="[^"]*105173\/painting_n\.png"/);
   assert.doesNotMatch(html,/_rw\.webp/);
   assert.equal(trustedReconstructedPainting('javascript:alert(1)'),null);
   assert.equal(trustedReconstructedPainting('https://evil.example/105173/painting.png'),null);
+});
+
+test('verified wiki artwork takes precedence with reconstructed art and no-background fallbacks',()=>{
+  const wiki='https://azurlane.netojuu.com/images/9/9e/New_Jersey.png';
+  const primary='https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/105170/painting.png';
+  const noBg='https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/105170/painting_n.png';
+  const skin={name:'New Jersey',images:{wiki,painting:primary,paintingNoBackground:noBg}};
+  assert.deepEqual(resolveSkinArtwork(skin),{primary:wiki,fallback:primary,secondFallback:noBg});
+  const html=renderShipProfile({ship,data:details,artworkSkins:[skin]});
+  assert.match(html,/src="https:\/\/azurlane\.netojuu\.com\/images\/9\/9e\/New_Jersey\.png"/);
+  assert.match(html,/data-fallback-src="[^"]*105170\/painting\.png"/);
+  assert.match(html,/data-last-resort-src="[^"]*105170\/painting_n\.png"/);
 });
