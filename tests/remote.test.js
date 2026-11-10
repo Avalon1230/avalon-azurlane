@@ -70,3 +70,21 @@ test('mode-aware evaluation dimensions cover all eight theaters without fabricat
     assert.equal(evaluationState({source:'lycoris'}).tier,null);
   }
 });
+test('source identity keeps different ships sharing the same name as separate records',()=>{
+  const duplicateNames=[
+    {id:'10706',name:'Enterprise',hullType:'Aircraft Carrier',rarity:'Super Rare'},
+    {id:'20232',name:'Enterprise',hullType:'Light Cruiser',rarity:'Elite'},
+    {id:'29901',name:'Neptune',hullType:'Light Cruiser',rarity:'Priority'},
+    {id:'1010001',name:'Neptune',hullType:'Destroyer',rarity:'Super Rare'}
+  ];
+  const source=normalizeShips([...ships,...duplicateNames]);
+  const merged=mergeShipCatalog([],source);
+  assert.equal(merged.length,source.length);
+  assert.deepEqual(merged.filter(x=>x.name==='Enterprise').map(x=>x.sourceId),['10706','20232']);
+  assert.deepEqual(merged.filter(x=>x.name==='Neptune').map(x=>x.sourceId),['29901','1010001']);
+  const editorial=[{id:'enterprise',name:'Enterprise',hull:'CV'}];
+  const withEditorial=mergeShipCatalog(editorial,source);
+  assert.equal(withEditorial.filter(x=>x.name==='Enterprise').length,2);
+  assert.equal(new Set(withEditorial.filter(x=>x.name==='Enterprise').map(x=>x.sourceId)).size,2);
+  assert.equal(withEditorial.find(x=>x.id==='enterprise').sourceId,'10706');
+});
