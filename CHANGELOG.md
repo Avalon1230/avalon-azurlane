@@ -11,7 +11,8 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Broken primary paintings fall back only to an explicitly available `painting_n.png` variant, never to raw effect layers.
 
 ### Research
-- Added a low-volume, read-only Koumakan MediaWiki image/rights metadata audit workflow. Wiki integration must rely on verified API access and image rights rather than assuming every image URL is available.
+- Validated Koumakan's MediaWiki API from GitHub Actions (HTTP 200, CORS `*`, site-content rights metadata), and added a low-volume, on-demand **wiki-first default ship artwork resolver**. It queries image metadata only for a file referenced by the ship's wiki page; reconstructed PNGs remain fallbacks.
+- Mapped the two formerly missing faction insignias using actual wiki imageinfo URLs: Kingdom of Tulipa (`Nl 1.png`) and Liga de Pedrería (`Ldp 1.png`). No invented symbols.
 - Existing ship skills and stats remain sourced from Lycoris until a verified, permission-compatible wiki data pipeline exists.
 
 ## [0.7.1] - 2026-11-10
