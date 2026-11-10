@@ -100,3 +100,23 @@ test('equipment index no longer shows technical method footnotes among its brows
   assert.doesNotMatch(html,/catalog-filter-note/);
   assert.doesNotMatch(html,/Verify ship-specific slots/);
 });
+
+test('compact ship filters and sorting use clickable buttons with no hull dropdown',()=>{
+  const records=[
+    shipRow(1,'Zeta','Eagle Union','DD'),
+    {...shipRow(2,'Alpha','Eagle Union','BB'),rarity:'Ultra Rare'},
+    {...shipRow(3,'Beta','Eagle Union','CV'),rarity:'Super Rare'}
+  ];
+  const roster=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',
+    sort:'rarity',descending:true,renderCard:card});
+  assert.match(roster,/data-action="ship-hull-filter" data-hull="Vanguard"/);
+  assert.match(roster,/data-action="ship-hull-filter" data-hull="BB"/);
+  assert.match(roster,/data-action="ship-sort" data-sort="rarity"/);
+  assert.match(roster,/Descending ↓/);
+  assert.doesNotMatch(roster,/id="hull-filter"/);
+  assert.ok(roster.indexOf('data-ship="2"') < roster.indexOf('data-ship="3"'));
+  assert.ok(roster.indexOf('data-ship="3"') < roster.indexOf('data-ship="1"'));
+  const vanguard=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',hull:'Vanguard',renderCard:card});
+  assert.match(vanguard,/data-ship="1"/);
+  assert.doesNotMatch(vanguard,/data-ship="2"/);
+});
