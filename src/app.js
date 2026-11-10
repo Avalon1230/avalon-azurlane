@@ -179,7 +179,7 @@ function sourceDisclosure() {
     <p>${E(descriptions[status] || descriptions.loading)} Current source response: ${state.sync.ships.toLocaleString()} ship entries, ${state.sync.equipment.toLocaleString()} equipment entries.</p>
     ${checked}
     <p>Original game-client artwork is linked from independent fan repositories, not hosted by Yostar or Manjuu. Last image audit: ${assetCoverage.availableShipThumbnails}/${assetCoverage.indexedShipsAtAudit} ship thumbnails and ${assetCoverage.availableEquipmentIcons} equipment icons. Some images may be unavailable.</p>
-    <p>Nation icons and other game artwork are owned by their respective rights holders. Browse and equipment compatibility data are third-party records, not publisher endorsements or verified combat results. Exact per-ship slot compatibility and numerical simulation remain unfinished.</p>
+    <p>Nation icons and other game artwork are owned by their respective rights holders. Browse and equipment compatibility data are third-party records, not publisher endorsements or verified combat results. Equipment hull filters show potential class eligibility, not individual ship or slot legality. Combat rankings are provisional scenario-specific research. Fleet suggestions use curated role matches rather than a complete numerical skill/gear simulator; exact ship-specific loadouts and damage calculations remain unfinished.</p>
     <div class="source-disclosure-links">
       ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/IMAGE_ASSETS.md','Artwork credits & rights')}
       ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/CATALOG_FILTERS.md','Catalog coverage & compatibility')}
@@ -200,15 +200,15 @@ function renderOverview() {
   </div>
   <div class="metric-grid">
     <div class="metric">${eyebrow('OPERATIONAL AREAS')}<strong>${MODES.length.toString().padStart(2,'0')}</strong><small>Mode-aware architecture</small></div>
-    <div class="metric">${eyebrow('INDEXED EXAMPLES')}<strong>${SHIPS.length.toLocaleString()}</strong><small>Searchable ships · no tier scores</small></div>
-    <div class="metric">${eyebrow('EQUIPMENT EXAMPLES')}<strong>${EQUIPMENT.length.toLocaleString()}</strong><small>Equipment records</small></div>
+    <div class="metric">${eyebrow('SHIP ROSTER')}<strong>${SHIPS.length.toLocaleString()}</strong><small>Indexed ships</small></div>
+    <div class="metric">${eyebrow('EQUIPMENT')}<strong>${EQUIPMENT.length.toLocaleString()}</strong><small>Indexed equipment</small></div>
     <div class="metric accent">${eyebrow('YOUR ACTIVE PLAN')}<strong>${countAssigned(currentPlan()).toString().padStart(2,'0')}</strong><small>${E(selectedMode().name)} ships assigned</small></div>
   </div>
   <div class="section-title"><div>${eyebrow('START A MISSION')}<h2>Choose your theater</h2></div><button class="ghost-btn" data-action="navigate" data-page="modes">View all eight →</button></div>
   <div class="mode-grid">${MODES.slice(0,4).map(modeCard).join('')}</div>
   <div class="bottom-grid">
     <div class="feature-card"><div class="feature-icon">▦</div>${eyebrow('FLEET LAB')}<h3>Plan without guessing.</h3><p>Build separate formations for each game mode, check hull eligibility, and export a reproducible plan. Saved locally in your browser.</p><button class="ghost-btn" data-action="navigate" data-page="fleet">Build a fleet →</button></div>
-    <div class="feature-card"><div class="feature-icon">◎</div>${eyebrow('EVIDENCE STANDARD')}<h3>Know what is proven.</h3><p>Game data, community observations, and AVALON assessments remain visibly separate. No popularity polls masquerading as damage tests.</p><button class="ghost-btn" data-action="navigate" data-page="sources">Review sources →</button></div>
+    <div class="feature-card"><div class="feature-icon">◎</div>${eyebrow('EVIDENCE STANDARD')}<h3>Explore the research.</h3><p>Review data sources and the evidence behind AVALON's recommendations.</p><button class="ghost-btn" data-action="navigate" data-page="sources">Review sources →</button></div>
   </div>`;
 }
 function modeCard(mode) {
@@ -267,7 +267,7 @@ function renderDetails() {
   return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect ${ship?'ship':'equipment'}"><div class="picker-head"><div>${eyebrow(ship?'SHIP INTELLIGENCE':'EQUIPMENT INTELLIGENCE')}<h2>${E(item.name)}</h2></div><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div>
   <div class="detail-scroll"><div class="profile-art">${imageMarkup(item,ship?'ship':'equipment','asset-profile')}</div>
   <div class="profile-table">${[...rows,...statRows].map(([k,v])=>`<div><span>${E(k)}</span><strong>${E(v)}</strong></div>`).join('')}</div>
-  <section class="context-panel">${eyebrow('MODE-SPECIFIC RESEARCH')}<h3>${E(selectedMode().name)} · assessment pending</h3><p>Data needed before calculating ship effectiveness or recommending equipment for this mode:</p><div class="tag-row">${contextCriteria(state.modeId).map(tag).join('')}</div></section>
+  <details class="method-disclosure"><summary>Research criteria</summary><section class="context-panel">${eyebrow('MODE-SPECIFIC RESEARCH')}<h3>${E(selectedMode().name)} · assessment pending</h3><p>Additional data needed to analyze performance in this game mode:</p><div class="tag-row">${contextCriteria(state.modeId).map(tag).join('')}</div></section></details>
   <section class="evidence-box"><h3>Evidence trail</h3>${evidenceLine(item)}<p>${link(wikiLookupUrl(item.name),'Search Azur Lane fan wiki')}</p></section></div>
   <div class="picker-footer"><button type="button" class="ghost-btn" data-action="close-detail">Close</button></div></aside></div>`;
 }
