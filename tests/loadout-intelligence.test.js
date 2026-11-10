@@ -106,8 +106,8 @@ test('ship profile embeds tactical planner beneath identity but outside artwork'
   assert.match(html,/class="ship-profile-left"/);
   assert.match(html,/class="ship-loadout-panel ship-loadout-compact"/);
   assert.ok(html.indexOf('class="ship-profile-overview"')<
-    html.indexOf('class="ship-loadout-panel"'));
-  assert.ok(html.indexOf('class="ship-loadout-panel"')<
+    html.indexOf('class="ship-loadout-panel ship-loadout-compact"'));
+  assert.ok(html.indexOf('class="ship-loadout-panel ship-loadout-compact"')<
     html.indexOf('class="ship-art-panel"'));
   assert.match(html,/data-action="loadout-mode"/);
   assert.match(html,/data-action="loadout-inspect" data-equip="fer-1020"/);
