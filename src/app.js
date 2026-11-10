@@ -2,6 +2,7 @@ import { MODES, FLEET_BLUEPRINTS, SHIPS, EQUIPMENT, SOURCES } from './catalog.js
 import { SHIP_MAP, compatible, createWorkspace, assignShip, normalizeWorkspace, countAssigned, findFirstVacancy, slotsForFleet, wikiLookupUrl, searchCatalog, escapeHtml, refreshShipIndex } from './domain.js';
 import { loadLiveCatalogs, mergeShipCatalog, mergeEquipmentCatalog } from './remote.js';
 import { contextCriteria, evaluationState } from './criteria.js';
+import { changelogToHtml } from './changelog.js';
 
 const $ = selector => document.querySelector(selector);
 const E = escapeHtml;
@@ -12,12 +13,14 @@ const pages = [
   { id: 'ships', label: 'Ship Index', icon: '♙' },
   { id: 'equipment', label: 'Equipment', icon: '⚙' },
   { id: 'fleet', label: 'Fleet Lab', icon: '▦' },
-  { id: 'sources', label: 'Sources', icon: '≡' }
+  { id: 'sources', label: 'Sources', icon: '≡' },
+  { id: 'updates', label: 'Updates', icon: '↻' }
 ];
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
-  sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] }
+  sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
+  changelog: null, changelogStatus: 'idle'
 };
 
 function loadPlans() {
@@ -71,6 +74,7 @@ function go(page) {
   const hash = `#/${page}`;
   if (location.hash !== hash) history.replaceState(null, '', hash);
   render();
+  if (page === 'updates') void loadChangelog();
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 function selectedMode() { return MODES.find(mode => mode.id === state.modeId); }
@@ -224,13 +228,40 @@ function renderPicker() {
 }
 function renderSources() {
   return `${sectionHeading('Trust the trail, not the hype.', 'SOURCES & METHODOLOGY', 'Sources are explicit; the project does not convert popular opinions into verified performance figures.')}
-  ${warning()}<div class="source-alert"><strong>⚠ Wiki verification outstanding</strong><p>In a current external check, the requested Koumakan URL returned unrelated content. We have deliberately paused automated imports from that domain until it can be verified. A separate fan wiki is linked for manual lookup; it is not a verified mirror.</p></div>
+  ${warning()}<div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. We have paused API ingestion until direct machine-readable responses and reuse permissions can be independently checked; see Sources documentation.</p></div>
   <div class="source-grid">${SOURCES.map(source => `<article class="source-card">${eyebrow(source.type)}<h3>${E(source.name)}</h3><p>${E(source.note)}</p>${link(source.url,'Open source')}</article>`).join('')}</div>
   <div class="method-card"><h2>Three different things. Never one misleading tier.</h2><div class="method-grid"><div><span class="method-num">01</span><h3>Game facts</h3><p>Observed or sourced mechanics with version, link, validation status, and licensing notes.</p></div><div><span class="method-num">02</span><h3>Community evidence</h3><p>Tests, guides and discussion with attribution, limitations, and scenario context.</p></div><div><span class="method-num">03</span><h3>AVALON analysis</h3><p>Independent calculations and judgment, labeled as inference with assumptions and uncertainty.</p></div></div><p class="doc-link">${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/SOURCES.md','Read the complete provenance policy')}</p></div>`;
 }
+
+async function loadChangelog() {
+  if (state.changelogStatus !== 'idle') return;
+  state.changelogStatus = 'loading';
+  try {
+    const response = await fetch('./CHANGELOG.md', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Changelog unavailable: HTTP ' + response.status);
+    state.changelog = await response.text();
+    state.changelogStatus = 'ready';
+  } catch {
+    state.changelogStatus = 'failed';
+  }
+  if (state.page === 'updates') render();
+}
+
+function renderUpdates() {
+  const sourceLink = link('https://github.com/Avalon1230/avalon-azurlane/blob/main/CHANGELOG.md', 'View changelog on GitHub');
+  const body = state.changelogStatus === 'ready'
+    ? changelogToHtml(state.changelog)
+    : state.changelogStatus === 'failed'
+      ? '<div class="source-alert">Changelog could not be loaded from this deployment. Use the GitHub copy instead.</div>'
+      : '<div class="info-banner"><span class="info-dot">i</span>Loading release history…</div>';
+  return `${sectionHeading('Release history', 'AVALON / CHANGELOG', 'Track new features, fixes, source changes, and known limitations across releases.')}
+  <div class="changelog-meta">${sourceLink}<span>Release history is maintained in CHANGELOG.md; this view reads that same file.</span></div>
+  <div class="changelog-content">${body}</div>`;
+}
+
 function render() {
   nav();
-  const views = { overview:renderOverview, modes:renderModes, ships:renderShips, equipment:renderEquipment, fleet:renderFleet, sources:renderSources };
+  const views = { overview:renderOverview, modes:renderModes, ships:renderShips, equipment:renderEquipment, fleet:renderFleet, sources:renderSources, updates:renderUpdates };
   $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
   document.title = `${pages.find(p=>p.id===state.page)?.label} · AVALON Azur Lane Intelligence`;
 }

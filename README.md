@@ -2,9 +2,13 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.2 source-indexed prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
+> **Project status:** **v0.2.1 source-indexed prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
+
+[Live website](https://avalon1230.github.io/avalon-azurlane/) · [Release changelog](CHANGELOG.md) · [GitHub commit history](https://github.com/Avalon1230/avalon-azurlane/commits/main)
+
+The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 
 ## Mission
 
@@ -72,7 +76,7 @@ This is an **extensible mode registry**, not a fixed list: new or temporary cont
 
 | Source | Intended use | Notes |
 | --- | --- | --- |
-| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Intended primary factual reference | **Automated import paused**: the requested URL returned unrelated text in an external check on November 10, 2026. Verify authenticity, availability and licensing before use. |
+| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Intended primary factual reference | **Automated import pending verification**: crawler-indexed pages returned unrelated novel fragments. This does **not** prove the live wiki is broken; normal browser access is reported working. Confirm direct API behavior and reuse permissions before ingestion. |
 | [Historical English Community Tier List](https://slaimuda.github.io/ectl/#/home) | Historical assessments and design inspiration | This project does **not** use its identity or claim its endorsement |
 | [REGAL](https://azur-lane-regal.suchiguma.com/) | Modern endgame evaluations and comparative analysis | Distinguish the source author's judgments from game facts |
 | [Operation Siren reference](https://azur-lane.wiki/index.php/Operation_Siren) | OpSi map/fleet systems and progression reference | Validate mechanics against current primary sources and regional versions |

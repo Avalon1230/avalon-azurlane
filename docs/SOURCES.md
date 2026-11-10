@@ -8,7 +8,9 @@ The source URLs appear in the app under **Sources** and each catalog entry links
 
 ### Important Koumakan verification warning
 
-The requested Koumakan Wiki URL `https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki` returned **unrelated text** during a November 10, 2026 public web check. The cause is unknown. **Do not automate ingestion, run scripts from it, or assume its API responses are authentic until domain ownership, content consistency, availability, and reuse permissions have been independently confirmed.** The alternative `https://azur-lane.wiki` is a separate fan-run wiki, not an official or authorized mirror of the original site; its material also requires permission/licensing review.
+During a November 10, 2026 crawler-mediated web check, the requested Koumakan page `https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki` was indexed as **"Body is like."**, showing unrelated snippets resembling *Nineteen Eighty-Four* and *Brave New World*. A `/wiki/Musashi` fetch returned **"Tarians or the law of."** with similar unrelated prose; additional indexed paths show the same mismatch. These results can be old or otherwise crawler-specific. **The user reports the actual wiki works normally in their browser.** We do **not** know whether the mismatch originates in cached/indexed pages, a crawler-specific response, an intermediary, or another cause; we have **no evidence that the live wiki is compromised or down**.
+
+Automated Koumakan **data ingestion** remains deferred until we can validate fresh, repeatable, machine-readable API responses and applicable reuse permissions. **Direct user-facing wiki links remain allowed.** The separate `https://azur-lane.wiki` is a different fan-run wiki and should not be mislabeled as an official Koumakan mirror.
 
 ### Source indexes used in v0.2 (at runtime only)
 

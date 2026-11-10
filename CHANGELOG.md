@@ -1,0 +1,40 @@
+# Changelog
+
+All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
+
+## [0.2.1] - 2026-11-10
+
+### Added
+- Added this canonical changelog to track releases, fixes, and documentation changes.
+- Added an **Updates** view to the live website, reading entries directly from this file.
+
+### Clarified
+- Corrected the Koumakan Wiki access warning: web crawler results showed unrelated literary text, but that does not establish the live wiki is broken. The cause is unverified, and user-side browser access works.
+- Kept automated Koumakan ingestion paused pending reliable, repeatable API checks and reuse/attribution review.
+
+## [0.2.0] - 2026-11-10
+
+### Added
+- Optional runtime ship index with up to 894 entries from the independent Lycoris-AzurAPI project.
+- Optional runtime equipment index with up to 936 records from Fernando2603/AzurLane.
+- Source-linked ship and equipment details, enhancement attributes, and data-source status indicators.
+- Context-specific evaluation criteria across eight game modes; no fabricated scores.
+- Data source contracts and extraction/licensing limitations documentation.
+
+### Improved
+- Preserved previous fleet assignments while external ship data is unavailable or still loading.
+- Expanded automated test coverage to 12 checks.
+- Published one feature commit and deployed successfully on GitHub Pages.
+
+## [0.1.0] - 2026-11-10
+
+### Added
+- Initial responsive AVALON web interface, hosted on GitHub Pages.
+- Eight game-mode categories: Campaign, Operation Siren, META Showdown, Exercises, Events & Archives, Challenge Mode, Daily Raids, and Guild Operations.
+- Searchable unranked editorial catalog containing 22 example ships and 11 equipment entries.
+- Interactive formation planner with hull-slot validation, duplicate-ship prevention, four OpSi fleets, local browser persistence, and JSON export.
+- Project documentation, provenance standards, and automated tests.
+
+### Notes
+- Independent fan project. Historical ECTL is a reference only, not the name or endorsement of this site.
+- Ratings, automated fleet optimization, audited skill calculations, and complete equipment-acquisition data are not implemented.

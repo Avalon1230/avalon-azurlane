@@ -33,3 +33,15 @@
 .evidence-box p{font-size:12px;color:#b1c8d8}
 .evidence-box .text-link{font-size:12px}
 @media(max-width:540px){.detail-panel{width:100%}.profile-table>div{flex-direction:column;gap:2px}.profile-table strong{text-align:left}}
+/* v0.2.1 — release history */
+.changelog-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0 22px;color:var(--muted,#97aec1);font-size:12px}
+.changelog-content{display:grid;grid-template-columns:1fr;gap:18px;max-width:930px}
+.changelog-content>p{color:#aec3d2;line-height:1.7}
+.release-card{background:#0e2133;border:1px solid #2e526d;border-radius:12px;padding:24px 28px;line-height:1.65}
+.release-card h2{font-size:22px;color:#eef8ff;margin:0 0 15px;border-bottom:1px solid #2e536c;padding-bottom:12px}
+.release-card h3{font-size:13px;letter-spacing:.11em;text-transform:uppercase;color:#85d9fc;margin:19px 0 9px}
+.release-card p,.release-card li{font-size:13px;color:#c4d9e7}
+.release-card ul{padding-left:21px;margin:0}
+.release-card li{margin:9px 0}
+.release-card strong{color:#f4fcff}
+@media(max-width:540px){.release-card{padding:18px}}
