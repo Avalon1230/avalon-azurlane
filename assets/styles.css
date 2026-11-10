@@ -815,3 +815,77 @@
   .loadout-slot{padding:8px}
   .loadout-status{white-space:normal}
 }
+
+
+/* v0.8.1 — six-position compact loadout; evidence remains in an on-demand drawer. */
+.ship-loadout-compact{gap:8px;padding:12px}
+.ship-loadout-compact .loadout-heading h2{font-size:16px;margin:2px 0 0}
+.ship-loadout-compact .loadout-heading .eyebrow{font-size:9px}
+.ship-loadout-compact .loadout-status{font-size:9px;padding:4px 6px}
+.ship-loadout-compact .loadout-mode{font-size:10px;padding:5px 8px}
+.ship-loadout-compact .loadout-modes{gap:4px}
+.loadout-slots.loadout-compact-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;
+  align-items:stretch;min-width:0
+}
+.loadout-compact-slot{
+  min-width:0;display:flex;flex-direction:column;gap:5px;
+  padding:7px;border:1px solid #335672;border-radius:8px;
+  background:linear-gradient(150deg,#17364b,#122a3d)
+}
+.loadout-compact-slot.provisional{border-style:dashed;border-color:#68818f}
+.loadout-compact-slot.augment{border-color:#68608e;background:linear-gradient(150deg,#292b46,#162b40)}
+.loadout-tile-heading{display:flex;align-items:center;justify-content:space-between;gap:3px;
+  color:#b8e2f4;font-weight:800;font-size:9px;min-width:0}
+.loadout-tile-heading span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.loadout-tile-type{font-size:9px;color:#b7ccda;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;min-width:0;line-height:1.25}
+.loadout-tile-gear{width:100%;flex:1;min-width:0;min-height:65px;
+  display:grid;grid-template-columns:45px minmax(0,1fr);gap:5px;align-items:center;
+  padding:5px;background:#193c52;border:1px solid #466b80;border-radius:6px;
+  color:#effaff;text-align:left;cursor:pointer}
+.loadout-tile-gear:hover,.loadout-tile-gear:focus-visible{
+  border-color:#93dbf3;background:#24546a;outline-offset:2px}
+.loadout-tile-gear .asset-media{width:43px;height:43px;max-width:100%;min-width:0;
+  border-radius:5px;flex:none}
+.loadout-tile-gear .asset-img{object-fit:contain}
+.loadout-compact-placeholder{display:grid;place-items:center;width:43px;height:43px;
+  border:1px dashed #7293aa;border-radius:6px;color:#a2c0d4;font-size:26px}
+.loadout-tile-name{display:-webkit-box;overflow:hidden;overflow-wrap:anywhere;
+  -webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;
+  font-size:10px;font-weight:750;line-height:1.2;min-width:0}
+.loadout-tile-unverified .loadout-tile-name{color:#afc4d4;font-weight:600;font-size:9px}
+.loadout-tile-more{display:block;width:100%;padding:3px 1px;text-align:left;
+  color:#99dff7;background:transparent;border:0;cursor:pointer;
+  font-size:9px;font-weight:800}
+.loadout-tile-more:hover,.loadout-tile-more:focus-visible{text-decoration:underline}
+.loadout-brief{font-size:10px;line-height:1.35;color:#afc9db;margin:1px 0;
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden}
+.ship-loadout-compact .loadout-footer{padding-top:6px}
+.ship-loadout-compact .loadout-footer>span{font-size:9px;max-width:none}
+.ship-loadout-compact .loadout-reset{font-size:10px}
+.loadout-compact-disclaimer{font-size:9px;line-height:1.3;color:#91b2c4;margin:0}
+.loadout-detail-reason{padding:12px;border:1px solid #3c5b75;border-radius:8px;
+  background:#132e45;display:flex;flex-direction:column;gap:9px}
+.loadout-detail-reason h3,.loadout-options-heading{font-size:14px;color:#ecf9ff;margin:0}
+.loadout-detail-reason p{font-size:12px;color:#d0e4f1;line-height:1.6;margin:0;overflow-wrap:anywhere}
+.loadout-detail-reason small{font-size:10px;color:#a8ccdd;line-height:1.5}
+.loadout-detail-inspect{display:block;margin:8px 0 12px}
+.loadout-options-heading{margin:10px 0}
+.loadout-picker-panel .loadout-choice{margin-top:8px}
+@media(max-width:1050px){
+  .loadout-tile-gear{grid-template-columns:1fr;justify-items:center;min-height:77px}
+  .loadout-tile-name{text-align:center;-webkit-line-clamp:2;line-clamp:2}
+}
+@media(max-width:760px){
+  .loadout-tile-gear{grid-template-columns:43px minmax(0,1fr);justify-items:stretch}
+  .loadout-tile-name{text-align:left;-webkit-line-clamp:3;line-clamp:3}
+}
+@media(max-width:400px){
+  .ship-loadout-compact{padding:10px}
+  .loadout-compact-grid{gap:5px}
+  .loadout-compact-slot{padding:5px}
+  .loadout-tile-gear{grid-template-columns:1fr;justify-items:center}
+  .loadout-tile-name{text-align:center;-webkit-line-clamp:2;line-clamp:2}
+}
