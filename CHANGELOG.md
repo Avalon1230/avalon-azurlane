@@ -2,6 +2,13 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [Unreleased] — Automatic Fleet Optimizer specification
+
+### Planned
+- Documented the core automatic fleet-building and loadout-optimization architecture: ship × skill × equipment × encounter synergy, event timing, composition roles, gear scarcity, and meaningful alternatives.
+- Specified OpSi four-fleet **joint** optimization, acquisition/progression constraints, source provenance, confidence, scenario-level testing, and staged implementation milestones.
+- **Not implemented yet**: automatic formation generation, skill event simulation, gear optimization, or computed best-fleet output.
+
 ## [0.4.1] - 2026-11-10
 
 ### Added

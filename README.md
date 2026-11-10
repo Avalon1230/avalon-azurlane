@@ -78,6 +78,12 @@ The two character boards remain draggable/editable, independently stored in this
 
 This is an **extensible mode registry**, not a fixed list: new or temporary content can be added without rebuilding the ranking system. Recommendations must name their mode and scenario and never imply that one tier automatically applies everywhere.
 
+## Automatic Fleet & Equipment Optimizer — core requirement
+
+The goal is not merely a tier list or an editable fleet grid. AVALON should **build a feasible formation and full equipment loadout for a specific encounter**, analyzing ship synergy, conditional skills, reload/debuff timing, enemy armor, survivability, AA/ASW, progression, and gear availability. For Operation Siren it must **optimize all four surface fleets together** rather than reuse the same ships or limited gear copies. Recommendations must include alternatives, supporting sources and uncertainty instead of claiming unvalidated numerical optima.
+
+See the complete [Fleet Optimizer architecture and acceptance criteria](docs/FLEET_OPTIMIZER_SPEC.md). **This feature is specified but not implemented yet.**
+
 ## Planned features
 
 1. **Comprehensive ship database and contextual rankings:** searchable statistics, skills, retrofits, augments, acquisition details, and assessments separated by game mode and role.
