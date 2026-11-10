@@ -454,3 +454,58 @@
  .ship-art-viewer-image{max-height:calc(100vh - 130px)}
 }
 @media(max-width:370px){.ship-profile-overview{flex-direction:column}.ship-profile-overview .ship-profile-cover{width:135px;flex-basis:auto;height:170px}}
+
+/* v0.7.2 reconstructed artwork: no stretched identity card and full-image viewing */
+.ship-profile-top{
+  grid-template-columns:minmax(345px,.83fr) minmax(0,1.45fr);
+  align-items:start;
+  gap:16px
+}
+.ship-profile-overview{align-self:start;min-height:0}
+.ship-profile-overview .ship-profile-cover{
+  flex:0 0 150px;
+  width:150px;
+  height:205px;
+  min-height:205px;
+  max-height:205px
+}
+.ship-profile-overview .ship-profile-identity{padding:4px 0}
+.ship-art-panel{align-self:start}
+.ship-art-preview{
+  height:clamp(320px,36vw,515px);
+  min-height:0;
+  padding:12px;
+  overflow:hidden
+}
+.ship-art-preview-image{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  max-height:100%;
+  object-fit:contain;
+  object-position:center center
+}
+.ship-art-viewer-canvas{min-height:0;overflow:auto}
+.ship-art-viewer-image{
+  display:block;
+  width:auto;
+  height:auto;
+  max-height:calc(96vh - 100px);
+  max-width:100%;
+  object-fit:contain;
+  object-position:center
+}
+.ship-art-lightbox:fullscreen .ship-art-viewer-image{
+  max-width:calc(100vw - 32px);
+  max-height:calc(100vh - 90px)
+}
+@media(max-width:1180px){
+  .ship-profile-top{grid-template-columns:1fr}
+  .ship-art-preview{height:clamp(320px,52vw,530px)}
+}
+@media(max-width:650px){
+  .ship-profile-overview{min-height:0}
+  .ship-profile-overview .ship-profile-cover{flex:0 0 124px;width:124px;height:178px;min-height:178px;max-height:178px}
+  .ship-art-preview{height:clamp(260px,80vw,390px)}
+}
