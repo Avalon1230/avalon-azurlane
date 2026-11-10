@@ -23,7 +23,7 @@ test('remote artwork markup escapes untrusted text and uses no inline script', (
   const html=imageMarkup({name:'<img src=x onerror=alert(1)>',hull:'DD'},'ship');
   assert.doesNotMatch(html,/<img src=x/);
   assert.match(html,/&lt;img src=x/);
-  assert.doesNotMatch(html,/onerror=/);
+  assert.doesNotMatch(html,/<img[^>]*\bonerror\s*=/i);
   assert.doesNotMatch(html,/<script/);
   assert.equal(assetCoverage.availableShipThumbnails,746);
   assert.equal(assetCoverage.availableEquipmentIcons,936);
