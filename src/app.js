@@ -10,6 +10,7 @@ import { renderCatalogIndex, SHIP_ROSTER_BATCH_SIZE, EQUIPMENT_ROSTER_BATCH_SIZE
 import { renderEquipmentRosterTile, renderEquipmentFamilyDetails } from './equipment-roster.js';
 import { equipmentFamilyMembers, EQUIPMENT_GROUP_MODES, EQUIPMENT_BROAD_TYPES } from './equipment-browse.js';
 import { renderShipRosterTile } from './ship-roster.js';
+import { loadEquipmentDrops, renderEquipmentAcquisition } from './equipment-acquisition.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
 import { loadWikiDefaultArtwork } from './wiki-artwork.js';
@@ -37,8 +38,9 @@ const pages = [
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   shipNation:'all', gearNation:'all', gearHull:'all', shipVisibleCount:SHIP_ROSTER_BATCH_SIZE, shipRosterScrollY:0, gearVisibleCount:EQUIPMENT_ROSTER_BATCH_SIZE,
-  shipSort:'rarity', shipDescending:true, shipRarity:'all', gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
+  shipSort:'rarity', shipDescending:true, shipRarity:'all', shipAdvancedOpen:false, gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
   shipDetails:{status:'idle',data:null,error:''},
+  equipmentAcquisition:{status:'idle',index:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
   changelog: null, changelogStatus: 'idle',
@@ -144,7 +146,7 @@ function go(page) {
   state.category = 'all';
   state.shipNation='all';state.gearNation='all';state.gearHull='all';
   state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;state.shipRosterScrollY=0;state.gearVisibleCount=EQUIPMENT_ROSTER_BATCH_SIZE;
-  state.shipSort='rarity';state.shipDescending=true;state.shipRarity='all';state.gearSort='rarity';state.gearDescending=true;state.gearRarity='all';state.gearBroadType='all';state.gearGroup='type';state.gearAdvancedOpen=false;
+  state.shipSort='rarity';state.shipDescending=true;state.shipRarity='all';state.shipAdvancedOpen=false;state.gearSort='rarity';state.gearDescending=true;state.gearRarity='all';state.gearBroadType='all';state.gearGroup='type';state.gearAdvancedOpen=false;
   state.picker = null;
   state.detail = null;
   state.artViewerOpen=false;
@@ -238,7 +240,7 @@ function searchBar(placeholder, extra = '') {
 }
 function renderShips() {
   return `${sectionHeading('Ship Index', 'SHIP REGISTRY', 'Browse ships by faction, or search the entire roster.')}${warning()}
-  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,shipLimit:state.shipVisibleCount,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity})}`;
+  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,shipLimit:state.shipVisibleCount,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity,shipAdvancedOpen:state.shipAdvancedOpen})}`;
 }
 function renderEquipment() {
   return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Browse equipment by origin, type, or compatible hull.')}${warning()}
@@ -248,6 +250,18 @@ function evidenceLine(record) {
   if(record?.source === 'lycoris') return `<p><strong>Source:</strong> Lycoris-AzurAPI ship-list.json (independent community snapshot).</p>${link('https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json','Inspect source data')}`;
   if(record?.source === 'fernando') return `<p><strong>Source:</strong> Fernando2603/AzurLane equipment.json (community game-data extraction).</p>${link('https://github.com/Fernando2603/AzurLane/blob/main/equipment.json','Inspect source data')}`;
   return `<p><strong>Source:</strong> Editorial placeholder (not validated).</p>${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/DATA_SOURCES.md','Source methodology')}`;
+}
+async function ensureEquipmentAcquisition() {
+  if(state.equipmentAcquisition.status==='ready'||state.equipmentAcquisition.status==='loading')return;
+  state.equipmentAcquisition={status:'loading',index:null,error:''};
+  if(state.page==='equipment'&&state.detail?.kind==='equipment')render();
+  try {
+    const index=await loadEquipmentDrops();
+    state.equipmentAcquisition={status:'ready',index,error:''};
+  }catch(err){
+    state.equipmentAcquisition={status:'error',index:null,error:String(err?.message||'Source unavailable')};
+  }
+  if(state.page==='equipment'&&state.detail?.kind==='equipment')render();
 }
 function renderDetails() {
   const d=state.detail;
@@ -259,11 +273,12 @@ function renderDetails() {
   const rows=ship?[
     ['Nation / browse group',shipBrowseDisplayNation(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
   ]:[
-    ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Potentially equippable hulls',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Acquisition',item.acquisition||'Not established'],['Source ID',item.sourceId||'Editorial']
+    ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Potentially equippable hulls',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Source ID',item.sourceId||'Editorial']
   ];
   const statRows=!ship?Object.entries(item.stats||{}).map(([k,v])=>[k.replaceAll('_',' ').toUpperCase(),String(v)]):[];
   return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect ${ship?'ship':'equipment'}"><div class="picker-head"><div>${eyebrow(ship?'SHIP INTELLIGENCE':'EQUIPMENT INTELLIGENCE')}<h2>${E(item.name)}</h2></div><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div>
   <div class="detail-scroll"><div class="profile-art">${imageMarkup(item,ship?'ship':'equipment','asset-profile')}</div>
+  ${ship?'':renderEquipmentAcquisition(item,state.equipmentAcquisition)}
   <div class="profile-table">${[...rows,...statRows].map(([k,v])=>`<div><span>${E(k)}</span><strong>${E(v)}</strong></div>`).join('')}</div>
   <details class="method-disclosure"><summary>Research criteria</summary><section class="context-panel">${eyebrow('MODE-SPECIFIC RESEARCH')}<h3>${E(selectedMode().name)} · assessment pending</h3><p>Additional data needed to analyze performance in this game mode:</p><div class="tag-row">${contextCriteria(state.modeId).map(tag).join('')}</div></section></details>
   <section class="evidence-box"><h3>Evidence trail</h3>${evidenceLine(item)}<p>${link(wikiLookupUrl(item.name),'Search Azur Lane fan wiki')}</p></section></div>
@@ -501,6 +516,20 @@ function handleAction(target) {
     state.workspaces[state.modeId]=normalizeWorkspace(preview.plan,state.modeId);
     state.suggestPreview=null;savePlans();render();notify('Suggested additions applied.');return;
   }
+  if (action === 'ship-toggle-filters') {
+    state.shipAdvancedOpen=!state.shipAdvancedOpen;render();
+    document.querySelector('[data-action="ship-toggle-filters"]')?.focus();return;
+  }
+  if (action === 'ship-reset-filters') {
+    state.hull='all';state.shipRarity='all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;
+    render();return;
+  }
+  if (action === 'ship-clear-filter') {
+    if(target.dataset.field==='hull')state.hull='all';
+    else if(target.dataset.field==='rarity')state.shipRarity='all';
+    else return;
+    state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();return;
+  }
   if (action === 'ship-rarity-filter') {
     state.shipRarity=target.dataset.rarity||'all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
@@ -575,6 +604,10 @@ function handleAction(target) {
     document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'equipment-load-more') {loadMoreEquipment();return;}
+  if (action === 'equipment-acquisition-retry') {
+    state.equipmentAcquisition={status:'idle',index:null,error:''};
+    void ensureEquipmentAcquisition();return;
+  }
   if (action === 'profile-art-open') {
     state.artViewerOpen=true;render();
     document.querySelector('.ship-art-viewer-actions [data-action="profile-art-close"]')?.focus();
@@ -629,7 +662,7 @@ function handleAction(target) {
   }
   if (action === 'sync-data') { void syncData(); return; }
   if (action === 'ship-details') { openShipProfile(ship);return; }
-  if (action === 'equip-details') { state.detail={kind:'equipment',id:equip};return render(); }
+  if (action === 'equip-details') { state.detail={kind:'equipment',id:equip};render();void ensureEquipmentAcquisition();return; }
   if (action === 'close-detail') { state.detail=null;return render(); }
   if (action === 'navigate') return go(page);
   if (action === 'open-mode') { state.modeId = mode; return go('fleet'); }
@@ -698,6 +731,17 @@ document.addEventListener('click', event => {
 });
 document.addEventListener('change', event => {
   const id=event.target.id, value=event.target.value;
+  if(id==='ship-sort-select') {
+    if(!['rarity','name','hull'].includes(value))return;
+    state.shipSort=value;state.shipDescending=value==='rarity';
+    state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();return;
+  }
+  if(id==='ship-hull-select') {
+    state.hull=value||'all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();return;
+  }
+  if(id==='ship-rarity-select') {
+    state.shipRarity=value||'all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();return;
+  }
   if(id==='equipment-sort-select') {
     if(!['rarity','name','type'].includes(value))return;
     state.gearSort=value;state.gearDescending=value==='rarity';resetEquipmentBatch();render();return;
