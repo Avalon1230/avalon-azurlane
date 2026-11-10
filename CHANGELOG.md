@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.9] - 2026-11-11
+
+### Fixed
+- Equipment inspection drawer now preserves the complete information table and other tall content through a dedicated, viewport-height scroll region. Flex children no longer shrink under `overflow:hidden`, fixing clipped stats rows at desktop and short/mobile viewports. Header and Close footer remain accessible while the body scrolls.
+- Re-rendering the drawer after an acquisition lookup now retains its previous scroll position, including equipment opened through Tier Boards.
+
+### Added
+- Lazy, source-ID-specific **Where to obtain** section in equipment inspection. The read-only [AzurLaneData May 2, 2026 equipment-drop snapshot](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/equip_drops.json) supplies documented locations, tech boxes, research-series sources and Gear Lab recipe availability where recorded. Dataset ID 44320 (Prototype Quadruple 305mm SKC39) lists **Research (Series 8)**.
+- Strict validation prevents guessing acquisition for unlisted, editorial, or malformed records. Loading failures have retry; the source date and event/server caveat always accompany acquisition text. This is not a live availability check or a complete/current farming guide.
+- Ship Index nation rosters now use a compact, sticky search/sort toolbar with quick All/Vanguard/Main/Sub hull tabs and collapsible detailed hull/rarity filters. Existing nation-first landing, all hull types, rarity, sort direction, search and progressive scrolling remain available.
+
+### Tests
+- Validate acquisition lookup, source provenance, Gear Lab flags, missing data, safe escaping, viewport overflow styles and preserved ship filter options.
+
 ## [0.7.8] - 2026-11-11
 
 ### Changed
