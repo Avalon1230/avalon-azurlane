@@ -45,6 +45,18 @@ A blocked route must not be evaded by spoofing a login session, CAPTCHA bypass,
 or aggressive repeated requests. If automation is disallowed, seek permission
 or use human-reviewed data already lawfully available under suitable terms.
 
+## Confirmed limited artwork integration (2026-11-10)
+
+A new read-only GitHub Actions probe (`.github/workflows/wiki-assets-audit.yml`) successfully used the Koumakan MediaWiki Action API at `/w/api.php` with `origin=*`. Responses were HTTP 200, JSON, with CORS `Access-Control-Allow-Origin: *`. The API's site `rightsinfo` advertises Creative Commons Attribution-NonCommercial-ShareAlike 4.0 for wiki content; this does not itself grant copyright permissions over extracted game art.
+
+AVALON's `src/wiki-artwork.js` now performs only **on-demand** artwork metadata lookups for a ship being viewed. It verifies the ship's MediaWiki page references the exact matching `File:<Ship Title>.png` before requesting the file's `imageinfo` URL. URLs are strictly restricted to the wiki's recognized image CDNs. New Jersey's verified default illustration is `https://azurlane.netojuu.com/images/9/9e/New_Jersey.png`.
+
+The same API supplied verified source image URLs for faction emblems previously missing from the Ship Index:
+- Kingdom of Tulipa: `File:Nl 1.png` → `https://azurlane.netojuu.com/images/4/4c/Nl_1.png`.
+- Liga de Pedrería: `File:Ldp 1.png` → `https://azurlane.netojuu.com/images/1/1b/Ldp_1.png`.
+
+**Boundary:** The API metadata lookup is *not* an audited bulk importer of ship stats, skills, barrage tables, equipment data, or complete skin galleries. Those fields continue to use existing source datasets and reconstructed painting links until access terms, provenance, game-version reconciliation and data structure are reviewed. Do not describe the complete AVALON database as wiki-hosted yet.
+
 ## Proposed analysis architecture (not yet implemented)
 
 1. **Versioned game facts:** use attributed original game data when legally

@@ -1,4 +1,4 @@
-# Ship Index Gallery and Source-backed Ship Profiles (v0.7.0)
+# Ship Index Gallery and Source-backed Ship Profiles (v0.7.2)
 
 ## User experience
 
@@ -8,11 +8,23 @@ The roster offers immediate hull/index buttons (individual hull codes plus Vangu
 
 Direct profile links use `#/ships/<source-id>`, e.g. `#/ships/30715` for Amagi(CV). The URL refers to a source ID, not an unstable editorial array position.
 
+## Reconstructed painting source (v0.7.2)
+
+The raw WebP skin files provided by iujab can include a background and effects **without the character** (verified by the New Jersey screenshots). Changing `_rw.webp` to another raw variant was not sufficient.
+
+AVALON now uses a deliberately small, locally versioned **metadata index** `data/ship-artwork.json` built from [Fernando2603/AzurLane `ship_skin.json`](https://github.com/Fernando2603/AzurLane/blob/main/ship_skin.json): **894 ship IDs and 2,613 named skin IDs** matched exactly against the existing Lycoris index on 2026-11-10. The upstream community project reconstructed `images/skin/<skin_id>/painting.png` for display. For entries that also list `painting_n.png`, this image may be tried on network failure. The viewer never falls back to the incomplete raw WebP render layer.
+
+No artwork binaries are copied to AVALON. All image URLs are constrained to the verified Fernando game-asset path; the manifest itself contains only numeric IDs, names, and source-listed `painting_n` availability. The browser lazily fetches the ~89 KB index after a ship profile is opened. The profile then uses original game-client artwork links from the independent source. Full image containment and smaller non-stretched identity cards reduce cropping and dead space.
+
+**Koumakan as first-choice default artwork and research authority:** GitHub Actions verified the site's MediaWiki Action API at `/w/api.php`, including `origin=*` CORS responses, page image-membership checks, imageinfo URLs and basic site content rights. The new `src/wiki-artwork.js` queries each viewed ship's known wiki page for an exact `File:<ship title>.png`, verifies that the image is referenced by that page, and fetches its official wiki imageinfo URL. Example: New Jersey's `New_Jersey.png` is at `azurlane.netojuu.com`. If the image is unavailable or not verifiably linked to that ship, the reconstructed Fernando painting remains the primary fallback. Other skins use reconstructed paintings, with no bulk wiki scraping.
+
+The wiki's stated **site text/content license** is CC BY-NC-SA 4.0; this does **not** override original artwork copyright belonging to Azur Lane's rights holders. The audit does not grant permission to bulk redistribute the wiki's data or art. The full ship mechanics database remains sourced from Lycoris until a provenance-aware wiki ingestion pipeline is implemented. The Lycoris data remains the source for current ship statistics, gear slots and skill text until a validated wiki-backed ingestion pipeline is implemented.
+
 ## Artwork behavior (v0.7.1)
 
 The source shipyard portrait is fixed in the profile identity panel; selecting a skin does not change the portrait. A **separate Artwork panel** displays the selected original game illustration with high-contrast skin buttons. Clicking the art opens a centered lightbox with a native-browser **Fullscreen / Exit fullscreen** toggle, Close control and Escape handling. If an artwork fails to load, the viewer tries an explicitly source-listed alternate; otherwise it displays a clear unavailable message. Profile stats and fleet information remain accessible.
 
-Some game-client paintings with `_rw.webp` suffix contain isolated Live2D rendering layers or effects rather than the full assembled character. For these, when the source lists a distinct static `censored` image, the static image is preferred. Source URLs remain allowlisted and escaped. This does **not** mean every upstream artwork is complete; additional visual audits can improve coverage.
+Some game-client paintings with `_rw.webp` suffix contain isolated Live2D rendering layers or effects rather than the full assembled character. These raw assets are no longer chosen in the gallery. Source-listed reconstructed PNG paintings are used instead. Source URLs remain allowlisted and escaped. This does **not** mean every upstream artwork is complete; additional visual audits can improve coverage.
 
 Nation logos no longer have source-name abbreviations superimposed. If the source emblem is unavailable, a neutral placeholder is shown instead of inventing a faction insignia.
 
@@ -25,7 +37,7 @@ When a ship profile is opened, the browser downloads the **full** [Lycoris ships
 Rendered fields come from the full source, when present:
 
 - Identification, rarity, class, hull and nation.
-- Game-authored skin illustrations from allowlisted iujab paint assets.
+- Reconstructed original game-client illustrations from the source-ID-linked Fernando skin catalog.
 - Level 100 and 120 stats (plus retrofit stat variants when provided).
 - Equipment slot types and minimum/maximum efficiencies.
 - English skill descriptions at source-supported level.
@@ -46,6 +58,7 @@ The ship profile contains source reference data and links, NOT a claim of mathem
 - `src/catalog-index.js`: nation selection, filters, sort, pagination.
 - `src/ship-factions.js`: nation grouping and source-supported hull/sort rules.
 - `src/ship-profiles.js`: complete profile sections with escaped source data.
+- `src/artwork-catalog.js` + `data/ship-artwork.json`: verified reconstructed skin IDs and lazily loaded artwork metadata.
 - `src/remote.js`: lazy full source loading and session caching.
 - `src/app.js`: profile navigation, deep links, asynchronous data state and preserved roster state.
 - `assets/styles.css`: responsive gallery and dossier layouts.

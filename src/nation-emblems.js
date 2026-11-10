@@ -6,6 +6,10 @@ import { COLLABORATION_NATIONS } from './ship-factions.js';
  * Factions without a verified source mapping use a typographic placeholder.
  */
 export const NATION_EMBLEM_ROOT = 'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/nationality/';
+export const WIKI_NATION_EMBLEMS = Object.freeze({
+  'Kingdom of Tulipa':'https://azurlane.netojuu.com/images/4/4c/Nl_1.png',
+  'Liga de Pedrería':'https://azurlane.netojuu.com/images/1/1b/Ldp_1.png'
+});
 export const NATION_EMBLEM_IDS = Object.freeze({
   'Universal': 0,
   'Bulins': 0,
@@ -28,6 +32,7 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => (
 ));
 
 export function nationEmblemUrl(nation) {
+  if (Object.hasOwn(WIKI_NATION_EMBLEMS,nation))return WIKI_NATION_EMBLEMS[nation];
   const id = Object.hasOwn(NATION_EMBLEM_IDS, nation)
     ? NATION_EMBLEM_IDS[nation]
     : (COLLABORATION_NATIONS.includes(nation) ? 100 : null);
