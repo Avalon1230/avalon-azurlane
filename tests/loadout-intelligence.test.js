@@ -180,6 +180,16 @@ test('source-recorded extra equipment positions are preserved before inferred au
   assert.deepEqual(exceptional.slice(3,6).map(x=>x.kind),['auxiliary','auxiliary','auxiliary']);
   assert.equal(exceptional[6].kind,'augment');
 });
+test('exceptional source-declared auxiliary in a first-three slot is not mislabeled as weapon',()=>{
+  const repair={id:'30715',slots:[
+    {type:'Auxiliary'}, {type:'Anti-Air Gun'}, {type:'Anti-Air Gun'}
+  ]};
+  const slots=loadoutDisplaySlots(repair);
+  assert.equal(slots[0].kind,'auxiliary');
+  assert.equal(slots[0].source,'Lycoris-AzurAPI');
+  assert.equal(slots.filter(x=>x.kind==='auxiliary').length,3);
+  assert.equal(slots.length,6); // two provisional additional auxiliaries + augment
+});
 test('compact planner uses two rows of three, retains click-to-inspect, and hides explanations until requested',()=>{
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
   const html=renderLoadoutPanel(model);
