@@ -1,4 +1,4 @@
-# AVALON Tactical Loadout Intelligence — v0.8.0
+# AVALON Tactical Loadout Intelligence — v0.8.1
 
 ## Objective
 
@@ -34,10 +34,22 @@ The loadout panel explicitly says when no mode-specific advantage can be verifie
 - Reset clears personal choices for the current ship/mode only. No user configuration is sent to a server.
 - A validated wiki augment *type* may be displayed, but an augment recommendation remains unverified until its own eligibility and effect data are integrated.
 
+## Six-position compact planner (v0.8.1)
+
+- The normal layout is **three main weapon/aircraft positions, two auxiliary positions, and one augment position**. The planner uses a responsive three-column tile grid instead of long vertical cards. The fixed identity portrait and separate official artwork panel remain untouched.
+- The **first three slots** are the original exact GroupID-matched wiki weapon mounts or detailed Lycoris categories where available. Missing source records show empty unverified positions, not fabricated weapons.
+- When detailed ship data explicitly supplies auxiliary/extra slots, preserve those source entries, including exceptional ships with more than two auxiliary positions. If it does not, show two **provisional** auxiliary positions derived from the normal equipment layout. Do **not** treat them as ship-confirmed legality; they start empty instead of automatically equipping top-rarity items.
+- A provisional auxiliary may expose equipment items with source category Auxiliary and source-recorded *potential* hull compatibility. Selecting one creates a **personal tentative choice**, not an independently legal or optimum loadout. Item-level exclusions and duplicate-group restrictions require further source integration.
+- The **augment position** always remains separate. An exact wiki augment type may be displayed as a sourced type label only; **there is no augment item selected**, even if other source equipment happens to share icon/name attributes. Unknown types remain unverified.
+- Click selected gear to open the already-established equipment dossier (stats and acquisition). Click **Why & alternatives** on any slot to open the detailed reasoning, source/efficiency metadata and source-matched candidate list. This includes unresolved augment and auxiliary slots, so the user can see what remains unverified.
+- The General, Boss, Mobbing and OpSi modes and per-ship/per-mode manual picks remain unchanged. No calculated DPS, best-in-slot status, or verified encounter mechanics are claimed by this layout change.
+
+The term **six-position** refers to the standard UI layout, not a universally verified count for every ship. Some repair/special ships have documented exceptions. AVALON must prefer exact source slots to a generic pattern.
+
 ## Limitations and next milestones
 
 This source-backed preview must **not** be labeled best-in-slot, "S tier," or simulated. It cannot yet calculate actual damage, ammunition armor multipliers, splash, barrage synchronization, skill-trigger conditions, boss traits, true OpSi synergy, availability costs, duplicate-equipment restrictions, or player inventory. Some ships have no parseable or source-confirmed slot types; their cards honestly show unavailable rather than an invented loadout.
 
-- **v0.8.1:** build fully sourced skill/weapon effect and acquisition-cost models, documented mode-specific recommendations, comparison and validation.
-- **v0.8.2:** connect equipment selection to full Fleet Lab formations and ship-skill/gear interactions.
+- **v0.8.2:** build fully sourced skill/weapon effect and acquisition-cost models, documented mode-specific recommendations, comparison and validation.
+- **v0.8.3:** connect equipment selection to full Fleet Lab formations and ship-skill/gear interactions.
 - Future: equipment inventory / owned-only suggestions, historical snapshots and repeatable evaluations with uncertainty.
