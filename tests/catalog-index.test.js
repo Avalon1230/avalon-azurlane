@@ -123,7 +123,7 @@ test('rarity descending is the default ship roster order and remains filterable'
   const html=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',renderCard:card});
   assert.match(html,/data-action="ship-sort" data-sort="rarity" aria-pressed="true"/);
   assert.match(html,/Descending ↓/);
-  const order=[...html.matchAll(/data-ship="(\\d+)"/g)].map(match=>match[1]);
+  const order=[...html.matchAll(/data-ship="(\d+)"/g)].map(match=>match[1]);
   assert.deepEqual(order,['2','4','1','3']);
   const filtered=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',rarity:'Ultra Rare',renderCard:card});
   assert.match(filtered,/data-ship="2"/);
