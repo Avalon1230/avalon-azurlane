@@ -59,7 +59,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 
 ## Known limitations and unresolved work
 
-1. Verify why a screenshot showed 890 indexed records versus the 894-source-ID snapshot; distinguish source normalization, merge, duplicates and dataset freshness.
+1. Resolved in v0.7.0 candidate: 890 vs 894 resulted from four same-name pairs (Enterprise, Neptune, Fubuki, Kasumi) merged by name instead of distinct source IDs. Source-ID-aware importer now preserves all four pairs; validate live count after deployment.
 2. No complete ship-specific equipment slot/restriction model. "Equippable by hull" means potentially eligible for some ships of that class, not verified for all.
 3. **Augment Modules need their own category and data integration**, not treatment as generic auxiliary equipment.
 4. Skill timing, interactions, exact fleet synergy, full numerical damage/eHP modeling, optimized automatic gear loadouts, gear ownership, and Gear Lab workflows are not yet implemented.
