@@ -659,12 +659,14 @@ function handleAction(target) {
     if(state.savedLoadouts[key])delete state.savedLoadouts[key][state.profileLoadoutMode];
     saveLoadoutPicks();render();notify('Personal picks reset for this ship and mode.');return;
   }
-  if (action === 'loadout-alternatives') {
+  if (action === 'loadout-slot-info' || action === 'loadout-alternatives') {
     const index=Number(target.dataset.slot);
     const ship=SHIP_MAP.get(state.detail?.id);
     const data=detailedShipRecord(state.shipDetails.data,state.detail?.sourceId);
     const model=currentShipLoadoutModel(ship,data,state.detail?.sourceId);
-    if(!Number.isSafeInteger(index)||model.slots.find(x=>x.index===index)?.candidates.length<2)return;
+    // Also show evidence for unknown auxiliary and augment positions; hiding
+    // these would falsely imply they were verified or did not exist.
+    if(!Number.isSafeInteger(index)||!model?.slots.find(x=>x.index===index))return;
     state.profileLoadoutPicker=index;state.profileGearId=null;render();
     document.querySelector('.loadout-picker-panel .icon-btn')?.focus();return;
   }
