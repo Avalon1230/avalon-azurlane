@@ -10,6 +10,7 @@ import { renderCatalogIndex } from './catalog-index.js';
 import { renderShipRosterTile } from './ship-roster.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
+import { loadWikiDefaultArtwork } from './wiki-artwork.js';
 import { nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
@@ -345,6 +346,7 @@ async function loadShipProfileData() {
     state.shipDetails={
       status:'ready',
       data:ships.value,
+      wikiArt:null,
       artwork:paintings.status==='fulfilled'?paintings.value:null,
       error:paintings.status==='rejected'?'Artwork manifest unavailable; profile data is still loaded.':''
     };
@@ -352,6 +354,19 @@ async function loadShipProfileData() {
     state.shipDetails={status:'failed',data:null,artwork:null,error:ships.reason?.message||'Unreachable'};
   }
   if (state.page === 'ships' && state.detail?.kind === 'ship') render();
+  if(ships.status==='fulfilled'){
+    const selectedId=String(state.detail?.sourceId || '');
+    const record=detailedShipRecord(ships.value,selectedId);
+    if(record?.wikiUrl){
+      void loadWikiDefaultArtwork(record.wikiUrl).then(url=>{
+        if(url && state.page==='ships' && state.detail?.sourceId===selectedId &&
+           state.shipDetails.data===ships.value){
+          state.shipDetails.wikiArt=url;
+          if(!state.artViewerOpen)render();
+        }
+      }).catch(()=>{}); // Fall back to the reconstructed image without interrupting browsing.
+    }
+  }
 }
 
 function openShipProfile(shipId) {
@@ -380,7 +395,9 @@ function render() {
   if (state.page === 'ships' && state.detail?.kind === 'ship') {
     const ship=SHIP_MAP.get(state.detail.id) || SHIPS.find(x=>String(x.sourceId||'')===state.detail.sourceId);
     const data=detailedShipRecord(state.shipDetails.data,state.detail.sourceId || ship?.sourceId);
-    const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,state.detail.sourceId || ship?.sourceId);
+    const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,state.detail.sourceId || ship?.sourceId)
+      .map((skin,index)=> index===0 && state.shipDetails.wikiArt
+        ? {...skin,images:{...skin.images,wiki:state.shipDetails.wikiArt}}:skin);
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
       level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins
@@ -533,8 +550,12 @@ function handleAction(target) {
 document.addEventListener('error', event => {
   const img=event.target;
   if(img?.matches?.('img.ship-art-preview-image, img.ship-art-viewer-image')) {
-    const fallback=img.dataset.fallbackSrc;
-    if (fallback) {delete img.dataset.fallbackSrc;img.src=fallback;return;}
+    const fallback=img.dataset.fallbackSrc || img.dataset.lastResortSrc;
+    if(fallback){
+      if(img.dataset.fallbackSrc)delete img.dataset.fallbackSrc;
+      else delete img.dataset.lastResortSrc;
+      img.src=fallback;return;
+    }
     img.remove();return;
   }
   if(img?.matches?.('img.asset-img, img.ship-profile-painting')) img.remove();
