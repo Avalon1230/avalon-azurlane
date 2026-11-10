@@ -1,5 +1,5 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
-import { shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { MAIN_SHIP_FACTIONS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
@@ -21,25 +21,33 @@ function shipNationLanding(records, sourceStatus) {
   const fallback = sourceStatus === 'failed'
     ? ' · Showing the locally available fallback roster'
     : '';
+  const main = nations.filter(item => MAIN_SHIP_FACTIONS.includes(item.nation));
+  const special = nations.filter(item => !MAIN_SHIP_FACTIONS.includes(item.nation));
+  const cards = rows => rows.map(({nation, count}) =>
+    '<button type="button" class="nation-card" data-action="catalog-nation" data-kind="ships" data-nation="' +
+    E(nation) + '">' + nationEmblemMarkup(nation) +
+    '<span class="nation-card-copy"><strong>' + E(nation) +
+    '</strong><span>' + count.toLocaleString() + ' ship' + (count === 1 ? '' : 's') + '</span></span>' +
+    '<span class="nation-card-arrow" aria-hidden="true">↗</span></button>'
+  ).join('');
+  const group = (label, rows, extraClass = '') => !rows.length ? '' :
+    '<section class="nation-registry-section ' + extraClass + '" aria-label="' + E(label) + '">' +
+    '<div class="nation-registry-heading"><h3>' + E(label) + '</h3><span>' +
+    rows.length + ' categor' + (rows.length === 1 ? 'y' : 'ies') + '</span></div>' +
+    '<div class="nation-card-grid">' + cards(rows) + '</div></section>';
   return '<div id="catalog-start" class="nation-landing">' +
     '<header class="nation-landing-head"><div><span class="eyebrow">FACTION REGISTRY</span>' +
     '<h2>Choose a nation</h2><p>Select a faction to browse its ship roster, or search across every nation.</p></div>' +
     '<div class="nation-landing-count"><strong>' + total.toLocaleString() +
-    '</strong><span>Indexed ships</span><small>' + nations.length + ' nations' + E(fallback) + '</small></div></header>' +
+    '</strong><span>Indexed ships</span><small>' + nations.length + ' browse categories' + E(fallback) + '</small></div></header>' +
     '<label class="search-wrap nation-landing-search"><span aria-hidden="true">⌕</span>' +
     '<input id="catalog-search" type="search" value="" placeholder="Search every ship or nation…" ' +
     'aria-label="Search ships across all nations" autocomplete="off"></label>' +
-    '<div class="nation-card-grid" role="group" aria-label="Browse ships by nation">' +
-    nations.map(({nation, count}) =>
-      '<button type="button" class="nation-card" data-action="catalog-nation" data-kind="ships" data-nation="' +
-      E(nation) + '">' + nationEmblemMarkup(nation) +
-      '<span class="nation-card-copy"><strong>' + E(nation) +
-      '</strong><span>' + count.toLocaleString() + ' ship' + (count === 1 ? '' : 's') + '</span></span>' +
-      '<span class="nation-card-arrow" aria-hidden="true">↗</span></button>'
-    ).join('') + '</div>' +
+    group('Main factions', main) +
+    group('META · BULINS · COLLAB', special, 'nation-special-registry') +
     (!nations.length ? '<p class="empty">No ship data available yet.</p>' : '') +
     '<p class="catalog-filter-note">Faction emblems are authentic Azur Lane game assets hosted by an independent fan repository. ' +
-    'Collaboration franchises share the Collab category; the Universal utility roster appears as Bulins. ' +
+    'Collaboration franchises share Collab; the Universal utility ships appear as Bulins. ' +
     'Unmapped and newly introduced factions use text placeholders; counts reflect the loaded roster.</p>' +
     '</div>';
 }
