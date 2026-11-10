@@ -1,5 +1,6 @@
 import { TIER_BOARDS, catalogForBoard, boardAssignmentCount } from './tiers.js';
 import { renderAssessmentBoard } from './assessment-view.js';
+import { imageMarkup } from './media.js';
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"':'&quot;', "'":'&#39;'
@@ -12,7 +13,7 @@ function tierTile(item, config, boardId, tier) {
     `<option value="${v}" ${v === tier ? 'selected' : ''}>${v === 'unranked' ? 'Unranked' : v}</option>`
   ).join('');
   return `<div class="tier-tile" draggable="true" data-tier-item="${E(item.id)}" title="Drag to another tier, or use the selector">
-    <div class="tier-tile-text"><strong>${E(item.name)}</strong><small>${E(sub)}</small></div>
+    <div class="tier-tile-text">${imageMarkup(item,'ship','asset-tier')}<strong>${E(item.name)}</strong><small>${E(sub)}</small></div>
     <label class="tier-tile-action"><span class="sr-only">Move ${E(item.name)} to tier</span><select data-tier-assign="${E(item.id)}" aria-label="Move ${E(item.name)} to tier">${choices}</select></label>
   </div>`;
 }

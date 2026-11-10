@@ -2,6 +2,24 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.5.1] - 2026-11-10
+
+### Added
+- Actual Azur Lane game-client **shipyard thumbnails** in ship catalogs, Fleet Lab slots, selection drawers, tier boards, reviewed assessments, and suggested fleet previews; no AI-generated illustrations.
+- Original in-game **equipment icons** in the searchable equipment catalog, detail panel, and equipment assessment cards.
+- Trusted-host, ID-validated image URLs with lazy loading and text fallbacks for missing/broken images.
+- Documented rights, independent asset hosting, image coverage, privacy, and attribution in [docs/IMAGE_ASSETS.md](docs/IMAGE_ASSETS.md).
+- Artwork mapping and HTML-safety regression tests.
+
+### Fixed
+- Connected the existing v0.5 Suggested Fleet module to Fleet Lab so users can generate, inspect, and apply suggestions from the website. The shipped module previously lacked the app entrypoint wiring.
+- Connected owned-ship controls, scenario selection, and preview invalidation to the existing local-state workflow.
+
+### Limitations
+- These are game-authored images **extracted and independently hosted by fan projects**. The assets are not served by an official publisher site, nor does their availability grant a publisher license.
+- Ship thumbnail audit: **746 of 894** indexed ships; equipment icons: **936 of 936** source records. Missing images show readable placeholders. Some retrofit names use their base-ship icons.
+- Default ship portraits and gear icons are visual identification aids, not verified combat assessment inputs.
+
 ## [0.5.0] - 2026-11-10
 
 ### Added

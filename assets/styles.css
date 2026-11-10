@@ -160,3 +160,30 @@
 .suggest-advice li,.suggest-cautions li{font-size:12px;color:#bcd0de;line-height:1.65;margin:9px 0}
 .suggest-advice ul,.suggest-cautions ul{padding-left:20px;margin:12px 0 0}
 @media(max-width:600px){.suggest-panel{padding:15px}.suggest-heading h2{font-size:21px}.suggest-toolbar{align-items:stretch;flex-direction:column}.suggest-toolbar .select-wrap{max-width:100%}.suggest-fleet summary span{display:block;margin-left:0;margin-top:4px}.suggest-items{grid-template-columns:1fr}}
+/* v0.5.1 — original Azur Lane game-client artwork (third-party hosted) */
+.asset-media{position:relative;display:inline-grid;place-items:center;flex:none;width:48px;height:48px;overflow:hidden;border:1px solid #3a5b74;border-radius:9px;background:linear-gradient(130deg,#1d354a,#112437);vertical-align:middle}
+.asset-media>.asset-fallback{display:grid;place-items:center;position:absolute;inset:0;font-size:11px;font-weight:800;color:#8cbbd6;letter-spacing:.02em;text-align:center;padding:3px;overflow:hidden}
+.asset-media>.asset-img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#182e43}
+.catalog-art{display:flex;justify-content:center;align-items:center;margin:-6px -6px 12px;border-radius:9px;background:radial-gradient(ellipse at center,#1c3952 0%,#0e1d2e 74%);min-height:132px}
+.asset-card-ship{width:min(100%,150px);height:128px;border:0;background:transparent}
+.asset-card-ship>.asset-img{background:transparent}
+.asset-card-ship>.asset-fallback{font-size:19px;opacity:.65}
+.asset-card-gear{width:68px;height:68px}
+.asset-card-gear>.asset-img{background:#27354c}
+.profile-art{display:flex;align-items:center;gap:16px;padding:15px;border:1px solid #32516a;border-radius:9px;background:radial-gradient(ellipse at left,#193b54,#122338);font-size:11px;line-height:1.6;color:#9bb8cc}
+.asset-profile{width:136px;height:136px;border-color:#4b6b81}
+.asset-profile>.asset-fallback{font-size:17px}
+.asset-picker{width:46px;height:46px;border-radius:7px}
+.asset-fleet{width:56px;height:56px;margin:1px 0;align-self:flex-start}
+.fleet-slot .asset-media{font-size:11px;color:#91bcd3;flex:none}
+.fleet-slot .asset-fallback{color:#91bcd3;font-size:10px}
+.asset-tier{width:55px;height:55px;margin:0 auto 3px}
+.asset-assessment{width:68px;height:68px}
+.assessment-identity{display:flex;gap:13px;align-items:center;min-width:0}
+.assessment-identity h3{overflow-wrap:anywhere}
+.asset-owned{width:43px;height:43px}
+.suggest-ship .asset-media{flex:none}
+.asset-suggestion{float:left;width:56px;height:56px;margin:0 12px 7px 0}
+.suggest-item::after{content:"";display:block;clear:both}
+.asset-provenance{font-size:11px;color:#8eafc2;margin:6px 0 15px;line-height:1.6}
+@media(max-width:540px){.asset-card-ship{height:104px;width:110px}.catalog-art{min-height:110px}.asset-profile{height:106px;width:106px}.asset-fleet{width:45px;height:45px}.asset-assessment{height:56px;width:56px}.asset-tier{height:43px;width:43px}}

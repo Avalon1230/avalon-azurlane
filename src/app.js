@@ -5,11 +5,15 @@ import { contextCriteria, evaluationState } from './criteria.js';
 import { changelogToHtml } from './changelog.js';
 import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, moveTierItem } from './tiers.js';
 import { renderTierView } from './tier-view.js';
+import { imageMarkup, assetCoverage } from './media.js';
+import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
+import { renderSuggestedFleet } from './fleet-suggest-view.js';
 
 const $ = selector => document.querySelector(selector);
 const E = escapeHtml;
 const storageKey = 'avalon.azurlane.plans.v1';
 const tierStorageKey = 'avalon.azurlane.tiers.v1';
+const suggestStorageKey = 'avalon.azurlane.suggest.v1';
 const pages = [
   { id: 'overview', label: 'Overview', icon: '⌂' },
   { id: 'modes', label: 'Game Modes', icon: '◈' },
@@ -25,7 +29,8 @@ const state = {
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
   changelog: null, changelogStatus: 'idle',
-  tierBoard: 'ships', tierQuery: '', tierFilter: 'all', tierBoards: freshTierBoards(), activeDragItem: null
+  tierBoard: 'ships', tierQuery: '', tierFilter: 'all', tierBoards: freshTierBoards(), activeDragItem: null,
+  suggestOptions: {scenario:'',ownedOnly:false,ownedIds:[],poolOpen:false}, suggestPreview:null
 };
 
 function loadPlans() {
@@ -61,6 +66,24 @@ function savePlans() {
   } catch { notify('Browser storage unavailable; export your plan to keep it.'); }
 }
 
+function loadSuggestOptions() {
+  try {
+    const x=JSON.parse(localStorage.getItem(suggestStorageKey)||'{}');
+    if(!x || typeof x!=='object' || Array.isArray(x)) return;
+    state.suggestOptions={
+      scenario: typeof x.scenario==='string'?x.scenario:'',
+      ownedOnly: x.ownedOnly===true,
+      ownedIds: Array.isArray(x.ownedIds)?[...new Set(x.ownedIds.filter(id=>typeof id==='string'&&/^[\w-]{1,96}$/.test(id)))].slice(0,1000):[],
+      poolOpen:false
+    };
+  } catch { /* unavailable */ }
+}
+function saveSuggestOptions() {
+  try { localStorage.setItem(suggestStorageKey,JSON.stringify({
+    scenario:state.suggestOptions.scenario,ownedOnly:state.suggestOptions.ownedOnly,
+    ownedIds:state.suggestOptions.ownedIds
+  })); } catch { notify('Browser storage unavailable for ship availability.'); }
+}
 function loadTierBoards() {
   try { state.tierBoards = normalizeTierBoards(JSON.parse(localStorage.getItem(tierStorageKey) || '{}')); }
   catch { state.tierBoards = freshTierBoards(); }
@@ -183,12 +206,15 @@ function renderShips() {
   const filtered = searchCatalog(SHIPS, state.query, ['name', 'hull', 'tags', 'rarity', 'sourceHull']).filter(s => state.hull === 'all' || s.hull === state.hull);
   const visible=filtered.slice(0,72);
   return `${sectionHeading('The ship index', 'RESEARCH CATALOG · v0.2', 'Search the public ship roster by name, hull, or rarity; open an evidence profile, then assign it to a fleet.')}${warning()}
-  ${searchBar('Search ship, hull or rarity...', extra)}<div class="result-caption">${filtered.length.toLocaleString()} / ${SHIPS.length.toLocaleString()} records ${visible.length<filtered.length?'· Showing first 72 (refine your search)':''} · Unranked</div>
+  ${assetNotice()}${searchBar('Search ship, hull or rarity...', extra)}<div class="result-caption">${filtered.length.toLocaleString()} / ${SHIPS.length.toLocaleString()} records ${visible.length<filtered.length?'· Showing first 72 (refine your search)':''} · Unranked</div>
   <div class="catalog-grid">${visible.map(shipCard).join('') || '<div class="empty">No ships match these filters.</div>'}</div>`;
+}
+function assetNotice() {
+  return `<p class="asset-provenance">Original Azur Lane game-client artwork (not AI). Image copies are hosted by independent fan repositories, not Yostar or Manjuu. Audit: ${assetCoverage.availableShipThumbnails}/${assetCoverage.indexedShipsAtAudit} ship thumbnails and ${assetCoverage.availableEquipmentIcons} equipment icons. <a href="https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/IMAGE_ASSETS.md" target="_blank" rel="noopener noreferrer">Artwork sources and rights</a>.</p>`;
 }
 function shipCard(ship) {
   const status=evaluationState(ship);
-  return `<article class="catalog-card"><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
+  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
   <div class="tag-row">${(ship.tags||[]).map(tag).join('')}${tag(status.tier===null?'Assessment pending':'Reviewed')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="ship-details" data-ship="${E(ship.id)}">Inspect</button><button type="button" class="small-btn" data-action="add-ship" data-ship="${E(ship.id)}">+ Assign</button></div></article>`;
 }
 function renderEquipment() {
@@ -197,12 +223,12 @@ function renderEquipment() {
   const filtered = searchCatalog(EQUIPMENT, state.query, ['name', 'category', 'rarity', 'acquisition']).filter(e => state.category==='all' || e.category===state.category);
   const visible=filtered.slice(0,72);
   return `${sectionHeading('Equipment intelligence', 'EQUIPMENT INDEX · v0.2', 'Browse sourced equipment identities, categories and enhancement attributes. Crafting and acquisition are a separate verification phase.')}${warning()}
-  ${searchBar('Search gear, category or rarity...', extra)}<div class="result-caption">${filtered.length.toLocaleString()} / ${EQUIPMENT.length.toLocaleString()} records ${visible.length<filtered.length?'· Showing first 72 (refine your search)':''} · No best-in-slot claims</div>
+  ${assetNotice()}${searchBar('Search gear, category or rarity...', extra)}<div class="result-caption">${filtered.length.toLocaleString()} / ${EQUIPMENT.length.toLocaleString()} records ${visible.length<filtered.length?'· Showing first 72 (refine your search)':''} · No best-in-slot claims</div>
   <div class="catalog-grid">${visible.map(equipCard).join('') || '<div class="empty">No equipment matches these filters.</div>'}</div>`;
 }
 function equipCard(item) {
   const stats=Object.entries(item.stats||{}).filter(([,v])=>typeof v==='number').slice(0,3);
-  return `<article class="catalog-card gear-card"><div class="catalog-top"><div class="gear-icon">⚙</div><span class="verification">SOURCE INDEX</span></div><h3>${E(item.name)}</h3><div class="type-line">${E(item.category)} · ${E(item.rarity||'Unverified rarity')}</div><p>${E(item.source==='fernando'?'Community data record; enhancement values are source-reported, not independently validated.':item.summary||'Acquisition requires verification.')}</p>
+  return `<article class="catalog-card gear-card"><div class="catalog-top">${imageMarkup(item,'equipment','asset-card-gear')}<span class="verification">SOURCE INDEX</span></div><h3>${E(item.name)}</h3><div class="type-line">${E(item.category)} · ${E(item.rarity||'Unverified rarity')}</div><p>${E(item.source==='fernando'?'Community data record; enhancement values are source-reported, not independently validated.':item.summary||'Acquisition requires verification.')}</p>
   <div class="tag-row">${stats.map(([k,v])=>tag(`${k.replaceAll('_',' ')}: ${v}`)).join('')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="equip-details" data-equip="${E(item.id)}">Inspect gear</button>${link(wikiLookupUrl(item.name), 'Wiki lookup')}</div></article>`;
 }
 function evidenceLine(record) {
@@ -222,7 +248,7 @@ function renderDetails() {
   ];
   const statRows=!ship?Object.entries(item.stats||{}).map(([k,v])=>[k.replaceAll('_',' ').toUpperCase(),String(v)]):[];
   return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect ${ship?'ship':'equipment'}"><div class="picker-head"><div>${eyebrow(ship?'SHIP INTELLIGENCE':'EQUIPMENT INTELLIGENCE')}<h2>${E(item.name)}</h2></div><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div>
-  <div class="detail-scroll"><div class="info-banner"><span class="info-dot">i</span><div><strong>Source-indexed, not tier-ranked.</strong> ${E(evaluationState(item).quality)}. Do not treat this profile as a battle-performance verdict.</div></div>
+  <div class="detail-scroll"><div class="profile-art">${imageMarkup(item,ship?'ship':'equipment','asset-profile')}<span>Original Azur Lane game image, community hosted. No AI art.</span></div><div class="info-banner"><span class="info-dot">i</span><div><strong>Source-indexed, not tier-ranked.</strong> ${E(evaluationState(item).quality)}. Do not treat this profile as a battle-performance verdict.</div></div>
   <div class="profile-table">${[...rows,...statRows].map(([k,v])=>`<div><span>${E(k)}</span><strong>${E(v)}</strong></div>`).join('')}</div>
   <section class="context-panel">${eyebrow('MODE-SPECIFIC RESEARCH')}<h3>${E(selectedMode().name)} · assessment pending</h3><p>Data needed before calculating ship effectiveness or recommending equipment for this mode:</p><div class="tag-row">${contextCriteria(state.modeId).map(tag).join('')}</div></section>
   <section class="evidence-box"><h3>Evidence trail</h3>${evidenceLine(item)}<p>${link(wikiLookupUrl(item.name),'Search Azur Lane fan wiki')}</p></section></div>
@@ -236,7 +262,7 @@ function renderFleet() {
   return `${sectionHeading('Fleet laboratory', 'TACTICAL PLANNING', 'Build manually or generate a qualitative role-matching preview. AVALON does not yet simulate battle mechanics or select optimal equipment.')}
   <div class="fleet-toolbar">${modeSelect()}<div class="fleet-controls"><span class="assignment-count">${countAssigned(plan)} / ${countSlots(plan)} assigned</span><button type="button" class="outline-btn compact" data-action="export-plan">Export JSON ↓</button><button type="button" class="ghost-btn danger" data-action="reset-plan">Clear plan</button></div></div>
   <div class="mode-description"><span class="mode-icon">${mode.icon}</span><div><strong>${E(mode.name)}</strong><p>${E(mode.summary)}</p></div></div>
-  ${contextPanel()}<div class="fleet-grid">${mode.fleetTypes.map(id => fleetCard(id, plan)).join('')}</div>
+  ${contextPanel()}${renderSuggestedFleet({mode,ships:SHIPS,workspace:plan,options:state.suggestOptions,preview:state.suggestPreview,sourceStatus:state.sync.status})}<div class="fleet-grid">${mode.fleetTypes.map(id => fleetCard(id, plan)).join('')}</div>
   <div class="info-banner"><span class="info-dot">i</span><div><strong>How to build:</strong> Click an empty or occupied slot to select a compatible ship. An assigned ship cannot appear twice within the same plan. Each game mode has a separate saved arrangement, stored only in this browser.</div></div>
   ${state.picker ? renderPicker() : ''}`;
 }
@@ -246,7 +272,7 @@ function fleetCard(id, plan) {
   const used = Object.values(plan.fleets[id]).filter(Boolean).length;
   return `<section class="fleet-card"><div class="fleet-card-head"><div>${eyebrow(fleet.type.toUpperCase() + ' FORMATION')}<h3>${E(fleet.name)}</h3><p>${E(fleet.detail)}</p></div><span class="fleet-count">${used}/${slots.length}</span></div><div class="slot-grid ${fleet.type === 'surface'?'surface-slots':''}">${slots.map(slot => {
     const assigned = SHIP_MAP.get(plan.fleets[id][slot.id]);
-    return `<button type="button" class="fleet-slot ${assigned?'filled':''}" data-action="choose-slot" data-fleet="${id}" data-slot="${slot.id}"><small>${E(slot.label)}</small><strong>${assigned?E(assigned.name):'+ Assign ship'}</strong><span>${assigned?E(assigned.hull):E(slot.kind)}</span></button>`;
+    return `<button type="button" class="fleet-slot ${assigned?'filled':''}" data-action="choose-slot" data-fleet="${id}" data-slot="${slot.id}"><small>${E(slot.label)}</small>${assigned?imageMarkup(assigned,'ship','asset-fleet'):''}<strong>${assigned?E(assigned.name):'+ Assign ship'}</strong><span>${assigned?E(assigned.hull):E(slot.kind)}</span></button>`;
   }).join('')}</div></section>`;
 }
 function renderPicker() {
@@ -259,7 +285,7 @@ function renderPicker() {
   <label class="search-wrap"><span>⌕</span><input id="picker-search" type="search" placeholder="Find a compatible ship" value="${E(state.pickerQuery)}" aria-label="Search compatible ships" /></label>
   <div class="picker-list">${filtered.map(ship => {
     const taken = assignedElsewhere.has(ship.id) && ship.id !== assigned;
-    return `<button type="button" class="picker-option" data-action="place-ship" data-ship="${ship.id}" ${taken?'disabled title="Already assigned"':''}><span class="ship-badge small">${E(ship.hull)}</span><span class="picker-name">${E(ship.name)}<small>${E(ship.tags.join(' · '))}</small></span><span>${taken?'In use':ship.id === assigned?'Selected':'+'}</span></button>`;
+    return `<button type="button" class="picker-option" data-action="place-ship" data-ship="${ship.id}" ${taken?'disabled title="Already assigned"':''}>${imageMarkup(ship,'ship','asset-picker')}<span class="ship-badge small">${E(ship.hull)}</span><span class="picker-name">${E(ship.name)}<small>${E(ship.tags.join(' · '))}</small></span><span>${taken?'In use':ship.id === assigned?'Selected':'+'}</span></button>`;
   }).join('') || '<div class="empty">No compatible ships in the sample index.</div>'}</div>
   <div class="picker-footer"><button type="button" class="outline-btn compact" data-action="clear-slot" ${assigned?'':'disabled'}>Remove assignment</button><button type="button" class="ghost-btn" data-action="close-picker">Close</button></div></aside></div>`;
 }
@@ -305,6 +331,29 @@ function render() {
 }
 function handleAction(target) {
   const {action,page,mode,ship,equip,fleet,slot,board} = target.dataset;
+  if (action === 'suggest-toggle-pool') { state.suggestOptions.poolOpen=!state.suggestOptions.poolOpen;render();return; }
+  if (action === 'suggest-all-owned' || action === 'suggest-none-owned') {
+    state.suggestOptions.ownedIds=action==='suggest-all-owned'?SHIPS.filter(s=>curatedProfile(s)).map(s=>s.id):[];
+    state.suggestPreview=null;saveSuggestOptions();render();return;
+  }
+  if (action === 'suggest-generate') {
+    const options=state.suggestOptions;
+    const valid=SCENARIOS[state.modeId]||[];
+    const scenario=valid.some(x=>x.id===options.scenario)?options.scenario:valid[0]?.id;
+    try {
+      const suggestion=suggestFleet({modeId:state.modeId,scenario,ships:SHIPS,workspace:currentPlan(),ownedOnly:options.ownedOnly,ownedIds:options.ownedIds});
+      state.suggestPreview={...suggestion,baseSignature:JSON.stringify(currentPlan())};
+      render();notify('Suggested formations are ready for review.');
+    } catch(error) {notify('Suggestion unavailable: '+error.message);}
+    return;
+  }
+  if (action === 'suggest-apply') {
+    const preview=state.suggestPreview;
+    if(!preview||preview.modeId!==state.modeId||JSON.stringify(currentPlan())!==preview.baseSignature)
+      return notify('Suggestion is stale. Generate it again.');
+    state.workspaces[state.modeId]=normalizeWorkspace(preview.plan,state.modeId);
+    state.suggestPreview=null;savePlans();render();notify('Suggested additions applied.');return;
+  }
   if (action === 'tier-board') {
     if (!TIER_BOARDS[board]) return;
     state.tierBoard=board;state.tierQuery='';state.tierFilter='all';render();return;
@@ -321,7 +370,7 @@ function handleAction(target) {
   if (action === 'close-detail') { state.detail=null;return render(); }
   if (action === 'navigate') return go(page);
   if (action === 'open-mode') { state.modeId = mode; return go('fleet'); }
-  if (action === 'add-ship') {
+  if (action === 'add-ship') { state.suggestPreview=null;
     const item = SHIP_MAP.get(ship), location = findFirstVacancy(currentPlan(), item);
     if (!location) return notify('No compatible free slot, or ship already assigned. Open Fleet Lab to adjust.');
     state.workspaces[state.modeId] = assignShip(currentPlan(), location.fleetId, location.slotId, item.id);
@@ -330,6 +379,7 @@ function handleAction(target) {
   if (action === 'choose-slot') { state.picker = {fleetId:fleet,slotId:slot}; state.pickerQuery=''; return render(); }
   if (action === 'close-picker') { state.picker=null; return render(); }
   if (action === 'place-ship' || action === 'clear-slot') {
+    state.suggestPreview=null;
     const {fleetId,slotId} = state.picker;
     try {
       state.workspaces[state.modeId] = assignShip(currentPlan(),fleetId,slotId,action==='place-ship'?ship:null);
@@ -337,7 +387,7 @@ function handleAction(target) {
     } catch(err) { notify(err.message); }
     return;
   }
-  if (action === 'reset-plan') {
+  if (action === 'reset-plan') { state.suggestPreview=null;
     if (!window.confirm(`Clear all ${selectedMode().name} assignments? This only affects this browser.`)) return;
     state.workspaces[state.modeId]=createWorkspace(state.modeId);
     if(state.pendingPlans) state.pendingPlans[state.modeId]=createWorkspace(state.modeId);
@@ -352,6 +402,10 @@ function handleAction(target) {
   }
 }
 
+document.addEventListener('error', event => {
+  const img=event.target;
+  if(img?.matches?.('img.asset-img')) img.remove();
+}, true);
 document.addEventListener('click', event => {
   const target = event.target.closest('[data-action]');
   if (!target || target.disabled) return;
@@ -360,12 +414,21 @@ document.addEventListener('click', event => {
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  if(event.target.id==='suggest-scenario') { state.suggestOptions.scenario=event.target.value;state.suggestPreview=null;saveSuggestOptions();render();return; }
+  if(event.target.id==='suggest-owned-only') { state.suggestOptions.ownedOnly=event.target.checked;state.suggestPreview=null;saveSuggestOptions();render();return; }
+  if(event.target.matches('[data-suggest-owned]')) {
+    const id=event.target.dataset.suggestOwned;
+    const set=new Set(state.suggestOptions.ownedIds);
+    if(event.target.checked)set.add(id); else set.delete(id);
+    state.suggestOptions.ownedIds=[...set];state.suggestPreview=null;saveSuggestOptions();
+    return;
+  }
   if (event.target.id === 'tier-filter') { state.tierFilter=event.target.value;render();return; }
   if (event.target.matches('[data-tier-assign]')) {
     if (TIER_BOARDS[state.tierBoard].readOnly) return;
     movePersonalTier(event.target.dataset.tierAssign,event.target.value);return;
   }
-  if (event.target.id === 'mode-select') { state.modeId=event.target.value;state.picker=null;render(); }
+  if (event.target.id === 'mode-select') { state.modeId=event.target.value;state.picker=null;state.suggestOptions.scenario='';state.suggestPreview=null;render(); }
   if (event.target.id === 'hull-filter') { state.hull=event.target.value;render(); }
   if (event.target.id === 'category-filter') { state.category=event.target.value;render(); }
 });
@@ -434,6 +497,7 @@ async function syncData() {
       ships:result.ships?.length||0,equipment:result.equipment?.length||0,
       shipVersion:result.shipVersion,checkedAt:result.checkedAt,errors:result.errors};
     if (result.ships) {
+      state.suggestPreview=null;
       for (const mode of MODES) state.workspaces[mode.id]=normalizeWorkspace(state.pendingPlans?.[mode.id]||state.workspaces[mode.id],mode.id);
       state.pendingPlans=null;
       savePlans();
@@ -445,6 +509,7 @@ async function syncData() {
 }
 loadPlans();
 loadTierBoards();
+loadSuggestOptions();
 const initial = location.hash.replace(/^#\//,'');
 go(pages.some(p=>p.id===initial)?initial:'overview');
 void syncData();

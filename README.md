@@ -46,6 +46,14 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 **Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, numerical fleet optimization and automatic gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
+## Original game artwork (v0.5.1)
+
+The UI now shows **real in-game shipyard portraits and equipment icons**, linked directly to independently hosted original Azur Lane game-client assets—not AI-generated artwork. The sources are [iujab/azurlane-images](https://github.com/iujab/azurlane-images) for ship thumbnails and [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane) for equipment icons. At the November 10 audit, **746/894** indexed ships had validated thumbnails, and all **936/936** equipment records had matching icon paths. Missing/blocked assets fall back to visible names and hull/category markers.
+
+Artwork remains copyright of the Azur Lane rights holders. These repositories are **community hosts, not official publisher image servers**, and host fan-use statements do not establish formal rights-holder permission. AVALON embeds but does not mirror or bundle their binary image files. See [image sources, restrictions and provenance](docs/IMAGE_ASSETS.md). No synthetic portraits or weapons art are used.
+
+The existing v0.5 fleet suggestion module is also now wired into the live Fleet Lab, with preserved user assignments and explicit, qualitative (not simulated) role matching.
+
 ## Combat recommendations and personal favorites (v0.3.1)
 
 Open the [Tier Boards](https://avalon1230.github.io/avalon-azurlane/#/tiers) page:

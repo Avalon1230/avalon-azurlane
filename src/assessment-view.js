@@ -1,17 +1,20 @@
 import { AVALON_ASSESSMENTS, EVIDENCE_SOURCES, assessmentsFor, confidenceLabel } from './assessments.js';
 import { MODES } from './catalog.js';
 import { TIER_BOARDS } from './tiers.js';
+import { imageMarkup } from './media.js';
 const escape = v=>String(v??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
 const E = escape;
 function tabs(boardId) {
   return Object.entries(TIER_BOARDS).map(([id,item])=>`<button type="button" class="tier-tab ${id===boardId?'active':''}" data-action="tier-board" data-board="${E(id)}" aria-pressed="${id===boardId}"><span>${E(item.icon)}</span>${E(item.title)}</button>`).join('');
 }
-function itemCard(item) {
+function itemCard(item,catalog) {
   const mode=MODES.find(m=>m.id===item.mode);
+  const matched=catalog.find(x=>x.name===item.name)||{name:item.name};
+  const art=imageMarkup(matched,item.board==='equipment'?'equipment':'ship','asset-assessment');
   return `<article class="research-card avalon-assessment-card">
      <div class="research-card-top"><span class="research-grade grade-${E(item.grade.toLowerCase())}">${E(item.grade)}</span><span class="research-context">${E(mode?.name||item.mode)}</span></div>
      <div class="eyebrow">${E(item.role)}</div>
-     <h3>${E(item.name)}</h3>
+     <div class="assessment-identity">${art}<h3>${E(item.name)}</h3></div>
      <p class="assessment-why"><strong>Why it earns ${E(item.grade)}:</strong> ${E(item.rationale)}</p>
      <p class="research-caveat"><strong>When not to pick it:</strong> ${E(item.caveat)}</p>
      ${item.alternatives.length?`<p class="assessment-alternatives"><strong>Other options:</strong> ${E(item.alternatives.join(', '))}</p>`:''}
@@ -40,7 +43,7 @@ export function renderAssessmentBoard({ boardId='ships', ships=[], equipment=[],
     <div class="tier-controls"><label class="search-wrap"><span aria-hidden="true">⌕</span><input type="search" id="tier-search" value="${E(query)}" placeholder="Search ${boardId==='ships'?'ships, roles, alternatives':'gear, enemies, acquisition'}…" aria-label="Search assessed recommendations" autocomplete="off"></label>
       <label class="select-wrap">Game mode <select id="tier-filter" aria-label="Filter by game mode">${choices}</select></label></div>
     <div class="result-caption">${entries.length} AVALON assessments shown · ${AVALON_ASSESSMENTS.filter(x=>x.board===boardId).length} reviewed situations${unassessed!==null?' · '+unassessed.toLocaleString()+' catalog names awaiting review':''}${sourceStatus==='failed'?' · External catalog unavailable':''}</div>
-    <div class="research-grid assessment-grid">${entries.map(itemCard).join('')||'<div class="empty">No reviewed assessments for this game mode and search. Other game modes and unreviewed items are not assumed weak.</div>'}</div>
+    <div class="research-grid assessment-grid">${entries.map(item=>itemCard(item,catalog)).join('')||'<div class="empty">No reviewed assessments for this game mode and search. Other game modes and unreviewed items are not assumed weak.</div>'}</div>
     ${matchedUnassessed.length?`<section class="context-panel"><h3>Not yet evaluated</h3><p>These names exist in the searchable catalog, but AVALON has not published a supported assessment for them:</p><div class="tag-row">${matchedUnassessed.map(item=>`<span class="chip">${E(item.name)}</span>`).join('')}</div></section>`:''}
     <div class="info-banner"><span class="info-dot">i</span><div><strong>Editorial research, not measured combat results.</strong> Each grade is a dated, scenario-bound AVALON synthesis supported by linked outside sources. Confidence describes the strength of that support, not a numeric win rate. Reassess when mechanics, equipment, or the source recommendations change. Waifu and Headpats remain separate, personal lists.</div></div>`;
 }
