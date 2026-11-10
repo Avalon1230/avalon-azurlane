@@ -1,4 +1,5 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
+import { renderEquipmentIndex } from './equipment-index.js';
 import { EQUIPMENT_SORTS, EQUIPMENT_RARITIES, sortEquipmentRows } from './equipment-roster.js';
 import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_RARITIES, SHIP_HULL_GROUPS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, possibleEquipmentHulls } from './catalog-filters.js';
@@ -60,9 +61,14 @@ function groupedCards(rows,kind,card,totals,sort='rarity',descending=true){
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE}){
+export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
+  if(kind==='equipment')return renderEquipmentIndex({
+    records,query,nation,hull,category,rarity,broadType,group:equipmentGroup,
+    sort,descending,advancedOpen:equipmentAdvancedOpen,
+    equipmentLimit,renderCard
+  });
   const ship=kind==='ships';
   if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1)
     return shipNationLanding(records);
