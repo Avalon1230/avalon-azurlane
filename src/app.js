@@ -251,17 +251,26 @@ function evidenceLine(record) {
   if(record?.source === 'fernando') return `<p><strong>Source:</strong> Fernando2603/AzurLane equipment.json (community game-data extraction).</p>${link('https://github.com/Fernando2603/AzurLane/blob/main/equipment.json','Inspect source data')}`;
   return `<p><strong>Source:</strong> Editorial placeholder (not validated).</p>${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/DATA_SOURCES.md','Source methodology')}`;
 }
+function refreshEquipmentDetail() {
+  if(state.page!=='equipment'||state.detail?.kind!=='equipment')return;
+  // A network response must not throw the reader back to the top while they
+  // are scrolling through the large stats table.
+  const previous=document.querySelector('.detail-panel .detail-scroll')?.scrollTop||0;
+  render();
+  const pane=document.querySelector('.detail-panel .detail-scroll');
+  if(pane)pane.scrollTop=previous;
+}
 async function ensureEquipmentAcquisition() {
   if(state.equipmentAcquisition.status==='ready'||state.equipmentAcquisition.status==='loading')return;
   state.equipmentAcquisition={status:'loading',index:null,error:''};
-  if(state.page==='equipment'&&state.detail?.kind==='equipment')render();
+  refreshEquipmentDetail();
   try {
     const index=await loadEquipmentDrops();
     state.equipmentAcquisition={status:'ready',index,error:''};
   }catch(err){
     state.equipmentAcquisition={status:'error',index:null,error:String(err?.message||'Source unavailable')};
   }
-  if(state.page==='equipment'&&state.detail?.kind==='equipment')render();
+  refreshEquipmentDetail();
 }
 function renderDetails() {
   const d=state.detail;
@@ -640,7 +649,7 @@ function handleAction(target) {
   }
   if (action === 'profile-retry') { state.shipDetails={status:'idle',data:null,error:''};void loadShipProfileData();return; }
   if (action === 'catalog-home') {
-    state.shipNation='all';state.hull='all';state.query='';state.shipRarity='all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;
+    state.shipNation='all';state.hull='all';state.query='';state.shipRarity='all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;state.shipAdvancedOpen=false;
     render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'catalog-nation') {
