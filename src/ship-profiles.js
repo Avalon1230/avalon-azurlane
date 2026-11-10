@@ -37,21 +37,20 @@ function profilePanel(title, body, id = '') {
 }
 
 /**
- * A number of game-client *_rw.webp paintings are Live2D/render-layer
- * components rather than the assembled skin image. Prefer the separately
- * sourced static variant where one is listed; retain the other as fallback.
- * Neither image is assumed to contain a complete assembled illustration.
+ * Game-client WebPs include incomplete backgrounds, Live2D layers or effects.
+ * Only use the source-listed, reconstructed PNG painting for the viewer.
+ * We deliberately DO NOT fall back to raw *_rw.webp fragments.
  */
-export function resolveSkinArtwork(skin) {
-  const urls = skin?.images || {};
-  const original = trustedShipPainting(urls.default || skin?.image);
-  const staticVersion = trustedShipPainting(urls.censored);
-  const isLayer = original && /_rw\.webp$/i.test(original);
-  const primary = isLayer && staticVersion && staticVersion !== original
-    ? staticVersion : original || staticVersion;
-  const fallback = primary !== original ? original : (staticVersion !== primary ? staticVersion : null);
-  return { primary: primary || null, fallback: fallback || null };
+export function trustedReconstructedPainting(url) {
+  return typeof url==='string' &&
+    /^https:\/\/raw\.githubusercontent\.com\/Fernando2603\/AzurLane\/main\/images\/skin\/\d{5,10}\/painting(?:_n)?\.png$/.test(url) ? url : null;
 }
+export function resolveSkinArtwork(skin) {
+  const primary=trustedReconstructedPainting(skin?.images?.painting);
+  const noBg=trustedReconstructedPainting(skin?.images?.paintingNoBackground);
+  return {primary:primary||null,fallback:primary&&noBg&&primary!==noBg?noBg:null};
+}
+
 function artImage(skin, className, shipName, lazy = true) {
   const {primary,fallback} = resolveSkinArtwork(skin);
   if (!primary) return '';
@@ -61,8 +60,8 @@ function artImage(skin, className, shipName, lazy = true) {
     '" ' + (lazy ? 'loading="lazy" ' : '') +
     'decoding="async" referrerpolicy="no-referrer">';
 }
-function artworkPanel(data, skinIndex) {
-  const skins=Array.isArray(data?.skins)?data.skins:[];
+function artworkPanel(data, skinIndex, artworkSkins=[]) {
+  const skins=artworkSkins;
   const index=Math.max(0,Math.min(Math.max(0,skins.length-1),skinIndex));
   const current=skins[index];
   const name=data.names?.en || 'Ship';
@@ -84,8 +83,8 @@ function artworkPanel(data, skinIndex) {
         '</button>').join('') + '</div>' : '') +
     '</section>';
 }
-function artworkViewer(data, skinIndex) {
-  const skins=Array.isArray(data.skins)?data.skins:[];
+function artworkViewer(data, skinIndex, artworkSkins=[]) {
+  const skins=artworkSkins;
   const current=skins[Math.max(0,Math.min(skins.length-1,skinIndex))];
   const name=data.names?.en || 'Ship';
   const image=artImage(current,'ship-art-viewer-image',name,false);
@@ -100,7 +99,7 @@ function artworkViewer(data, skinIndex) {
     '<span class="ship-art-missing">Artwork unavailable for this skin</span></div>' +
     '</section></div>';
 }
-function profileHead(ship, data, skinIndex) {
+function profileHead(ship, data, skinIndex, artworkSkins=[]) {
   const fallbackName = data?.names?.en || ship?.name || 'Unknown ship';
   const identity = ship ? shipBrowseDisplayNation(ship) : data?.nationality || 'Unclassified';
   const metadata = [identity,data?.class,data?.hullType, data?.rarity || ship?.rarity].filter(Boolean);
@@ -113,7 +112,7 @@ function profileHead(ship, data, skinIndex) {
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
     '<div class="ship-profile-actions"><button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>' +
     (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
-    '</div></div></section>' + artworkPanel(data,skinIndex) + '</div>';
+    '</div></div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
 }
 
 function statPanel(data, level) {
@@ -183,7 +182,7 @@ function sourcePanel(data, ship) {
     '<a class="outline-btn compact" href="https://github.com/iujab/Lycoris-AzurAPI" target="_blank" rel="noopener noreferrer">Game-data source ↗</a></div>'+
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, error='' } = {}) {
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
@@ -198,7 +197,7 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       (error&&status==='failed'?'<small>'+E(error)+'</small>':'')+
       '</div></div>';
   }
-  return '<div class="ship-profile-page">'+profileHead(ship,data,skinIndex)+
+  return '<div class="ship-profile-page">'+profileHead(ship,data,skinIndex,artworkSkins)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
@@ -206,5 +205,5 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
     statPanel(data,level)+gearPanel(data)+skillsPanel(data)+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data)+progressionPanel(data)+sourcePanel(data,ship)+
-    '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex):'')+'</div>';
+    '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
 }
