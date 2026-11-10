@@ -32,27 +32,32 @@ test('combat boards include all available valid records without invented ranking
   assert.equal(catalogForBoard('equipment',ships,equipment).length,1);
   assert.equal(catalogForBoard('waifu',ships,equipment).length,2);
 });
-test('tier move and unrank stay independent between boards', () => {
-  const initial = freshTierBoards();
-  const once = moveTierItem(initial, 'ships', 'musashi','EX',ships);
-  assert.equal(once.ships.musashi,'EX');
+test('published combat assessments cannot be manually changed', () => {
+  const initial=freshTierBoards();
+  assert.throws(()=>moveTierItem(initial,'ships','musashi','EX',ships),/published research/);
+  assert.throws(()=>moveTierItem(initial,'equipment','fer-100','S',equipment),/published research/);
   assert.deepEqual(initial.ships,{});
-  const twice=moveTierItem(once,'waifu','musashi','SSS',catalogForBoard('waifu',ships,equipment));
-  assert.equal(twice.ships.musashi,'EX');
-  assert.equal(twice.waifu.musashi,'SSS');
-  const reset=moveTierItem(twice,'waifu','musashi','unranked',ships);
+});
+test('waifu and headpats remain independent personal boards', () => {
+  const first=moveTierItem(freshTierBoards(),'waifu','musashi','SSS',catalogForBoard('waifu',ships,equipment));
+  assert.equal(first.waifu.musashi,'SSS');
+  const next=moveTierItem(first,'protect','little-bel','SSS',catalogForBoard('protect',ships,equipment));
+  assert.equal(next.protect['little-bel'],'SSS');
+  assert.equal(next.waifu.musashi,'SSS');
+  const reset=moveTierItem(next,'waifu','musashi','unranked',ships);
   assert.equal(reset.waifu.musashi,undefined);
+  assert.equal(reset.protect['little-bel'],'SSS');
 });
 test('ineligible and unknown assignments are refused', () => {
   assert.throws(()=>moveTierItem(freshTierBoards(),'waifu','little-bel','SSS',ships),/not eligible/);
   assert.throws(()=>moveTierItem(freshTierBoards(),'waifu','unreviewed','S',ships),/not eligible/);
-  assert.throws(()=>moveTierItem(freshTierBoards(),'ships','musashi','ZZ',ships),/Unknown tier/);
-  assert.throws(()=>moveTierItem(freshTierBoards(),'ships','not-in-source','EX',ships),/not eligible/);
+  assert.throws(()=>moveTierItem(freshTierBoards(),'waifu','musashi','ZZ',ships),/Unknown tier/);
+  assert.throws(()=>moveTierItem(freshTierBoards(),'waifu','not-in-source','SSS',ships),/not eligible/);
 });
 test('persisted JSON is normalized without code or unknown tiers', () => {
   const output=normalizeTierBoards({ships:{musashi:'EX',bad:'BLURGH','<x>':'S'}, protect:{'little-bel':'SSS'},evil:{musashi:'S'}});
-  assert.deepEqual(output.ships,{musashi:'EX'});
+  assert.deepEqual(output.ships,{});
   assert.deepEqual(output.protect,{'little-bel':'SSS'});
   assert.equal(output.evil,undefined);
-  assert.equal(boardAssignmentCount(output.ships, ships),1);
+  assert.equal(boardAssignmentCount(output.protect, ships),1);
 });

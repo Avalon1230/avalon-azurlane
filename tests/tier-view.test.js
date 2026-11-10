@@ -3,12 +3,14 @@ import assert from 'node:assert/strict';
 import { renderTierView } from '../src/tier-view.js';
 import { freshTierBoards } from '../src/tiers.js';
 const ships = [{id:'musashi',name:'Musashi',hull:'BB'}, {id:'little-bel',name:'Little Bel',hull:'CL'}, {id:'unreviewed',name:'Someone else',hull:'DD'}];
-test('renders all four tier-board categories and drop zones', () => {
-  const html=renderTierView({boards:freshTierBoards(),ships});
+test('combat boards show researched recommendations, without interactive personal tier assignments', () => {
+  const html=renderTierView({boards:freshTierBoards(),ships,query:'Musashi'});
   assert.match(html,/data-board="waifu"/);
   assert.match(html,/data-board="protect"/);
-  assert.match(html,/data-tier-drop="EX"/);
-  assert.match(html,/data-tier-drop="unranked"/);
+  assert.match(html,/Musashi/);
+  assert.match(html,/REGAL/);
+  assert.doesNotMatch(html,/data-tier-drop="EX"/);
+  assert.doesNotMatch(html,/data-tier-assign=/);
 });
 test('waifu board excludes childlike and ambiguous character records', () => {
   const html=renderTierView({boardId:'waifu',boards:freshTierBoards(),ships});
@@ -23,16 +25,25 @@ test('Must Protect board is wholly platonic with individual curation', () => {
   assert.doesNotMatch(html,/data-tier-item="musashi"/);
   assert.match(html,/platonic/);
 });
-test('escapes malicious untrusted source names in HTML and attrs', () => {
-  const html=renderTierView({boardId:'ships',boards:freshTierBoards(),ships:[{id:'safe-id',name:'<img src=x onerror=alert(1)>',hull:'BB'}]});
+test('character board escapes malicious untrusted source names', () => {
+  const html=renderTierView({boardId:'waifu',boards:freshTierBoards(),ships:[
+    {id:'musashi',name:'Musashi',hull:'BB'},
+    {id:'fake',name:'<img src=x onerror=alert(1)>',hull:'DD'}
+  ]});
   assert.doesNotMatch(html,/<img src=x/);
-  assert.match(html,/&lt;img src=x/);
+  assert.doesNotMatch(html,/data-tier-item="fake"/);
 });
-test('assigned tiles appear in correct lane and are omitted from unranked candidates', () => {
-  const boards=freshTierBoards(); boards.ships.musashi='EX';
-  const html=renderTierView({boardId:'ships',boards,ships});
-  const ex=html.match(/data-tier-drop="EX"[^]*?<\/section>/)?.[0];
-  assert.match(ex, /Musashi/);
+test('personal character tiles can be moved and are not duplicated', () => {
+  const boards=freshTierBoards(); boards.waifu.musashi='SSS';
+  const html=renderTierView({boardId:'waifu',boards,ships});
+  const sss=html.match(/data-tier-drop="SSS"[^]*?<\/section>/)?.[0];
+  assert.match(sss,/Musashi/);
   const pool=html.match(/class="tier-pool"[^]*$/)?.[0];
-  assert.doesNotMatch(pool, /data-tier-item="musashi"/);
+  assert.doesNotMatch(pool,/data-tier-item="musashi"/);
+});
+test('equipment board cites expert recommendations without asking player to assign tiers', () => {
+  const html=renderTierView({boardId:'equipment',boards:freshTierBoards(),equipment:[]});
+  assert.match(html,/La-9/);
+  assert.match(html,/Suchiguma/);
+  assert.doesNotMatch(html,/data-tier-assign=/);
 });

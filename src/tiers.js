@@ -6,18 +6,18 @@
 
 export const TIER_BOARDS = Object.freeze({
   ships: {
-    title: 'Ship Combat', icon: '⚓', kind: 'ships', label: 'Personal combat draft',
-    subtitle: 'Organize your own combat impressions across the game. These placements are not independently verified AVALON rankings.',
+    title: 'Ship Combat', icon: '⚓', kind: 'ships', label: 'Published combat research', readOnly: true,
+    subtitle: 'Find research-backed ship recommendations for specific encounters; AVALON will add independently reviewed scores as evidence develops.',
     tiers: ['EX', 'S', 'A', 'B', 'C', 'D'],
-    meanings: { EX:'Exceptional (your assessment)', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
-    note: 'A single global combat tier cannot replace mode-specific testing. For now, every ship begins unranked; your edits are explicitly personal drafts.'
+    meanings: { EX:'Exceptional', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
+    note: 'Read-only reference snapshots are clearly attributed to their original authors. Their published grades are not yet AVALON scores; unreviewed ships remain unevaluated.'
   },
   equipment: {
-    title: 'Equipment', icon: '⚙', kind: 'equipment', label: 'Personal equipment draft',
-    subtitle: 'Sort equipment by your experience. Category, slot, enemy, and acquisition cost matter more than rarity alone.',
+    title: 'Equipment', icon: '⚙', kind: 'equipment', label: 'Published equipment research', readOnly: true,
+    subtitle: 'See expert-supported gear priorities, use-case limitations, and acquisition research—not a blank board you have to rate yourself.',
     tiers: ['EX', 'S', 'A', 'B', 'C', 'D'],
-    meanings: { EX:'Exceptional (your assessment)', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
-    note: 'No automatic best-in-slot claims or source-verified tier scores exist yet. Your gear placements are personal and can be changed freely.'
+    meanings: { EX:'Exceptional', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
+    note: 'These are narrow, attributed recommendations; exact stats, slot-specific best-in-slot claims, and AVALON-calculated tiers require further validation.'
   },
   waifu: {
     title: 'Waifu Favorites', icon: '♥', kind: 'ships', label: 'Personal character favorites',
@@ -94,7 +94,7 @@ export function normalizeTierBoards(raw) {
     const input = raw[boardId];
     if (!input || typeof input !== 'object' || Array.isArray(input)) continue;
     for (const [id, tier] of Object.entries(input)) {
-      if (safeItemId(id) && config.tiers.includes(tier)) result[boardId][id] = tier;
+      if (!config.readOnly && safeItemId(id) && config.tiers.includes(tier)) result[boardId][id] = tier;
     }
   }
   return result;
@@ -103,6 +103,7 @@ export function normalizeTierBoards(raw) {
 export function moveTierItem(boards, boardId, itemId, tier, eligibleItems) {
   const config = TIER_BOARDS[boardId];
   if (!config || !safeItemId(itemId)) throw new Error('Invalid board or item');
+  if (config.readOnly) throw new Error('Combat rankings are published research, not editable personal ratings');
   if (tier !== 'unranked' && !config.tiers.includes(tier)) throw new Error('Unknown tier');
   if (!eligibleItems.some(item => item.id === itemId && eligibleForBoard(boardId, item))) {
     throw new Error('Character or equipment not eligible for this board');

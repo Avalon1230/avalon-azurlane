@@ -1,4 +1,5 @@
 import { TIER_BOARDS, catalogForBoard, boardAssignmentCount } from './tiers.js';
+import { researchForBoard, SHIP_RESEARCH, EQUIPMENT_RESEARCH, RESEARCH_REFERENCES } from './research.js';
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"':'&quot;', "'":'&#39;'
@@ -26,9 +27,58 @@ function tierRow(config, tier, entries, boardId) {
   </section>`;
 }
 
+
+function renderResearchBoard({ boardId, query, filter, ships, equipment, sourceStatus }) {
+  const config = TIER_BOARDS[boardId];
+  const all = boardId === 'ships' ? SHIP_RESEARCH : EQUIPMENT_RESEARCH;
+  const candidates = catalogForBoard(boardId, ships, equipment);
+  const contexts = ['all', ...new Set(all.map(record => record.context))];
+  const selected = contexts.includes(filter) ? filter : 'all';
+  const entries = researchForBoard(boardId, selected, query);
+  const choices = contexts.map(context =>
+    '<option value="' + E(context) + '"' + (selected===context?' selected':'') + '>' +
+    E(context==='all'?'All researched situations':context) + '</option>').join('');
+  const tabs = Object.entries(TIER_BOARDS).map(([id,meta]) =>
+    '<button type="button" class="tier-tab ' + (id===boardId?'active':'') +
+    '" data-action="tier-board" data-board="' + E(id) + '" aria-pressed="' + (id===boardId) +
+    '"><span>' + E(meta.icon) + '</span>' + E(meta.title) + '</button>').join('');
+  const rows = entries.map(item => {
+    const source = RESEARCH_REFERENCES[item.source];
+    return '<article class="research-card">' +
+      '<div class="research-card-top"><span class="research-grade">' + E(item.grade) +
+      '</span><span class="research-context">' + E(item.context) + '</span></div>' +
+      '<h3>' + E(item.name) + '</h3>' +
+      '<p>' + E(item.why) + '</p><p class="research-caveat">' + E(item.note) + '</p>' +
+      '<a class="text-link" href="' + E(source.url) + '" target="_blank" rel="noopener noreferrer">' +
+      E(source.title) + ' ↗</a><small class="research-source">External assessment · Checked ' +
+      E(source.checked) + '</small></article>';
+  }).join('');
+  return '<div class="page-heading"><div class="eyebrow">AVALON / RESEARCH INTELLIGENCE</div>' +
+    '<h1>Which ' + (boardId==='ships'?'ships are good?':'equipment is worth using?') + '</h1>' +
+    '<p>Research-backed pointers, with the game mode, evidence and caveats visible. You do not have to rank items yourself.</p></div>' +
+    '<nav class="tier-tabs" aria-label="Tier board categories">' + tabs + '</nav>' +
+    '<section class="tier-intro"><div class="eyebrow">' + E(config.label.toUpperCase()) +
+    '</div><h2>' + E(config.icon) + ' ' + E(config.title) + '</h2><p>' +
+    E(config.subtitle) + '</p><div class="tier-notice">' + E(config.note) + '</div></section>' +
+    '<div class="tier-controls"><label class="search-wrap"><span aria-hidden="true">⌕</span>' +
+    '<input id="tier-search" type="search" value="' + E(query) +
+    '" placeholder="Search evaluated items and use cases…" aria-label="Search researched recommendations" autocomplete="off"></label>' +
+    '<label class="select-wrap">Situation <select id="tier-filter">' + choices + '</select></label></div>' +
+    '<div class="result-caption">' + entries.length + ' source-backed research entries · ' +
+    candidates.length.toLocaleString() + ' indexed ' + (boardId==='ships'?'ships':'equipment records') +
+    (sourceStatus==='loading'?' · Data loading':sourceStatus==='failed'?' · Fallback catalog':'') +
+    ' · Not a complete ranking.</div>' +
+    '<div class="research-grid">' + (rows || '<div class="empty">No researched recommendations match these filters. An unmatched item is NOT automatically bad—it is simply not yet assessed.</div>') + '</div>' +
+    '<div class="info-banner"><span class="info-dot">i</span><div><strong>Source rankings, not fabricated AVALON scores.</strong> ' +
+    'These entries selectively summarize external specialist assessments, preserving their original labels. ' +
+    'We are building independently reviewed AVALON rankings with scenario conditions, validation, and update dates. ' +
+    'Everything else remains Not Yet Evaluated. Waifu and Headpats rankings are separate, personal lists.</div></div>';
+}
+
 export function renderTierView({ boardId='ships', boards={}, ships=[], equipment=[], query='', filter='all', sourceStatus='loading' } = {}) {
   const config = TIER_BOARDS[boardId] || TIER_BOARDS.ships;
   boardId = Object.keys(TIER_BOARDS).includes(boardId) ? boardId : 'ships';
+  if (TIER_BOARDS[boardId].readOnly) return renderResearchBoard({boardId,query,filter,ships,equipment,sourceStatus});
   const candidates = catalogForBoard(boardId, ships, equipment);
   const placements = boards[boardId] || {};
   const categories = ['all', ...new Set(candidates.map(item => config.kind === 'equipment' ? item.category : item.hull).filter(Boolean))].sort((a,b) => a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b));

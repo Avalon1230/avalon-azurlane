@@ -70,6 +70,7 @@ function saveTierBoards() {
   catch { notify('Cannot save tiers in this browser. Use Export JSON to back up your selections.'); }
 }
 function movePersonalTier(itemId, tier) {
+  if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Combat assessments come from published research, not personal placements.');
   const eligible = catalogForBoard(state.tierBoard, SHIPS, EQUIPMENT);
   try {
     state.tierBoards = moveTierItem(state.tierBoards, state.tierBoard, itemId, tier, eligible);
@@ -78,6 +79,7 @@ function movePersonalTier(itemId, tier) {
   } catch (err) { notify(err.message); }
 }
 function exportTierBoard() {
+  if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Research assessments are published sources, not a personal board to export.');
   const content = JSON.stringify({
     app: 'avalon-azurlane', format: 1, kind: 'personal-tier-board',
     boardId: state.tierBoard, exportedAt: new Date().toISOString(),
@@ -309,6 +311,7 @@ function handleAction(target) {
   }
   if (action === 'tier-export') { exportTierBoard();return; }
   if (action === 'tier-clear') {
+    if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Published combat assessments cannot be cleared.');
     if (!window.confirm('Clear your personal ' + TIER_BOARDS[state.tierBoard].title + ' board? Other boards and Fleet Lab are unaffected.')) return;
     state.tierBoards[state.tierBoard]={};saveTierBoards();render();notify('Tier board cleared.');return;
   }
@@ -359,6 +362,7 @@ document.addEventListener('click', event => {
 document.addEventListener('change', event => {
   if (event.target.id === 'tier-filter') { state.tierFilter=event.target.value;render();return; }
   if (event.target.matches('[data-tier-assign]')) {
+    if (TIER_BOARDS[state.tierBoard].readOnly) return;
     movePersonalTier(event.target.dataset.tierAssign,event.target.value);return;
   }
   if (event.target.id === 'mode-select') { state.modeId=event.target.value;state.picker=null;render(); }
@@ -379,7 +383,7 @@ document.addEventListener('input', event => {
   try { restored?.setSelectionRange(pos,pos); } catch { /* unsupported input selection */ }
 });
 document.addEventListener('dragstart', event => {
-  if (state.page !== 'tiers') return;
+  if (state.page !== 'tiers' || TIER_BOARDS[state.tierBoard].readOnly) return;
   const item = event.target.closest('[data-tier-item]');
   if (!item || !event.dataTransfer) return;
   state.activeDragItem = item.dataset.tierItem;
@@ -388,14 +392,14 @@ document.addEventListener('dragstart', event => {
   item.classList.add('tier-dragging');
 });
 document.addEventListener('dragover', event => {
-  if (state.page !== 'tiers' || !state.activeDragItem) return;
+  if (state.page !== 'tiers' || TIER_BOARDS[state.tierBoard].readOnly || !state.activeDragItem) return;
   const target = event.target.closest('[data-tier-drop]');
   if (!target) return;
   event.preventDefault();
   if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
 });
 document.addEventListener('drop', event => {
-  if (state.page !== 'tiers' || !state.activeDragItem) return;
+  if (state.page !== 'tiers' || TIER_BOARDS[state.tierBoard].readOnly || !state.activeDragItem) return;
   const target = event.target.closest('[data-tier-drop]');
   if (!target) return;
   event.preventDefault();

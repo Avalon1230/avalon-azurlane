@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.3.1] - 2026-11-10
+
+### Fixed
+- Corrected combat tier list ownership: **ship and equipment recommendations are made by the system**, not manually ranked by the player. Their old personal-draft controls have been removed.
+- Published combat recommendation pages are read-only. Earlier personal combat-tier draft assignments are ignored, preserving the separately stored Waifu and Headpats boards.
+
+### Added
+- Select, source-attributed REGAL single-wave boss assessments and Suchiguma campaign/research equipment recommendations, each shown with original source label, context, caveat, checked date, and link.
+- Research scenarios, search, and explicit **Not Yet Evaluated** status for the remaining catalog.
+- Tests enforcing read-only combat research, source attribution, and continued independence of personal character boards.
+
+### Clarified
+- External specialist grades are not independent AVALON calculations or universal tiers. Full mode-specific AVALON evaluation, validation and acquisition-cost scoring remain future work.
+
 ## [0.3.0] - 2026-11-10
 
 ### Added

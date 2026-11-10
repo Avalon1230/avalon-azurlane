@@ -2,7 +2,13 @@
 
 ## Current status — 2026-11-10
 
-### v0.3 personal tier boards
+### v0.3.1 research-owned combat boards
+
+This corrects an earlier design mistake. **Ship Combat and Equipment are meant to answer what is good**, not ask users to rank items themselves. Their pages now contain **read-only, attributed, context-specific research picks**. Example source grades from REGAL must be treated as REGAL's assessments, **not independent AVALON rankings**. Suchiguma research recommendations are also cited as third-party expert guidance. No full third-party tier list is copied. Unknown items are marked Not Yet Evaluated; an absent entry is not evidence of poor performance.
+
+Character boards (Waifu / Headpats) remain personal, subjective, and strictly separated from combat data. Production AVALON scores still require current game mechanics, confirmed gear conditions, numerical comparison, and independent validation.
+
+### Historical v0.3 personal tier boards
 
 Ship Combat and Equipment now include **editable personal tier boards**, but **no published AVALON performance scores**. Rarity, hull and equipment-type data cannot by themselves establish reliable EX/S/A rankings. A validated tier assessment must cite its mode/scenario, measurements, assumptions, alternative builds and confidence. Waifu Favorites and Must Protect are wholly separate subjective lists and have no combat evidentiary value. Their eligibility catalogs are manually curated and incomplete; no automatic hull-based age/appearance classification is performed. No source character portraits are copied.
 
