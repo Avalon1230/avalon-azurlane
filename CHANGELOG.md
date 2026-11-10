@@ -2,6 +2,22 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.0] - 2026-11-11
+
+### Added
+- **Tactical Loadout Intelligence** panel beneath every detailed ship's fixed portrait/identity card. The separate official artwork gallery remains unchanged. Four switchable mission contexts: General, Boss, Mobbing, and OpSi.
+- Equipment-slot-specific **source-matched candidates** generated from Lycoris ship slot categories and exact GroupID-verified Koumakan mount/efficiency facts when present. Eligible gear must match the original Fernando equipment type, source ID and recorded hull class after forbidden-hull restrictions; unknown/unsupported slots are marked unverified instead of filled with fictional gear.
+- Real, clickable original equipment icons, explanations of verified slot/category/efficiency and available enhancement attributes, and an alternative selection drawer. Clicking equipment opens the existing source-stat/acquisition intelligence drawer **without navigating away** from the ship profile.
+- Personal equipment picks saved in browser localStorage independently for each ship ID, mode and slot. Restored picks are revalidated against the current source category/hull constraints; users can reset a mode's picks.
+- Source-confirmed wiki augment *type* may appear as a placeholder; actual augment eligibility and effects need separate verification.
+
+### Evidence boundary
+- Candidate ordering uses available source enhancement attributes (HIT for Boss, RLD for Mobbing, Anti-Siren for OpSi) when reported, with source rarity as a fallback. **These are NOT calculated damage, best-in-slot gear, validated slot exceptions, skill-timing synergy or simulated fleet optimization.** Every panel labels its evidence limitations and missing coverage.
+- See `docs/TACTICAL_LOADOUTS.md` for the data contract and v0.8.1/v0.8.2 research requirements.
+
+### Tests
+- Added validation for exact slot aliases, wiki/ship identity matching, forbidden hulls, mode attribute evidence, saved override validation, safe fallback, fixed portrait/artwork layout, original icon actions and alternative drawer behavior.
+
 ## [0.7.9] - 2026-11-11
 
 ### Fixed
