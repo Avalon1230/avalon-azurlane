@@ -2,6 +2,26 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.0] - 2026-11-10
+
+### Changed
+- Replaced the oversized three-column Ship Index roster cards with a dense, rarity-accented shipyard portrait gallery; selecting any ship opens its dedicated information page rather than a small inspection drawer.
+- Converted ship hull selection, rarity filtering and source-supported sorting into compact, immediately accessible buttons (fleet groups/individual hulls; Common/Rare/Elite/SR/UR; Name/Rarity/Hull with reversible direction), while preserving nation-first navigation, search, and pagination.
+- Individual ship profile URLs can be bookmarked as `#/ships/<source-id>`; returning to the roster retains the current nation and filtering state.
+
+### Fixed
+- Corrected the long-standing 890-vs-894 source-count discrepancy: four pairs of unrelated ships with identical display names (Enterprise, Neptune, Fubuki, Kasumi) were being merged incorrectly. Source numeric ID now determines identity, preserving all 894 records.
+
+### Added
+- Lazy on-demand loading of the full 894-record Lycoris-AzurAPI `ships.json` source only when a ship profile is requested (roughly 5 MB, cached for the browser session). This avoids delaying the initial gallery.
+- Detailed ship profiles with original character art, optional skin selection, Lv.100/Lv.120 and available retrofit statistics, equipment slots/efficiencies, source skill descriptions, limit breaks, acquisition/construction, fleet-tech points, and links to Koumakan and source data.
+- Fail-safe handling of unavailable detailed data, safe asset URL validation, escaped external text, and source ID-based lookup.
+- Regression tests for compact ship cards, filtering/sorting, full profile data, loading and unavailable states, and unsafe content.
+
+### Limitations
+- This is source-backed **reference information**, not yet AVALON's own numerical synergy or loadout optimizer. Per-ship augment rules, barrage coefficients, certain equipment-slot exceptions and full Lv.125/affinity variations require additional verified datasets.
+- The externally hosted full source file may be temporarily unavailable; the minimal ship gallery still works, and full profiles can be retried.
+
 ## [0.6.2] - 2026-11-10
 
 ### Changed

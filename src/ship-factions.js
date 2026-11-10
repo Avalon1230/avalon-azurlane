@@ -22,6 +22,33 @@ export const COLLABORATION_NATIONS = Object.freeze([
   'Collab'
 ]);
 
+
+export const SHIP_HULL_GROUPS = Object.freeze({
+  Vanguard: ['DD','CL','CA','CB'],
+  Main: ['BB','BC','BBV','BM','CV','CVL','AR','AE'],
+  Sub: ['SS','SSV'],
+  Misc: ['IX','OTHER']
+});
+export const SHIP_SORTS = Object.freeze(['name','rarity','hull']);
+export const SHIP_RARITIES = Object.freeze(['all','Normal','Rare','Elite','Super Rare','Ultra Rare']);
+const RARITY_ORDER = Object.freeze({
+  'Normal':1,'Rare':2,'Elite':3,'Super Rare':4,'Priority':4,
+  'Ultra Rare':5,'Decisive':5
+});
+export function sortShipBrowseRows(rows, sort='name', descending=false) {
+  const field=SHIP_SORTS.includes(sort)?sort:'name';
+  const compare = (a,b) => {
+    if(field==='rarity') return (RARITY_ORDER[a.rarity]||0)-(RARITY_ORDER[b.rarity]||0);
+    return String(field==='hull'?a.hull:a.name||'').localeCompare(String(field==='hull'?b.hull:b.name||''));
+  };
+  return rows.slice().sort((a,b)=> {
+    const difference=compare(a,b);
+    return difference ? (descending?-difference:difference) :
+      String(a.name||'').localeCompare(String(b.name||'')) ||
+      String(a.sourceId||a.id).localeCompare(String(b.sourceId||b.id));
+  });
+}
+
 const mainSet = new Set(MAIN_SHIP_FACTIONS);
 const collabSet = new Set(COLLABORATION_NATIONS);
 const browseOrder = [
@@ -62,8 +89,10 @@ export function shipBrowseCounts(rows) {
  * Search both raw nationality names and AVALON group labels while retaining
  * existing name, hull, and rarity search behavior from catalog-filters.js.
  */
-export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 'all' } = {}) {
-  const hullMatched = filterShipRecords(rows, { hull });
+export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 'all', rarity = 'all' } = {}) {
+  const hullMatched = SHIP_HULL_GROUPS[hull]
+    ? filterShipRecords(rows).filter(ship=>SHIP_HULL_GROUPS[hull].includes(ship.hull))
+    : filterShipRecords(rows,{hull});
   const term = String(query).trim().toLocaleLowerCase();
   const sourceMatches = term
     ? new Set(filterShipRecords(hullMatched, { query }).map(ship => ship))
@@ -71,11 +100,15 @@ export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 
   return hullMatched.filter(ship => {
     const group = shipBrowseNation(ship);
     if (nation !== 'all' && nation !== group) return false;
+    if (rarity !== 'all') {
+      const actual=ship.rarity==='Decisive'?'Ultra Rare':ship.rarity==='Priority'?'Super Rare':ship.rarity;
+      if(actual!==rarity) return false;
+    }
     return !term || sourceMatches.has(ship) || group.toLocaleLowerCase().includes(term);
   });
 }
 
-export function groupedShipBrowseRows(rows) {
+export function groupedShipBrowseRows(rows, sort='name', descending=false) {
   const groups = new Map();
   for (const ship of rows) {
     const group = shipBrowseNation(ship);
@@ -85,8 +118,7 @@ export function groupedShipBrowseRows(rows) {
   return [...groups].sort(([a], [b]) => compareShipBrowseNations(a, b))
     .map(([nation, items]) => ({
       nation,
-      items: items.slice().sort((a, b) => a.name.localeCompare(b.name) ||
-        String(a.id).localeCompare(String(b.id)))
+      items: sortShipBrowseRows(items,sort,descending)
     }));
 }
 
