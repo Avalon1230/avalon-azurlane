@@ -266,7 +266,8 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
     '</div>';
   return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki,loadoutModel)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
-    [['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
+    [...(loadoutModel?[['Loadout','#ship-profile-loadout']]:[]),
+      ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
     statPanel(data,level,wiki)+gearPanel(data,wiki)+skillsPanel(data,wiki)+
