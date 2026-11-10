@@ -13,7 +13,7 @@ Primary upstream projects: [iujab/Lycoris-AzurAPI](https://github.com/iujab/Lyco
 
 ## Why not mirror the original Koumakan wiki?
 
-A web crawler's cached/indexed response for Koumakan (`https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki`) contained unrelated literature on November 10, 2026; another wiki route behaved similarly. This **does not establish a live website failure**, and the user reports normal browser access. The exact cause is unknown. Automatic ingestion remains paused pending successful direct API validation and reuse/attribution review. The separate fan-run wiki remains a supplementary manual reference, not a Koumakan mirror.
+A web crawler's cached/indexed response for Koumakan (`https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki`) contained unrelated literature on November 10, 2026; another wiki route behaved similarly. This **does not establish a live website failure**, and the user reports normal browser access. The exact cause is unknown. An independent GitHub Actions runner has since confirmed valid read-only JSON access at `/w/api.php` and successful Musashi wikitext retrieval, while HTML pages gave HTTP 403. Automatic data ingestion remains paused pending schema interpretation and reuse/attribution review. The separate fan-run wiki remains a supplementary manual reference, not a Koumakan mirror.
 
 ## Loading contract
 

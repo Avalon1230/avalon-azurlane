@@ -91,7 +91,7 @@ This is an **extensible mode registry**, not a fixed list: new or temporary cont
 
 | Source | Intended use | Notes |
 | --- | --- | --- |
-| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Intended primary factual reference | **Automated import pending verification**: crawler-indexed pages returned unrelated novel fragments. This does **not** prove the live wiki is broken; normal browser access is reported working. Confirm direct API behavior and reuse permissions before ingestion. |
+| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Intended primary factual reference | **API access confirmed**: GitHub Actions successfully queried `/w/api.php` for site metadata, Musashi/Unicorn page metadata, and Musashi wikitext. Browser-visible wiki pages may still return 403 to automated clients, and cached search pages showed unrelated novel fragments. Automated ingestion awaits schema validation and reuse permissions; see [diagnostic](docs/KOUMAKAN_ACCESS.md). |
 | [Historical English Community Tier List](https://slaimuda.github.io/ectl/#/home) | Historical assessments and design inspiration | This project does **not** use its identity or claim its endorsement |
 | [REGAL](https://azur-lane-regal.suchiguma.com/) | Modern endgame evaluations and comparative analysis | Distinguish the source author's judgments from game facts |
 | [Operation Siren reference](https://azur-lane.wiki/index.php/Operation_Siren) | OpSi map/fleet systems and progression reference | Validate mechanics against current primary sources and regional versions |

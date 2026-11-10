@@ -11,15 +11,22 @@ reports normal browsing access. Direct probes through the assistant's execution
 environment failed DNS resolution for multiple public domains, not just Koumakan;
 that environment is not a usable indicator of Koumakan's availability.
 
-The website's MediaWiki API base path has not yet been established. The standard
-possibilities are `https://azurlane.koumakan.jp/api.php` and
-`https://azurlane.koumakan.jp/w/api.php`. Find the actual endpoint on the wiki's
-Special:Version page rather than assuming either path.
+**Resolved November 10, 2026:** a GitHub Actions runner successfully requested
+`https://azurlane.koumakan.jp/w/api.php` using MediaWiki's Action API and received
+HTTP 200, `application/json`, and `sitename: Azur Lane Wiki`. The `/api.php` root
+returned HTTP 404 and ordinary `/wiki/...` pages returned 403 for that runner.
+
+A second run confirmed `action=query&prop=info` returns Musashi (page 59391)
+and Unicorn (page 465), and `action=parse&page=Musashi&prop=wikitext` returns
+4,385 characters of page source. This proves the API allows selected
+read-only page retrieval; it does not establish unrestricted bulk access,
+site licensing, or that the page data has been accurately parsed. See the
+[successful diagnostic run](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42780862193).
 
 ## Diagnosis from an independent runner
 
 Use the `Koumakan connectivity diagnosis` GitHub Actions workflow
-(`.github/workflows/koumakan-connectivity.yml`). It makes **four read-only,
+(`.github/workflows/koumakan-connectivity.yml`). It makes **six read-only,
 low-volume** requests from GitHub infrastructure, reports DNS/IP and response
 status/content type/title or JSON site identity, and writes a compact GitHub
 Action summary. It does **not** commit or reproduce site content. A successful
@@ -28,6 +35,7 @@ reachable. Read the classifications in the run summary.
 
 - `MEDIAWIKI_API`: a valid MediaWiki `action=query&meta=siteinfo` response; this
   is the preferred starting point for documented structured API access.
+- `PAGE_METADATA` or `WIKITEXT_AVAILABLE`: wiki pages were found and their page source can be read; template interpretation is still required.
 - `POSSIBLE_WIKI_PAGE`: page body looks relevant; check HTTP status and title.
 - `UNRELATED_CONTENT`, `UNRECOGNIZED_HTML`, `POSSIBLE_CHALLENGE`:
   investigate response/cache behavior; do not ingest.

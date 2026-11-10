@@ -9,6 +9,9 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - A workflow summary classifying genuine MediaWiki API responses, normal wiki pages, unrelated content, access challenges, and networking failures.
 - A [documented ingestion strategy](docs/KOUMAKAN_ACCESS.md) separating wiki corroboration, versioned game facts, community research, and independent AVALON combat judgments.
 
+### Verified
+- A GitHub Actions runner successfully resolved Koumakan and accessed `/w/api.php` with HTTP 200 JSON. Musashi and Unicorn page IDs and Musashi page wikitext were returned from read-only API requests. Ordinary wiki URLs returned 403 and root `/api.php` returned 404.
+
 ### Clarified
 - Previous crawler results are not proof that the live Koumakan wiki is broken; container DNS restrictions are not necessarily origin-server problems.
 - Automated ingestion remains disabled until a valid access method and compatible reuse terms are verified. The diagnostic does not scrape or store wiki content.
