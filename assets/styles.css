@@ -537,3 +537,50 @@
   .ship-profile-toolbar{justify-content:flex-start}
   .ship-profile-toolbar .primary-btn{margin-left:0}
 }
+
+/* Compact encyclopedia facts and verified wiki equipment counts */
+.ship-profile-rarity{
+  display:inline-block;padding:4px 10px;margin:5px 0 6px;
+  border-radius:5px;border:1px solid #5a7990;
+  font-size:11px;font-weight:900;letter-spacing:.025em;
+  background:#263b52;color:#e4f4ff
+}
+.ship-profile-rarity.rarity-ultra-rare{
+  background:linear-gradient(100deg,#93e0e7,#c1b0e9 42%,#e8b6da 68%,#b6dfc3);
+  border-color:#9ed9dc;color:#182d41
+}
+.ship-profile-rarity.rarity-super-rare{background:#a47b36;border-color:#e5c581;color:#fff}
+.ship-profile-rarity.rarity-elite{background:#79549a;border-color:#ab87ca;color:#fff}
+.ship-profile-rarity.rarity-rare{background:#236e91;border-color:#70b6d8;color:#fff}
+.ship-profile-rarity.rarity-normal{background:#556b7c;border-color:#8fa7b9;color:#fff}
+.ship-profile-facts{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;
+  margin:12px 0 0
+}
+.ship-profile-facts>div{
+  min-width:0;background:#18334a;border:1px solid #36526a;
+  padding:7px 9px;border-radius:6px
+}
+.ship-profile-facts dt{
+  color:#94c5db;font-size:9px;letter-spacing:.055em;
+  text-transform:uppercase;font-weight:800
+}
+.ship-profile-facts dd{
+  margin:3px 0 0;font-size:12px;color:#f1f9ff;
+  font-weight:750;overflow-wrap:anywhere
+}
+.ship-data-source{font-size:11px!important;color:#9dbacd!important;margin:9px 0 0!important}
+.ship-gear-slot{grid-template-columns:36px minmax(0,1fr) auto auto}
+.ship-gear-mount{
+  color:#f0d9a0;font-size:11px;font-weight:900;
+  white-space:nowrap;padding:4px 7px;
+  background:#674d2b;border-radius:5px
+}
+.ship-skill-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ship-skill-head h3{margin:0}
+.ship-skill-icon{width:44px;height:44px;flex:0 0 44px;object-fit:contain}
+@media(max-width:700px){
+  .ship-gear-slot{grid-template-columns:32px minmax(0,1fr) auto;gap:8px}
+  .ship-gear-slot>span:last-child{grid-column:2 / -1;white-space:normal}
+  .ship-profile-facts{grid-template-columns:1fr}
+}
