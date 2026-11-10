@@ -1,3 +1,5 @@
+import { shipyardPortraitUrl, shipyardManifestCoverage } from './shipyard-assets.js';
+
 /**
  * Original Azur Lane game-client thumbnails and equipment icons, linked (NOT
  * copied into AVALON) from independent, unofficial community asset hosts.
@@ -20,9 +22,16 @@ function recordId(record) {
   const source=record && typeof record==='object'?String(record.sourceId||''):'';
   return /^\d{2,8}$/.test(source)?source:null;
 }
-export function shipImageUrl(record) {
+export function shipImageSources(record) {
   const id=recordId(record)||CORE_SHIP_IDS[nameKey(typeof record==='string'?record:record?.name)];
-  return id && SHIP_ASSET_IDS.has(id) ? SHIP_ASSET_HOST+id+'.png' : null;
+  // Retain the lighter existing shipyard thumbnail where the audited file exists.
+  // Use an exact, source-ID-matched original shipyard portrait for missing records.
+  const thumbnail=id && SHIP_ASSET_IDS.has(id) ? SHIP_ASSET_HOST+id+'.png' : null;
+  const shipyard=shipyardPortraitUrl(id);
+  return {primary:thumbnail||shipyard||null,fallback:thumbnail?shipyard:null};
+}
+export function shipImageUrl(record) {
+  return shipImageSources(record).primary;
 }
 export function equipmentImageUrl(record) {
   const id=recordId(record)||CORE_GEAR_IDS[gearKey(typeof record==='string'?record:record?.name)];
@@ -33,18 +42,24 @@ export function equipmentImageUrl(record) {
  * Any image errors are hidden by the delegated error handler in app.js.
  */
 export function imageMarkup(record, kind, cssClass='asset-thumb') {
-  const src=kind==='equipment'?equipmentImageUrl(record):shipImageUrl(record);
+  const source=kind==='equipment'
+    ? {primary:equipmentImageUrl(record),fallback:null}
+    : shipImageSources(record);
+  const {primary:src,fallback}=source;
   const name=typeof record==='string'?record:(record?.name||'Unknown');
   const hull=typeof record==='object'&&record ? record.hull : '';
   const fallback=kind==='equipment'?'⚙':(hull||'SHIP');
   const cls=/^[a-z0-9 -]{1,80}$/i.test(cssClass)?cssClass:'asset-thumb';
   return '<span class="asset-media '+esc(cls)+'" role="img" aria-label="'+esc(name)+' · original game art or placeholder">' +
     '<span class="asset-fallback" aria-hidden="true">'+esc(fallback)+'</span>' +
-    (src?'<img class="asset-img" src="'+esc(src)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">':'') +
+    (src?'<img class="asset-img" src="'+esc(src)+'"'+
+      (fallback?' data-fallback-src="'+esc(fallback)+'"':'')+
+      ' alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">':'') +
     '</span>';
 }
 export const assetCoverage = Object.freeze({
   availableShipThumbnails: 746,
+  mappedShipyardPortraits: shipyardManifestCoverage,
   indexedShipsAtAudit: 894,
   availableEquipmentIcons: 936,
   checked: '2026-11-10'
