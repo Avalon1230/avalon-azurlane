@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { SHIP_NATION_BY_SOURCE_ID } from '../src/catalog-filters.js';
 import {
   shipBrowseNation, shipBrowseCounts, filterShipBrowseRows,
-  groupedShipBrowseRows, shipBrowseDisplayNation
+  groupedShipBrowseRows, shipBrowseDisplayNation, sortShipBrowseRows
 } from '../src/ship-factions.js';
 
 const ship=(id,name,nation,hull='DD')=>({id:String(id),sourceId:String(id),name,nation,hull,rarity:'Rare',tags:[]});
@@ -51,4 +51,28 @@ test('source snapshot records are all preserved by browse category aggregation',
 test('unknown factions do not get incorrectly classified as collabs',()=>{
   assert.equal(shipBrowseNation(ship(100,'New Nation','Unclassified')),'Unclassified');
   assert.equal(shipBrowseNation(ship(100,'Unknown Future','Future Nation')),'Future Nation');
+});
+
+test('in-game-style hull groups filter correctly across class families',()=>{
+  const rows=[
+    ship(1,'Destroyer','Eagle Union','DD'),
+    ship(2,'Carrier','Eagle Union','CV'),
+    ship(3,'Submarine','Eagle Union','SS'),
+    ship(4,'Sailing frigate','Tempesta','IX')
+  ];
+  assert.deepEqual(filterShipBrowseRows(rows,{hull:'Vanguard'}).map(x=>x.name),['Destroyer']);
+  assert.deepEqual(filterShipBrowseRows(rows,{hull:'Main'}).map(x=>x.name),['Carrier']);
+  assert.deepEqual(filterShipBrowseRows(rows,{hull:'Sub'}).map(x=>x.name),['Submarine']);
+  assert.deepEqual(filterShipBrowseRows(rows,{hull:'Misc'}).map(x=>x.name),['Sailing frigate']);
+  assert.deepEqual(filterShipBrowseRows(rows,{hull:'CV'}).map(x=>x.name),['Carrier']);
+});
+test('sort controls use observed rarity and hull rather than invented ship levels',()=>{
+  const rows=[
+    {...ship(1,'Zeta','Eagle Union','DD'),rarity:'Rare'},
+    {...ship(2,'Alpha','Eagle Union','BB'),rarity:'Ultra Rare'},
+    {...ship(3,'Beta','Eagle Union','CL'),rarity:'Super Rare'}
+  ];
+  assert.deepEqual(sortShipBrowseRows(rows,'name').map(x=>x.name),['Alpha','Beta','Zeta']);
+  assert.deepEqual(sortShipBrowseRows(rows,'rarity',true).map(x=>x.name),['Alpha','Beta','Zeta']);
+  assert.deepEqual(sortShipBrowseRows(rows,'hull').map(x=>x.name),['Alpha','Beta','Zeta']);
 });
