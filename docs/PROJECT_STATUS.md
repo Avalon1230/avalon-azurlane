@@ -6,9 +6,9 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 
 - Repository: https://github.com/Avalon1230/avalon-azurlane
 - Live site: https://avalon1230.github.io/avalon-azurlane/
-- Stable baseline: **main / v0.6.0 / da8bea3ef4c469fe5f1c2be9d39b6c286049554f** (last inspected 2026-11-10).
-- In-progress release: **v0.6.1 candidate** on `feat/nation-first-ship-index`. These changes are not live until merged and deployed.
-- Last baseline test report: 69/69 passed (historical conversation report; recheck current GitHub Actions). Updated feature branch test verification pending CI at the time of this write.
+- Current release: **main / v0.6.1 / b9ded9ab931fefc53532400b7bea72d91512b1a2** (nation-first Ship Index merged 2026-11-10).
+- Feature PR: [#1](https://github.com/Avalon1230/avalon-azurlane/pull/1) merged via squash into main. GitHub Pages deployment should be independently confirmed.
+- Verified quality checks: **74/74 tests passed**, `npm run check` succeeded on PR #1 and on the merged main commit (GitHub Actions run [42801112657](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42801112657)).
 - Last baseline upstream coverage: 894 Lycoris source IDs and 936 Fernando equipment records. One UI screenshot displayed 890 indexed ships; **investigate, do not assume cause**.
 
 ## Product objective and decisions
@@ -38,13 +38,13 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 - Original game-asset thumbnails and equipment icons with source attribution and fallbacks.
 - Provisional, context-specific, evidence-linked AVALON combat assessments and independent character favorite boards.
 
-**v0.6.1 branch work:**
+**Delivered in v0.6.1:**
 - Replace initial Ship Index grid with compact nation/faction selection cards.
 - Show original game-client nationality emblems (independent community host), dynamic counts, global search, and text fallback for unverified factions.
 - Open filtered ship roster on nation click; keep hull filtering, search, pagination, inspect/assign, and a return-to-nations control.
 - Preserve the existing Equipment Index behavior.
 - Add new tests, docs, release notes and this handoff.
-- Verify quality workflow before merge.
+- Quality workflow verified; PR #1 merged. Visual browser/phone inspection of live deployment is still recommended.
 
 ## Research data / external integration
 
@@ -65,7 +65,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 
 ## Next development steps
 
-1. Review and verify the nation-first Ship Index PR (Node syntax checks and regression tests). Merge only after verification; confirm GitHub Pages deployment if merging.
+1. Confirm GitHub Pages deployment for the merged v0.6.1 version and visually verify the nation-first interface on desktop/mobile.
 2. Confirm navigation and layouts in the live site at desktop/mobile widths, all recorded factions, search, hull filtering, all pages and ship actions.
 3. Investigate 890 vs 894 index count with reproducible normalization/merge tests.
 4. Add Augment Modules as their own equipment category with trusted source data and correct eligibility.
