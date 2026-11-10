@@ -2,6 +2,17 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.1] - 2026-11-11
+
+### Changed
+- Replaced the tall ship loadout card stack with a responsive **three-column, two-row six-position planner** for standard ships: three source-described combat positions, two potential auxiliary positions and one separate augment position. Ship records with explicitly documented extra slots retain them rather than being forced into an incorrect six-slot template.
+- Moved detailed per-slot reasoning, evidence, eligibility caveats, and source-matched alternatives into an on-demand slot intelligence drawer. Equipment icons still open the original equipment stats/acquisition drawer.
+- Auxiliary positions not individually confirmed by the current ship dataset are clearly **provisional**, not auto-equipped; manually selected source/hull-matched auxiliaries remain labeled potential until verified. Augments are **not** inferred from generic gear: a Koumakan augment type is shown only as a category, never a specific recommended module.
+- Preserved General/Boss/Mobbing/OpSi tabs, source-only recommendation gating, personal picks, official ship artwork, and ship profile identity card.
+
+### Tests
+- Added coverage for six visible positions, two provisional auxiliary slots, unknown augments, explicit extra source slots, manually chosen auxiliary candidates, responsive grid markup and on-demand evidence.
+
 ## [0.8.0] - 2026-11-11
 
 ### Added
