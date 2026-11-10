@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.1] - 2026-11-10
+
+### Changed
+- The ship profile now keeps the original shipyard portrait permanently visible, independent of selected skins.
+- Artwork has its own in-profile display window with readable skin selectors. Selecting the artwork opens a larger overlay viewer with optional browser fullscreen and Close/Exit controls.
+- The artwork viewer supports keyboard Escape, click-outside dismissal, viewport-responsive scaling, and graceful fallback text when images are unavailable.
+- Ship image variants ending in `_rw.webp` may contain game-client render effects/layers rather than complete illustrations. When the source also provides a distinct static variant, AVALON prefers that image and attempts the other only if loading fails.
+- Nation emblem initials no longer overlap translucent source insignias; unknown insignias use a neutral non-letter placeholder instead.
+- Skin/level selection controls now use accessible, high-contrast buttons instead of near-white-on-white browser styles.
+
+### Preserved
+- All source artworks remain original game images; no AI substitutes.
+- Existing ship profiles, deep links, stats, skill and equipment sections, roster browsing, and fleet assignments remain unchanged.
+
 ## [0.7.0] - 2026-11-10
 
 ### Changed
