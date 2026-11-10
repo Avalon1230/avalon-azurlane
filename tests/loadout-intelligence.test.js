@@ -115,7 +115,7 @@ test('ship profile embeds tactical planner beneath identity but outside artwork'
 test('alternative chooser exposes authentic source icons and lets users select legal records',()=>{
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
   const html=renderLoadoutAlternatives(model,0);
-  assert.match(html,/class="loadout-picker-panel"/);
+  assert.match(html,/class="picker-panel detail-panel loadout-picker-panel"/);
   assert.match(html,/data-action="loadout-select" data-slot="0" data-equip="fer-1040"/);
   assert.match(html,/data-action="loadout-inspect" data-equip="fer-1000"/);
   assert.match(html,/asset-picker/);
