@@ -605,7 +605,17 @@ document.addEventListener('error', event => {
     }
     img.remove();return;
   }
-  if(img?.matches?.('img.asset-img, img.ship-profile-painting')) img.remove();
+  if(img?.matches?.('img.asset-img')) {
+    // A known original game-client portrait may be available even when the
+    // first community thumbnail goes missing. Retry that exact ID once.
+    const backup=img.dataset.fallbackSrc;
+    if(backup){
+      delete img.dataset.fallbackSrc;
+      if(img.src!==backup){img.src=backup;return;}
+    }
+    img.remove();return;
+  }
+  if(img?.matches?.('img.ship-profile-painting')) img.remove();
 }, true);
 document.addEventListener('click', event => {
   const target = event.target.closest('[data-action]');
