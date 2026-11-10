@@ -1,5 +1,6 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
-import { filterShipRecords, filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
+import { shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
 
@@ -15,7 +16,7 @@ function nationStrip(kind,facets,active){
 }
 
 function shipNationLanding(records, sourceStatus) {
-  const nations = nationCounts(records, 'ships');
+  const nations = shipBrowseCounts(records);
   const total = nations.reduce((sum, item) => sum + item.count, 0);
   const fallback = sourceStatus === 'failed'
     ? ' · Showing the locally available fallback roster'
@@ -38,6 +39,7 @@ function shipNationLanding(records, sourceStatus) {
     ).join('') + '</div>' +
     (!nations.length ? '<p class="empty">No ship data available yet.</p>' : '') +
     '<p class="catalog-filter-note">Faction emblems are authentic Azur Lane game assets hosted by an independent fan repository. ' +
+    'Collaboration franchises share the Collab category; the Universal utility roster appears as Bulins. ' +
     'Unmapped and newly introduced factions use text placeholders; counts reflect the loaded roster.</p>' +
     '</div>';
 }
@@ -53,7 +55,7 @@ function pager(kind,result){
 }
 function groupedCards(rows,kind,card,totals){
   if(!rows.length)return '<div class="empty">No records match these filters. Try another nation, hull or search.</div>';
-  return groupedCatalogRows(rows,kind).map(group=>
+  return (kind === 'ships' ? groupedShipBrowseRows(rows) : groupedCatalogRows(rows,kind)).map(group=>
     '<section class="nation-result-group" aria-label="'+E(group.nation)+'">'+
     '<div class="nation-section-title"><h2>'+E(group.nation)+'</h2><span>'+group.items.length+' shown · '+(totals.get(group.nation)||group.items.length)+' matches</span></div>'+
     '<div class="catalog-grid">'+group.items.map(card).join('')+'</div></section>'
@@ -66,20 +68,19 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   const ship=kind==='ships';
   if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && page === 1)
     return shipNationLanding(records, sourceStatus);
-  const criteria={query,hull,category};
   const facetRecords=ship
-    ?filterShipRecords(records,{query,hull})
+    ?filterShipBrowseRows(records,{query,hull})
     :filterEquipmentRecords(records,{query,hull,category});
-  const facets=nationCounts(facetRecords,kind);
-  const knownNations = new Set(nationCounts(records,kind).map(x => x.nation));
+  const facets=ship ? shipBrowseCounts(facetRecords) : nationCounts(facetRecords,kind);
+  const knownNations = new Set((ship ? shipBrowseCounts(records) : nationCounts(records,kind)).map(x => x.nation));
   const currentNation=nation==='all'||knownNations.has(nation)?nation:'all';
   const filtered=ship
-    ?filterShipRecords(facetRecords,{nation:currentNation})
+    ?filterShipBrowseRows(facetRecords,{nation:currentNation})
     :filterEquipmentRecords(facetRecords,{nation:currentNation});
-  const groups=groupedCatalogRows(filtered,kind);
+  const groups=ship ? groupedShipBrowseRows(filtered) : groupedCatalogRows(filtered,kind);
   const ordered=groups.flatMap(x=>x.items);
   const slices=paginateRecords(ordered,page,60);
-  const totals=new Map(nationCounts(filtered,kind).map(x=>[x.nation,x.count]));
+  const totals=new Map((ship ? shipBrowseCounts(filtered) : nationCounts(filtered,kind)).map(x=>[x.nation,x.count]));
   const hulls=ship?[...new Set(records.map(x=>x.hull).filter(Boolean))].sort():
     [...new Set(records.flatMap(possibleEquipmentHulls))].sort();
   const cats=ship?[]:[...new Set(records.map(x=>x.category).filter(Boolean))].sort();
