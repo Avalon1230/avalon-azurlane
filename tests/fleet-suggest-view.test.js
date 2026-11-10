@@ -11,7 +11,7 @@ test('suggest controls include owned-only, scenario and generate; no claim of va
  assert.match(html,/id="suggest-owned-only"/);
  assert.match(html,/data-action="suggest-generate"/);
  assert.match(html,/reviewed candidates/);
- assert.match(html,/HEURISTIC PREVIEW/);
+ assert.doesNotMatch(html,/HEURISTIC PREVIEW/);
 });
 test('preview shows traceable reasons and gaps without mutating output',()=>{
  const preview=suggestFleet({modeId:'daily',scenario:'daily',ships,workspace});
