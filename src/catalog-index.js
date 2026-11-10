@@ -1,5 +1,5 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
-import { MAIN_SHIP_FACTIONS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_HULL_GROUPS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
@@ -55,16 +55,16 @@ function pager(kind,result){
     '<button type="button" class="outline-btn compact" data-action="catalog-page" data-kind="'+E(kind)+'" data-page-index="'+(result.page+1)+'"'+(result.page===result.pages?' disabled':'')+'>Next</button>'+
     '</nav>';
 }
-function groupedCards(rows,kind,card,totals){
+function groupedCards(rows,kind,card,totals,sort='name',descending=false){
   if(!rows.length)return '<div class="empty">No records match these filters. Try another nation, hull or search.</div>';
-  return (kind === 'ships' ? groupedShipBrowseRows(rows) : groupedCatalogRows(rows,kind)).map(group=>
+  return (kind === 'ships' ? groupedShipBrowseRows(rows,sort,descending) : groupedCatalogRows(rows,kind)).map(group=>
     '<section class="nation-result-group" aria-label="'+E(group.nation)+'">'+
     '<div class="nation-section-title"><h2>'+E(group.nation)+'</h2><span>'+group.items.length+' shown · '+(totals.get(group.nation)||group.items.length)+' matches</span></div>'+
-    '<div class="catalog-grid">'+group.items.map(card).join('')+'</div></section>'
+    '<div class="catalog-grid'+(kind==='ships'?' ship-gallery':'')+'">'+group.items.map(card).join('')+'</div></section>'
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready'}){
+export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='name',descending=false}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   const ship=kind==='ships';
@@ -79,19 +79,39 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   const filtered=ship
     ?filterShipBrowseRows(facetRecords,{nation:currentNation})
     :filterEquipmentRecords(facetRecords,{nation:currentNation});
-  const groups=ship ? groupedShipBrowseRows(filtered) : groupedCatalogRows(filtered,kind);
+  const groups=ship ? groupedShipBrowseRows(filtered,sort,descending) : groupedCatalogRows(filtered,kind);
   const ordered=groups.flatMap(x=>x.items);
   const slices=paginateRecords(ordered,page,60);
   const totals=new Map((ship ? shipBrowseCounts(filtered) : nationCounts(filtered,kind)).map(x=>[x.nation,x.count]));
   const hulls=ship?[...new Set(records.map(x=>x.hull).filter(Boolean))].sort():
     [...new Set(records.flatMap(possibleEquipmentHulls))].sort();
   const cats=ship?[]:[...new Set(records.map(x=>x.category).filter(Boolean))].sort();
-  const filters='<div class="catalog-filter-row">'+
-    '<label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="'+E(query)+'" placeholder="'+E(ship?'Search all ships, hulls or nations…':'Search all equipment, types or nations…')+'" aria-label="Search full catalog" autocomplete="off"></label>'+
-    (ship?'<label class="select-wrap">Hull <select id="hull-filter" aria-label="Filter ships by hull">'+option('all','All hull types',hull)+hulls.map(x=>option(x,x,hull)).join('')+'</select></label>':
-    '<label class="select-wrap">Equipment type <select id="category-filter" aria-label="Equipment category">'+option('all','All types',category)+cats.map(x=>option(x,x,category)).join('')+'</select></label>'+
-    '<label class="select-wrap">Equippable by hull <select id="gear-hull-filter" aria-label="Filter gear by compatible ship hull">'+option('all','All hulls',hull)+hulls.map(x=>option(x,x,hull)).join('')+'</select></label>')+
-    '</div>';
+  const shipHulls = [
+    'all','Vanguard','Main','Sub','DD','CL','CA','CB','BB','BC','BBV','BM',
+    'CV','CVL','AR','AE','SS','SSV','Misc'
+  ].filter(name=>name==='all' || SHIP_HULL_GROUPS[name] ||
+    hulls.includes(name));
+  const filterButton = name => '<button type="button" class="ship-filter-chip' +
+    (hull===name?' active':'') + '" data-action="ship-hull-filter" data-hull="' +
+    E(name) + '" aria-pressed="' + (hull===name) + '">' +
+    E(name==='all'?'All':name) + '</button>';
+  const sortButtons = SHIP_SORTS.map(name =>
+    '<button type="button" class="ship-filter-chip' + (sort===name?' active':'') +
+    '" data-action="ship-sort" data-sort="' + E(name) +
+    '" aria-pressed="' + (sort===name) + '">' +
+    E(name.charAt(0).toUpperCase()+name.slice(1)) + '</button>').join('');
+  const filters=ship
+    ? '<div class="ship-roster-tools"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="' +
+       E(query) + '" placeholder="Find a ship…" aria-label="Search full ship roster" autocomplete="off"></label>' +
+      '<div class="ship-filter-row"><span>Index</span><div class="ship-filter-scroll" role="group" aria-label="Filter ship hull">' +
+       shipHulls.map(filterButton).join('') + '</div></div>' +
+      '<div class="ship-filter-row"><span>Sort</span><div class="ship-sort-controls" role="group" aria-label="Sort ships">' +
+       sortButtons + '<button type="button" class="ship-filter-chip" data-action="ship-sort-direction" aria-label="Reverse ship sorting direction">' +
+       (descending?'Descending ↓':'Ascending ↑') + '</button></div></div></div>'
+    : '<div class="catalog-filter-row">' +
+      '<label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="'+E(query)+'" placeholder="Search all equipment, types or nations…" aria-label="Search full catalog" autocomplete="off"></label>'+
+      '<label class="select-wrap">Equipment type <select id="category-filter" aria-label="Equipment category">'+option('all','All types',category)+cats.map(x=>option(x,x,category)).join('')+'</select></label>'+
+      '<label class="select-wrap">Equippable by hull <select id="gear-hull-filter" aria-label="Filter gear by compatible ship hull">'+option('all','All hulls',hull)+hulls.map(x=>option(x,x,hull)).join('')+'</select></label></div>';
   const text='Showing '+slices.start.toLocaleString()+'–'+slices.end.toLocaleString()+' of '+ordered.length.toLocaleString()+
     ' matching records · '+records.length.toLocaleString()+' total';
   const heading = ship
@@ -108,7 +128,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     filters+
     '<div class="catalog-result-bar"><span>'+E(text)+'</span><span>Page '+slices.page+' of '+slices.pages+'</span></div>'+
     pager(kind,slices)+
-    groupedCards(slices.rows,kind,renderCard,totals)+
+    groupedCards(slices.rows,kind,renderCard,totals,sort,descending)+
     pager(kind,slices)+
     '</div>';
 }
