@@ -7,7 +7,8 @@ import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, mov
 import { renderTierView } from './tier-view.js';
 import { imageMarkup, assetCoverage } from './media.js';
 import { renderCatalogIndex } from './catalog-index.js';
-import { nationForShip, nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
+import { nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
+import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
 import { renderSuggestedFleet } from './fleet-suggest-view.js';
 
@@ -214,7 +215,7 @@ function assetNotice() {
 }
 function shipCard(ship) {
   const status=evaluationState(ship);
-  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(nationForShip(ship))} · ${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
+  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(shipBrowseDisplayNation(ship))} · ${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
   <div class="tag-row">${(ship.tags||[]).map(tag).join('')}${tag(status.tier===null?'Assessment pending':'Reviewed')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="ship-details" data-ship="${E(ship.id)}">Inspect</button><button type="button" class="small-btn" data-action="add-ship" data-ship="${E(ship.id)}">+ Assign</button></div></article>`;
 }
 function renderEquipment() {
@@ -237,7 +238,7 @@ function renderDetails() {
   if (!item) return '';
   const ship=d.kind==='ship';
   const rows=ship?[
-    ['Nation',nationForShip(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
+    ['Nation / browse group',shipBrowseDisplayNation(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
   ]:[
     ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Potentially equippable hulls',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Acquisition',item.acquisition||'Not established'],['Source ID',item.sourceId||'Editorial']
   ];
