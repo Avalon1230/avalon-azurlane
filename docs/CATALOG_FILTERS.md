@@ -4,7 +4,7 @@
 
 ## Full catalog navigation
 
-The Ship Index and Equipment Index no longer silently stop at the first 72 entries. Both provide nation chips, full-catalog search, type filters, grouped results and **60 cards per page**, with previous/next buttons and a page selector. Page count and total matching records are explicit. Images remain lazy-loaded to avoid opening hundreds of asset requests at once.
+The Ship Index now opens with a nation-first faction emblem landing page (original game nationality art, or typographic fallback if no verified source image). Selecting a nation opens that roster; global search also works before selection. The Equipment Index retains the compact nation filter chips. Neither index silently stops at the first 72 entries. Both provide nation chips, full-catalog search, type filters, grouped results and **60 cards per page**, with previous/next buttons and a page selector. Page count and total matching records are explicit. Images remain lazy-loaded to avoid opening hundreds of asset requests at once.
 
 ### Ship nationality
 

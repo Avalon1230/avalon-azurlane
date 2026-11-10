@@ -206,7 +206,7 @@ function searchBar(placeholder, extra = '') {
   return `<div class="filter-bar"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="${E(state.query)}" placeholder="${E(placeholder)}" autocomplete="off" aria-label="Search catalog" /></label>${extra}</div>`;
 }
 function renderShips() {
-  return `${sectionHeading('The ship index', 'SHIP REGISTRY / ALL NATIONS', 'Browse every indexed ship. Choose a nation and hull type, search the entire roster, and move between pages without an arbitrary 72-item limit.')}${warning()}
+  return `${sectionHeading('Ship Index', 'SHIP REGISTRY / FACTIONS', 'Browse by nation with authentic faction insignia, then inspect ships, filter by hull, and build your fleet. Global search remains available.')}${warning()}
   ${assetNotice()}${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:shipCard,sourceStatus:state.sync.status})}`;
 }
 function assetNotice() {
@@ -348,6 +348,10 @@ function handleAction(target) {
       return notify('Suggestion is stale. Generate it again.');
     state.workspaces[state.modeId]=normalizeWorkspace(preview.plan,state.modeId);
     state.suggestPreview=null;savePlans();render();notify('Suggested additions applied.');return;
+  }
+  if (action === 'catalog-home') {
+    state.shipNation='all';state.hull='all';state.query='';state.shipPage=1;
+    render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'catalog-nation') {
     const kind=target.dataset.kind, nation=target.dataset.nation||'all';

@@ -35,3 +35,7 @@ AVALON is an independent, free, noncommercial fan reference site; it does not cl
 2. Support full-size default skins and optional galleries, with explicit rights review and licensing/publisher guidance before bundling images.
 3. Enhance the image provenance field with each asset's group ID, host, timestamp and verified skin variant.
 4. Keep all character art distinct from any AI-created content; AVALON will not use synthetic "official-looking" imagery.
+
+## Nationality and faction emblems (v0.6.1)
+
+The Ship Index nation selector references game-client nationality insignia exposed by [Fernando2603/AzurLane nationality.json](https://github.com/Fernando2603/AzurLane/blob/main/nationality.json), served from its `images/nationality/` directory. These assets are original game imagery mirrored by an independent fan repository, not images hosted by the rights holders. Known nationalities use the published ID mapping; named collaborations use the dataset's generic collaboration icon; unverified factions use typographic placeholders instead of fabricated logos. Images load lazily and have text fallbacks when unavailable. Copyright and fan-use limitations described above apply equally to these assets.
