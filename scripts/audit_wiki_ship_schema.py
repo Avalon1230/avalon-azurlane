@@ -16,14 +16,17 @@ for page in ["Amagi(CV)","New Jersey"]:
       if isinstance(text,dict):text=text.get("*","")
       print("PAGE",page,"PROP",prop,"STATUS",status,"CHARACTERS",len(text),"ERROR",obj.get("error",{}).get("code"))
       if prop=="wikitext":
-        print("START",repr(text[:4200]))
-        print("TEMPLATES",re.findall(r"\{\{([^|{}\n]{1,65})",text)[:40])
-        for word in ["Level 125","Level125","Armor","Equipable","Construction","Barrage","Stats","ShipStats","ShipCard","Skill"]:
-          i=text.lower().find(word.lower())
-          if i>=0:print("TOKEN",word,repr(text[max(0,i-80):i+300]))
+        fields=re.findall(r"(?m)^\s*\|\s*([A-Za-z0-9]+)\s*=",text)
+        group=re.search(r"(?m)^\s*\|\s*GroupID\s*=\s*(\d+)",text)
+        print("GROUP_ID",group.group(1) if group else "missing")
+        print("STRUCTURE", {"has_ship_template": "{{Ship" in text,
+          "has_lvl125": "Health125" in fields,
+          "has_build_time": "ConstructTime" in fields,
+          "has_gear_mounts": all("Eq"+str(i)+"BaseMax" in fields for i in (1,2,3)),
+          "has_skill_ids": "Skill1Icon" in fields,
+          "parameter_count":len(fields)})
       else:
-        print("TABLES",len(re.findall("<table",text)), "HEADERS",re.findall(r"<th[^>]*>(.*?)</th>",text,re.S)[:24])
-        for token in ["Level 125","Level&nbsp;125","baseStats","stat-table","statTable","Skills","Barrages"]:
-          i=text.lower().find(token.lower())
-          if i>=0:print("HTMLTOKEN",token,repr(re.sub("<[^>]+>"," ",text[max(0,i-120):i+500])[:450]))
+        print("RENDERED_STRUCTURE", {"table_count":len(re.findall("<table",text)),
+          "has_barrage_table":"barrageTable" in text,
+          "has_level125":"Level 125" in text})
     except Exception as e:print("ERROR",page,prop,type(e).__name__,str(e)[:250])
