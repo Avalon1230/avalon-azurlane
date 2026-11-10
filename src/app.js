@@ -12,6 +12,8 @@ import { equipmentFamilyMembers, EQUIPMENT_GROUP_MODES, EQUIPMENT_BROAD_TYPES } 
 import { renderShipRosterTile } from './ship-roster.js';
 import { loadEquipmentDrops, renderEquipmentAcquisition } from './equipment-acquisition.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
+import { LOADOUT_MODES, buildShipLoadout, validateManualChoice } from './loadout-intelligence.js';
+import { renderLoadoutAlternatives } from './loadout-view.js';
 import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
 import { loadWikiDefaultArtwork } from './wiki-artwork.js';
 import { loadWikiShipFacts } from './wiki-ship-facts.js';
@@ -25,6 +27,7 @@ const E = escapeHtml;
 const storageKey = 'avalon.azurlane.plans.v1';
 const tierStorageKey = 'avalon.azurlane.tiers.v1';
 const suggestStorageKey = 'avalon.azurlane.suggest.v1';
+const loadoutStorageKey = 'avalon.azurlane.loadouts.v1';
 const pages = [
   { id: 'overview', label: 'Overview', icon: '⌂' },
   { id: 'modes', label: 'Game Modes', icon: '◈' },
@@ -38,7 +41,8 @@ const pages = [
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   shipNation:'all', gearNation:'all', gearHull:'all', shipVisibleCount:SHIP_ROSTER_BATCH_SIZE, shipRosterScrollY:0, gearVisibleCount:EQUIPMENT_ROSTER_BATCH_SIZE,
-  shipSort:'rarity', shipDescending:true, shipRarity:'all', shipAdvancedOpen:false, gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
+  shipSort:'rarity', shipDescending:true, shipRarity:'all', shipAdvancedOpen:false,
+  profileLoadoutMode:'general',profileGearId:null,profileLoadoutPicker:null,savedLoadouts:{}, gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
   shipDetails:{status:'idle',data:null,error:''},
   equipmentAcquisition:{status:'idle',index:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
@@ -48,6 +52,28 @@ const state = {
   suggestOptions: {scenario:'',ownedOnly:false,ownedIds:[],poolOpen:false}, suggestPreview:null
 };
 
+function loadSavedLoadouts() {
+  try{
+    const raw=localStorage.getItem(loadoutStorageKey)||'{}';
+    if(raw.length>150000)return;
+    const value=JSON.parse(raw);
+    if(value&&typeof value==='object'&&!Array.isArray(value))state.savedLoadouts=value;
+  }catch{state.savedLoadouts={};}
+}
+function saveLoadoutPicks() {
+  try{
+    localStorage.setItem(loadoutStorageKey,JSON.stringify(state.savedLoadouts));
+  }catch{notify('Unable to save equipment selections in browser storage.');}
+}
+function currentShipLoadoutModel(ship,data,sourceId) {
+  const id=String(sourceId||data?.id||ship?.sourceId||'');
+  const saved=state.savedLoadouts?.[id]?.[state.profileLoadoutMode];
+  return buildShipLoadout({
+    ship,data,wikiFacts:wikiFactsCache.get(id)||null,
+    equipment:EQUIPMENT,mode:state.profileLoadoutMode,
+    overrides:saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{}
+  });
+}
 function loadPlans() {
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
@@ -149,7 +175,7 @@ function go(page) {
   state.shipSort='rarity';state.shipDescending=true;state.shipRarity='all';state.shipAdvancedOpen=false;state.gearSort='rarity';state.gearDescending=true;state.gearRarity='all';state.gearBroadType='all';state.gearGroup='type';state.gearAdvancedOpen=false;
   state.picker = null;
   state.detail = null;
-  state.artViewerOpen=false;
+  state.artViewerOpen=false;state.profileGearId=null;state.profileLoadoutPicker=null;
   const hash = `#/${page}`;
   if (location.hash !== hash) history.replaceState(null, '', hash);
   render();
@@ -252,7 +278,7 @@ function evidenceLine(record) {
   return `<p><strong>Source:</strong> Editorial placeholder (not validated).</p>${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/DATA_SOURCES.md','Source methodology')}`;
 }
 function refreshEquipmentDetail() {
-  if(state.detail?.kind!=='equipment')return;
+  if(state.detail?.kind!=='equipment'&&!state.profileGearId)return;
   // A network response must not throw the reader back to the top while they
   // are scrolling through the large stats table.
   const previous=document.querySelector('.detail-panel .detail-scroll')?.scrollTop||0;
@@ -272,8 +298,8 @@ async function ensureEquipmentAcquisition() {
   }
   refreshEquipmentDetail();
 }
-function renderDetails() {
-  const d=state.detail;
+function renderDetails(gearId=null) {
+  const d=gearId?{kind:'equipment',id:gearId}:state.detail;
   if(d?.kind==='equipment-family')
     return renderEquipmentFamilyDetails(equipmentFamilyMembers(EQUIPMENT,d.id));
   const item=d.kind==='ship'?SHIP_MAP.get(d.id):EQUIPMENT.find(x=>x.id===d.id);
@@ -420,13 +446,14 @@ function openShipProfile(shipId) {
   state.page='ships';
   state.detail={kind:'ship',id:item.id,sourceId:String(item.sourceId||'')};
   state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;
+  state.profileLoadoutMode='general';state.profileGearId=null;state.profileLoadoutPicker=null;
   if (state.detail.sourceId) history.pushState(null,'','#/ships/'+encodeURIComponent(state.detail.sourceId));
   render();
   window.scrollTo({top:0,behavior:'instant'});
   void loadShipProfileData();
 }
 function closeShipProfile() {
-  state.artViewerOpen=false;
+  state.artViewerOpen=false;state.profileGearId=null;state.profileLoadoutPicker=null;
   state.detail=null;
   history.pushState(null,'','#/ships');
   render();
@@ -488,11 +515,14 @@ function render() {
     const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,recordId)
       .map((skin,index)=>index===0 && wikiPainting
         ? {...skin,images:{...skin.images,wiki:wikiPainting}}:skin);
+    const loadoutModel=data?currentShipLoadoutModel(ship,data,recordId):null;
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
       level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins,
-      wikiFacts:wikiFactsCache.get(recordId)||null
-    });
+      wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel
+    })+(state.profileGearId?renderDetails(state.profileGearId):'')+
+      (loadoutModel&&state.profileLoadoutPicker!==null
+        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker):'');
   } else {
     $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
   }
@@ -617,6 +647,55 @@ function handleAction(target) {
     state.equipmentAcquisition={status:'idle',index:null,error:''};
     void ensureEquipmentAcquisition();return;
   }
+  if (action === 'loadout-mode') {
+    const next=target.dataset.mode;
+    if(!LOADOUT_MODES.some(x=>x.id===next)||state.detail?.kind!=='ship')return;
+    state.profileLoadoutMode=next;state.profileGearId=null;state.profileLoadoutPicker=null;
+    render();return;
+  }
+  if (action === 'loadout-reset') {
+    const key=String(state.detail?.sourceId||'');
+    if(!/^\d{2,8}$/.test(key))return;
+    if(state.savedLoadouts[key])delete state.savedLoadouts[key][state.profileLoadoutMode];
+    saveLoadoutPicks();render();notify('Personal picks reset for this ship and mode.');return;
+  }
+  if (action === 'loadout-alternatives') {
+    const index=Number(target.dataset.slot);
+    const ship=SHIP_MAP.get(state.detail?.id);
+    const data=detailedShipRecord(state.shipDetails.data,state.detail?.sourceId);
+    const model=currentShipLoadoutModel(ship,data,state.detail?.sourceId);
+    if(!Number.isSafeInteger(index)||model.slots.find(x=>x.index===index)?.candidates.length<2)return;
+    state.profileLoadoutPicker=index;state.profileGearId=null;render();
+    document.querySelector('.loadout-picker-panel .icon-btn')?.focus();return;
+  }
+  if (action === 'loadout-close-alternatives') {
+    state.profileLoadoutPicker=null;render();return;
+  }
+  if (action === 'loadout-select') {
+    const index=Number(target.dataset.slot),equipId=target.dataset.equip;
+    const ship=SHIP_MAP.get(state.detail?.id);
+    const data=detailedShipRecord(state.shipDetails.data,state.detail?.sourceId);
+    const model=currentShipLoadoutModel(ship,data,state.detail?.sourceId);
+    if(!validateManualChoice(model,index,equipId))return notify('This equipment is not source-matched to that slot.');
+    const key=String(state.detail.sourceId);
+    if(!/^\d{2,8}$/.test(key))return;
+    if(!state.savedLoadouts[key]||typeof state.savedLoadouts[key]!=='object')state.savedLoadouts[key]={};
+    if(!state.savedLoadouts[key][state.profileLoadoutMode]||typeof state.savedLoadouts[key][state.profileLoadoutMode]!=='object')
+      state.savedLoadouts[key][state.profileLoadoutMode]={};
+    state.savedLoadouts[key][state.profileLoadoutMode][String(index)]=equipId;
+    saveLoadoutPicks();
+    state.profileLoadoutPicker=null;render();notify('Equipment selection saved for this ship and mode.');return;
+  }
+  if (action === 'loadout-inspect') {
+    const equipId=target.dataset.equip;
+    const ship=SHIP_MAP.get(state.detail?.id);
+    const data=detailedShipRecord(state.shipDetails.data,state.detail?.sourceId);
+    const model=currentShipLoadoutModel(ship,data,state.detail?.sourceId);
+    if(!model.slots.some(slot=>slot.candidates.some(item=>item.id===equipId)))return;
+    state.profileGearId=equipId;state.profileLoadoutPicker=null;render();
+    void ensureEquipmentAcquisition();
+    document.querySelector('.detail-panel .icon-btn')?.focus();return;
+  }
   if (action === 'profile-art-open') {
     state.artViewerOpen=true;render();
     document.querySelector('.ship-art-viewer-actions [data-action="profile-art-close"]')?.focus();
@@ -672,7 +751,10 @@ function handleAction(target) {
   if (action === 'sync-data') { void syncData(); return; }
   if (action === 'ship-details') { openShipProfile(ship);return; }
   if (action === 'equip-details') { state.detail={kind:'equipment',id:equip};render();void ensureEquipmentAcquisition();return; }
-  if (action === 'close-detail') { state.detail=null;return render(); }
+  if (action === 'close-detail') {
+    if(state.profileGearId){state.profileGearId=null;render();return;}
+    state.detail=null;return render();
+  }
   if (action === 'navigate') return go(page);
   if (action === 'open-mode') { state.modeId = mode; return go('fleet'); }
   if (action === 'add-ship') { state.suggestPreview=null;
@@ -840,6 +922,8 @@ document.addEventListener('keydown', event => {
     if(document.fullscreenElement) void document.exitFullscreen().catch(()=>{});
     render();
   }
+  else if(event.key==='Escape' && state.profileGearId){state.profileGearId=null;render();}
+  else if(event.key==='Escape' && state.profileLoadoutPicker!==null){state.profileLoadoutPicker=null;render();}
   else if (event.key==='Escape' && state.detail?.kind==='ship') closeShipProfile();
   else if (event.key==='Escape' && (state.picker||state.detail)) {state.picker=null;state.detail=null;render();}
 });
@@ -848,11 +932,13 @@ window.addEventListener('hashchange', () => {
   const match=route.match(/^ships\/(\d{2,8})$/);
   if (match) {
     state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};state.artViewerOpen=false;
-    state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;render();void loadShipProfileData();
+    state.profileSkin=0;state.profileLevel='level120';state.profileLoadoutMode='general';state.profileGearId=null;state.profileLoadoutPicker=null;
+    state.artViewerOpen=false;render();void loadShipProfileData();
     return;
   }
   if(route==='ships' && state.page==='ships' && state.detail?.kind==='ship'){
-    state.detail=null;state.artViewerOpen=false;render();window.scrollTo({top:state.shipRosterScrollY,behavior:'instant'});return;
+    state.detail=null;state.artViewerOpen=false;state.profileGearId=null;state.profileLoadoutPicker=null;
+    render();window.scrollTo({top:state.shipRosterScrollY,behavior:'instant'});return;
   }
   if (pages.some(p=>p.id===route) && (route!==state.page || state.detail)) go(route);
 });
@@ -885,6 +971,7 @@ async function syncData() {
 loadPlans();
 loadTierBoards();
 loadSuggestOptions();
+loadSavedLoadouts();
 const initial = location.hash.replace(/^#\//,'');
 const initialShip = initial.match(/^ships\/(\d{2,8})$/);
 if (initialShip) {
