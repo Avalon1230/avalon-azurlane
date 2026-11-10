@@ -17,14 +17,40 @@ test('ship roster continuously loads all 894 records without numbered pages',()=
   assert.match(expanded,/Royal Navy/);
   assert.doesNotMatch(expanded,/data-ship-scroll-sentinel|catalog-pagination/);
 });
-test('equipment keeps numbered pagination independently from continuous ship roster',()=>{
-  const equipment=Array.from({length:121},(_,i)=>({id:String(i),name:'Gear '+i,nation:'Eagle Union',category:'Auxiliary'}));
-  const second=renderCatalogIndex({kind:'equipment',records:equipment,page:2,renderCard:card});
-  assert.match(second,/Page <select/);
-  assert.match(second,/Page 2 of 3/);
-  assert.match(second,/data-catalog-page-select="equipment"/);
-  assert.match(second,/data-ship="60"/);
-  assert.doesNotMatch(second,/data-ship="0"/);
+test('equipment index uses continuous scrolling through all records, not numbered pages',()=>{
+  const equipment=Array.from({length:936},(_,i)=>({id:String(i),name:'Gear '+i,nation:'Eagle Union',category:'Auxiliary',rarity:'Rare'}));
+  const first=renderCatalogIndex({kind:'equipment',records:equipment,renderCard:card});
+  assert.match(first,/Showing 60 of 936 matching equipment · 936 total/);
+  assert.equal((first.match(/data-ship="/g)||[]).length,60);
+  assert.match(first,/data-equipment-scroll-sentinel/);
+  assert.match(first,/data-action="equipment-load-more"/);
+  assert.doesNotMatch(first,/catalog-pagination|data-catalog-page-select|Page <select|Page 2 of/);
+  const all=renderCatalogIndex({kind:'equipment',records:equipment,equipmentLimit:936,renderCard:card});
+  assert.equal((all.match(/data-ship="/g)||[]).length,936);
+  assert.match(all,/data-ship="935"/);
+  assert.doesNotMatch(all,/data-equipment-scroll-sentinel|catalog-pagination/);
+});
+test('equipment defaults to highest rarity, filters source rarity, and allows type/hull/name controls',()=>{
+  const source=[
+    {id:'1',name:'Gamma',nation:'Eagle Union',category:'Fighter',rarity:'Elite',typeCode:7,forbiddenHullIds:[]},
+    {id:'2',name:'Delta',nation:'Eagle Union',category:'Auxiliary',rarity:'Ultra Rare',typeCode:10,forbiddenHullIds:[]},
+    {id:'3',name:'Alpha',nation:'Eagle Union',category:'Fighter',rarity:'Super Rare',typeCode:7,forbiddenHullIds:[]},
+    {id:'4',name:'Beta',nation:'Eagle Union',category:'Fighter',rarity:'Normal',typeCode:7,forbiddenHullIds:[]}
+  ];
+  const html=renderCatalogIndex({kind:'equipment',records:source,renderCard:card});
+  assert.match(html,/data-action="equipment-sort" data-sort="rarity" aria-pressed="true"/);
+  assert.match(html,/Descending ↓/);
+  const order=[...html.matchAll(/data-ship="(\d+)"/g)].map(hit=>hit[1]);
+  assert.deepEqual(order,['2','3','1','4']);
+  assert.match(html,/data-action="equipment-type-filter" data-category="Fighter"/);
+  assert.match(html,/data-action="equipment-hull-filter" data-hull="CV"/);
+  assert.match(html,/data-action="equipment-rarity-filter" data-rarity="Ultra Rare"/);
+  const filtered=renderCatalogIndex({kind:'equipment',records:source,rarity:'Ultra Rare',renderCard:card});
+  assert.match(filtered,/data-ship="2"/);
+  assert.doesNotMatch(filtered,/data-ship="3"/);
+  const fighter=renderCatalogIndex({kind:'equipment',records:source,category:'Fighter',hull:'CV',renderCard:card});
+  assert.match(fighter,/data-ship="3"/);
+  assert.doesNotMatch(fighter,/data-ship="2"/);
 });
 test('equipment view filters by type, origin, and hull without fictional equipability',()=>{
   const gear=[
@@ -36,8 +62,8 @@ test('equipment view filters by type, origin, and hull without fictional equipab
   assert.match(html,/Eagle Fighter/);
   assert.doesNotMatch(html,/Iron Fighter<\/article>/);
   assert.doesNotMatch(html,/Unknown<\/article>/);
-  assert.match(html,/Equippable by hull/);
-  assert.match(html,/Equipment type/);
+  assert.match(html,/Filter potentially compatible hulls/);
+  assert.match(html,/Filter equipment type/);
 });
 test('search escaping prevents attribute injection in catalog controls',()=>{
   const html=renderCatalogIndex({kind:'ships',records:[],query:'" autofocus onfocus="alert(1)',renderCard:card});
