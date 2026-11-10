@@ -41,7 +41,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 ## Completed and planned behavior
 
 **Shipped in v0.6.0:**
-- Large browsable ship/equipment catalogs with source data, filterable nation/type/hull/rarity and 60-item progressive scrolling.
+- Large browsable ship/equipment catalogs with dynamic source records and 60-item pagination.
 - Source-backed nation and hull/category filters.
 - Full-game mode registry and browser-local Fleet Lab planning with four OpSi surface fleets.
 - Suggested formations using 39 curated candidate profiles, review-before-apply flow, duplicate prevention, and owned-only preferences.
