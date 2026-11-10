@@ -112,7 +112,7 @@ test('ship profile embeds tactical planner beneath identity but outside artwork'
   assert.match(html,/data-action="loadout-mode"/);
   assert.match(html,/data-action="loadout-inspect" data-equip="fer-1020"/);
   assert.match(html,/data-action="loadout-slot-info" data-slot="0"/);
-  assert.match(html,/SOURCE-MATCHED|Source-matched/);
+  assert.match(html,/Planning · Sourced/);
   assert.doesNotMatch(html,/Simulated DPS|Best in slot|guaranteed optimum/);
 });
 test('alternative chooser exposes authentic source icons and lets users select legal records',()=>{
