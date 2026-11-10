@@ -1,4 +1,5 @@
 import { shipyardPortraitUrl, shipyardManifestCoverage } from './shipyard-assets.js';
+import { verifiedEquipmentIconUrl, EQUIPMENT_ICON_COUNT } from './equipment-assets.js';
 
 /**
  * Original Azur Lane game-client thumbnails and equipment icons, linked (NOT
@@ -35,7 +36,9 @@ export function shipImageUrl(record) {
 }
 export function equipmentImageUrl(record) {
   const id=recordId(record)||CORE_GEAR_IDS[gearKey(typeof record==='string'?record:record?.name)];
-  return id && /^\d{2,8}$/.test(id) ? EQUIPMENT_ASSET_HOST+id+'.png' : null;
+  // The source's equipment_icon.json maps some enhancement variants to a
+  // shared base icon. Reconstructing URL with the item ID gives a broken 404.
+  return verifiedEquipmentIconUrl(id);
 }
 /**
  * CSS provides a visible placeholder underneath an external icon.
@@ -61,6 +64,6 @@ export const assetCoverage = Object.freeze({
   availableShipThumbnails: 746,
   mappedShipyardPortraits: shipyardManifestCoverage,
   indexedShipsAtAudit: 894,
-  availableEquipmentIcons: 936,
+  availableEquipmentIcons: EQUIPMENT_ICON_COUNT,
   checked: '2026-11-10'
 });
