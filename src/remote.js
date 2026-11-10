@@ -1,3 +1,5 @@
+import { nationForShip, nationForEquipment } from './catalog-filters.js';
+
 /**
  * Optional, read-only community data adapters. Third-party JSON is fetched at
  * runtime, never redistributed in this repository. No tier scores are inferred.
@@ -57,7 +59,7 @@ export function normalizeShips(input) {
     seen.add(id);
     const hullName = String(item.hullType || '').trim();
     entries.push({ id, name:item.name.trim(), hull:HULLS[hullName] || 'OTHER',
-      sourceHull:hullName, rarity:String(item.rarity || 'Unknown'),tags:[],
+      sourceHull:hullName, rarity:String(item.rarity || 'Unknown'),nation:nationForShip({sourceId:item.id}),tags:[],
       source:'lycoris', sourceId:item.id, verified:'sourced' });
   }
   if (entries.length < 100) throw new Error('No valid ship records');
@@ -83,6 +85,10 @@ export function normalizeEquipment(input) {
     }
     entries.push({id:`fer-${key}`,name:item.name.trim(),category:GEAR_TYPES[item.type]||`Other (type ${item.type ?? '?'})`,
       rarity:RARITIES[item.rarity]||'Unknown',rarityCode:item.rarity ?? null,
+      typeCode:Number.isInteger(item.type)?item.type:null,
+      nationalityCode:Number.isInteger(item.nationality)?item.nationality:null,
+      nation:nationForEquipment({nationalityCode:item.nationality}),
+      forbiddenHullIds:Array.isArray(item.ship_type_forbidden)?item.ship_type_forbidden.filter(v=>Number.isInteger(v)&&v>=1&&v<=255):[],
       source:'fernando',sourceId:key,verified:'sourced',summary:'',acquisition:'Not established by this dataset',
       stats:numericStats,enhancement:last?.[1]?.enhance || 'unknown',
       sourceUrl:'https://github.com/Fernando2603/AzurLane/blob/main/equipment.json'});
@@ -99,7 +105,7 @@ export function mergeShipCatalog(editorial,remote) {
     const key=normalKey(ship.name);
     const index=keyToIndex.get(key);
     if (index!==undefined) {
-      original[index] = {...original[index],rarity:ship.rarity,sourceHull:ship.sourceHull,source:'lycoris',sourceId:ship.sourceId,verified:'sourced'};
+      original[index] = {...original[index],rarity:ship.rarity,sourceHull:ship.sourceHull,nation:ship.nation,source:'lycoris',sourceId:ship.sourceId,verified:'sourced'};
     } else { keyToIndex.set(key,original.length); original.push(ship); }
   }
   return original;

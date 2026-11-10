@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.5 suggested-fleet prototype**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
+> **Project status:** **v0.6 full-catalog browsing prototype**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -45,6 +45,15 @@ npm test
 For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
 
 **Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, numerical fleet optimization and automatic gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
+
+## Full ship and equipment catalogs (v0.6.0)
+
+AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. Both indexes offer horizontally scrollable nation chips, global search, grouped nation headings, and **60 results per page** with previous/next and direct page selection.
+
+- **Ships:** filter by nation/faction, hull type (DD, CL, CA, BB, CV, etc.), or search across names, hulls, rarity and nationality. Full nation mapping is sourced from Lycoris-AzurAPI's 894-ship database and joined to the compact live ship index by stable numeric ID.
+- **Equipment:** filter by nation of origin, equipment category, and the hull classes **potentially able to equip** the item. Availability combines equipment `type`, explicit `ship_type_forbidden` exclusions, and equipment-slot types observed in the ship database. This denotes **some ships of the hull type**, not automatic legality for every individual ship or slot. Nation is not an equipment faction lock.
+
+The new nationality metadata is a dated compact source snapshot; newly released IDs without mappings appear as **Unclassified**, never as a guessed nation. See [catalog filter methodology and limitations](docs/CATALOG_FILTERS.md).
 
 ## Original game artwork (v0.5.1)
 

@@ -6,6 +6,8 @@ import { changelogToHtml } from './changelog.js';
 import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, moveTierItem } from './tiers.js';
 import { renderTierView } from './tier-view.js';
 import { imageMarkup, assetCoverage } from './media.js';
+import { renderCatalogIndex } from './catalog-index.js';
+import { nationForShip, nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
 import { renderSuggestedFleet } from './fleet-suggest-view.js';
 
@@ -26,6 +28,7 @@ const pages = [
 ];
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
+  shipNation:'all', gearNation:'all', gearHull:'all', shipPage:1, gearPage:1,
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
   changelog: null, changelogStatus: 'idle',
@@ -129,6 +132,8 @@ function go(page) {
   state.query = '';
   state.hull = 'all';
   state.category = 'all';
+  state.shipNation='all';state.gearNation='all';state.gearHull='all';
+  state.shipPage=1;state.gearPage=1;
   state.picker = null;
   state.detail = null;
   const hash = `#/${page}`;
@@ -201,34 +206,24 @@ function searchBar(placeholder, extra = '') {
   return `<div class="filter-bar"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="${E(state.query)}" placeholder="${E(placeholder)}" autocomplete="off" aria-label="Search catalog" /></label>${extra}</div>`;
 }
 function renderShips() {
-  const hulls = ['all', ...new Set(SHIPS.map(s => s.hull))].sort((a,b)=>a==='all'?-1:b==='all'?1:a.localeCompare(b));
-  const extra = `<label class="select-wrap">Hull <select id="hull-filter">${hulls.map(h => `<option value="${E(h)}" ${h===state.hull?'selected':''}>${h === 'all' ? 'All hulls' : E(h)}</option>`).join('')}</select></label>`;
-  const filtered = searchCatalog(SHIPS, state.query, ['name', 'hull', 'tags', 'rarity', 'sourceHull']).filter(s => state.hull === 'all' || s.hull === state.hull);
-  const visible=filtered.slice(0,72);
-  return `${sectionHeading('The ship index', 'RESEARCH CATALOG · v0.2', 'Search the public ship roster by name, hull, or rarity; open an evidence profile, then assign it to a fleet.')}${warning()}
-  ${assetNotice()}${searchBar('Search ship, hull or rarity...', extra)}<div class="result-caption">${filtered.length.toLocaleString()} / ${SHIPS.length.toLocaleString()} records ${visible.length<filtered.length?'· Showing first 72 (refine your search)':''} · Unranked</div>
-  <div class="catalog-grid">${visible.map(shipCard).join('') || '<div class="empty">No ships match these filters.</div>'}</div>`;
+  return `${sectionHeading('The ship index', 'SHIP REGISTRY / ALL NATIONS', 'Browse every indexed ship. Choose a nation and hull type, search the entire roster, and move between pages without an arbitrary 72-item limit.')}${warning()}
+  ${assetNotice()}${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:shipCard,sourceStatus:state.sync.status})}`;
 }
 function assetNotice() {
   return `<p class="asset-provenance">Original Azur Lane game-client artwork (not AI). Image copies are hosted by independent fan repositories, not Yostar or Manjuu. Audit: ${assetCoverage.availableShipThumbnails}/${assetCoverage.indexedShipsAtAudit} ship thumbnails and ${assetCoverage.availableEquipmentIcons} equipment icons. <a href="https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/IMAGE_ASSETS.md" target="_blank" rel="noopener noreferrer">Artwork sources and rights</a>.</p>`;
 }
 function shipCard(ship) {
   const status=evaluationState(ship);
-  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
+  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(nationForShip(ship))} · ${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
   <div class="tag-row">${(ship.tags||[]).map(tag).join('')}${tag(status.tier===null?'Assessment pending':'Reviewed')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="ship-details" data-ship="${E(ship.id)}">Inspect</button><button type="button" class="small-btn" data-action="add-ship" data-ship="${E(ship.id)}">+ Assign</button></div></article>`;
 }
 function renderEquipment() {
-  const categories = ['all', ...new Set(EQUIPMENT.map(e => e.category))].sort((a,b)=>a==='all'?-1:b==='all'?1:a.localeCompare(b));
-  const extra = `<label class="select-wrap">Type <select id="category-filter">${categories.map(cat => `<option value="${E(cat)}" ${cat===state.category?'selected':''}>${E(cat==='all'?'All equipment':cat)}</option>`).join('')}</select></label>`;
-  const filtered = searchCatalog(EQUIPMENT, state.query, ['name', 'category', 'rarity', 'acquisition']).filter(e => state.category==='all' || e.category===state.category);
-  const visible=filtered.slice(0,72);
-  return `${sectionHeading('Equipment intelligence', 'EQUIPMENT INDEX · v0.2', 'Browse sourced equipment identities, categories and enhancement attributes. Crafting and acquisition are a separate verification phase.')}${warning()}
-  ${assetNotice()}${searchBar('Search gear, category or rarity...', extra)}<div class="result-caption">${filtered.length.toLocaleString()} / ${EQUIPMENT.length.toLocaleString()} records ${visible.length<filtered.length?'· Showing first 72 (refine your search)':''} · No best-in-slot claims</div>
-  <div class="catalog-grid">${visible.map(equipCard).join('') || '<div class="empty">No equipment matches these filters.</div>'}</div>`;
+  return `${sectionHeading('Equipment intelligence', 'EQUIPMENT / NATION & COMPATIBILITY', 'Search all equipment by origin, category, and potential hull compatibility. Ship-specific equipment slots must still be checked.')}${warning()}
+  ${assetNotice()}${renderCatalogIndex({kind:'equipment',records:EQUIPMENT,query:state.query,nation:state.gearNation,hull:state.gearHull,category:state.category,page:state.gearPage,renderCard:equipCard,sourceStatus:state.sync.status})}`;
 }
 function equipCard(item) {
   const stats=Object.entries(item.stats||{}).filter(([,v])=>typeof v==='number').slice(0,3);
-  return `<article class="catalog-card gear-card"><div class="catalog-top">${imageMarkup(item,'equipment','asset-card-gear')}<span class="verification">SOURCE INDEX</span></div><h3>${E(item.name)}</h3><div class="type-line">${E(item.category)} · ${E(item.rarity||'Unverified rarity')}</div><p>${E(item.source==='fernando'?'Community data record; enhancement values are source-reported, not independently validated.':item.summary||'Acquisition requires verification.')}</p>
+  return `<article class="catalog-card gear-card"><div class="catalog-top">${imageMarkup(item,'equipment','asset-card-gear')}<span class="verification">SOURCE INDEX</span></div><h3>${E(item.name)}</h3><div class="type-line">${E(nationForEquipment(item))} · ${E(item.category)} · ${E(item.rarity||'Unverified rarity')}</div><div class="gear-compat">Potential hulls: ${E(possibleEquipmentHulls(item).join(', ')||'Not verified')}</div><p>${E(item.source==='fernando'?'Community data record; enhancement values are source-reported, not independently validated.':item.summary||'Acquisition requires verification.')}</p>
   <div class="tag-row">${stats.map(([k,v])=>tag(`${k.replaceAll('_',' ')}: ${v}`)).join('')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="equip-details" data-equip="${E(item.id)}">Inspect gear</button>${link(wikiLookupUrl(item.name), 'Wiki lookup')}</div></article>`;
 }
 function evidenceLine(record) {
@@ -242,9 +237,9 @@ function renderDetails() {
   if (!item) return '';
   const ship=d.kind==='ship';
   const rows=ship?[
-    ['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
+    ['Nation',nationForShip(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
   ]:[
-    ['Category',item.category],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Acquisition',item.acquisition||'Not established'],['Source ID',item.sourceId||'Editorial']
+    ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Potentially equippable hulls',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Acquisition',item.acquisition||'Not established'],['Source ID',item.sourceId||'Editorial']
   ];
   const statRows=!ship?Object.entries(item.stats||{}).map(([k,v])=>[k.replaceAll('_',' ').toUpperCase(),String(v)]):[];
   return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect ${ship?'ship':'equipment'}"><div class="picker-head"><div>${eyebrow(ship?'SHIP INTELLIGENCE':'EQUIPMENT INTELLIGENCE')}<h2>${E(item.name)}</h2></div><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div>
@@ -354,6 +349,21 @@ function handleAction(target) {
     state.workspaces[state.modeId]=normalizeWorkspace(preview.plan,state.modeId);
     state.suggestPreview=null;savePlans();render();notify('Suggested additions applied.');return;
   }
+  if (action === 'catalog-nation') {
+    const kind=target.dataset.kind, nation=target.dataset.nation||'all';
+    if (kind==='ships') {state.shipNation=nation;state.shipPage=1;}
+    else if (kind==='equipment') {state.gearNation=nation;state.gearPage=1;}
+    else return;
+    render();return;
+  }
+  if (action === 'catalog-page') {
+    const kind=target.dataset.kind, index=Number(target.dataset.pageIndex);
+    if(!Number.isSafeInteger(index)||index<1||index>100)return;
+    if(kind==='ships')state.shipPage=index;
+    else if(kind==='equipment')state.gearPage=index;
+    else return;
+    render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
+  }
   if (action === 'tier-board') {
     if (!TIER_BOARDS[board]) return;
     state.tierBoard=board;state.tierQuery='';state.tierFilter='all';render();return;
@@ -414,6 +424,15 @@ document.addEventListener('click', event => {
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  if (event.target.dataset.catalogPageSelect) {
+    const kind=event.target.dataset.catalogPageSelect, page=Number(event.target.value);
+    if(!Number.isSafeInteger(page)||page<1)return;
+    if(kind==='ships')state.shipPage=page;
+    else if(kind==='equipment')state.gearPage=page;
+    else return;
+    render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
+  }
+  if (event.target.id==='gear-hull-filter') {state.gearHull=event.target.value;state.gearPage=1;render();return;}
   if(event.target.id==='suggest-scenario') { state.suggestOptions.scenario=event.target.value;state.suggestPreview=null;saveSuggestOptions();render();return; }
   if(event.target.id==='suggest-owned-only') { state.suggestOptions.ownedOnly=event.target.checked;state.suggestPreview=null;saveSuggestOptions();render();return; }
   if(event.target.matches('[data-suggest-owned]')) {
@@ -429,15 +448,15 @@ document.addEventListener('change', event => {
     movePersonalTier(event.target.dataset.tierAssign,event.target.value);return;
   }
   if (event.target.id === 'mode-select') { state.modeId=event.target.value;state.picker=null;state.suggestOptions.scenario='';state.suggestPreview=null;render(); }
-  if (event.target.id === 'hull-filter') { state.hull=event.target.value;render(); }
-  if (event.target.id === 'category-filter') { state.category=event.target.value;render(); }
+  if (event.target.id === 'hull-filter') { state.hull=event.target.value;state.shipPage=1;render(); }
+  if (event.target.id === 'category-filter') { state.category=event.target.value;state.gearPage=1;render(); }
 });
 document.addEventListener('input', event => {
   const id = event.target.id;
   if (id!=='catalog-search' && id!=='picker-search' && id!=='tier-search') return;
   const value = event.target.value;
   const pos = event.target.selectionStart;
-  if (id==='catalog-search') state.query=value;
+  if (id==='catalog-search') {state.query=value;if(state.page==='ships')state.shipPage=1;else if(state.page==='equipment')state.gearPage=1;}
   else if (id==='picker-search') state.pickerQuery=value;
   else state.tierQuery=value;
   render();

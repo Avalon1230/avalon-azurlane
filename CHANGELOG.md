@@ -2,6 +2,24 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.6.0] - 2026-11-10
+
+### Fixed
+- Removed the arbitrary 72-card Ship Index and Equipment Index cutoff. All 894+ ship records and 936 equipment records are now browseable through searchable, directly selectable pages.
+
+### Added
+- Nation/faction selector and nation-grouped results for ship and equipment indexes.
+- Ship hull-type filter with full-roster search and combined filtering.
+- Equipment nation-of-origin, equipment category and **potentially equippable by hull** filters, based on item type, forbidden hulls and actual ship slot-type data.
+- Stable 60-record pagination with previous/next buttons, page jump, matching record totals, and persistent browsing within each index.
+- Dated compact nationality snapshot across all 894 Lycoris ship IDs, plus sourced equipment origin and slot compatibility maps.
+- Regression tests for missing/unknown nationalities, equipment forbidden hulls, filter combinations, and accessing records past item 72.
+- [Catalog provenance and interpretation](docs/CATALOG_FILTERS.md).
+
+### Limitations
+- Potential hull compatibility means **at least one ship of that hull type has a matching equipment-slot type** and no explicit hull-level exclusion. Individual ship slot restrictions, gear-specific restrictions and unusual hulls still require verification.
+- Nation snapshot is dated 2026-11-09; source data may advance independently. No new combat scores or assumed gear synergy are introduced.
+
 ## [0.5.1] - 2026-11-10
 
 ### Added
