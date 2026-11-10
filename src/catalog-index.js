@@ -3,6 +3,7 @@ import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_RARITIES, SHIP_HULL_GROUPS, shipBr
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
+export const SHIP_ROSTER_BATCH_SIZE = 60;
 
 function option(value,label,active){
   return '<option value="'+E(value)+'"'+(active===value?' selected':'')+'>'+E(label)+'</option>';
@@ -64,7 +65,7 @@ function groupedCards(rows,kind,card,totals,sort='name',descending=false){
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='name',descending=false,rarity='all'}){
+export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   const ship=kind==='ships';
@@ -81,7 +82,10 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     :filterEquipmentRecords(facetRecords,{nation:currentNation});
   const groups=ship ? groupedShipBrowseRows(filtered,sort,descending) : groupedCatalogRows(filtered,kind);
   const ordered=groups.flatMap(x=>x.items);
-  const slices=paginateRecords(ordered,page,60);
+  // Ship portraits load in progressively larger batches on the same continuous roster.
+  // Equipment retains its existing page navigation.
+  const slices=ship ? null : paginateRecords(ordered,page,60);
+  const visible=ship ? ordered.slice(0,Math.max(SHIP_ROSTER_BATCH_SIZE,Math.trunc(Number(shipLimit)||SHIP_ROSTER_BATCH_SIZE))) : slices.rows;
   const totals=new Map((ship ? shipBrowseCounts(filtered) : nationCounts(filtered,kind)).map(x=>[x.nation,x.count]));
   const hulls=ship?[...new Set(records.map(x=>x.hull).filter(Boolean))].sort():
     [...new Set(records.flatMap(possibleEquipmentHulls))].sort();
@@ -118,8 +122,11 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
       '<label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="'+E(query)+'" placeholder="Search all equipment, types or nations…" aria-label="Search full catalog" autocomplete="off"></label>'+
       '<label class="select-wrap">Equipment type <select id="category-filter" aria-label="Equipment category">'+option('all','All types',category)+cats.map(x=>option(x,x,category)).join('')+'</select></label>'+
       '<label class="select-wrap">Equippable by hull <select id="gear-hull-filter" aria-label="Filter gear by compatible ship hull">'+option('all','All hulls',hull)+hulls.map(x=>option(x,x,hull)).join('')+'</select></label></div>';
-  const text='Showing '+slices.start.toLocaleString()+'–'+slices.end.toLocaleString()+' of '+ordered.length.toLocaleString()+
-    ' matching records · '+records.length.toLocaleString()+' total';
+  const text=ship
+    ? 'Showing '+visible.length.toLocaleString()+' of '+ordered.length.toLocaleString()+
+      ' matching ships · '+records.length.toLocaleString()+' total'
+    : 'Showing '+slices.start.toLocaleString()+'–'+slices.end.toLocaleString()+' of '+ordered.length.toLocaleString()+
+      ' matching records · '+records.length.toLocaleString()+' total';
   const heading = ship
     ? '<div class="catalog-roster-heading"><button type="button" class="outline-btn compact" data-action="catalog-home">← Nations</button>' +
       '<div class="catalog-roster-label">' +
@@ -132,9 +139,13 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   return '<div id="catalog-start">' +
     heading +
     filters+
-    '<div class="catalog-result-bar"><span>'+E(text)+'</span><span>Page '+slices.page+' of '+slices.pages+'</span></div>'+
-    pager(kind,slices)+
-    groupedCards(slices.rows,kind,renderCard,totals,sort,descending)+
-    pager(kind,slices)+
+    '<div class="catalog-result-bar"><span>'+E(text)+'</span>'+
+      (ship?'<span>Rarity-first roster</span>':'<span>Page '+slices.page+' of '+slices.pages+'</span>')+'</div>'+
+    (ship?'':pager(kind,slices))+
+    groupedCards(visible,kind,renderCard,totals,sort,descending)+
+    (ship?(visible.length<ordered.length
+      ? '<div class="ship-scroll-sentinel" data-ship-scroll-sentinel><span>'+E((ordered.length-visible.length).toLocaleString())+
+        ' ships remaining</span><button type="button" class="outline-btn compact" data-action="ship-load-more">Load more ships</button></div>'
+      : ''):pager(kind,slices))+
     '</div>';
 }
