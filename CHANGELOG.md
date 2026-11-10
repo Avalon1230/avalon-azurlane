@@ -6,8 +6,11 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 ### Changed
 - Replaced the oversized three-column Ship Index roster cards with a dense, rarity-accented shipyard portrait gallery; selecting any ship opens its dedicated information page rather than a small inspection drawer.
-- Converted ship hull selection and source-supported sorting into compact, immediately accessible buttons (All, fleet groups, individual hulls; Name/Rarity/Hull ascending/descending), while preserving nation-first navigation, search, and pagination.
+- Converted ship hull selection, rarity filtering and source-supported sorting into compact, immediately accessible buttons (fleet groups/individual hulls; Common/Rare/Elite/SR/UR; Name/Rarity/Hull with reversible direction), while preserving nation-first navigation, search, and pagination.
 - Individual ship profile URLs can be bookmarked as `#/ships/<source-id>`; returning to the roster retains the current nation and filtering state.
+
+### Fixed
+- Corrected the long-standing 890-vs-894 source-count discrepancy: four pairs of unrelated ships with identical display names (Enterprise, Neptune, Fubuki, Kasumi) were being merged incorrectly. Source numeric ID now determines identity, preserving all 894 records.
 
 ### Added
 - Lazy on-demand loading of the full 894-record Lycoris-AzurAPI `ships.json` source only when a ship profile is requested (roughly 5 MB, cached for the browser session). This avoids delaying the initial gallery.
