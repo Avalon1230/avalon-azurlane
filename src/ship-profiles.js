@@ -131,7 +131,9 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
   if(!data){
     const message=status==='failed'
       ? 'Detailed game data could not be loaded. The ship index and saved fleet remain available.'
-      : 'Loading ship statistics, skills and equipment information…';
+      : status==='ready'
+        ? 'No matching detailed record was found in the current source snapshot.'
+        : 'Loading ship statistics, skills and equipment information…';
     return '<div class="ship-profile-page"><div class="ship-profile-loading">'+
       '<h1>'+E(name)+'</h1><p>'+message+'</p>'+back+
       (status==='failed'?'<button type="button" class="outline-btn compact" data-action="profile-retry">Retry loading</button>':'')+
@@ -141,7 +143,7 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
   return '<div class="ship-profile-page">'+profileHead(ship,data,skinIndex)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
-      .map(([label,href])=>'<a href="'+href+'">'+E(label)+'</a>').join('')+'</nav>'+
+      .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
     statPanel(data,level)+gearPanel(data)+skillsPanel(data)+
     '</div><div class="ship-profile-side">'+
