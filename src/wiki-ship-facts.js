@@ -15,7 +15,11 @@ const ENHANCE_LEVELS=Object.freeze({
   levelBase:'Initial',level100:'Max',level120:'120',level125:'125'
 });
 const cache=new Map();
-const plain=v=>String(v??'')
+// Wiki comments are editorial markup, not field data. Preserve their line
+// breaks so anchored "| Field =" parsing stays correct.
+const stripWikiComments=text=>text.replace(/<!--[\s\S]*?(?:-->|$)/g,
+  comment=>comment.replace(/[^\r\n]/g,''));
+const plain=v=>stripWikiComments(String(v??''))
   .replace(/\[\[(?:[^\]|]*\|)?([^\]]+)\]\]/g,'$1')
   .replace(/\[https?:\/\/[^\s\]]+\s+([^\]]+)\]/g,'$1')
   .replace(/\{\{(?:[^{}]|\{[^{}]*\})*\}\}/g,'')
@@ -25,9 +29,10 @@ const plain=v=>String(v??'')
 
 export function extractShipFields(wikitext) {
   if(typeof wikitext!=='string'||wikitext.length>MAX_TEXT)return null;
-  const start=wikitext.search(/\{\{Ship\s*\n/i);
+  const cleaned=stripWikiComments(wikitext);
+  const start=cleaned.search(/\{\{Ship\s*\n/i);
   if(start<0)return null;
-  const rest=wikitext.slice(start);
+  const rest=cleaned.slice(start);
   const end=rest.search(/^\s*\}\}\s*$/m);
   if(end<0)return null;
   const template=rest.slice(0,end);
