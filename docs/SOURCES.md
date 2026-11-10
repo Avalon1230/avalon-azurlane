@@ -2,6 +2,12 @@
 
 ## Current status — 2026-11-10
 
+### v0.3 personal tier boards
+
+Ship Combat and Equipment now include **editable personal tier boards**, but **no published AVALON performance scores**. Rarity, hull and equipment-type data cannot by themselves establish reliable EX/S/A rankings. A validated tier assessment must cite its mode/scenario, measurements, assumptions, alternative builds and confidence. Waifu Favorites and Must Protect are wholly separate subjective lists and have no combat evidentiary value. Their eligibility catalogs are manually curated and incomplete; no automatic hull-based age/appearance classification is performed. No source character portraits are copied.
+
+
+
 The website includes a small editorial fallback and, in v0.2, optionally reads two external community-maintained catalogs directly from GitHub in the user's browser. The third-party sources supply up to **894 ship identities** and **936 equipment records**. They are not verified game-performance assessments or the complete objective data model. There are **no modeled damage figures, tier ratings, crafting material counts, or automatically generated combat rankings**. See [DATA_SOURCES.md](DATA_SOURCES.md) for source contracts, licenses, boundaries and failure modes.
 
 The source URLs appear in the app under **Sources** and each catalog entry links to a separate wiki's search page for follow-up. They are **references, not permission to mirror content**. No third-party character art or equipment sprites are bundled. External pages may be outdated.

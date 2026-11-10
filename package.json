@@ -1,12 +1,12 @@
 {
   "name": "avalon-azurlane",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "description": "Independent Azur Lane fleet and equipment intelligence — foundation MVP",
   "scripts": {
     "test": "node --test",
-    "check": "node --check src/app.js && node --check src/catalog.js && node --check src/domain.js && node --check src/remote.js && node --check src/criteria.js && node --check src/changelog.js"
+    "check": "node --check src/app.js && node --check src/catalog.js && node --check src/domain.js && node --check src/remote.js && node --check src/criteria.js && node --check src/changelog.js && node --check src/tiers.js && node --check src/tier-view.js"
   },
   "engines": {"node": ">=20"}
 }

@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.2.1 source-indexed prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
+> **Project status:** **v0.3 interactive tier-board prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -45,6 +45,21 @@ npm test
 For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
 
 **Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, automatic fleet optimization, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
+
+## Four independent tier boards (v0.3)
+
+Open the [Tier Boards](https://avalon1230.github.io/avalon-azurlane/#/tiers) page:
+
+1. **Ship Combat** — personal combat-placement draft (EX–D). The board is **unranked by default**; the app has not yet produced evidence-reviewed combat assessments. Global rankings alone do not replace future stage/mode-specific scoring.
+2. **Equipment** — personal equipment-placement draft (EX–D); equipment rarity is not treated as performance proof.
+3. **Waifu Favorites** — subjective, non-explicit personal preferences (SSS–C), limited to a **curated subset of adult-portrayed characters**. Childlike or ambiguous portrayals are not included by default.
+4. **Must Protect! — Headpats Division** — a wholly **platonic**, wholesome board (SSS–C), with individually curated childlike/little characters and no romantic rankings.
+
+Both character boards use **individual curation, not ship-class shortcuts**: destroyer class alone does not determine character portrayal, and childlike characters can be other ship classes. This initial curated list is intentionally incomplete. Character categories are editorial eligibility choices, not claims about canonical ages.
+
+Drag cards between tiers on desktop, or use each card's dropdown on desktop/mobile. Boards save separately to browser localStorage and can be exported as JSON. They **do not sync between devices or upload rankings**. Imported source records remain linked to their independent upstream projects. The current prototype uses text cards rather than copying copyrighted character portraits.
+
+**Important distinction:** These are **user-authored private boards**, not official AVALON tier verdicts. Evidence-reviewed mode-specific ship and equipment ratings, reproducible performance calculations, confidence labels, and recommendations remain future work.
 
 ## Full-game coverage
 

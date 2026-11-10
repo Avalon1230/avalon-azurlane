@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.3.0] - 2026-11-10
+
+### Added
+- Four independent tier boards: Ship Combat, Equipment, Waifu Favorites, and Must Protect! — Headpats Division.
+- Drag-and-drop tier placement with dropdown controls for keyboard/touch use.
+- Search and type/hull filtering, separate browser-local persistence, clear-board confirmation, and per-board JSON export.
+- Individually curated character eligibility: adult-portrayed favorites only in Waifu; wholesome, platonic Headpats division for the little ones. Childlike and unreviewed portrayals are excluded from the Waifu board by default.
+- Automated tier model, character eligibility, sanitization, rendering, and state validation tests.
+
+### Clarified
+- No auto-assigned combat tiers. All ships and equipment begin unranked; the boards contain **personal drafts**, not independently validated AVALON rankings.
+- Ship class is not an age or portrayal classifier. Both character eligibility catalogs are deliberately incomplete and subject to manual review.
+- Character art and sprites remain excluded pending licensing/attribution checks.
+
 ## [0.2.1] - 2026-11-10
 
 ### Added

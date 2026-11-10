@@ -3,16 +3,20 @@ import { SHIP_MAP, compatible, createWorkspace, assignShip, normalizeWorkspace, 
 import { loadLiveCatalogs, mergeShipCatalog, mergeEquipmentCatalog } from './remote.js';
 import { contextCriteria, evaluationState } from './criteria.js';
 import { changelogToHtml } from './changelog.js';
+import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, moveTierItem } from './tiers.js';
+import { renderTierView } from './tier-view.js';
 
 const $ = selector => document.querySelector(selector);
 const E = escapeHtml;
 const storageKey = 'avalon.azurlane.plans.v1';
+const tierStorageKey = 'avalon.azurlane.tiers.v1';
 const pages = [
   { id: 'overview', label: 'Overview', icon: '⌂' },
   { id: 'modes', label: 'Game Modes', icon: '◈' },
   { id: 'ships', label: 'Ship Index', icon: '♙' },
   { id: 'equipment', label: 'Equipment', icon: '⚙' },
   { id: 'fleet', label: 'Fleet Lab', icon: '▦' },
+  { id: 'tiers', label: 'Tier Boards', icon: '♛' },
   { id: 'sources', label: 'Sources', icon: '≡' },
   { id: 'updates', label: 'Updates', icon: '↻' }
 ];
@@ -20,7 +24,8 @@ const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
-  changelog: null, changelogStatus: 'idle'
+  changelog: null, changelogStatus: 'idle',
+  tierBoard: 'ships', tierQuery: '', tierFilter: 'all', tierBoards: freshTierBoards(), activeDragItem: null
 };
 
 function loadPlans() {
@@ -56,6 +61,36 @@ function savePlans() {
   } catch { notify('Browser storage unavailable; export your plan to keep it.'); }
 }
 
+function loadTierBoards() {
+  try { state.tierBoards = normalizeTierBoards(JSON.parse(localStorage.getItem(tierStorageKey) || '{}')); }
+  catch { state.tierBoards = freshTierBoards(); }
+}
+function saveTierBoards() {
+  try { localStorage.setItem(tierStorageKey, JSON.stringify(state.tierBoards)); }
+  catch { notify('Cannot save tiers in this browser. Use Export JSON to back up your selections.'); }
+}
+function movePersonalTier(itemId, tier) {
+  const eligible = catalogForBoard(state.tierBoard, SHIPS, EQUIPMENT);
+  try {
+    state.tierBoards = moveTierItem(state.tierBoards, state.tierBoard, itemId, tier, eligible);
+    saveTierBoards();
+    render();
+  } catch (err) { notify(err.message); }
+}
+function exportTierBoard() {
+  const content = JSON.stringify({
+    app: 'avalon-azurlane', format: 1, kind: 'personal-tier-board',
+    boardId: state.tierBoard, exportedAt: new Date().toISOString(),
+    tiers: state.tierBoards[state.tierBoard]
+  }, null, 2);
+  const blob = new Blob([content], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `avalon-${state.tierBoard}-tiers.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  notify('Your personal tier board was exported as JSON.');
+}
 function notify(message) {
   const toast = $('#toast');
   toast.textContent = message;
@@ -109,7 +144,7 @@ function contextPanel() {
 function renderOverview() {
   return `<div class="hero">
     <div class="hero-copy">${eyebrow('YOUR FLEET. YOUR DECISION.')}<h1>Intelligence<br><em>above instinct.</em></h1><p>A research-first Azur Lane workbench. Explore the entire game, organize your fleets, and trace decisions back to evidence.</p>
-      <div class="hero-actions"><button class="primary-btn" data-action="navigate" data-page="fleet">Open Fleet Lab <span>↗</span></button><button class="outline-btn" data-action="navigate" data-page="modes">Explore Game Modes</button></div>
+      <div class="hero-actions"><button class="primary-btn" data-action="navigate" data-page="fleet">Open Fleet Lab <span>↗</span></button><button class="outline-btn" data-action="navigate" data-page="modes">Explore Game Modes</button><button class="outline-btn" data-action="navigate" data-page="tiers">Tier Boards ♛</button></div>
     </div>
     <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="radar-center"><div class="compass-rose">✦</div><span>AVALON</span><small>TACTICAL INTELLIGENCE</small></div><span class="coord coord-a">N 35° 42′</span><span class="coord coord-b">TACTICAL SYSTEM // 001</span></div>
   </div>
@@ -261,12 +296,22 @@ function renderUpdates() {
 
 function render() {
   nav();
-  const views = { overview:renderOverview, modes:renderModes, ships:renderShips, equipment:renderEquipment, fleet:renderFleet, sources:renderSources, updates:renderUpdates };
+  const views = { overview:renderOverview, modes:renderModes, ships:renderShips, equipment:renderEquipment, fleet:renderFleet, sources:renderSources, updates:renderUpdates,
+    tiers: () => renderTierView({ boardId: state.tierBoard, boards: state.tierBoards, ships: SHIPS, equipment: EQUIPMENT, query: state.tierQuery, filter: state.tierFilter, sourceStatus: state.sync.status }) };
   $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
   document.title = `${pages.find(p=>p.id===state.page)?.label} · AVALON Azur Lane Intelligence`;
 }
 function handleAction(target) {
-  const {action,page,mode,ship,equip,fleet,slot} = target.dataset;
+  const {action,page,mode,ship,equip,fleet,slot,board} = target.dataset;
+  if (action === 'tier-board') {
+    if (!TIER_BOARDS[board]) return;
+    state.tierBoard=board;state.tierQuery='';state.tierFilter='all';render();return;
+  }
+  if (action === 'tier-export') { exportTierBoard();return; }
+  if (action === 'tier-clear') {
+    if (!window.confirm('Clear your personal ' + TIER_BOARDS[state.tierBoard].title + ' board? Other boards and Fleet Lab are unaffected.')) return;
+    state.tierBoards[state.tierBoard]={};saveTierBoards();render();notify('Tier board cleared.');return;
+  }
   if (action === 'sync-data') { void syncData(); return; }
   if (action === 'ship-details') { state.detail={kind:'ship',id:ship};return render(); }
   if (action === 'equip-details') { state.detail={kind:'equipment',id:equip};return render(); }
@@ -312,20 +357,55 @@ document.addEventListener('click', event => {
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  if (event.target.id === 'tier-filter') { state.tierFilter=event.target.value;render();return; }
+  if (event.target.matches('[data-tier-assign]')) {
+    movePersonalTier(event.target.dataset.tierAssign,event.target.value);return;
+  }
   if (event.target.id === 'mode-select') { state.modeId=event.target.value;state.picker=null;render(); }
   if (event.target.id === 'hull-filter') { state.hull=event.target.value;render(); }
   if (event.target.id === 'category-filter') { state.category=event.target.value;render(); }
 });
 document.addEventListener('input', event => {
   const id = event.target.id;
-  if (id!=='catalog-search' && id!=='picker-search') return;
+  if (id!=='catalog-search' && id!=='picker-search' && id!=='tier-search') return;
   const value = event.target.value;
   const pos = event.target.selectionStart;
-  if (id==='catalog-search') state.query=value; else state.pickerQuery=value;
+  if (id==='catalog-search') state.query=value;
+  else if (id==='picker-search') state.pickerQuery=value;
+  else state.tierQuery=value;
   render();
   const restored = $('#'+id);
   restored?.focus();
   try { restored?.setSelectionRange(pos,pos); } catch { /* unsupported input selection */ }
+});
+document.addEventListener('dragstart', event => {
+  if (state.page !== 'tiers') return;
+  const item = event.target.closest('[data-tier-item]');
+  if (!item || !event.dataTransfer) return;
+  state.activeDragItem = item.dataset.tierItem;
+  event.dataTransfer.effectAllowed = 'move';
+  event.dataTransfer.setData('text/plain', state.activeDragItem);
+  item.classList.add('tier-dragging');
+});
+document.addEventListener('dragover', event => {
+  if (state.page !== 'tiers' || !state.activeDragItem) return;
+  const target = event.target.closest('[data-tier-drop]');
+  if (!target) return;
+  event.preventDefault();
+  if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
+});
+document.addEventListener('drop', event => {
+  if (state.page !== 'tiers' || !state.activeDragItem) return;
+  const target = event.target.closest('[data-tier-drop]');
+  if (!target) return;
+  event.preventDefault();
+  const id=state.activeDragItem;
+  state.activeDragItem=null;
+  movePersonalTier(id,target.dataset.tierDrop);
+});
+document.addEventListener('dragend', () => {
+  state.activeDragItem=null;
+  document.querySelectorAll('.tier-dragging').forEach(item => item.classList.remove('tier-dragging'));
 });
 document.addEventListener('keydown', event => {
   if (event.key==='Escape' && (state.picker||state.detail)) {state.picker=null;state.detail=null;render();}
@@ -360,6 +440,7 @@ async function syncData() {
   }
 }
 loadPlans();
+loadTierBoards();
 const initial = location.hash.replace(/^#\//,'');
 go(pages.some(p=>p.id===initial)?initial:'overview');
 void syncData();
