@@ -116,9 +116,7 @@ function profileHead(ship, data, skinIndex, artworkSkins=[]) {
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
-    '<div class="ship-profile-actions"><button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>' +
-    (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
-    '</div></div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
+    '</div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
 }
 
 function statPanel(data, level) {
@@ -203,7 +201,10 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       (error&&status==='failed'?'<small>'+E(error)+'</small>':'')+
       '</div></div>';
   }
-  return '<div class="ship-profile-page">'+profileHead(ship,data,skinIndex,artworkSkins)+
+  const actions='<div class="ship-profile-toolbar" role="group" aria-label="Ship profile actions">' + back +
+    (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
+    '</div>';
+  return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
