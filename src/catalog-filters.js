@@ -56,12 +56,13 @@ export function filterShipRecords(rows,{query='',nation='all',hull='all'}={}) {
     return !term||[x.name,x.hull,x.sourceHull,x.rarity,n,...(x.tags||[])].filter(Boolean).join(' ').toLocaleLowerCase().includes(term);
   });
 }
-export function filterEquipmentRecords(rows,{query='',nation='all',hull='all',category='all'}={}) {
+export function filterEquipmentRecords(rows,{query='',nation='all',hull='all',category='all',rarity='all'}={}) {
   const term=String(query).trim().toLocaleLowerCase();
   return rows.filter(x=>{
     const n=nationForEquipment(x),hulls=possibleEquipmentHulls(x);
     if(nation!=='all'&&n!==nation)return false;
     if(category!=='all'&&x.category!==category)return false;
+    if(rarity!=='all'&&x.rarity!==rarity)return false;
     if(hull!=='all'&&!hulls.includes(hull))return false;
     return !term||[x.name,x.category,x.rarity,n,x.acquisition,...hulls].filter(Boolean).join(' ').toLocaleLowerCase().includes(term);
   });
