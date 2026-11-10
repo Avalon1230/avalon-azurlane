@@ -76,3 +76,16 @@ test('sort controls use observed rarity and hull rather than invented ship level
   assert.deepEqual(sortShipBrowseRows(rows,'rarity',true).map(x=>x.name),['Alpha','Beta','Zeta']);
   assert.deepEqual(sortShipBrowseRows(rows,'hull').map(x=>x.name),['Alpha','Beta','Zeta']);
 });
+
+test('rarity filter groups research variants into displayed rarity tiers',()=>{
+  const rows=[
+    {...ship(1,'Priority','Eagle Union'),rarity:'Priority'},
+    {...ship(2,'Super Rare','Eagle Union'),rarity:'Super Rare'},
+    {...ship(3,'Decisive','Eagle Union'),rarity:'Decisive'},
+    {...ship(4,'Ultra Rare','Eagle Union'),rarity:'Ultra Rare'},
+    {...ship(5,'Normal','Eagle Union'),rarity:'Normal'}
+  ];
+  assert.deepEqual(filterShipBrowseRows(rows,{rarity:'Super Rare'}).map(x=>x.name),['Priority','Super Rare']);
+  assert.deepEqual(filterShipBrowseRows(rows,{rarity:'Ultra Rare'}).map(x=>x.name),['Decisive','Ultra Rare']);
+  assert.deepEqual(filterShipBrowseRows(rows,{rarity:'Normal'}).map(x=>x.name),['Normal']);
+});
