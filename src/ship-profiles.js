@@ -1,5 +1,6 @@
 import { imageMarkup } from './media.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
+import { trustedWikiImage } from './wiki-artwork.js';
 
 const E = value => String(value ?? '').replace(/[&<>"']/g, c => (
   {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
@@ -46,16 +47,21 @@ export function trustedReconstructedPainting(url) {
     /^https:\/\/raw\.githubusercontent\.com\/Fernando2603\/AzurLane\/main\/images\/skin\/\d{5,10}\/painting(?:_n)?\.png$/.test(url) ? url : null;
 }
 export function resolveSkinArtwork(skin) {
-  const primary=trustedReconstructedPainting(skin?.images?.painting);
+  const wiki=trustedWikiImage(skin?.images?.wiki);
+  const reconstructed=trustedReconstructedPainting(skin?.images?.painting);
   const noBg=trustedReconstructedPainting(skin?.images?.paintingNoBackground);
-  return {primary:primary||null,fallback:primary&&noBg&&primary!==noBg?noBg:null};
+  const primary=wiki||reconstructed||noBg;
+  const fallback=wiki?(reconstructed||noBg):(reconstructed&&noBg?noBg:null);
+  const secondFallback=wiki&&reconstructed&&noBg?noBg:null;
+  return {primary:primary||null,fallback:fallback||null,secondFallback:secondFallback||null};
 }
 
 function artImage(skin, className, shipName, lazy = true) {
-  const {primary,fallback} = resolveSkinArtwork(skin);
+  const {primary,fallback,secondFallback} = resolveSkinArtwork(skin);
   if (!primary) return '';
   return '<img class="' + E(className) + '" src="' + E(primary) + '"' +
     (fallback ? ' data-fallback-src="' + E(fallback) + '"' : '') +
+    (secondFallback ? ' data-last-resort-src="' + E(secondFallback) + '"' : '') +
     ' alt="' + E(shipName + ' — ' + (skin?.name || 'Artwork')) +
     '" ' + (lazy ? 'loading="lazy" ' : '') +
     'decoding="async" referrerpolicy="no-referrer">';
