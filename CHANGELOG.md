@@ -2,6 +2,24 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.6.1] - 2026-11-10
+
+### Added
+- Nation-first Ship Index: a compact faction registry with dynamically counted ship rosters, a cross-nation search box, and large clickable nation cards.
+- Authentic in-game faction emblems from the Fernando2603/AzurLane nationality icon collection, with non-invented typographic fallbacks for factions without verified icon mappings.
+- Dedicated ship-roster view after faction selection, including a one-click return to all nations.
+- Regression tests for landing versus roster behavior, real emblem mappings, global search, no-result searches, and pagination.
+- `docs/PROJECT_STATUS.md` for permanent GitHub-based development continuity.
+
+### Preserved
+- Ship hull filters, search, pagination, inspection, fleet assignment, and the existing Equipment Index's nation/category/hull filters.
+- The original game image handling, deferred thumbnail loading, and source/provenance conventions.
+
+### Limitations
+- Faction icons are original game assets redistributed by an independent fan-data host, not first-party publisher-hosted media.
+- Some newly introduced or special factions have no verified emblem mapping and display readable initials instead.
+- Separate Augment Module categorization, ship-specific equipment legality, and numerical fleet optimization remain future work.
+
 ## [0.6.0] - 2026-11-10
 
 ### Fixed
