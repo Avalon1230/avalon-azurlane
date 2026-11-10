@@ -76,7 +76,24 @@ export const SHIPS = [
   { id: 'laffey-ii', name: 'Laffey II', hull: 'DD', tags: ['Destroyer', 'Survival / ASW'] },
   { id: 'u-81', name: 'U-81', hull: 'SS', tags: ['Submarine'] },
   { id: 'u-96', name: 'U-96', hull: 'SS', tags: ['Submarine'] },
-  { id: 'u-47', name: 'U-47', hull: 'SS', tags: ['Submarine'] }
+  { id: 'u-47', name: 'U-47', hull: 'SS', tags: ['Submarine'] },
+  { id: 'plymouth', name: 'Plymouth', hull: 'CL', tags: ['Boss support', 'Editorial candidate'] },
+  { id: 'agir', name: 'Ägir', hull: 'CB', tags: ['Tank / boss', 'Editorial candidate'] },
+  { id: 'anchorage', name: 'Anchorage', hull: 'CA', tags: ['Defensive tank', 'Editorial candidate'] },
+  { id: 'vanguard', name: 'Vanguard', hull: 'BB', tags: ['Boss support', 'Editorial candidate'] },
+  { id: 'yorktown-ii', name: 'Yorktown II', hull: 'CV', tags: ['Boss aviation', 'Editorial candidate'] },
+  { id: 'hakuryuu', name: 'Hakuryuu', hull: 'CV', tags: ['Boss aviation', 'Editorial candidate'] },
+  { id: 'cowpens', name: 'Cowpens', hull: 'CVL', tags: ['Chapter 16 sustain', 'Editorial candidate'] },
+  { id: 'mecklenburg', name: 'Mecklenburg', hull: 'BB', tags: ['Boss damage', 'Editorial candidate'] },
+  { id: 'lion', name: 'Lion', hull: 'BB', tags: ['Boss damage', 'Editorial candidate'] },
+  { id: 'admiral-nakhimov', name: 'Admiral Nakhimov', hull: 'CV', tags: ['Boss aviation', 'Editorial candidate'] },
+  { id: 'perseus', name: 'Perseus', hull: 'CVL', tags: ['Healing', 'Editorial candidate'] },
+  { id: 'cheshire', name: 'Cheshire', hull: 'CA', tags: ['Anti-air tank', 'Editorial candidate'] },
+  { id: 'raffaello', name: 'Raffaello', hull: 'BB', tags: ['Wave damage', 'Editorial candidate'] },
+  { id: 'sovetsky-soyuz', name: 'Sovetsky Soyuz', hull: 'BB', tags: ['Boss damage', 'Editorial candidate'] },
+  { id: 'shimakaze', name: 'Shimakaze', hull: 'DD', tags: ['Vanguard damage', 'Editorial candidate'] },
+  { id: 'harbin', name: 'Harbin', hull: 'CL', tags: ['Vanguard damage', 'Editorial candidate'] },
+  { id: 'noshiro', name: 'Noshiro', hull: 'CL', tags: ['Vanguard durability', 'Editorial candidate'] }
 ];
 
 // No stat lines or "best in slot" claims until the wiki/provenance pipeline is validated.

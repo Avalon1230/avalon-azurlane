@@ -2,12 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
-## [Unreleased] — Automatic Fleet Optimizer specification
+## [0.5.0] - 2026-11-10
 
-### Planned
-- Documented the core automatic fleet-building and loadout-optimization architecture: ship × skill × equipment × encounter synergy, event timing, composition roles, gear scarcity, and meaningful alternatives.
-- Specified OpSi four-fleet **joint** optimization, acquisition/progression constraints, source provenance, confidence, scenario-level testing, and staged implementation milestones.
-- **Not implemented yet**: automatic formation generation, skill event simulation, gear optimization, or computed best-fleet output.
+### Added
+- **Suggest a Fleet** interface in Fleet Lab: scenario selection, preview, review, and explicit Apply additions.
+- A deterministic, global, **constraint-aware role-matching engine** using 39 manually reviewed candidate ships (including 17 added fallback catalog identities).
+- Four-fleet Operation Siren joint assignments, submarine team, and source-linked role notes; no duplicate ships and correct hull compatibility.
+- Owned-only ship pool, per-ship availability checkboxes, persistent availability preferences, and preservation of all existing manual fleet assignments.
+- Incomplete-roster handling, role mismatch warnings, equipment-check advisories and safe stale-preview rejection.
+- Source-based design notes and automated tests for matching, locked slots, owned-only constraints, duplicate prevention, fallback catalog integration and HTML safety.
+
+### Limits and planned work
+- **Qualitative prototype only**, not a simulated or verified strongest fleet. Skill timing, equipment-slot assignments, gear inventory, actual encounter modifiers and full Koumakan skill import remain unimplemented.
+- Every ship's role tags are provisional; no numerical tier scores or fabricated DPS were added.
+- The longer-term automatic skill/equipment synergy specification is in [docs/FLEET_OPTIMIZER_SPEC.md](docs/FLEET_OPTIMIZER_SPEC.md).
 
 ## [0.4.1] - 2026-11-10
 

@@ -233,7 +233,7 @@ function modeSelect() {
 }
 function renderFleet() {
   const mode = selectedMode(), plan = currentPlan();
-  return `${sectionHeading('Fleet laboratory', 'TACTICAL PLANNING', 'A working formation planner with hull checks and local persistence. It does not claim to optimize combat performance yet.')}
+  return `${sectionHeading('Fleet laboratory', 'TACTICAL PLANNING', 'Build manually or generate a qualitative role-matching preview. AVALON does not yet simulate battle mechanics or select optimal equipment.')}
   <div class="fleet-toolbar">${modeSelect()}<div class="fleet-controls"><span class="assignment-count">${countAssigned(plan)} / ${countSlots(plan)} assigned</span><button type="button" class="outline-btn compact" data-action="export-plan">Export JSON ↓</button><button type="button" class="ghost-btn danger" data-action="reset-plan">Clear plan</button></div></div>
   <div class="mode-description"><span class="mode-icon">${mode.icon}</span><div><strong>${E(mode.name)}</strong><p>${E(mode.summary)}</p></div></div>
   ${contextPanel()}<div class="fleet-grid">${mode.fleetTypes.map(id => fleetCard(id, plan)).join('')}</div>
@@ -265,7 +265,7 @@ function renderPicker() {
 }
 function renderSources() {
   return `${sectionHeading('Trust the trail, not the hype.', 'SOURCES & METHODOLOGY', 'Sources are explicit; the project does not convert popular opinions into verified performance figures.')}
-  ${warning()}<div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. We have paused API ingestion until direct machine-readable responses and reuse permissions can be independently checked; see Sources documentation.</p></div>
+  ${warning()}<div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. Koumakan’s /w/api.php endpoint has returned valid page metadata and Musashi wikitext from GitHub Actions; automatic imports still await schema and reuse-permission review; see Sources documentation.</p></div>
   <div class="source-grid">${SOURCES.map(source => `<article class="source-card">${eyebrow(source.type)}<h3>${E(source.name)}</h3><p>${E(source.note)}</p>${link(source.url,'Open source')}</article>`).join('')}</div>
   <div class="method-card"><h2>Three different things. Never one misleading tier.</h2><div class="method-grid"><div><span class="method-num">01</span><h3>Game facts</h3><p>Observed or sourced mechanics with version, link, validation status, and licensing notes.</p></div><div><span class="method-num">02</span><h3>Community evidence</h3><p>Tests, guides and discussion with attribution, limitations, and scenario context.</p></div><div><span class="method-num">03</span><h3>AVALON analysis</h3><p>Independent calculations and judgment, labeled as inference with assumptions and uncertainty.</p></div></div><p class="doc-link">${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/SOURCES.md','Read the complete provenance policy')}</p></div>`;
 }

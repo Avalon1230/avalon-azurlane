@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.4 contextual recommendation prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
+> **Project status:** **v0.5 suggested-fleet prototype**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -44,7 +44,7 @@ npm test
 
 For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
 
-**Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, automatic fleet optimization, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
+**Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, numerical fleet optimization and automatic gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
 ## Combat recommendations and personal favorites (v0.3.1)
 
@@ -78,11 +78,19 @@ The two character boards remain draggable/editable, independently stored in this
 
 This is an **extensible mode registry**, not a fixed list: new or temporary content can be added without rebuilding the ranking system. Recommendations must name their mode and scenario and never imply that one tier automatically applies everywhere.
 
+## Suggested Fleet Builder — first working implementation (v0.5)
+
+Open [Fleet Lab](https://avalon1230.github.io/avalon-azurlane/#/fleet), select a game mode and scenario, and use **Generate suggestion**. AVALON proposes a reviewable formation from its 39 manually curated candidate ship profiles, using **global role/slot matching** to avoid duplicates and preserve any manually assigned ships. You can mark individual reviewed candidates available and enable **Use only my checked ships**. Nothing changes the saved plan until you press **Apply additions**; unfilled roles and weak/unverified role matches are flagged, with contextual source links and gear-check advisories.
+
+OpSi's four surface fleets and submarine team are considered **together**, preventing duplicate ship use across the proposed fleets. For later Campaign stages, the builder differentiates Chapter 15 and Chapter 16 requirements. Other modes receive explicitly provisional formations, without claims of stage-specific best builds.
+
+This is a **qualitative heuristic**, not a damage/eHP simulator or final synergistic optimizer. Ships from the larger remote catalog are not blindly assigned because rarity and hull type do not establish their verified skills. **Automatic equipment assignment, exact skill interactions, attack timelines and item inventory limits remain future work.** See [Suggested Fleet Builder instructions](docs/FLEET_SUGGESTIONS.md) and [full optimizer specification](docs/FLEET_OPTIMIZER_SPEC.md).
+
 ## Automatic Fleet & Equipment Optimizer — core requirement
 
 The goal is not merely a tier list or an editable fleet grid. AVALON should **build a feasible formation and full equipment loadout for a specific encounter**, analyzing ship synergy, conditional skills, reload/debuff timing, enemy armor, survivability, AA/ASW, progression, and gear availability. For Operation Siren it must **optimize all four surface fleets together** rather than reuse the same ships or limited gear copies. Recommendations must include alternatives, supporting sources and uncertainty instead of claiming unvalidated numerical optima.
 
-See the complete [Fleet Optimizer architecture and acceptance criteria](docs/FLEET_OPTIMIZER_SPEC.md). **This feature is specified but not implemented yet.**
+See the complete [Fleet Optimizer architecture and acceptance criteria](docs/FLEET_OPTIMIZER_SPEC.md). **The first role-based formation generator is implemented in v0.5. The full ship-and-equipment synergy optimizer specified here remains future work.**
 
 ## Planned features
 
