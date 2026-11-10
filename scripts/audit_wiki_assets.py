@@ -10,7 +10,7 @@ UA = "AVALON-AzurLane-Research/0.7 (noncommercial fan wiki metadata audit)"
 
 
 def query(**params):
-    url = ENDPOINT + "?" + urllib.parse.urlencode({"action": "query", "format": "json", "formatversion": "2", **params})
+    url = ENDPOINT + "?" + urllib.parse.urlencode({"action": "query", "format": "json", "formatversion": "2", "origin": "*", **params})
     request = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
     try:
         with urllib.request.urlopen(request, timeout=14) as response:
@@ -32,8 +32,8 @@ def main():
     for record in page.get("query", {}).get("pages", []):
         print("Page:", record.get("title"), "missing:", bool(record.get("missing")))
         names = [file.get("title") for file in record.get("images", [])]
-        print("Images (first 25):", names[:25])
-    files = query(prop="imageinfo", titles="File:New Jersey.png|File:New_Jersey.png|File:Camplogo 郁金王国.png",
+        print("Images (first 50):", names[:50])
+    files = query(prop="imageinfo", titles="File:New Jersey.png|File:En 1.png|File:Ldp 1.png|File:Bi 1.png|File:Tulipa.png|File:Kt 1.png|File:Hnlms 1.png|File:Nl 1.png|File:Camplogo 郁金王国.png",
                   iiprop="url|mime|size|extmetadata")
     for record in files.get("query", {}).get("pages", []):
         info = record.get("imageinfo", [])
