@@ -1,5 +1,5 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
-import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_HULL_GROUPS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_RARITIES, SHIP_HULL_GROUPS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
@@ -64,14 +64,14 @@ function groupedCards(rows,kind,card,totals,sort='name',descending=false){
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='name',descending=false}){
+export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='name',descending=false,rarity='all'}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   const ship=kind==='ships';
-  if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && page === 1)
+  if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1)
     return shipNationLanding(records);
   const facetRecords=ship
-    ?filterShipBrowseRows(records,{query,hull})
+    ?filterShipBrowseRows(records,{query,hull,rarity})
     :filterEquipmentRecords(records,{query,hull,category});
   const facets=ship ? shipBrowseCounts(facetRecords) : nationCounts(facetRecords,kind);
   const knownNations = new Set((ship ? shipBrowseCounts(records) : nationCounts(records,kind)).map(x => x.nation));
@@ -95,6 +95,11 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     (hull===name?' active':'') + '" data-action="ship-hull-filter" data-hull="' +
     E(name) + '" aria-pressed="' + (hull===name) + '">' +
     E(name==='all'?'All':name) + '</button>';
+  const rarityButtons = SHIP_RARITIES.map(name=>
+    '<button type="button" class="ship-filter-chip' + (rarity===name?' active':'') +
+    '" data-action="ship-rarity-filter" data-rarity="' + E(name) +
+    '" aria-pressed="' + (rarity===name) + '">' +
+    E(name==='all'?'All':name==='Normal'?'Common':name) + '</button>').join('');
   const sortButtons = SHIP_SORTS.map(name =>
     '<button type="button" class="ship-filter-chip' + (sort===name?' active':'') +
     '" data-action="ship-sort" data-sort="' + E(name) +
@@ -105,6 +110,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
        E(query) + '" placeholder="Find a ship…" aria-label="Search full ship roster" autocomplete="off"></label>' +
       '<div class="ship-filter-row"><span>Index</span><div class="ship-filter-scroll" role="group" aria-label="Filter ship hull">' +
        shipHulls.map(filterButton).join('') + '</div></div>' +
+      '<div class="ship-filter-row"><span>Rarity</span><div class="ship-sort-controls" role="group" aria-label="Filter by ship rarity">' + rarityButtons + '</div></div>' +
       '<div class="ship-filter-row"><span>Sort</span><div class="ship-sort-controls" role="group" aria-label="Sort ships">' +
        sortButtons + '<button type="button" class="ship-filter-chip" data-action="ship-sort-direction" aria-label="Reverse ship sorting direction">' +
        (descending?'Descending ↓':'Ascending ↑') + '</button></div></div></div>'
