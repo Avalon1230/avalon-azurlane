@@ -187,7 +187,7 @@ test('Guam voice actor omits wiki section comments and commented-out fields',()=
   assert.doesNotMatch(html,/Section 2: Stats|Fake Commented Actor|99999/);
 });
 test('unterminated wiki comments never enter text fields',()=>{
-  const raw='{{Ship\n| GroupID = 11802\n| VA = Karin Kagami<!-- broken editor comment';
+  const raw='{{Ship\n| GroupID = 11802\n| VA = Karin Kagami\n}}\n<!-- broken editor comment';
   const fields=extractShipFields(raw);
   assert.equal(fields?.VA,'Karin Kagami');
 });
