@@ -9,7 +9,7 @@ const PAINT_HOST = 'https://raw.githubusercontent.com/iujab/azurlane-images/main
 const STAT_FIELDS = Object.freeze([
   ['health','HP'],['firepower','FP'],['torpedo','TRP'],['antiwar','AA'],
   ['aviation','AVI'],['reload','RLD'],['evasion','EVA'],['accuracy','ACC'],
-  ['speed','SPD'],['luck','LCK']
+  ['speed','SPD'],['luck','LCK'],['antisub','ASW'],['oil','Oil']
 ]);
 
 export function detailedShipRecord(dataset, sourceId) {
@@ -105,61 +105,108 @@ function artworkViewer(data, skinIndex, artworkSkins=[]) {
     '<span class="ship-art-missing">Artwork unavailable for this skin</span></div>' +
     '</section></div>';
 }
-function profileHead(ship, data, skinIndex, artworkSkins=[]) {
+function rarityBadge(rarity) {
+  const kind={'Ultra Rare':'ultra-rare','Decisive':'ultra-rare',
+    'Super Rare':'super-rare','Priority':'super-rare',
+    'Elite':'elite','Rare':'rare','Normal':'normal'}[rarity]||'unknown';
+  return '<span class="ship-profile-rarity rarity-'+kind+'">'+E(rarity||'Unclassified')+'</span>';
+}
+function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null) {
   const fallbackName = data?.names?.en || ship?.name || 'Unknown ship';
   const identity = ship ? shipBrowseDisplayNation(ship) : data?.nationality || 'Unclassified';
-  const metadata = [identity,data?.class,data?.hullType, data?.rarity || ship?.rarity].filter(Boolean);
-  // Keep the shipyard thumbnail/portrait constant; skins only change the
-  // independent artwork panel.
+  const metadata = [identity,data?.class,data?.hullType].filter(Boolean);
+  const knownFacts=[
+    wiki?.armor?['Armor',wiki.armor]:null,
+    wiki?.constructionTime?['Build time',wiki.constructionTime]:null,
+    wiki?.voiceActor?['Voice actor',wiki.voiceActor]:null,
+    wiki?.artist?['Illustrator',wiki.artist]:null
+  ].filter(Boolean);
+  const facts=knownFacts.length?
+    '<dl class="ship-profile-facts">'+knownFacts.map(([key,value])=>
+      '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
+  // Never replace the small shipyard portrait when changing skin art.
   return '<div class="ship-profile-top"><section class="ship-profile-overview">' +
     '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
-    '<p>' + E(metadata.join(' · ')) + '</p>' +
+    '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
-    '<div class="ship-profile-actions"><button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>' +
-    (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
-    '</div></div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
+    facts + '</div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
 }
 
-function statPanel(data, level) {
-  const levels=['level100','level120','level100Retrofit','level120Retrofit'].filter(k=>data.stats?.[k]);
+function statPanel(data, level, wiki=null) {
+  const wikiStats=wiki?.stats||{};
+  const combined={...data.stats,...wikiStats};
+  const levels=['levelBase','level100','level120','level125','level100Retrofit','level120Retrofit'].filter(k=>combined[k]);
   if(!levels.length) return profilePanel('Statistics','<p class="profile-unavailable">No verified stat block loaded.</p>');
   const active=levels.includes(level)?level:(levels.includes('level120')?'level120':levels[0]);
+  const names={
+    levelBase:'Base',level100:'Lv. 100',level120:'Lv. 120',
+    level125:'Lv. 125',level100Retrofit:'Lv. 100 · Retrofit',level120Retrofit:'Lv. 120 · Retrofit'
+  };
   const choices=levels.map(k=>'<button type="button" class="filter-chip'+(k===active?' active':'')+
     '" data-action="profile-level" data-level="'+E(k)+'" aria-pressed="'+(k===active)+'">'+
-    E(k.replace('level','Lv. ').replace('Retrofit',' · Retrofit'))+'</button>').join('');
-  const vals=STAT_FIELDS.map(([key,title])=>'<div class="ship-stat"><span>'+E(title)+'</span><strong>'+num(data.stats[active][key])+'</strong></div>').join('');
+    E(names[k]||k)+'</button>').join('');
+  const current=combined[active];
+  const vals=STAT_FIELDS.filter(([key])=>Number.isFinite(current?.[key]))
+    .map(([key,title])=>'<div class="ship-stat"><span>'+E(title)+'</span><strong>'+num(current[key])+'</strong></div>').join('');
+  const fromWiki=!!wikiStats[active];
+  const note=fromWiki
+    ?(active==='levelBase'?'Koumakan Wiki · base stats (no enhancements).':
+      'Koumakan Wiki · level 100+ stats at 100 affinity with max enhancements.')
+    :'Lycoris game-data snapshot · may use a different affinity/enhancement basis.';
   return profilePanel('Statistics','<div class="ship-profile-choices" role="group" aria-label="Stat level">'+choices+
-    '</div><div class="ship-stat-grid">'+vals+'</div>','ship-profile-stats');
+    '</div><div class="ship-stat-grid">'+vals+'</div><p class="ship-data-source">'+E(note)+'</p>','ship-profile-stats');
 }
-function gearPanel(data) {
-  const slots = Array.isArray(data.slots) ? data.slots : [];
-  const body = slots.length
-    ? '<div class="ship-gear-list">' + slots.map((slot,i)=>
-      '<div class="ship-gear-slot"><span class="slot-number">'+(i+1)+'</span><strong>'+E(slot.type||'Equipment slot')+'</strong>' +
-      '<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span></div>').join('')+'</div>'
-    : '<p class="profile-unavailable">Equipment slot data unavailable.</p>';
+
+function gearPanel(data,wiki=null) {
+  const verified=Array.isArray(wiki?.slots)&&wiki.slots.length===3;
+  const slots=verified?wiki.slots:(Array.isArray(data.slots)?data.slots:[]);
+  const rows=slots.map((slot,i)=>
+    '<div class="ship-gear-slot"><span class="slot-number">'+(i+1)+'</span>'+
+    '<strong>'+E(slot.type||'Equipment slot')+'</strong>' +
+    (Number.isInteger(slot.maxMounts)?'<span class="ship-gear-mount">Max '+slot.maxMounts+'</span>':'')+
+    '<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span></div>').join('');
+  const aug=wiki?.augmentType?'<div class="ship-gear-slot"><span class="slot-number">+</span>'+
+    '<strong>Augment: '+E(wiki.augmentType)+'</strong></div>':'';
+  const body=rows||aug?'<div class="ship-gear-list">'+rows+aug+'</div>'+
+    '<p class="ship-data-source">'+(verified?'Koumakan Wiki · mount counts, unlock-aware types and efficiencies.':
+      'Lycoris equipment-slot categories; exact mount counts not verified.')+'</p>'
+    :'<p class="profile-unavailable">Equipment slot data unavailable.</p>';
   return profilePanel('Equipment slots',body,'ship-profile-gear');
 }
-function skillsPanel(data) {
+
+function skillsPanel(data,wiki=null) {
   const skills=Array.isArray(data.skills)?data.skills:[];
   return profilePanel('Skills',skills.length?
-    '<div class="ship-skills-list">' + skills.map(x=>'<article class="ship-skill skill-'+E(['red','yellow','blue'].includes(x.color)?x.color:'other')+'">' +
-    '<h3>'+E(x.names?.en||'Unnamed skill')+'</h3><p>'+E(x.description||'Description unavailable')+'</p></article>').join('')+'</div>'
+    '<div class="ship-skills-list">' + skills.map(x=>{
+      const name=x.names?.en||'Unnamed skill';
+      const icon=wiki?.skillIcons?.[name];
+      const skillIcon=Number.isInteger(icon)&&icon>0&&icon<100000000
+        ?'<img class="ship-skill-icon" src="https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skill/'+icon+
+          '.png" alt="" loading="lazy" decoding="async">':'';
+      return '<article class="ship-skill skill-'+E(['red','yellow','blue'].includes(x.color)?x.color:'other')+'">' +
+        '<div class="ship-skill-head">'+skillIcon+'<h3>'+E(name)+'</h3></div>'+
+        '<p>'+E(x.description||'Description unavailable')+'</p></article>';
+    }).join('')+'</div>' +
+    '<p class="ship-data-source">Skill descriptions: Lycoris game-data snapshot'+
+    (wiki?' · icons corroborated against Koumakan skill IDs.':'.')+'</p>'
     :'<p class="profile-unavailable">Skill descriptions unavailable.</p>','ship-profile-skills');
 }
-function progressionPanel(data) {
-  const breaks=Array.isArray(data.limitBreaks) ? data.limitBreaks : [];
-  const tech=data.fleetTech?.techPoints;
+
+function progressionPanel(data,wiki=null) {
+  const breaks=wiki?.limitBreaks||(Array.isArray(data.limitBreaks)?data.limitBreaks:[]);
+  const tech=wiki?.fleetTech||data.fleetTech?.techPoints;
   const parts=[];
   if(breaks.length)parts.push('<h3>Limit breaks</h3><ol class="ship-break-list">'+
     breaks.map((x,i)=>'<li><strong>Stage '+(i+1)+'</strong><span>'+E(Array.isArray(x)?x.join(' · '):String(x))+'</span></li>').join('')+'</ol>');
   if(tech) parts.push('<h3>Fleet technology</h3><div class="ship-quick-facts">'+
     [['Collection',tech.collection],['Max limit break',tech.maxLimitBreak],['Max level',tech.maxLevel],['Total',tech.total]]
       .map(([k,v])=>'<div><span>'+E(k)+'</span><strong>'+num(v)+'</strong></div>').join('')+'</div>');
+  if(parts.length&&wiki)parts.push('<p class="ship-data-source">Wiki-verified limit breaks and fleet-technology points where available.</p>');
   return parts.length?profilePanel('Progression',parts.join(''),'ship-profile-progress'): '';
 }
-function acquisitionPanel(data) {
+
+function acquisitionPanel(data,wiki=null) {
   const obtain = data.obtainedFrom?.obtainedFrom;
   const maps = Array.isArray(data.obtainedFrom?.fromMaps) ? data.obtainedFrom.fromMaps : [];
   const available=data.construction?.availableIn;
@@ -170,25 +217,34 @@ function acquisitionPanel(data) {
   const rows = [
     obtain?['Acquisition',obtain]:null,
     maps.length?['Map drops',maps.join(', ')]:null,
-    data.construction?.constructionTime?['Build time',data.construction.constructionTime]:null,
-    modes.length?['Construction pools',modes.join(' · ')]:null
+    wiki?.constructionTime?['Build time',wiki.constructionTime]:
+      data.construction?.constructionTime?['Build time',data.construction.constructionTime]:null,
+    modes.length?['Construction pools',modes.join(' · ')]:null,
+    wiki?.dropNote?['Wiki availability notes',wiki.dropNote]:null
   ].filter(Boolean);
   return profilePanel('Acquisition',rows.length?
-    '<div class="ship-info-rows">'+rows.map(([name,value])=>'<div><span>'+E(name)+'</span><strong>'+E(value)+'</strong></div>').join('')+'</div>'
+    '<div class="ship-info-rows">'+rows.map(([name,value])=>'<div><span>'+E(name)+'</span><strong>'+E(value)+'</strong></div>').join('')+'</div>'+
+    (wiki?.dropNote?'<p class="ship-data-source">Historical availability; may not reflect current construction pools or active events.</p>':'')
     :'<p class="profile-unavailable">Acquisition data unavailable in this source.</p>','ship-profile-acquire');
 }
-function sourcePanel(data, ship) {
+
+function sourcePanel(data, ship, wiki=null) {
   const url=trustedWikiUrl(data.wikiUrl);
   const sourceId = data.id || ship?.sourceId;
+  const basis=wiki
+    ?'Ship stats, armor, mount counts, build time and progression facts are drawn from the ship’s verified Koumakan Wiki template, matched by game GroupID. Lycoris supplies skill descriptions and other fields without verified wiki equivalents.'
+    :'This profile currently uses the Lycoris game-data snapshot. Wiki facts were not available or have not yet been verified for this ship; the statistics may use a different affinity or enhancement basis.';
   return profilePanel('Sources & further research',
-    '<p>Ship statistics and skill descriptions are drawn from the current third-party Lycoris game-data snapshot. They are not AVALON combat rankings.</p>'+
-    '<p>Augment eligibility, detailed barrage calculations and exact loadout restrictions still require separate verified data.</p>'+
+    '<p>'+E(basis)+'</p>'+
+    '<p>Exact barrage coefficients, augment eligibility, ship-specific equipment legality and alternative affinity variations still need separate verification. These profiles do not imply AVALON combat rankings.</p>'+
     '<div class="ship-profile-actions">'+
     (url?'<a class="outline-btn compact" href="'+E(url)+'" target="_blank" rel="noopener noreferrer">Full Koumakan entry ↗</a>':'')+
     '<a class="outline-btn compact" href="https://github.com/iujab/Lycoris-AzurAPI" target="_blank" rel="noopener noreferrer">Game-data source ↗</a></div>'+
+    (wiki?.revision?'<small>Koumakan revision '+E(wiki.revision)+'</small>':'')+
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], error='' } = {}) {
+
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
@@ -203,13 +259,17 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       (error&&status==='failed'?'<small>'+E(error)+'</small>':'')+
       '</div></div>';
   }
-  return '<div class="ship-profile-page">'+profileHead(ship,data,skinIndex,artworkSkins)+
+  const wiki=wikiFacts && String(wikiFacts.sourceId)===String(data.id)?wikiFacts:null;
+  const actions='<div class="ship-profile-toolbar" role="group" aria-label="Ship profile actions">' + back +
+    (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
+    '</div>';
+  return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
-    statPanel(data,level)+gearPanel(data)+skillsPanel(data)+
+    statPanel(data,level,wiki)+gearPanel(data,wiki)+skillsPanel(data,wiki)+
     '</div><div class="ship-profile-side">'+
-    acquisitionPanel(data)+progressionPanel(data)+sourcePanel(data,ship)+
+    acquisitionPanel(data,wiki)+progressionPanel(data,wiki)+sourcePanel(data,ship,wiki)+
     '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
 }

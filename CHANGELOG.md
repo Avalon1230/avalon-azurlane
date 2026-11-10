@@ -2,6 +2,23 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.3] - 2026-11-10
+
+### Fixed
+- Corrected the Ship Index's **Ultra Rare/Decisive** card presentation to a distinct prismatic game-inspired gradient; **Elite remains purple** and Super Rare/Priority stays gold.
+- Moved **Back to roster** and **Assign to fleet** into a separate top-level profile toolbar, outside the ship's portrait/identity card.
+
+### Added
+- Bounded, on-demand Koumakan MediaWiki `{{Ship}}`-template data resolver, validated against each ship's numeric **GroupID** before any wiki information is displayed.
+- Wiki-verified **base, level 100, level 120, and level 125 stats** (where present), including additional ASW and oil consumption fields, armor, construction timer, illustrator, voice actor, and more useful identity facts.
+- Equipment slot **maximum mount/aircraft counts**, unlocked equipment categories and efficiencies as the wiki specifies, wiki corroborated skill icons, fleet tech values, limit breaks, and availability history notes.
+- Source annotations distinguish wiki 100-affinity/max-enhancement stat conventions from earlier Lycoris values. Unverified wiki records never overwrite existing fallback data.
+- Regression coverage for stat discrepancies, source-ID validation, presentation and safer wiki loading.
+
+### Still pending
+- Fully parsed barrage damage tables, augment-module legality, alternative affinity/retrofit variants and comprehensive mechanical synergy modeling remain separate research work.
+- Wiki data is loaded on demand per viewed ship; it is not a mass scrape or a permanently mirrored wiki database.
+
 ## [0.7.2] - 2026-11-10
 
 ### Fixed

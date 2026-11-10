@@ -509,3 +509,78 @@
   .ship-profile-overview .ship-profile-cover{flex:0 0 124px;width:124px;height:178px;min-height:178px;max-height:178px}
   .ship-art-preview{height:clamp(260px,80vw,390px)}
 }
+
+
+/* v0.7.3 — in-game rarity language: Elite is purple, UR/DR is iridescent. */
+.ship-roster-tile.rarity-ultra-rare{
+  border-color:#9bdde8;
+  box-shadow:0 0 0 1px #f6b8dc50,inset 0 0 0 1px #ade4f62a;
+}
+.ship-roster-tile.rarity-ultra-rare .ship-roster-name{
+  background:linear-gradient(105deg,#659bca 0%,#9ca9d9 25%,#cfa4d5 47%,#e1b1a5 70%,#98cfc5 100%);
+  color:#172d45;
+  text-shadow:0 1px 1px #ffffff77;
+  font-weight:900;
+}
+.ship-roster-tile.rarity-ultra-rare .ship-roster-portrait{
+  background:linear-gradient(145deg,#b4e8ee 0%,#d7c3f1 38%,#f5c2da 68%,#d4e7bb 100%);
+}
+.ship-roster-tile.rarity-elite .ship-roster-name{background:#79549a;color:#fff}
+.ship-roster-tile.rarity-elite .ship-roster-portrait{background:linear-gradient(145deg,#c3a6e3,#85669e)}
+.ship-profile-toolbar{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  gap:10px;margin:0 0 14px;
+}
+.ship-profile-toolbar .primary-btn{margin-left:auto}
+.ship-profile-toolbar button{min-height:35px}
+@media(max-width:450px){
+  .ship-profile-toolbar{justify-content:flex-start}
+  .ship-profile-toolbar .primary-btn{margin-left:0}
+}
+
+/* Compact encyclopedia facts and verified wiki equipment counts */
+.ship-profile-rarity{
+  display:inline-block;padding:4px 10px;margin:5px 0 6px;
+  border-radius:5px;border:1px solid #5a7990;
+  font-size:11px;font-weight:900;letter-spacing:.025em;
+  background:#263b52;color:#e4f4ff
+}
+.ship-profile-rarity.rarity-ultra-rare{
+  background:linear-gradient(100deg,#93e0e7,#c1b0e9 42%,#e8b6da 68%,#b6dfc3);
+  border-color:#9ed9dc;color:#182d41
+}
+.ship-profile-rarity.rarity-super-rare{background:#a47b36;border-color:#e5c581;color:#fff}
+.ship-profile-rarity.rarity-elite{background:#79549a;border-color:#ab87ca;color:#fff}
+.ship-profile-rarity.rarity-rare{background:#236e91;border-color:#70b6d8;color:#fff}
+.ship-profile-rarity.rarity-normal{background:#556b7c;border-color:#8fa7b9;color:#fff}
+.ship-profile-facts{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;
+  margin:12px 0 0
+}
+.ship-profile-facts>div{
+  min-width:0;background:#18334a;border:1px solid #36526a;
+  padding:7px 9px;border-radius:6px
+}
+.ship-profile-facts dt{
+  color:#94c5db;font-size:9px;letter-spacing:.055em;
+  text-transform:uppercase;font-weight:800
+}
+.ship-profile-facts dd{
+  margin:3px 0 0;font-size:12px;color:#f1f9ff;
+  font-weight:750;overflow-wrap:anywhere
+}
+.ship-data-source{font-size:11px!important;color:#9dbacd!important;margin:9px 0 0!important}
+.ship-gear-slot{grid-template-columns:36px minmax(0,1fr) auto auto}
+.ship-gear-mount{
+  color:#f0d9a0;font-size:11px;font-weight:900;
+  white-space:nowrap;padding:4px 7px;
+  background:#674d2b;border-radius:5px
+}
+.ship-skill-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ship-skill-head h3{margin:0}
+.ship-skill-icon{width:44px;height:44px;flex:0 0 44px;object-fit:contain}
+@media(max-width:700px){
+  .ship-gear-slot{grid-template-columns:32px minmax(0,1fr) auto;gap:8px}
+  .ship-gear-slot>span:last-child{grid-column:2 / -1;white-space:normal}
+  .ship-profile-facts{grid-template-columns:1fr}
+}
