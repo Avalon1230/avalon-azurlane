@@ -15,12 +15,9 @@ function nationStrip(kind,facets,active){
   ).join('')+'</div>';
 }
 
-function shipNationLanding(records, sourceStatus) {
+function shipNationLanding(records) {
   const nations = shipBrowseCounts(records);
   const total = nations.reduce((sum, item) => sum + item.count, 0);
-  const fallback = sourceStatus === 'failed'
-    ? ' · Showing the locally available fallback roster'
-    : '';
   const main = nations.filter(item => MAIN_SHIP_FACTIONS.includes(item.nation));
   const special = nations.filter(item => !MAIN_SHIP_FACTIONS.includes(item.nation));
   const cards = rows => rows.map(({nation, count}) =>
@@ -39,16 +36,13 @@ function shipNationLanding(records, sourceStatus) {
     '<header class="nation-landing-head"><div><span class="eyebrow">FACTION REGISTRY</span>' +
     '<h2>Choose a nation</h2><p>Select a faction to browse its ship roster, or search across every nation.</p></div>' +
     '<div class="nation-landing-count"><strong>' + total.toLocaleString() +
-    '</strong><span>Indexed ships</span><small>' + nations.length + ' browse categories' + E(fallback) + '</small></div></header>' +
+    '</strong><span>Indexed ships</span><small>' + nations.length + ' browse categories</small></div></header>' +
     '<label class="search-wrap nation-landing-search"><span aria-hidden="true">⌕</span>' +
     '<input id="catalog-search" type="search" value="" placeholder="Search every ship or nation…" ' +
     'aria-label="Search ships across all nations" autocomplete="off"></label>' +
     group('Main factions', main) +
     group('META · BULINS · COLLAB', special, 'nation-special-registry') +
     (!nations.length ? '<p class="empty">No ship data available yet.</p>' : '') +
-    '<p class="catalog-filter-note">Faction emblems are authentic Azur Lane game assets hosted by an independent fan repository. ' +
-    'Collaboration franchises share Collab; the Universal utility ships appear as Bulins. ' +
-    'Unmapped and newly introduced factions use text placeholders; counts reflect the loaded roster.</p>' +
     '</div>';
 }
 
@@ -75,7 +69,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   const ship=kind==='ships';
   if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && page === 1)
-    return shipNationLanding(records, sourceStatus);
+    return shipNationLanding(records);
   const facetRecords=ship
     ?filterShipBrowseRows(records,{query,hull})
     :filterEquipmentRecords(records,{query,hull,category});
@@ -98,9 +92,8 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     '<label class="select-wrap">Equipment type <select id="category-filter" aria-label="Equipment category">'+option('all','All types',category)+cats.map(x=>option(x,x,category)).join('')+'</select></label>'+
     '<label class="select-wrap">Equippable by hull <select id="gear-hull-filter" aria-label="Filter gear by compatible ship hull">'+option('all','All hulls',hull)+hulls.map(x=>option(x,x,hull)).join('')+'</select></label>')+
     '</div>';
-  const available=sourceStatus==='failed'?' · Live catalogs unavailable; showing local fallback':'';
   const text='Showing '+slices.start.toLocaleString()+'–'+slices.end.toLocaleString()+' of '+ordered.length.toLocaleString()+
-    ' matching records · '+records.length.toLocaleString()+' indexed total'+available;
+    ' matching records · '+records.length.toLocaleString()+' total';
   const heading = ship
     ? '<div class="catalog-roster-heading"><button type="button" class="outline-btn compact" data-action="catalog-home">← Nations</button>' +
       '<div class="catalog-roster-label">' +
@@ -113,12 +106,9 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   return '<div id="catalog-start">' +
     heading +
     filters+
-    '<div class="catalog-result-bar"><span>'+E(text)+'</span><span>'+slices.pages+' page'+(slices.pages!==1?'s':'')+' · every record accessible</span></div>'+
+    '<div class="catalog-result-bar"><span>'+E(text)+'</span><span>Page '+slices.page+' of '+slices.pages+'</span></div>'+
     pager(kind,slices)+
     groupedCards(slices.rows,kind,renderCard,totals)+
     pager(kind,slices)+
-    '<p class="catalog-filter-note">'+(ship
-      ?'Nationality is sourced from the full game-data ship roster and refreshed separately from the compact live index. Unmapped or future ships appear as Unclassified.'
-      :'A hull listed here means at least one ship of that class has a compatible equipment-type slot, and the item does not explicitly forbid the class. This is NOT a guarantee for every individual ship. Verify ship-specific slots, faction and equipment restrictions before equipping.')+
-    '</p></div>';
+    '</div>';
 }
