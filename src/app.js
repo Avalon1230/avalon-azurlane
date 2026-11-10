@@ -6,7 +6,7 @@ import { changelogToHtml } from './changelog.js';
 import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, moveTierItem } from './tiers.js';
 import { renderTierView } from './tier-view.js';
 import { imageMarkup, assetCoverage } from './media.js';
-import { renderCatalogIndex } from './catalog-index.js';
+import { renderCatalogIndex, SHIP_ROSTER_BATCH_SIZE } from './catalog-index.js';
 import { renderShipRosterTile } from './ship-roster.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
@@ -34,8 +34,8 @@ const pages = [
 ];
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
-  shipNation:'all', gearNation:'all', gearHull:'all', shipPage:1, gearPage:1,
-  shipSort:'name', shipDescending:false, shipRarity:'all', profileLevel:'level120',profileSkin:0,artViewerOpen:false,
+  shipNation:'all', gearNation:'all', gearHull:'all', shipVisibleCount:SHIP_ROSTER_BATCH_SIZE, shipRosterScrollY:0, gearPage:1,
+  shipSort:'rarity', shipDescending:true, shipRarity:'all', profileLevel:'level120',profileSkin:0,artViewerOpen:false,
   shipDetails:{status:'idle',data:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
@@ -141,7 +141,7 @@ function go(page) {
   state.hull = 'all';
   state.category = 'all';
   state.shipNation='all';state.gearNation='all';state.gearHull='all';
-  state.shipPage=1;state.gearPage=1;state.shipSort='name';state.shipDescending=false;state.shipRarity='all';
+  state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;state.shipRosterScrollY=0;state.gearPage=1;state.shipSort='rarity';state.shipDescending=true;state.shipRarity='all';
   state.picker = null;
   state.detail = null;
   state.artViewerOpen=false;
@@ -235,7 +235,7 @@ function searchBar(placeholder, extra = '') {
 }
 function renderShips() {
   return `${sectionHeading('Ship Index', 'SHIP REGISTRY', 'Browse ships by faction, or search the entire roster.')}${warning()}
-  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity})}`;
+  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,shipLimit:state.shipVisibleCount,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity})}`;
 }
 function renderEquipment() {
   return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Browse equipment by origin, type, or compatible hull.')}${warning()}
@@ -394,6 +394,7 @@ async function loadShipProfileData() {
 function openShipProfile(shipId) {
   const item = SHIP_MAP.get(shipId);
   if (!item) return;
+  state.shipRosterScrollY=window.scrollY;
   state.page='ships';
   state.detail={kind:'ship',id:item.id,sourceId:String(item.sourceId||'')};
   state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;
@@ -407,7 +408,27 @@ function closeShipProfile() {
   state.detail=null;
   history.pushState(null,'','#/ships');
   render();
-  window.scrollTo({top:0,behavior:'instant'});
+  window.scrollTo({top:state.shipRosterScrollY,behavior:'instant'});
+}
+let shipScrollObserver=null;
+function loadMoreShips() {
+  if(state.page!=='ships'||state.detail||!document.querySelector('[data-ship-scroll-sentinel]'))return;
+  state.shipVisibleCount+=SHIP_ROSTER_BATCH_SIZE;
+  render();
+}
+function observeShipRosterScroll() {
+  shipScrollObserver?.disconnect();
+  shipScrollObserver=null;
+  if(state.page!=='ships'||state.detail||typeof IntersectionObserver==='undefined')return;
+  const sentinel=document.querySelector('[data-ship-scroll-sentinel]');
+  if(!sentinel)return;
+  shipScrollObserver=new IntersectionObserver(entries=>{
+    if(!entries.some(entry=>entry.isIntersecting))return;
+    shipScrollObserver?.disconnect();
+    shipScrollObserver=null;
+    loadMoreShips();
+  },{rootMargin:'400px 0px'});
+  shipScrollObserver.observe(sentinel);
 }
 function render() {
   nav();
@@ -431,6 +452,7 @@ function render() {
     $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
   }
   document.title = `${state.detail?.kind==='ship' ? (detailedShipRecord(state.shipDetails.data,state.detail.sourceId)?.names?.en || SHIP_MAP.get(state.detail.id)?.name || 'Ship Profile') : pages.find(p=>p.id===state.page)?.label} · AVALON Azur Lane Intelligence`;
+  observeShipRosterScroll();
 }
 function handleAction(target) {
   const {action,page,mode,ship,equip,fleet,slot,board} = target.dataset;
@@ -458,22 +480,23 @@ function handleAction(target) {
     state.suggestPreview=null;savePlans();render();notify('Suggested additions applied.');return;
   }
   if (action === 'ship-rarity-filter') {
-    state.shipRarity=target.dataset.rarity||'all';state.shipPage=1;render();return;
+    state.shipRarity=target.dataset.rarity||'all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'ship-hull-filter') {
-    state.hull=target.dataset.hull||'all';state.shipPage=1;
-    render();return;
+    state.hull=target.dataset.hull||'all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;
+    render();document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'ship-sort') {
     const sort=target.dataset.sort;
     if (!['name','rarity','hull'].includes(sort)) return;
     if(sort===state.shipSort) state.shipDescending=!state.shipDescending;
     else {state.shipSort=sort;state.shipDescending=sort==='rarity';}
-    state.shipPage=1;render();return;
+    state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'ship-sort-direction') {
-    state.shipDescending=!state.shipDescending;state.shipPage=1;render();return;
+    state.shipDescending=!state.shipDescending;state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
+  if (action === 'ship-load-more') {loadMoreShips();return;}
   if (action === 'profile-art-open') {
     state.artViewerOpen=true;render();
     document.querySelector('.ship-art-viewer-actions [data-action="profile-art-close"]')?.focus();
@@ -506,22 +529,21 @@ function handleAction(target) {
   }
   if (action === 'profile-retry') { state.shipDetails={status:'idle',data:null,error:''};void loadShipProfileData();return; }
   if (action === 'catalog-home') {
-    state.shipNation='all';state.hull='all';state.query='';state.shipRarity='all';state.shipPage=1;
+    state.shipNation='all';state.hull='all';state.query='';state.shipRarity='all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;
     render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'catalog-nation') {
     const kind=target.dataset.kind, nation=target.dataset.nation||'all';
-    if (kind==='ships') {state.shipNation=nation;state.shipPage=1;}
+    if (kind==='ships') {state.shipNation=nation;state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;}
     else if (kind==='equipment') {state.gearNation=nation;state.gearPage=1;}
     else return;
-    render();return;
+    render();if(kind==='ships')document.getElementById('catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'catalog-page') {
     const kind=target.dataset.kind, index=Number(target.dataset.pageIndex);
     if(!Number.isSafeInteger(index)||index<1||index>100)return;
-    if(kind==='ships')state.shipPage=index;
-    else if(kind==='equipment')state.gearPage=index;
-    else return;
+    if(kind!=='equipment')return;
+    state.gearPage=index;
     render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'tier-board') {
@@ -597,9 +619,8 @@ document.addEventListener('change', event => {
   if (event.target.dataset.catalogPageSelect) {
     const kind=event.target.dataset.catalogPageSelect, page=Number(event.target.value);
     if(!Number.isSafeInteger(page)||page<1)return;
-    if(kind==='ships')state.shipPage=page;
-    else if(kind==='equipment')state.gearPage=page;
-    else return;
+    if(kind!=='equipment')return;
+    state.gearPage=page;
     render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (event.target.id==='gear-hull-filter') {state.gearHull=event.target.value;state.gearPage=1;render();return;}
@@ -618,7 +639,7 @@ document.addEventListener('change', event => {
     movePersonalTier(event.target.dataset.tierAssign,event.target.value);return;
   }
   if (event.target.id === 'mode-select') { state.modeId=event.target.value;state.picker=null;state.suggestOptions.scenario='';state.suggestPreview=null;render(); }
-  if (event.target.id === 'hull-filter') { state.hull=event.target.value;state.shipPage=1;render(); }
+  if (event.target.id === 'hull-filter') { state.hull=event.target.value;state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render(); }
   if (event.target.id === 'category-filter') { state.category=event.target.value;state.gearPage=1;render(); }
 });
 document.addEventListener('input', event => {
@@ -626,7 +647,7 @@ document.addEventListener('input', event => {
   if (id!=='catalog-search' && id!=='picker-search' && id!=='tier-search') return;
   const value = event.target.value;
   const pos = event.target.selectionStart;
-  if (id==='catalog-search') {state.query=value;if(state.page==='ships')state.shipPage=1;else if(state.page==='equipment')state.gearPage=1;}
+  if (id==='catalog-search') {state.query=value;if(state.page==='ships')state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;else if(state.page==='equipment')state.gearPage=1;}
   else if (id==='picker-search') state.pickerQuery=value;
   else state.tierQuery=value;
   render();
@@ -685,7 +706,7 @@ window.addEventListener('hashchange', () => {
     return;
   }
   if(route==='ships' && state.page==='ships' && state.detail?.kind==='ship'){
-    state.detail=null;state.artViewerOpen=false;render();return;
+    state.detail=null;state.artViewerOpen=false;render();window.scrollTo({top:state.shipRosterScrollY,behavior:'instant'});return;
   }
   if (pages.some(p=>p.id===route) && (route!==state.page || state.detail)) go(route);
 });

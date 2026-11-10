@@ -311,6 +311,8 @@
 .ship-roster-tile.rarity-rare .ship-roster-portrait{background:linear-gradient(145deg,#8accdf,#40778f)}
 .ship-roster-tile.rarity-normal .ship-roster-name{background:#5f7886}
 .ship-roster-tile.rarity-normal .ship-roster-portrait{background:linear-gradient(145deg,#9ab6c4,#657a88)}
+.ship-scroll-sentinel{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;min-height:72px;margin:12px 0 28px;padding:14px 20px;border-top:1px solid #2b4d65;color:#93bfd4;font-size:12px}
+.ship-scroll-sentinel .outline-btn{white-space:nowrap}
 .ship-roster-tools{display:flex;flex-direction:column;gap:9px;margin:13px 0 20px}
 .ship-roster-tools>.search-wrap{width:100%}
 .ship-filter-row{display:flex;gap:12px;align-items:center;min-width:0}
