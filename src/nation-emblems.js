@@ -1,3 +1,4 @@
+import { COLLABORATION_NATIONS } from './ship-factions.js';
 /**
  * Actual Azur Lane game-client nationality emblems, not AI-generated logos.
  * Mapping and asset URLs sourced from Fernando2603/AzurLane nationality.json.
@@ -7,6 +8,8 @@
 export const NATION_EMBLEM_ROOT = 'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/nationality/';
 export const NATION_EMBLEM_IDS = Object.freeze({
   'Universal': 0,
+  'Bulins': 0,
+  'Collab': 100,
   'Eagle Union': 1,
   'Royal Navy': 2,
   'Sakura Empire': 3,
@@ -20,11 +23,6 @@ export const NATION_EMBLEM_IDS = Object.freeze({
   'Tempesta': 96,
   'META': 97
 });
-const COLLABORATION_NATIONS = new Set([
-  'Neptunia', 'Bilibili', 'Utawarerumono', 'Kizuna AI', 'Hololive',
-  'Venus Vacation', 'The Idolmaster', 'SSSS', 'Atelier Ryza',
-  'Senran Kagura', 'To LOVE-Ru', 'Collab'
-]);
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => (
   {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]
 ));
@@ -32,7 +30,7 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => (
 export function nationEmblemUrl(nation) {
   const id = Object.hasOwn(NATION_EMBLEM_IDS, nation)
     ? NATION_EMBLEM_IDS[nation]
-    : (COLLABORATION_NATIONS.has(nation) ? 100 : null);
+    : (COLLABORATION_NATIONS.includes(nation) ? 100 : null);
   return id === null ? null : NATION_EMBLEM_ROOT + id + '.png';
 }
 

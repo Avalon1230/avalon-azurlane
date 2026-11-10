@@ -9,7 +9,7 @@ export function renderSuggestedFleet({mode,ships,workspace,options={},preview=nu
   const already=new Set();const candidates=reviewed.filter(s=>!already.has(s.id)&&already.add(s.id));
   const owned=new Set(options.ownedIds||[]);
   const checkboxes=(options.poolOpen?`<div class="suggest-pool-grid">${candidates.map(ship=>`<label class="suggest-ship"><input type="checkbox" data-suggest-owned="${E(ship.id)}" ${owned.has(ship.id)?'checked':''}>${imageMarkup(ship,'ship','asset-owned')}<span>${E(ship.name)}<small>${E(ship.hull)}</small></span></label>`).join('')}</div>`:'');
-  const warning = sourceStatus==='loading'?'The source index is loading; suggestions currently use locally curated entries.':'Only manually reviewed candidate roles are used; unreviewed identities are not automatically selected.';
+  const availability = sourceStatus === 'failed' ? ' · Local candidates only' : '';
   let result='';
   if(preview && preview.modeId===mode.id){
     const count=preview.changes.length,missing=preview.missing.length,unverified=preview.changes.filter(x=>!x.qualified).length;
@@ -26,11 +26,11 @@ export function renderSuggestedFleet({mode,ships,workspace,options={},preview=nu
     ${groups}<div class="suggest-advice"><strong>Equipment and mechanics to validate</strong><ul>${advisories}</ul></div>
     <div class="suggest-cautions"><strong>Limitations and next checks</strong><ul>${preview.notes.map(x=>`<li>${E(x)}</li>`).join('')}</ul></div></div>`;
   }
-  return `<section class="suggest-panel"><div class="suggest-heading"><div><div class="eyebrow">AVALON / AUTOMATIC FORMATION PREVIEW</div><h2>Suggest a Fleet</h2><p>Assign compatible, role-reviewed candidates across this mode's fleets without overwriting manual slots. A first step toward full ship/skill/gear optimization.</p></div><span class="suggest-status">HEURISTIC PREVIEW</span></div>
+  return `<section class="suggest-panel"><div class="suggest-heading"><div><div class="eyebrow">AVALON / AUTOMATIC FORMATION PREVIEW</div><h2>Suggest a Fleet</h2><p>Build a fleet from available candidates without changing your existing assignments.</p></div></div>
     <div class="suggest-toolbar"><label class="select-wrap">Scenario <select id="suggest-scenario">${scenarioOptions.map(s=>`<option value="${E(s.id)}" ${current===s.id?'selected':''}>${E(s.label)}</option>`).join('')}</select></label>
     <label class="suggest-owned-toggle"><input id="suggest-owned-only" type="checkbox" ${options.ownedOnly?'checked':''}> Use only my checked ships</label>
     <button type="button" class="outline-btn compact" data-action="suggest-generate">Generate suggestion</button></div>
-    <div class="suggest-pool-head"><span>${candidates.length} reviewed candidates · ${candidates.filter(s=>owned.has(s.id)).length} checked as available · ${E(warning)}</span><button type="button" class="ghost-btn" data-action="suggest-toggle-pool">${options.poolOpen?'Hide':'Show'} ship availability</button></div>
+    <div class="suggest-pool-head"><span>${candidates.length} candidate ships · ${candidates.filter(s=>owned.has(s.id)).length} checked as available${E(availability)}</span><button type="button" class="ghost-btn" data-action="suggest-toggle-pool">${options.poolOpen?'Hide':'Show'} ship availability</button></div>
     ${options.poolOpen?`<div class="suggest-pool-actions"><button class="ghost-btn" type="button" data-action="suggest-all-owned">Mark all reviewed ships available</button><button class="ghost-btn" type="button" data-action="suggest-none-owned">Clear available ships</button></div>${checkboxes}`:''}
     ${result}</section>`;
 }

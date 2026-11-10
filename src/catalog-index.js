@@ -1,5 +1,6 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
-import { filterShipRecords, filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
+import { MAIN_SHIP_FACTIONS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
 
@@ -14,31 +15,34 @@ function nationStrip(kind,facets,active){
   ).join('')+'</div>';
 }
 
-function shipNationLanding(records, sourceStatus) {
-  const nations = nationCounts(records, 'ships');
+function shipNationLanding(records) {
+  const nations = shipBrowseCounts(records);
   const total = nations.reduce((sum, item) => sum + item.count, 0);
-  const fallback = sourceStatus === 'failed'
-    ? ' · Showing the locally available fallback roster'
-    : '';
+  const main = nations.filter(item => MAIN_SHIP_FACTIONS.includes(item.nation));
+  const special = nations.filter(item => !MAIN_SHIP_FACTIONS.includes(item.nation));
+  const cards = rows => rows.map(({nation, count}) =>
+    '<button type="button" class="nation-card" data-action="catalog-nation" data-kind="ships" data-nation="' +
+    E(nation) + '">' + nationEmblemMarkup(nation) +
+    '<span class="nation-card-copy"><strong>' + E(nation) +
+    '</strong><span>' + count.toLocaleString() + ' ship' + (count === 1 ? '' : 's') + '</span></span>' +
+    '<span class="nation-card-arrow" aria-hidden="true">↗</span></button>'
+  ).join('');
+  const group = (label, rows, extraClass = '') => !rows.length ? '' :
+    '<section class="nation-registry-section ' + extraClass + '" aria-label="' + E(label) + '">' +
+    '<div class="nation-registry-heading"><h3>' + E(label) + '</h3><span>' +
+    rows.length + ' categor' + (rows.length === 1 ? 'y' : 'ies') + '</span></div>' +
+    '<div class="nation-card-grid">' + cards(rows) + '</div></section>';
   return '<div id="catalog-start" class="nation-landing">' +
     '<header class="nation-landing-head"><div><span class="eyebrow">FACTION REGISTRY</span>' +
     '<h2>Choose a nation</h2><p>Select a faction to browse its ship roster, or search across every nation.</p></div>' +
     '<div class="nation-landing-count"><strong>' + total.toLocaleString() +
-    '</strong><span>Indexed ships</span><small>' + nations.length + ' nations' + E(fallback) + '</small></div></header>' +
+    '</strong><span>Indexed ships</span><small>' + nations.length + ' browse categories</small></div></header>' +
     '<label class="search-wrap nation-landing-search"><span aria-hidden="true">⌕</span>' +
     '<input id="catalog-search" type="search" value="" placeholder="Search every ship or nation…" ' +
     'aria-label="Search ships across all nations" autocomplete="off"></label>' +
-    '<div class="nation-card-grid" role="group" aria-label="Browse ships by nation">' +
-    nations.map(({nation, count}) =>
-      '<button type="button" class="nation-card" data-action="catalog-nation" data-kind="ships" data-nation="' +
-      E(nation) + '">' + nationEmblemMarkup(nation) +
-      '<span class="nation-card-copy"><strong>' + E(nation) +
-      '</strong><span>' + count.toLocaleString() + ' ship' + (count === 1 ? '' : 's') + '</span></span>' +
-      '<span class="nation-card-arrow" aria-hidden="true">↗</span></button>'
-    ).join('') + '</div>' +
+    group('Main factions', main) +
+    group('META · BULINS · COLLAB', special, 'nation-special-registry') +
     (!nations.length ? '<p class="empty">No ship data available yet.</p>' : '') +
-    '<p class="catalog-filter-note">Faction emblems are authentic Azur Lane game assets hosted by an independent fan repository. ' +
-    'Unmapped and newly introduced factions use text placeholders; counts reflect the loaded roster.</p>' +
     '</div>';
 }
 
@@ -53,7 +57,7 @@ function pager(kind,result){
 }
 function groupedCards(rows,kind,card,totals){
   if(!rows.length)return '<div class="empty">No records match these filters. Try another nation, hull or search.</div>';
-  return groupedCatalogRows(rows,kind).map(group=>
+  return (kind === 'ships' ? groupedShipBrowseRows(rows) : groupedCatalogRows(rows,kind)).map(group=>
     '<section class="nation-result-group" aria-label="'+E(group.nation)+'">'+
     '<div class="nation-section-title"><h2>'+E(group.nation)+'</h2><span>'+group.items.length+' shown · '+(totals.get(group.nation)||group.items.length)+' matches</span></div>'+
     '<div class="catalog-grid">'+group.items.map(card).join('')+'</div></section>'
@@ -65,21 +69,20 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   const ship=kind==='ships';
   if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && page === 1)
-    return shipNationLanding(records, sourceStatus);
-  const criteria={query,hull,category};
+    return shipNationLanding(records);
   const facetRecords=ship
-    ?filterShipRecords(records,{query,hull})
+    ?filterShipBrowseRows(records,{query,hull})
     :filterEquipmentRecords(records,{query,hull,category});
-  const facets=nationCounts(facetRecords,kind);
-  const knownNations = new Set(nationCounts(records,kind).map(x => x.nation));
+  const facets=ship ? shipBrowseCounts(facetRecords) : nationCounts(facetRecords,kind);
+  const knownNations = new Set((ship ? shipBrowseCounts(records) : nationCounts(records,kind)).map(x => x.nation));
   const currentNation=nation==='all'||knownNations.has(nation)?nation:'all';
   const filtered=ship
-    ?filterShipRecords(facetRecords,{nation:currentNation})
+    ?filterShipBrowseRows(facetRecords,{nation:currentNation})
     :filterEquipmentRecords(facetRecords,{nation:currentNation});
-  const groups=groupedCatalogRows(filtered,kind);
+  const groups=ship ? groupedShipBrowseRows(filtered) : groupedCatalogRows(filtered,kind);
   const ordered=groups.flatMap(x=>x.items);
   const slices=paginateRecords(ordered,page,60);
-  const totals=new Map(nationCounts(filtered,kind).map(x=>[x.nation,x.count]));
+  const totals=new Map((ship ? shipBrowseCounts(filtered) : nationCounts(filtered,kind)).map(x=>[x.nation,x.count]));
   const hulls=ship?[...new Set(records.map(x=>x.hull).filter(Boolean))].sort():
     [...new Set(records.flatMap(possibleEquipmentHulls))].sort();
   const cats=ship?[]:[...new Set(records.map(x=>x.category).filter(Boolean))].sort();
@@ -89,9 +92,8 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     '<label class="select-wrap">Equipment type <select id="category-filter" aria-label="Equipment category">'+option('all','All types',category)+cats.map(x=>option(x,x,category)).join('')+'</select></label>'+
     '<label class="select-wrap">Equippable by hull <select id="gear-hull-filter" aria-label="Filter gear by compatible ship hull">'+option('all','All hulls',hull)+hulls.map(x=>option(x,x,hull)).join('')+'</select></label>')+
     '</div>';
-  const available=sourceStatus==='failed'?' · Live catalogs unavailable; showing local fallback':'';
   const text='Showing '+slices.start.toLocaleString()+'–'+slices.end.toLocaleString()+' of '+ordered.length.toLocaleString()+
-    ' matching records · '+records.length.toLocaleString()+' indexed total'+available;
+    ' matching records · '+records.length.toLocaleString()+' total';
   const heading = ship
     ? '<div class="catalog-roster-heading"><button type="button" class="outline-btn compact" data-action="catalog-home">← Nations</button>' +
       '<div class="catalog-roster-label">' +
@@ -104,12 +106,9 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   return '<div id="catalog-start">' +
     heading +
     filters+
-    '<div class="catalog-result-bar"><span>'+E(text)+'</span><span>'+slices.pages+' page'+(slices.pages!==1?'s':'')+' · every record accessible</span></div>'+
+    '<div class="catalog-result-bar"><span>'+E(text)+'</span><span>Page '+slices.page+' of '+slices.pages+'</span></div>'+
     pager(kind,slices)+
     groupedCards(slices.rows,kind,renderCard,totals)+
     pager(kind,slices)+
-    '<p class="catalog-filter-note">'+(ship
-      ?'Nationality is sourced from the full game-data ship roster and refreshed separately from the compact live index. Unmapped or future ships appear as Unclassified.'
-      :'A hull listed here means at least one ship of that class has a compatible equipment-type slot, and the item does not explicitly forbid the class. This is NOT a guarantee for every individual ship. Verify ship-specific slots, faction and equipment restrictions before equipping.')+
-    '</p></div>';
+    '</div>';
 }

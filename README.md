@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.6.1 nation-first Ship Index**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
+> **Project status:** **v0.6.2 faction-first Ship Index**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **Numerical combat optimization, skill-timing simulation, and automatic equipment slot builds are not implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -46,9 +46,9 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 **Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, numerical fleet optimization and automatic gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
-## Full ship and equipment catalogs (v0.6.1)
+## Full ship and equipment catalogs (v0.6.2)
 
-AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. The **Ship Index now opens to a faction registry** with original in-game nationality emblems, source-derived ship counts, and a global search box. Select a nation to open its roster with hull filtering, inspection, fleet assignment, and 60-record pagination. A **Nations** button returns to the registry. The **Equipment Index retains** its horizontally scrollable nation chips, type/hull filtering, and 60-record pagination.
+AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. The **Ship Index opens to a faction registry** with larger, high-contrast, original in-game nationality insignia and source-derived ship counts. Main factions appear first, followed by META, **Bulins** (the source's Universal utility ships), and **Collab** (combined crossover franchises with original franchise names retained on ship records). Full-roster searching recognizes both category labels and original crossover names. Select a nation to open its roster with hull filtering, inspection, fleet assignment, and 60-record pagination. A **Nations** button returns to the registry. The **Equipment Index retains** its horizontally scrollable nation chips, type/hull filtering, and 60-record pagination.
 
 - **Ships:** filter by nation/faction, hull type (DD, CL, CA, BB, CV, etc.), or search across names, hulls, rarity and nationality. Full nation mapping is sourced from Lycoris-AzurAPI's 894-ship database and joined to the compact live ship index by stable numeric ID.
 - **Equipment:** filter by nation of origin, equipment category, and the hull classes **potentially able to equip** the item. Availability combines equipment `type`, explicit `ship_type_forbidden` exclusions, and equipment-slot types observed in the ship database. This denotes **some ships of the hull type**, not automatic legality for every individual ship or slot. Nation is not an equipment faction lock.

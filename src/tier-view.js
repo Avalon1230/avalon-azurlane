@@ -52,7 +52,7 @@ export function renderTierView({ boardId='ships', boards={}, ships=[], equipment
   const loadingMessage = sourceStatus === 'loading' ? ' · Source catalogs loading' : sourceStatus === 'failed' ? ' · Fallback catalog only' : '';
   return `<div class="page-heading"><div class="eyebrow">TACTICAL INTELLIGENCE / TIER BOARD</div><h1>Choose your tier list.</h1><p>Combat intelligence and character favorites stay separate. Personal rankings remain private in this browser until you export them.</p></div>
     <nav class="tier-tabs" aria-label="Tier board categories">${buttons}</nav>
-    <section class="tier-intro"><div class="eyebrow">${E(config.label.toUpperCase())}</div><h2>${config.icon} ${E(config.title)}</h2><p>${E(config.subtitle)}</p><div class="tier-notice">${E(config.note)}</div></section>
+    <section class="tier-intro"><div class="eyebrow">${E(config.label.toUpperCase())}</div><h2>${config.icon} ${E(config.title)}</h2><p>${E(config.subtitle)}</p><details class="method-disclosure"><summary>About this board</summary><div class="tier-notice">${E(config.note)}</div></details></section>
     <div class="tier-controls"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="tier-search" type="search" value="${E(query)}" placeholder="Find a ${config.kind === 'equipment' ? 'gear' : 'ship'}…" aria-label="Search tier candidates" autocomplete="off"></label>
       <label class="select-wrap">Filter <select id="tier-filter" aria-label="Filter tier candidates">${choices}</select></label>
       <button class="outline-btn compact" type="button" data-action="tier-export">Export JSON ↓</button>
@@ -65,5 +65,5 @@ export function renderTierView({ boardId='ships', boards={}, ships=[], equipment
       <div class="tier-pool-items">${notRanked.slice(0,limit).map(item=>tierTile(item,config,boardId,'unranked')).join('') || '<div class="tier-empty">No unranked candidates match your search.</div>'}</div>
       ${notRanked.length>limit?`<p class="tier-more">Showing ${limit} of ${notRanked.length} results. Search or filter to find other entries.</p>`:''}
     </section>
-    <div class="info-banner"><span class="info-dot">i</span><div><strong>Personal picks, not published AVALON scores.</strong> Ship and equipment performance tiers need independent analysis and mode-specific evidence. Waifu and Must Protect boards are explicitly subjective and completely separate from combat.</div></div>`;
+    `;
 }

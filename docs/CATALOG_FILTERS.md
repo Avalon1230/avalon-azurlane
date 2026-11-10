@@ -37,3 +37,9 @@ AVALON derives the set of hull types for which **at least one recorded ship has 
 - Original game-client thumbnails remain an optional external asset service and not all ships have corresponding art.
 - The frontend supports large catalogs through pagination. It does not imply that every ship has a verified combat tier or equipment recommendation.
 - The equipment slot map includes only observed ship-slot possibilities in the currently referenced `ship.json` snapshot, and intentionally avoids inferring unknown hull subclasses.
+
+## Ship Index faction browse groups (v0.6.2)
+
+The displayed Ship Index categories are presentation groups, not replacements for source nationality facts. Original source nationality values remain unchanged. Source `Universal` utility ships display under **Bulins**; all known franchise crossover nationalities display under one **Collab** roster, retaining individual source names in ship cards/details and search. Main factions are listed before META, Bulins, and Collab, followed by unknown/future factions that lack a safe mapping. All counts are computed from the loaded roster, rather than manually copied from a wiki.
+
+The separate Equipment Index intentionally retains its own nation-of-origin taxonomy. Browse groups are not equipment origin rules or equipability permissions. For data provenance, artwork credits and restrictions, see the **Sources** page and the corresponding documentation.

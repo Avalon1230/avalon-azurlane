@@ -7,7 +7,8 @@ import { TIER_BOARDS, catalogForBoard, freshTierBoards, normalizeTierBoards, mov
 import { renderTierView } from './tier-view.js';
 import { imageMarkup, assetCoverage } from './media.js';
 import { renderCatalogIndex } from './catalog-index.js';
-import { nationForShip, nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
+import { nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
+import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
 import { renderSuggestedFleet } from './fleet-suggest-view.js';
 
@@ -157,14 +158,33 @@ function nav() {
 }
 function warning() {
   const status = state.sync.status;
-  const summary = status === 'ready'
-    ? `Live third-party indexes: ${state.sync.ships} source ship entries and ${state.sync.equipment} equipment entries loaded. No combat tiers or verified acquisition recipes are implied.`
-    : status === 'partial'
-      ? 'One live index is unavailable. Available source data and the editorial fallback remain usable.'
-      : status === 'failed'
-        ? 'External indexes unavailable: showing the small editorial fallback. Retry when online.'
-        : 'Loading public data indexes in the background. The editorial fallback is available immediately.';
-  return `<div class="info-banner"><span class="info-dot">i</span><div><strong>${E(status==='ready'?'Source indexes loaded':status==='loading'?'Data connection in progress':'Limited source coverage')}.</strong> ${E(summary)} ${state.sync.shipVersion?`Ship snapshot generated ${E(new Date(state.sync.shipVersion).toLocaleDateString())}.`:''} ${status !== 'ready' && status !== 'loading'?'<button class="inline-action" data-action="sync-data">Retry indexes</button>':''}</div></div>`;
+  // Do not interrupt ordinary browsing with successful source/asset notices.
+  if (status !== 'partial' && status !== 'failed') return '';
+  const summary = status === 'partial'
+    ? 'Some catalog data is unavailable. Available records can still be browsed.'
+    : 'Live catalog data is unavailable. Showing locally available records.';
+  return `<div class="info-banner source-availability-warning" role="status"><span class="info-dot">!</span><div><strong>Limited catalog data.</strong> ${E(summary)} <button class="inline-action" data-action="sync-data">Retry</button></div></div>`;
+}
+function sourceDisclosure() {
+  const status = state.sync.status;
+  const descriptions = {
+    ready: 'Live community indexes loaded.',
+    partial: 'Some live records are unavailable; local fallback and reachable sources remain usable.',
+    failed: 'Live sources are unavailable; showing the local fallback catalog.',
+    loading: 'Live data is loading; local fallback remains available.'
+  };
+  const checked = state.sync.shipVersion
+    ? `<p>Ship snapshot: ${E(new Date(state.sync.shipVersion).toLocaleDateString())}.</p>` : '';
+  return `<section class="source-technical"><h2>Data coverage and limitations</h2>
+    <p>${E(descriptions[status] || descriptions.loading)} Current source response: ${state.sync.ships.toLocaleString()} ship entries, ${state.sync.equipment.toLocaleString()} equipment entries.</p>
+    ${checked}
+    <p>Original game-client artwork is linked from independent fan repositories, not hosted by Yostar or Manjuu. Last image audit: ${assetCoverage.availableShipThumbnails}/${assetCoverage.indexedShipsAtAudit} ship thumbnails and ${assetCoverage.availableEquipmentIcons} equipment icons. Some images may be unavailable.</p>
+    <p>Nation icons and other game artwork are owned by their respective rights holders. Browse and equipment compatibility data are third-party records, not publisher endorsements or verified combat results. Equipment hull filters show potential class eligibility, not individual ship or slot legality. Combat rankings are provisional scenario-specific research. Fleet suggestions use curated role matches rather than a complete numerical skill/gear simulator; exact ship-specific loadouts and damage calculations remain unfinished.</p>
+    <div class="source-disclosure-links">
+      ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/IMAGE_ASSETS.md','Artwork credits & rights')}
+      ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/CATALOG_FILTERS.md','Catalog coverage & compatibility')}
+      ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/DATA_SOURCES.md','Data source methodology')}
+    </div></section>`;
 }
 function contextPanel() {
   const mode=selectedMode();
@@ -180,16 +200,16 @@ function renderOverview() {
   </div>
   <div class="metric-grid">
     <div class="metric">${eyebrow('OPERATIONAL AREAS')}<strong>${MODES.length.toString().padStart(2,'0')}</strong><small>Mode-aware architecture</small></div>
-    <div class="metric">${eyebrow('INDEXED EXAMPLES')}<strong>${SHIPS.length.toLocaleString()}</strong><small>Searchable ships · no tier scores</small></div>
-    <div class="metric">${eyebrow('EQUIPMENT EXAMPLES')}<strong>${EQUIPMENT.length.toLocaleString()}</strong><small>Equipment records</small></div>
+    <div class="metric">${eyebrow('SHIP ROSTER')}<strong>${SHIPS.length.toLocaleString()}</strong><small>Indexed ships</small></div>
+    <div class="metric">${eyebrow('EQUIPMENT')}<strong>${EQUIPMENT.length.toLocaleString()}</strong><small>Indexed equipment</small></div>
     <div class="metric accent">${eyebrow('YOUR ACTIVE PLAN')}<strong>${countAssigned(currentPlan()).toString().padStart(2,'0')}</strong><small>${E(selectedMode().name)} ships assigned</small></div>
   </div>
-  ${warning()}<div class="section-title"><div>${eyebrow('START A MISSION')}<h2>Choose your theater</h2></div><button class="ghost-btn" data-action="navigate" data-page="modes">View all eight →</button></div>
+  <div class="section-title"><div>${eyebrow('START A MISSION')}<h2>Choose your theater</h2></div><button class="ghost-btn" data-action="navigate" data-page="modes">View all eight →</button></div>
   <div class="mode-grid">${MODES.slice(0,4).map(modeCard).join('')}</div>
   <div class="bottom-grid">
     <div class="feature-card"><div class="feature-icon">▦</div>${eyebrow('FLEET LAB')}<h3>Plan without guessing.</h3><p>Build separate formations for each game mode, check hull eligibility, and export a reproducible plan. Saved locally in your browser.</p><button class="ghost-btn" data-action="navigate" data-page="fleet">Build a fleet →</button></div>
-    <div class="feature-card"><div class="feature-icon">◎</div>${eyebrow('EVIDENCE STANDARD')}<h3>Know what is proven.</h3><p>Game data, community observations, and AVALON assessments remain visibly separate. No popularity polls masquerading as damage tests.</p><button class="ghost-btn" data-action="navigate" data-page="sources">Review sources →</button></div>
-  </div>${warning()}`;
+    <div class="feature-card"><div class="feature-icon">◎</div>${eyebrow('EVIDENCE STANDARD')}<h3>Explore the research.</h3><p>Review data sources and the evidence behind AVALON's recommendations.</p><button class="ghost-btn" data-action="navigate" data-page="sources">Review sources →</button></div>
+  </div>`;
 }
 function modeCard(mode) {
   return `<button class="mode-card" type="button" data-action="open-mode" data-mode="${mode.id}">
@@ -200,32 +220,34 @@ function modeCard(mode) {
 }
 function renderModes() {
   return `${sectionHeading('Every theater. One command center.', 'MODE REGISTRY / 08', 'Every mode has different mechanics and fleet constraints. Build and evaluate them separately.')}
-  <div class="mode-grid all-modes">${MODES.map(modeCard).join('')}</div>${contextPanel()}<div class="info-banner"><span class="info-dot">i</span><div><strong>Context first.</strong> A campaign mob fleet is not automatically optimal for META Showdown, Operation Siren, Exercises, or an event boss.</div></div>`;
+  <div class="mode-grid all-modes">${MODES.map(modeCard).join('')}</div>`;
 }
 function searchBar(placeholder, extra = '') {
   return `<div class="filter-bar"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="${E(state.query)}" placeholder="${E(placeholder)}" autocomplete="off" aria-label="Search catalog" /></label>${extra}</div>`;
 }
 function renderShips() {
-  return `${sectionHeading('Ship Index', 'SHIP REGISTRY / FACTIONS', 'Browse by nation with authentic faction insignia, then inspect ships, filter by hull, and build your fleet. Global search remains available.')}${warning()}
-  ${assetNotice()}${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:shipCard,sourceStatus:state.sync.status})}`;
-}
-function assetNotice() {
-  return `<p class="asset-provenance">Original Azur Lane game-client artwork (not AI). Image copies are hosted by independent fan repositories, not Yostar or Manjuu. Audit: ${assetCoverage.availableShipThumbnails}/${assetCoverage.indexedShipsAtAudit} ship thumbnails and ${assetCoverage.availableEquipmentIcons} equipment icons. <a href="https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/IMAGE_ASSETS.md" target="_blank" rel="noopener noreferrer">Artwork sources and rights</a>.</p>`;
+  return `${sectionHeading('Ship Index', 'SHIP REGISTRY', 'Browse ships by faction, or search the entire roster.')}${warning()}
+  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:shipCard,sourceStatus:state.sync.status})}`;
 }
 function shipCard(ship) {
-  const status=evaluationState(ship);
-  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div><span class="verification">NO TIER</span></div><h3>${E(ship.name)}</h3><p class="muted">${E(nationForShip(ship))} · ${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
-  <div class="tag-row">${(ship.tags||[]).map(tag).join('')}${tag(status.tier===null?'Assessment pending':'Reviewed')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="ship-details" data-ship="${E(ship.id)}">Inspect</button><button type="button" class="small-btn" data-action="add-ship" data-ship="${E(ship.id)}">+ Assign</button></div></article>`;
+  const status = evaluationState(ship);
+  const labels = (ship.tags || []).map(tag).join('') +
+    (status.tier === null ? '' : tag('Reviewed'));
+  return `<article class="catalog-card"><div class="catalog-art">${imageMarkup(ship,'ship','asset-card-ship')}</div><div class="catalog-top"><div class="ship-badge ${E(ship.hull.toLowerCase())}">${E(ship.hull)}</div></div><h3>${E(ship.name)}</h3><p class="muted">${E(shipBrowseDisplayNation(ship))} · ${E(ship.rarity||'Unverified rarity')} · ${E(ship.sourceHull||ship.hull)}</p>
+  ${labels ? `<div class="tag-row">${labels}</div>` : ''}<div class="card-actions"><button type="button" class="small-btn secondary" data-action="ship-details" data-ship="${E(ship.id)}">Inspect</button><button type="button" class="small-btn" data-action="add-ship" data-ship="${E(ship.id)}">+ Assign</button></div></article>`;
 }
+
 function renderEquipment() {
-  return `${sectionHeading('Equipment intelligence', 'EQUIPMENT / NATION & COMPATIBILITY', 'Search all equipment by origin, category, and potential hull compatibility. Ship-specific equipment slots must still be checked.')}${warning()}
-  ${assetNotice()}${renderCatalogIndex({kind:'equipment',records:EQUIPMENT,query:state.query,nation:state.gearNation,hull:state.gearHull,category:state.category,page:state.gearPage,renderCard:equipCard,sourceStatus:state.sync.status})}`;
+  return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Browse equipment by origin, type, or compatible hull.')}${warning()}
+  ${renderCatalogIndex({kind:'equipment',records:EQUIPMENT,query:state.query,nation:state.gearNation,hull:state.gearHull,category:state.category,page:state.gearPage,renderCard:equipCard,sourceStatus:state.sync.status})}`;
 }
 function equipCard(item) {
   const stats=Object.entries(item.stats||{}).filter(([,v])=>typeof v==='number').slice(0,3);
-  return `<article class="catalog-card gear-card"><div class="catalog-top">${imageMarkup(item,'equipment','asset-card-gear')}<span class="verification">SOURCE INDEX</span></div><h3>${E(item.name)}</h3><div class="type-line">${E(nationForEquipment(item))} · ${E(item.category)} · ${E(item.rarity||'Unverified rarity')}</div><div class="gear-compat">Potential hulls: ${E(possibleEquipmentHulls(item).join(', ')||'Not verified')}</div><p>${E(item.source==='fernando'?'Community data record; enhancement values are source-reported, not independently validated.':item.summary||'Acquisition requires verification.')}</p>
+  return `<article class="catalog-card gear-card"><div class="catalog-top">${imageMarkup(item,'equipment','asset-card-gear')}</div><h3>${E(item.name)}</h3><div class="type-line">${E(nationForEquipment(item))} · ${E(item.category)} · ${E(item.rarity||'Unverified rarity')}</div><div class="gear-compat">Potential hulls: ${E(possibleEquipmentHulls(item).join(', ')||'Not verified')}</div>
+  ${item.source==='fernando'?'':item.summary?`<p>${E(item.summary)}</p>`:''}
   <div class="tag-row">${stats.map(([k,v])=>tag(`${k.replaceAll('_',' ')}: ${v}`)).join('')}</div><div class="card-actions"><button type="button" class="small-btn secondary" data-action="equip-details" data-equip="${E(item.id)}">Inspect gear</button>${link(wikiLookupUrl(item.name), 'Wiki lookup')}</div></article>`;
 }
+
 function evidenceLine(record) {
   if(record?.source === 'lycoris') return `<p><strong>Source:</strong> Lycoris-AzurAPI ship-list.json (independent community snapshot).</p>${link('https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json','Inspect source data')}`;
   if(record?.source === 'fernando') return `<p><strong>Source:</strong> Fernando2603/AzurLane equipment.json (community game-data extraction).</p>${link('https://github.com/Fernando2603/AzurLane/blob/main/equipment.json','Inspect source data')}`;
@@ -237,15 +259,15 @@ function renderDetails() {
   if (!item) return '';
   const ship=d.kind==='ship';
   const rows=ship?[
-    ['Nation',nationForShip(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
+    ['Nation / browse group',shipBrowseDisplayNation(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
   ]:[
     ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Potentially equippable hulls',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Acquisition',item.acquisition||'Not established'],['Source ID',item.sourceId||'Editorial']
   ];
   const statRows=!ship?Object.entries(item.stats||{}).map(([k,v])=>[k.replaceAll('_',' ').toUpperCase(),String(v)]):[];
   return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect ${ship?'ship':'equipment'}"><div class="picker-head"><div>${eyebrow(ship?'SHIP INTELLIGENCE':'EQUIPMENT INTELLIGENCE')}<h2>${E(item.name)}</h2></div><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div>
-  <div class="detail-scroll"><div class="profile-art">${imageMarkup(item,ship?'ship':'equipment','asset-profile')}<span>Original Azur Lane game image, community hosted. No AI art.</span></div><div class="info-banner"><span class="info-dot">i</span><div><strong>Source-indexed, not tier-ranked.</strong> ${E(evaluationState(item).quality)}. Do not treat this profile as a battle-performance verdict.</div></div>
+  <div class="detail-scroll"><div class="profile-art">${imageMarkup(item,ship?'ship':'equipment','asset-profile')}</div>
   <div class="profile-table">${[...rows,...statRows].map(([k,v])=>`<div><span>${E(k)}</span><strong>${E(v)}</strong></div>`).join('')}</div>
-  <section class="context-panel">${eyebrow('MODE-SPECIFIC RESEARCH')}<h3>${E(selectedMode().name)} · assessment pending</h3><p>Data needed before calculating ship effectiveness or recommending equipment for this mode:</p><div class="tag-row">${contextCriteria(state.modeId).map(tag).join('')}</div></section>
+  <details class="method-disclosure"><summary>Research criteria</summary><section class="context-panel">${eyebrow('MODE-SPECIFIC RESEARCH')}<h3>${E(selectedMode().name)} · assessment pending</h3><p>Additional data needed to analyze performance in this game mode:</p><div class="tag-row">${contextCriteria(state.modeId).map(tag).join('')}</div></section></details>
   <section class="evidence-box"><h3>Evidence trail</h3>${evidenceLine(item)}<p>${link(wikiLookupUrl(item.name),'Search Azur Lane fan wiki')}</p></section></div>
   <div class="picker-footer"><button type="button" class="ghost-btn" data-action="close-detail">Close</button></div></aside></div>`;
 }
@@ -254,11 +276,10 @@ function modeSelect() {
 }
 function renderFleet() {
   const mode = selectedMode(), plan = currentPlan();
-  return `${sectionHeading('Fleet laboratory', 'TACTICAL PLANNING', 'Build manually or generate a qualitative role-matching preview. AVALON does not yet simulate battle mechanics or select optimal equipment.')}
+  return `${sectionHeading('Fleet Lab', 'TACTICAL PLANNING', 'Build formations manually or generate a fleet suggestion.')}
   <div class="fleet-toolbar">${modeSelect()}<div class="fleet-controls"><span class="assignment-count">${countAssigned(plan)} / ${countSlots(plan)} assigned</span><button type="button" class="outline-btn compact" data-action="export-plan">Export JSON ↓</button><button type="button" class="ghost-btn danger" data-action="reset-plan">Clear plan</button></div></div>
   <div class="mode-description"><span class="mode-icon">${mode.icon}</span><div><strong>${E(mode.name)}</strong><p>${E(mode.summary)}</p></div></div>
-  ${contextPanel()}${renderSuggestedFleet({mode,ships:SHIPS,workspace:plan,options:state.suggestOptions,preview:state.suggestPreview,sourceStatus:state.sync.status})}<div class="fleet-grid">${mode.fleetTypes.map(id => fleetCard(id, plan)).join('')}</div>
-  <div class="info-banner"><span class="info-dot">i</span><div><strong>How to build:</strong> Click an empty or occupied slot to select a compatible ship. An assigned ship cannot appear twice within the same plan. Each game mode has a separate saved arrangement, stored only in this browser.</div></div>
+  <details class="method-disclosure"><summary>View scenario criteria</summary>${contextPanel()}</details>${renderSuggestedFleet({mode,ships:SHIPS,workspace:plan,options:state.suggestOptions,preview:state.suggestPreview,sourceStatus:state.sync.status})}<div class="fleet-grid">${mode.fleetTypes.map(id => fleetCard(id, plan)).join('')}</div>
   ${state.picker ? renderPicker() : ''}`;
 }
 function fleetCard(id, plan) {
@@ -286,7 +307,7 @@ function renderPicker() {
 }
 function renderSources() {
   return `${sectionHeading('Trust the trail, not the hype.', 'SOURCES & METHODOLOGY', 'Sources are explicit; the project does not convert popular opinions into verified performance figures.')}
-  ${warning()}<div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. Koumakan’s /w/api.php endpoint has returned valid page metadata and Musashi wikitext from GitHub Actions; automatic imports still await schema and reuse-permission review; see Sources documentation.</p></div>
+  ${sourceDisclosure()}<details class="method-disclosure"><summary>Wiki connectivity notes</summary><div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. Koumakan’s /w/api.php endpoint has returned valid page metadata and Musashi wikitext from GitHub Actions; automatic imports still await schema and reuse-permission review; see Sources documentation.</p></div></details>
   <div class="source-grid">${SOURCES.map(source => `<article class="source-card">${eyebrow(source.type)}<h3>${E(source.name)}</h3><p>${E(source.note)}</p>${link(source.url,'Open source')}</article>`).join('')}</div>
   <div class="method-card"><h2>Three different things. Never one misleading tier.</h2><div class="method-grid"><div><span class="method-num">01</span><h3>Game facts</h3><p>Observed or sourced mechanics with version, link, validation status, and licensing notes.</p></div><div><span class="method-num">02</span><h3>Community evidence</h3><p>Tests, guides and discussion with attribution, limitations, and scenario context.</p></div><div><span class="method-num">03</span><h3>AVALON analysis</h3><p>Independent calculations and judgment, labeled as inference with assumptions and uncertainty.</p></div></div><p class="doc-link">${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/SOURCES.md','Read the complete provenance policy')}</p></div>`;
 }

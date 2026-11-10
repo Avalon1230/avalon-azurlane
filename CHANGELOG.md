@@ -20,6 +20,21 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Some newly introduced or special factions have no verified emblem mapping and display readable initials instead.
 - Separate Augment Module categorization, ship-specific equipment legality, and numerical fleet optimization remain future work.
 
+## [0.6.2] - 2026-11-10
+
+### Changed
+- Ship Index hierarchy: main game factions first, then META, Bulins (the source's Universal utility ships), and a single Collab roster containing all known crossover franchises.
+- Preserve each crossover's original nationality/franchise in individual ship details, full-roster searching, and data records. No source nationality is overwritten.
+- Enlarge faction insignias and place them against contrasting light panels with reduced padding, better legibility, and responsive card layouts. More scrolling is intentional.
+- Remove repetitive source status, artwork and methodology disclaimers from the Overview, Ship Index, Equipment Index, Fleet Lab and Tier Boards. Full provenance, image rights, compatibility caveats, and data status remain accessible from Sources; brief warnings still appear if live data is unavailable.
+- Move secondary assessment methodology into expandable help and simplify repeated labels on catalog cards and page headings.
+
+### Added
+- Regression tests covering source-preserving main/META/Bulins/Collab grouping, crossover search, icon mapping, lossless 894-source aggregation, and uncluttered catalog views.
+
+### Unchanged
+- Equipment nation/category/hull filtering, ship inspection/assignment, complete roster search and pagination, contextual rankings, provenance trails, browser-local plans, and documented data limitations.
+
 ## [0.6.0] - 2026-11-10
 
 ### Fixed

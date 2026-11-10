@@ -6,7 +6,7 @@ const card=item=>'<article data-ship="'+item.id+'">'+item.name+'</article>';
 test('nation-categorized ship index supports all 894 records with 15 pages',()=>{
   const rows=Array.from({length:894},(_,i)=>shipRow(10000+i,'Ship '+i,i%2===0?'Eagle Union':'Royal Navy',i%4===0?'BB':'DD'));
   const page=renderCatalogIndex({kind:'ships',records:rows,page:15,renderCard:card});
-  assert.match(page,/894 indexed total/);
+  assert.match(page,/894 total/);
   assert.match(page,/Page <select/);
   assert.match(page,/<option value="15" selected>/);
   assert.match(page,/data-ship="10893"/);
@@ -69,4 +69,34 @@ test('unrecognized factions remain browseable with a non-invented emblem fallbac
   assert.match(html,/Kingdom of Tulipa/);
   assert.match(html,/nation-emblem-fallback/);
   assert.doesNotMatch(html,/images\/nationality\/null\.png/);
+});
+
+test('faction landing shows main factions before META, Bulins and a single Collab card',()=>{
+  const rows=[
+    shipRow(1,'Akagi','Sakura Empire'),shipRow(2,'META ship','META'),
+    shipRow(3,'Bulin','Universal'),shipRow(4,'Ryza','Atelier Ryza'),
+    shipRow(5,'Yumia','Atelier Yumia'),shipRow(6,'Enterprise','Eagle Union')
+  ];
+  const html=renderCatalogIndex({kind:'ships',records:rows,renderCard:card});
+  const cards=[...html.matchAll(/data-kind="ships" data-nation="([^"]+)"/g)].map(x=>x[1]);
+  assert.deepEqual(cards,['Eagle Union','Sakura Empire','META','Bulins','Collab']);
+  assert.match(html,/data-nation="Collab"[^]*?2 ships/);
+  assert.match(html,/images\/nationality\/100\.png/);
+  assert.match(html,/images\/nationality\/0\.png/);
+  assert.doesNotMatch(html,/data-nation="Atelier Ryza"/);
+  assert.doesNotMatch(html,/catalog-filter-note/);
+  assert.doesNotMatch(html,/Original Azur Lane game assets/);
+  const collab=renderCatalogIndex({kind:'ships',records:rows,nation:'Collab',renderCard:card});
+  assert.match(collab,/data-ship="4"/);
+  assert.match(collab,/data-ship="5"/);
+  assert.doesNotMatch(collab,/data-ship="3"/);
+  const searched=renderCatalogIndex({kind:'ships',records:rows,query:'Atelier Yumia',renderCard:card});
+  assert.match(searched,/data-ship="5"/);
+});
+test('equipment index no longer shows technical method footnotes among its browse cards',()=>{
+  const html=renderCatalogIndex({kind:'equipment',records:[
+    {id:'1',name:'Fighter',category:'Fighter',nation:'Eagle Union',typeCode:7,forbiddenHullIds:[]}
+  ],renderCard:card});
+  assert.doesNotMatch(html,/catalog-filter-note/);
+  assert.doesNotMatch(html,/Verify ship-specific slots/);
 });
