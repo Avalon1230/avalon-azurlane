@@ -11,6 +11,7 @@ import { renderShipRosterTile } from './ship-roster.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
 import { loadWikiDefaultArtwork } from './wiki-artwork.js';
+import { loadWikiShipFacts } from './wiki-ship-facts.js';
 import { nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
@@ -338,6 +339,18 @@ function renderUpdates() {
 }
 
 const wikiArtCache=new Map();
+const wikiFactsCache=new Map();
+function loadWikiFactsForCurrentShip() {
+  const sourceId=String(state.detail?.sourceId||'');
+  const record=detailedShipRecord(state.shipDetails.data,sourceId);
+  if(!record?.wikiUrl || wikiFactsCache.has(sourceId))return;
+  wikiFactsCache.set(sourceId,null);
+  void loadWikiShipFacts(record.wikiUrl,sourceId).then(facts=>{
+    wikiFactsCache.set(sourceId,facts||null);
+    if(facts && state.page==='ships' && state.detail?.sourceId===sourceId && !state.artViewerOpen)render();
+  }).catch(()=>wikiFactsCache.set(sourceId,null));
+}
+
 function loadWikiArtForCurrentShip() {
   const sourceId=String(state.detail?.sourceId||'');
   const record=detailedShipRecord(state.shipDetails.data,sourceId);
@@ -353,6 +366,7 @@ async function loadShipProfileData() {
   if(state.shipDetails.status==='loading')return;
   if(state.shipDetails.status==='ready'){
     loadWikiArtForCurrentShip();
+    loadWikiFactsForCurrentShip();
     return;
   }
   state.shipDetails={status:'loading',data:null,artwork:null,error:''};
@@ -370,7 +384,10 @@ async function loadShipProfileData() {
   }
   if(state.page==='ships' && state.detail?.kind==='ship'){
     render();
-    if(ships.status==='fulfilled')loadWikiArtForCurrentShip();
+    if(ships.status==='fulfilled'){
+      loadWikiArtForCurrentShip();
+      loadWikiFactsForCurrentShip();
+    }
   }
 }
 
@@ -407,7 +424,8 @@ function render() {
         ? {...skin,images:{...skin.images,wiki:wikiPainting}}:skin);
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
-      level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins
+      level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins,
+      wikiFacts:wikiFactsCache.get(recordId)||null
     });
   } else {
     $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
