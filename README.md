@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.3.1 research-first recommendation prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
+> **Project status:** **v0.4 contextual recommendation prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -50,14 +50,14 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 Open the [Tier Boards](https://avalon1230.github.io/avalon-azurlane/#/tiers) page:
 
-1. **Ship Combat — read-only research recommendations.** Displays a deliberately small set of externally published, **mode-specific** expert placements with the author's original grade, scenario, limitations, source and check date. It is **not** a personal tier editor. Any ship lacking sufficient reviewed evidence stays **Not Yet Evaluated**.
-2. **Equipment — read-only research recommendations.** Displays source-backed gear priorities tied to boss/armor conditions and source links. It is **not** a personal equipment editor, and source opinions are not represented as independently calculated AVALON ratings.
+1. **Ship Combat — AVALON editorial assessments.** Displays provisional context-bound EX/S/A/B recommendations, why that ship fits, when not to use it, alternatives, sources, confidence and review date. This is **not** a personal tier editor or a simulated damage ranking. Unreviewed ships stay **Not Yet Evaluated**.
+2. **Equipment — AVALON editorial gear assessments.** Shows provisional equipment recommendations for specific target armor, situations, and roles, along with caveats, alternative gear, references, confidence and review dates. It is **not** a personal tier editor, nor a numerical best-in-slot engine.
 3. **Waifu Favorites — personal and subjective.** Editable rankings for a limited, individually reviewed set of adult-portrayed characters; childlike or ambiguous portrayals are excluded.
 4. **Must Protect! — Headpats Division — personal and platonic.** Editable wholesome rankings for selected childlike or little characters.
 
-The first source references are a *selective* sample from [REGAL](https://azur-lane-regal.suchiguma.com/) and [Suchiguma's Research Focus](https://suchiguma.github.io/miniguides/research-focus/), checked November 10, 2026. They are explicitly **external expert recommendations**, not AVALON's own computed and verified scores. They can become outdated when original authors or game mechanics change. No source's full tier list is mirrored, and no ship is assigned an AVALON-wide universal grade without evidence.
+The new [AVALON assessments](src/assessments.js) combine select specialist guide evidence with explicit editorial judgment. **EX = defining for the stated role; S = highly recommended; A = strong with trade-offs; B = workable budget/situational option**. Those judgments are provisional and only comparable **within the same mode and role**; they are neither copied source grades nor computed numerical combat results. Sources include [Research Focus](https://suchiguma.github.io/miniguides/research-focus/), [Chapter 15](https://suchiguma.github.io/guides/chapter-15/), [Chapter 16](https://suchiguma.github.io/guides/chapter-16-fleets/), [REGAL](https://azur-lane-regal.suchiguma.com/), and additional linked references. Unreviewed ships and unsupported modes remain unevaluated; source coverage and confidence are visible on each card.
 
-**Roadmap:** Build AVALON's own assessment system with versioned game data, comparable fleet conditions, mode filters, numerical damage/survival/utility evaluation, confidence levels, and a reproducible explanation for *why* a ship or gear is recommended. Eventually distinguish independent AVALON evaluation from third-party expert consensus.
+**Roadmap:** Expand review coverage beyond the initial evidence-backed editorial samples, then build versioned game data and reproducible combat comparisons, with numerical damage/survival/utility calculations where legitimately supported. Eventually distinguish independent AVALON evaluation from third-party expert consensus.
 
 The two character boards remain draggable/editable, independently stored in this browser, and JSON-exportable. They do not sync across devices and contain no copyrighted art. Individual curation, **not hull class**, determines which character board includes each ship.
 

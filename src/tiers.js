@@ -6,18 +6,18 @@
 
 export const TIER_BOARDS = Object.freeze({
   ships: {
-    title: 'Ship Combat', icon: '⚓', kind: 'ships', label: 'Published combat research', readOnly: true,
-    subtitle: 'Find research-backed ship recommendations for specific encounters; AVALON will add independently reviewed scores as evidence develops.',
+    title: 'Ship Combat', icon: '⚓', kind: 'ships', label: 'AVALON contextual assessments', readOnly: true,
+    subtitle: 'See which ships AVALON recommends for a particular mode and role, with rationale, evidence, trade-offs and confidence.',
     tiers: ['EX', 'S', 'A', 'B', 'C', 'D'],
     meanings: { EX:'Exceptional', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
-    note: 'Read-only reference snapshots are clearly attributed to their original authors. Their published grades are not yet AVALON scores; unreviewed ships remain unevaluated.'
+    note: 'AVALON provisional editorial grades, not simulated performance or universal scores. Every grade is scoped to a role, source-linked, and revisable; unreviewed ships remain unevaluated.'
   },
   equipment: {
-    title: 'Equipment', icon: '⚙', kind: 'equipment', label: 'Published equipment research', readOnly: true,
-    subtitle: 'See expert-supported gear priorities, use-case limitations, and acquisition research—not a blank board you have to rate yourself.',
+    title: 'Equipment', icon: '⚙', kind: 'equipment', label: 'AVALON contextual gear assessments', readOnly: true,
+    subtitle: 'See which gear AVALON recommends for a target, role and mode, with viable alternatives and source-backed reasoning.'
     tiers: ['EX', 'S', 'A', 'B', 'C', 'D'],
     meanings: { EX:'Exceptional', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
-    note: 'These are narrow, attributed recommendations; exact stats, slot-specific best-in-slot claims, and AVALON-calculated tiers require further validation.'
+    note: 'AVALON provisional editorial grades, not numerical DPS or verified best-in-slot claims. Use target armor, ship slots, costs and attack timing before investing.'
   },
   waifu: {
     title: 'Waifu Favorites', icon: '♥', kind: 'ships', label: 'Personal character favorites',

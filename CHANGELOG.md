@@ -2,6 +2,22 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.4.0] - 2026-11-10
+
+### Fixed
+- Ship and Equipment boards now **tell readers what AVALON recommends**, instead of showing only source-grades or asking players to provide their own rankings.
+- Kept the original two subjective boards editable; combat boards remain read-only and distinct.
+
+### Added
+- Initial **15 ship-scenario assessments and 8 gear-scenario assessments**, ordered by context-bound EX/S/A/B editorial grades.
+- Role-based explanations, limiting conditions, alternative picks, multiple source links where available, confidence descriptors and review dates on each assessment.
+- Game-mode filtering, search, and clear **Not Yet Evaluated** treatment for the many catalog entries without reviewed evidence.
+- New provenance and rendering tests covering source integrity, mode boundaries, and untrusted text escaping.
+
+### Limitations
+- These are **provisional AVALON editorial syntheses**, not simulated damage/eHP, measured performance, or a universal tier list. Uncovered modes (for example PvP) intentionally show no ratings.
+- Gear crafting recipes, complete roster coverage, detailed combat simulations, and an automated review/update pipeline are still not implemented.
+
 ## [0.3.1] - 2026-11-10
 
 ### Fixed

@@ -53,3 +53,11 @@ Any performance assessment additionally needs a mode/scenario, enemy context, lo
 ## Recommended next step
 
 Verify permissions for broader reuse and implement an auditable, pinned snapshot pipeline only when authorized. This release performs **optional direct browser reads of GitHub-hosted third-party indexes**, not unverified Koumakan wiki scraping. Add complete ship stats, enemy data, equipment recipes, and scenario testing before attempting evidence-based scoring.
+
+## v0.4 initial editorial reviews
+
+The current [AVALON assessment records](../src/assessments.js) are independently authored summaries of contextual recommendations supported by linked third-party guides. They use **provisional editorial** EX/S/A/B grades, not their sources' original grade notation and not numerical modeling. Each assessment includes a game mode, role, conditions and limitations, editorial evidence-confidence descriptor, sources and a review date.
+
+The primary references include Suchiguma's [Research Focus](https://suchiguma.github.io/miniguides/research-focus/), [Chapter 15](https://suchiguma.github.io/guides/chapter-15/), and [Chapter 16 Fleets](https://suchiguma.github.io/guides/chapter-16-fleets/), plus [REGAL](https://azur-lane-regal.suchiguma.com/) and clearly labeled secondary guides. The original authors are not endorsing AVALON and their sites may change independently. Where there is no reviewed evidence, the interface says **Not Yet Evaluated** instead of inventing a grade.
+
+**Confidence is qualitative**, not an estimated success percentage. High or moderate confidence is not a substitute for controlled measurements; independent ship, gear, mode and enemy tests remain required before numerical performance claims or fully automated fleet optimization.

@@ -105,3 +105,18 @@
 .research-grade{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d7b77d;background:#59462b;border-radius:8px;padding:8px 12px;font-size:14px;color:#ffe2a9;font-weight:900;white-space:nowrap}
 .research-context{font-size:10px;color:#92c4db;text-transform:uppercase;letter-spacing:.08em}
 .research-source{display:block;color:#7897ad;font-size:10px}
+
+/* v0.4 — evidence-linked AVALON editorial analysis */
+.assessment-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,335px),1fr))}
+.avalon-assessment-card{gap:13px}
+.avalon-assessment-card .eyebrow{margin-top:4px;color:#8dd6e8}
+.avalon-assessment-card .assessment-why{color:#d3e6f1}
+.avalon-assessment-card strong{color:#effbff}
+.avalon-assessment-card .research-caveat strong{color:#ffdda0}
+.avalon-assessment-card .assessment-alternatives{font-size:12px;color:#a9c8d9;background:#102f42;padding:9px 11px;border:1px solid #2d5972;border-radius:7px}
+.assessment-links{display:flex;gap:7px 15px;flex-wrap:wrap;margin-top:auto;padding-top:12px;border-top:1px solid #2d4a60}
+.assessment-metadata{display:flex;flex-wrap:wrap;justify-content:space-between;gap:7px;color:#97b5c9;font-size:10px;border-top:1px solid #274258;padding-top:10px}
+.research-grade.grade-ex{background:#775326;border-color:#e9c06f;color:#ffe6aa}
+.research-grade.grade-s{background:#543766;border-color:#b58cdb;color:#f5d6ff}
+.research-grade.grade-a{background:#254e6c;border-color:#5ca3d4;color:#c2e9ff}
+.research-grade.grade-b{background:#24594c;border-color:#4fa78c;color:#d3fff1}
