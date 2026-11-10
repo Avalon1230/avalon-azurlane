@@ -112,6 +112,7 @@ test('compact ship filters and sorting use clickable buttons with no hull dropdo
   assert.match(roster,/data-action="ship-hull-filter" data-hull="Vanguard"/);
   assert.match(roster,/data-action="ship-hull-filter" data-hull="BB"/);
   assert.match(roster,/data-action="ship-sort" data-sort="rarity"/);
+  assert.match(roster,/data-action="ship-rarity-filter" data-rarity="Ultra Rare"/);
   assert.match(roster,/Descending ↓/);
   assert.doesNotMatch(roster,/id="hull-filter"/);
   assert.ok(roster.indexOf('data-ship="2"') < roster.indexOf('data-ship="3"'));
