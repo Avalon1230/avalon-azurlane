@@ -626,3 +626,89 @@
 @media(max-width:760px){.equipment-gallery{grid-template-columns:repeat(auto-fill,minmax(107px,1fr));gap:7px}
  .equipment-roster-art{min-height:96px}.equipment-roster-art .asset-roster-equipment{width:82px;height:82px}}
 @media(prefers-reduced-motion:reduce){.equipment-roster-tile{transition:none}.equipment-roster-tile:hover{transform:none}}
+
+
+/* v0.7.8 — compact equipment research controls and verified source families. */
+.equipment-index{min-width:0}
+.equipment-compact-toolbar{
+  position:sticky;top:0;z-index:18;
+  display:flex;flex-direction:column;gap:8px;
+  padding:10px 12px;margin:4px -12px 8px;
+  background:rgba(9,25,41,.96);border:1px solid #25465f;
+  border-radius:10px;backdrop-filter:blur(12px);
+  box-shadow:0 7px 20px #0004;
+}
+.equipment-search-row{display:flex;align-items:center;gap:9px;min-width:0}
+.equipment-search-row .search-wrap{flex:1;min-width:0}
+.equipment-advanced-toggle{display:flex;align-items:center;gap:7px;flex:none;min-height:34px;white-space:nowrap}
+.equipment-advanced-toggle.has-active-filters{border-color:#65b6d9;color:#e3f8ff}
+.equipment-filter-count{
+  display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;
+  border-radius:20px;background:#246e94;color:#fff;font-size:10px;font-weight:800;
+}
+.equipment-sort-bar{display:flex;align-items:flex-end;flex-wrap:wrap;gap:8px 10px}
+.equipment-sort-bar .equipment-filter-field{display:flex;flex-direction:row;align-items:center;gap:6px}
+.equipment-filter-field{display:flex;flex-direction:column;min-width:0;gap:5px;color:#93b9cf;font-size:11px;font-weight:750}
+.equipment-filter-field select{
+  max-width:100%;min-height:31px;color:#eaf8ff;background:#0e273b;
+  border:1px solid #3e6883;border-radius:6px;padding:5px 9px;font-size:11px;
+}
+.equipment-direction-btn{min-height:31px}
+.equipment-quick-categories{
+  display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:thin;scrollbar-color:#3f799b transparent;
+  padding:3px 1px 8px;margin-bottom:5px
+}
+.equipment-category-tab{
+  flex:none;min-height:34px;padding:7px 12px;
+  border:1px solid #335975;border-radius:7px;background:#112b40;
+  color:#bed8e6;font-weight:800;font-size:11px;white-space:nowrap
+}
+.equipment-category-tab:hover{background:#1b405a;color:#fff;border-color:#79c5e8}
+.equipment-category-tab.active{
+  background:#236b92;border-color:#82d8f6;color:#fff;
+  box-shadow:inset 0 -2px 0 #9ce8fa
+}
+.equipment-advanced-panel{
+  display:grid;grid-template-columns:repeat(4,minmax(125px,1fr));
+  gap:11px;align-items:end;padding:13px;
+  border:1px solid #385a72;border-radius:9px;background:#10273c;
+  margin:4px 0 10px;
+}
+.equipment-advanced-panel[hidden]{display:none}
+.equipment-filter-actions{display:flex;flex-wrap:wrap;gap:8px;grid-column:1 / -1;justify-content:flex-end}
+.equipment-active-filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:7px 0 11px}
+.equipment-active-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 9px;border:1px solid #5187a3;border-radius:20px;
+  color:#e2f7ff;background:#15374e;font-size:10px;font-weight:750;
+}
+.equipment-active-chip span{font-size:15px;color:#99dff5}
+.equipment-clear-all{border:0;background:transparent;color:#a8c4d8;font-size:11px;text-decoration:underline;cursor:pointer;padding:5px 7px}
+.equipment-result-summary{margin-top:4px}
+.equipment-result-summary span:last-child{font-size:11px}
+.equipment-family-tile .equipment-roster-footer strong{color:#8ce4ed;font-weight:850;white-space:nowrap}
+.equipment-family-notice{color:#b6cfdd;line-height:1.6;font-size:12px;margin:6px 0 15px}
+.equipment-family-variants{display:flex;flex-direction:column;gap:8px}
+.equipment-family-variant{
+  display:flex;align-items:center;text-align:left;gap:10px;
+  width:100%;border-radius:8px;padding:10px;
+  color:#e9f8ff;background:#143047;border:1px solid #3f6780;cursor:pointer;
+}
+.equipment-family-variant:hover{background:#1b405a;border-color:#86cce8}
+.equipment-family-variant>span:nth-child(2){display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.equipment-family-variant strong{font-size:12px;overflow-wrap:anywhere}
+.equipment-family-variant small{font-size:11px;color:#abcad9}
+.equipment-family-variant>span:last-child{color:#9edbf5}
+@media(max-width:850px){
+  .equipment-advanced-panel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .equipment-compact-toolbar{margin-left:0;margin-right:0}
+}
+@media(max-width:480px){
+  .equipment-compact-toolbar{padding:9px 8px;gap:6px}
+  .equipment-advanced-panel{grid-template-columns:1fr}
+  .equipment-sort-bar{gap:7px}
+  .equipment-sort-bar .equipment-filter-field select{max-width:158px}
+  .equipment-category-tab{font-size:10px;padding:6px 10px}
+  .equipment-result-summary{align-items:flex-start}
+}
