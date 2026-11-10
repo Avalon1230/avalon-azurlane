@@ -20,4 +20,6 @@ test('nation emblem markup retains text fallback and escapes untrusted names',()
   assert.doesNotMatch(unknown,/<script>/);
   assert.doesNotMatch(unknown,/<img/);
   assert.match(unknown,/nation-emblem-fallback/);
+  assert.match(unknown,/>◇<\/span>/);
+  assert.doesNotMatch(nationEmblemMarkup('Eagle Union'),/>EU<\/span>/);
 });
