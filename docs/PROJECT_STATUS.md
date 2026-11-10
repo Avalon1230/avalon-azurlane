@@ -5,9 +5,9 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 ## Source of truth and current development
 
 - Repository: https://github.com/Avalon1230/avalon-azurlane
-- **v0.7.0 development candidate:** `feat/compact-ship-gallery-and-full-profiles`. Adds dense portrait gallery and source-backed full-page ship records with lazy Lycoris full-data loading; awaiting CI and merge. See `docs/SHIP_PROFILES.md`.
+- v0.7.0 delivered by [PR #4](https://github.com/Avalon1230/avalon-azurlane/pull/4), merged into main. **93/93 tests passed**, JavaScript syntax checks passed on feature branch [Actions run 42809749844](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42809749844). GitHub Pages release deployment must be independently confirmed. See `docs/SHIP_PROFILES.md`.
 - Live site: https://avalon1230.github.io/avalon-azurlane/
-- Current release: **main / v0.6.2 / 7593cab582c827d8c52a422b5f383d60c0bb37bc** (faction hierarchy, emblem visibility and site-wide presentation cleanup merged 2026-11-10).
+- Current release: **main / v0.7.0 / d0501fc54fb27046b8bf3c651c19050c99bc11c3** (dense ship gallery and detailed ship profiles, 2026-11-10).
 - Release PR [#2](https://github.com/Avalon1230/avalon-azurlane/pull/2) merged into `main`. Main factions → META → Bulins → Collab; authentic emblems enlarged and contrasted; routine source disclaimers consolidated under Sources while functional warnings remain.
 - Previous PR [#1](https://github.com/Avalon1230/avalon-azurlane/pull/1) shipped v0.6.1, now superseded by v0.6.2.
 - Verified v0.6.2 PR checks: **80/80 tests passed** and `npm run check` succeeded ([GitHub Actions #42804415298](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42804415298)); merge succeeded. Verify merged main build/deployment separately.
@@ -41,13 +41,14 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 - Original game-asset thumbnails and equipment icons with source attribution and fallbacks.
 - Provisional, context-specific, evidence-linked AVALON combat assessments and independent character favorite boards.
 
-**Delivered in v0.6.1–v0.6.2:**
+**Delivered in v0.6.1–v0.7.0:**
 - Replace initial Ship Index grid with compact nation/faction selection cards.
 - Show original game-client nationality emblems (independent community host), dynamic counts, global search, and text fallback for unverified factions.
 - Open filtered ship roster on nation click; keep hull filtering, search, pagination, inspect/assign, and a return-to-nations control.
 - Preserve the existing Equipment Index behavior.
 - Add new tests, docs, release notes and this handoff.
 - Quality workflow verified; PR #1 merged. Visual browser/phone inspection of live deployment is still recommended.
+- v0.7.0 Ship Index nation rosters now use dense, rarity-accented clickable portraits; ship dossiers have direct source-ID links and real sourced stats, skills, equipment efficiencies, acquisition, skins, limit breaks and fleet tech. Full detail feed is requested lazily on opening a ship. Button filters include hull groups, rarity and sort by name/rarity/hull. Duplicate-name source IDs now remain distinct; 890-vs-894 import bug corrected.
 
 ## Research data / external integration
 
@@ -68,7 +69,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 
 ## Next development steps
 
-0. Verify v0.7.0 CI and desktop/mobile gallery/profile behavior, including bookmarked ship links, original skins, sorting/filtering and returning to the same roster. Merge only on passing checks; confirm GitHub Pages deployment.
+0. v0.7.0 PR passed 93/93 tests and merged. Confirm final GitHub Pages deployment and visually inspect desktop/mobile gallery and profiles, including bookmarked ship links, skins, sorting/filtering and roster return.
 
 0. Verify v0.6.2 GitHub Pages deployment and inspect live desktop/mobile visuals, particularly enlarged faction emblem contrast, category navigation, Collab search, Bulins and the Sources panel. Automated quality checks passed.
 1. Confirm GitHub Pages deployment for the merged v0.6.1 version and visually verify the nation-first interface on desktop/mobile.
