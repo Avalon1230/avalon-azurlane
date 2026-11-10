@@ -66,6 +66,40 @@ export function verifiedShipSlots(data,wikiFacts=null) {
   });
 }
 
+/**
+ * Render the normal 3 + 2 + augment arrangement without claiming that generic
+ * auxiliary positions are individually verified. Unusual ships can retain any
+ * additional source-declared slots. Do not fabricate an augment item.
+ */
+export function loadoutDisplaySlots(data,wikiFacts=null) {
+  const sourced=verifiedShipSlots(data,wikiFacts);
+  const primary=Array.from({length:3},(_,index)=>sourced[index]?
+    {...sourced[index],kind:sourced[index].categories.includes('Auxiliary')?'auxiliary':'weapon',provisional:false}:
+    {index,kind:'weapon',type:'Weapon slot · details unavailable',categories:[],
+      source:'Ship-specific slot data unavailable',verified:false,provisional:false,
+      minEfficiency:null,maxEfficiency:null,maxMounts:null});
+  const extra=sourced.slice(3).map(slot=>({...slot,
+    kind:slot.categories.includes('Auxiliary')?'auxiliary':'special',provisional:false}));
+  const slots=[...primary,...extra];
+  const documentedAux=extra.filter(slot=>slot.kind==='auxiliary').length;
+  for(let i=documentedAux;i<2;i++)slots.push({
+    index:slots.length,kind:'auxiliary',type:'Auxiliary',categories:['Auxiliary'],
+    source:'Standard equipment layout · ship-specific rules unverified',
+    verified:false,provisional:true,minEfficiency:null,maxEfficiency:null,maxMounts:null
+  });
+  // Augments are a separate inventory system. A wiki-listed augment TYPE does
+  // not mean that a particular augment item or effect is verified.
+  const aug=typeof wikiFacts?.augmentType==='string'&&
+    String(wikiFacts.sourceId)===String(data?.id)?wikiFacts.augmentType.trim():null;
+  slots.push({
+    index:slots.length,kind:'augment',type:aug?'Augment · '+aug:'Augment',
+    augmentType:aug||null,source:aug?'Koumakan Wiki · type only':'Augment eligibility not verified',
+    categories:[],verified:false,provisional:false,
+    minEfficiency:null,maxEfficiency:null,maxMounts:null
+  });
+  return slots;
+}
+
 function numericStat(item,key) {
   const n=item?.stats?.[key];
   return typeof n==='number'&&Number.isFinite(n)?n:null;
@@ -85,7 +119,7 @@ function orderCandidates(candidates,mode) {
   });
 }
 export function candidatesForSlot(ship,slot,equipment,mode='general') {
-  if(!ship?.hull||!slot?.verified||!Array.isArray(equipment))return [];
+  if(!ship?.hull||(!slot?.verified&&!slot?.provisional)||slot?.kind==='augment'||!Array.isArray(equipment))return [];
   const allowed=new Set(slot.categories);
   const matches=equipment.filter(item=>
     item?.source==='fernando' && /^\d{2,8}$/.test(String(item.sourceId||'')) &&
@@ -95,7 +129,15 @@ export function candidatesForSlot(ship,slot,equipment,mode='general') {
   return orderCandidates(matches,mode);
 }
 export function candidateEvidence(slot,item,mode='general') {
-  if(!item)return 'No equipment candidate has been verified for this slot.';
+  if(slot?.kind==='augment')return slot.augmentType
+    ? 'Koumakan Wiki identifies augment type '+slot.augmentType+'. Individual module eligibility and effects have not been verified; no augment is selected.'
+    : 'This ship\'s augment eligibility and compatible module have not been verified. No module will be guessed.';
+  if(slot?.provisional)return item
+    ? 'This is a manually chosen potential Auxiliary: source category and hull restrictions match, but the slot itself is inferred from the standard layout. Ship-specific exceptions and duplicate restrictions remain unverified.'
+    : 'Auxiliary position inferred from the standard equipment layout, not verified for this individual ship. Explore source/hull-matched possibilities; no default equipment is assumed.';
+  if(!item)return slot?.verified
+    ? 'No source-matched equipment candidate was found for this verified slot.'
+    : 'Ship-specific slot category is not verified, so no equipment is assigned.';
   const pct=Number.isFinite(slot.maxEfficiency)?' · slot efficiency up to '+Math.round(slot.maxEfficiency*100)+'%':'';
   const parts=['Source category '+item.category+' matches '+slot.type+pct+'.',
     'The source records potential hull compatibility after class restrictions. Ship-specific exceptions still require checking.'];
@@ -108,11 +150,13 @@ export function candidateEvidence(slot,item,mode='general') {
 
 export function buildShipLoadout({ship=null,data=null,wikiFacts=null,equipment=[],mode='general',overrides={}}={}) {
   const selectedMode=LOADOUT_MODES.some(item=>item.id===mode)?mode:'general';
-  const slots=verifiedShipSlots(data,wikiFacts).map(slot=>{
+  const slots=loadoutDisplaySlots(data,wikiFacts).map(slot=>{
     const candidates=candidatesForSlot(ship,slot,equipment,selectedMode);
     const manualId=String(overrides?.[slot.index]||'');
     const manual=manualId?candidates.find(x=>x.id===manualId):null;
-    const selected=manual||candidates[0]||null;
+    // Auto-fill only a sourced primary/auxiliary slot. For inferred aux slots
+    // show a choice, never a fictitious best-in-slot.
+    const selected=manual||(!slot.provisional&&slot.verified?candidates[0]:null)||null;
     return {...slot,candidates,selected,manual:!!manual,
       explanation:candidateEvidence(slot,selected,selectedMode)};
   });
@@ -129,5 +173,5 @@ export function buildShipLoadout({ship=null,data=null,wikiFacts=null,equipment=[
 export function validateManualChoice(model,slotIndex,equipmentId) {
   if(!model||!Number.isSafeInteger(slotIndex)||slotIndex<0)return false;
   const slot=model.slots.find(x=>x.index===slotIndex);
-  return !!slot?.candidates.some(item=>item.id===equipmentId);
+  return slot?.kind!=='augment' && !!slot?.candidates.some(item=>item.id===equipmentId);
 }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  LOADOUT_MODES,slotCategories,verifiedShipSlots,candidatesForSlot,
+  LOADOUT_MODES,slotCategories,verifiedShipSlots,loadoutDisplaySlots,candidatesForSlot,
   buildShipLoadout,validateManualChoice,candidateEvidence
 } from '../src/loadout-intelligence.js';
 import { renderLoadoutPanel,renderLoadoutAlternatives } from '../src/loadout-view.js';
@@ -91,25 +91,28 @@ test('saved manual picks must still match exact slot, type and hull',()=>{
   assert.equal(validateManualChoice(changed,2,'fer-1120'),false);
 });
 test('missing slots and unsupported categories must not receive synthetic equipment',()=>{
-  assert.equal(buildShipLoadout({ship,data:{id:'11802',slots:[]},equipment}).slots.length,0);
+  const missing=buildShipLoadout({ship,data:{id:'11802',slots:[]},equipment});
+  assert.equal(missing.slots.length,6);
+  assert.equal(missing.slots.slice(0,3).every(slot=>!slot.verified&&slot.selected===null),true);
+  assert.equal(missing.slots[5].kind,'augment');
   const unsupported=buildShipLoadout({ship,data:{id:'11802',slots:[{type:'Unconfirmed Beam Cannon'}]},equipment});
   assert.equal(unsupported.slots[0].selected,null);
   assert.equal(unsupported.slots[0].verified,false);
-  assert.match(candidateEvidence(unsupported.slots[0],null),/No equipment candidate/);
+  assert.match(candidateEvidence(unsupported.slots[0],null),/Ship-specific slot category is not verified/);
 });
 test('ship profile embeds tactical planner beneath identity but outside artwork',()=>{
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
   const html=renderShipProfile({ship,data,loadoutModel:model,artworkSkins:[]});
   assert.match(html,/class="ship-profile-left"/);
-  assert.match(html,/class="ship-loadout-panel"/);
+  assert.match(html,/class="ship-loadout-panel ship-loadout-compact"/);
   assert.ok(html.indexOf('class="ship-profile-overview"')<
-    html.indexOf('class="ship-loadout-panel"'));
-  assert.ok(html.indexOf('class="ship-loadout-panel"')<
+    html.indexOf('class="ship-loadout-panel ship-loadout-compact"'));
+  assert.ok(html.indexOf('class="ship-loadout-panel ship-loadout-compact"')<
     html.indexOf('class="ship-art-panel"'));
   assert.match(html,/data-action="loadout-mode"/);
   assert.match(html,/data-action="loadout-inspect" data-equip="fer-1020"/);
-  assert.match(html,/data-action="loadout-alternatives" data-slot="0"/);
-  assert.match(html,/SOURCE-MATCHED|Source-matched/);
+  assert.match(html,/data-action="loadout-slot-info" data-slot="0"/);
+  assert.match(html,/Planning · Sourced/);
   assert.doesNotMatch(html,/Simulated DPS|Best in slot|guaranteed optimum/);
 });
 test('alternative chooser exposes authentic source icons and lets users select legal records',()=>{
@@ -128,5 +131,76 @@ test('loadout UI escapes untrusted equipment names and ship slot types',()=>{
   const html=renderLoadoutPanel(model);
   assert.match(html,/&lt;svg onload=alert\(1\)&gt;/);
   assert.doesNotMatch(html,/<svg/);
-  assert.match(html,/No verified mode-specific performance advantage/);
+  assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
+  assert.match(renderLoadoutAlternatives(model,0),/No verified mode-specific performance advantage/);
+});
+
+test('standard ship display has exactly three weapon, two provisional auxiliary and one augment position',()=>{
+  assert.equal(verifiedShipSlots(data,wiki).length,3);
+  const slots=loadoutDisplaySlots(data,wiki);
+  assert.equal(slots.length,6);
+  assert.deepEqual(slots.map(x=>x.kind),['weapon','weapon','weapon','auxiliary','auxiliary','augment']);
+  assert.equal(slots[3].provisional,true);
+  assert.equal(slots[4].provisional,true);
+  assert.equal(slots[5].augmentType,'Sword');
+  const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
+  assert.equal(model.slots.length,6);
+  assert.equal(model.slots[0].selected?.id,'fer-1020');
+  assert.equal(model.slots[3].selected,null);
+  assert.equal(model.slots[4].selected,null);
+  assert.equal(model.slots[5].selected,null);
+  assert.match(model.slots[3].explanation,/standard equipment layout/);
+  assert.match(model.slots[5].explanation,/no augment is selected/);
+});
+test('manual auxiliary choices remain potential, source-matched, and never auto-equipped',()=>{
+  const auxiliary=gear(1180,'Source Auxiliary',10,'Auxiliary','Super Rare',{durability:180});
+  const dataset=[...equipment,auxiliary];
+  const auto=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset});
+  assert.ok(auto.slots[3].candidates.some(x=>x.id==='fer-1180'));
+  assert.equal(auto.slots[3].selected,null);
+  assert.equal(validateManualChoice(auto,3,'fer-1180'),true);
+  assert.equal(validateManualChoice(auto,5,'fer-1180'),false);
+  const picked=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset,overrides:{3:'fer-1180',5:'fer-1180'}});
+  assert.equal(picked.slots[3].selected?.id,'fer-1180');
+  assert.equal(picked.slots[3].manual,true);
+  assert.equal(picked.slots[5].selected,null);
+  assert.match(picked.slots[3].explanation,/remain unverified/);
+});
+test('source-recorded extra equipment positions are preserved before inferred auxiliaries and augment',()=>{
+  const documented={...data,slots:[...data.slots,
+    {type:'Auxiliary',minEfficiency:1,maxEfficiency:1},
+    {type:'Auxiliary',minEfficiency:1,maxEfficiency:1}]};
+  const six=loadoutDisplaySlots(documented,wiki);
+  assert.deepEqual(six.map(x=>x.kind),['weapon','weapon','weapon','auxiliary','auxiliary','augment']);
+  assert.equal(six[3].source,'Lycoris-AzurAPI');
+  assert.equal(six[4].provisional,false);
+  const extra={...data,slots:[...documented.slots,{type:'Auxiliary'}]};
+  const exceptional=loadoutDisplaySlots(extra,wiki);
+  assert.equal(exceptional.length,7); // third source-confirmed auxiliary is not discarded
+  assert.deepEqual(exceptional.slice(3,6).map(x=>x.kind),['auxiliary','auxiliary','auxiliary']);
+  assert.equal(exceptional[6].kind,'augment');
+});
+test('exceptional source-declared auxiliary in a first-three slot is not mislabeled as weapon',()=>{
+  const repair={id:'30715',slots:[
+    {type:'Auxiliary'}, {type:'Anti-Air Gun'}, {type:'Anti-Air Gun'}
+  ]};
+  const slots=loadoutDisplaySlots(repair);
+  assert.equal(slots[0].kind,'auxiliary');
+  assert.equal(slots[0].source,'Lycoris-AzurAPI');
+  assert.equal(slots.filter(x=>x.kind==='auxiliary').length,3);
+  assert.equal(slots.length,6); // two provisional additional auxiliaries + augment
+});
+test('compact planner uses two rows of three, retains click-to-inspect, and hides explanations until requested',()=>{
+  const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
+  const html=renderLoadoutPanel(model);
+  assert.match(html,/class="loadout-slots loadout-compact-grid"/);
+  assert.equal((html.match(/class="loadout-compact-slot/g)||[]).length,6);
+  assert.match(html,/data-action="loadout-inspect" data-equip="fer-1020"/);
+  assert.match(html,/data-action="loadout-slot-info" data-slot="5"/);
+  assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
+  const detail=renderLoadoutAlternatives(model,5);
+  assert.match(detail,/Augment modules require a dedicated verified module database/);
+  assert.match(detail,/No source-confirmed selectable equipment/);
+  assert.doesNotMatch(detail,/data-action="loadout-select"/);
+  assert.match(renderLoadoutAlternatives(model,3),/Potential auxiliary position/);
 });
