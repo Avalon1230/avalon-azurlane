@@ -57,6 +57,12 @@ The same API supplied verified source image URLs for faction emblems previously 
 
 **Boundary:** The API metadata lookup is *not* an audited bulk importer of ship stats, skills, barrage tables, equipment data, or complete skin galleries. Those fields continue to use existing source datasets and reconstructed painting links until access terms, provenance, game-version reconciliation and data structure are reviewed. Do not describe the complete AVALON database as wiki-hosted yet.
 
+## Ship template enrichment (2026-11-10)
+
+AVALON now retrieves *individual* ship info via MediaWiki `action=parse&page=<ship title>&prop=wikitext&origin=*`. A limited schema audit verified Amagi(CV) (GroupID 30715) and New Jersey (GroupID 10517) expose regular `{{Ship}}` parameters for stats through Lv.125, armor, oil consumption, equipment types/mount counts/efficiencies, skill icon IDs, constructor timing, and limit breaks. Because the wiki and Lycoris present different affinity/enhancement bases, wiki stat figures are preferred only for explicitly validated GroupIDs and labeled accordingly. Page content remains attributed to its original wiki; the runtime keeps only per-session data and does not build a bulk mirror.
+
+Current limitations include page templates that do not match the observed schema and unparsed barrage HTML tables. If a wiki response is invalid or unavailable, the app continues with existing Lycoris data and displays its source basis. Original wiki art rights remain distinct from the site's CC BY-NC-SA 4.0 text rights metadata.
+
 ## Proposed analysis architecture (not yet implemented)
 
 1. **Versioned game facts:** use attributed original game data when legally
