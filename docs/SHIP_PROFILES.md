@@ -28,6 +28,16 @@ Some game-client paintings with `_rw.webp` suffix contain isolated Live2D render
 
 Nation logos no longer have source-name abbreviations superimposed. If the source emblem is unavailable, a neutral placeholder is shown instead of inventing a faction insignia.
 
+## Wiki-backed combat profile fields (v0.7.3)
+
+The site fetches **one `action=parse&prop=wikitext` result per opened ship**, via Koumakan's documented MediaWiki API and CORS, with a strict response-size/time limit. It extracts only the wiki's top-level `{{Ship}}` template, **rejects** results whose `GroupID` does not match the selected ship's numeric game-data source ID, and caches results for the current browser session. This is not bulk wiki ingestion.
+
+When present, Koumakan fields take priority for base and Lv.100/120/125 **HP, FP, TRP, AVI, AA, RLD, EVA, ACC, SPD, LCK, ASW and oil** (numeric fields only). The source's Lv.100+ convention is **100 affinity and maximum enhancements**, whereas the original Lycoris snapshot can differ. AVALON displays a source label with the selected stat level to avoid misleading cross-source comparisons. Level variants unavailable in the wiki retain clearly labeled Lycoris values rather than invented results.
+
+Additional wiki-verified fields: **armor, construction time, voice actor, illustrator, main equipment type/efficiency and maximum number of mounts or planes, stage limit breaks, fleet-technology points, and skill icon IDs**. Source-backed acquisition history is labeled historical, not guaranteed current availability. Values are HTML-escaped, skill icon URLs are generated only from bounded numeric IDs, and missing records are left missing.
+
+**Not yet implemented:** Koumakan barrage rows and projectile damage coefficients, augment-module eligibility, exact ship-specific equipment legality and numerical skill synergy. These must not be implied by stat or ship rarity.
+
 ## Data contract
 
 The lightweight catalog still reads [Lycoris ship-list.json](https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json).
