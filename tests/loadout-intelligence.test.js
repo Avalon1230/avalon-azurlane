@@ -98,13 +98,13 @@ test('missing slots and unsupported categories must not receive synthetic equipm
   const unsupported=buildShipLoadout({ship,data:{id:'11802',slots:[{type:'Unconfirmed Beam Cannon'}]},equipment});
   assert.equal(unsupported.slots[0].selected,null);
   assert.equal(unsupported.slots[0].verified,false);
-  assert.match(candidateEvidence(unsupported.slots[0],null),/No equipment candidate/);
+  assert.match(candidateEvidence(unsupported.slots[0],null),/Ship-specific slot category is not verified/);
 });
 test('ship profile embeds tactical planner beneath identity but outside artwork',()=>{
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
   const html=renderShipProfile({ship,data,loadoutModel:model,artworkSkins:[]});
   assert.match(html,/class="ship-profile-left"/);
-  assert.match(html,/class="ship-loadout-panel"/);
+  assert.match(html,/class="ship-loadout-panel ship-loadout-compact"/);
   assert.ok(html.indexOf('class="ship-profile-overview"')<
     html.indexOf('class="ship-loadout-panel"'));
   assert.ok(html.indexOf('class="ship-loadout-panel"')<
@@ -164,7 +164,7 @@ test('manual auxiliary choices remain potential, source-matched, and never auto-
   assert.equal(picked.slots[3].selected?.id,'fer-1180');
   assert.equal(picked.slots[3].manual,true);
   assert.equal(picked.slots[5].selected,null);
-  assert.match(picked.slots[3].explanation,/not verified/);
+  assert.match(picked.slots[3].explanation,/remain unverified/);
 });
 test('source-recorded extra equipment positions are preserved before inferred auxiliaries and augment',()=>{
   const documented={...data,slots:[...data.slots,
