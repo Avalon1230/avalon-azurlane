@@ -45,7 +45,7 @@ export function imageMarkup(record, kind, cssClass='asset-thumb') {
   const source=kind==='equipment'
     ? {primary:equipmentImageUrl(record),fallback:null}
     : shipImageSources(record);
-  const {primary:src,fallback}=source;
+  const {primary:src,fallback:backupSrc}=source;
   const name=typeof record==='string'?record:(record?.name||'Unknown');
   const hull=typeof record==='object'&&record ? record.hull : '';
   const fallback=kind==='equipment'?'⚙':(hull||'SHIP');
@@ -53,7 +53,7 @@ export function imageMarkup(record, kind, cssClass='asset-thumb') {
   return '<span class="asset-media '+esc(cls)+'" role="img" aria-label="'+esc(name)+' · original game art or placeholder">' +
     '<span class="asset-fallback" aria-hidden="true">'+esc(fallback)+'</span>' +
     (src?'<img class="asset-img" src="'+esc(src)+'"'+
-      (fallback?' data-fallback-src="'+esc(fallback)+'"':'')+
+      (backupSrc?' data-fallback-src="'+esc(backupSrc)+'"':'')+
       ' alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">':'') +
     '</span>';
 }
