@@ -30,6 +30,7 @@ export const SHIP_HULL_GROUPS = Object.freeze({
   Misc: ['IX','OTHER']
 });
 export const SHIP_SORTS = Object.freeze(['name','rarity','hull']);
+export const SHIP_RARITIES = Object.freeze(['all','Normal','Rare','Elite','Super Rare','Ultra Rare']);
 const RARITY_ORDER = Object.freeze({
   'Normal':1,'Rare':2,'Elite':3,'Super Rare':4,'Priority':4,
   'Ultra Rare':5,'Decisive':5
@@ -88,7 +89,7 @@ export function shipBrowseCounts(rows) {
  * Search both raw nationality names and AVALON group labels while retaining
  * existing name, hull, and rarity search behavior from catalog-filters.js.
  */
-export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 'all' } = {}) {
+export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 'all', rarity = 'all' } = {}) {
   const hullMatched = SHIP_HULL_GROUPS[hull]
     ? filterShipRecords(rows).filter(ship=>SHIP_HULL_GROUPS[hull].includes(ship.hull))
     : filterShipRecords(rows,{hull});
@@ -99,6 +100,10 @@ export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 
   return hullMatched.filter(ship => {
     const group = shipBrowseNation(ship);
     if (nation !== 'all' && nation !== group) return false;
+    if (rarity !== 'all') {
+      const actual=ship.rarity==='Decisive'?'Ultra Rare':ship.rarity==='Priority'?'Super Rare':ship.rarity;
+      if(actual!==rarity) return false;
+    }
     return !term || sourceMatches.has(ship) || group.toLocaleLowerCase().includes(term);
   });
 }
