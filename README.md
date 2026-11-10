@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** Foundation. This repository is not yet a working website, tier list, or fleet optimizer.
+> **Project status:** **v0.1 functional prototype**. Static web application and local fleet planner are implemented. The catalog is a small, explicitly unranked sample; rankings, verified full-game data, and automatic optimization are not yet implemented.
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -20,6 +20,27 @@ The goal is to answer practical questions across **the entire game**, such as:
 - Why does a ship excel in one scenario but underperform elsewhere? What changed after a game update?
 
 Favorite-character ("waifu") selections are valid preferences, but will be kept separate from maximum-combat-efficiency comparisons.
+
+## Run the prototype
+
+No build step or external JavaScript dependencies are needed. Serve the repository root over HTTP (ES modules do not load reliably from `file://`):
+
+```bash
+python -m http.server 8765
+```
+
+Then open **http://localhost:8765**. The page has responsive game-mode navigation, ship/equipment searches, source links, and an interactive fleet builder covering all eight game-mode families. Operation Siren uses four separate surface fleets. The builder checks hull slots, prevents duplicate use of the same ship in a plan, persists plans only in the current browser (localStorage), and exports plans as JSON.
+
+Run automated checks with Node.js 20+:
+
+```bash
+npm run check
+npm test
+```
+
+For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
+
+**Not implemented yet:** authoritative numerical game data, comprehensive ship/gear coverage, audited wiki import, measured tier rankings, fleet optimization, or account/ALAS import. Do not mistake the example role tags for verified performance scores.
 
 ## Full-game coverage
 
@@ -51,7 +72,7 @@ This is an **extensible mode registry**, not a fixed list: new or temporary cont
 
 | Source | Intended use | Notes |
 | --- | --- | --- |
-| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Primary factual reference for ship/equipment stats, skills, mechanics, and acquisition | Verify API availability, data version, reuse permissions, and attribution before automated ingestion |
+| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Intended primary factual reference | **Automated import paused**: the requested URL returned unrelated text in an external check on November 10, 2026. Verify authenticity, availability and licensing before use. |
 | [Historical English Community Tier List](https://slaimuda.github.io/ectl/#/home) | Historical assessments and design inspiration | This project does **not** use its identity or claim its endorsement |
 | [REGAL](https://azur-lane-regal.suchiguma.com/) | Modern endgame evaluations and comparative analysis | Distinguish the source author's judgments from game facts |
 | [Operation Siren reference](https://azur-lane.wiki/index.php/Operation_Siren) | OpSi map/fleet systems and progression reference | Validate mechanics against current primary sources and regional versions |
