@@ -6,7 +6,7 @@ An independent, evidence-driven **Azur Lane** research and fleet-planning projec
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
-[Live website](https://avalon1230.github.io/avalon-azurlane/) · [Release changelog](CHANGELOG.md) · [GitHub commit history](https://github.com/Avalon1230/avalon-azurlane/commits/main)
+[Live website](https://avalon1230.github.io/avalon-azurlane/) · [Release changelog](CHANGELOG.md) · [Koumakan connectivity diagnosis](docs/KOUMAKAN_ACCESS.md) · [GitHub commit history](https://github.com/Avalon1230/avalon-azurlane/commits/main)
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 

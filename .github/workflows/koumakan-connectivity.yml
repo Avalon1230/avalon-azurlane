@@ -1,0 +1,20 @@
+name: Koumakan connectivity diagnosis
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/probe_koumakan.py
+      - .github/workflows/koumakan-connectivity.yml
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check wiki pages and MediaWiki API without saving data
+        run: python scripts/probe_koumakan.py

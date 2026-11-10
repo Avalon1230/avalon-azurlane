@@ -2,6 +2,17 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.4.1] - 2026-11-10
+
+### Added
+- A low-volume, read-only Koumakan connectivity check in GitHub Actions that tests actual DNS, two wiki pages, and both candidate MediaWiki API locations.
+- A workflow summary classifying genuine MediaWiki API responses, normal wiki pages, unrelated content, access challenges, and networking failures.
+- A [documented ingestion strategy](docs/KOUMAKAN_ACCESS.md) separating wiki corroboration, versioned game facts, community research, and independent AVALON combat judgments.
+
+### Clarified
+- Previous crawler results are not proof that the live Koumakan wiki is broken; container DNS restrictions are not necessarily origin-server problems.
+- Automated ingestion remains disabled until a valid access method and compatible reuse terms are verified. The diagnostic does not scrape or store wiki content.
+
 ## [0.4.0] - 2026-11-10
 
 ### Fixed
