@@ -1,7 +1,8 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
 import { renderEquipmentIndex } from './equipment-index.js';
-import { EQUIPMENT_SORTS, EQUIPMENT_RARITIES, sortEquipmentRows } from './equipment-roster.js';
-import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_RARITIES, SHIP_HULL_GROUPS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { sortEquipmentRows } from './equipment-roster.js';
+import { renderShipFilterToolbar } from './ship-toolbar.js';
+import { MAIN_SHIP_FACTIONS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, possibleEquipmentHulls } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
@@ -61,7 +62,7 @@ function groupedCards(rows,kind,card,totals,sort='rarity',descending=true){
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false}){
+export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false,shipAdvancedOpen=false}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   if(kind==='equipment')return renderEquipmentIndex({
@@ -89,52 +90,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   const batchSize=ship?SHIP_ROSTER_BATCH_SIZE:EQUIPMENT_ROSTER_BATCH_SIZE;
   const visible=ordered.slice(0,Math.max(batchSize,Math.trunc(Number(requestedLimit)||batchSize)));
   const totals=new Map((ship ? shipBrowseCounts(filtered) : nationCounts(filtered,kind)).map(x=>[x.nation,x.count]));
-  const hulls=ship?[...new Set(records.map(x=>x.hull).filter(Boolean))].sort():
-    [...new Set(records.flatMap(possibleEquipmentHulls))].sort();
-  const cats=ship?[]:[...new Set(records.map(x=>x.category).filter(Boolean))].sort();
-  const shipHulls = [
-    'all','Vanguard','Main','Sub','DD','CL','CA','CB','BB','BC','BBV','BM',
-    'CV','CVL','AR','AE','SS','SSV','Misc'
-  ].filter(name=>name==='all' || SHIP_HULL_GROUPS[name] ||
-    hulls.includes(name));
-  const filterButton = name => '<button type="button" class="ship-filter-chip' +
-    (hull===name?' active':'') + '" data-action="ship-hull-filter" data-hull="' +
-    E(name) + '" aria-pressed="' + (hull===name) + '">' +
-    E(name==='all'?'All':name) + '</button>';
-  const rarityButtons = SHIP_RARITIES.map(name=>
-    '<button type="button" class="ship-filter-chip' + (rarity===name?' active':'') +
-    '" data-action="ship-rarity-filter" data-rarity="' + E(name) +
-    '" aria-pressed="' + (rarity===name) + '">' +
-    E(name==='all'?'All':name==='Normal'?'Common':name) + '</button>').join('');
-  const sortButtons = SHIP_SORTS.map(name =>
-    '<button type="button" class="ship-filter-chip' + (sort===name?' active':'') +
-    '" data-action="ship-sort" data-sort="' + E(name) +
-    '" aria-pressed="' + (sort===name) + '">' +
-    E(name.charAt(0).toUpperCase()+name.slice(1)) + '</button>').join('');
-  const equipmentChip=(name,value,action,active)=>'<button type="button" class="ship-filter-chip'+
-    (active?' active':'')+'" data-action="'+E(action)+'" data-'+E(name)+'="'+E(value)+
-    '" aria-pressed="'+active+'">'+E(value==='all'?'All':value==='Normal'?'Common':value)+'</button>';
-  const equipmentTypeButtons=['all',...cats].map(value=>equipmentChip('category',value,'equipment-type-filter',category===value)).join('');
-  const equipmentHullButtons=['all',...hulls].map(value=>equipmentChip('hull',value,'equipment-hull-filter',hull===value)).join('');
-  const equipmentRarityButtons=EQUIPMENT_RARITIES.map(value=>equipmentChip('rarity',value,'equipment-rarity-filter',rarity===value)).join('');
-  const equipmentSortButtons=EQUIPMENT_SORTS.map(value=>equipmentChip('sort',value,'equipment-sort',sort===value)).join('');
-  const filters=ship
-    ? '<div class="ship-roster-tools"><label class="search-wrap"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" value="' +
-       E(query) + '" placeholder="Find a ship…" aria-label="Search full ship roster" autocomplete="off"></label>' +
-      '<div class="ship-filter-row"><span>Index</span><div class="ship-filter-scroll" role="group" aria-label="Filter ship hull">' +
-       shipHulls.map(filterButton).join('') + '</div></div>' +
-      '<div class="ship-filter-row"><span>Rarity</span><div class="ship-sort-controls" role="group" aria-label="Filter by ship rarity">' + rarityButtons + '</div></div>' +
-      '<div class="ship-filter-row"><span>Sort</span><div class="ship-sort-controls" role="group" aria-label="Sort ships">' +
-       sortButtons + '<button type="button" class="ship-filter-chip" data-action="ship-sort-direction" aria-label="Reverse ship sorting direction">' +
-       (descending?'Descending ↓':'Ascending ↑') + '</button></div></div></div>'
-    : '<div class="ship-roster-tools equipment-roster-tools"><label class="search-wrap"><span aria-hidden="true">⌕</span>'+
-      '<input id="catalog-search" type="search" value="'+E(query)+'" placeholder="Find equipment…" aria-label="Search all equipment" autocomplete="off"></label>'+
-      '<div class="ship-filter-row"><span>Type</span><div class="ship-filter-scroll" role="group" aria-label="Filter equipment type">'+equipmentTypeButtons+'</div></div>'+
-      '<div class="ship-filter-row"><span>Hull</span><div class="ship-filter-scroll" role="group" aria-label="Filter potentially compatible hulls">'+equipmentHullButtons+'</div></div>'+
-      '<div class="ship-filter-row"><span>Rarity</span><div class="ship-sort-controls" role="group" aria-label="Filter equipment rarity">'+equipmentRarityButtons+'</div></div>'+
-      '<div class="ship-filter-row"><span>Sort</span><div class="ship-sort-controls" role="group" aria-label="Sort equipment">'+equipmentSortButtons+
-      '<button type="button" class="ship-filter-chip" data-action="equipment-sort-direction" aria-label="Reverse equipment sorting direction">'+
-      (descending?'Descending ↓':'Ascending ↑')+'</button></div></div></div>';
+  const filters=renderShipFilterToolbar({rows:records,query,hull,rarity,sort,descending,open:shipAdvancedOpen});
   const text='Showing '+visible.length.toLocaleString()+' of '+ordered.length.toLocaleString()+
     ' matching '+(ship?'ships':'equipment')+' · '+records.length.toLocaleString()+' total';
   const heading = ship
