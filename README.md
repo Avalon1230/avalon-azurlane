@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.1 functional prototype**. Static web application and local fleet planner are implemented. The catalog is a small, explicitly unranked sample; rankings, verified full-game data, and automatic optimization are not yet implemented.
+> **Project status:** **v0.2 source-indexed prototype**. The static application now optionally loads third-party community catalogs into searchable ship/equipment indexes and has source-linked detail panels and mode-specific evaluation criteria. **No numerical tier rankings, verified acquisition calculations, or automatic fleet optimization are implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -29,7 +29,7 @@ No build step or external JavaScript dependencies are needed. Serve the reposito
 python -m http.server 8765
 ```
 
-Then open **http://localhost:8765**. The page has responsive game-mode navigation, ship/equipment searches, source links, and an interactive fleet builder covering all eight game-mode families. Operation Siren uses four separate surface fleets. The builder checks hull slots, prevents duplicate use of the same ship in a plan, persists plans only in the current browser (localStorage), and exports plans as JSON.
+Then open **http://localhost:8765**. The page includes all eight game-mode families, hull-compatible fleet plans (including four OpSi surface fleets), browser-local persistence, JSON export, source status, search, and ship/equipment detail drawers. The app makes optional runtime requests to [Lycoris-AzurAPI](https://github.com/iujab/Lycoris-AzurAPI) (up to **894 source ship records**) and [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane) (up to **936 source equipment records**). These records remain on their upstream servers; the repo does not mirror their raw data or game art. If a source fails, the small editorial index remains available. Consult [data-source contracts](docs/DATA_SOURCES.md) for coverage, limitations, permissions and freshness.
 
 Run automated checks with Node.js 20+:
 
@@ -40,7 +40,7 @@ npm test
 
 For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
 
-**Not implemented yet:** authoritative numerical game data, comprehensive ship/gear coverage, audited wiki import, measured tier rankings, fleet optimization, or account/ALAS import. Do not mistake the example role tags for verified performance scores.
+**Not implemented yet:** a complete verified game data model, audited Koumakan wiki import, authoritative skill calculations, verified acquisition/crafting routes, reproducible damage/tier scores, automatic fleet optimization, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
 ## Full-game coverage
 
@@ -62,7 +62,7 @@ This is an **extensible mode registry**, not a fixed list: new or temporary cont
 ## Planned features
 
 1. **Comprehensive ship database and contextual rankings:** searchable statistics, skills, retrofits, augments, acquisition details, and assessments separated by game mode and role.
-2. **Equipment encyclopedia:** stats, compatible hulls, strengths, alternatives, upgrade priorities, crafting paths, and source links.
+2. **Equipment encyclopedia:** source-reported identities and enhancement attributes; verified compatibility, strengths, alternatives, crafting paths, and upgrade priorities remain future work.
 3. **Mode-aware fleet builder:** campaign mobs/bosses, four-fleet OpSi compositions, META Showdown, Exercises, guild bosses, support carriers, submarines, and temporary event challenges.
 4. **Acquisition and progression planner:** Gear Lab recipes, research blueprints, material availability, farming strategies, and economical substitutes.
 5. **Explainable recommendations:** assumptions, evidence, competing options, limitations, and review dates, including clearly labeled AVALON assessments.
@@ -80,6 +80,14 @@ This is an **extensible mode registry**, not a fixed list: new or temporary cont
 | Public player discussions and test reports | Observations, counterarguments, practical fleet results | Attribute authors and preserve test conditions; do not turn upvotes into proof |
 
 Third-party game art, database content, ratings, and guide text must **not** be copied wholesale without verifying the relevant rights and attribution requirements. Linking to a source does not itself grant permission to reproduce its content.
+
+## v0.2 data and evaluation boundaries
+
+- [Ship source index](https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json): community extraction (ship ID, English name, hull family, rarity); source version observed November 9, 2026.
+- [Equipment source index](https://github.com/Fernando2603/AzurLane/blob/main/equipment.json): community extraction (gear ID, identity, type, rarity, reported enhancement attributes); source update observed November 6, 2026.
+- [Data contracts and source limitations](docs/DATA_SOURCES.md): schema validation, licensing caveats, failure behavior, and ambiguity rules. Automated Koumakan import remains on hold.
+- **Performance is not inferred from rarity.** The eight game-mode evaluation frameworks explain the factors to assess later; they do not generate tier rankings.
+- The source data is requested at runtime from its maintainers. Public source availability and browser CORS policies affect loading, and user-side source data is not uploaded to AVALON.
 
 ## Evidence standard
 

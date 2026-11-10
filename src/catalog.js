@@ -1,6 +1,6 @@
 /**
- * A small, intentionally UNRANKED editorial index. These entries are navigation
- * examples, not a complete database or validated tier placements. No game art or
+ * A small, intentionally UNRANKED fallback index. Additional ship and gear
+ * identities are loaded from clearly attributed third-party JSON at runtime. No game art or
  * third-party database content is bundled here. See docs/SOURCES.md.
  */
 export const MODES = [
@@ -95,6 +95,8 @@ export const EQUIPMENT = [
 ];
 
 export const SOURCES = [
+  { id: 'lycoris', name: 'Lycoris-AzurAPI ship index', url: 'https://github.com/iujab/Lycoris-AzurAPI', type: 'Third-party sourced ship identities', note: 'Public game-data extraction. Used for name, hull type, and rarity (not skill-performance evaluation). Read live in browser, not mirrored into repository; source licensed GPL-3.0.' },
+  { id: 'fernando', name: 'Fernando2603 equipment data', url: 'https://github.com/Fernando2603/AzurLane', type: 'Third-party sourced equipment records', note: 'Public source for gear identities, categories and enhancement attributes. Licensing and correctness have not been independently audited; data is read from upstream, not bundled.' },
   { id: 'koumakan', name: 'Azur Lane Wiki (Koumakan)', url: 'https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki', type: 'Primary reference candidate', note: 'Automated access is on hold: external checks returned unrelated content. Verify website authenticity, API, license, and data before ingestion.' },
   { id: 'official', name: 'Azur Lane EN Updates', url: 'https://azurlane.yo-star.com/news/author/azur-lane/', type: 'Official update notes', note: 'Use for patch and equipment release corroboration; pages may change.' },
   { id: 'fanwiki', name: 'Azur Lane Fan Wiki', url: 'https://azur-lane.wiki/index.php/Main_Page', type: 'Secondary reference', note: 'A separate fan-maintained wiki; not a mirror or substitute for permission to copy Koumakan data.' },

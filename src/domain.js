@@ -1,11 +1,16 @@
 import { MODES, FLEET_BLUEPRINTS, SLOT_LAYOUTS, SHIPS } from './catalog.js';
 
-export const MAIN_HULLS = new Set(['BB', 'BC', 'BBV', 'BM', 'CV', 'CVL']);
+export const MAIN_HULLS = new Set(['BB', 'BC', 'BBV', 'BM', 'CV', 'CVL', 'AR', 'AE']);
 export const VANGUARD_HULLS = new Set(['DD', 'CL', 'CA', 'CB']);
 export const SUB_HULLS = new Set(['SS', 'SSV']);
 export const CARRIER_HULLS = new Set(['CV', 'CVL']);
 export const MODE_IDS = new Set(MODES.map(m => m.id));
 export const SHIP_MAP = new Map(SHIPS.map(ship => [ship.id, ship]));
+
+export function refreshShipIndex(ships) {
+  SHIP_MAP.clear();
+  for (const ship of ships) SHIP_MAP.set(ship.id, ship);
+}
 
 export function compatible(ship, kind) {
   if (!ship) return false;
