@@ -140,3 +140,28 @@ export async function loadLiveCatalogs(fetcher=fetch) {
   if(version.status==='fulfilled' && typeof version.value?.generatedAt==='string') result.shipVersion=version.value.generatedAt;
   return result;
 }
+
+// The complete source is ~5 MB and must NOT block the initial Ship Index.
+// Fetch once per session only when a user opens a ship profile.
+export const FULL_SHIP_FEED = 'https://raw.githubusercontent.com/iujab/Lycoris-AzurAPI/main/data/ships.json';
+let detailedShipCache = null;
+let detailedShipPending = null;
+export async function loadDetailedShips(fetcher = fetch) {
+  if (fetcher === fetch && detailedShipCache) return detailedShipCache;
+  if (fetcher === fetch && detailedShipPending) return detailedShipPending;
+  const load = async () => {
+    const payload = await fetchJson(fetcher,FULL_SHIP_FEED,{timeoutMs:30000});
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload) ||
+        Object.keys(payload).length < 100 || Object.keys(payload).length > 3000)
+      throw new Error('Invalid full ship dataset');
+    return payload;
+  };
+  if (fetcher !== fetch) return load();
+  detailedShipPending = load();
+  try {
+    detailedShipCache = await detailedShipPending;
+    return detailedShipCache;
+  } finally {
+    detailedShipPending = null;
+  }
+}
