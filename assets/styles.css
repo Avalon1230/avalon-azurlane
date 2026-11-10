@@ -287,3 +287,106 @@
 .method-disclosure .source-alert{margin:0}
 .source-availability-warning{margin-bottom:20px}
 @media(max-width:600px){.source-technical{padding:17px}.source-disclosure-links{gap:10px;flex-direction:column}}
+
+
+/* v0.7 — compact shipyard-gallery browsing, deliberate full ship dossiers */
+.ship-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;align-items:stretch}
+.ship-roster-tile{display:flex;flex-direction:column;position:relative;min-width:0;padding:0;border:1px solid #42617b;border-radius:7px;overflow:hidden;color:#fff;text-align:center;background:#17354c;cursor:pointer;transition:border-color .16s,transform .16s,box-shadow .16s}
+.ship-roster-tile:hover{transform:translateY(-2px);border-color:#8cdefb;box-shadow:0 5px 18px #0008}
+.ship-roster-tile:focus-visible{outline:2px solid #7ed5f7;outline-offset:3px}
+.ship-roster-name{display:flex;align-items:center;justify-content:center;min-height:29px;padding:5px 4px;background:#31678d;color:#f8fcff;font-size:11px;font-weight:800;line-height:1.15;overflow-wrap:anywhere}
+.ship-roster-portrait{display:flex;align-items:stretch;justify-content:center;flex:1;min-height:130px;max-height:161px;background:linear-gradient(140deg,#467187,#24445d);overflow:hidden}
+.ship-roster-portrait .asset-media{display:flex;width:100%;height:100%;min-height:130px;border:0;border-radius:0;background:transparent}
+.ship-roster-portrait .asset-media>.asset-img{object-fit:cover;object-position:center top;background:transparent}
+.ship-roster-portrait .asset-media>.asset-fallback{font-size:22px;color:#e0eff8}
+.ship-roster-footer{display:flex;justify-content:space-between;align-items:center;min-height:25px;padding:4px 8px;background:#10293c;color:#d9ebf6;font-size:10px;font-weight:750}
+.ship-roster-open{color:#78c7e6;font-size:12px}
+.ship-roster-tile.rarity-ultra-rare .ship-roster-name{background:#79549a}
+.ship-roster-tile.rarity-ultra-rare .ship-roster-portrait{background:linear-gradient(145deg,#c6a3e6,#876baa)}
+.ship-roster-tile.rarity-super-rare .ship-roster-name{background:#ad8440}
+.ship-roster-tile.rarity-super-rare .ship-roster-portrait{background:linear-gradient(145deg,#e4c88e,#9e7a48)}
+.ship-roster-tile.rarity-elite .ship-roster-name{background:#8261a3}
+.ship-roster-tile.rarity-elite .ship-roster-portrait{background:linear-gradient(145deg,#b69ad4,#7d6b9d)}
+.ship-roster-tile.rarity-rare .ship-roster-name{background:#317e9b}
+.ship-roster-tile.rarity-rare .ship-roster-portrait{background:linear-gradient(145deg,#8accdf,#40778f)}
+.ship-roster-tile.rarity-normal .ship-roster-name{background:#5f7886}
+.ship-roster-tile.rarity-normal .ship-roster-portrait{background:linear-gradient(145deg,#9ab6c4,#657a88)}
+.ship-roster-tools{display:flex;flex-direction:column;gap:9px;margin:13px 0 20px}
+.ship-roster-tools>.search-wrap{width:100%}
+.ship-filter-row{display:flex;gap:12px;align-items:center;min-width:0}
+.ship-filter-row>span{flex:0 0 36px;color:#8db7cc;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}
+.ship-filter-scroll{display:flex;overflow-x:auto;gap:5px;scrollbar-width:thin;scrollbar-color:#3d7794 transparent;padding:2px 1px 6px;min-width:0}
+.ship-sort-controls{display:flex;flex-wrap:wrap;gap:6px}
+.ship-filter-chip{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:30px;padding:6px 10px;background:#102a3e;color:#b9d6e4;border:1px solid #345873;border-radius:6px;font-size:11px;font-weight:750;white-space:nowrap}
+.ship-filter-chip:hover{background:#1e445e;border-color:#77b8d6;color:#fff}
+.ship-filter-chip.active{background:#236389;border-color:#81d4f6;color:#fff;box-shadow:inset 0 -2px 0 #7ed6ff}
+
+/* A ship is an information destination, not an oversized catalog card. */
+.ship-profile-page{width:100%;min-width:0;padding-bottom:40px}
+.ship-profile-top{display:grid;grid-template-columns:minmax(240px,335px) minmax(0,1fr);gap:25px;align-items:stretch;margin:5px 0 23px}
+.ship-profile-cover{min-height:300px;max-height:390px;display:grid;place-items:center;border:1px solid #365972;border-radius:12px;background:radial-gradient(circle at 45% 35%,#294f6b,#0e253a 76%);overflow:hidden}
+.ship-profile-painting{display:block;width:100%;height:100%;max-height:390px;object-fit:contain;object-position:center bottom}
+.ship-profile-cover .asset-media{width:200px;height:220px;border:0;background:transparent}
+.ship-profile-cover .asset-img{background:transparent}
+.ship-profile-identity{padding:20px 5px;min-width:0}
+.ship-profile-identity h1{font-size:clamp(30px,4vw,48px);line-height:1.1;margin:7px 0 12px;color:#f0faff;letter-spacing:-.04em}
+.ship-profile-identity p{color:#aec8d8;font-size:14px;line-height:1.6;margin:0 0 8px}
+.ship-profile-stars{color:#e9c575;font-size:22px;letter-spacing:.09em}
+.ship-profile-actions{display:flex;flex-wrap:wrap;gap:10px;margin:17px 0}
+.ship-profile-skin-selector{margin-top:22px;color:#a8c8d7;font-size:12px}
+.ship-profile-skin-selector>span{display:block;margin-bottom:10px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.ship-profile-choices{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 15px}
+.ship-profile-nav{display:flex;flex-wrap:wrap;gap:8px;padding:0 0 14px;border-bottom:1px solid #31546d;margin:0 0 21px}
+.ship-profile-nav button{background:#142c40;color:#bde0ef;border:1px solid #365a74;border-radius:6px;padding:9px 13px;font-size:12px;font-weight:760}
+.ship-profile-nav button:hover{border-color:#8dd3ec;color:white}
+.ship-profile-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(275px,1fr);gap:17px;align-items:start}
+.ship-profile-main,.ship-profile-side{display:flex;flex-direction:column;gap:17px;min-width:0}
+.ship-profile-panel{min-width:0;background:#102339;border:1px solid #31536b;border-radius:10px;padding:19px;scroll-margin-top:20px}
+.ship-profile-panel>h2{font-size:19px;color:#effaff;margin:0 0 15px;padding-bottom:11px;border-bottom:1px solid #2b4c62}
+.ship-profile-panel>h3{font-size:13px;color:#a8d3e8;margin:15px 0 8px}
+.ship-profile-panel p{font-size:12px;line-height:1.7;color:#b4cfdd}
+.ship-stat-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ship-stat{display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;padding:12px 5px;background:#162f46;border:1px solid #32536a;border-radius:7px}
+.ship-stat span{font-size:10px;color:#9ebfd1;font-weight:800}
+.ship-stat strong{font-size:19px;color:#ecfaff;font-variant-numeric:tabular-nums}
+.ship-gear-list,.ship-skills-list{display:flex;flex-direction:column;gap:9px}
+.ship-gear-slot{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid #304c63;border-radius:8px;background:#152b40;padding:11px 14px}
+.ship-gear-slot .slot-number{display:grid;place-items:center;width:32px;height:32px;background:#265671;border-radius:5px;color:#cceeff;font-weight:800}
+.ship-gear-slot strong{color:#ecf7ff;font-size:13px}
+.ship-gear-slot>span:last-child{font-size:12px;color:#a0d8e9;white-space:nowrap}
+.ship-skill{background:#142b40;border:1px solid #32556f;border-left:4px solid #849bb1;padding:15px 18px;border-radius:8px}
+.ship-skill.skill-red{border-left-color:#db6878}
+.ship-skill.skill-yellow{border-left-color:#e3bd66}
+.ship-skill.skill-blue{border-left-color:#72bde6}
+.ship-skill h3{font-size:15px;color:#f1faff;margin:0 0 10px}
+.ship-skill p{white-space:pre-line;margin:0;color:#c2dae8;line-height:1.65;font-size:13px}
+.ship-quick-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.ship-quick-facts>div,.ship-info-rows>div{display:flex;flex-direction:column;gap:5px;background:#162e42;border-radius:6px;padding:9px}
+.ship-quick-facts span,.ship-info-rows span{font-size:10px;color:#93b4c7}
+.ship-quick-facts strong,.ship-info-rows strong{font-size:12px;color:#eaf7ff;font-weight:750;line-height:1.5}
+.ship-info-rows{display:flex;flex-direction:column;gap:8px}
+.ship-break-list{list-style:decimal;padding-left:20px;margin:0}
+.ship-break-list li{font-size:12px;color:#b7d4e3;margin:9px 0;line-height:1.5}
+.ship-break-list li strong{color:#f0faff;display:block}
+.ship-break-list li span{display:block}
+.profile-unavailable{font-style:italic;color:#8daec2}
+.ship-profile-loading{display:flex;flex-direction:column;gap:13px;align-items:flex-start;padding:35px;background:#122b40;border:1px solid #325971;border-radius:10px}
+.ship-profile-loading h1{font-size:28px;margin:0}
+.ship-profile-loading p{font-size:14px;color:#b9d6e6}
+.ship-profile-loading small{color:#b99c9c}
+@media(max-width:1180px){.ship-profile-layout{grid-template-columns:minmax(0,1fr)}.ship-stat-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:760px){
+  .ship-gallery{grid-template-columns:repeat(auto-fill,minmax(106px,1fr));gap:7px}
+  .ship-roster-name{font-size:10px}
+  .ship-roster-portrait{min-height:116px}
+  .ship-roster-portrait .asset-media{min-height:116px}
+  .ship-profile-top{grid-template-columns:1fr;gap:12px}
+  .ship-profile-cover{min-height:240px;max-height:320px}
+  .ship-profile-painting{max-height:320px}
+  .ship-profile-identity{padding:8px 0}
+  .ship-profile-panel{padding:14px}
+  .ship-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ship-gear-slot{grid-template-columns:28px minmax(0,1fr);gap:8px}
+  .ship-gear-slot>span:last-child{grid-column:2;white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){.ship-roster-tile{transition:none}.ship-roster-tile:hover{transform:none}}
