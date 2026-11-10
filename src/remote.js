@@ -99,14 +99,34 @@ export function normalizeEquipment(input) {
 
 const normalKey=name=>String(name).toLocaleLowerCase().replace(/\s*\(retrofit\)/g,'').replace(/[^\p{L}\p{N}]/gu,'');
 export function mergeShipCatalog(editorial,remote) {
-  const original = editorial.map(s=>({...s,source:s.source||'editorial',rarity:s.rarity||'Unverified'}));
-  const keyToIndex = new Map(original.map((x,i)=>[normalKey(x.name),i]));
-  for (const ship of remote) {
-    const key=normalKey(ship.name);
-    const index=keyToIndex.get(key);
-    if (index!==undefined) {
-      original[index] = {...original[index],rarity:ship.rarity,sourceHull:ship.sourceHull,nation:ship.nation,source:'lycoris',sourceId:ship.sourceId,verified:'sourced'};
-    } else { keyToIndex.set(key,original.length); original.push(ship); }
+  const original=editorial.map(s=>({...s,source:s.source||'editorial',rarity:s.rarity||'Unverified'}));
+  const named=new Map(original.map((row,i)=>[normalKey(row.name),i]));
+  const sourceIds=new Map(original.filter(row=>row.sourceId)
+    .map(row=>[String(row.sourceId),original.indexOf(row)]));
+  const claimed=new Set();
+  const seenRemoteIds=new Set();
+  for(const ship of remote){
+    const sourceId=String(ship.sourceId||'');
+    if(sourceId && seenRemoteIds.has(sourceId))continue;
+    if(sourceId)seenRemoteIds.add(sourceId);
+    // Source IDs are the ship identity. Two ships may legitimately have
+    // identical names (Enterprise, Neptune, Fubuki, Kasumi, etc.).
+    // A name match is only an editorial-to-source merge opportunity ONCE,
+    // never permission to silently coalesce two distinct source records.
+    const known=sourceId?sourceIds.get(sourceId):undefined;
+    const namedIndex=named.get(normalKey(ship.name));
+    const mergeByName=namedIndex!==undefined && !claimed.has(namedIndex) &&
+      (!original[namedIndex].sourceId || String(original[namedIndex].sourceId)===sourceId);
+    const index=known!==undefined?known:mergeByName?namedIndex:undefined;
+    if(index!==undefined){
+      claimed.add(index);
+      original[index]={...original[index],rarity:ship.rarity,sourceHull:ship.sourceHull,
+        nation:ship.nation,source:'lycoris',sourceId:ship.sourceId,verified:'sourced'};
+    }else {
+      const indexNew=original.length;
+      original.push(ship);
+      if(sourceId)sourceIds.set(sourceId,indexNew);
+    }
   }
   return original;
 }
