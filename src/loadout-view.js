@@ -37,7 +37,7 @@ export function renderLoadoutPanel(model) {
   return '<section class="ship-loadout-panel" id="ship-profile-loadout" aria-labelledby="ship-loadout-title">'+
     '<div class="loadout-heading"><div><span class="eyebrow">AVALON TACTICAL INTELLIGENCE</span>'+
     '<h2 id="ship-loadout-title">Loadout planner</h2></div>'+
-    '<span class="loadout-status">Evidence-first</span></div>'+
+    '<span class="loadout-status" title="Source-matched eligibility, not a simulated recommendation">Sourced</span></div>'+
     '<div class="loadout-modes" role="group" aria-label="Loadout mission context">'+tabs+'</div>'+
     '<p class="loadout-context">'+E(model.description)+'</p>'+
     '<div class="loadout-slots">'+slots+'</div>'+
