@@ -140,7 +140,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     heading +
     filters+
     '<div class="catalog-result-bar"><span>'+E(text)+'</span>'+
-      (ship?'<span>Rarity-first roster</span>':'<span>Page '+slices.page+' of '+slices.pages+'</span>')+'</div>'+
+      (ship?'<span>Sort: '+E(sort.charAt(0).toUpperCase()+sort.slice(1))+' '+(descending?'↓':'↑')+'</span>':'<span>Page '+slices.page+' of '+slices.pages+'</span>')+'</div>'+
     (ship?'':pager(kind,slices))+
     groupedCards(visible,kind,renderCard,totals,sort,descending)+
     (ship?(visible.length<ordered.length
