@@ -39,3 +39,10 @@ AVALON is an independent, free, noncommercial fan reference site; it does not cl
 ## Nationality and faction emblems (v0.6.1)
 
 The Ship Index nation selector references game-client nationality insignia exposed by [Fernando2603/AzurLane nationality.json](https://github.com/Fernando2603/AzurLane/blob/main/nationality.json), served from its `images/nationality/` directory. These assets are original game imagery mirrored by an independent fan repository, not images hosted by the rights holders. Known nationalities use the published ID mapping; named collaborations use the dataset's generic collaboration icon; unverified factions use typographic placeholders instead of fabricated logos. Images load lazily and have text fallbacks when unavailable. Copyright and fan-use limitations described above apply equally to these assets.
+
+## Ship artwork and missing-faction icons (v0.7.2)
+
+- **Default ship art (first choice):** a validated Koumakan MediaWiki API imageinfo URL, but only if `prop=images` confirms that the referenced page uses the exact `File:<ship title>.png`. The API advertises `origin=*` CORS. No images are mirrored to AVALON, and the lookup is on demand.
+- **Every skin / default fallback:** Fernando2603/AzurLane reconstructed PNG paintings, from a compact ID-only index covering 894 ships and 2,613 skins. Raw Lycoris WebPs are NOT used as art-viewer fallback because some are only background/effect layers.
+- **New faction emblems:** Koumakan MediaWiki `imageinfo` confirmed `https://azurlane.netojuu.com/images/4/4c/Nl_1.png` (Kingdom of Tulipa) and `https://azurlane.netojuu.com/images/1/1b/Ldp_1.png` (Liga de Pedrería).
+- Wiki page text declares a CC BY-NC-SA 4.0 site license; game artwork retains separate publisher rights and is not assumed to be covered by that license. Linking/embedding wiki images is not a license grant to bulk copy them. See `docs/KOUMAKAN_ACCESS.md` and `docs/SHIP_PROFILES.md`.
