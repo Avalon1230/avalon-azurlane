@@ -32,7 +32,7 @@ const pages = [
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   shipNation:'all', gearNation:'all', gearHull:'all', shipPage:1, gearPage:1,
-  shipSort:'name', shipDescending:false, profileLevel:'level120',profileSkin:0,
+  shipSort:'name', shipDescending:false, shipRarity:'all', profileLevel:'level120',profileSkin:0,
   shipDetails:{status:'idle',data:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
@@ -138,7 +138,7 @@ function go(page) {
   state.hull = 'all';
   state.category = 'all';
   state.shipNation='all';state.gearNation='all';state.gearHull='all';
-  state.shipPage=1;state.gearPage=1;state.shipSort='name';state.shipDescending=false;
+  state.shipPage=1;state.gearPage=1;state.shipSort='name';state.shipDescending=false;state.shipRarity='all';
   state.picker = null;
   state.detail = null;
   const hash = `#/${page}`;
@@ -231,7 +231,7 @@ function searchBar(placeholder, extra = '') {
 }
 function renderShips() {
   return `${sectionHeading('Ship Index', 'SHIP REGISTRY', 'Browse ships by faction, or search the entire roster.')}${warning()}
-  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending})}`;
+  ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,hull:state.hull,page:state.shipPage,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity})}`;
 }
 function renderEquipment() {
   return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Browse equipment by origin, type, or compatible hull.')}${warning()}
@@ -404,6 +404,9 @@ function handleAction(target) {
     state.workspaces[state.modeId]=normalizeWorkspace(preview.plan,state.modeId);
     state.suggestPreview=null;savePlans();render();notify('Suggested additions applied.');return;
   }
+  if (action === 'ship-rarity-filter') {
+    state.shipRarity=target.dataset.rarity||'all';state.shipPage=1;render();return;
+  }
   if (action === 'ship-hull-filter') {
     state.hull=target.dataset.hull||'all';state.shipPage=1;
     render();return;
@@ -430,7 +433,7 @@ function handleAction(target) {
   }
   if (action === 'profile-retry') { state.shipDetails={status:'idle',data:null,error:''};void loadShipProfileData();return; }
   if (action === 'catalog-home') {
-    state.shipNation='all';state.hull='all';state.query='';state.shipPage=1;
+    state.shipNation='all';state.hull='all';state.query='';state.shipRarity='all';state.shipPage=1;
     render();document.querySelector('#catalog-start')?.scrollIntoView({block:'start'});return;
   }
   if (action === 'catalog-nation') {
