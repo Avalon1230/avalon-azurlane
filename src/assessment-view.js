@@ -36,7 +36,7 @@ export function renderAssessmentBoard({ boardId='ships', ships=[], equipment=[],
   const searchTerm=String(query||'').trim().toLocaleLowerCase();
   const matchedUnassessed = searchTerm && catalog.filter(x=>!unique.has(x.name.toLocaleLowerCase()) && x.name.toLocaleLowerCase().includes(searchTerm)).slice(0,12);
   return `<div class="page-heading"><div class="eyebrow">AVALON / COMBAT INTELLIGENCE</div><h1>${boardId==='ships'?'Which ships should I build?':'Which equipment is worth investing in?'}</h1>
-      <p>Recommendations are written by AVALON from referenced gameplay guides. They are provisional, explain their use case, and never require you to rank anything yourself.</p></div>
+      <p>Game-mode recommendations, explanations, and alternatives.</p></div>
     <nav class="tier-tabs" aria-label="Tier board categories">${tabs(boardId)}</nav>
     <section class="tier-intro"><div class="eyebrow">${E(config.label.toUpperCase())} · PROVISIONAL RESEARCH</div><h2>${E(config.icon)} ${E(config.title)}</h2><p>${E(config.subtitle)}</p>
     <details class="method-disclosure"><summary>How rankings work</summary><div class="tier-notice"><strong>How to read this:</strong> EX = a defining choice for the stated role, S = highly recommended, A = strong with trade-offs, B = serviceable or budget alternative. Tiers are <strong>not universal</strong>, cannot be compared across unrelated roles, and are not derived from a battle simulator. No assessment means <strong>not yet evaluated</strong>, not bad.</div></details></section>
