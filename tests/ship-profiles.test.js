@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { renderShipRosterTile } from '../src/ship-roster.js';
-import { detailedShipRecord, renderShipProfile, trustedShipPainting, resolveSkinArtwork } from '../src/ship-profiles.js';
+import { detailedShipRecord, renderShipProfile, trustedShipPainting, trustedReconstructedPainting, resolveSkinArtwork } from '../src/ship-profiles.js';
 import { FULL_SHIP_FEED, loadDetailedShips } from '../src/remote.js';
 
 const ship={id:'lyc-30715',sourceId:'30715',name:'Amagi(CV)',hull:'CV',nation:'Sakura Empire',rarity:'Ultra Rare'};
@@ -19,6 +19,12 @@ const details={
   skins:[{name:'Amagi(CV)',image:'https://raw.githubusercontent.com/iujab/azurlane-images/main/paintings/tiancheng_cv_rw.webp'}],
   wikiUrl:'https://azurlane.koumakan.jp/wiki/Amagi(CV)'
 };
+const artworkSkins=[
+  {name:'Amagi(CV)',images:{
+    painting:'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/307150/painting.png',
+    paintingNoBackground:'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/307150/painting_n.png'}},
+  {name:'Alternate',images:{painting:'https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/307151/painting.png'}}
+];
 test('dense roster tiles show clickable original portraits rather than oversized action cards',()=>{
   const html=renderShipRosterTile(ship);
   assert.match(html,/class="ship-roster-tile rarity-ultra-rare"/);
@@ -29,7 +35,7 @@ test('dense roster tiles show clickable original portraits rather than oversized
   assert.doesNotMatch(html,/Inspect/);
 });
 test('full profile displays available stats, skills, equipment and acquisition without invented data',()=>{
-  const html=renderShipProfile({ship,data:details,level:'level120'});
+  const html=renderShipProfile({ship,data:details,level:'level120',artworkSkins});
   assert.match(html,/7,168/);
   assert.match(html,/417/);
   assert.match(html,/Fighter/);
@@ -37,7 +43,7 @@ test('full profile displays available stats, skills, equipment and acquisition w
   assert.match(html,/From Plans Laid, Eternity Arrayed/);
   assert.match(html,/Event: Ode of Everblooming Crimson/);
   assert.match(html,/Hangar capacity \+1/);
-  assert.match(html,/tiancheng_cv_rw\.webp/);
+  assert.match(html,/307150\/painting\.png/);
   assert.match(html,/data-action="profile-back"/);
   assert.match(html,/data-action="profile-jump"/);
   assert.match(html,/Full Koumakan entry/);
@@ -80,26 +86,22 @@ test('full detail source is lazy and has a validated record count',async()=>{
 });
 
 test('profile portrait is fixed while changing independently selected artwork',()=>{
-  const withSkins={...details,skins:[
-    details.skins[0],
-    {name:'Alternate',image:'https://raw.githubusercontent.com/iujab/azurlane-images/main/paintings/alternate.webp'}
-  ]};
-  const first=renderShipProfile({ship,data:withSkins,skinIndex:0});
-  const second=renderShipProfile({ship,data:withSkins,skinIndex:1});
+  const first=renderShipProfile({ship,data:details,skinIndex:0,artworkSkins});
+  const second=renderShipProfile({ship,data:details,skinIndex:1,artworkSkins});
   assert.match(first,/class="ship-profile-overview"/);
   assert.match(first,/class="ship-profile-cover"/);
   assert.match(first,/class="ship-art-panel"/);
   assert.match(first,/class="ship-art-preview"/);
   assert.match(first,/data-action="profile-art-open"/);
   assert.match(first,/data-action="profile-skin"/);
-  assert.match(second,/alternate\.webp/);
+  assert.match(second,/307151\/painting\.png/);
   assert.match(second,/aria-pressed="true">Alternate<\/button>/);
   const cover=markup=>markup.match(/<div class="ship-profile-cover">([\s\S]+?)<\/div>/)?.[1];
   assert.equal(cover(first),cover(second),'skin selection must never change the shipyard portrait');
 });
 test('enlarge viewer is a separate opt-in layer with a fullscreen control',()=>{
   const closed=renderShipProfile({ship,data:details});
-  const open=renderShipProfile({ship,data:details,viewerOpen:true});
+  const open=renderShipProfile({ship,data:details,viewerOpen:true,artworkSkins});
   assert.doesNotMatch(closed,/id="ship-art-lightbox"/);
   assert.match(open,/role="dialog" aria-modal="true"/);
   assert.match(open,/id="ship-art-lightbox"/);
@@ -107,13 +109,18 @@ test('enlarge viewer is a separate opt-in layer with a fullscreen control',()=>{
   assert.match(open,/data-action="profile-art-close"/);
   assert.match(open,/class="ship-art-viewer-image"/);
 });
-test('static assembled skin artwork takes precedence over render-layer images',()=>{
-  const renderLayer='https://raw.githubusercontent.com/iujab/azurlane-images/main/paintings/xinzexi_4_rw.webp';
-  const staticImage='https://raw.githubusercontent.com/iujab/azurlane-images/main/paintings/xinzexi_4.webp';
-  const skin={name:'Dancing in the Moonlight',images:{default:renderLayer,censored:staticImage}};
-  assert.deepEqual(resolveSkinArtwork(skin),{primary:staticImage,fallback:renderLayer});
-  const html=renderShipProfile({ship,data:{...details,skins:[skin]}});
-  assert.match(html,/src="https:\/\/raw\.githubusercontent\.com\/iujab\/azurlane-images\/main\/paintings\/xinzexi_4\.webp"/);
-  assert.match(html,/data-fallback-src="https:\/\/raw\.githubusercontent\.com\/iujab\/azurlane-images\/main\/paintings\/xinzexi_4_rw\.webp"/);
-  assert.deepEqual(resolveSkinArtwork({images:{default:'javascript:evil()'}}),{primary:null,fallback:null});
+test('reconstructed paintings supersede all broken raw image layers',()=>{
+  const layer='https://raw.githubusercontent.com/iujab/azurlane-images/main/paintings/xinzexi_4_rw.webp';
+  const source={name:'New Jersey',images:{default:layer,censored:layer}};
+  assert.deepEqual(resolveSkinArtwork(source),{primary:null,fallback:null});
+  const first='https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/105173/painting.png';
+  const noBg='https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/105173/painting_n.png';
+  const reconstructed={name:'Dancing in the Moonlight',images:{painting:first,paintingNoBackground:noBg}};
+  assert.deepEqual(resolveSkinArtwork(reconstructed),{primary:first,fallback:noBg});
+  const html=renderShipProfile({ship,data:details,artworkSkins:[reconstructed]});
+  assert.match(html,/105173\/painting\.png/);
+  assert.match(html,/data-fallback-src="[^"]*105173\/painting_n\.png"/);
+  assert.doesNotMatch(html,/_rw\.webp/);
+  assert.equal(trustedReconstructedPainting('javascript:alert(1)'),null);
+  assert.equal(trustedReconstructedPainting('https://evil.example/105173/painting.png'),null);
 });
