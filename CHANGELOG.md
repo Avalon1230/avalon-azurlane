@@ -2,6 +2,15 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.4] - 2026-11-10
+
+### Fixed
+- Strip MediaWiki HTML editor comments, including multiline and unterminated comments, before parsing ship infobox fields. Preserve original line boundaries so commented-out template fields cannot overwrite live data.
+- Prevent Guam's voice-actor value from including the wiki's “Section 2: Stats” editorial divider; profiles now show the credited voice actor without editorial markup.
+
+### Tests
+- Added regression cases for Guam's VA, hidden field assignments inside comments, and stray trailing wiki comments.
+
 ## [0.7.3] - 2026-11-10
 
 ### Fixed
