@@ -509,3 +509,31 @@
   .ship-profile-overview .ship-profile-cover{flex:0 0 124px;width:124px;height:178px;min-height:178px;max-height:178px}
   .ship-art-preview{height:clamp(260px,80vw,390px)}
 }
+
+
+/* v0.7.3 — in-game rarity language: Elite is purple, UR/DR is iridescent. */
+.ship-roster-tile.rarity-ultra-rare{
+  border-color:#9bdde8;
+  box-shadow:0 0 0 1px #f6b8dc50,inset 0 0 0 1px #ade4f62a;
+}
+.ship-roster-tile.rarity-ultra-rare .ship-roster-name{
+  background:linear-gradient(105deg,#659bca 0%,#9ca9d9 25%,#cfa4d5 47%,#e1b1a5 70%,#98cfc5 100%);
+  color:#172d45;
+  text-shadow:0 1px 1px #ffffff77;
+  font-weight:900;
+}
+.ship-roster-tile.rarity-ultra-rare .ship-roster-portrait{
+  background:linear-gradient(145deg,#b4e8ee 0%,#d7c3f1 38%,#f5c2da 68%,#d4e7bb 100%);
+}
+.ship-roster-tile.rarity-elite .ship-roster-name{background:#79549a;color:#fff}
+.ship-roster-tile.rarity-elite .ship-roster-portrait{background:linear-gradient(145deg,#c3a6e3,#85669e)}
+.ship-profile-toolbar{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  gap:10px;margin:0 0 14px;
+}
+.ship-profile-toolbar .primary-btn{margin-left:auto}
+.ship-profile-toolbar button{min-height:35px}
+@media(max-width:450px){
+  .ship-profile-toolbar{justify-content:flex-start}
+  .ship-profile-toolbar .primary-btn{margin-left:0}
+}
