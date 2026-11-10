@@ -1,15 +1,12 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
 import { EQUIPMENT_SORTS, EQUIPMENT_RARITIES, sortEquipmentRows } from './equipment-roster.js';
 import { MAIN_SHIP_FACTIONS, SHIP_SORTS, SHIP_RARITIES, SHIP_HULL_GROUPS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
-import { filterEquipmentRecords, nationCounts, groupedCatalogRows, paginateRecords, possibleEquipmentHulls, UNKNOWN_NATION } from './catalog-filters.js';
+import { filterEquipmentRecords, nationCounts, groupedCatalogRows, possibleEquipmentHulls } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
 export const SHIP_ROSTER_BATCH_SIZE = 60;
 export const EQUIPMENT_ROSTER_BATCH_SIZE = 60;
 
-function option(value,label,active){
-  return '<option value="'+E(value)+'"'+(active===value?' selected':'')+'>'+E(label)+'</option>';
-}
 function nationStrip(kind,facets,active){
   const full=facets.reduce((sum,x)=>sum+x.count,0);
   const entries=[{nation:'all',count:full},...facets];
@@ -49,15 +46,6 @@ function shipNationLanding(records) {
     '</div>';
 }
 
-function pager(kind,result){
-  if(result.pages<=1)return '';
-  const current=String(result.page);
-  return '<nav class="catalog-pagination" aria-label="Catalog pages">'+
-    '<button type="button" class="outline-btn compact" data-action="catalog-page" data-kind="'+E(kind)+'" data-page-index="'+(result.page-1)+'"'+(result.page===1?' disabled':'')+'>Previous</button>'+
-    '<label>Page <select class="catalog-page-select" data-catalog-page-select="'+E(kind)+'" aria-label="Jump to page">'+Array.from({length:result.pages},(_,i)=>option(String(i+1),String(i+1),current)).join('')+'</select> of '+result.pages+'</label>'+
-    '<button type="button" class="outline-btn compact" data-action="catalog-page" data-kind="'+E(kind)+'" data-page-index="'+(result.page+1)+'"'+(result.page===result.pages?' disabled':'')+'>Next</button>'+
-    '</nav>';
-}
 function equipmentGroups(rows,sort,descending) {
   return groupedCatalogRows(rows,'equipment').map(group=>({
     ...group,items:sortEquipmentRows(group.items,sort,descending)
