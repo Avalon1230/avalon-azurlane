@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.2] - 2026-11-10
+
+### Fixed
+- Replaced raw `*_rw.webp` and other incomplete game-client rendering layers in ship galleries with reconstructed, display-ready PNG paintings from a dedicated verified skin source. This corrects the New Jersey background-only example.
+- Built an ID-keyed artwork manifest covering **894 ships and 2,613 skins** from Fernando2603/AzurLane, linking original extracted game artwork without storing image binaries. The skin index is lazily loaded on profile open.
+- The art viewer now uses full-image contain scaling without cutting the illustration; the identity card no longer stretches to match the artwork panel's height.
+- Broken primary paintings fall back only to an explicitly available `painting_n.png` variant, never to raw effect layers.
+
+### Research
+- Added a low-volume, read-only Koumakan MediaWiki image/rights metadata audit workflow. Wiki integration must rely on verified API access and image rights rather than assuming every image URL is available.
+- Existing ship skills and stats remain sourced from Lycoris until a verified, permission-compatible wiki data pipeline exists.
+
 ## [0.7.1] - 2026-11-10
 
 ### Changed
