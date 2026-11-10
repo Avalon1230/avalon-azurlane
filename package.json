@@ -1,12 +1,14 @@
 {
   "name": "avalon-azurlane",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.6.1",
   "type": "module",
   "description": "Independent Azur Lane fleet and equipment intelligence — foundation MVP",
   "scripts": {
     "test": "node --test",
-    "check": "node --check src/app.js && node --check src/catalog.js && node --check src/domain.js && node --check src/remote.js && node --check src/criteria.js && node --check src/changelog.js && node --check src/tiers.js && node --check src/tier-view.js && node --check src/research.js && node --check src/assessments.js && node --check src/assessment-view.js && node --check src/fleet-suggest.js && node --check src/fleet-suggest-view.js && node --check src/media.js && node --check src/catalog-filters.js && node --check src/catalog-index.js"
+    "check": "node --check src/app.js && node --check src/catalog.js && node --check src/domain.js && node --check src/remote.js && node --check src/criteria.js && node --check src/changelog.js && node --check src/tiers.js && node --check src/tier-view.js && node --check src/research.js && node --check src/assessments.js && node --check src/assessment-view.js && node --check src/fleet-suggest.js && node --check src/fleet-suggest-view.js && node --check src/media.js && node --check src/catalog-filters.js && node --check src/catalog-index.js && node --check src/nation-emblems.js"
   },
-  "engines": {"node": ">=20"}
+  "engines": {
+    "node": ">=20"
+  }
 }
