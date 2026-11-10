@@ -9,6 +9,7 @@ import { imageMarkup, assetCoverage } from './media.js';
 import { renderCatalogIndex } from './catalog-index.js';
 import { renderShipRosterTile } from './ship-roster.js';
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
+import { loadArtworkCatalog, artworkSkinsForShip } from './artwork-catalog.js';
 import { nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
@@ -337,16 +338,22 @@ function renderUpdates() {
 
 async function loadShipProfileData() {
   if (state.shipDetails.status === 'loading' || state.shipDetails.status === 'ready') return;
-  state.shipDetails={status:'loading',data:null,error:''};
+  state.shipDetails={status:'loading',data:null,artwork:null,error:''};
   render();
-  try {
-    const data = await loadDetailedShips();
-    state.shipDetails={status:'ready',data,error:''};
-  } catch(error) {
-    state.shipDetails={status:'failed',data:null,error:error?.message||'Unreachable'};
+  const [ships,paintings]=await Promise.allSettled([loadDetailedShips(),loadArtworkCatalog()]);
+  if(ships.status==='fulfilled') {
+    state.shipDetails={
+      status:'ready',
+      data:ships.value,
+      artwork:paintings.status==='fulfilled'?paintings.value:null,
+      error:paintings.status==='rejected'?'Artwork manifest unavailable; profile data is still loaded.':''
+    };
+  } else {
+    state.shipDetails={status:'failed',data:null,artwork:null,error:ships.reason?.message||'Unreachable'};
   }
   if (state.page === 'ships' && state.detail?.kind === 'ship') render();
 }
+
 function openShipProfile(shipId) {
   const item = SHIP_MAP.get(shipId);
   if (!item) return;
@@ -373,9 +380,10 @@ function render() {
   if (state.page === 'ships' && state.detail?.kind === 'ship') {
     const ship=SHIP_MAP.get(state.detail.id) || SHIPS.find(x=>String(x.sourceId||'')===state.detail.sourceId);
     const data=detailedShipRecord(state.shipDetails.data,state.detail.sourceId || ship?.sourceId);
+    const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,state.detail.sourceId || ship?.sourceId);
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
-      level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen
+      level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins
     });
   } else {
     $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
