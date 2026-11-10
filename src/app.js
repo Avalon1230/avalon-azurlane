@@ -141,6 +141,7 @@ function go(page) {
   state.shipPage=1;state.gearPage=1;state.shipSort='name';state.shipDescending=false;state.shipRarity='all';
   state.picker = null;
   state.detail = null;
+  state.artViewerOpen=false;
   const hash = `#/${page}`;
   if (location.hash !== hash) history.replaceState(null, '', hash);
   render();
@@ -435,6 +436,10 @@ function handleAction(target) {
   }
   if (action === 'profile-art-fullscreen') {
     const element=document.getElementById('ship-art-lightbox');
+    if(document.fullscreenElement) {
+      void document.exitFullscreen().catch(()=>notify('Unable to exit fullscreen.'));
+      return;
+    }
     if(!element?.requestFullscreen) return notify('Fullscreen is not available in this browser.');
     void element.requestFullscreen().catch(()=>notify('Fullscreen is not available in this browser.'));
     return;
@@ -604,6 +609,10 @@ document.addEventListener('dragend', () => {
   state.activeDragItem=null;
   document.querySelectorAll('.tier-dragging').forEach(item => item.classList.remove('tier-dragging'));
 });
+document.addEventListener('fullscreenchange', () => {
+  const btn=document.querySelector('[data-action="profile-art-fullscreen"]');
+  if(btn) btn.textContent=document.fullscreenElement?'⛶ Exit fullscreen':'⛶ Fullscreen';
+});
 document.addEventListener('keydown', event => {
   if (event.key==='Escape' && state.artViewerOpen) {
     state.artViewerOpen=false;
@@ -617,7 +626,7 @@ window.addEventListener('hashchange', () => {
   const route=location.hash.replace(/^#\//,'');
   const match=route.match(/^ships\/(\d{2,8})$/);
   if (match) {
-    state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};
+    state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};state.artViewerOpen=false;
     state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;render();void loadShipProfileData();
     return;
   }
