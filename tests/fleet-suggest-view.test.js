@@ -10,7 +10,7 @@ test('suggest controls include owned-only, scenario and generate; no claim of va
  assert.match(html,/id="suggest-scenario"/);
  assert.match(html,/id="suggest-owned-only"/);
  assert.match(html,/data-action="suggest-generate"/);
- assert.match(html,/reviewed candidates/);
+ assert.match(html,/candidate ships/);
  assert.doesNotMatch(html,/HEURISTIC PREVIEW/);
 });
 test('preview shows traceable reasons and gaps without mutating output',()=>{
