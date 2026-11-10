@@ -1,6 +1,7 @@
 import { imageMarkup } from './media.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { trustedWikiImage } from './wiki-artwork.js';
+import { renderLoadoutPanel } from './loadout-view.js';
 
 const E = value => String(value ?? '').replace(/[&<>"']/g, c => (
   {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
@@ -111,7 +112,7 @@ function rarityBadge(rarity) {
     'Elite':'elite','Rare':'rare','Normal':'normal'}[rarity]||'unknown';
   return '<span class="ship-profile-rarity rarity-'+kind+'">'+E(rarity||'Unclassified')+'</span>';
 }
-function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null) {
+function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=null) {
   const fallbackName = data?.names?.en || ship?.name || 'Unknown ship';
   const identity = ship ? shipBrowseDisplayNation(ship) : data?.nationality || 'Unclassified';
   const metadata = [identity,data?.class,data?.hullType].filter(Boolean);
@@ -125,12 +126,12 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null) {
     '<dl class="ship-profile-facts">'+knownFacts.map(([key,value])=>
       '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
   // Never replace the small shipyard portrait when changing skin art.
-  return '<div class="ship-profile-top"><section class="ship-profile-overview">' +
+  return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview">' +
     '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
-    facts + '</div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
+    facts + '</div></section>' + (loadout?renderLoadoutPanel(loadout):'') + '</div>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
 }
 
 function statPanel(data, level, wiki=null) {
@@ -244,7 +245,7 @@ function sourcePanel(data, ship, wiki=null) {
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
 
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, error='' } = {}) {
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
@@ -263,9 +264,10 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
   const actions='<div class="ship-profile-toolbar" role="group" aria-label="Ship profile actions">' + back +
     (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
     '</div>';
-  return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki)+
+  return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki,loadoutModel)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
-    [['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
+    [...(loadoutModel?[['Loadout','#ship-profile-loadout']]:[]),
+      ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
     statPanel(data,level,wiki)+gearPanel(data,wiki)+skillsPanel(data,wiki)+
