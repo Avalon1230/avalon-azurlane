@@ -161,6 +161,36 @@ test('wiki loader validates URL, group ID and source template asynchronously',as
   assert.equal(await loadWikiShipFacts('https://example.com/wiki/Amagi(CV)','30715',fetcher),null);
   assert.equal(await loadWikiShipFacts('https://azurlane.koumakan.jp/wiki/Amagi(CV)','30714',fetcher),null);
 });
+test('Guam voice actor omits wiki section comments and commented-out fields',()=>{
+  const guam=String.raw`{{Ship
+| GroupID = 11802
+| Rarity = Ultra Rare
+| VA = [[Karin Kagami]]<!--
+--------- Section 2: Stats ---------
+| VA = Fake Commented Actor
+| GroupID = 99999
+-->
+| Artist = Dishwasher1910
+| Armor = Medium
+}}`;
+  const fields=extractShipFields(guam);
+  assert.equal(fields.VA,'[[Karin Kagami]]');
+  assert.equal(fields.Artist,'Dishwasher1910');
+  assert.equal(fields.GroupID,'11802');
+  const parsed=parseWikiShipFacts(guam,'11802');
+  assert.equal(parsed.voiceActor,'Karin Kagami');
+  assert.equal(parsed.artist,'Dishwasher1910');
+  const guamShip={...ship,id:'lyc-11802',sourceId:'11802',name:'Guam'};
+  const guamInfo={...info,id:'11802',names:{en:'Guam'}};
+  const html=renderShipProfile({ship:guamShip,data:guamInfo,wikiFacts:parsed});
+  assert.match(html,/<dt>Voice actor<\/dt><dd>Karin Kagami<\/dd>/);
+  assert.doesNotMatch(html,/Section 2: Stats|Fake Commented Actor|99999/);
+});
+test('unterminated wiki comments never enter text fields',()=>{
+  const raw='{{Ship\n| GroupID = 11802\n| VA = Karin Kagami<!-- broken editor comment';
+  const fields=extractShipFields(raw);
+  assert.equal(fields?.VA,'Karin Kagami');
+});
 test('Elite remains purple and Ultra Rare is a distinct prismatic style',()=>{
   const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
   assert.match(css,/\.ship-roster-tile\.rarity-ultra-rare \.ship-roster-name\s*\{\s*background:linear-gradient/);
