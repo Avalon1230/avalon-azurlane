@@ -9,7 +9,7 @@ const PAINT_HOST = 'https://raw.githubusercontent.com/iujab/azurlane-images/main
 const STAT_FIELDS = Object.freeze([
   ['health','HP'],['firepower','FP'],['torpedo','TRP'],['antiwar','AA'],
   ['aviation','AVI'],['reload','RLD'],['evasion','EVA'],['accuracy','ACC'],
-  ['speed','SPD'],['luck','LCK']
+  ['speed','SPD'],['luck','LCK'],['antisub','ASW'],['oil','Oil']
 ]);
 
 export function detailedShipRecord(dataset, sourceId) {
@@ -105,40 +105,76 @@ function artworkViewer(data, skinIndex, artworkSkins=[]) {
     '<span class="ship-art-missing">Artwork unavailable for this skin</span></div>' +
     '</section></div>';
 }
-function profileHead(ship, data, skinIndex, artworkSkins=[]) {
+function rarityBadge(rarity) {
+  const kind={'Ultra Rare':'ultra-rare','Decisive':'ultra-rare',
+    'Super Rare':'super-rare','Priority':'super-rare',
+    'Elite':'elite','Rare':'rare','Normal':'normal'}[rarity]||'unknown';
+  return '<span class="ship-profile-rarity rarity-'+kind+'">'+E(rarity||'Unclassified')+'</span>';
+}
+function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null) {
   const fallbackName = data?.names?.en || ship?.name || 'Unknown ship';
   const identity = ship ? shipBrowseDisplayNation(ship) : data?.nationality || 'Unclassified';
-  const metadata = [identity,data?.class,data?.hullType, data?.rarity || ship?.rarity].filter(Boolean);
-  // Keep the shipyard thumbnail/portrait constant; skins only change the
-  // independent artwork panel.
+  const metadata = [identity,data?.class,data?.hullType].filter(Boolean);
+  const knownFacts=[
+    wiki?.armor?['Armor',wiki.armor]:null,
+    wiki?.constructionTime?['Build time',wiki.constructionTime]:null,
+    wiki?.voiceActor?['Voice actor',wiki.voiceActor]:null,
+    wiki?.artist?['Illustrator',wiki.artist]:null
+  ].filter(Boolean);
+  const facts=knownFacts.length?
+    '<dl class="ship-profile-facts">'+knownFacts.map(([key,value])=>
+      '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
+  // Never replace the small shipyard portrait when changing skin art.
   return '<div class="ship-profile-top"><section class="ship-profile-overview">' +
     '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
-    '<p>' + E(metadata.join(' · ')) + '</p>' +
+    '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
-    '</div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
+    facts + '</div></section>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
 }
 
-function statPanel(data, level) {
-  const levels=['level100','level120','level100Retrofit','level120Retrofit'].filter(k=>data.stats?.[k]);
+function statPanel(data, level, wiki=null) {
+  const wikiStats=wiki?.stats||{};
+  const combined={...data.stats,...wikiStats};
+  const levels=['levelBase','level100','level120','level125','level100Retrofit','level120Retrofit'].filter(k=>combined[k]);
   if(!levels.length) return profilePanel('Statistics','<p class="profile-unavailable">No verified stat block loaded.</p>');
   const active=levels.includes(level)?level:(levels.includes('level120')?'level120':levels[0]);
+  const names={
+    levelBase:'Base',level100:'Lv. 100',level120:'Lv. 120',
+    level125:'Lv. 125',level100Retrofit:'Lv. 100 · Retrofit',level120Retrofit:'Lv. 120 · Retrofit'
+  };
   const choices=levels.map(k=>'<button type="button" class="filter-chip'+(k===active?' active':'')+
     '" data-action="profile-level" data-level="'+E(k)+'" aria-pressed="'+(k===active)+'">'+
-    E(k.replace('level','Lv. ').replace('Retrofit',' · Retrofit'))+'</button>').join('');
-  const vals=STAT_FIELDS.map(([key,title])=>'<div class="ship-stat"><span>'+E(title)+'</span><strong>'+num(data.stats[active][key])+'</strong></div>').join('');
+    E(names[k]||k)+'</button>').join('');
+  const current=combined[active];
+  const vals=STAT_FIELDS.filter(([key])=>Number.isFinite(current?.[key]))
+    .map(([key,title])=>'<div class="ship-stat"><span>'+E(title)+'</span><strong>'+num(current[key])+'</strong></div>').join('');
+  const fromWiki=!!wikiStats[active];
+  const note=fromWiki
+    ?(active==='levelBase'?'Koumakan Wiki · base stats (no enhancements).':
+      'Koumakan Wiki · level 100+ stats at 100 affinity with max enhancements.')
+    :'Lycoris game-data snapshot · may use a different affinity/enhancement basis.';
   return profilePanel('Statistics','<div class="ship-profile-choices" role="group" aria-label="Stat level">'+choices+
-    '</div><div class="ship-stat-grid">'+vals+'</div>','ship-profile-stats');
+    '</div><div class="ship-stat-grid">'+vals+'</div><p class="ship-data-source">'+E(note)+'</p>','ship-profile-stats');
 }
-function gearPanel(data) {
-  const slots = Array.isArray(data.slots) ? data.slots : [];
-  const body = slots.length
-    ? '<div class="ship-gear-list">' + slots.map((slot,i)=>
-      '<div class="ship-gear-slot"><span class="slot-number">'+(i+1)+'</span><strong>'+E(slot.type||'Equipment slot')+'</strong>' +
-      '<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span></div>').join('')+'</div>'
-    : '<p class="profile-unavailable">Equipment slot data unavailable.</p>';
+
+function gearPanel(data,wiki=null) {
+  const verified=Array.isArray(wiki?.slots)&&wiki.slots.length===3;
+  const slots=verified?wiki.slots:(Array.isArray(data.slots)?data.slots:[]);
+  const rows=slots.map((slot,i)=>
+    '<div class="ship-gear-slot"><span class="slot-number">'+(i+1)+'</span>'+
+    '<strong>'+E(slot.type||'Equipment slot')+'</strong>' +
+    (Number.isInteger(slot.maxMounts)?'<span class="ship-gear-mount">Max '+slot.maxMounts+'</span>':'')+
+    '<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span></div>').join('');
+  const aug=wiki?.augmentType?'<div class="ship-gear-slot"><span class="slot-number">+</span>'+
+    '<strong>Augment: '+E(wiki.augmentType)+'</strong></div>':'';
+  const body=rows||aug?'<div class="ship-gear-list">'+rows+aug+'</div>'+
+    '<p class="ship-data-source">'+(verified?'Koumakan Wiki · mount counts, unlock-aware types and efficiencies.':
+      'Lycoris equipment-slot categories; exact mount counts not verified.')+'</p>'
+    :'<p class="profile-unavailable">Equipment slot data unavailable.</p>';
   return profilePanel('Equipment slots',body,'ship-profile-gear');
 }
+
 function skillsPanel(data) {
   const skills=Array.isArray(data.skills)?data.skills:[];
   return profilePanel('Skills',skills.length?
