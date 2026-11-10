@@ -6,10 +6,10 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 
 - Repository: https://github.com/Avalon1230/avalon-azurlane
 - Live site: https://avalon1230.github.io/avalon-azurlane/
-- Current release: **main / v0.6.1 / b9ded9ab931fefc53532400b7bea72d91512b1a2** (nation-first Ship Index merged 2026-11-10).
-- **v0.6.2 candidate in progress:** `feat/ship-faction-hierarchy-and-emblem-visibility`. Groups crossover ships as Collab, renames Universal browse group Bulins, prioritizes main factions → META → Bulins → Collab, enlarges emblem tiles for contrast, and consolidates disclosures in Sources. Test verification/merge pending.
-- Feature PR: [#1](https://github.com/Avalon1230/avalon-azurlane/pull/1) merged via squash into main. GitHub Pages deployment should be independently confirmed.
-- Verified quality checks: **74/74 tests passed**, `npm run check` succeeded on PR #1 and on the merged main commit (GitHub Actions run [42801112657](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42801112657)).
+- Current release: **main / v0.6.2 / 7593cab582c827d8c52a422b5f383d60c0bb37bc** (faction hierarchy, emblem visibility and site-wide presentation cleanup merged 2026-11-10).
+- Release PR [#2](https://github.com/Avalon1230/avalon-azurlane/pull/2) merged into `main`. Main factions → META → Bulins → Collab; authentic emblems enlarged and contrasted; routine source disclaimers consolidated under Sources while functional warnings remain.
+- Previous PR [#1](https://github.com/Avalon1230/avalon-azurlane/pull/1) shipped v0.6.1, now superseded by v0.6.2.
+- Verified v0.6.2 PR checks: **80/80 tests passed** and `npm run check` succeeded ([GitHub Actions #42804415298](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42804415298)); merge succeeded. Verify merged main build/deployment separately.
 - Last baseline upstream coverage: 894 Lycoris source IDs and 936 Fernando equipment records. One UI screenshot displayed 890 indexed ships; **investigate, do not assume cause**.
 
 ## Product objective and decisions
@@ -39,7 +39,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 - Original game-asset thumbnails and equipment icons with source attribution and fallbacks.
 - Provisional, context-specific, evidence-linked AVALON combat assessments and independent character favorite boards.
 
-**Delivered in v0.6.1:**
+**Delivered in v0.6.1–v0.6.2:**
 - Replace initial Ship Index grid with compact nation/faction selection cards.
 - Show original game-client nationality emblems (independent community host), dynamic counts, global search, and text fallback for unverified factions.
 - Open filtered ship roster on nation click; keep hull filtering, search, pagination, inspect/assign, and a return-to-nations control.
@@ -66,7 +66,7 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 
 ## Next development steps
 
-0. Verify v0.6.2 faction grouping, icon visibility and site-wide disclosure cleanup with Node checks/tests and live visual inspection; merge only after CI passes. Preserve each source franchise label and keep caveats documented under Sources.
+0. Verify v0.6.2 GitHub Pages deployment and inspect live desktop/mobile visuals, particularly enlarged faction emblem contrast, category navigation, Collab search, Bulins and the Sources panel. Automated quality checks passed.
 1. Confirm GitHub Pages deployment for the merged v0.6.1 version and visually verify the nation-first interface on desktop/mobile.
 2. Confirm navigation and layouts in the live site at desktop/mobile widths, all recorded factions, search, hull filtering, all pages and ship actions.
 3. Investigate 890 vs 894 index count with reproducible normalization/merge tests.
