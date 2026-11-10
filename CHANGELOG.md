@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.7.7] - 2026-11-11
+
+### Fixed
+- Corrected original equipment icon resolution across the full index using Fernando2603/AzurLane's source `equipment_icon.json`, rather than assuming that an equipment item with ID `X` always uses `X.png`. **417 of 936** records intentionally share a different base icon filename. All 936 referenced icon filenames were verified against the host's Git image tree; network/display success remains subject to the third-party host.
+
+### Changed
+- Converted Equipment Index from large text-heavy cards and numbered pages to a dense, clickable gallery of genuine game equipment icons with rarity-appropriate colors. Selecting an item still opens the existing source-backed equipment inspection panel.
+- Defaults to descending rarity (UR → SR → Elite → Rare → Common), with name/type sorting, reverse-order control, and source-only rarity filtering.
+- Loads equipment in continuous 60-item batches on scroll, with an accessible Load More fallback; all matching records remain reachable without page navigation.
+- Retains nation-of-origin browsing plus equipment-type and potentially compatible-hull filters, now presented as compact buttons. Hull eligibility remains source-supported *potential* compatibility, not a promise for every individual ship.
+
+### Tests
+- Verified icon alias mappings, safe source-ID validation, correct rarity ordering, filtering, compact card rendering, and full 936-record scroll reachability.
+
 ## [0.7.6] - 2026-11-10
 
 ### Fixed
