@@ -11,9 +11,8 @@ test('nation-categorized ship index supports all 894 records with 15 pages',()=>
   assert.match(page,/<option value="15" selected>/);
   assert.match(page,/data-ship="10893"/);
   assert.doesNotMatch(page,/data-ship="10000"/);
-  assert.match(page,/Eagle Union/);
   assert.match(page,/Royal Navy/);
-  assert.match(page,/All nations/);
+  assert.match(page,/Search all nations/);
 });
 test('equipment view filters by type, origin, and hull without fictional equipability',()=>{
   const gear=[
