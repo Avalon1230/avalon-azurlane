@@ -337,35 +337,40 @@ function renderUpdates() {
   <div class="changelog-content">${body}</div>`;
 }
 
+const wikiArtCache=new Map();
+function loadWikiArtForCurrentShip() {
+  const sourceId=String(state.detail?.sourceId||'');
+  const record=detailedShipRecord(state.shipDetails.data,sourceId);
+  if(!record?.wikiUrl || wikiArtCache.has(sourceId))return;
+  wikiArtCache.set(sourceId,null); // request in flight; do not repeat
+  void loadWikiDefaultArtwork(record.wikiUrl).then(url=>{
+    wikiArtCache.set(sourceId,url||null);
+    if(url && state.page==='ships' && state.detail?.sourceId===sourceId &&
+       !state.artViewerOpen)render();
+  }).catch(()=>wikiArtCache.set(sourceId,null));
+}
 async function loadShipProfileData() {
-  if (state.shipDetails.status === 'loading' || state.shipDetails.status === 'ready') return;
+  if(state.shipDetails.status==='loading')return;
+  if(state.shipDetails.status==='ready'){
+    loadWikiArtForCurrentShip();
+    return;
+  }
   state.shipDetails={status:'loading',data:null,artwork:null,error:''};
   render();
   const [ships,paintings]=await Promise.allSettled([loadDetailedShips(),loadArtworkCatalog()]);
-  if(ships.status==='fulfilled') {
+  if(ships.status==='fulfilled'){
     state.shipDetails={
       status:'ready',
       data:ships.value,
-      wikiArt:null,
       artwork:paintings.status==='fulfilled'?paintings.value:null,
-      error:paintings.status==='rejected'?'Artwork manifest unavailable; profile data is still loaded.':''
+      error:paintings.status==='rejected'?'Artwork manifest unavailable; ship data remains loaded.':''
     };
-  } else {
+  }else{
     state.shipDetails={status:'failed',data:null,artwork:null,error:ships.reason?.message||'Unreachable'};
   }
-  if (state.page === 'ships' && state.detail?.kind === 'ship') render();
-  if(ships.status==='fulfilled'){
-    const selectedId=String(state.detail?.sourceId || '');
-    const record=detailedShipRecord(ships.value,selectedId);
-    if(record?.wikiUrl){
-      void loadWikiDefaultArtwork(record.wikiUrl).then(url=>{
-        if(url && state.page==='ships' && state.detail?.sourceId===selectedId &&
-           state.shipDetails.data===ships.value){
-          state.shipDetails.wikiArt=url;
-          if(!state.artViewerOpen)render();
-        }
-      }).catch(()=>{}); // Fall back to the reconstructed image without interrupting browsing.
-    }
+  if(state.page==='ships' && state.detail?.kind==='ship'){
+    render();
+    if(ships.status==='fulfilled')loadWikiArtForCurrentShip();
   }
 }
 
@@ -395,9 +400,11 @@ function render() {
   if (state.page === 'ships' && state.detail?.kind === 'ship') {
     const ship=SHIP_MAP.get(state.detail.id) || SHIPS.find(x=>String(x.sourceId||'')===state.detail.sourceId);
     const data=detailedShipRecord(state.shipDetails.data,state.detail.sourceId || ship?.sourceId);
-    const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,state.detail.sourceId || ship?.sourceId)
-      .map((skin,index)=> index===0 && state.shipDetails.wikiArt
-        ? {...skin,images:{...skin.images,wiki:state.shipDetails.wikiArt}}:skin);
+    const recordId=String(state.detail.sourceId || ship?.sourceId || '');
+    const wikiPainting=wikiArtCache.get(recordId);
+    const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,recordId)
+      .map((skin,index)=>index===0 && wikiPainting
+        ? {...skin,images:{...skin.images,wiki:wikiPainting}}:skin);
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
       level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins
