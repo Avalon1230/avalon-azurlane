@@ -390,3 +390,67 @@
   .ship-gear-slot>span:last-child{grid-column:2;white-space:normal}
 }
 @media(prefers-reduced-motion:reduce){.ship-roster-tile{transition:none}.ship-roster-tile:hover{transform:none}}
+
+
+/* v0.7.1 — persistent portraits, separate artwork gallery and native fullscreen viewer */
+.nation-emblem:has(> .nation-emblem-img) > .nation-emblem-fallback{display:none}
+.ship-profile-top{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);align-items:stretch;gap:18px}
+.ship-profile-overview{display:flex;gap:19px;align-items:flex-start;min-width:0;padding:16px;background:#102339;border:1px solid #31536b;border-radius:12px}
+.ship-profile-overview .ship-profile-cover{display:flex;align-items:center;justify-content:center;flex:0 0 172px;width:172px;min-height:215px;height:235px;max-height:235px;border-radius:9px;background:linear-gradient(140deg,#365976,#182f43)}
+.ship-profile-overview .ship-profile-cover .asset-media{width:100%;height:100%;background:transparent;border:0}
+.ship-profile-overview .ship-profile-cover .asset-img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.ship-profile-overview .ship-profile-cover .asset-fallback{font-size:23px}
+.ship-profile-overview .ship-profile-identity{padding:9px 0;flex:1;min-width:0}
+.ship-profile-overview .ship-profile-identity h1{font-size:clamp(26px,2.7vw,39px)}
+.ship-profile-choices .filter-chip{background:#173a53;border:1px solid #5485a1;color:#e1f3fa;padding:8px 11px;font-size:12px;min-height:32px;border-radius:6px;font-weight:750}
+.ship-profile-choices .filter-chip:hover{border-color:#90d7ee;background:#265c7d;color:#fff}
+.ship-profile-choices .filter-chip.active{background:#28759b;border-color:#9de3f9;color:#fff;box-shadow:inset 0 -2px 0 #a1ecfc}
+.ship-art-panel{min-width:0;background:#102339;border:1px solid #31536b;border-radius:12px;padding:15px;display:flex;flex-direction:column;gap:12px}
+.ship-art-panel-head{display:flex;justify-content:space-between;align-items:end;gap:12px}
+.ship-art-panel-head h2{margin:4px 0 0;color:#effaff;font-size:19px}
+.ship-art-current{font-size:12px;color:#b6d8e9;text-align:right}
+.ship-art-preview{position:relative;display:grid;place-items:center;width:100%;height:310px;min-width:0;overflow:hidden;border:1px solid #3d6885;border-radius:10px;background:radial-gradient(circle at 50% 40%,#35536e,#11283d 70%);padding:7px;cursor:zoom-in}
+.ship-art-preview:disabled{cursor:default}
+.ship-art-preview:not(:disabled):hover{border-color:#a3def4;box-shadow:inset 0 0 12px #91dfff25}
+.ship-art-preview-image{width:100%;height:100%;object-fit:contain;object-position:center center;filter:drop-shadow(0 6px 12px #05111a77)}
+.ship-art-zoom-hint{position:absolute;bottom:11px;right:12px;font-size:11px;font-weight:800;color:#eaf8ff;background:#0b2338e6;border:1px solid #5485a1;border-radius:6px;padding:7px 10px}
+.ship-art-missing{font-size:13px;color:#9cbace;text-align:center;padding:16px}
+.ship-art-preview:has(img)>.ship-art-missing,
+.ship-art-viewer-canvas:has(img)>.ship-art-missing{display:none}
+.ship-art-variants{display:flex;gap:8px;flex-wrap:wrap;max-height:126px;overflow-y:auto;padding:3px 2px 7px;scrollbar-width:thin}
+.ship-art-variant{background:#173750;border:1px solid #5c84a1;color:#e1f4fe;border-radius:6px;font-size:12px;font-weight:760;line-height:1.3;padding:9px 12px;cursor:pointer;text-align:center}
+.ship-art-variant:hover{background:#295e7c;border-color:#93d2ed;color:#fff}
+.ship-art-variant.active{background:#2c799c;border-color:#b0e8fc;color:white;box-shadow:inset 0 -2px 0 #9ce8fb}
+.ship-art-variant:focus-visible,.ship-art-preview:focus-visible{outline:3px solid #9adcf2;outline-offset:2px}
+.ship-art-viewing{overflow:hidden}
+.ship-art-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;background:#01070edb;backdrop-filter:blur(8px)}
+.ship-art-lightbox{width:min(1250px,96vw);max-height:96vh;min-height:300px;display:flex;flex-direction:column;background:#091b2a;border:1px solid #4d7c98;border-radius:12px;overflow:hidden;box-shadow:0 24px 75px #000b}
+.ship-art-viewer-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;background:#122c42;border-bottom:1px solid #325771}
+.ship-art-viewer-head h2{margin:4px 0 0;color:#ecf9ff;font-size:16px}
+.ship-art-viewer-actions{display:flex;flex-wrap:wrap;gap:8px}
+.ship-art-viewer-actions button{min-height:35px;background:#1b415d;color:#ecf9ff;border:1px solid #699ab4}
+.ship-art-viewer-actions button:hover{background:#285f83;border-color:#a2daf1}
+.ship-art-viewer-canvas{min-height:220px;min-width:0;display:grid;place-items:center;overflow:auto;flex:1;background:radial-gradient(circle at 50% 45%,#1b334b,#06111f 80%);padding:12px}
+.ship-art-viewer-image{display:block;object-fit:contain;width:100%;height:auto;max-width:100%;max-height:calc(96vh - 110px);filter:drop-shadow(0 6px 20px #02080eb8)}
+.ship-art-lightbox:fullscreen{width:100vw;max-width:none;height:100vh;max-height:none;border-radius:0;border:0}
+.ship-art-lightbox:fullscreen .ship-art-viewer-canvas{min-height:0}
+.ship-art-lightbox:fullscreen .ship-art-viewer-image{max-height:calc(100vh - 85px)}
+@media(max-width:1250px){
+ .ship-profile-top{grid-template-columns:1fr}
+ .ship-profile-overview .ship-profile-cover{flex-basis:183px;width:183px}
+ .ship-art-preview{height:370px}
+}
+@media(max-width:650px){
+ .ship-profile-overview{padding:12px;gap:13px}
+ .ship-profile-overview .ship-profile-cover{flex:0 0 125px;width:125px;height:181px;min-height:181px}
+ .ship-profile-overview .ship-profile-identity{padding:3px 0}
+ .ship-profile-overview .ship-profile-identity h1{font-size:25px}
+ .ship-art-preview{height:270px}
+ .ship-art-panel{padding:11px}
+ .ship-art-variants{max-height:150px}
+ .ship-art-overlay{padding:0}
+ .ship-art-lightbox{width:100vw;max-height:100vh;height:100vh;border-radius:0}
+ .ship-art-viewer-head{padding:11px;flex-wrap:wrap}
+ .ship-art-viewer-image{max-height:calc(100vh - 130px)}
+}
+@media(max-width:370px){.ship-profile-overview{flex-direction:column}.ship-profile-overview .ship-profile-cover{width:135px;flex-basis:auto;height:170px}}

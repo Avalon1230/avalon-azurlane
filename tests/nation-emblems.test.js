@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { nationEmblemUrl, nationEmblemMarkup } from '../src/nation-emblems.js';
 
 test('verified nations map to original in-game nationality icon assets',()=>{
@@ -20,4 +21,14 @@ test('nation emblem markup retains text fallback and escapes untrusted names',()
   assert.doesNotMatch(unknown,/<script>/);
   assert.doesNotMatch(unknown,/<img/);
   assert.match(unknown,/nation-emblem-fallback/);
+  assert.match(unknown,/>◇<\/span>/);
+  assert.doesNotMatch(nationEmblemMarkup('Eagle Union'),/>EU<\/span>/);
+});
+
+test('nation emblem overlays and artwork controls keep the intended contrast',()=>{
+  const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
+  assert.match(css,/\.nation-emblem:has\(> \.nation-emblem-img\) > \.nation-emblem-fallback\{display:none\}/);
+  assert.match(css,/\.ship-art-variant\.active\{[^}]*color:white/);
+  assert.match(css,/\.ship-art-lightbox:fullscreen\{/);
+  assert.match(css,/\.ship-profile-overview \.ship-profile-cover/);
 });

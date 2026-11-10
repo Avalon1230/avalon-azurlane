@@ -36,10 +36,8 @@ export function nationEmblemUrl(nation) {
 
 export function nationEmblemMarkup(nation) {
   const src = nationEmblemUrl(nation);
-  const initials = String(nation || '?').split(/\s+/).filter(Boolean)
-    .map(word => word[0]).join('').slice(0, 3).toUpperCase();
   return '<span class="nation-emblem" aria-hidden="true">' +
-    '<span class="nation-emblem-fallback">' + escapeHtml(initials) + '</span>' +
+    '<span class="nation-emblem-fallback">◇</span>' +
     (src ? '<img class="asset-img nation-emblem-img" src="' + escapeHtml(src) +
       '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') +
     '</span>';

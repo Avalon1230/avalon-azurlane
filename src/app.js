@@ -32,7 +32,7 @@ const pages = [
 const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   shipNation:'all', gearNation:'all', gearHull:'all', shipPage:1, gearPage:1,
-  shipSort:'name', shipDescending:false, shipRarity:'all', profileLevel:'level120',profileSkin:0,
+  shipSort:'name', shipDescending:false, shipRarity:'all', profileLevel:'level120',profileSkin:0,artViewerOpen:false,
   shipDetails:{status:'idle',data:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
   sync: { status:'loading', ships:0, equipment:0, shipVersion:null, checkedAt:null, errors:[] },
@@ -141,6 +141,7 @@ function go(page) {
   state.shipPage=1;state.gearPage=1;state.shipSort='name';state.shipDescending=false;state.shipRarity='all';
   state.picker = null;
   state.detail = null;
+  state.artViewerOpen=false;
   const hash = `#/${page}`;
   if (location.hash !== hash) history.replaceState(null, '', hash);
   render();
@@ -351,13 +352,14 @@ function openShipProfile(shipId) {
   if (!item) return;
   state.page='ships';
   state.detail={kind:'ship',id:item.id,sourceId:String(item.sourceId||'')};
-  state.profileSkin=0;state.profileLevel='level120';
+  state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;
   if (state.detail.sourceId) history.pushState(null,'','#/ships/'+encodeURIComponent(state.detail.sourceId));
   render();
   window.scrollTo({top:0,behavior:'instant'});
   void loadShipProfileData();
 }
 function closeShipProfile() {
+  state.artViewerOpen=false;
   state.detail=null;
   history.pushState(null,'','#/ships');
   render();
@@ -365,6 +367,7 @@ function closeShipProfile() {
 }
 function render() {
   nav();
+  document.body.classList.toggle('ship-art-viewing', state.artViewerOpen && state.page==='ships' && state.detail?.kind==='ship');
   const views = { overview:renderOverview, modes:renderModes, ships:renderShips, equipment:renderEquipment, fleet:renderFleet, sources:renderSources, updates:renderUpdates,
     tiers: () => renderTierView({ boardId: state.tierBoard, boards: state.tierBoards, ships: SHIPS, equipment: EQUIPMENT, query: state.tierQuery, filter: state.tierFilter, sourceStatus: state.sync.status }) };
   if (state.page === 'ships' && state.detail?.kind === 'ship') {
@@ -372,7 +375,7 @@ function render() {
     const data=detailedShipRecord(state.shipDetails.data,state.detail.sourceId || ship?.sourceId);
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
-      level:state.profileLevel,skinIndex:state.profileSkin
+      level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen
     });
   } else {
     $('#app-content').innerHTML = views[state.page]() + (state.detail ? renderDetails() : '');
@@ -421,12 +424,32 @@ function handleAction(target) {
   if (action === 'ship-sort-direction') {
     state.shipDescending=!state.shipDescending;state.shipPage=1;render();return;
   }
+  if (action === 'profile-art-open') {
+    state.artViewerOpen=true;render();
+    document.querySelector('.ship-art-viewer-actions [data-action="profile-art-close"]')?.focus();
+    return;
+  }
+  if (action === 'profile-art-close') {
+    state.artViewerOpen=false;
+    if(document.fullscreenElement) void document.exitFullscreen().catch(()=>{});
+    render();document.querySelector('.ship-art-preview')?.focus();return;
+  }
+  if (action === 'profile-art-fullscreen') {
+    const element=document.getElementById('ship-art-lightbox');
+    if(document.fullscreenElement) {
+      void document.exitFullscreen().catch(()=>notify('Unable to exit fullscreen.'));
+      return;
+    }
+    if(!element?.requestFullscreen) return notify('Fullscreen is not available in this browser.');
+    void element.requestFullscreen().catch(()=>notify('Fullscreen is not available in this browser.'));
+    return;
+  }
   if (action === 'profile-back') { closeShipProfile();return; }
   if (action === 'profile-level') {state.profileLevel=target.dataset.level||'level120';render();return;}
   if (action === 'profile-skin') {
     const next=Number(target.dataset.index);
     if (!Number.isSafeInteger(next) || next<0 || next>100) return;
-    state.profileSkin=next;render();return;
+    state.profileSkin=next;state.artViewerOpen=false;render();return;
   }
   if (action === 'profile-jump') {
     document.getElementById(target.dataset.section)?.scrollIntoView({block:'start',behavior:'smooth'});return;
@@ -501,6 +524,11 @@ function handleAction(target) {
 
 document.addEventListener('error', event => {
   const img=event.target;
+  if(img?.matches?.('img.ship-art-preview-image, img.ship-art-viewer-image')) {
+    const fallback=img.dataset.fallbackSrc;
+    if (fallback) {delete img.dataset.fallbackSrc;img.src=fallback;return;}
+    img.remove();return;
+  }
   if(img?.matches?.('img.asset-img, img.ship-profile-painting')) img.remove();
 }, true);
 document.addEventListener('click', event => {
@@ -508,6 +536,7 @@ document.addEventListener('click', event => {
   if (!target || target.disabled) return;
   // A click within the picker should not close it unless it hits the backdrop itself.
   if (['close-picker','close-detail'].includes(target.dataset.action) && target.classList.contains('picker-backdrop') && event.target!==target) return;
+  if(target.dataset.action==='profile-art-close' && target.classList.contains('ship-art-overlay') && event.target!==target) return;
   handleAction(target);
 });
 document.addEventListener('change', event => {
@@ -580,20 +609,29 @@ document.addEventListener('dragend', () => {
   state.activeDragItem=null;
   document.querySelectorAll('.tier-dragging').forEach(item => item.classList.remove('tier-dragging'));
 });
+document.addEventListener('fullscreenchange', () => {
+  const btn=document.querySelector('[data-action="profile-art-fullscreen"]');
+  if(btn) btn.textContent=document.fullscreenElement?'⛶ Exit fullscreen':'⛶ Fullscreen';
+});
 document.addEventListener('keydown', event => {
-  if (event.key==='Escape' && state.detail?.kind==='ship') closeShipProfile();
+  if (event.key==='Escape' && state.artViewerOpen) {
+    state.artViewerOpen=false;
+    if(document.fullscreenElement) void document.exitFullscreen().catch(()=>{});
+    render();
+  }
+  else if (event.key==='Escape' && state.detail?.kind==='ship') closeShipProfile();
   else if (event.key==='Escape' && (state.picker||state.detail)) {state.picker=null;state.detail=null;render();}
 });
 window.addEventListener('hashchange', () => {
   const route=location.hash.replace(/^#\//,'');
   const match=route.match(/^ships\/(\d{2,8})$/);
   if (match) {
-    state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};
-    state.profileSkin=0;state.profileLevel='level120';render();void loadShipProfileData();
+    state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};state.artViewerOpen=false;
+    state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;render();void loadShipProfileData();
     return;
   }
   if(route==='ships' && state.page==='ships' && state.detail?.kind==='ship'){
-    state.detail=null;render();return;
+    state.detail=null;state.artViewerOpen=false;render();return;
   }
   if (pages.some(p=>p.id===route) && (route!==state.page || state.detail)) go(route);
 });

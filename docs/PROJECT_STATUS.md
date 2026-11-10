@@ -8,6 +8,7 @@ _Last updated: 2026-11-10 (Asia/Manila). This file is the permanent cross-conver
 - v0.7.0 delivered by [PR #4](https://github.com/Avalon1230/avalon-azurlane/pull/4), merged into main. **93/93 tests passed**, JavaScript syntax checks passed on feature branch [Actions run 42809749844](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42809749844). GitHub Pages release deployment must be independently confirmed. See `docs/SHIP_PROFILES.md`.
 - Live site: https://avalon1230.github.io/avalon-azurlane/
 - Current release: **main / v0.7.0 / d0501fc54fb27046b8bf3c651c19050c99bc11c3** (dense ship gallery and detailed ship profiles, 2026-11-10).
+- **v0.7.1 candidate** on `feat/profile-artwork-gallery-and-lightbox`: fixed ship portrait alongside separate skin artwork panel, enlarged/fullscreen artwork viewer, preferred static source variants for `_rw` render-layer paintings, improved control contrast, and no overlaid nation abbreviations. Awaiting CI and merge.
 - Release PR [#2](https://github.com/Avalon1230/avalon-azurlane/pull/2) merged into `main`. Main factions → META → Bulins → Collab; authentic emblems enlarged and contrasted; routine source disclaimers consolidated under Sources while functional warnings remain.
 - Previous PR [#1](https://github.com/Avalon1230/avalon-azurlane/pull/1) shipped v0.6.1, now superseded by v0.6.2.
 - Verified v0.6.2 PR checks: **80/80 tests passed** and `npm run check` succeeded ([GitHub Actions #42804415298](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42804415298)); merge succeeded. Verify merged main build/deployment separately.
@@ -82,3 +83,8 @@ AVALON is an **independent**, explainable Azur Lane intelligence platform coveri
 ## Continuity protocol
 
 When a new conversation starts: retrieve relevant prior decisions, inspect latest commits/branches/PRs, read this file and CHANGELOG, compare code against claims, and resume the current task. Never silently reset to older milestones or claim tests/deployment without verification. Update this handoff after substantial development.
+
+## Artwork UI follow-up
+
+- Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
+- On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
