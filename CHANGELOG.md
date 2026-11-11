@@ -2,35 +2,10 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
-## [0.8.6 WIP feature status] - 2026-11-12
-
-- Added understated **WIP** labels to **Equipment, Augments, Fleet Lab and Tier Boards** in sidebar navigation and page headings.
-- Functioning browsing, official/source-backed artwork, manual fleet assignments, the personalized tier editors and data search are unchanged.
-- Labels apply to incomplete **combat recommendations, augment analysis, fleet/gear synergy and full tier coverage**. Ship Index stays an ordinary roster; its existing Loadout Planner (WIP) label remains.
-- Added regression tests for page labels, usability boundaries and responsive styles. Source data, rankings, recommendation selection and ship count are not modified.
-
-## [0.8.6 Collaboration series navigation] - 2026-11-12
-
-- Collaboration ships now have a dedicated second-level landing page in **Ship Index → Collab**, showing each franchise individually rather than opening one mixed roster.
-- Verified **14 distinct series** in the 894-ship source snapshot. Source nationalities and ship IDs are unchanged; Kizuna AI/KizunaAI are normalized only for browsing.
-- Each franchise card features game-client ship artwork from that series, plus a sourced franchise wordmark where a verified match was found (seven franchises). Unverified wordmarks are never fabricated or replaced by the generic Collab emblem.
-- Ship series rosters preserve the familiar hull class, rarity, sort, search, progressive loading and profile flow, with a **← Collaborations** back action.
-- External Wikimedia logo hosts may rate-limit hotlinking. Failed logo overlays are removed so the original ship artwork remains visible. Automated tests audit real HTTP failures and distinguish external throttling from broken paths.
-- Browser fixture coverage expanded from 35 to **49** responsive checks across seven viewport widths; full CI gates must pass before release.
-
-## [0.8.6 WIP clarity hotfix] - 2026-11-12
-
-- Clearly marks the ship-profile **Loadout Planner (WIP)** and its automatic items **Auto-filled · unreviewed**, with a concise explanation that eligibility is not a combat recommendation.
-- Simplifies the equipment-options drawer: shows the current source-compatible item, source provenance and alternatives first. Removes redundant 'Why this item appears' and verbose selection-audit/evidence essays from the default screen.
-- Keeps specialist comparisons as optional collapsed, attributed research notes **only when they actually exist**, including situational conditions and trade-offs; unresearched equipment no longer gets a generic pseudo-justification.
-- Preserves existing saved picks, available equipment, legality filters, ship-specific sourced slot types, augments and 50-at-a-time browsing. Does not assert any new best-in-slot rankings or alter the equipment selection heuristics.
-- Adds regression tests for WIP labels, concise drawer, researched/unresearched states and escaping, plus existing viewport/asset CI checks.
-- [PR #24](https://github.com/Avalon1230/avalon-azurlane/pull/24) merged as `95062b8b`. [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065637404) passed **197/197 Node tests, 35/35 viewport fixtures and 16/16 WebP image probes**. [Merged-main checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065816329) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065815815) passed. This is WIP transparency, **not** a recommendation engine.
-
 ## [0.8.6] - 2026-11-11
 
 ### Source evidence and explainability
-- Replaced the misleading loadout drawer headline **Why this choice?** with **Why this item appears** for automatic compatibility candidates.
+- Replaced the misleading loadout drawer headline **Why this choice?** with **Why this item appears** for automatic compatibility candidates (later simplified in the WIP clarity fix below).
 - Added a source-attribute decision audit: exact selected gear identity and enhancement, numeric HIT/RLD/Anti-Siren comparison where available, and explicit distinction between a sort explanation and damage/survivability evidence.
 - Added contextual research notes for six exact source-identified items (La-9, Mecklenburg 305mm, Tenrai, Saiun Kai, BF-109G, High Performance Hydraulic Steering Gear), with mission/armor/timing caveats and links to Suchiguma's research and Quick Gear Guide. The notes are expert reports, **not AVALON DPS simulations**.
 - Added an Aquila aircraft-slot-two skill decision in the options drawer and highlighted other eligible research-informed alternatives without silently overriding a user's selections.
@@ -40,17 +15,37 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Added `docs/RECOMMENDATION_EVIDENCE.md` specifying the missing independent mechanics checks and minimum evidence required for future recommendation certification.
 - Added regression tests for exact source ID matching, provenance, numeric selection comparisons, Aquila skill conditions, manual choices, and escaping; browser viewport fixtures cover the new evidence drawer.
 - [PR #23](https://github.com/Avalon1230/avalon-azurlane/pull/23) squash-merged as `efb17a31`. [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057421709) passed **194/194 tests, 35/35 seven-width browser fixtures and 16/16 real image probes**. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057586713) and [GitHub Pages](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057585457) passed for the release SHA. This does not establish full live-session or across-catalog performance validity.
-## [0.8.5 artwork and filter hotfix] - 2026-11-11
 
-- **Critical artwork fix:** The first v0.8.5 release requested the regular-equipment icon path `al.mrlar.dev/equips/<id>.webp` for augment IDs. This caused many missing images and some unrelated gun illustrations. Switched to the verified dedicated original-game [JforPlay spweapon archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon), with all 239 May 2026 source icon keys checked against actual repository filenames (including 12 aliases).
-- **Filters:** Search, Hull Class, and Rarity use a responsive grid with independently labeled dropdowns instead of compressed inline label/select controls.
-- **Regression coverage:** Real network HTTP/WebP checks on 16 icon samples; Chromium fixture viewport tests now include 360/390/560/768/1024/1280/1640px and assert the two filter controls do not collide. The initial v0.8.5 browser tests blocked all external image requests.
-- **Delivery:** [PR #22](https://github.com/Avalon1230/avalon-azurlane/pull/22) merged as `2ddcc72b`; [branch tests](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055180724), [merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055403611) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055403429) succeeded.
+### WIP clarity hotfix (2026-11-12)
+
+- Clearly marks the ship-profile **Loadout Planner (WIP)** and its automatic items **Auto-filled · unreviewed**, with a concise explanation that eligibility is not a combat recommendation.
+- Simplifies the equipment-options drawer: shows the current source-compatible item, source provenance and alternatives first. Removes redundant 'Why this item appears' and verbose selection-audit/evidence essays from the default screen.
+- Keeps specialist comparisons as optional collapsed, attributed research notes **only when they actually exist**, including situational conditions and trade-offs; unresearched equipment no longer gets a generic pseudo-justification.
+- Preserves existing saved picks, available equipment, legality filters, ship-specific sourced slot types, augments and 50-at-a-time browsing. Does not assert any new best-in-slot rankings or alter the equipment selection heuristics.
+- Adds regression tests for WIP labels, concise drawer, researched/unresearched states and escaping, plus existing viewport/asset CI checks.
+- [PR #24](https://github.com/Avalon1230/avalon-azurlane/pull/24) merged as `95062b8b`. [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065637404) passed **197/197 Node tests, 35/35 viewport fixtures and 16/16 WebP image probes**. [Merged-main checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065816329) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065815815) passed. This is WIP transparency, **not** a recommendation engine.
+
+### Collaboration series navigation (2026-11-12)
+
+- Collaboration ships now have a dedicated second-level landing page in **Ship Index → Collab**, showing each franchise individually rather than opening one mixed roster.
+- Verified **14 distinct series** in the 894-ship source snapshot. Source nationalities and ship IDs are unchanged; Kizuna AI/KizunaAI are normalized only for browsing.
+- Each franchise card features game-client ship artwork from that series, plus a sourced franchise wordmark where a verified match was found (seven franchises). Unverified wordmarks are never fabricated or replaced by the generic Collab emblem.
+- Ship series rosters preserve the familiar hull class, rarity, sort, search, progressive loading and profile flow, with a **← Collaborations** back action.
+- External Wikimedia logo hosts may rate-limit hotlinking. Failed logo overlays are removed so the original ship artwork remains visible. Automated tests audit real HTTP failures and distinguish external throttling from broken paths.
+- Browser fixture coverage expanded from 35 to **49** responsive checks across seven viewport widths; full CI gates must pass before release.
+
+### WIP feature labels (2026-11-12)
+
+- Added understated **WIP** labels to **Equipment, Augments, Fleet Lab and Tier Boards** in sidebar navigation and page headings.
+- Functioning browsing, official/source-backed artwork, manual fleet assignments, the personalized tier editors and data search are unchanged.
+- Labels apply to incomplete **combat recommendations, augment analysis, fleet/gear synergy and full tier coverage**. Ship Index stays an ordinary roster; its existing Loadout Planner (WIP) label remains.
+- Added regression tests for page labels, usability boundaries and responsive styles. Source data, rankings, recommendation selection and ship count are not modified.
+
 ## [0.8.5] - 2026-11-11
 
 ### Added
 - First-class **Augments** directory with 239 sourced modules and five October publisher-announced name-only entries, searchable by text, ID, compatible type and rarity, with progressive browsing.
-- Original in-game augment icons from the explicit source `icon` field and 12 exact filename aliases. Art is shared across loadout tiles, alternatives and details. The first artwork URLs erroneously used the ordinary equipment icon collection; see hotfix above.
+- Original in-game augment icons from the explicit source `icon` field and 12 exact filename aliases. Art is shared across loadout tiles, alternatives and details. The first artwork URLs erroneously used the ordinary equipment icon collection; see the hotfix below.
 
 ### Corrected
 - Escape and backdrop behavior in augment details; missing Progression navigation target; overstated Equipment Index search placeholder.
@@ -60,8 +55,14 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Regression coverage for 239 source ID/icon mappings, all 12 source aliases, five announcement placeholders, directory/filters, dialog art, progression and source identity.
 - [PR #21](https://github.com/Avalon1230/avalon-azurlane/pull/21) merged as `9130e4df`. [Branch CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43052368377) passed **185/185 Node tests and 20/20 viewport fixture checks**. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43052521752) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43052521109) succeeded. This is not a published-site end-to-end interaction or image-availability certification. Numerical combat optimization, full augment skill effects and current acquisition costs remain out of scope.
 
-## [0.8.4] - 2026-11-11
+### Augment artwork and filter hotfix (2026-11-11)
 
+- **Critical artwork fix:** The first v0.8.5 release requested the regular-equipment icon path `al.mrlar.dev/equips/<id>.webp` for augment IDs. This caused many missing images and some unrelated gun illustrations. Switched to the verified dedicated original-game [JforPlay spweapon archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon), with all 239 May 2026 source icon keys checked against actual repository filenames (including 12 aliases).
+- **Filters:** Search, Hull Class, and Rarity use a responsive grid with independently labeled dropdowns instead of compressed inline label/select controls.
+- **Regression coverage:** Real network HTTP/WebP checks on 16 icon samples; Chromium fixture viewport tests now include 360/390/560/768/1024/1280/1640px and assert the two filter controls do not collide. The initial v0.8.5 browser tests blocked all external image requests.
+- **Delivery:** [PR #22](https://github.com/Avalon1230/avalon-azurlane/pull/22) merged as `2ddcc72b`; [branch tests](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055180724), [merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055403611) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055403429) succeeded.
+
+## [0.8.4] - 2026-11-11
 ### Corrected
 - Aquila's assessment now follows her imported skill condition: **Fighter in aircraft slot two activates healing/shielding**, while **Dive Bomber activates preload/damage**. Both configurations are explicitly described, and a conflicting secondary guide is identified rather than treated as authoritative skill text.
 - Replaced a mislabeled MK7 equipment assessment with the **Prototype Quadruple 305mm SKC39 Main Gun Mount**, source equipment ID **44320**, for the Series 8 Mecklenburg gun. Its displayed icon is accepted only when the catalog name and exact source ID agree.
@@ -78,7 +79,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Added a browser-based viewport smoke suite covering ship profiles, equipment filters and the alternatives drawer at **360, 390, 768, 1024 and 1280 px**. [PR checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043473875) and [merged-main checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043704582) passed: **178/178 unit tests, 15/15 five-viewport browser fixture checks**. [GitHub Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded for v0.8.4 commit `65bec712`. Full live-site and complete-catalog visual certification were not performed.
 
 ## [0.8.3] - 2026-11-11
-
 ### Fixed
 - Prefer exact ship, fully limit-broken slot arrays over lossy Lycoris display labels when wiki data is unavailable. Restores mixed aircraft mounts and corrects Langley's second slot from a destroyer gun to a fighter.
 - Require equipment type/category agreement and preserve item hull exclusions. Exact ship slot arrays establish type eligibility without an additional broad hull-map exclusion.
@@ -90,7 +90,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Reproducible audit checks all 894 ships, 936 equipment records and four modes, plus source identity of all 860 slot records and 239 augment records. With the verified wiki pages, 5,363/5,364 positions populate; Royal Fortune's augment remains unsupported. See docs/LOADOUT_AUDIT.md for conditional source coverage and provenance.
 
 ## [0.8.2] - 2026-11-11
-
 ### Fixed
 - **Roster-wide ship loadout completion:** corrected the shared matcher for all 13 Lycoris equipment-slot labels (especially `Artillery (Destroyer)`, `Artillery (Pocket Battleship)`, `Torpedo (Submarine)`, and `Reconnaissance`), plus Koumakan wiki variants such as `CB Main Guns`, `DD Main Guns`, and limit-break suffixes. Previously 1,582/2,682 primary slot labels were unrecognized by the old dictionary.
 - Added compact **exact numeric GroupID-matched five-slot metadata** from the May 2, 2026 AzurLaneData game snapshot: 860 verified source records, matching 852 of the current 894 indexed ships. These include both actual auxiliary slot types and exact hull codes, resolving Sailing Frigate subclasses in the dated source. The newer Lycoris roster continues to cover missing entries with conservative class-based fallbacks.
@@ -105,7 +104,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - New source-snapshot identity and slot coverage checks, all original Lycoris descriptor variants, multi-faction/hull matchers (CB, CV, SSV, Tempesta), augment type and ship-exclusivity, markup safety, and sixth-position fidelity.
 
 ## [0.8.1] - 2026-11-11
-
 ### Changed
 - Replaced the tall ship loadout card stack with a responsive **three-column, two-row six-position planner** for standard ships: three source-described combat positions, two potential auxiliary positions and one separate augment position. Ship records with explicitly documented extra slots retain them rather than being forced into an incorrect six-slot template.
 - Moved detailed per-slot reasoning, evidence, eligibility caveats, and source-matched alternatives into an on-demand slot intelligence drawer. Equipment icons still open the original equipment stats/acquisition drawer.
@@ -116,7 +114,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Added coverage for six visible positions, two provisional auxiliary slots, unknown augments, explicit extra source slots, manually chosen auxiliary candidates, responsive grid markup and on-demand evidence.
 
 ## [0.8.0] - 2026-11-11
-
 ### Added
 - **Tactical Loadout Intelligence** panel beneath every detailed ship's fixed portrait/identity card. The separate official artwork gallery remains unchanged. Four switchable mission contexts: General, Boss, Mobbing, and OpSi.
 - Equipment-slot-specific **source-matched candidates** generated from Lycoris ship slot categories and exact GroupID-verified Koumakan mount/efficiency facts when present. Eligible gear must match the original Fernando equipment type, source ID and recorded hull class after forbidden-hull restrictions; unknown/unsupported slots are marked unverified instead of filled with fictional gear.
@@ -132,7 +129,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Added validation for exact slot aliases, wiki/ship identity matching, forbidden hulls, mode attribute evidence, saved override validation, safe fallback, fixed portrait/artwork layout, original icon actions and alternative drawer behavior.
 
 ## [0.7.9] - 2026-11-11
-
 ### Fixed
 - Equipment inspection drawer now preserves the complete information table and other tall content through a dedicated, viewport-height scroll region. Flex children no longer shrink under `overflow:hidden`, fixing clipped stats rows at desktop and short/mobile viewports. Header and Close footer remain accessible while the body scrolls.
 - Re-rendering the drawer after an acquisition lookup now retains its previous scroll position, including equipment opened through Tier Boards.
@@ -146,7 +142,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Validate acquisition lookup, source provenance, Gear Lab flags, missing data, safe escaping, viewport overflow styles and preserved ship filter options.
 
 ## [0.7.8] - 2026-11-11
-
 ### Changed
 - Replaced the Equipment Index's large nation, type, hull, rarity, and sorting control rows with a **compact sticky search/sort toolbar** and eight broad equipment tabs: All, Guns, Torpedoes, Aircraft, AA, Auxiliary, ASW, and Special.
 - Moved detailed nation-of-origin, potentially-compatible hull, source rarity, and exact equipment-type filters into a **collapsible advanced panel**, keeping active selections visible as removable chips and providing a reset control. No filters were discarded.
@@ -158,7 +153,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Added focused checks for broad type classification, exact-source family identification, global versus grouped ordering, filter visibility and escaping, family inspection, and scroll reachability.
 
 ## [0.7.7] - 2026-11-11
-
 ### Fixed
 - Corrected original equipment icon resolution across the full index using Fernando2603/AzurLane's source `equipment_icon.json`, rather than assuming that an equipment item with ID `X` always uses `X.png`. **417 of 936** records intentionally share a different base icon filename. All 936 referenced icon filenames were verified against the host's Git image tree; network/display success remains subject to the third-party host.
 
@@ -172,7 +166,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Verified icon alias mappings, safe source-ID validation, correct rarity ordering, filtering, compact card rendering, and full 936-record scroll reachability.
 
 ## [0.7.6] - 2026-11-10
-
 ### Fixed
 - Repaired missing ship portraits throughout the **entire Ship Index**, not just Eagle Union. The previous iujab ship thumbnail inventory only matched 746 of 894 indexed ships.
 - Added original in-game `shipyard.png` asset URLs using **source-ID-verified base skin IDs for all 894 ships** from the existing Fernando2603/AzurLane skin manifest; the images remain on the third-party host.
@@ -184,7 +177,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - The 894 count refers to **verified source-ID mappings**, not 894 separately HTTP-validated or visually inspected remote PNG files.
 
 ## [0.7.5] - 2026-11-10
-
 ### Changed
 - Ship rosters now open **sorted by rarity, highest first** (UR/DR → SR/PR → Elite → Rare → Common). Name and hull sorts and reverse direction remain available.
 - Removed numbered ship pages: scrolling automatically reveals successive 60-portrait batches until every matching ship is accessible, with a manual load-more fallback for browsers without intersection observation.
@@ -195,7 +187,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Verify rarity-first default, continuous reachability of all 894 sample ships, no ship page controls, and continued equipment pagination.
 
 ## [0.7.4] - 2026-11-10
-
 ### Fixed
 - Strip MediaWiki HTML editor comments, including multiline and unterminated comments, before parsing ship infobox fields. Preserve original line boundaries so commented-out template fields cannot overwrite live data.
 - Apply the wiki-comment cleanup to **all ship profiles**, preventing editorial section dividers and commented-out template fields from leaking into voice-actor names or other wiki-derived metadata. Guam was one reported example, not the scope of the fix.
@@ -204,7 +195,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Added regression cases using Guam as one example, plus hidden field assignments inside comments and stray trailing wiki comments. This tests the shared parser, not a ship-specific exception.
 
 ## [0.7.3] - 2026-11-10
-
 ### Fixed
 - Corrected the Ship Index's **Ultra Rare/Decisive** card presentation to a distinct prismatic game-inspired gradient; **Elite remains purple** and Super Rare/Priority stays gold.
 - Moved **Back to roster** and **Assign to fleet** into a separate top-level profile toolbar, outside the ship's portrait/identity card.
@@ -221,7 +211,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Wiki data is loaded on demand per viewed ship; it is not a mass scrape or a permanently mirrored wiki database.
 
 ## [0.7.2] - 2026-11-10
-
 ### Fixed
 - Replaced raw `*_rw.webp` and other incomplete game-client rendering layers in ship galleries with reconstructed, display-ready PNG paintings from a dedicated verified skin source. This corrects the New Jersey background-only example.
 - Built an ID-keyed artwork manifest covering **894 ships and 2,613 skins** from Fernando2603/AzurLane, linking original extracted game artwork without storing image binaries. The skin index is lazily loaded on profile open.
@@ -234,7 +223,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Existing ship skills and stats remain sourced from Lycoris until a verified, permission-compatible wiki data pipeline exists.
 
 ## [0.7.1] - 2026-11-10
-
 ### Changed
 - The ship profile now keeps the original shipyard portrait permanently visible, independent of selected skins.
 - Artwork has its own in-profile display window with readable skin selectors. Selecting the artwork opens a larger overlay viewer with optional browser fullscreen and Close/Exit controls.
@@ -248,7 +236,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Existing ship profiles, deep links, stats, skill and equipment sections, roster browsing, and fleet assignments remain unchanged.
 
 ## [0.7.0] - 2026-11-10
-
 ### Changed
 - Replaced the oversized three-column Ship Index roster cards with a dense, rarity-accented shipyard portrait gallery; selecting any ship opens its dedicated information page rather than a small inspection drawer.
 - Converted ship hull selection, rarity filtering and source-supported sorting into compact, immediately accessible buttons (fleet groups/individual hulls; Common/Rare/Elite/SR/UR; Name/Rarity/Hull with reversible direction), while preserving nation-first navigation, search, and pagination.
@@ -268,7 +255,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - The externally hosted full source file may be temporarily unavailable; the minimal ship gallery still works, and full profiles can be retried.
 
 ## [0.6.2] - 2026-11-10
-
 ### Changed
 - Ship Index hierarchy: main game factions first, then META, Bulins (the source's Universal utility ships), and a single Collab roster containing all known crossover franchises.
 - Preserve each crossover's original nationality/franchise in individual ship details, full-roster searching, and data records. No source nationality is overwritten.
@@ -283,7 +269,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Equipment nation/category/hull filtering, ship inspection/assignment, complete roster search and pagination, contextual rankings, provenance trails, browser-local plans, and documented data limitations.
 
 ## [0.6.1] - 2026-11-10
-
 ### Added
 - Nation-first Ship Index: a compact faction registry with dynamically counted ship rosters, a cross-nation search box, and large clickable nation cards.
 - Authentic in-game faction emblems from the Fernando2603/AzurLane nationality icon collection, with non-invented typographic fallbacks for factions without verified icon mappings.
@@ -301,7 +286,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Separate Augment Module categorization, ship-specific equipment legality, and numerical fleet optimization remain future work.
 
 ## [0.6.0] - 2026-11-10
-
 ### Fixed
 - Removed the arbitrary 72-card Ship Index and Equipment Index cutoff. All 894+ ship records and 936 equipment records are now browseable through searchable, directly selectable pages.
 
@@ -319,7 +303,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Nation snapshot is dated 2026-11-09; source data may advance independently. No new combat scores or assumed gear synergy are introduced.
 
 ## [0.5.1] - 2026-11-10
-
 ### Added
 - Actual Azur Lane game-client **shipyard thumbnails** in ship catalogs, Fleet Lab slots, selection drawers, tier boards, reviewed assessments, and suggested fleet previews; no AI-generated illustrations.
 - Original in-game **equipment icons** in the searchable equipment catalog, detail panel, and equipment assessment cards.
@@ -337,7 +320,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Default ship portraits and gear icons are visual identification aids, not verified combat assessment inputs.
 
 ## [0.5.0] - 2026-11-10
-
 ### Added
 - **Suggest a Fleet** interface in Fleet Lab: scenario selection, preview, review, and explicit Apply additions.
 - A deterministic, global, **constraint-aware role-matching engine** using 39 manually reviewed candidate ships (including 17 added fallback catalog identities).
@@ -352,7 +334,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - The longer-term automatic skill/equipment synergy specification is in [docs/FLEET_OPTIMIZER_SPEC.md](docs/FLEET_OPTIMIZER_SPEC.md).
 
 ## [0.4.1] - 2026-11-10
-
 ### Added
 - A low-volume, read-only Koumakan connectivity check in GitHub Actions that tests actual DNS, two wiki pages, and both candidate MediaWiki API locations.
 - A workflow summary classifying genuine MediaWiki API responses, normal wiki pages, unrelated content, access challenges, and networking failures.
@@ -366,7 +347,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Automated ingestion remains disabled until a valid access method and compatible reuse terms are verified. The diagnostic does not scrape or store wiki content.
 
 ## [0.4.0] - 2026-11-10
-
 ### Fixed
 - Ship and Equipment boards now **tell readers what AVALON recommends**, instead of showing only source-grades or asking players to provide their own rankings.
 - Kept the original two subjective boards editable; combat boards remain read-only and distinct.
@@ -382,7 +362,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Gear crafting recipes, complete roster coverage, detailed combat simulations, and an automated review/update pipeline are still not implemented.
 
 ## [0.3.1] - 2026-11-10
-
 ### Fixed
 - Corrected combat tier list ownership: **ship and equipment recommendations are made by the system**, not manually ranked by the player. Their old personal-draft controls have been removed.
 - Published combat recommendation pages are read-only. Earlier personal combat-tier draft assignments are ignored, preserving the separately stored Waifu and Headpats boards.
@@ -396,7 +375,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - External specialist grades are not independent AVALON calculations or universal tiers. Full mode-specific AVALON evaluation, validation and acquisition-cost scoring remain future work.
 
 ## [0.3.0] - 2026-11-10
-
 ### Added
 - Four independent tier boards: Ship Combat, Equipment, Waifu Favorites, and Must Protect! — Headpats Division.
 - Drag-and-drop tier placement with dropdown controls for keyboard/touch use.
@@ -410,7 +388,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Character art and sprites remain excluded pending licensing/attribution checks.
 
 ## [0.2.1] - 2026-11-10
-
 ### Added
 - Added this canonical changelog to track releases, fixes, and documentation changes.
 - Added an **Updates** view to the live website, reading entries directly from this file.
@@ -420,7 +397,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Kept automated Koumakan ingestion paused pending reliable, repeatable API checks and reuse/attribution review.
 
 ## [0.2.0] - 2026-11-10
-
 ### Added
 - Optional runtime ship index with up to 894 entries from the independent Lycoris-AzurAPI project.
 - Optional runtime equipment index with up to 936 records from Fernando2603/AzurLane.
@@ -434,7 +410,6 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Published one feature commit and deployed successfully on GitHub Pages.
 
 ## [0.1.0] - 2026-11-10
-
 ### Added
 - Initial responsive AVALON web interface, hosted on GitHub Pages.
 - Eight game-mode categories: Campaign, Operation Siren, META Showdown, Exercises, Events & Archives, Challenge Mode, Daily Raids, and Guild Operations.

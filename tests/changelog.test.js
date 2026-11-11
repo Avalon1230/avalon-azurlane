@@ -34,3 +34,32 @@ test('project release history stays newest-first in CHANGELOG.md', () => {
     assert.ok(descending, `release ${current.join('.')} must appear below ${previous.join('.')}`);
   }
 });
+
+
+test('every semantic version has exactly one release heading and one rendered release card', () => {
+  const changelog = readFileSync(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
+  const headings = [...changelog.matchAll(/^## (.+)$/gm)].map(m=>m[1]);
+  assert.ok(headings.length >= 20);
+  const versions = headings.map(title=>{
+    const match = title.match(/^\[(\d+\.\d+\.\d+)\] - \d{4}-\d{2}-\d{2}$/);
+    assert.ok(match, 'release heading must be canonical: '+title);
+    return match[1];
+  });
+  assert.equal(new Set(versions).size, versions.length, 'duplicate version heading');
+  assert.equal(versions.filter(x=>x==='0.8.5').length,1);
+  assert.equal(versions.filter(x=>x==='0.8.6').length,1);
+  const html = changelogToHtml(changelog);
+  assert.equal((html.match(/<section class="release-card">/g)||[]).length,headings.length);
+  assert.equal((html.match(/<h2>\[0\.8\.6\]/g)||[]).length,1);
+  assert.equal((html.match(/<h2>\[0\.8\.5\]/g)||[]).length,1);
+});
+test('original releases and post-release fixes retain their provenance in consolidated sections',()=>{
+  const changelog = readFileSync(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
+  const release86 = changelog.split('## [0.8.6]')[1].split('## [0.8.5]')[0];
+  const release85 = changelog.split('## [0.8.5]')[1].split('## [0.8.4]')[0];
+  for(const term of ['Source evidence and explainability','WIP clarity hotfix',
+    'Collaboration series navigation','WIP feature labels','pull/23','pull/24'])
+    assert.ok(release86.includes(term),'missing v0.8.6 section history: '+term);
+  for(const term of ['### Added','Augment artwork and filter hotfix','pull/21','pull/22'])
+    assert.ok(release85.includes(term),'missing v0.8.5 section history: '+term);
+});
