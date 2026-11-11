@@ -25,7 +25,8 @@ test('augment IDs have 239 source-matched icon keys and precisely 12 source alia
   for(const row of verified){
     assert.match(row.sourceId,/^\d{4,8}$/);
     assert.match(augmentIconKey(row),/^\d{4,8}$/);
-    assert.equal(augmentIconUrl(row),'https://al.mrlar.dev/equips/'+augmentIconKey(row)+'.webp');
+    assert.equal(augmentIconUrl(row),'https://raw.githubusercontent.com/JforPlay/data_for_toy/main/spweapon/'+augmentIconKey(row)+'.webp');
+    assert.doesNotMatch(augmentIconUrl(row),/\/equips\//,'augment art must never resolve to a regular equipment image');
   }
   assert.equal(augmentIconKey(augmentRecord('1010120')),'1010100');
   assert.equal(augmentIconKey(augmentRecord('1080220')),'1080200');
@@ -69,7 +70,7 @@ test('augment art appears in equipped tile, alternatives and stats drawer withou
   const alternatives=renderLoadoutAlternatives(model,5);
   const dossier=renderAugmentDetails(row);
   for(const html of [tile,alternatives,dossier]){
-    assert.match(html,/https:\/\/al\.mrlar\.dev\/equips\/1010100\.webp/);
+    assert.match(html,/https:\/\/raw\.githubusercontent\.com\/JforPlay\/data_for_toy\/main\/spweapon\/1010100\.webp/);
     assert.doesNotMatch(html,/images\/equipment\/1010120/);
   }
   assert.match(dossier,/Artwork: source icon field 1010100/);
