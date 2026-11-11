@@ -985,7 +985,8 @@
 .loadout-choice-inspect .augment-image{flex:0 0 43px;width:43px;height:43px}
 @media(max-width:480px){
   .augment-toolbar .search-wrap{flex-basis:100%}
-  .augment-toolbar .select-wrap{flex:1 1 140px}
+  .augment-toolbar .select-wrap{flex:1 1 calc(50% - 5px);min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:4px}
+  .augment-toolbar .select-wrap select{width:100%;min-width:0;max-width:100%}
   .augment-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
   .augment-tile{padding:9px 6px}
   .loadout-compact-slot.augment .augment-image{max-width:36px;height:36px}
