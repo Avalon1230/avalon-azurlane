@@ -4,11 +4,12 @@ _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
-## Active WIP feature maturity labels — 2026-11-12
+## WIP feature maturity labels — delivered 2026-11-12
 
 - **Requirement:** Mark Equipment, Augments, Fleet Lab and Tier Boards **WIP** to avoid overstating unfinished combat analysis; leave Ship Index's functional roster and Loadout Planner's existing WIP label unchanged.
-- **Branch:** `fix/wip-feature-labels`; preserve all browsing, manual fleet builders, tier boards and original source art. Four quiet navigation labels and page-level markers; no new best-in-slot claims.
-- **Release gate:** run Node tests and seven-width Chromium smoke and update this record with exact release, CI and Pages proof.
+- **Delivered:** [PR #26](https://github.com/Avalon1230/avalon-azurlane/pull/26), squash-merged as **`7c7b73423c065fa1030c7bbe9bd824a3f93db5ab`**. Four restrained WIP markers appear in sidebar navigation and page headings, without changing browsing, manually assembled fleets, original art, favorites boards, or tactical decision algorithms.
+- **Verification:** [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43073916181) passed **206/206 Node tests, 49/49 Chromium viewport fixtures across seven widths, 16/16 real augment image probes** and **2 verified Wikimedia logo probes (five others host-throttled)**. [Merged-main quality](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43074120446) passed; [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43074120346) succeeded for the merged source commit.
+- **Next:** true mechanics-backed overall and fleet-dependent equipment choices (weapon cycles, armor, ship skills, debuff timing and synergistic gear) with short human-readable recommendations and practical alternatives. WIP remains until real combat performance can be justified.
 
 ## Collaboration directory refinement — delivered 2026-11-12
 
@@ -16,7 +17,7 @@ _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conver
 - **Delivered:** [PR #25](https://github.com/Avalon1230/avalon-azurlane/pull/25), squash-merged as `8a55bbbb98e4020b108354e3f98bd25a7ecdd254`. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43073374529) and [GitHub Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43073373465) passed. Last PR branch tests: 203/203 unit tests, 49/49 seven-width viewport cases, 16/16 real augment-image probes; Wikimedia logos were partially host-throttled, which is not a passed logo HTTP test.
 - **Implementation:** `shipCollabSeriesCounts` groups all 14 named series from the 894-ship nationality snapshot, canonicalizes Kizuna aliases, and preserves source nation fields. `catalog-index` renders a nested landing and filters only the chosen series, with existing sort/search/hull/rarity and profile navigation. Actual original in-game character thumbnails appear in every series card; a verified exact series logo overlays seven cards. Incorrect universal Collab emblems are not used as fake franchise logos. External logo hosts may return HTTP 429 to automated requests; the app must remove failed overlays while retaining the sourced game portrait.
 - **Known incomplete assets:** seven franchise-specific wordmarks still lack vetted and reliable sources; only verified logos may appear. Tests must not silently claim host-throttled images downloaded successfully.
-- **Follow-up:** WIP labels requested on Equipment, Augments, Fleet Lab and Tier Boards are implemented separately in `fix/wip-feature-labels`, awaiting PR review/CI. The labels qualify unfinished tactical recommendations, not source-linked catalogs, manual tier boards or fleet editing.
+- **Follow-up delivered:** feature-wide WIP labels shipped separately in [PR #26](https://github.com/Avalon1230/avalon-azurlane/pull/26). Labels qualify unfinished tactical recommendations, not source-linked catalogs, manual tier boards or fleet editing.
 - **Verification boundary:** Node/Chromium source-based fixtures pass; 14 franchise cards use exact in-game character portraits, seven link known franchise logo files. Independent Wikimedia CDN may throttle HTTP requests, which the app handles by reverting to the ship portrait; we have not verified complete logo delivery in all browsers. Do not claim 14 independently verified franchise wordmarks.
 
 ## WIP clarity refinement — delivered 2026-11-12
