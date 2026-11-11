@@ -34,7 +34,7 @@ export function renderAugmentDetails(augment){
     '<p class="equipment-acquisition-provenance">Source: <a class="text-link" href="'+link+
     '" target="_blank" rel="noopener noreferrer">'+(announced?'Yostar October 2026 notice':'AzurLaneData augments.json')+'</a> · '+(announced?'2026-10-21':E(AUGMENT_SOURCE_DATE))+
     '. Skill upgrades, optimality, present availability and ship-specific exceptions require separate validation. '+
-    (announced?'No verified icon or internal augment item ID is available.':'Artwork: source icon field '+E(augmentIconKey(augment))+' via independent MrLar game-asset CDN (not publisher-hosted).')+'</p>'+
+    (announced?'No verified icon or internal augment item ID is available.':'Artwork: source icon field '+E(augmentIconKey(augment))+' from the original spweapon asset archive hosted by independent fan project JforPlay (not publisher-hosted).')+'</p>'+
     '</div><div class="picker-footer"><button type="button" class="ghost-btn" data-action="loadout-augment-close">Close</button></div>'+
     '</aside></div>';
 }
