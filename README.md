@@ -10,6 +10,12 @@ An independent, evidence-driven **Azur Lane** research and fleet-planning projec
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 
+## Collaboration archives
+
+Ship Index now has two levels for collaborations: **Collab → choose franchise → that series' ship roster**, preserving the existing hull, rarity, and search controls. Series names come from verified ship nationality data, with **14 distinct franchises** in the May/November 2026 catalog snapshot (Atelier Ryza and Atelier Yumia remain separate).
+
+Every series card uses an **original in-game ship portrait** from that collaboration. Seven series also use identified franchise wordmarks from Wikimedia Commons. Those trademarks are owned by their respective creators; the remaining cards intentionally keep their actual character art instead of inventing franchise symbols. Wikimedia may throttle remote requests; when a logo cannot load, its underlying game portrait remains visible. This does not establish that every individual logo image is reliably available from every browser.
+
 ## Mission
 
 Make ship selection, equipment decisions, and fleet building more useful and explainable by combining verifiable game mechanics, attributed public community evidence, and independently reasoned analysis.
