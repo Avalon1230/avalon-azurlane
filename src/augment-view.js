@@ -1,6 +1,6 @@
 import { AUGMENT_SOURCE, AUGMENT_SOURCE_DATE } from './augment-manifest.js';
 const E=v=>String(v??'').replace(/[&<>"']/g,c=>(
-  {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','&quot;',"'":'&#39;'}[c]
+  {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
 ));
 const statLabel=Object.freeze({
   hp:'HP',fp:'Firepower',trp:'Torpedo',avi:'Aviation',aa:'Anti-Air',
