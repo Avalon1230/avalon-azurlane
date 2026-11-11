@@ -889,3 +889,13 @@
   .loadout-tile-gear{grid-template-columns:1fr;justify-items:center}
   .loadout-tile-name{text-align:center;-webkit-line-clamp:2;line-clamp:2}
 }
+
+
+/* v0.8.2 — unambiguous source-matched vs tentative loadout state. */
+.loadout-tentative-label{
+  display:block;align-self:flex-start;font-size:9px;line-height:1.2;
+  color:#ffe4a3;font-weight:850;letter-spacing:.015em
+}
+.loadout-compact-slot.provisional:has(.loadout-tentative-label){
+  border-color:#9a8150;background:linear-gradient(150deg,#263342,#172b3d)
+}
