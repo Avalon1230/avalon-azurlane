@@ -46,13 +46,13 @@ function shell(content){
 }
 const browser=await chromium.launch({headless:true,channel:'chrome'});
 try{
-  for(const width of [360,390,768,1024,1280]){
+  for(const width of [360,390,560,768,1024,1280,1640]){
     const page=await browser.newPage({viewport:{width,height:800},deviceScaleFactor:1});
     await page.route(/^https?:\/\//,route=>route.abort());
     for(const [label,markup,selectors] of [
       ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav']],
       ['equipment index',equipment,['#catalog-search','.equipment-advanced-toggle','.equipment-category-tab','#equipment-hull-select']],
-      ['augment directory',augments,['#augment-search','#augment-type-filter','.augment-tile','.augment-load-more']],
+      ['augment directory',augments,['#augment-search','#augment-type-filter','#augment-rarity-filter','[data-action="augment-clear-filters"]','.augment-tile','.augment-load-more']],
       ['slot alternatives',profile+alternatives,['#loadout-choice-search','.loadout-more-choices','.loadout-choice-inspect','.picker-footer button']]
     ]){
       await page.setContent(shell(markup),{waitUntil:'domcontentloaded'});
@@ -77,6 +77,19 @@ try{
       for(const c of measurements.controls){
         assert.ok(!c.missing && c.width>0 && c.right>0 && c.left<width && c.right<=width+1,
           width+'px '+label+' unreachable '+JSON.stringify(c));
+      }
+      if(label==='augment directory'){
+        const facetBoxes=await page.evaluate(()=>{
+          const ids=['#augment-type-filter','#augment-rarity-filter'];
+          return ids.map(id=>{
+            const el=document.querySelector(id);
+            const box=el?.getBoundingClientRect();
+            return {id,left:box?.left,right:box?.right,top:box?.top,bottom:box?.bottom};
+          });
+        });
+        const [a,b]=facetBoxes;
+        assert.ok(a.right<=b.left+1 || a.bottom<=b.top+1,
+          width+'px augment facet controls collide: '+JSON.stringify(facetBoxes));
       }
       console.log('PASS '+width+'px '+label+' document width '+measurements.doc);
     }

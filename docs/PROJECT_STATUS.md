@@ -4,6 +4,14 @@ _Last updated: 2026-11-11 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
+## In progress: v0.8.5 artwork and filter hotfix (2026-11-11)
+
+- **Confirmed user-visible regression:** an actual live-site screenshot of `/avalon-azurlane/#/augments` showed most augment thumbnails missing and several depicting unrelated guns; desktop Hull Class and Rarity filter labels/selects were crowded and clipped. This disproves the earlier claim that exact icon field mapping alone ensured correct artwork.
+- **Root cause:** our original `al.mrlar.dev/equips/<id>.webp` URL pointed into the **ordinary equipment icon collection**. Absent augment filenames led to placeholders; overlapping regular gear IDs showed guns. No issue with the 239 source icon IDs themselves.
+- **Audited correction:** the independent JforPlay/data_for_toy `spweapon` directory has 258 distinct original augment WebP files; all 239 May 2026 source augment icon keys (including 12 shared aliases) exactly matched filenames. Replace artwork URLs with `raw.githubusercontent.com/JforPlay/data_for_toy/main/spweapon/<icon>.webp`. Announcement-only records stay placeholders.
+- **Filter correction:** independent labels, controlled select sizes and a responsive filter grid. Add real image HTTP/WebP probes to CI and no-overlap checks at 360/390/560/768/1024/1280/1640px; previous viewport suite suppressed external image requests.
+- **Branch:** `fix/v0.8.5-augment-icons-filters`, based on main `03427a701ff7250c80bf3c03d12de1ca715c68ab`. CI/PR/Pages verification pending; document real hashes when delivered.
+- **Separate product-quality finding:** user compared loadout reasoning with Slaimuda/ECTL and correctly noted that current selection explanations are mostly compatibility assertions. Mechanics-backed performance recommendations, source attribution, opportunity costs, scenario/target context, and alternatives remain incomplete. Do not relabel such candidates as validated optimal gear.
 ## Current release: v0.8.5 delivered (2026-11-11)
 
 - **Source and merge:** v0.8.4 verified baseline `a26abb1caa0c79e55d9a19e9a3a098f51abe424a`; [PR #21](https://github.com/Avalon1230/avalon-azurlane/pull/21) squash-merged as `9130e4df028323e6542b314073e4832e91969422`. Subsequent documentation-only commits can advance main without changing this delivered code.

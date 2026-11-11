@@ -2,7 +2,7 @@
 
 ## v0.8.5 augment icons and directory
 
-The May 2026 augment manifest supplies 239 verified item identities and explicit original icon keys. Twelve modules alias another original image filename rather than their own ID; the independent MrLar game-asset CDN serves the documented paths. Source-backed icons appear in the six-position planner, alternatives, dedicated Augments catalog and details; five October name-only official announcements remain without verified art, IDs or stats. CDN availability and publisher authorization are not implied.
+The May 2026 augment manifest supplies 239 verified item identities and explicit original icon keys. Twelve modules alias another original image filename rather than their own ID; the dedicated JforPlay/data_for_toy `spweapon` asset directory contains exact images for all 239 source keys. Initial v0.8.5 mistakenly used MrLar's ordinary `equips` path, leading to 404s and unrelated icons for overlapping IDs; this hotfix corrects that defect. Source-backed icons appear in the six-position planner, alternatives, dedicated Augments catalog and details; five October name-only official announcements remain without verified art, IDs or stats. CDN availability and publisher authorization are not implied.
 
 Alternatives are searchable with 50-at-a-time progressive continuation since v0.8.4; early descriptions of a permanent first-50 ceiling are superseded. This feature is not an augment-combat optimality assessment.
 ## Current matching corrections
@@ -67,7 +67,7 @@ The source-matched regular slot model is now:
 
 The augment position is now a separate, source-backed inventory:
 - `src/augment-manifest.js` contains **239** dated May 2, 2026 [AzurLaneData augment records](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/augments.json). An exclusive item's `limit_group` references the **internal ship collection ID**, not the display GroupID. Nonexclusive augments are eligible by documented augment type/hull rules in the source's `types/augments.d.ts` (further ship-specific restrictions still need validation).
-- Augment cards, options and details are intentionally separate from the original Fernando equipment icon API; without a verified augment image host, display a neutral ✦ mark, never a potentially unrelated weapon icon. The augment dossier shows source stats, craftability, rarity and dated provenance.
+- Augment cards, options and details use exact source icons hosted at `JforPlay/data_for_toy/spweapon/<icon>.webp`; display a neutral ✦ only if the source image cannot be loaded or no source item ID/icon is documented. The augment dossier shows source stats, craftability, rarity and dated provenance.
 - Five newer Tempesta augments are identified by the [publisher's October 21, 2026 announcement](https://azurlane.yo-star.com/news/2026/10/21/maintenance-notice-10-22-12-a-m-utc-7-2/), with name-only eligibility and **unverified** IDs, costs, stats and icons.
 - No compatible augment was verified for **Royal Fortune**, so that one position remains unfilled with an honest source status. Do not invent an augment simply to make the grid appear complete.
 
