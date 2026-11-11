@@ -38,7 +38,15 @@ export function slotCategories(type) {
   const parts=type.normalize('NFKC').replace(/\u00a0/g,' ').split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
   const result=[];
   for(const part of parts){
-    const key=part.toLowerCase().replace(/\s+/g,' ').trim();
+    // The wiki uses both "CB Guns" and "CB Main Guns" (likewise
+    // DD/CL/AA) depending on ship class. The previously literal-only
+    // dictionary silently rejected the latter across many ship profiles.
+    const raw=part.toLowerCase().replace(/\s+/g,' ').trim();
+    const key=raw
+      .replace(/\b(?:main|secondary|primary|auxiliary)\s+(?=guns?\b)/g,'')
+      .replace(/\bgun\s+mounts?\b/g,'guns')
+      .replace(/\bmain\s+armaments?\b/g,'guns')
+      .replace(/\s+/g,' ').trim();
     if(!Object.hasOwn(ALIASES,key))continue;
     const cat=ALIASES[key];
     if(!result.includes(cat))result.push(cat);
@@ -51,7 +59,14 @@ export function verifiedShipSlots(data,wikiFacts=null) {
     Array.isArray(wikiFacts.slots)&&wikiFacts.slots.length===3?wikiFacts.slots:null;
   const base=Array.isArray(data?.slots)?data.slots:[];
   // Wiki facts cover 3 weapon slots. Add others ONLY if source lists them.
-  const slots=wiki?wiki.concat(base.slice(3)):base;
+  // Prefer validated wiki categories per slot. A wiki label that the
+  // dictionary cannot understand should not erase a usable Lycoris slot.
+  const slots=Array.from({length:Math.max(base.length,wiki?.length||0)},(_,index)=>{
+    const sourceWiki=wiki?.[index];
+    const wikiValid=sourceWiki&&slotCategories(sourceWiki.type).length>0;
+    return wikiValid?{...sourceWiki,_source:'Koumakan Wiki'}:
+      {...(base[index]||{}),_source:base[index]?'Lycoris-AzurAPI':'Unverified'};
+  });
   return slots.slice(0,7).map((slot,index)=>{
     const type=typeof slot?.type==='string'?slot.type:'Unclassified';
     const categories=slotCategories(type);
@@ -60,7 +75,7 @@ export function verifiedShipSlots(data,wikiFacts=null) {
       minEfficiency:Number.isFinite(slot?.minEfficiency)?slot.minEfficiency:null,
       maxEfficiency:Number.isFinite(slot?.maxEfficiency)?slot.maxEfficiency:null,
       maxMounts:Number.isSafeInteger(slot?.maxMounts)?slot.maxMounts:null,
-      source:wiki && index<3?'Koumakan Wiki':'Lycoris-AzurAPI',
+      source:slot._source||'Unverified',
       verified:categories.length>0
     };
   });
@@ -133,8 +148,8 @@ export function candidateEvidence(slot,item,mode='general') {
     ? 'Koumakan Wiki identifies augment type '+slot.augmentType+'. Individual module eligibility and effects have not been verified; no augment is selected.'
     : 'This ship\'s augment eligibility and compatible module have not been verified. No module will be guessed.';
   if(slot?.provisional)return item
-    ? 'This is a manually chosen potential Auxiliary: source category and hull restrictions match, but the slot itself is inferred from the standard layout. Ship-specific exceptions and duplicate restrictions remain unverified.'
-    : 'Auxiliary position inferred from the standard equipment layout, not verified for this individual ship. Explore source/hull-matched possibilities; no default equipment is assumed.';
+    ? 'Tentative Auxiliary candidate: source category and potential hull restrictions match. This position is inferred from the standard layout; ship-specific eligibility, duplicate restrictions and combat value still require verification.'
+    : 'Auxiliary position inferred from the standard equipment layout; no source-matched equipment was found. Ship-specific legality remains unverified.';
   if(!item)return slot?.verified
     ? 'No source-matched equipment candidate was found for this verified slot.'
     : 'Ship-specific slot category is not verified, so no equipment is assigned.';
@@ -150,13 +165,17 @@ export function candidateEvidence(slot,item,mode='general') {
 
 export function buildShipLoadout({ship=null,data=null,wikiFacts=null,equipment=[],mode='general',overrides={}}={}) {
   const selectedMode=LOADOUT_MODES.some(item=>item.id===mode)?mode:'general';
+  const usedTentative=new Set();
   const slots=loadoutDisplaySlots(data,wikiFacts).map(slot=>{
     const candidates=candidatesForSlot(ship,slot,equipment,selectedMode);
     const manualId=String(overrides?.[slot.index]||'');
     const manual=manualId?candidates.find(x=>x.id===manualId):null;
-    // Auto-fill only a sourced primary/auxiliary slot. For inferred aux slots
-    // show a choice, never a fictitious best-in-slot.
-    const selected=manual||(!slot.provisional&&slot.verified?candidates[0]:null)||null;
+    // Tentatively show a hull/type-matched auxiliary instead of an empty
+    // card, without pretending a ship-specific legality check was done.
+    // Use different alternatives for the two generic auxiliary positions.
+    const tentative=slot.provisional?candidates.find(x=>!usedTentative.has(x.id)):null;
+    const selected=manual||((slot.provisional||slot.verified)?tentative||candidates[0]:null)||null;
+    if(slot.provisional&&selected)usedTentative.add(selected.id);
     return {...slot,candidates,selected,manual:!!manual,
       explanation:candidateEvidence(slot,selected,selectedMode)};
   });
