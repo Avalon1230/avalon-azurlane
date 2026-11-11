@@ -1,15 +1,16 @@
 /**
- * Official in-game augment icons linked from the original client asset extract,
- * served by the independent MrLar fan CDN (not a publisher-hosted service).
+ * Source-identity matched original game-client Augment Module artwork.
  *
- * Source: Linuxxy0/AzurLaneData-2026-5-2-16-08-11 data/augments.json,
- * each record's explicit "icon" field, with path specified in
- * docs/equips/index.md: https://al.mrlar.dev/equips/<icon>.webp.
+ * Item icon keys: Linuxxy0/AzurLaneData-2026-5-2-16-08-11 data/augments.json
+ * Actual image files: JforPlay/data_for_toy spweapon/*.webp (independent
+ * unofficial game asset extract, NOT standard equipment art).
  *
- * Audit: 239 source records / 239 valid icon keys, 12 alias entries.
- * Never construct an icon URL for publisher-announced-only records.
+ * Audited against the upstream GitHub directory: all 239 dated source augment
+ * icon keys have exact filename matches, including 12 source-defined aliases.
+ * New publisher announcements without internal IDs have no invented artwork.
+ * External image availability still depends on GitHub's raw asset host.
  */
-export const AUGMENT_ASSET_BASE='https://al.mrlar.dev/equips/';
+export const AUGMENT_ASSET_BASE='https://raw.githubusercontent.com/JforPlay/data_for_toy/main/spweapon/';
 export const AUGMENT_ICON_COUNT=239;
 export const AUGMENT_ICON_ALIASES=Object.freeze({
   '1010120':'1010100','1010220':'1010200',
