@@ -4,12 +4,12 @@ _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
-## Release log structure cleanup — 2026-11-12
+## Release log structure cleanup — delivered 2026-11-12
 
 - **User-reported regression:** the Updates page rendered four distinct release cards titled `v0.8.6` and two titled `v0.8.5` because several post-release hotfixes were authored as separate top-level changelog headings without increasing the version number.
-- **Fix branch:** `fix/changelog-unique-releases`. Consolidate both versions into one standard `## [version] - YYYY-MM-DD` entry each, keeping original release sections and all hotfix notes as dated `###` subsections. No package version bump: no application behavior was changed.
+- **Delivered:** [PR #27](https://github.com/Avalon1230/avalon-azurlane/pull/27), squash-merged as **`04309668de9d0b867cc6ba29ce7df70299601ab7`**. The changelog now contains exactly one canonical `## [0.8.5]` and `## [0.8.6]` heading, with all original release work and subsequent hotfixes kept in dated `###` subsections. No package version bump or application behavior change.
 - **Regression prevention:** extend `tests/changelog.test.js` to require unique semver headings, canonical heading syntax, one rendered release card per version, and preservation of source PR/history.
-- **Release gate:** verify GitHub CI and Pages before marking delivered; update status with exact merged SHA.
+- **Verified:** [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43076708711) passed **208/208 Node tests**, **49/49 Chromium viewport cases**, **16/16 augment image probes**; independent Wikimedia logo CDN checks remain partially rate-limited. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43076876693) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43076876385) both succeeded for the release correction commit. The display renderer generates one release card per `##` entry; the new test checks canonical unique version headings.
 
 ## WIP feature maturity labels — delivered 2026-11-12
 
