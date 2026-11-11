@@ -1,4 +1,5 @@
 import { imageMarkup } from './media.js';
+import { augmentImageMarkup } from './augment-assets.js';
 import { LOADOUT_MODES } from './loadout-intelligence.js';
 
 const E=v=>String(v??'').replace(/[&<>"']/g,c=>
@@ -26,11 +27,10 @@ function renderCompactSlot(slot) {
     slot.kind==='augment'?(slot.augmentType?'Type: '+slot.augmentType:'Augment not verified')
       :slot.provisional?'Choose auxiliary':'No verified equipment'
   );
-  // Augments are from a different source inventory; never pass their IDs
-  // through equipmentImageUrl or display an unrelated game equipment icon.
+  // Augments use exact source icon mappings, never the regular gear icon mapper.
   const isAugment=slot.kind==='augment';
   const image=isAugment
-    ? '<span class="loadout-compact-placeholder loadout-augment-symbol" aria-hidden="true">✦</span>'
+    ? augmentImageMarkup(picked,'asset-roster-equipment')
     :picked?imageMarkup(picked,'equipment','asset-roster-equipment'):
       '<span class="loadout-compact-placeholder" aria-hidden="true">'+
       (slot.kind==='auxiliary'?'+':'?')+'</span>';
@@ -95,7 +95,7 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}
   const shown=filtered.slice(0,Math.max(1,Number.isSafeInteger(limit)?limit:50));
   const choices=shown.map(item=>{
     const aug=slot.kind==='augment';
-    const icon=aug?'<span class="loadout-compact-placeholder" aria-hidden="true">✦</span>':
+    const icon=aug?augmentImageMarkup(item,'asset-picker'):
       imageMarkup(item,'equipment','asset-picker');
     const scope=aug?(item.matchLevel==='ship-specific'?'Exclusive · exact ship ID':'General · class eligibility'):
       item.category;
