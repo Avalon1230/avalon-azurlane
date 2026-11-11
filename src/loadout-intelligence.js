@@ -63,8 +63,13 @@ const HULL_ID=Object.freeze({
 
 export function slotCategories(type) {
   if(typeof type!=='string'||type.length>160)return [];
-  const parts=type.normalize('NFKC').replace(/\u00a0/g,' ')
-    .split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
+  const original=type.normalize('NFKC').replace(/\u00a0/g,' ');
+  // Shorthand such as "DD/CL Main Guns" applies "Main Guns" to BOTH labels.
+  const expanded=original.replace(
+    /\b((?:DD|CL|CA|CB|BB|AA)(?:\s*\/\s*(?:DD|CL|CA|CB|BB|AA))+)[ \t]+((?:Main|Secondary)[ \t]+Guns)\b/gi,
+    (_whole,types,suffix)=>types.split(/\s*\/\s*/).map(t=>t+' '+suffix).join(' / ')
+  );
+  const parts=expanded.split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
   const result=[];
   for(const part of parts){
     const key=part.toLowerCase().replace(/\(\s*(?:lb\s*[123]|mlb|limit break\s*[123])\s*\)/gi,'')
