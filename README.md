@@ -10,6 +10,10 @@ An independent, evidence-driven **Azur Lane** research and fleet-planning projec
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 
+## Feature maturity labels
+
+AVALON clearly marks **Equipment, Augments, Fleet Lab and Tier Boards** as **WIP** in the navigation and section headings. Their catalogs, manually editable workspaces and already sourced records remain usable; labels qualify the **unfinished combat intelligence**, not basic browsing or user favorites. Ship Index remains a functional roster, while its loadout planner retains its own independent WIP warning.
+
 ## Collaboration archives
 
 Ship Index now has two levels for collaborations: **Collab → choose franchise → that series' ship roster**, preserving the existing hull, rarity, and search controls. Series names come from verified ship nationality data, with **14 distinct franchises** in the May/November 2026 catalog snapshot (Atelier Ryza and Atelier Yumia remain separate).
