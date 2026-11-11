@@ -4,14 +4,20 @@ _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
-## Active collaboration directory refinement — 2026-11-12
+## Active WIP feature maturity labels — 2026-11-12
+
+- **Requirement:** Mark Equipment, Augments, Fleet Lab and Tier Boards **WIP** to avoid overstating unfinished combat analysis; leave Ship Index's functional roster and Loadout Planner's existing WIP label unchanged.
+- **Branch:** `fix/wip-feature-labels`; preserve all browsing, manual fleet builders, tier boards and original source art. Four quiet navigation labels and page-level markers; no new best-in-slot claims.
+- **Release gate:** run Node tests and seven-width Chromium smoke and update this record with exact release, CI and Pages proof.
+
+## Collaboration directory refinement — delivered 2026-11-12
 
 - **Requirement:** user requested a distinct landing for each collaboration franchise under Ship Index → Collab, with franchise-specific, genuine visual assets. This follows the existing nation landing and must not flatten all collaboration shipgirls into one roster.
-- **PR:** [#25](https://github.com/Avalon1230/avalon-azurlane/pull/25), branch `feat/collab-series-index`; release gate and merge/deployment verification pending.
+- **Delivered:** [PR #25](https://github.com/Avalon1230/avalon-azurlane/pull/25), squash-merged as `8a55bbbb98e4020b108354e3f98bd25a7ecdd254`. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43073374529) and [GitHub Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43073373465) passed. Last PR branch tests: 203/203 unit tests, 49/49 seven-width viewport cases, 16/16 real augment-image probes; Wikimedia logos were partially host-throttled, which is not a passed logo HTTP test.
 - **Implementation:** `shipCollabSeriesCounts` groups all 14 named series from the 894-ship nationality snapshot, canonicalizes Kizuna aliases, and preserves source nation fields. `catalog-index` renders a nested landing and filters only the chosen series, with existing sort/search/hull/rarity and profile navigation. Actual original in-game character thumbnails appear in every series card; a verified exact series logo overlays seven cards. Incorrect universal Collab emblems are not used as fake franchise logos. External logo hosts may return HTTP 429 to automated requests; the app must remove failed overlays while retaining the sourced game portrait.
 - **Known incomplete assets:** seven franchise-specific wordmarks still lack vetted and reliable sources; only verified logos may appear. Tests must not silently claim host-throttled images downloaded successfully.
-- **Parallel deferred WIP label request:** user also wants concise WIP labels on Equipment, Augments, Fleet Lab and Tier Boards. Track as a separate PR; labels should qualify unfinished recommendations, not imply catalogs or manually usable tools are broken.
-- **Release gate:** Node tests, seven-width Chromium smoke, 16 original-game augment HTTP probes and independently hosted franchise logo checks. Update this record with actual merge SHA, CI and Pages status once delivered.
+- **Follow-up:** WIP labels requested on Equipment, Augments, Fleet Lab and Tier Boards are implemented separately in `fix/wip-feature-labels`, awaiting PR review/CI. The labels qualify unfinished tactical recommendations, not source-linked catalogs, manual tier boards or fleet editing.
+- **Verification boundary:** Node/Chromium source-based fixtures pass; 14 franchise cards use exact in-game character portraits, seven link known franchise logo files. Independent Wikimedia CDN may throttle HTTP requests, which the app handles by reverting to the ship portrait; we have not verified complete logo delivery in all browsers. Do not claim 14 independently verified franchise wordmarks.
 
 ## WIP clarity refinement — delivered 2026-11-12
 
