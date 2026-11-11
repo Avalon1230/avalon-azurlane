@@ -45,6 +45,13 @@ test('slot category parsing is strict and knows sourced wiki and Lycoris termino
   assert.deepEqual(slotCategories('AA Guns'),['Anti-Air Gun']);
   assert.deepEqual(slotCategories('Fighter'),['Fighter']);
   assert.deepEqual(slotCategories('DD Guns, Light Cruiser Guns'),['Destroyer Gun','Light Cruiser Gun']);
+  assert.deepEqual(slotCategories('Artillery (Destroyer)'),['Destroyer Gun']);
+  assert.deepEqual(slotCategories('Artillery (Pocket Battleship)'),['Large Cruiser Gun']);
+  assert.deepEqual(slotCategories('Torpedo (Submarine)'),['Submarine Torpedo']);
+  assert.deepEqual(slotCategories('Reconnaissance'),['Seaplane']);
+  assert.deepEqual(slotCategories('CB Main Guns / CA Main Guns'),['Large Cruiser Gun','Heavy Cruiser Gun']);
+  assert.deepEqual(slotCategories('DD Main Guns'),['Destroyer Gun']);
+  assert.deepEqual(slotCategories('Fighters/Dive Bombers (LB1)'),['Fighter','Dive Bomber']);
   assert.deepEqual(slotCategories('Unknown Main Slot'),[]);
   assert.deepEqual(slotCategories('<script>'),[]);
 });
@@ -91,11 +98,12 @@ test('saved manual picks must still match exact slot, type and hull',()=>{
   assert.equal(validateManualChoice(changed,2,'fer-1120'),false);
 });
 test('missing slots and unsupported categories must not receive synthetic equipment',()=>{
-  const missing=buildShipLoadout({ship,data:{id:'11802',slots:[]},equipment});
+  const unknownShip={...ship,hull:'UNKNOWN',sourceId:'99999999'};
+  const missing=buildShipLoadout({ship:unknownShip,data:{id:'99999999',slots:[]},equipment});
   assert.equal(missing.slots.length,6);
   assert.equal(missing.slots.slice(0,3).every(slot=>!slot.verified&&slot.selected===null),true);
   assert.equal(missing.slots[5].kind,'augment');
-  const unsupported=buildShipLoadout({ship,data:{id:'11802',slots:[{type:'Unconfirmed Beam Cannon'}]},equipment});
+  const unsupported=buildShipLoadout({ship:unknownShip,data:{id:'99999999',slots:[{type:'Unconfirmed Beam Cannon'}]},equipment});
   assert.equal(unsupported.slots[0].selected,null);
   assert.equal(unsupported.slots[0].verified,false);
   assert.match(candidateEvidence(unsupported.slots[0],null),/Ship-specific slot category is not verified/);
@@ -140,42 +148,43 @@ test('standard ship display has exactly three weapon, two provisional auxiliary 
   const slots=loadoutDisplaySlots(data,wiki);
   assert.equal(slots.length,6);
   assert.deepEqual(slots.map(x=>x.kind),['weapon','weapon','weapon','auxiliary','auxiliary','augment']);
-  assert.equal(slots[3].provisional,true);
-  assert.equal(slots[4].provisional,true);
-  assert.equal(slots[5].augmentType,'Sword');
+  assert.equal(slots[3].provisional,false);
+  assert.equal(slots[4].provisional,false);
+  assert.equal(slots[3].source,'AzurLaneData · May 2026');
+  assert.equal(slots[5].augmentType,null); // test wiki type does not match verified CB modules
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
   assert.equal(model.slots.length,6);
   assert.equal(model.slots[0].selected?.id,'fer-1020');
-  assert.equal(model.slots[3].selected,null);
+  assert.equal(model.slots[3].selected,null); // fixture contains no auxiliary candidates
   assert.equal(model.slots[4].selected,null);
-  assert.equal(model.slots[5].selected,null);
-  assert.match(model.slots[3].explanation,/standard equipment layout/);
-  assert.match(model.slots[5].explanation,/no augment is selected/);
+  assert.equal(model.slots[5].selected?.kind,'augment');
+  assert.match(model.slots[3].explanation,/no corresponding equipment/);
+  assert.match(model.slots[5].explanation,/hull type/);
 });
-test('manual auxiliary choices remain potential, source-matched, and never auto-equipped',()=>{
+test('manually chosen auxiliaries remain source-matched and the auto-default is not called optimal',()=>{
   const auxiliary=gear(1180,'Source Auxiliary',10,'Auxiliary','Super Rare',{durability:180});
   const dataset=[...equipment,auxiliary];
   const auto=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset});
   assert.ok(auto.slots[3].candidates.some(x=>x.id==='fer-1180'));
-  assert.equal(auto.slots[3].selected,null);
+  assert.equal(auto.slots[3].selected?.id,'fer-1180');
   assert.equal(validateManualChoice(auto,3,'fer-1180'),true);
   assert.equal(validateManualChoice(auto,5,'fer-1180'),false);
   const picked=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset,overrides:{3:'fer-1180',5:'fer-1180'}});
   assert.equal(picked.slots[3].selected?.id,'fer-1180');
   assert.equal(picked.slots[3].manual,true);
-  assert.equal(picked.slots[5].selected,null);
-  assert.match(picked.slots[3].explanation,/remain unverified/);
+  assert.equal(picked.slots[5].selected?.kind,'augment');
+  assert.match(picked.slots[3].explanation,/Ship-specific exceptions/);
 });
 test('source-recorded extra equipment positions are preserved before inferred auxiliaries and augment',()=>{
   const documented={...data,slots:[...data.slots,
     {type:'Auxiliary',minEfficiency:1,maxEfficiency:1},
     {type:'Auxiliary',minEfficiency:1,maxEfficiency:1}]};
-  const six=loadoutDisplaySlots(documented,wiki);
+  const six=loadoutDisplaySlots(documented,wiki,null,ship);
   assert.deepEqual(six.map(x=>x.kind),['weapon','weapon','weapon','auxiliary','auxiliary','augment']);
   assert.equal(six[3].source,'Lycoris-AzurAPI');
   assert.equal(six[4].provisional,false);
   const extra={...data,slots:[...documented.slots,{type:'Auxiliary'}]};
-  const exceptional=loadoutDisplaySlots(extra,wiki);
+  const exceptional=loadoutDisplaySlots(extra,wiki,null,ship);
   assert.equal(exceptional.length,7); // third source-confirmed auxiliary is not discarded
   assert.deepEqual(exceptional.slice(3,6).map(x=>x.kind),['auxiliary','auxiliary','auxiliary']);
   assert.equal(exceptional[6].kind,'augment');
@@ -184,7 +193,7 @@ test('exceptional source-declared auxiliary in a first-three slot is not mislabe
   const repair={id:'30715',slots:[
     {type:'Auxiliary'}, {type:'Anti-Air Gun'}, {type:'Anti-Air Gun'}
   ]};
-  const slots=loadoutDisplaySlots(repair);
+  const slots=loadoutDisplaySlots(repair,null,null,{hull:'AR'});
   assert.equal(slots[0].kind,'auxiliary');
   assert.equal(slots[0].source,'Lycoris-AzurAPI');
   assert.equal(slots.filter(x=>x.kind==='auxiliary').length,3);
@@ -199,8 +208,8 @@ test('compact planner uses two rows of three, retains click-to-inspect, and hide
   assert.match(html,/data-action="loadout-slot-info" data-slot="5"/);
   assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
   const detail=renderLoadoutAlternatives(model,5);
-  assert.match(detail,/Augment modules require a dedicated verified module database/);
-  assert.match(detail,/No source-confirmed selectable equipment/);
-  assert.doesNotMatch(detail,/data-action="loadout-select"/);
-  assert.match(renderLoadoutAlternatives(model,3),/Potential auxiliary position/);
+  assert.match(detail,/Modules are sourced from the May 2026 augment database/);
+  assert.match(detail,/data-action="loadout-augment-inspect"/);
+  assert.match(detail,/data-action="loadout-select" data-slot="5" data-equip="aug-/);
+  assert.match(renderLoadoutAlternatives(model,3),/source records a slot category/i);
 });
