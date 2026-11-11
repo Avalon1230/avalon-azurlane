@@ -2,6 +2,14 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.6 WIP clarity hotfix] - 2026-11-12
+
+- Clearly marks the ship-profile **Loadout Planner (WIP)** and its automatic items **Auto-filled · unreviewed**, with a concise explanation that eligibility is not a combat recommendation.
+- Simplifies the equipment-options drawer: shows the current source-compatible item, source provenance and alternatives first. Removes redundant 'Why this item appears' and verbose selection-audit/evidence essays from the default screen.
+- Keeps specialist comparisons as optional collapsed, attributed research notes **only when they actually exist**, including situational conditions and trade-offs; unresearched equipment no longer gets a generic pseudo-justification.
+- Preserves existing saved picks, available equipment, legality filters, ship-specific sourced slot types, augments and 50-at-a-time browsing. Does not assert any new best-in-slot rankings or alter the equipment selection heuristics.
+- Adds regression tests for WIP labels, concise drawer, researched/unresearched states and escaping, plus existing viewport/asset CI checks.
+
 ## [0.8.6] - 2026-11-11
 
 ### Source evidence and explainability
