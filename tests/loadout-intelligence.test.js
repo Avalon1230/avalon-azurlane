@@ -148,9 +148,9 @@ test('standard ship display has exactly three weapon, two provisional auxiliary 
   assert.equal(model.slots[0].selected?.id,'fer-1020');
   assert.equal(model.slots[3].selected,null); // sample has no sourced auxiliary candidate
   assert.equal(model.slots[4].selected,null);
-  assert.equal(model.slots[5].selected,null);
+  assert.equal(model.slots[5].selected?.source,'augment-snapshot');
   assert.match(model.slots[3].explanation,/standard equipment layout/);
-  assert.match(model.slots[5].explanation,/no augment is selected/);
+  assert.match(model.slots[5].explanation,/generic|Generic/);
 });
 test('manual auxiliary choices remain potential, source-matched, and never auto-equipped',()=>{
   const auxiliary=gear(1180,'Source Auxiliary',10,'Auxiliary','Super Rare',{durability:180});
@@ -164,7 +164,7 @@ test('manual auxiliary choices remain potential, source-matched, and never auto-
   const picked=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset,overrides:{3:'fer-1180',5:'fer-1180'}});
   assert.equal(picked.slots[3].selected?.id,'fer-1180');
   assert.equal(picked.slots[3].manual,true);
-  assert.equal(picked.slots[5].selected,null);
+  assert.equal(picked.slots[5].selected?.source,'augment-snapshot');
   assert.match(picked.slots[3].explanation,/require verification/);
 });
 test('source-recorded extra equipment positions are preserved before inferred auxiliaries and augment',()=>{
@@ -200,9 +200,9 @@ test('compact planner uses two rows of three, retains click-to-inspect, and hide
   assert.match(html,/data-action="loadout-slot-info" data-slot="5"/);
   assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
   const detail=renderLoadoutAlternatives(model,5);
-  assert.match(detail,/Augment modules require a dedicated verified module database/);
-  assert.match(detail,/No source-confirmed selectable equipment/);
-  assert.doesNotMatch(detail,/data-action="loadout-select"/);
+  assert.match(detail,/Only generic craftable modules are shown/);
+  assert.match(detail,/data-action="loadout-augment-inspect"/);
+  assert.match(detail,/data-action="loadout-select"/);
   assert.match(renderLoadoutAlternatives(model,3),/Potential auxiliary position/);
 });
 
@@ -267,4 +267,19 @@ test('shared parser fills documented main guns and aircraft on unrelated ship cl
     assert.deepEqual(result.slots[0].selected?.id,sample.gear.id,
       sample.name+' should not have an empty slot for '+sample.type);
   }
+});
+
+test('generic class-backed augments are selectable, while unrelated modules are rejected',()=>{
+  const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
+  const aug=model.slots.at(-1);
+  assert.equal(aug.kind,'augment');
+  assert.ok(aug.candidates.length>=2);
+  assert.equal(aug.selected?.source,'augment-snapshot');
+  assert.equal(aug.selected?.craftable,true);
+  assert.equal(validateManualChoice(model,aug.index,aug.candidates[1].id),true);
+  assert.equal(validateManualChoice(model,aug.index,'aug-999999'),false);
+  assert.match(aug.explanation,/not verified best-in-slot/);
+  const html=renderLoadoutPanel(model);
+  assert.match(html,/data-action="loadout-augment-inspect"/);
+  assert.match(html,/Potential · verify/);
 });
