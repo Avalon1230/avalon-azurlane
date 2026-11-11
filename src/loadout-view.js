@@ -1,7 +1,7 @@
 import { imageMarkup } from './media.js';
 import { augmentImageMarkup } from './augment-assets.js';
 import { LOADOUT_MODES } from './loadout-intelligence.js';
-import { renderLoadoutDecisionEvidence } from './loadout-evidence.js';
+import { researchedOptions, LOADOUT_EVIDENCE_SOURCES } from './loadout-evidence.js';
 
 const E=v=>String(v??'').replace(/[&<>"']/g,c=>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -43,17 +43,17 @@ function renderCompactSlot(slot) {
     E(picked?'Inspect '+name+(isAugment?' augment details':' equipment stats and acquisition'):
       'Inspect '+label+' eligibility and options')+'">'+image+
     '<span class="loadout-tile-name" title="'+E(name)+'">'+E(name)+'</span></button>';
-  const choiceStatus=slot.manual?'Personal pick':slot.selected?'Compatible candidate':'No verified selection';
+  const choiceStatus=slot.manual?'Your pick':slot.selected?'Auto-filled · unreviewed':'Unverified';
   return '<article class="loadout-compact-slot'+(slot.provisional?' provisional':'')+
     (slot.kind==='augment'?' augment':'')+'" data-loadout-slot="'+slot.index+'">'+
     '<div class="loadout-tile-heading"><span>'+(slot.index+1).toString().padStart(2,'0')+' · '+E(label)+'</span>'+
     (slot.manual?'<span title="Personal pick">★</span>':'')+'</div>'+
     '<div class="loadout-tile-type" title="'+E(slot.type)+'">'+E(slot.type)+'</div>'+
     gear+
-    '<span class="loadout-choice-status" title="'+E(slot.manual?'Saved locally by you; not independently reviewed':'Compatibility only; not a reviewed performance recommendation')+'">'+E(choiceStatus)+'</span>'+
+    '<span class="loadout-choice-status" title="'+E(slot.manual?'Saved locally by you; not independently reviewed':'Automatically shown from the compatible source catalog; not a gear recommendation')+'">'+E(choiceStatus)+'</span>'+
     '<button type="button" class="loadout-tile-more" data-action="loadout-slot-info" data-slot="'+slot.index+
-    '" aria-label="Why this choice and equipment alternatives for '+E(slot.type)+'">'+
-    (slot.kind==='augment'?'Eligibility & details':slot.candidates.length>1?'Why & alternatives':'Why & source')+' ↗</button>'+
+    '" aria-label="Review compatible equipment for '+E(slot.type)+'">'+
+    (slot.kind==='augment'?'Module options':'Compatible options')+' ↗</button>'+
     '</article>';
 }
 export function renderLoadoutPanel(model) {
@@ -70,15 +70,15 @@ export function renderLoadoutPanel(model) {
     '</p>':'';
   return '<section class="ship-loadout-panel ship-loadout-compact" id="ship-profile-loadout" aria-labelledby="ship-loadout-title">'+
     '<div class="loadout-heading"><div><span class="eyebrow">AVALON TACTICAL INTELLIGENCE</span>'+
-    '<h2 id="ship-loadout-title">Loadout planner</h2></div>'+
-    '<span class="loadout-status" title="Source matching only. Not evaluated or simulated">Planning · Sourced</span></div>'+
-    '<div class="loadout-modes" role="group" aria-label="Loadout mission context">'+tabs+'</div>'+
+    '<h2 id="ship-loadout-title">Loadout Planner (WIP)</h2></div>'+
+    '<span class="loadout-status loadout-status-wip" title="Work in progress: compatible placeholders, not reviewed gear recommendations">WIP · Unreviewed</span></div>'+
+    '<p class="loadout-wip-note"><strong>Work in progress.</strong> Gear is auto-filled for source compatibility, not selected for combat performance. The right build depends on ship skills, mission, enemy armor and equipment interactions.</p>'+'<div class="loadout-modes" role="group" aria-label="Loadout mission context">'+tabs+'</div>'+
     aquilaAdvice+
     '<div class="loadout-slots loadout-compact-grid" role="group" aria-label="Ship equipment positions">'+tiles+'</div>'+
     '<p class="loadout-brief">'+E(model.description)+'</p>'+
-    '<div class="loadout-footer"><span>Potential gear · not combat-optimized</span>'+
+    '<div class="loadout-footer"><span>Auto-filled examples · not recommended builds</span>'+
       '<button type="button" class="loadout-reset" data-action="loadout-reset">Reset my picks</button></div>'+
-    '<p class="loadout-compact-disclaimer">Slots and augments are source-based starting points, not optimized builds. Dated game data may not cover every ship. Tap Why & alternatives for eligibility and evidence.</p>'+
+    '<p class="loadout-compact-disclaimer">Slot compatibility is provisional. Use Compatible options to inspect other gear; performance recommendations are still in development.</p>'+
     '</section>';
 }
 export function filteredLoadoutCandidates(slot,query='') {
@@ -88,6 +88,24 @@ export function filteredLoadoutCandidates(slot,query='') {
   return options.filter(item=>[
     item.name,item.category,item.rarity,item.sourceId,item.matchLevel
   ].some(value=>String(value||'').toLocaleLowerCase().includes(term)));
+}
+function renderResearchNotes(slot,mode){
+  if(slot.kind==='augment')return '';
+  const notes=researchedOptions(slot,mode);
+  if(!notes.length)return '';
+  const entries=notes.map(({item,note})=>{
+    const source=LOADOUT_EVIDENCE_SOURCES[note.source];
+    return '<li><strong>'+E(item.name)+'</strong>'+
+      (item.id===slot.selected?.id?' · current candidate':' · eligible alternative')+
+      '<p>'+E(note.evidence)+'</p>'+
+      '<p><strong>When it applies:</strong> '+E(note.conditions)+'</p>'+
+      '<p><strong>Trade-off:</strong> '+E(note.alternative)+'</p>'+
+      (source?'<a href="'+E(source.url)+'" target="_blank" rel="noopener noreferrer">'+E(source.name)+'</a>':'')+
+      '</li>';
+  }).join('');
+  return '<details class="loadout-picker-research"><summary>Specialist research notes ('+notes.length+')</summary>'+
+    '<p>Published findings for specific equipment and situations, not a ranked build for this ship.</p>'+
+    '<ul>'+entries+'</ul></details>';
 }
 export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}) {
   const slot=model?.slots?.find(s=>s.index===slotIndex);
@@ -111,26 +129,30 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}
         (slot.selected?.id===item.id?' disabled':'')+'>'+
         (slot.selected?.id===item.id?'Selected':'Select')+'</button></div>';
   }).join('');
-  const note=slot.kind==='augment'
-    ?'Modules are sourced from the May 2026 augment database. Exclusive modules match exact internal ship IDs; generic modules match documented hull classes. Their skill effects and combat optimality are not simulated.'
-    :slot.provisional
-      ?'Potential auxiliary position based on the common loadout layout. Ship-specific exceptions and build performance are unverified; source limit groups are enforced when available.'
-      :'The source records a slot category. Equipment options match sourced type, hull and known limit-group restrictions; combat effectiveness still requires verification.';
-  const status=slot.manual?'Personal pick':slot.selected?'Compatible candidate · not reviewed':'No candidate selected';
+  const status=slot.manual?'Your saved choice':slot.selected?'Auto-filled candidate · not recommended':'No current selection';
+  const statusExplanation=slot.manual
+    ?'Your choice is saved. AVALON has not independently compared it with alternatives.'
+    :slot.selected?'This was filled by the compatibility catalog, not a combat recommendation. The options below are not ranked by effectiveness.'
+    :'No equipment has been selected from this slot’s compatible catalog.';
+  const current=slot.selected
+    ?'<strong>'+E(slot.selected.name)+'</strong><span class="loadout-picker-current-status">'+E(status)+'</span>'
+    :'<strong>Nothing selected</strong><span class="loadout-picker-current-status">'+E(status)+'</span>';
+  const research=renderResearchNotes(slot,model?.mode||'general');
   return '<div class="picker-backdrop detail-backdrop" data-action="loadout-close-alternatives">'+
     '<aside class="picker-panel detail-panel loadout-picker-panel" role="dialog" aria-modal="true" aria-label="Equipment evidence and options for '+E(slot.type)+'">'+
-      '<div class="picker-head"><div><span class="eyebrow">SLOT '+(slot.index+1)+' · '+E(sourceStatus(slot))+'</span><h2>'+E(slot.type)+'</h2></div>'+
+      '<div class="picker-head"><div><span class="eyebrow">SLOT '+(slot.index+1)+' · WORK IN PROGRESS</span><h2>'+E(slot.type)+'</h2></div>'+
         '<button type="button" class="icon-btn" data-action="loadout-close-alternatives" aria-label="Close options">✕</button></div>'+
       '<div class="detail-scroll">'+
-        '<section class="loadout-detail-reason"><h3>Why this item appears · '+E(status)+'</h3>'+
-          '<p>'+E(slot.explanation)+'</p><small>'+E(slotNote(slot))+'</small>'+
-          '<p>'+E(note)+'</p></section>'+renderLoadoutDecisionEvidence(model,slot)+
+        '<section class="loadout-picker-current"><div class="loadout-picker-current-head">'+current+'</div>'+
+          '<p>'+E(statusExplanation)+'</p>'+
+          '<small>Source: '+E(slotNote(slot))+'</small></section>'+
+        research+
         (slot.selected?'<button class="loadout-detail-inspect outline-btn compact" type="button" data-action="'+
           (slot.kind==='augment'?'loadout-augment-inspect':'loadout-inspect')+'"'+
           (slot.kind==='augment'?' data-augment="'+E(slot.selected.id)+'"':' data-equip="'+E(slot.selected.id)+'"')+'">'+
           (slot.kind==='augment'?'Inspect sourced augment stats':'Inspect selected equipment stats and acquisition')+' ↗</button>':'')+
-        '<h3 class="loadout-options-heading">Equipment options ('+slot.candidates.length+')</h3>'+
-        '<label class="loadout-choice-search-label" for="loadout-choice-search">Search eligible items within this slot</label>'+
+        '<h3 class="loadout-options-heading">Compatible equipment ('+slot.candidates.length+')</h3>'+
+        '<label class="loadout-choice-search-label" for="loadout-choice-search">Browse source-eligible items · not ranked by performance</label>'+
         '<input id="loadout-choice-search" class="loadout-choice-search" type="search" value="'+E(query)+
           '" placeholder="Search names, types, rarity or IDs" autocomplete="off" aria-label="Search compatible equipment for this slot">'+
         '<p class="loadout-picker-info" role="status">'+shown.length+' shown of '+filtered.length+
