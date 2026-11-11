@@ -184,8 +184,12 @@ export function loadoutDisplaySlots(data,wikiFacts=null,gameFacts=undefined,ship
   const announcement=announcedAugmentForShip(data?.id);
   if(announcement&&!augmentCandidates.some(a=>a.matchLevel==='ship-specific'))
     augmentCandidates.unshift(announcement);
-  const selectedType=typeof wikiFacts?.augmentType==='string'&&sameShip(wikiFacts,data)
+  const wikiType=typeof wikiFacts?.augmentType==='string'&&sameShip(wikiFacts,data)
     ?wikiFacts.augmentType.trim():null;
+  // Wiki type labels and generic module names can disagree; do not display a
+  // misleading category beside a differently named source-matched module.
+  const selectedType=wikiType && augmentCandidates.some(item=>
+    item.name.toLocaleLowerCase()===wikiType.toLocaleLowerCase())?wikiType:null;
   slots.push({
     index:slots.length,kind:'augment',type:selectedType?'Augment · '+selectedType:'Augment',
     augmentType:selectedType||null,
