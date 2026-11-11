@@ -4,6 +4,13 @@ _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
+## Release log structure cleanup — 2026-11-12
+
+- **User-reported regression:** the Updates page rendered four distinct release cards titled `v0.8.6` and two titled `v0.8.5` because several post-release hotfixes were authored as separate top-level changelog headings without increasing the version number.
+- **Fix branch:** `fix/changelog-unique-releases`. Consolidate both versions into one standard `## [version] - YYYY-MM-DD` entry each, keeping original release sections and all hotfix notes as dated `###` subsections. No package version bump: no application behavior was changed.
+- **Regression prevention:** extend `tests/changelog.test.js` to require unique semver headings, canonical heading syntax, one rendered release card per version, and preservation of source PR/history.
+- **Release gate:** verify GitHub CI and Pages before marking delivered; update status with exact merged SHA.
+
 ## WIP feature maturity labels — delivered 2026-11-12
 
 - **Requirement:** Mark Equipment, Augments, Fleet Lab and Tier Boards **WIP** to avoid overstating unfinished combat analysis; leave Ship Index's functional roster and Loadout Planner's existing WIP label unchanged.
