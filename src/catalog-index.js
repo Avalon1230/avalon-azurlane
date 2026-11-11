@@ -1,8 +1,9 @@
 import { nationEmblemMarkup } from './nation-emblems.js';
+import { collabSeriesVisual } from './collab-series.js';
 import { renderEquipmentIndex } from './equipment-index.js';
 import { sortEquipmentRows } from './equipment-roster.js';
 import { renderShipFilterToolbar } from './ship-toolbar.js';
-import { MAIN_SHIP_FACTIONS, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
+import { MAIN_SHIP_FACTIONS, COLLAB_BROWSE_NATION, shipCollabSeriesCounts, shipBrowseCounts, filterShipBrowseRows, groupedShipBrowseRows } from './ship-factions.js';
 import { filterEquipmentRecords, nationCounts, groupedCatalogRows, possibleEquipmentHulls } from './catalog-filters.js';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=esc;
@@ -48,21 +49,44 @@ function shipNationLanding(records) {
     '</div>';
 }
 
+function shipCollabLanding(records){
+  const series=shipCollabSeriesCounts(records);
+  const total=series.reduce((sum,item)=>sum+item.count,0);
+  const cards=series.map(({series:label,count,ship})=>
+    '<button type="button" class="collab-series-card" data-action="catalog-series" data-series="'+E(label)+'" aria-label="Browse '+E(label)+' collaboration ships">'+
+    collabSeriesVisual(label,ship)+
+    '<span class="collab-series-copy"><strong>'+E(label)+'</strong><span>'+count+' ship'+(count===1?'':'s')+'</span></span>'+
+    '<span class="nation-card-arrow" aria-hidden="true">↗</span></button>'
+  ).join('');
+  return '<div id="catalog-start" class="nation-landing collab-landing">'+
+    '<button type="button" class="outline-btn compact collab-back" data-action="catalog-home">← Nations</button>'+
+    '<header class="nation-landing-head"><div><span class="eyebrow">CROSSOVER ARCHIVE</span>'+
+    '<h2>Choose a collaboration</h2><p>Browse shipgirls by the series they came from.</p></div>'+
+    '<div class="nation-landing-count"><strong>'+total.toLocaleString()+'</strong><span>Collab ships</span>'+
+    '<small>'+series.length+' series</small></div></header>'+
+    '<label class="search-wrap nation-landing-search"><span aria-hidden="true">⌕</span>'+
+    '<input id="catalog-search" type="search" value="" placeholder="Search collaboration ships…" '+
+    'aria-label="Search collaboration ships" autocomplete="off"></label>'+
+    '<div class="collab-series-grid">'+cards+'</div>'+
+    (!series.length?'<p class="empty">No collaboration ships are available in the loaded source data.</p>':'')+
+    '</div>';
+}
+
 function equipmentGroups(rows,sort,descending) {
   return groupedCatalogRows(rows,'equipment').map(group=>({
     ...group,items:sortEquipmentRows(group.items,sort,descending)
   }));
 }
-function groupedCards(rows,kind,card,totals,sort='rarity',descending=true){
+function groupedCards(rows,kind,card,totals,sort='rarity',descending=true,collabSeries='all'){
   if(!rows.length)return '<div class="empty">No records match these filters. Try another nation, hull or search.</div>';
   return (kind==='ships' ? groupedShipBrowseRows(rows,sort,descending) : equipmentGroups(rows,sort,descending)).map(group=>
     '<section class="nation-result-group" aria-label="'+E(group.nation)+'">'+
-    '<div class="nation-section-title"><h2>'+E(group.nation)+'</h2><span>'+group.items.length+' shown · '+(totals.get(group.nation)||group.items.length)+' matches</span></div>'+
+    '<div class="nation-section-title"><h2>'+E(kind==='ships'&&group.nation===COLLAB_BROWSE_NATION&&collabSeries!=='all'?collabSeries:group.nation)+'</h2><span>'+group.items.length+' shown · '+(totals.get(group.nation)||group.items.length)+' matches</span></div>'+
     '<div class="catalog-grid '+(kind==='ships'?'ship-gallery':'equipment-gallery')+'">'+group.items.map(card).join('')+'</div></section>'
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false,shipAdvancedOpen=false}){
+export function renderCatalogIndex({kind,records,query='',nation='all',collabSeries='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false,shipAdvancedOpen=false}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   if(kind==='equipment')return renderEquipmentIndex({
@@ -73,14 +97,17 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   const ship=kind==='ships';
   if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1)
     return shipNationLanding(records);
+  if(ship && nation === COLLAB_BROWSE_NATION && collabSeries === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1)
+    return shipCollabLanding(records);
   const facetRecords=ship
     ?filterShipBrowseRows(records,{query,hull,rarity})
     :filterEquipmentRecords(records,{query,hull,category,rarity});
   const facets=ship ? shipBrowseCounts(facetRecords) : nationCounts(facetRecords,kind);
   const knownNations = new Set((ship ? shipBrowseCounts(records) : nationCounts(records,kind)).map(x => x.nation));
   const currentNation=nation==='all'||knownNations.has(nation)?nation:'all';
+  const activeSeries=currentNation===COLLAB_BROWSE_NATION&&shipCollabSeriesCounts(records).some(x=>x.series===collabSeries)?collabSeries:'all';
   const filtered=ship
-    ?filterShipBrowseRows(facetRecords,{nation:currentNation})
+    ?filterShipBrowseRows(facetRecords,{nation:currentNation,collabSeries:activeSeries})
     :filterEquipmentRecords(facetRecords,{nation:currentNation});
   const groups=ship ? groupedShipBrowseRows(filtered,sort,descending) : equipmentGroups(filtered,sort,descending);
   const ordered=groups.flatMap(x=>x.items);
@@ -94,10 +121,16 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
   const text='Showing '+visible.length.toLocaleString()+' of '+ordered.length.toLocaleString()+
     ' matching '+(ship?'ships':'equipment')+' · '+records.length.toLocaleString()+' total';
   const heading = ship
-    ? '<div class="catalog-roster-heading"><button type="button" class="outline-btn compact" data-action="catalog-home">← Nations</button>' +
+    ? '<div class="catalog-roster-heading">'+
+      (currentNation===COLLAB_BROWSE_NATION?
+        '<button type="button" class="outline-btn compact" data-action="catalog-series-home">← Collaborations</button>':
+        '<button type="button" class="outline-btn compact" data-action="catalog-home">← Nations</button>')+
       '<div class="catalog-roster-label">' +
-      (currentNation === 'all' ? '' : nationEmblemMarkup(currentNation)) +
-      '<div><span class="eyebrow">SHIP ROSTER</span><h2>' + E(currentNation === 'all' ? 'Search all nations' : currentNation) +
+      (currentNation === 'all'||currentNation===COLLAB_BROWSE_NATION ? '' : nationEmblemMarkup(currentNation)) +
+      '<div><span class="eyebrow">SHIP ROSTER</span><h2>' +
+      E(currentNation===COLLAB_BROWSE_NATION
+        ?(activeSeries==='all'?'All collaborations':activeSeries)
+        :(currentNation==='all'?'Search all nations':currentNation)) +
       '</h2></div></div></div>'
     : '<div class="catalog-filter-summary"><strong>Browse by nation</strong><span>' +
       facets.length + ' nations represented · Click a nation to filter</span></div>' +
@@ -107,7 +140,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',hull='all
     filters+
     '<div class="catalog-result-bar"><span>'+E(text)+'</span>'+
       '<span>Sort: '+E(sort.charAt(0).toUpperCase()+sort.slice(1))+' '+(descending?'↓':'↑')+'</span></div>'+
-    groupedCards(visible,kind,renderCard,totals,sort,descending)+
+    groupedCards(visible,kind,renderCard,totals,sort,descending,activeSeries)+
     (visible.length<ordered.length
       ? '<div class="ship-scroll-sentinel" data-'+(ship?'ship':'equipment')+'-scroll-sentinel><span>'+
         E((ordered.length-visible.length).toLocaleString())+' '+(ship?'ships':'equipment')+' remaining</span>'+
