@@ -253,6 +253,33 @@ const AUGMENTS={
 "1080220":["Kunai",8,0,4,1,1,1,[["trp",35,5],["hit",5,3]]]
 };
 export const AUGMENT_RECORDS=Object.keys(AUGMENTS).length;
+/**
+ * Official 2026-10-22 announcement for five newly released Tempesta modules,
+ * newer than the May source snapshot. Names are source-confirmed but item IDs,
+ * skill modifiers, costs and icons are NOT present in our verified database.
+ * These are labelled announcement-only, not parsed as normal augment gear.
+ * https://azurlane.yo-star.com/news/2026/10/21/maintenance-notice-10-22-12-a-m-utc-7-2/
+ */
+export const OFFICIAL_AUGMENT_ANNOUNCEMENT='https://azurlane.yo-star.com/news/2026/10/21/maintenance-notice-10-22-12-a-m-utc-7-2/';
+const OFFICIAL_AUGMENTS=Object.freeze({
+  '960017':'Greatstaff of the Lodestar',
+  '960018':'Silent Scythe',
+  '960019':"Fate’s Choice",
+  '960020':'Abyssal Summons',
+  '960021':'Mizrak of Trials'
+});
+export function announcedAugmentForShip(sourceId) {
+  const id=String(sourceId??'');
+  if(!Object.hasOwn(OFFICIAL_AUGMENTS,id))return null;
+  return {
+    id:'aug-announced-'+id,sourceId:id,kind:'augment',
+    source:'official-announcement',name:OFFICIAL_AUGMENTS[id],
+    typeCode:null,limitGroup:null,rarityCode:null,rarity:'Not verified',
+    obtainable:null,craftable:null,serverEN:true,stats:[],
+    category:'Augment',sourceUrl:OFFICIAL_AUGMENT_ANNOUNCEMENT,
+    matchLevel:'announced-specific'
+  };
+}
 export function augmentRecord(sourceId){
   const id=String(sourceId??'').replace(/^aug-/,'');
   if(!/^\d{4,8}$/.test(id)||!Object.hasOwn(AUGMENTS,id))return null;
