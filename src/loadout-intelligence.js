@@ -4,6 +4,7 @@
  * synergy computations. The panel is an evidence-first planning station.
  */
 import { possibleEquipmentHulls } from './catalog-filters.js';
+import { genericAugmentCandidates } from './augment-candidates.js';
 
 export const LOADOUT_MODES = Object.freeze([
   {id:'general',name:'General',description:'Balance documented eligibility, enhancement attributes and ship role.'},
@@ -134,7 +135,9 @@ function orderCandidates(candidates,mode) {
   });
 }
 export function candidatesForSlot(ship,slot,equipment,mode='general') {
-  if(!ship?.hull||(!slot?.verified&&!slot?.provisional)||slot?.kind==='augment'||!Array.isArray(equipment))return [];
+  if(!ship?.hull)return [];
+  if(slot?.kind==='augment')return genericAugmentCandidates(ship.hull);
+  if((!slot?.verified&&!slot?.provisional)||!Array.isArray(equipment))return [];
   const allowed=new Set(slot.categories);
   const matches=equipment.filter(item=>
     item?.source==='fernando' && /^\d{2,8}$/.test(String(item.sourceId||'')) &&
@@ -144,9 +147,10 @@ export function candidatesForSlot(ship,slot,equipment,mode='general') {
   return orderCandidates(matches,mode);
 }
 export function candidateEvidence(slot,item,mode='general') {
-  if(slot?.kind==='augment')return slot.augmentType
-    ? 'Koumakan Wiki identifies augment type '+slot.augmentType+'. Individual module eligibility and effects have not been verified; no augment is selected.'
-    : 'This ship\'s augment eligibility and compatible module have not been verified. No module will be guessed.';
+  if(slot?.kind==='augment')return item
+    ? 'Generic '+item.name+' augment from the May 2, 2026 game-data snapshot; class type '+item.typeCode+
+      ' includes this hull. This is a craftable source candidate, not verified best-in-slot. Ship-specific augment exceptions, equipment effects and exclusive modules have not been evaluated.'
+    : 'A compatible generic augment could not be confirmed from the dated source. No ship-exclusive module has been invented.';
   if(slot?.provisional)return item
     ? 'Tentative Auxiliary candidate: source category and potential hull restrictions match. This position is inferred from the standard layout; ship-specific eligibility, duplicate restrictions and combat value still require verification.'
     : 'Auxiliary position inferred from the standard equipment layout; no source-matched equipment was found. Ship-specific legality remains unverified.';
@@ -173,8 +177,9 @@ export function buildShipLoadout({ship=null,data=null,wikiFacts=null,equipment=[
     // Tentatively show a hull/type-matched auxiliary instead of an empty
     // card, without pretending a ship-specific legality check was done.
     // Use different alternatives for the two generic auxiliary positions.
-    const tentative=slot.provisional?candidates.find(x=>!usedTentative.has(x.id)):null;
-    const selected=manual||((slot.provisional||slot.verified)?tentative||candidates[0]:null)||null;
+    const tentative=slot.provisional&&slot.kind!=='augment'?candidates.find(x=>!usedTentative.has(x.id)):null;
+    const selected=manual||(slot.kind==='augment'?candidates[0]:
+      (slot.provisional||slot.verified)?tentative||candidates[0]:null)||null;
     if(slot.provisional&&selected)usedTentative.add(selected.id);
     return {...slot,candidates,selected,manual:!!manual,
       explanation:candidateEvidence(slot,selected,selectedMode)};
@@ -192,5 +197,5 @@ export function buildShipLoadout({ship=null,data=null,wikiFacts=null,equipment=[
 export function validateManualChoice(model,slotIndex,equipmentId) {
   if(!model||!Number.isSafeInteger(slotIndex)||slotIndex<0)return false;
   const slot=model.slots.find(x=>x.index===slotIndex);
-  return slot?.kind!=='augment' && !!slot?.candidates.some(item=>item.id===equipmentId);
+  return !!slot?.candidates.some(item=>item.id===equipmentId);
 }
