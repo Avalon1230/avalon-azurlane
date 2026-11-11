@@ -2,6 +2,15 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.6 Collaboration series navigation] - 2026-11-12
+
+- Collaboration ships now have a dedicated second-level landing page in **Ship Index → Collab**, showing each franchise individually rather than opening one mixed roster.
+- Verified **14 distinct series** in the 894-ship source snapshot. Source nationalities and ship IDs are unchanged; Kizuna AI/KizunaAI are normalized only for browsing.
+- Each franchise card features game-client ship artwork from that series, plus a sourced franchise wordmark where a verified match was found (seven franchises). Unverified wordmarks are never fabricated or replaced by the generic Collab emblem.
+- Ship series rosters preserve the familiar hull class, rarity, sort, search, progressive loading and profile flow, with a **← Collaborations** back action.
+- External Wikimedia logo hosts may rate-limit hotlinking. Failed logo overlays are removed so the original ship artwork remains visible. Automated tests audit real HTTP failures and distinguish external throttling from broken paths.
+- Browser fixture coverage expanded from 35 to **49** responsive checks across seven viewport widths; full CI gates must pass before release.
+
 ## [0.8.6 WIP clarity hotfix] - 2026-11-12
 
 - Clearly marks the ship-profile **Loadout Planner (WIP)** and its automatic items **Auto-filled · unreviewed**, with a concise explanation that eligibility is not a combat recommendation.
