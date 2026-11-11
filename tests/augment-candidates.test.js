@@ -4,7 +4,7 @@ import { genericAugmentCandidates, genericAugmentById, GENERIC_AUGMENT_SOURCE } 
 import { renderAugmentDossier } from '../src/loadout-view.js';
 
 test('generic augment coverage spans supported hull categories without inventing exclusive modules',()=>{
-  const cases=['DD','CL','CA','CB','BB','BC','CV','CVL','SS','SSV','AR','AE','BM','IX'];
+  const cases=['DD','CL','CA','CB','BB','BC','CV','CVL','SS','SSV','AR','AE','BM'];
   for(const hull of cases){
     const entries=genericAugmentCandidates(hull);
     assert.ok(entries.length>0, 'No generic augment candidates for '+hull);
@@ -18,6 +18,7 @@ test('generic augment coverage spans supported hull categories without inventing
     }
   }
   assert.deepEqual(genericAugmentCandidates('UNKNOWN'),[]);
+  assert.deepEqual(genericAugmentCandidates('IX'),[]); // Snapshot has no generic IX modules; do not invent one
   assert.equal(genericAugmentById('CB','aug-999999'),null);
 });
 test('generic augment candidate selection obeys source class type, not image or rarity alone',()=>{
