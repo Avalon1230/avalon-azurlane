@@ -14,7 +14,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 ### Verification scope
 - Regression coverage for 239 source ID/icon mappings, all 12 source aliases, five announcement placeholders, directory/filters, dialog art, progression and source identity.
-- CI and Pages deployment are pending verification. Live CDN success, numerical battle optimization, full augment skill effects and current acquisition costs are not claimed.
+- [PR #21](https://github.com/Avalon1230/avalon-azurlane/pull/21) merged as `9130e4df`. [Branch CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43052368377) passed **185/185 Node tests and 20/20 viewport fixture checks**. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43052521752) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43052521109) succeeded. This is not a published-site end-to-end interaction or image-availability certification. Numerical combat optimization, full augment skill effects and current acquisition costs remain out of scope.
 
 ## [0.8.4] - 2026-11-11
 
