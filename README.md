@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
+> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **The ship loadout planner is explicitly labeled WIP: auto-filled gear is a compatibility placeholder, not a combat recommendation. Validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
