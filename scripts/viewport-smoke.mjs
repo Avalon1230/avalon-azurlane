@@ -65,7 +65,12 @@ try{
           const r=el.getBoundingClientRect();
           return {selector,left:r.left,right:r.right,width:r.width};
         });
-        return {viewport,doc,controls};
+        const overflowing=[...document.querySelectorAll('body *')]
+          .map(el=>({el,rect:el.getBoundingClientRect()}))
+          .filter(({rect})=>rect.right>viewport+1||rect.left< -1)
+          .slice(0,12).map(({el,rect})=>({tag:el.tagName,cls:el.className?.toString().slice(0,70),
+            left:Math.round(rect.left*10)/10,right:Math.round(rect.right*10)/10,scrollWidth:el.scrollWidth}));
+        return {viewport,doc,controls,overflowing};
       },selectors);
       assert.ok(measurements.doc<=measurements.viewport+1,
         width+'px '+label+' horizontal overflow: '+JSON.stringify(measurements));
