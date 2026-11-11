@@ -11,7 +11,7 @@
  */
 import { possibleEquipmentHulls, EQUIPMENT_TYPE_HULL_SLOTS } from './catalog-filters.js';
 import { gameShipSlots } from './game-slot-manifest.js';
-import { candidateAugmentsForShip } from './augment-manifest.js';
+import { candidateAugmentsForShip, announcedAugmentForShip } from './augment-manifest.js';
 
 export const LOADOUT_MODES = Object.freeze([
   {id:'general',name:'General',description:'Balance documented eligibility, enhancement attributes and ship role.'},
@@ -156,6 +156,15 @@ export function loadoutDisplaySlots(data,wikiFacts=null,gameFacts=undefined,ship
   const primary=sourced.slice(0,3).map(slot=>({
     ...slot,kind:slot.categories.includes('Auxiliary')?'auxiliary':'weapon',provisional:false
   }));
+  // A few newer Sailing Frigates have a generic IX hull identifier in
+  // Lycoris, not the exact IXS/IXV/IXM class. Their source slot types are
+  // known, but equipment legality remains provisional until subclass is known.
+  if(!game&&ship?.hull==='IX'){
+    for(const slot of primary){
+      slot.provisional=true;
+      slot.source+=' · Sailing Frigate subclass unverified';
+    }
+  }
   const extra=sourced.slice(3).map(slot=>({
     ...slot,kind:slot.categories.includes('Auxiliary')?'auxiliary':'special',
     provisional:false
@@ -170,15 +179,21 @@ export function loadoutDisplaySlots(data,wikiFacts=null,gameFacts=undefined,ship
   });
   const hullId=game?.hullId??HULL_ID[ship?.hull]??null;
   const augmentCandidates=candidateAugmentsForShip({shipId:game?.shipId??null,hullId});
+  // Publisher-announced October 2026 modules postdate the May extract.
+  // Surface the sourced NAME only; no guessed game ID or simulated stats.
+  const announcement=announcedAugmentForShip(data?.id);
+  if(announcement&&!augmentCandidates.some(a=>a.matchLevel==='ship-specific'))
+    augmentCandidates.unshift(announcement);
   const selectedType=typeof wikiFacts?.augmentType==='string'&&sameShip(wikiFacts,data)
     ?wikiFacts.augmentType.trim():null;
   slots.push({
     index:slots.length,kind:'augment',type:selectedType?'Augment · '+selectedType:'Augment',
     augmentType:selectedType||null,
-    source:game?'AzurLaneData · exact ship ID / augment type':'Augment class eligibility only',
+    source:announcement?'Yostar official announcement · October 2026':
+      game?'AzurLaneData · exact ship ID / augment type':'Augment class eligibility only',
     categories:[],typeCodes:[],hullId,
-    augmentCandidates,verified:augmentCandidates.length>0&&!!game,
-    provisional:augmentCandidates.length>0&&!game,
+    augmentCandidates,verified:augmentCandidates.length>0&&(!!game||!!announcement),
+    provisional:augmentCandidates.length>0&&!game&&!announcement,
     minEfficiency:null,maxEfficiency:null,maxMounts:null
   });
   return slots;
@@ -207,7 +222,10 @@ export function candidatesForSlot(ship,slot,equipment,mode='general') {
   const matches=equipment.filter(item=>{
     if(item?.source!=='fernando'||!/^\d{2,8}$/.test(String(item.sourceId||''))||
       !Number.isInteger(item.typeCode)||!allowed.has(item.category))return false;
-    if(exactHull===null)return possibleEquipmentHulls(item).includes(ship.hull);
+    if(exactHull===null){
+      if(ship.hull==='IX')return possibleEquipmentHulls(item).some(h=>['IXS','IXV','IXM'].includes(h));
+      return possibleEquipmentHulls(item).includes(ship.hull);
+    }
     return EQUIPMENT_TYPE_HULL_SLOTS[String(item.typeCode)]?.some(([id])=>id===exactHull) &&
       !item.forbiddenHullIds?.includes(exactHull);
   });
@@ -216,6 +234,8 @@ export function candidatesForSlot(ship,slot,equipment,mode='general') {
 export function candidateEvidence(slot,item,mode='general') {
   if(slot?.kind==='augment'){
     if(!item)return 'No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module.';
+    if(item.matchLevel==='announced-specific')
+      return 'The publisher announced this module for this exact ship on October 21, 2026 (released October 22). The item ID, gameplay stats, crafting details and icon have not been independently verified. No combat effectiveness is inferred.';
     const evidence=item.matchLevel==='ship-specific'
       ?'This module is assigned to this ship’s exact internal collection ID in the dated augment source.'
       :'This general module matches the ship’s hull type in the published augment-type eligibility data.';
