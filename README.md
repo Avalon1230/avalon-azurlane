@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.8.4 correctness and responsive interface (review pending)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
+> **Project status:** **v0.8.4 correctness and responsive interface (released)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -208,4 +208,4 @@ Code licensing and third-party data/media permissions will be handled explicitly
 
 This pass resolves source-trust and UI defects reported in the v0.8.3 browser review: Aquila's second-aircraft-slot fighter/healer versus dive-bomber/offense condition is explicitly described, the Series 8 Mecklenburg 305mm gun is not misidentified as MK7, and the ship's lower Equipment slots section reuses the planner's resolved source-slot model. The slot alternatives drawer supports filtering and progressive access to **every source-eligible item**, not only the first 50. Choices are visibly labeled **Compatible candidate** or **Personal pick**; no generic default is promoted to a reviewed best-in-slot choice. Responsive grid min-size rules reduce page-level overflow and keep controls reachable across phone/tablet/desktop layouts.
 
-The full-game optimization roadmap is unchanged. These fixes do not add a gear optimizer, canonical alias migrations, richer weapon dossiers or inventory-constrained fleets. Verify GitHub PR checks and browser viewport results before treating the release as deployed.
+The full-game optimization roadmap is unchanged. These fixes do not add a gear optimizer, canonical alias migrations, richer weapon dossiers or inventory-constrained fleets. The release merged in [PR #20](https://github.com/Avalon1230/avalon-azurlane/pull/20) at `65bec712`. PR and main quality checks passed **178/178 unit tests** and **15 browser fixture viewport checks** at 360/390/768/1024/1280 px; [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded. A full published-site visual regression and catalog-wide review are separate from these checks.
