@@ -216,7 +216,8 @@ test('roster-wide wiki main-gun grammar matches sourced categories without guess
     ['AA Main Guns',['Anti-Air Gun']],
     ['Anti-Air Main Guns',['Anti-Air Gun']],
     ['CB Main Guns / CA Main Guns',['Large Cruiser Gun','Heavy Cruiser Gun']],
-    ['DD Main Guns / CL Secondary Guns',['Destroyer Gun','Light Cruiser Gun']]
+    ['DD Main Guns / CL Secondary Guns',['Destroyer Gun','Light Cruiser Gun']],
+    ['DD/CL Main Guns',['Destroyer Gun','Light Cruiser Gun']]
   ];
   for(const [label,categories] of expected)
     assert.deepEqual(slotCategories(label),categories,'Unrecognized source terminology: '+label);
