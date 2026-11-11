@@ -120,7 +120,8 @@ test('ship profile embeds tactical planner beneath identity but outside artwork'
   assert.match(html,/data-action="loadout-mode"/);
   assert.match(html,/data-action="loadout-inspect" data-equip="fer-1020"/);
   assert.match(html,/data-action="loadout-slot-info" data-slot="0"/);
-  assert.match(html,/Planning · Sourced/);
+  assert.match(html,/Loadout Planner \(WIP\)/);
+  assert.match(html,/WIP · Unreviewed/);
   assert.doesNotMatch(html,/Simulated DPS|Best in slot|guaranteed optimum/);
 });
 test('alternative chooser exposes authentic source icons and lets users select legal records',()=>{
@@ -140,7 +141,7 @@ test('loadout UI escapes untrusted equipment names and ship slot types',()=>{
   assert.match(html,/&lt;svg onload=alert\(1\)&gt;/);
   assert.doesNotMatch(html,/<svg/);
   assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
-  assert.match(renderLoadoutAlternatives(model,0),/No verified mode-specific performance advantage/);
+  assert.match(renderLoadoutAlternatives(model,0),/not a combat recommendation/);
 });
 
 test('standard ship display has exactly three weapon, two provisional auxiliary and one augment position',()=>{
@@ -208,8 +209,8 @@ test('compact planner uses two rows of three, retains click-to-inspect, and hide
   assert.match(html,/data-action="loadout-slot-info" data-slot="5"/);
   assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
   const detail=renderLoadoutAlternatives(model,5);
-  assert.match(detail,/Modules are sourced from the May 2026 augment database/);
+  assert.match(detail,/Source: AzurLaneData · exact ship ID \/ augment type/);
   assert.match(detail,/data-action="loadout-augment-inspect"/);
   assert.match(detail,/data-action="loadout-select" data-slot="5" data-equip="aug-/);
-  assert.match(renderLoadoutAlternatives(model,3),/source records a slot category/i);
+  assert.match(renderLoadoutAlternatives(model,3),/Source: AzurLaneData/);
 });
