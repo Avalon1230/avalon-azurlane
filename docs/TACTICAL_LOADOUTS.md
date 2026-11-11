@@ -1,4 +1,4 @@
-# AVALON Tactical Loadout Intelligence — v0.8.1
+# AVALON Tactical Loadout Intelligence — v0.8.2
 
 ## Objective
 
@@ -46,10 +46,20 @@ The loadout panel explicitly says when no mode-specific advantage can be verifie
 
 The term **six-position** refers to the standard UI layout, not a universally verified count for every ship. Some repair/special ships have documented exceptions. AVALON must prefer exact source slots to a generic pattern.
 
+## Roster-wide source coverage corrections (v0.8.2)
+
+The slot parser accepts source terminology including `CB Main Guns`, `DD Main Guns`, `BB Main Guns` and compressed `DD/CL Main Guns`. Equivalent known source labels resolve to actual equipment categories, not fictional weapons. If wiki fields are still unrecognized, the same ship and slot can use its valid Lycoris category; a broken wiki string no longer erases a valid fallback.
+
+The two generic auxiliary positions may now display **tentative** distinct equipment candidates matching their real source category and potential hull restrictions. They remain provisional: item-level, ship-exclusive and duplicate restrictions are still unverified. The panel labels them `Potential · verify`; selecting one does not establish a proven build.
+
+A new separate data source — [May 2, 2026 AzurLaneData generic augments](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/augments.json) and [its type contract](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/types/augments.d.ts) — supplies 24 generic **craftable and obtainable** modules with `limit_group=0`, original ID, type, rarity and sourced enhancement attributes. Only the hull classes listed by that type can see a candidate. A source-linked augment dossier offers maximum attributes and provenance. Exclusive ship-specific modules are deliberately excluded because their group-ID join is not yet independently validated. Equipment artwork is **not fabricated** when this source lacks an authenticated icon path.
+
+Generic augments are candidate options, not an endorsement that one is best or that every individual ship can equip it. Unsupported hull categories continue to show no source-matched module. This release repairs data coverage but does not deliver validated combat-skill synergy or DPS rankings.
+
 ## Limitations and next milestones
 
 This source-backed preview must **not** be labeled best-in-slot, "S tier," or simulated. It cannot yet calculate actual damage, ammunition armor multipliers, splash, barrage synchronization, skill-trigger conditions, boss traits, true OpSi synergy, availability costs, duplicate-equipment restrictions, or player inventory. Some ships have no parseable or source-confirmed slot types; their cards honestly show unavailable rather than an invented loadout.
 
-- **v0.8.2:** build fully sourced skill/weapon effect and acquisition-cost models, documented mode-specific recommendations, comparison and validation.
-- **v0.8.3:** connect equipment selection to full Fleet Lab formations and ship-skill/gear interactions.
+- **v0.8.3:** build fully sourced skill/weapon effect and acquisition-cost models, documented mode-specific recommendations, comparison and validation.
+- **v0.8.4:** connect equipment selection to full Fleet Lab formations and ship-skill/gear interactions.
 - Future: equipment inventory / owned-only suggestions, historical snapshots and repeatable evaluations with uncertainty.
