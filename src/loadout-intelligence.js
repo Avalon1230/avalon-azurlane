@@ -36,7 +36,14 @@ const MODE_STAT_NAMES=Object.freeze({hit:'HIT',reload:'RLD',anti_siren:'Anti-Sir
 
 export function slotCategories(type) {
   if(typeof type!=='string'||type.length>160)return [];
-  const parts=type.normalize('NFKC').replace(/\u00a0/g,' ').split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
+  const original=type.normalize('NFKC').replace(/\u00a0/g,' ');
+  // Source shorthand "DD/CL Main Guns" means DD Main Guns *or* CL Main Guns.
+  // Apply the suffix to each abbreviated prefix before splitting on "/".
+  const expanded=original.replace(
+    /\b((?:DD|CL|CA|CB|BB|AA)(?:\s*\/\s*(?:DD|CL|CA|CB|BB|AA))+)[ \t]+((?:Main|Secondary)[ \t]+Guns)\b/gi,
+    (_whole,types,suffix)=>types.split(/\s*\/\s*/).map(t=>t+' '+suffix).join(' / ')
+  );
+  const parts=expanded.split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
   const result=[];
   for(const part of parts){
     // The wiki uses both "CB Guns" and "CB Main Guns" (likewise
