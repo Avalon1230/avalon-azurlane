@@ -4,13 +4,13 @@ _Last updated: 2026-11-11 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
-## WIP clarity refinement — 2026-11-12
+## WIP clarity refinement — delivered 2026-11-12
 
 - **User's explicit instruction:** label the ship-profile planner **Loadout Planner (WIP)**. Screenshots of Aquila's equipment drawer show long generic source/selection-audit essays that sound robotic and fail the actual question, “Why is this piece better than its alternatives?” Slaimuda's comparative reasoning and source-specific conditions remain the quality benchmark for AVALON's future independent system, NOT a license to copy old rankings.
-- **Correction branch:** `fix/loadout-wip-label`, based on `main` `72a686be4ad7ae7493425713a96016734879a972` (v0.8.6). UI changes: conspicuous WIP title/status, auto-filled/unreviewed labels, plain current item, accessible compatible options, and optional collapsed specialist notes where sourced evidence exists. Remove repeated boilerplate, selection-audit essay and speculative “Why this choice?” messaging from default drawer.
+- **Delivered:** [PR #24](https://github.com/Avalon1230/avalon-azurlane/pull/24) squash-merged as **`95062b8b836af0d9f7850c50d8af29db504737b3`**, based on v0.8.6 main `72a686be4ad7ae7493425713a96016734879a972`. UI changes: conspicuous WIP title/status, auto-filled/unreviewed labels, a brief current item summary, accessible compatible options, and optional collapsed specialist notes only where evidence exists. Repeated boilerplate and the selection-audit essay are removed from the default drawer; saved picks and sourced equipment eligibility are preserved.
 - **Scope boundary:** do not change user-selected gear, remove the six equipment positions, assert that current auto choices are best in slot, or claim a full combat scoring engine. Keep existing mode tabs, acquisition/stat inspection, candidate lists and independent original art.
 - **Next substantive work:** real data-driven ship+gear evaluation with source-corroborated mechanics (armor damage, cycle, aim/pattern, interception, skill activation, buffs, fleet timing, survivability), target/mode context, cost, rank and alternatives; only certify build choices after testing. See `docs/RECOMMENDATION_EVIDENCE.md`.
-- **Release gate:** PR review, Node unit suite, Chromium viewport suite and image HTTP smoke checks must pass; add actual merge and Pages verification when complete.
+- **Verified:** [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065637404) passed **197/197 unit tests, 35/35 seven-width Chromium viewport fixtures and 16/16 live HTTP image probes**. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065816329) and [GitHub Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065815815) succeeded for the merge SHA. This still does not certify all live-browser user interactions or combat performance.
 
 ## Current release: v0.8.6 delivered (2026-11-11)
 
