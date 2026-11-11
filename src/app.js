@@ -975,6 +975,14 @@ document.addEventListener('input', event => {
   restored?.focus();
   try { restored?.setSelectionRange(pos,pos); } catch { /* unsupported input selection */ }
 });
+// A franchise logo may be rate-limited by its independent host; retain the
+// original game portrait behind it rather than leaving a broken image tile.
+document.addEventListener('error', event => {
+  const image=event.target;
+  if(image instanceof HTMLImageElement && image.matches('.collab-series-brand img'))
+    image.closest('.collab-series-brand')?.remove();
+},true);
+
 document.addEventListener('dragstart', event => {
   if (state.page !== 'tiers' || TIER_BOARDS[state.tierBoard].readOnly) return;
   const item = event.target.closest('[data-tier-item]');
