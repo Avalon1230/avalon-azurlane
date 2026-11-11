@@ -156,7 +156,7 @@ export function renderLoadoutDecisionEvidence(model,slot){
       '<p class="loadout-evidence-caveat">Specialist observations, not automatically assigned best-in-slot items. Conditions must be checked against the ship and target.</p>'+
       '<ul>'+insights.map(({item,note})=>'<li><strong>'+E(item.name)+'</strong>'+
         (item.id===selected?.id?' · selected':' · alternative')+
-        '<p>'+E(note.evidence)+'</p><small>'+E(note.conditions)+' · '+sourceLink(note.source)+'</small></li>').join('')+
+        '<p>'+E(note.evidence)+'</p><p><strong>Trade-off / alternative:</strong> '+E(note.alternative)+'</p>'+'<small>'+E(note.conditions)+' · '+sourceLink(note.source)+'</small></li>').join('')+
       '</ul></section>':
       '<p class="loadout-evidence-caveat">No item-specific, independently evaluated recommendation is recorded for this slot and mission yet. Source compatibility alone cannot establish best-in-slot.</p>')+
     '</section>';
