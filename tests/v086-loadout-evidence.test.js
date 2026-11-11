@@ -126,6 +126,7 @@ test('unresearched slot drawer stays short and does not repeat robotic audit pan
   assert.doesNotMatch(html,/loadout-evidence/);
   assert.doesNotMatch(html,/loadout-picker-research/);
   assert.doesNotMatch(html,/Why this item appears/);
+  assert.doesNotMatch(html,/data-equip="fer-99901""/);
 });
 test('WIP label and research summary remain safe under untrusted names',()=>{
   const unsafe=gear('99999','<img src=x onerror=alert(1)>','Fighter',{});
