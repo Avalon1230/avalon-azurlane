@@ -2,11 +2,17 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.5 artwork and filter hotfix] - 2026-11-11
+
+- **Critical artwork fix:** The first v0.8.5 release requested the regular-equipment icon path `al.mrlar.dev/equips/<id>.webp` for augment IDs. This caused many missing images and some unrelated gun illustrations. Switched to the verified dedicated original-game [JforPlay spweapon archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon), with all 239 May 2026 source icon keys checked against actual repository filenames (including 12 aliases).
+- **Filters:** Search, Hull Class, and Rarity use a responsive grid with independently labeled dropdowns instead of compressed inline label/select controls.
+- **Regression coverage:** Real network HTTP/WebP checks on 16 icon samples; Chromium fixture viewport tests now include 360/390/560/768/1024/1280/1640px and assert the two filter controls do not collide. The initial v0.8.5 browser tests blocked all external image requests.
+- **Release gate:** CI and Pages deployment must complete before treating this hotfix as delivered.
 ## [0.8.5] - 2026-11-11
 
 ### Added
 - First-class **Augments** directory with 239 sourced modules and five October publisher-announced name-only entries, searchable by text, ID, compatible type and rarity, with progressive browsing.
-- Original in-game augment icons from the explicit source `icon` field and 12 exact filename aliases. Art is shared across loadout tiles, alternatives and details. The independent MrLar CDN is not publisher-hosted.
+- Original in-game augment icons from the explicit source `icon` field and 12 exact filename aliases. Art is shared across loadout tiles, alternatives and details. The first artwork URLs erroneously used the ordinary equipment icon collection; see hotfix above.
 
 ### Corrected
 - Escape and backdrop behavior in augment details; missing Progression navigation target; overstated Equipment Index search placeholder.
