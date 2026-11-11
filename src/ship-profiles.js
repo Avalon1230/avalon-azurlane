@@ -159,19 +159,35 @@ function statPanel(data, level, wiki=null) {
     '</div><div class="ship-stat-grid">'+vals+'</div><p class="ship-data-source">'+E(note)+'</p>','ship-profile-stats');
 }
 
-function gearPanel(data,wiki=null) {
-  const verified=Array.isArray(wiki?.slots)&&wiki.slots.length===3;
-  const slots=verified?wiki.slots:(Array.isArray(data.slots)?data.slots:[]);
-  const rows=slots.map((slot,i)=>
-    '<div class="ship-gear-slot"><span class="slot-number">'+(i+1)+'</span>'+
-    '<strong>'+E(slot.type||'Equipment slot')+'</strong>' +
-    (Number.isInteger(slot.maxMounts)?'<span class="ship-gear-mount">Max '+slot.maxMounts+'</span>':'')+
-    '<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span></div>').join('');
-  const aug=wiki?.augmentType?'<div class="ship-gear-slot"><span class="slot-number">+</span>'+
-    '<strong>Augment: '+E(wiki.augmentType)+'</strong></div>':'';
-  const body=rows||aug?'<div class="ship-gear-list">'+rows+aug+'</div>'+
-    '<p class="ship-data-source">'+(verified?'Koumakan Wiki · mount counts, unlock-aware types and efficiencies.':
-      'Lycoris equipment-slot categories; exact mount counts not verified.')+'</p>'
+function gearPanel(data,wiki=null,loadout=null) {
+  // This is the same already-resolved model used by the six-position planner.
+  // Never print raw Lycoris fallback labels beside conflicting game/wiki slots.
+  const resolved=loadout?.slots?.filter(slot=>slot.kind!=='augment')||[];
+  const wikiVerified=Array.isArray(wiki?.slots)&&wiki.slots.length===3;
+  const slots=resolved.length?resolved:(wikiVerified?wiki.slots:(Array.isArray(data.slots)?data.slots:[]));
+  const rows=slots.map((slot,i)=>{
+    const source=resolved.length
+      ?'<small class="ship-gear-origin">'+E(slot.provisional?'Potential slot · not ship-verified':slot.source||'Unverified')+'</small>'
+      :'';
+    const efficiency=Number.isFinite(slot.minEfficiency)||Number.isFinite(slot.maxEfficiency)
+      ?'<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span>':'';
+    return '<div class="ship-gear-slot"><span class="slot-number">'+(i+1)+'</span>'+
+      '<strong>'+E(slot.type||'Equipment slot')+source+'</strong>'+
+      (Number.isInteger(slot.maxMounts)?'<span class="ship-gear-mount">Max '+slot.maxMounts+'</span>':'')+
+      efficiency+'</div>';
+  }).join('');
+  const augmentSlot=loadout?.slots?.find(slot=>slot.kind==='augment');
+  const augment=augmentSlot
+    ?'<div class="ship-gear-slot"><span class="slot-number">+</span><strong>'+E(augmentSlot.type)+
+      '<small class="ship-gear-origin">'+E(augmentSlot.source)+'</small></strong></div>'
+    :wiki?.augmentType?'<div class="ship-gear-slot"><span class="slot-number">+</span>'+
+      '<strong>Augment: '+E(wiki.augmentType)+'</strong></div>':'';
+  const note=resolved.length
+    ?'Shared with loadout planner · exact-ID game/wiki slots take precedence; potential slots are labeled.'
+    :wikiVerified?'Koumakan Wiki · mount counts, unlock-aware types and efficiencies.'
+      :'Lycoris equipment-slot categories; exact mount counts not verified.';
+  const body=rows||augment?'<div class="ship-gear-list">'+rows+augment+'</div>'+
+    '<p class="ship-data-source">'+E(note)+'</p>'
     :'<p class="profile-unavailable">Equipment slot data unavailable.</p>';
   return profilePanel('Equipment slots',body,'ship-profile-gear');
 }
@@ -270,7 +286,7 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
-    statPanel(data,level,wiki)+gearPanel(data,wiki)+skillsPanel(data,wiki)+
+    statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki)+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data,wiki)+progressionPanel(data,wiki)+sourcePanel(data,ship,wiki)+
     '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
