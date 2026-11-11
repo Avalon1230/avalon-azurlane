@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.5] - 2026-11-11
+
+### Added
+- First-class **Augments** directory with 239 sourced modules and five October publisher-announced name-only entries, searchable by text, ID, compatible type and rarity, with progressive browsing.
+- Original in-game augment icons from the explicit source `icon` field and 12 exact filename aliases. Art is shared across loadout tiles, alternatives and details. The independent MrLar CDN is not publisher-hosted.
+
+### Corrected
+- Escape and backdrop behavior in augment details; missing Progression navigation target; overstated Equipment Index search placeholder.
+- Six additional published gear assessment instances are pinned to source equipment IDs and expected source titles/aliases. One newer Ta 152 review remains unpinned, so its icon is withheld instead of guessed.
+
+### Verification scope
+- Regression coverage for 239 source ID/icon mappings, all 12 source aliases, five announcement placeholders, directory/filters, dialog art, progression and source identity.
+- CI and Pages deployment are pending verification. Live CDN success, numerical battle optimization, full augment skill effects and current acquisition costs are not claimed.
+
 ## [0.8.4] - 2026-11-11
 
 ### Corrected
