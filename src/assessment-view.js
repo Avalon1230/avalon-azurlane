@@ -7,14 +7,29 @@ const E = escape;
 function tabs(boardId) {
   return Object.entries(TIER_BOARDS).map(([id,item])=>`<button type="button" class="tier-tab ${id===boardId?'active':''}" data-action="tier-board" data-board="${E(id)}" aria-pressed="${id===boardId}"><span>${E(item.icon)}</span>${E(item.title)}</button>`).join('');
 }
+export function matchAssessmentCatalogItem(item,catalog) {
+  if(!Array.isArray(catalog))return null;
+  return catalog.find(x=>x.name===item.name && (item.board!=='equipment'||!item.sourceId||
+    (String(x.sourceId)===String(item.sourceId)&&x.source==='fernando')))||null;
+}
 function itemCard(item,catalog) {
   const mode=MODES.find(m=>m.id===item.mode);
-  const matched=catalog.find(x=>x.name===item.name)||{name:item.name};
-  const art=imageMarkup(matched,item.board==='equipment'?'equipment':'ship','asset-assessment');
+  const matched=matchAssessmentCatalogItem(item,catalog);
+  const art=matched?imageMarkup(matched,item.board==='equipment'?'equipment':'ship','asset-assessment'):
+    '<span class="assessment-unverified-art" aria-hidden="true">?</span>';
+  const configuration=item.configurations?.length?
+    '<div class="assessment-configs"><strong>Skill-dependent configurations</strong>'+
+      item.configurations.map(x=>'<p><b>'+E(x.name)+':</b> '+E(x.condition)+'</p>').join('')+
+    '<small>These are equipment-category conditions, not validated gear presets.</small></div>':'';
+  const identityNote=item.board==='equipment' && item.sourceId?
+    '<p class="assessment-identity-source">Exact source equipment ID: '+E(item.sourceId)+
+      (matched?' · title and ID matched':' · current catalog match unavailable')+'</p>':
+    item.board==='equipment'?'<p class="assessment-identity-source">Editorial title match only · source ID not pinned</p>':'';
   return `<article class="research-card avalon-assessment-card">
      <div class="research-card-top"><span class="research-grade grade-${E(item.grade.toLowerCase())}">${E(item.grade)}</span><span class="research-context">${E(mode?.name||item.mode)}</span></div>
      <div class="eyebrow">${E(item.role)}</div>
      <div class="assessment-identity">${art}<h3>${E(item.name)}</h3></div>
+     ${identityNote}${configuration}
      <p class="assessment-why"><strong>Why it earns ${E(item.grade)}:</strong> ${E(item.rationale)}</p>
      <p class="research-caveat"><strong>When not to pick it:</strong> ${E(item.caveat)}</p>
      ${item.alternatives.length?`<p class="assessment-alternatives"><strong>Other options:</strong> ${E(item.alternatives.join(', '))}</p>`:''}

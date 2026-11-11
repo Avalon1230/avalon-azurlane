@@ -1,6 +1,6 @@
 # Provenance, permissions, and data-quality policy
 
-## Current status — 2026-11-10
+## Current status — 2026-11-11
 
 ### v0.3.1 research-owned combat boards
 
@@ -10,7 +10,7 @@ Character boards (Waifu / Headpats) remain personal, subjective, and strictly se
 
 ### Historical v0.3 personal tier boards
 
-Ship Combat and Equipment now include **editable personal tier boards**, but **no published AVALON performance scores**. Rarity, hull and equipment-type data cannot by themselves establish reliable EX/S/A rankings. A validated tier assessment must cite its mode/scenario, measurements, assumptions, alternative builds and confidence. Waifu Favorites and Must Protect are wholly separate subjective lists and have no combat evidentiary value. Their eligibility catalogs are manually curated and incomplete; no automatic hull-based age/appearance classification is performed. No source character portraits are copied.
+**Historical description (superseded by v0.3.1):** Ship Combat and Equipment once had editable personal tier boards but no published AVALON performance scores. Rarity, hull and equipment-type data cannot by themselves establish reliable EX/S/A rankings. A validated tier assessment must cite its mode/scenario, measurements, assumptions, alternative builds and confidence. Waifu Favorites and Must Protect are wholly separate subjective lists and have no combat evidentiary value. Their eligibility catalogs are manually curated and incomplete; no automatic hull-based age/appearance classification is performed. No source character portraits are copied.
 
 
 
@@ -22,7 +22,7 @@ The source URLs appear in the app under **Sources** and each catalog entry links
 
 During a November 10, 2026 crawler-mediated web check, the requested Koumakan page `https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki` was indexed as **"Body is like."**, showing unrelated snippets resembling *Nineteen Eighty-Four* and *Brave New World*. A `/wiki/Musashi` fetch returned **"Tarians or the law of."** with similar unrelated prose; additional indexed paths show the same mismatch. These results can be old or otherwise crawler-specific. **The user reports the actual wiki works normally in their browser.** We do **not** know whether the mismatch originates in cached/indexed pages, a crawler-specific response, an intermediary, or another cause; we have **no evidence that the live wiki is compromised or down**.
 
-A separate GitHub Actions runner **has now validated machine-readable Koumakan API responses** using `/w/api.php`, including a Musashi wikitext read and page metadata for Musashi and Unicorn. HTML page requests from that runner returned 403; API reads returned 200. Automated **data ingestion** remains deferred until schema/template interpretation, respectful access rules, and applicable reuse permissions are reviewed. See [access findings](KOUMAKAN_ACCESS.md). **Direct user-facing wiki links remain allowed.** The separate `https://azur-lane.wiki` is a different fan-run wiki and should not be mislabeled as an official Koumakan mirror.
+A separate GitHub Actions runner **has now validated machine-readable Koumakan API responses** using `/w/api.php`, including a Musashi wikitext read and page metadata for Musashi and Unicorn. HTML page requests from that runner returned 403; API reads returned 200. Selective, exact GroupID-checked wiki **ship-profile facts** are now loaded in the browser (slot categories, available stats and other fields); this is not a complete audited wiki import. Broader ingestion still requires schema/template interpretation, respectful access rules, and applicable reuse permissions. See [access findings](KOUMAKAN_ACCESS.md). **Direct user-facing wiki links remain allowed.** The separate `https://azur-lane.wiki` is a different fan-run wiki and should not be mislabeled as an official Koumakan mirror.
 
 ### Source indexes used in v0.2 (at runtime only)
 
@@ -31,7 +31,7 @@ A separate GitHub Actions runner **has now validated machine-readable Koumakan A
 
 ## Data sources under consideration
 
-- **Koumakan Wiki:** primary target for game facts **after** a successful verification and license audit.
+- **Koumakan Wiki:** selectively used for GroupID-checked ship-profile facts; a broader, auditable, permission-reviewed import remains future work.
 - **Azur Lane EN patch notes:** release/update corroboration. The 2026 Gear Lab notes list the FW-190 G-3/R1 and Fairey Gannet additions: https://azurlane.yo-star.com/news/author/azur-lane/page/5/
 - **REGAL:** context-specific third-party expert interpretation; don't relabel as canonical facts: https://azur-lane-regal.suchiguma.com/
 - **Chapter 15 guide:** example of narrow game mode analysis (not site-wide defaults): https://suchiguma.github.io/guides/chapter-15/
@@ -50,9 +50,16 @@ Every imported factual record should declare:
 
 Any performance assessment additionally needs a mode/scenario, enemy context, loadout, test method, assumptions, uncertainty, and last-reviewed date. A popularity poll never constitutes a combat-performance measurement.
 
+## Current v0.8.4 evidence boundaries
+
+- The ship planner uses exact-ID dated game slot records, with verified wiki mount facts taking priority where available. The lower Equipment slots section displays that **same resolved model**, preserving each slot's source and flagging provisional slots.
+- Six filled positions represent **potentially compatible candidates**, not six independently evaluated recommendations. A saved user choice is labeled a **Personal pick**. No heuristic default is a validated best-in-slot ranking.
+- Aquila's profile skill condition controls the second aircraft-slot switch: **Fighter = healing/shielding**, **Dive Bomber = offensive preload/damage**. The older healer article cited by an editorial assessment states the opposite; the imported skill text takes precedence. Both configurations are described without assuming a particular optimized equipment item.
+- The META assessment for the Series 8 Mecklenburg gun names **Prototype Quadruple 305mm SKC39 Main Gun Mount** and binds its catalog image to exact Fernando equipment source ID **44320**. It is **not** the Triple 406mm/45 MK7. Other historic editorial assessments remain provisional and should not be mistaken for validated, ID-pinned tier optimization.
+
 ## Recommended next step
 
-Verify permissions for broader reuse and implement an auditable, pinned snapshot pipeline only when authorized. This release performs **optional direct browser reads of GitHub-hosted third-party indexes**, not unverified Koumakan wiki scraping. Add complete ship stats, enemy data, equipment recipes, and scenario testing before attempting evidence-based scoring.
+After verifying v0.8.4 CI and browser regression tests, continue source-identity validation, permission review and richer mechanical benchmarks only under a separate authorized milestone. External third-party indexes and selective wiki facts are read at runtime; raw source datasets and game art are not mirrored into this repository.
 
 ## v0.4 initial editorial reviews
 

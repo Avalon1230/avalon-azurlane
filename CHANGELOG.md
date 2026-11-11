@@ -2,6 +2,23 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.4] - 2026-11-11
+
+### Corrected
+- Aquila's assessment now follows her imported skill condition: **Fighter in aircraft slot two activates healing/shielding**, while **Dive Bomber activates preload/damage**. Both configurations are explicitly described, and a conflicting secondary guide is identified rather than treated as authoritative skill text.
+- Replaced a mislabeled MK7 equipment assessment with the **Prototype Quadruple 305mm SKC39 Main Gun Mount**, source equipment ID **44320**, for the Series 8 Mecklenburg gun. Its displayed icon is accepted only when the catalog name and exact source ID agree.
+- The lower ship **Equipment slots** section uses the same resolved source-backed slot model as the six-position planner, with source/provisional labels; stale Lycoris fallback names no longer contradict verified wiki/game slots.
+- Each filled gear tile distinguishes a **Compatible candidate** from a saved **Personal pick**, without claiming reviewed best-in-slot quality. This is not an equipment-optimization release.
+
+### Usability
+- Removed the 50-choice dead end in the equipment alternatives drawer. Search by item name, type, rarity or ID and progressively reveal every eligible option without leaving the ship and slot.
+- Constrained intrinsic grid widths and improved responsive ship profile, compact loadout, equipment filters and navigation at narrow widths. Desktop planner tiles gain width instead of forcing unreadable three-column names.
+- Refreshed outdated Sources, README and app text about selective GroupID-verified wiki facts and existing limitations.
+
+### Verification
+- Added targeted regression tests for Aquila, exact equipment identity, all 152 slot candidates, slot consistency, selection status and escaping.
+- Added a browser-based viewport smoke suite covering ship profiles, equipment filters and the alternatives drawer at **360, 390, 768, 1024 and 1280 px**. GitHub PR checks verify execution; no live Pages deployment is asserted here.
+
 ## [0.8.3] - 2026-11-11
 
 ### Fixed

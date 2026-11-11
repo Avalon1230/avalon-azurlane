@@ -15,3 +15,15 @@ jobs:
           node-version: '22'
       - run: npm run check
       - run: npm test
+  viewport:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.56.1
+      - run: google-chrome --version
+      - run: node scripts/viewport-smoke.mjs

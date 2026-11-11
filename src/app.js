@@ -43,7 +43,7 @@ const state = {
   page: 'overview', modeId: 'opsi', query: '', hull: 'all', category: 'all',
   shipNation:'all', gearNation:'all', gearHull:'all', shipVisibleCount:SHIP_ROSTER_BATCH_SIZE, shipRosterScrollY:0, gearVisibleCount:EQUIPMENT_ROSTER_BATCH_SIZE,
   shipSort:'rarity', shipDescending:true, shipRarity:'all', shipAdvancedOpen:false,
-  profileLoadoutMode:'general',profileGearId:null,profileAugmentId:null,profileLoadoutPicker:null,savedLoadouts:{}, gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
+  profileLoadoutMode:'general',profileGearId:null,profileAugmentId:null,profileLoadoutPicker:null,profileLoadoutPickerQuery:'',profileLoadoutVisibleCount:50,savedLoadouts:{}, gearSort:'rarity', gearDescending:true, gearRarity:'all', gearBroadType:'all', gearGroup:'type', gearAdvancedOpen:false, profileLevel:'level120',profileSkin:0,artViewerOpen:false,
   shipDetails:{status:'idle',data:null,error:''},
   equipmentAcquisition:{status:'idle',index:null,error:''},
   picker: null, pickerQuery: '', detail: null, workspaces: {}, pendingPlans: null, toastTimer: null,
@@ -356,7 +356,7 @@ function renderPicker() {
 }
 function renderSources() {
   return `${sectionHeading('Trust the trail, not the hype.', 'SOURCES & METHODOLOGY', 'Sources are explicit; the project does not convert popular opinions into verified performance figures.')}
-  ${sourceDisclosure()}<details class="method-disclosure"><summary>Wiki connectivity notes</summary><div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. Koumakan’s /w/api.php endpoint has returned valid page metadata and Musashi wikitext from GitHub Actions; automatic imports still await schema and reuse-permission review; see Sources documentation.</p></div></details>
+  ${sourceDisclosure()}<details class="method-disclosure"><summary>Wiki connectivity notes</summary><div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. Koumakan’s /w/api.php endpoint has returned valid page metadata and Musashi wikitext from GitHub Actions; GroupID-checked wiki facts now load selectively for ship profiles; this does not imply full wiki ingestion, reuse permission or a complete game mechanics model. See Sources documentation.</p></div></details>
   <div class="source-grid">${SOURCES.map(source => `<article class="source-card">${eyebrow(source.type)}<h3>${E(source.name)}</h3><p>${E(source.note)}</p>${link(source.url,'Open source')}</article>`).join('')}</div>
   <div class="method-card"><h2>Three different things. Never one misleading tier.</h2><div class="method-grid"><div><span class="method-num">01</span><h3>Game facts</h3><p>Observed or sourced mechanics with version, link, validation status, and licensing notes.</p></div><div><span class="method-num">02</span><h3>Community evidence</h3><p>Tests, guides and discussion with attribution, limitations, and scenario context.</p></div><div><span class="method-num">03</span><h3>AVALON analysis</h3><p>Independent calculations and judgment, labeled as inference with assumptions and uncertainty.</p></div></div><p class="doc-link">${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/SOURCES.md','Read the complete provenance policy')}</p></div>`;
 }
@@ -447,14 +447,14 @@ function openShipProfile(shipId) {
   state.page='ships';
   state.detail={kind:'ship',id:item.id,sourceId:String(item.sourceId||'')};
   state.profileSkin=0;state.profileLevel='level120';state.artViewerOpen=false;
-  state.profileLoadoutMode='general';state.profileGearId=null;state.profileAugmentId=null;state.profileLoadoutPicker=null;
+  state.profileLoadoutMode='general';state.profileGearId=null;state.profileAugmentId=null;state.profileLoadoutPicker=null;state.profileLoadoutPickerQuery='';state.profileLoadoutVisibleCount=50;
   if (state.detail.sourceId) history.pushState(null,'','#/ships/'+encodeURIComponent(state.detail.sourceId));
   render();
   window.scrollTo({top:0,behavior:'instant'});
   void loadShipProfileData();
 }
 function closeShipProfile() {
-  state.artViewerOpen=false;state.profileGearId=null;state.profileLoadoutPicker=null;
+  state.artViewerOpen=false;state.profileGearId=null;state.profileLoadoutPicker=null;state.profileLoadoutPickerQuery='';state.profileLoadoutVisibleCount=50;
   state.detail=null;
   history.pushState(null,'','#/ships');
   render();
@@ -523,7 +523,7 @@ function render() {
       wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel
     })+(state.profileGearId?renderDetails(state.profileGearId):'')+
       (loadoutModel&&state.profileLoadoutPicker!==null
-        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker):'')+
+        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount}):'')+
       (loadoutModel&&state.profileAugmentId
         ?renderAugmentDetails(loadoutModel.slots.flatMap(slot=>slot.candidates)
           .find(item=>item.id===state.profileAugmentId&&item.kind==='augment')):'');
@@ -654,7 +654,7 @@ function handleAction(target) {
   if (action === 'loadout-mode') {
     const next=target.dataset.mode;
     if(!LOADOUT_MODES.some(x=>x.id===next)||state.detail?.kind!=='ship')return;
-    state.profileLoadoutMode=next;state.profileGearId=null;state.profileAugmentId=null;state.profileLoadoutPicker=null;
+    state.profileLoadoutMode=next;state.profileGearId=null;state.profileAugmentId=null;state.profileLoadoutPicker=null;state.profileLoadoutPickerQuery='';state.profileLoadoutVisibleCount=50;
     render();return;
   }
   if (action === 'loadout-reset') {
@@ -671,11 +671,20 @@ function handleAction(target) {
     // Also show evidence for unknown auxiliary and augment positions; hiding
     // these would falsely imply they were verified or did not exist.
     if(!Number.isSafeInteger(index)||!model?.slots.find(x=>x.index===index))return;
-    state.profileLoadoutPicker=index;state.profileGearId=null;state.profileAugmentId=null;render();
+    state.profileLoadoutPicker=index;state.profileLoadoutPickerQuery='';state.profileLoadoutVisibleCount=50;state.profileGearId=null;state.profileAugmentId=null;render();
     document.querySelector('.loadout-picker-panel .icon-btn')?.focus();return;
   }
   if (action === 'loadout-close-alternatives') {
-    state.profileLoadoutPicker=null;render();return;
+    state.profileLoadoutPicker=null;state.profileLoadoutPickerQuery='';state.profileLoadoutVisibleCount=50;render();return;
+  }
+  if (action === 'loadout-more-alternatives') {
+    if(state.profileLoadoutPicker===null)return;
+    const previous=document.querySelector('.loadout-picker-panel .detail-scroll')?.scrollTop||0;
+    state.profileLoadoutVisibleCount+=50;
+    render();
+    const current=document.querySelector('.loadout-picker-panel .detail-scroll');
+    if(current)current.scrollTop=previous;
+    return;
   }
   if (action === 'loadout-select') {
     const index=Number(target.dataset.slot),equipId=target.dataset.equip;
@@ -891,6 +900,18 @@ document.addEventListener('change', event => {
 });
 document.addEventListener('input', event => {
   const id = event.target.id;
+  if (id==='loadout-choice-search' && state.profileLoadoutPicker!==null) {
+    const value=event.target.value,pos=event.target.selectionStart;
+    const scroll=event.target.closest('.detail-scroll')?.scrollTop||0;
+    state.profileLoadoutPickerQuery=value;state.profileLoadoutVisibleCount=50;
+    render();
+    const restored=document.getElementById(id);
+    restored?.focus();
+    try {restored?.setSelectionRange(pos,pos);} catch { /* unsupported input selection */ }
+    const pane=document.querySelector('.loadout-picker-panel .detail-scroll');
+    if(pane)pane.scrollTop=Math.max(0,Math.min(scroll,pane.scrollHeight-pane.clientHeight));
+    return;
+  }
   if (id!=='catalog-search' && id!=='picker-search' && id!=='tier-search') return;
   const value = event.target.value;
   const pos = event.target.selectionStart;

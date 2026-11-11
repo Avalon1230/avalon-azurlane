@@ -8,6 +8,7 @@ export const EVIDENCE_SOURCES = Object.freeze({
   chapter15: { title: 'Suchiguma · Chapter 15', url: 'https://suchiguma.github.io/guides/chapter-15/', type: 'Late campaign strategy guide' },
   chapter16: { title: 'Suchiguma · Chapter 16 Fleets', url: 'https://suchiguma.github.io/guides/chapter-16-fleets/', type: 'Late campaign strategy guide' },
   regal: { title: 'REGAL · Endgame ship evaluations', url: 'https://azur-lane-regal.suchiguma.com/', type: 'Third-party multi-mode relative ratings' },
+  skillData: { title: 'Lycoris-AzurAPI · imported skill descriptions', url: 'https://github.com/iujab/Lycoris-AzurAPI', type: 'Game-data skill text; verified against the ship profile' },
   healer: { title: 'AAYYY · Mob Fleet Healers', url: 'https://www.aayyy.com/azur-lane/healer-guide-best-support-ships-mob-fleets/', type: 'Secondary explanatory guide' },
   opsi: { title: 'OpSi fleet planning · player write-up', url: 'https://note.com/enrico_pucci/n/ncf3c85aa24dc?hl=en-US', type: 'Player experience, not a controlled benchmark' },
   bluestacks: { title: 'BlueStacks · Equipment Guide', url: 'https://www.bluestacks.com/blog/game-guides/azur-lane/al-equipment-guide-en.html', type: 'General equipment guidance' },
@@ -19,9 +20,9 @@ export const EVIDENCE_SOURCES = Object.freeze({
 // B: workable alternative; no grade when insufficient evidence.
 // Confidence is editorial evidence confidence, NOT statistical probability.
 const stamp = '2026-11-10';
-const pick = (key, board, name, mode, role, grade, confidence, rationale, caveat, sources, alternatives=[]) => ({
+const pick = (key, board, name, mode, role, grade, confidence, rationale, caveat, sources, alternatives=[], metadata={}) => ({
   key, board, name, mode, role, grade, confidence,
-  rationale, caveat, sources, alternatives, reviewedAt: stamp,
+  rationale, caveat, sources, alternatives, ...metadata, reviewedAt: stamp,
   assessmentType:'AVALON provisional synthesis'
 });
 export const AVALON_ASSESSMENTS = Object.freeze([
@@ -46,9 +47,13 @@ export const AVALON_ASSESSMENTS = Object.freeze([
   pick('volga-campaign','ships','Volga','campaign','Secondary healing with damage','A','high',
     'Adds targeted recovery while still contributing carrier damage, useful for stabilizing long boss/mob sequences.',
     'Does not replace every role of a full-party healer such as Unicorn (Retrofit).', ['chapter15','healer'],['Aquila','Cowpens']),
-  pick('aquila-campaign','ships','Aquila','campaign','Spot healing and shielding','A','moderate',
-    'Flexible dive-bomber configuration offers spot recovery and shielding with an opening attack.',
-    'Her heal configuration depends on the equipment slot; ensure the intended setup before relying on sustain.', ['healer'],['Volga','Cowpens']),
+  pick('aquila-campaign','ships','Aquila','campaign','Conditional healing / damage carrier','A','moderate',
+    'A fighter equipped in Aquila’s second aircraft slot enables healing and shielding; a dive bomber in that slot instead switches her to an offensive preload/damage configuration.',
+    'Check slot two before relying on sustain: a dive bomber such as AD-1 Skyraider is NOT the healing configuration. The secondary healer guide conflicts with the imported skill text; the skill condition takes precedence.', ['skillData','healer'],['Volga','Cowpens'],
+    {configurations:[
+      {name:'Support · healing/shielding',condition:'Equip a Fighter in aircraft slot 2.'},
+      {name:'Offense · preload/damage',condition:'Equip a Dive Bomber in aircraft slot 2.'}
+    ]}),
   pick('independence-campaign','ships','Independence (Retrofit)','campaign','Air damage and staggered coverage','A','moderate',
     'Staggered carrier pressure offers wave-clearing utility when a second dedicated healer is unnecessary.',
     'Lethal Chapter 15/16 progression can require more recovery than this offensive setup supplies.', ['chapter15'],['Volga','Cowpens']),
@@ -73,9 +78,9 @@ export const AVALON_ASSESSMENTS = Object.freeze([
   pick('la9-boss','equipment','Prototype Carrier-Based La-9','meta','Medium/heavy boss fighter','EX','moderate',
     'Research comparisons identify exceptionally strong anti-medium and anti-heavy boss damage among fighter-slot options.',
     'Not a generic air-defense recommendation; fighter slot and aircraft timing must be validated per carrier.', ['research'],['BF 109G']),
-  pick('mk7-boss','equipment','Prototype Triple 406mm/45 MK7 Main Gun Mount','meta','Medium/heavy boss BB gun','EX','high',
-    'Research Focus highlights the Series 8 Mecklenburg gun for medium/heavy boss damage and useful reload timing.',
-    'Not necessarily the best against light armor; an individual BB may need a faster gun to synchronize skills.', ['research','officialPR8'],['Champagne gun']),
+  pick('mecklenburg305-boss','equipment','Prototype Quadruple 305mm SKC39 Main Gun Mount','meta','Series 8 Mecklenburg BB gun · medium/heavy bosses','EX','moderate',
+    'Research Focus discusses the Series 8 Mecklenburg 305mm quadruple gun for medium/heavy boss damage and firing-cycle considerations. This is not the Eagle Union Triple 406mm/45 MK7.',
+    'This is a conditional research-guide assessment, not a measured universal best-in-slot. Target armor, reload timing and the battleship’s skills may favor another gun.', ['research','officialPR8'],['Champagne gun'],{sourceId:'44320'}),
   pick('ta152-boss','equipment','Carrier-Based Ta 152 C-1/R14','meta','Medium/heavy boss dive bomber','S','moderate',
     'Research Focus describes this PR9 dive bomber as a leading option against medium and heavy boss armor.',
     'Use-case specificity matters: do not extrapolate to light armor or fleet air interception.', ['research'],['Tenrai']),
@@ -112,6 +117,8 @@ export function validateAssessments(records=AVALON_ASSESSMENTS) {
     if(!(r.grade in GRADE_ORDER))errors.push('Invalid grade '+r.key);
     if(!['high','moderate','low'].includes(r.confidence))errors.push('Invalid confidence '+r.key);
     if(!Array.isArray(r.sources) || !r.sources.length || r.sources.some(id=>!EVIDENCE_SOURCES[id]))errors.push('Missing source '+r.key);
+    if(r.sourceId!==undefined && (r.board!=='equipment'||!/^[0-9]{2,8}$/.test(String(r.sourceId))))errors.push('Invalid source equipment identity '+r.key);
+    if(r.configurations!==undefined && (!Array.isArray(r.configurations)||r.configurations.some(x=>!x.name||!x.condition)))errors.push('Invalid configuration '+r.key);
     if(!r.name||!r.role||!r.rationale||!r.caveat||!/^\d{4}-\d\d-\d\d$/.test(r.reviewedAt))errors.push('Incomplete assessment '+r.key);
   }
   return errors;
