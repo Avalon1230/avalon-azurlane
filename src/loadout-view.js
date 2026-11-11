@@ -66,7 +66,7 @@ export function renderLoadoutPanel(model) {
     '<p class="loadout-skill-conditional"><strong>Aquila · slot 2 skill switch:</strong> Fighter = healing/shielding; Dive Bomber = offensive preload/damage. '+
     'The displayed item is only a compatibility candidate, not a selected healer preset. '+
     (!['Fighter','Dive Bomber'].every(type=>aquilaSecond.categories.includes(type))?
-      'Both configurations are not independently confirmed by the current slot feed; check her in-game slot.':'Choose the required type in Why & alternatives.')+
+      'Both configurations are not independently confirmed by the current slot feed; check her in-game slot.':'Choose the appropriate type under Compatible options.')+
     '</p>':'';
   return '<section class="ship-loadout-panel ship-loadout-compact" id="ship-profile-loadout" aria-labelledby="ship-loadout-title">'+
     '<div class="loadout-heading"><div><span class="eyebrow">AVALON TACTICAL INTELLIGENCE</span>'+
@@ -76,9 +76,9 @@ export function renderLoadoutPanel(model) {
     aquilaAdvice+
     '<div class="loadout-slots loadout-compact-grid" role="group" aria-label="Ship equipment positions">'+tiles+'</div>'+
     '<p class="loadout-brief">'+E(model.description)+'</p>'+
-    '<div class="loadout-footer"><span>Auto-filled examples · not recommended builds</span>'+
+    '<div class="loadout-footer"><span>Equipment evaluation pending</span>'+
       '<button type="button" class="loadout-reset" data-action="loadout-reset">Reset my picks</button></div>'+
-    '<p class="loadout-compact-disclaimer">Slot compatibility is provisional. Use Compatible options to inspect other gear; performance recommendations are still in development.</p>'+
+
     '</section>';
 }
 export function filteredLoadoutCandidates(slot,query='') {
