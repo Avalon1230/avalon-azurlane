@@ -88,6 +88,7 @@ test('loadout alternatives integrate reasoning, preserve actual options and esca
   assert.match(html,/Why this item appears/);
   assert.match(html,/Selection audit/);
   assert.match(html,/Research-informed options in this eligible pool/);
+  assert.match(html,/Trade-off \/ alternative:/);
   assert.match(html,/data-action="loadout-select"/);
   assert.match(html,/&lt;img src=x onerror=alert\(1\)&gt;/);
   assert.doesNotMatch(html,/<img src=x onerror/);
