@@ -4,6 +4,8 @@ import {chromium} from 'playwright';
 import {renderShipProfile} from '../src/ship-profiles.js';
 import {renderEquipmentIndex} from '../src/equipment-index.js';
 import {renderLoadoutAlternatives} from '../src/loadout-view.js';
+import {renderAugmentIndex} from '../src/augment-index.js';
+import {allAugmentRecords} from '../src/augment-manifest.js';
 
 const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
 const ship={id:'lyc-60701',sourceId:'60701',name:'Aquila',hull:'CV',nation:'Sardegna Empire',rarity:'Super Rare'};
@@ -33,6 +35,7 @@ const profile=renderShipProfile({ship,data:details,loadoutModel:loadout,artworkS
 const equipment=renderEquipmentIndex({records:options.slice(0,32),advancedOpen:true,renderCard:
   row=>'<article class="equipment-roster-tile"><strong>'+row.name+'</strong></article>'});
 const alternatives=renderLoadoutAlternatives(loadout,3);
+const augments=renderAugmentIndex({records:allAugmentRecords()});
 function shell(content){
   return '<!doctype html><html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<style>'+css+'</style></head><body><div class="app-shell">'+
@@ -49,6 +52,7 @@ try{
     for(const [label,markup,selectors] of [
       ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav']],
       ['equipment index',equipment,['#catalog-search','.equipment-advanced-toggle','.equipment-category-tab','#equipment-hull-select']],
+      ['augment directory',augments,['#augment-search','#augment-type-filter','.augment-tile','.augment-load-more']],
       ['slot alternatives',profile+alternatives,['#loadout-choice-search','.loadout-more-choices','.loadout-choice-inspect','.picker-footer button']]
     ]){
       await page.setContent(shell(markup),{waitUntil:'domcontentloaded'});
@@ -61,7 +65,12 @@ try{
           const r=el.getBoundingClientRect();
           return {selector,left:r.left,right:r.right,width:r.width};
         });
-        return {viewport,doc,controls};
+        const overflowing=[...document.querySelectorAll('body *')]
+          .map(el=>({el,rect:el.getBoundingClientRect()}))
+          .filter(({rect})=>rect.right>viewport+1||rect.left< -1)
+          .slice(0,12).map(({el,rect})=>({tag:el.tagName,cls:el.className?.toString().slice(0,70),
+            left:Math.round(rect.left*10)/10,right:Math.round(rect.right*10)/10,scrollWidth:el.scrollWidth}));
+        return {viewport,doc,controls,overflowing};
       },selectors);
       assert.ok(measurements.doc<=measurements.viewport+1,
         width+'px '+label+' horizontal overflow: '+JSON.stringify(measurements));

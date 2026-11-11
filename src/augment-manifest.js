@@ -313,3 +313,14 @@ export function candidateAugmentsForShip({shipId=null,hullId=null}={}){
 export function augmentHullIds(typeCode){
   return AUGMENT_HULLS[typeCode]?.slice()||[];
 }
+
+/** Browseable augments include 239 source records plus five name-only
+ * October 2026 publisher announcements. Announced items must never gain
+ * invented internal item IDs, icons, stats or craft requirements.
+ */
+export function allAugmentRecords(){
+  return [
+    ...Object.keys(AUGMENTS).map(augmentRecord),
+    ...Object.keys(OFFICIAL_AUGMENTS).map(announcedAugmentForShip)
+  ];
+}

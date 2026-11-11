@@ -277,17 +277,18 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       '</div></div>';
   }
   const wiki=wikiFacts && String(wikiFacts.sourceId)===String(data.id)?wikiFacts:null;
+  const progression=progressionPanel(data,wiki);
   const actions='<div class="ship-profile-toolbar" role="group" aria-label="Ship profile actions">' + back +
     (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
     '</div>';
   return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki,loadoutModel)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [...(loadoutModel?[['Loadout','#ship-profile-loadout']]:[]),
-      ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],['Progression','#ship-profile-progress'],['Acquisition','#ship-profile-acquire']]
+      ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],...(progression?[['Progression','#ship-profile-progress']]:[]),['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
     statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki)+
     '</div><div class="ship-profile-side">'+
-    acquisitionPanel(data,wiki)+progressionPanel(data,wiki)+sourcePanel(data,ship,wiki)+
+    acquisitionPanel(data,wiki)+progression+sourcePanel(data,ship,wiki)+
     '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
 }

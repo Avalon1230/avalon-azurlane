@@ -9,8 +9,14 @@ function tabs(boardId) {
 }
 export function matchAssessmentCatalogItem(item,catalog) {
   if(!Array.isArray(catalog))return null;
-  return catalog.find(x=>x.name===item.name && (item.board!=='equipment'||!item.sourceId||
-    (String(x.sourceId)===String(item.sourceId)&&x.source==='fernando')))||null;
+  if(item.board==='equipment'){
+    // Never display an equipment icon from an unpinned fuzzy title match.
+    if(!item.sourceId)return null;
+    const expected=[item.name,item.sourceName].filter(Boolean);
+    return catalog.find(x=>x.source==='fernando'&&String(x.sourceId)===String(item.sourceId)&&
+      expected.includes(x.name))||null;
+  }
+  return catalog.find(x=>x.name===item.name)||null;
 }
 function itemCard(item,catalog) {
   const mode=MODES.find(m=>m.id===item.mode);
@@ -23,8 +29,8 @@ function itemCard(item,catalog) {
     '<small>These are equipment-category conditions, not validated gear presets.</small></div>':'';
   const identityNote=item.board==='equipment' && item.sourceId?
     '<p class="assessment-identity-source">Exact source equipment ID: '+E(item.sourceId)+
-      (matched?' · title and ID matched':' · current catalog match unavailable')+'</p>':
-    item.board==='equipment'?'<p class="assessment-identity-source">Editorial title match only · source ID not pinned</p>':'';
+      (matched?' · verified ID and source title/alias':' · current catalog match unavailable')+'</p>':
+    item.board==='equipment'?'<p class="assessment-identity-source">Exact source ID not verified · artwork withheld rather than guessed</p>':'';
   return `<article class="research-card avalon-assessment-card">
      <div class="research-card-top"><span class="research-grade grade-${E(item.grade.toLowerCase())}">${E(item.grade)}</span><span class="research-context">${E(mode?.name||item.mode)}</span></div>
      <div class="eyebrow">${E(item.role)}</div>

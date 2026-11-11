@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.8.4 correctness and responsive interface (released)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
+> **Project status:** **v0.8.5 augment integrity and browsable directory (candidate; CI/deployment pending)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -45,6 +45,12 @@ npm test
 For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
 
 **Not implemented yet:** a complete verified game data model, comprehensive Koumakan wiki import, authoritative skill calculations, complete/current acquisition and crafting routes, reproducible damage/tier scores, numerical fleet optimization and validated optimal gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
+
+## Original augment icons and directory (v0.8.5)
+
+The dedicated **Augments** section provides 239 exact-ID source records and five October 2026 publisher-announced names, with name/ID, hull-type and rarity filters. Original icons are linked from the source `icon` field through the independent MrLar asset CDN, including all 12 shared-icon filename aliases; announced-only names lack verified item IDs/art and retain clear placeholders. The same art is used in ship loadouts, alternative choosers and augment dossiers. This validates source identity, **not** CDN availability or optimized builds.
+
+Equipment assessment artwork requires numeric source ID and an expected source title or verified alias. The release also fixes augment-dossier Escape/backdrop behavior, missing Progression anchors and the equipment search placeholder. Gear optimization, skill-effect simulation and current full acquisition costs remain future work.
 
 ## Full ship and equipment catalogs (v0.8.4)
 

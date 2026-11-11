@@ -78,7 +78,7 @@ export function renderEquipmentIndex({records,query='',nation='all',hull='all',
   return '<div id="catalog-start" class="equipment-index">'+
     '<div class="equipment-compact-toolbar">'+
       '<div class="equipment-search-row"><label class="search-wrap"><span aria-hidden="true">⌕</span>'+
-      '<input id="catalog-search" type="search" value="'+E(query)+'" placeholder="Search equipment, effects, names…" aria-label="Search all equipment" autocomplete="off"></label>'+
+      '<input id="catalog-search" type="search" value="'+E(query)+'" placeholder="Search equipment names, types, hulls…" aria-label="Search all equipment" autocomplete="off"></label>'+
       '<button type="button" class="equipment-advanced-toggle outline-btn compact'+(count?' has-active-filters':'')+
       '" data-action="equipment-toggle-filters" aria-expanded="'+Boolean(advancedOpen)+'" aria-controls="equipment-advanced-filters">'+
       '⚙ Filters'+(count?' <span class="equipment-filter-count">'+count+'</span>':'')+'</button></div>'+

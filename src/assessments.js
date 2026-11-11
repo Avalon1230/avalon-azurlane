@@ -77,7 +77,7 @@ export const AVALON_ASSESSMENTS = Object.freeze([
     'Some Siren boss modifiers punish healing: switch to a non-healing boss fleet when necessary.', ['opsi','healer'],['Aquila']),
   pick('la9-boss','equipment','Prototype Carrier-Based La-9','meta','Medium/heavy boss fighter','EX','moderate',
     'Research comparisons identify exceptionally strong anti-medium and anti-heavy boss damage among fighter-slot options.',
-    'Not a generic air-defense recommendation; fighter slot and aircraft timing must be validated per carrier.', ['research'],['BF 109G']),
+    'Not a generic air-defense recommendation; fighter slot and aircraft timing must be validated per carrier.', ['research'],['BF 109G'],{sourceId:'85600',sourceName:'Prototype Carrier-Based La-9'}),
   pick('mecklenburg305-boss','equipment','Prototype Quadruple 305mm SKC39 Main Gun Mount','meta','Series 8 Mecklenburg BB gun · medium/heavy bosses','EX','moderate',
     'Research Focus discusses the Series 8 Mecklenburg 305mm quadruple gun for medium/heavy boss damage and firing-cycle considerations. This is not the Eagle Union Triple 406mm/45 MK7.',
     'This is a conditional research-guide assessment, not a measured universal best-in-slot. Target armor, reload timing and the battleship’s skills may favor another gun.', ['research','officialPR8'],['Champagne gun'],{sourceId:'44320'}),
@@ -86,19 +86,19 @@ export const AVALON_ASSESSMENTS = Object.freeze([
     'Use-case specificity matters: do not extrapolate to light armor or fleet air interception.', ['research'],['Tenrai']),
   pick('tenrai-boss','equipment','Prototype Tenrai','meta','Heavy boss dive bomber / campaign flexibility','A','moderate',
     'Research guidance retains Tenrai as a strong PR4 gear option for campaign and heavy bosses.',
-    'Newer Ta 152 may be preferable for medium/heavy single-target bossing.', ['research'],['Carrier-Based Ta 152 C-1/R14']),
+    'Newer Ta 152 may be preferable for medium/heavy single-target bossing.', ['research'],['Carrier-Based Ta 152 C-1/R14'],{sourceId:'39340',sourceName:'Prototype Tenrai'}),
   pick('saiun-boss','equipment','Saiun (Kai)','meta','Converging torpedo bomber','A','moderate',
     'An expert research guide highlights Saiun among relevant converging torpedo bomber options for boss fights.',
-    'Converging torpedoes demand appropriate target movement, armor and launch timing.', ['research'],['Prototype VIT-2 (VK-107)']),
+    'Converging torpedoes demand appropriate target movement, armor and launch timing.', ['research'],['Prototype VIT-2 (VK-107)'],{sourceId:'38300',sourceName:'Prototype Saiun Kai'}),
   pick('bf109-budget','equipment','Messerschmitt Bf 109G','meta','Budget boss fighter','B','moderate',
     'Research Focus identifies BF 109G as a useful earlier fighter before obtaining La-9 copies.',
-    'Significantly outclassed against medium/heavy armor once the specialized La-9 is available.', ['research'],['Prototype Carrier-Based La-9']),
+    'Significantly outclassed against medium/heavy armor once the specialized La-9 is available.', ['research'],['Prototype Carrier-Based La-9'],{sourceId:'47160',sourceName:'Prototype BF-109G'}),
   pick('rudder-campaign','equipment','Improved Hydraulic Rudder','campaign','Survival auxiliary','S','moderate',
     'A widely used evasion-oriented defensive auxiliary that can help frontline ships endure hard late-stage maps.',
-    'Defensive value varies with ship base stats and the specific threats; equipment positioning also matters.', ['bluestacks','chapter15'],['Repair Toolkit']),
+    'Defensive value varies with ship base stats and the specific threats; equipment positioning also matters.', ['bluestacks','chapter15'],['Repair Toolkit'],{sourceId:'1760',sourceName:'High Performance Hydraulic Steering Gear'}),
   pick('tenrai-campaign','equipment','Prototype Tenrai','campaign','Area / heavy target bombing','A','moderate',
     'Research guidance notes Tenrai remains relevant for campaign fleets, not only specialized boss setups.',
-    'Check interception needs and carrier slots; this is not a substitute for a defensive fighter.', ['research'],['Carrier-Based Ta 152 C-1/R14'])
+    'Check interception needs and carrier slots; this is not a substitute for a defensive fighter.', ['research'],['Carrier-Based Ta 152 C-1/R14'],{sourceId:'39340',sourceName:'Prototype Tenrai'})
 ]);
 
 export const GRADE_ORDER = Object.freeze({EX:0,S:1,A:2,B:3,C:4,D:5});
@@ -118,6 +118,7 @@ export function validateAssessments(records=AVALON_ASSESSMENTS) {
     if(!['high','moderate','low'].includes(r.confidence))errors.push('Invalid confidence '+r.key);
     if(!Array.isArray(r.sources) || !r.sources.length || r.sources.some(id=>!EVIDENCE_SOURCES[id]))errors.push('Missing source '+r.key);
     if(r.sourceId!==undefined && (r.board!=='equipment'||!/^[0-9]{2,8}$/.test(String(r.sourceId))))errors.push('Invalid source equipment identity '+r.key);
+    if(r.sourceName!==undefined && (typeof r.sourceName!=='string'||!r.sourceName.trim()))errors.push('Invalid exact-source alias '+r.key);
     if(r.configurations!==undefined && (!Array.isArray(r.configurations)||r.configurations.some(x=>!x.name||!x.condition)))errors.push('Invalid configuration '+r.key);
     if(!r.name||!r.role||!r.rationale||!r.caveat||!/^\d{4}-\d\d-\d\d$/.test(r.reviewedAt))errors.push('Incomplete assessment '+r.key);
   }

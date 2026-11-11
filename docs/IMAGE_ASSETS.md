@@ -1,6 +1,6 @@
 # Original Azur Lane artwork and equipment icons
 
-**AVALON v0.5.1 · November 10, 2026**
+**AVALON v0.8.5 · November 11, 2026**
 
 ## What is displayed
 
@@ -15,6 +15,11 @@ The image endpoints are fixed, trusted `raw.githubusercontent.com` repository pa
 
 The images are requested directly by the visitor's browser from the upstream community hosts, not downloaded, altered, or bundled in AVALON's repository. Each image is lazily loaded. Missing or blocked art falls back to the ship's hull or a gear glyph, with the item's name preserved.
 
+## Verified augment icon mapping (v0.8.5)
+
+The dated [AzurLaneData augment source](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/augments.json) has **239 records with 239 explicit `icon` keys**. Its [base equipment documentation](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/docs/equips/index.md) specifies original game-client art at `https://al.mrlar.dev/equips/<icon>.webp`. Source inspection found **12 records with shared/aliased icon filenames**; `src/augment-assets.js` retains exactly those mappings.
+
+This source asset path is hosted by an **independent community CDN**, not the game publisher. Audited icon-field and filename identities are not proof that every actual image request succeeds for every visitor. The app's existing image-error fallback preserves the readable ✦ icon if needed. Five October 2026 announcement-only augments have no verified internal item IDs/icons and always show unverified placeholders. No synthetic, guessed or borrowed ordinary equipment art is substituted.
 ## Complete equipment-icon mapping (v0.7.7)
 
 The 936-record `Fernando2603/AzurLane/equipment_icon.json` associates every equipment record ID with an exact original game-client icon. Crucially, **417 equipment record IDs intentionally point to another filename**, typically a shared icon for the same equipment line/rarity variant (for example, record `1020` uses `1000.png`, not a nonexistent `1020.png`). The old AVALON renderer incorrectly assembled every image URL from the record ID alone.
