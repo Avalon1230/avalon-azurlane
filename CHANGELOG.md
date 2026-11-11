@@ -9,6 +9,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Keeps specialist comparisons as optional collapsed, attributed research notes **only when they actually exist**, including situational conditions and trade-offs; unresearched equipment no longer gets a generic pseudo-justification.
 - Preserves existing saved picks, available equipment, legality filters, ship-specific sourced slot types, augments and 50-at-a-time browsing. Does not assert any new best-in-slot rankings or alter the equipment selection heuristics.
 - Adds regression tests for WIP labels, concise drawer, researched/unresearched states and escaping, plus existing viewport/asset CI checks.
+- [PR #24](https://github.com/Avalon1230/avalon-azurlane/pull/24) merged as `95062b8b`. [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065637404) passed **197/197 Node tests, 35/35 viewport fixtures and 16/16 WebP image probes**. [Merged-main checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065816329) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43065815815) passed. This is WIP transparency, **not** a recommendation engine.
 
 ## [0.8.6] - 2026-11-11
 
