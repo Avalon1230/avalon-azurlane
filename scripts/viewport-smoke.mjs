@@ -41,7 +41,7 @@ function shell(content){
     '<div class="workspace"><header class="topbar"><div class="breadcrumb"><span>PROJECT AVALON</span><strong>Ship Index</strong></div></header>'+
     '<main id="app-content" class="page">'+content+'</main></div></div></body></html>';
 }
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true,channel:'chrome'});
 try{
   for(const width of [360,390,768,1024,1280]){
     const page=await browser.newPage({viewport:{width,height:800},deviceScaleFactor:1});
