@@ -956,3 +956,37 @@
   .ship-profile-overview .ship-profile-cover{flex:0 0 100px;width:100px;height:145px;min-height:145px;max-height:145px}
   .ship-profile-overview{flex-direction:row}
 }
+
+
+/* v0.8.5 — first-class, source-linked original Augment Modules. */
+.augment-index{min-width:0;max-width:100%}
+.augment-intro{border:1px solid #355a72;border-radius:11px;padding:17px 20px;background:#102b41;color:#e9f8ff;margin-bottom:16px}
+.augment-intro strong{font-size:16px}
+.augment-intro p{font-size:12px;color:#b5cfde;line-height:1.6;margin:7px 0 0}
+.augment-toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin:12px 0 16px}
+.augment-toolbar .search-wrap{flex:1 1 240px;min-width:0}
+.augment-toolbar .select-wrap{flex:0 1 190px;min-width:150px}
+.augment-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,167px),1fr));gap:12px;align-items:stretch}
+.augment-tile{display:flex;flex-direction:column;gap:6px;align-items:center;min-width:0;padding:13px 10px;border:1px solid #40637d;border-radius:10px;background:linear-gradient(150deg,#142f47,#101e32);color:#eaf7ff;text-align:center;cursor:pointer}
+.augment-tile:hover,.augment-tile:focus-visible{border-color:#9bceec;background:#1d4261;outline-offset:2px}
+.augment-tile .augment-art{display:grid;place-items:center;width:100%;min-height:91px}
+.augment-tile .asset-media{width:83px;height:83px;max-width:100%;background:#26354e;border-radius:9px}
+.augment-tile .asset-img{object-fit:contain}
+.augment-tile strong{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+.augment-tile small{font-size:10px;color:#9ebbd1;line-height:1.4;overflow-wrap:anywhere}
+.augment-tile .augment-rarity{font-size:10px;font-weight:800;color:#edd69f}
+.augment-tile.augment-announced{border-style:dashed}
+.augment-load-more{width:100%;min-height:42px;margin:17px 0}
+.augment-inspection-art{display:grid;place-items:center;min-height:125px}
+.augment-inspection-art .asset-media{width:116px;height:116px;border-radius:12px;background:#273149}
+.augment-inspection-art .asset-img{object-fit:contain}
+.loadout-compact-slot.augment .augment-image{max-width:43px;height:43px;min-width:0}
+.loadout-compact-slot.augment .augment-image .asset-fallback{color:#d8b1f7}
+.loadout-choice-inspect .augment-image{flex:0 0 43px;width:43px;height:43px}
+@media(max-width:480px){
+  .augment-toolbar .search-wrap{flex-basis:100%}
+  .augment-toolbar .select-wrap{flex:1 1 140px}
+  .augment-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .augment-tile{padding:9px 6px}
+  .loadout-compact-slot.augment .augment-image{max-width:36px;height:36px}
+}
