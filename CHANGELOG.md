@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.2] - 2026-11-11
+
+### Fixed
+- Resolved a **roster-wide** loadout parsing issue: Koumakan Wiki uses labels such as `CB Main Guns`, `DD Main Guns`, `AA Main Guns`, and compressed `DD/CL Main Guns` that previously failed AVALON's narrow slot alias matcher. The shared parser now recognizes these documented equivalents; invalid wiki types fall back to valid source categories per individual slot rather than blanking out the whole profile.
+- For the standard two auxiliary positions lacking per-ship details, expose two distinct, potential hull/category-matched candidates rather than leaving every position empty. These are prominently marked **Potential · verify**, are not claimed ship-legal or combat-optimal, and ship-specific exceptions/duplicate bans still require research.
+- Introduced a separate, source-linked set of 24 **generic craftable augments** from the dated May 2, 2026 `AzurLaneData/data/augments.json` snapshot. Show a tentative generic augment where its source type permits the ship's hull, with a dedicated source/maximum-stat dossier, alternatives, and optional saved personal choice. No ship-exclusive augments, fake equipment icons or inferred augment effects are added.
+- Preserve truly unavailable or unsupported positions as unverified, including ship types with no documented generic augment.
+- Existing equipment inspection, acquisition, general/boss/mobbing/OpSi modes, original portrait and artwork remain unchanged.
+
+### Tests
+- Regression tests for diverse main-gun naming variants, per-slot Lycoris fallback, distinct tentative auxiliaries, DD/BB/CV/SS examples, validated generic augments and source/attribute disclosure.
+
 ## [0.8.1] - 2026-11-11
 
 ### Changed
