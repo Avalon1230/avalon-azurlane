@@ -1,4 +1,4 @@
-# AVALON Tactical Loadout Intelligence — v0.8.1
+# AVALON Tactical Loadout Intelligence — v0.8.2
 
 ## Objective
 
@@ -34,17 +34,35 @@ The loadout panel explicitly says when no mode-specific advantage can be verifie
 - Reset clears personal choices for the current ship/mode only. No user configuration is sent to a server.
 - A validated wiki augment *type* may be displayed, but an augment recommendation remains unverified until its own eligibility and effect data are integrated.
 
-## Six-position compact planner (v0.8.1)
+## Six-position compact planner (v0.8.1; revised v0.8.2)
 
 - The normal layout is **three main weapon/aircraft positions, two auxiliary positions, and one augment position**. The planner uses a responsive three-column tile grid instead of long vertical cards. The fixed identity portrait and separate official artwork panel remain untouched.
 - The **first three slots** are the original exact GroupID-matched wiki weapon mounts or detailed Lycoris categories where available. Missing source records show empty unverified positions, not fabricated weapons.
-- When detailed ship data explicitly supplies auxiliary/extra slots, preserve those source entries, including exceptional ships with more than two auxiliary positions. If it does not, show two **provisional** auxiliary positions derived from the normal equipment layout. Do **not** treat them as ship-confirmed legality; they start empty instead of automatically equipping top-rarity items.
+- The dated game-slot manifest confirms both auxiliary equipment positions for 852 indexed ships. Newer ships without the record retain **provisional** auxiliary positions; source/hull-compatible items are surfaced as **planning candidates** only. They must not be mistaken for tested or individually legal loadouts.
 - A provisional auxiliary may expose equipment items with source category Auxiliary and source-recorded *potential* hull compatibility. Selecting one creates a **personal tentative choice**, not an independently legal or optimum loadout. Item-level exclusions and duplicate-group restrictions require further source integration.
-- The **augment position** always remains separate. An exact wiki augment type may be displayed as a sourced type label only; **there is no augment item selected**, even if other source equipment happens to share icon/name attributes. Unknown types remain unverified.
+- The **augment position** remains separate: exact-ship exclusive modules or general class-compatible modules from the dated augment source may be selected. The source's published hull type/ship ID is required; never display a Fernando equipment icon as an augment icon. Missing modules remain unverified.
 - Click selected gear to open the already-established equipment dossier (stats and acquisition). Click **Why & alternatives** on any slot to open the detailed reasoning, source/efficiency metadata and source-matched candidate list. This includes unresolved augment and auxiliary slots, so the user can see what remains unverified.
 - The General, Boss, Mobbing and OpSi modes and per-ship/per-mode manual picks remain unchanged. No calculated DPS, best-in-slot status, or verified encounter mechanics are claimed by this layout change.
 
 The term **six-position** refers to the standard UI layout, not a universally verified count for every ship. Some repair/special ships have documented exceptions. AVALON must prefer exact source slots to a generic pattern.
+
+## Roster-wide slot and augment coverage (v0.8.2)
+
+AVALON's older source dictionary failed to interpret **1,582 of 2,682** slot labels in Lycoris's 894-ship detailed record, even when the equipment type was known. The shared matcher now covers all **13 distinct Lycoris labels**, including `Artillery (Pocket Battleship)`, `Artillery (Destroyer)`, `Torpedo (Submarine)`, and `Reconnaissance`, and understands verified wiki labels such as `CB Main Guns`, `DD Main Guns` and `Fighters / Dive Bombers (LB1)`. Slot-matching terms are explicit; an unknown string does not silently become a guessed type.
+
+The source-matched regular slot model is now:
+1. Check the ship's exact GroupID and parseable wiki mount type (when verified), falling back per weapon slot to Lycoris labels and then the dated game slot snapshot.
+2. The compact game snapshot `src/game-slot-manifest.js` is derived from [Linuxxy0/AzurLaneData 2026-05-02 `data/ships.json`](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/ships.json). It stores **860 exact GroupID mappings** (internal collection ID, exact numeric hull ID, fully limit-broken equipment type arrays, efficiency and mounts); **852 overlap the current 894 ship roster**. Both auxiliary positions are explicitly described for those ships. No eight-megabyte source download is required on every profile opening.
+3. For ships absent from that dated snapshot, retain Lycoris's three supported combat slots and two provisional auxiliary positions. Exact Tempesta subclasses cannot be invented from Lycoris's generic `IX` label; equipment possibilities across IXS/IXV/IXM are shown with a **provisional** source-caveat only.
+4. Candidate gear must still match the Fernando equipment type/category, declared hull compatibility, and per-item forbidden-hull exclusions. For records with an exact game hull number, use that number instead of a broad guessed category. Auto-selected auxiliary candidates are kept distinct where alternatives exist. No item is certified optimal; class-level eligibility does not prove every unique equipment restriction.
+
+The augment position is now a separate, source-backed inventory:
+- `src/augment-manifest.js` contains **239** dated May 2, 2026 [AzurLaneData augment records](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/augments.json). An exclusive item's `limit_group` references the **internal ship collection ID**, not the display GroupID. Nonexclusive augments are eligible by documented augment type/hull rules in the source's `types/augments.d.ts` (further ship-specific restrictions still need validation).
+- Augment cards, options and details are intentionally separate from the original Fernando equipment icon API; without a verified augment image host, display a neutral ✦ mark, never a potentially unrelated weapon icon. The augment dossier shows source stats, craftability, rarity and dated provenance.
+- Five newer Tempesta augments are identified by the [publisher's October 21, 2026 announcement](https://azurlane.yo-star.com/news/2026/10/21/maintenance-notice-10-22-12-a-m-utc-7-2/), with name-only eligibility and **unverified** IDs, costs, stats and icons.
+- No compatible augment was verified for **Royal Fortune**, so that one position remains unfilled with an honest source status. Do not invent an augment simply to make the grid appear complete.
+
+**Roster-wide audit:** Across the 894 Lycoris ships and 936 Fernando equipment records, the updated source candidate logic populates **893 six-position ship loadouts**, or **5,363/5,364** total positions. This is a metadata/candidate-eligibility audit, not live browser image testing, guaranteed legality, possession, or optimal build verification. The four mission contexts remain distinct but are not numerical combat simulations.
 
 ## Limitations and next milestones
 
