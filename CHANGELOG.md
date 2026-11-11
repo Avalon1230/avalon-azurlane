@@ -17,7 +17,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 ### Verification
 - Added targeted regression tests for Aquila, exact equipment identity, all 152 slot candidates, slot consistency, selection status and escaping.
-- Added a browser-based viewport smoke suite covering ship profiles, equipment filters and the alternatives drawer at **360, 390, 768, 1024 and 1280 px**. GitHub PR checks verify execution; no live Pages deployment is asserted here.
+- Added a browser-based viewport smoke suite covering ship profiles, equipment filters and the alternatives drawer at **360, 390, 768, 1024 and 1280 px**. [PR checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043473875) and [merged-main checks](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043704582) passed: **178/178 unit tests, 15/15 five-viewport browser fixture checks**. [GitHub Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded for v0.8.4 commit `65bec712`. Full live-site and complete-catalog visual certification were not performed.
 
 ## [0.8.3] - 2026-11-11
 
