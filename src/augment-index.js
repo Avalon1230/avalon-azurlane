@@ -60,10 +60,10 @@ export function renderAugmentIndex({records=[],query='',type='all',rarity='all',
     '<p>'+AUGMENT_ICON_COUNT+' dated game records with original icon mappings; five October 2026 announcements are separate and lack verified artwork or stats. Source compatibility is not an effectiveness ranking.</p></div>'+
     '<div class="augment-toolbar"><label class="search-wrap"><span aria-hidden="true">⌕</span>'+
     '<input id="augment-search" type="search" value="'+E(query)+'" aria-label="Search augments" placeholder="Search augment name, ID, class…" autocomplete="off"></label>'+
-    '<label class="select-wrap">Hull class <select id="augment-type-filter" aria-label="Augment compatible class">'+
+    '<label class="augment-filter"><span>Hull class</span><select id="augment-type-filter" aria-label="Augment compatible class">'+
     option('all','All classes',type)+types.map(t=>option(t,AUGMENT_TYPE_NAMES[t],type)).join('')+
     '</select></label>'+
-    '<label class="select-wrap">Rarity <select id="augment-rarity-filter" aria-label="Augment rarity">'+
+    '<label class="augment-filter"><span>Rarity</span><select id="augment-rarity-filter" aria-label="Augment rarity">'+
     option('all','All rarities',rarity)+rarities.map(t=>option(t,t,rarity)).join('')+
     '</select></label>'+
     '<button type="button" class="outline-btn compact" data-action="augment-clear-filters">Clear</button></div>'+
