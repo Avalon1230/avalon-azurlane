@@ -889,3 +889,16 @@
   .loadout-tile-gear{grid-template-columns:1fr;justify-items:center}
   .loadout-tile-name{text-align:center;-webkit-line-clamp:2;line-clamp:2}
 }
+
+
+/* v0.8.2 — game-verified source candidates with separate augment identity. */
+.loadout-augment-symbol{font-size:29px;color:#d6aaf6;background:#292948;border-color:#9375b9}
+.augment-source-symbol{
+  display:grid;place-items:center;width:104px;height:104px;flex:0 0 auto;
+  border:1px solid #806aab;border-radius:13px;
+  margin:4px auto 12px;background:radial-gradient(circle at 40% 35%,#71598c,#232a46 75%);
+  color:#dfc5fb;font-size:57px
+}
+.loadout-compact-slot.provisional .loadout-tile-heading span:first-child:after{
+  content:" · check";color:#eecc90;font-size:8px
+}

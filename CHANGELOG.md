@@ -2,6 +2,21 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.2] - 2026-11-11
+
+### Fixed
+- **Roster-wide ship loadout completion:** corrected the shared matcher for all 13 Lycoris equipment-slot labels (especially `Artillery (Destroyer)`, `Artillery (Pocket Battleship)`, `Torpedo (Submarine)`, and `Reconnaissance`), plus Koumakan wiki variants such as `CB Main Guns`, `DD Main Guns`, and limit-break suffixes. Previously 1,582/2,682 primary slot labels were unrecognized by the old dictionary.
+- Added compact **exact numeric GroupID-matched five-slot metadata** from the May 2, 2026 AzurLaneData game snapshot: 860 verified source records, matching 852 of the current 894 indexed ships. These include both actual auxiliary slot types and exact hull codes, resolving Sailing Frigate subclasses in the dated source. The newer Lycoris roster continues to cover missing entries with conservative class-based fallbacks.
+- Default source-matched candidates now populate primary and auxiliary equipment positions without repeating the same automatic auxiliary item. Choices are **planning candidates, not proven legal for every ship or best-in-slot**; ambiguous newer Sailing Frigate classes stay marked provisional.
+
+### Added
+- Dedicated **augment candidate support** using 239 source augments, exact internal ship-collection-ID exclusives and generic hull-type eligibility, with separate sourced stats/crafting details instead of treating augment IDs as ordinary equipment icons.
+- Officially announced October 22, 2026 modules for five new Tempesta ships are surfaced by name and exact public ship GroupID, with item IDs, images and stats explicitly unverified because they postdate the May source snapshot.
+- Roster-wide audit over 894 ships and 936 source equipment records: **893/894 ships now have six populated loadout choices (5,363/5,364 positions)**. Royal Fortune's augment remains unfilled because an eligible module could not be verified. Coverage represents candidate selection, **not** combat optimization, current availability or guaranteed item-specific legality.
+
+### Tests
+- New source-snapshot identity and slot coverage checks, all original Lycoris descriptor variants, multi-faction/hull matchers (CB, CV, SSV, Tempesta), augment type and ship-exclusivity, markup safety, and sixth-position fidelity.
+
 ## [0.8.1] - 2026-11-11
 
 ### Changed

@@ -10,7 +10,7 @@ function slotLabel(slot) {
   return 'Weapon / aircraft';
 }
 function sourceStatus(slot) {
-  if(slot.kind==='augment')return slot.augmentType?'Type known · module pending':'Module unverified';
+  if(slot.kind==='augment')return slot.verified?'Source-matched module':slot.provisional?'Class-matched · verify':'Module unverified';
   if(slot.provisional)return 'Potential slot · verify';
   return slot.verified?'Source-matched':'Slot unverified';
 }
@@ -26,15 +26,21 @@ function renderCompactSlot(slot) {
     slot.kind==='augment'?(slot.augmentType?'Type: '+slot.augmentType:'Augment not verified')
       :slot.provisional?'Choose auxiliary':'No verified equipment'
   );
-  const image=picked?imageMarkup(picked,'equipment','asset-roster-equipment'):
-    '<span class="loadout-compact-placeholder" aria-hidden="true">'+
-    (slot.kind==='augment'?'✦':slot.kind==='auxiliary'?'+':'?')+'</span>';
-  const gear=picked?
-    '<button type="button" class="loadout-tile-gear" data-action="loadout-inspect" data-equip="'+E(picked.id)+
-    '" aria-label="Inspect '+E(name)+' equipment stats and acquisition">'+image+
-    '<span class="loadout-tile-name" title="'+E(name)+'">'+E(name)+'</span></button>':
-    '<button type="button" class="loadout-tile-gear loadout-tile-unverified" data-action="loadout-slot-info" data-slot="'+slot.index+
-    '" aria-label="Inspect '+E(label)+' eligibility and options">'+image+
+  // Augments are from a different source inventory; never pass their IDs
+  // through equipmentImageUrl or display an unrelated game equipment icon.
+  const isAugment=slot.kind==='augment';
+  const image=isAugment
+    ? '<span class="loadout-compact-placeholder loadout-augment-symbol" aria-hidden="true">✦</span>'
+    :picked?imageMarkup(picked,'equipment','asset-roster-equipment'):
+      '<span class="loadout-compact-placeholder" aria-hidden="true">'+
+      (slot.kind==='auxiliary'?'+':'?')+'</span>';
+  const action=picked?(isAugment?'loadout-augment-inspect':'loadout-inspect'):'loadout-slot-info';
+  const attribute=picked?(isAugment?' data-augment="'+E(picked.id)+'"':' data-equip="'+E(picked.id)+'"')
+    :' data-slot="'+slot.index+'"';
+  const gear='<button type="button" class="loadout-tile-gear'+(!picked?' loadout-tile-unverified':'')+
+    '" data-action="'+action+'"'+attribute+' aria-label="'+
+    E(picked?'Inspect '+name+(isAugment?' augment details':' equipment stats and acquisition'):
+      'Inspect '+label+' eligibility and options')+'">'+image+
     '<span class="loadout-tile-name" title="'+E(name)+'">'+E(name)+'</span></button>';
   return '<article class="loadout-compact-slot'+(slot.provisional?' provisional':'')+
     (slot.kind==='augment'?' augment':'')+'" data-loadout-slot="'+slot.index+'">'+
@@ -61,24 +67,31 @@ export function renderLoadoutPanel(model) {
     '<p class="loadout-brief">'+E(model.description)+'</p>'+
     '<div class="loadout-footer"><span>Potential gear · not combat-optimized</span>'+
       '<button type="button" class="loadout-reset" data-action="loadout-reset">Reset my picks</button></div>'+
-    '<p class="loadout-compact-disclaimer">Auxiliary positions without ship data are provisional; augments are not auto-selected. Tap Why & alternatives for eligibility and evidence.</p>'+
+    '<p class="loadout-compact-disclaimer">Slots and augments are source-based starting points, not optimized builds. Dated game data may not cover every ship. Tap Why & alternatives for eligibility and evidence.</p>'+
     '</section>';
 }
 export function renderLoadoutAlternatives(model,slotIndex) {
   const slot=model?.slots?.find(s=>s.index===slotIndex);
   if(!slot)return '';
-  const choices=slot.candidates.slice(0,50).map(item=>
-    '<div class="loadout-choice">'+
-      '<button type="button" class="loadout-choice-inspect" data-action="loadout-inspect" data-equip="'+E(item.id)+'"'+
-        ' aria-label="Inspect '+E(item.name)+'">'+imageMarkup(item,'equipment','asset-picker')+
+  const choices=slot.candidates.slice(0,50).map(item=>{
+    const aug=slot.kind==='augment';
+    const icon=aug?'<span class="loadout-compact-placeholder" aria-hidden="true">✦</span>':
+      imageMarkup(item,'equipment','asset-picker');
+    const scope=aug?(item.matchLevel==='ship-specific'?'Exclusive · exact ship ID':'General · class eligibility'):
+      item.category;
+    return '<div class="loadout-choice">'+
+      '<button type="button" class="loadout-choice-inspect" data-action="'+(aug?'loadout-augment-inspect':'loadout-inspect')+'"'+
+        (aug?' data-augment="'+E(item.id)+'"':' data-equip="'+E(item.id)+'"')+
+        ' aria-label="Inspect '+E(item.name)+'">'+icon+
         '<span><strong>'+E(item.name)+'</strong><small>'+E(item.rarity||'Unverified')+
-        ' · '+E(item.category)+'</small></span></button>'+
+        ' · '+E(scope)+'</small></span></button>'+
       '<button type="button" class="outline-btn compact" data-action="loadout-select"'+
         ' data-slot="'+slot.index+'" data-equip="'+E(item.id)+'"'+
         (slot.selected?.id===item.id?' disabled':'')+'>'+
-        (slot.selected?.id===item.id?'Selected':'Select')+'</button></div>').join('');
+        (slot.selected?.id===item.id?'Selected':'Select')+'</button></div>';
+  }).join('');
   const note=slot.kind==='augment'
-    ?'Augment modules require a dedicated verified module database and legality rules. A wiki augment type is not an individual module recommendation.'
+    ?'Modules are sourced from the May 2026 augment database. Exclusive modules match exact internal ship IDs; generic modules match documented hull classes. Their skill effects and combat optimality are not simulated.'
     :slot.provisional
       ?'Potential auxiliary position based on the common loadout layout. Ship-specific exceptions and duplicate-equipment restrictions have not been validated. Choose only after verifying your in-game slot.'
       :'The source records a slot category. Equipment choices match the documented type and potential hull restrictions; exceptions and combat effectiveness still require verification.';
@@ -90,7 +103,10 @@ export function renderLoadoutAlternatives(model,slotIndex) {
         '<section class="loadout-detail-reason"><h3>Why this choice?</h3>'+
           '<p>'+E(slot.explanation)+'</p><small>'+E(slotNote(slot))+'</small>'+
           '<p>'+E(note)+'</p></section>'+
-        (slot.selected?'<button class="loadout-detail-inspect outline-btn compact" type="button" data-action="loadout-inspect" data-equip="'+E(slot.selected.id)+'">Inspect selected equipment stats and acquisition ↗</button>':'')+
+        (slot.selected?'<button class="loadout-detail-inspect outline-btn compact" type="button" data-action="'+
+          (slot.kind==='augment'?'loadout-augment-inspect':'loadout-inspect')+'"'+
+          (slot.kind==='augment'?' data-augment="'+E(slot.selected.id)+'"':' data-equip="'+E(slot.selected.id)+'"')+'">'+
+          (slot.kind==='augment'?'Inspect sourced augment stats':'Inspect selected equipment stats and acquisition')+' ↗</button>':'')+
         '<h3 class="loadout-options-heading">Equipment options ('+slot.candidates.length+')</h3>'+
         (choices||'<p class="loadout-picker-info">No source-confirmed selectable equipment is available for this position. Nothing has been invented.</p>')+
         (slot.candidates.length>50?'<p class="loadout-picker-info">Showing the first 50 source candidates. Use the Equipment Index for the full list.</p>':'')+
