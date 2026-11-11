@@ -24,7 +24,7 @@ function renderCompactSlot(slot) {
   const picked=slot.selected;
   const name=picked?.name||(
     slot.kind==='augment'?(slot.augmentType?'Type: '+slot.augmentType:'Augment not verified')
-      :slot.provisional?'Choose auxiliary':'No verified equipment'
+      :slot.provisional?'No source-matched auxiliary':'No verified equipment'
   );
   const image=picked?imageMarkup(picked,'equipment','asset-roster-equipment'):
     '<span class="loadout-compact-placeholder" aria-hidden="true">'+
@@ -39,9 +39,10 @@ function renderCompactSlot(slot) {
   return '<article class="loadout-compact-slot'+(slot.provisional?' provisional':'')+
     (slot.kind==='augment'?' augment':'')+'" data-loadout-slot="'+slot.index+'">'+
     '<div class="loadout-tile-heading"><span>'+(slot.index+1).toString().padStart(2,'0')+' · '+E(label)+'</span>'+
-    (slot.manual?'<span title="Personal pick">★</span>':'')+'</div>'+
+    (slot.manual?'<span title="Personal pick">★</span>':slot.provisional&&picked?'<span title="Tentative, not ship-verified">?</span>':'')+'</div>'+
     '<div class="loadout-tile-type" title="'+E(slot.type)+'">'+E(slot.type)+'</div>'+
     gear+
+    (slot.provisional&&picked?'<span class="loadout-tentative-label">Potential · verify</span>':'')+
     '<button type="button" class="loadout-tile-more" data-action="loadout-slot-info" data-slot="'+slot.index+
     '" aria-label="Why this choice and equipment alternatives for '+E(slot.type)+'">'+
     (slot.kind==='augment'?'Eligibility & details':slot.candidates.length>1?'Why & alternatives':'Why & source')+' ↗</button>'+
@@ -61,7 +62,7 @@ export function renderLoadoutPanel(model) {
     '<p class="loadout-brief">'+E(model.description)+'</p>'+
     '<div class="loadout-footer"><span>Potential gear · not combat-optimized</span>'+
       '<button type="button" class="loadout-reset" data-action="loadout-reset">Reset my picks</button></div>'+
-    '<p class="loadout-compact-disclaimer">Auxiliary positions without ship data are provisional; augments are not auto-selected. Tap Why & alternatives for eligibility and evidence.</p>'+
+    '<p class="loadout-compact-disclaimer">Some source-matched gear is only a potential fit, not a verified recommendation. Auxiliary picks may be provisional and augments remain unselected until their module rules are verified.</p>'+
     '</section>';
 }
 export function renderLoadoutAlternatives(model,slotIndex) {
