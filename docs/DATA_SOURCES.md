@@ -2,7 +2,7 @@
 
 ## Scope and ownership
 
-The static website optionally requests two **independently maintained, third-party datasets directly from their GitHub raw endpoints at runtime**. They are not bundled, cached persistently by AVALON, included in source commits, or represented as officially verified game facts. The upstream owners remain responsible for their respective content. Data subjects and game artwork remain subject to their owners' rights. No ship portraits or gear sprites are copied by this version.
+The static website optionally requests two **independently maintained, third-party datasets directly from their GitHub raw endpoints at runtime**. Their large JSON payloads are not bundled or persistently cached by AVALON. From v0.8.2, **two compact, dated, source-attributed metadata extracts** for five-slot eligibility and augment records are also checked into the repository; these are not full copies of the upstream game datasets, live feeds, or publisher-certified performance claims. The upstream owners remain responsible for their respective content. Data subjects and game artwork remain subject to their owners' rights. No ship portraits or gear sprites are copied by this version.
 
 | Domain | Runtime URL | Fields imported | Source as checked November 10, 2026 |
 | --- | --- | --- | --- |
@@ -32,6 +32,13 @@ A web crawler's cached/indexed response for Koumakan (`https://azurlane.koumakan
 **Source identity ≠ verified performance ≠ tier.** This release does not calculate damage, tier rankings, best-in-slot choices, Gear Lab recipes, or acquisition costs. The `src/criteria.js` module lists data requirements for all eight supported game-mode categories. It does not turn these dimensions into invented numerical evaluations.
 
 Production scoring would additionally require reliable enemy tables, skill descriptions, enhancement/loadout validation, uptime and targeting assumptions, mode mechanics, tests, uncertainty and reproducible calculations. Every assessment must be dated and attributed. Community opinions are citations to consider, **not votes that define truth**.
+
+## Ship loadout and augment snapshots (v0.8.2)
+
+- [Linuxxy0/AzurLaneData May 2, 2026 ship records](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/ships.json) provide the collection ID, numeric hull, fully limit-broken equipment slot types, efficiency and mounts. AVALON retains a compact 860-record exact GroupID manifest (`src/game-slot-manifest.js`); **852/894 current roster ships match**. The complete 8.9 MB ship JSON is *not* loaded into the page.
+- [May 2, 2026 augment records](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/augments.json) provide the separate 239-entry augment manifest (`src/augment-manifest.js`), with exact internal ship-ID exclusivity or generic type/hull restrictions. No augment image binaries are hosted.
+- For five modules announced in October 2026, AVALON includes only the [officially announced names](https://azurlane.yo-star.com/news/2026/10/21/maintenance-notice-10-22-12-a-m-utc-7-2/) and exact ship identities. Item IDs, artwork and stats remain unknown.
+- The source snapshots cannot establish current event availability, actual player inventory, hidden item-level exceptions, optimal upgrades, damage, skill timing or a simulated loadout. See [Tactical Loadout Intelligence](TACTICAL_LOADOUTS.md).
 
 ## Optional equipment acquisition provenance (v0.7.9)
 
