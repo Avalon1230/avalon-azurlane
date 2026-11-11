@@ -1,4 +1,5 @@
 import { AUGMENT_SOURCE, AUGMENT_SOURCE_DATE, OFFICIAL_AUGMENT_ANNOUNCEMENT } from './augment-manifest.js';
+import { augmentImageMarkup, augmentIconKey } from './augment-assets.js';
 const E=v=>String(v??'').replace(/[&<>"']/g,c=>(
   {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
 ));
@@ -22,7 +23,7 @@ export function renderAugmentDetails(augment){
     '<aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect augment '+E(augment.name)+'">'+
     '<div class="picker-head"><div><span class="eyebrow">SOURCED AUGMENT</span><h2>'+
       E(augment.name)+'</h2></div><button type="button" class="icon-btn" data-action="loadout-augment-close" aria-label="Close augment details">✕</button></div>'+
-    '<div class="detail-scroll"><div class="augment-source-symbol" aria-hidden="true">✦</div>'+
+    '<div class="detail-scroll"><div class="augment-inspection-art">'+augmentImageMarkup(augment,'asset-augment-detail')+'</div>'+
     '<section class="equipment-acquisition-panel"><h3>Eligibility and provenance</h3>'+
     '<p>'+E(scope)+'</p>'+
     '<p>Rarity: '+E(augment.rarity)+' · Type: '+E(augment.typeCode??'Unverified')+
@@ -32,7 +33,8 @@ export function renderAugmentDetails(augment){
     '<div class="profile-table">'+(stats||'<p>Stat increments are not available in this manifest.</p>')+'</div>'+
     '<p class="equipment-acquisition-provenance">Source: <a class="text-link" href="'+link+
     '" target="_blank" rel="noopener noreferrer">'+(announced?'Yostar October 2026 notice':'AzurLaneData augments.json')+'</a> · '+(announced?'2026-10-21':E(AUGMENT_SOURCE_DATE))+
-    '. Skill upgrades, optimality, present availability and ship-specific exceptions require separate validation. No unverified icon is substituted.</p>'+
+    '. Skill upgrades, optimality, present availability and ship-specific exceptions require separate validation. '+
+    (announced?'No verified icon or internal augment item ID is available.':'Artwork: source icon field '+E(augmentIconKey(augment))+' via independent MrLar game-asset CDN (not publisher-hosted).')+'</p>'+
     '</div><div class="picker-footer"><button type="button" class="ghost-btn" data-action="loadout-augment-close">Close</button></div>'+
     '</aside></div>';
 }
