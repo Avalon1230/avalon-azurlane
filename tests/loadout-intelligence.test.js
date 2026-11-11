@@ -146,7 +146,7 @@ test('standard ship display has exactly three weapon, two provisional auxiliary 
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
   assert.equal(model.slots.length,6);
   assert.equal(model.slots[0].selected?.id,'fer-1020');
-  assert.equal(model.slots[3].selected,null);
+  assert.equal(model.slots[3].selected,null); // sample has no sourced auxiliary candidate
   assert.equal(model.slots[4].selected,null);
   assert.equal(model.slots[5].selected,null);
   assert.match(model.slots[3].explanation,/standard equipment layout/);
@@ -157,14 +157,15 @@ test('manual auxiliary choices remain potential, source-matched, and never auto-
   const dataset=[...equipment,auxiliary];
   const auto=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset});
   assert.ok(auto.slots[3].candidates.some(x=>x.id==='fer-1180'));
-  assert.equal(auto.slots[3].selected,null);
+  assert.equal(auto.slots[3].selected?.id,'fer-1180');
+  assert.match(auto.slots[3].explanation,/Tentative Auxiliary candidate/);
   assert.equal(validateManualChoice(auto,3,'fer-1180'),true);
   assert.equal(validateManualChoice(auto,5,'fer-1180'),false);
   const picked=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:dataset,overrides:{3:'fer-1180',5:'fer-1180'}});
   assert.equal(picked.slots[3].selected?.id,'fer-1180');
   assert.equal(picked.slots[3].manual,true);
   assert.equal(picked.slots[5].selected,null);
-  assert.match(picked.slots[3].explanation,/remain unverified/);
+  assert.match(picked.slots[3].explanation,/require verification/);
 });
 test('source-recorded extra equipment positions are preserved before inferred auxiliaries and augment',()=>{
   const documented={...data,slots:[...data.slots,
@@ -203,4 +204,50 @@ test('compact planner uses two rows of three, retains click-to-inspect, and hide
   assert.match(detail,/No source-confirmed selectable equipment/);
   assert.doesNotMatch(detail,/data-action="loadout-select"/);
   assert.match(renderLoadoutAlternatives(model,3),/Potential auxiliary position/);
+});
+
+test('roster-wide wiki main-gun grammar matches sourced categories without guesses',()=>{
+  const expected=[
+    ['CB Main Guns',['Large Cruiser Gun']],
+    ['CA Main Guns',['Heavy Cruiser Gun']],
+    ['DD Main Guns',['Destroyer Gun']],
+    ['CL Secondary Guns',['Light Cruiser Gun']],
+    ['BB Main Guns',['Battleship Gun']],
+    ['AA Main Guns',['Anti-Air Gun']],
+    ['Anti-Air Main Guns',['Anti-Air Gun']],
+    ['CB Main Guns / CA Main Guns',['Large Cruiser Gun','Heavy Cruiser Gun']],
+    ['DD Main Guns / CL Secondary Guns',['Destroyer Gun','Light Cruiser Gun']]
+  ];
+  for(const [label,categories] of expected)
+    assert.deepEqual(slotCategories(label),categories,'Unrecognized source terminology: '+label);
+  assert.deepEqual(slotCategories('Mystery Laser Cannon'),[]);
+});
+test('Guam-like actual wiki main-gun labels no longer produce blank first two slots',()=>{
+  const wikiNames={...wiki,slots:[
+    {...wiki.slots[0],type:'CB Main Guns / CA Main Guns'},
+    {...wiki.slots[1],type:'DD Main Guns'},
+    {...wiki.slots[2],type:'AA Guns'}]};
+  const model=buildShipLoadout({ship,data,wikiFacts:wikiNames,equipment});
+  assert.deepEqual(model.slots.slice(0,3).map(x=>x.selected?.id),
+    ['fer-1020','fer-1060','fer-1100']);
+  assert.equal(model.slots[0].source,'Koumakan Wiki');
+  assert.equal(model.slots[1].source,'Koumakan Wiki');
+});
+test('unrecognized wiki slot preserves valid per-position Lycoris fallback',()=>{
+  const unfamiliar={...wiki,slots:wiki.slots.map((x,i)=>({...x,type:i===0?'Proprietary Mystery System':x.type}))};
+  const model=buildShipLoadout({ship,data,wikiFacts:unfamiliar,equipment});
+  assert.equal(model.slots[0].type,'Heavy Cruiser Gun');
+  assert.equal(model.slots[0].source,'Lycoris-AzurAPI');
+  assert.equal(model.slots[0].selected?.id,'fer-1040');
+  assert.equal(model.slots[1].source,'Koumakan Wiki');
+});
+test('generic auxiliary slots show distinct tentative candidates rather than two identical suggestions',()=>{
+  const aux1=gear(1180,'Aux A',10,'Auxiliary','Ultra Rare',{durability:220});
+  const aux2=gear(1200,'Aux B',10,'Auxiliary','Super Rare',{durability:180});
+  const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment:[...equipment,aux1,aux2]});
+  assert.equal(model.slots[3].selected?.id,'fer-1180');
+  assert.equal(model.slots[4].selected?.id,'fer-1200');
+  assert.equal(model.slots[3].provisional,true);
+  assert.equal(model.slots[4].provisional,true);
+  assert.match(renderLoadoutPanel(model),/Potential · verify/);
 });
