@@ -37,10 +37,10 @@ const pages = [
   { id: 'overview', label: 'Overview', icon: '⌂' },
   { id: 'modes', label: 'Game Modes', icon: '◈' },
   { id: 'ships', label: 'Ship Index', icon: '♙' },
-  { id: 'equipment', label: 'Equipment', icon: '⚙' },
-  { id: 'augments', label: 'Augments', icon: '✦' },
-  { id: 'fleet', label: 'Fleet Lab', icon: '▦' },
-  { id: 'tiers', label: 'Tier Boards', icon: '♛' },
+  { id: 'equipment', label: 'Equipment', wip: true, icon: '⚙' },
+  { id: 'augments', label: 'Augments', wip: true, icon: '✦' },
+  { id: 'fleet', label: 'Fleet Lab', wip: true, icon: '▦' },
+  { id: 'tiers', label: 'Tier Boards', wip: true, icon: '♛' },
   { id: 'sources', label: 'Sources', icon: '≡' },
   { id: 'updates', label: 'Updates', icon: '↻' }
 ];
@@ -196,11 +196,11 @@ function countSlots(plan) { return Object.values(plan.fleets).reduce((sum, slots
 function tag(label) { return `<span class="chip">${E(label)}</span>`; }
 function link(url, label, cls = 'text-link') { return `<a href="${E(url)}" target="_blank" rel="noopener noreferrer" class="${cls}">${E(label)} ↗</a>`; }
 function eyebrow(text) { return `<div class="eyebrow">${E(text)}</div>`; }
-function sectionHeading(title, kicker, sub) {
-  return `<div class="page-heading">${eyebrow(kicker)}<h1>${E(title)}</h1><p>${E(sub)}</p></div>`;
+function sectionHeading(title, kicker, sub, wip=false) {
+  return `<div class="page-heading">${eyebrow(kicker)}<h1>${E(title)}${wip?' <span class="page-wip-label">WIP</span>':''}</h1><p>${E(sub)}</p></div>`;
 }
 function nav() {
-  $('#side-nav').innerHTML = pages.map(p => `<button type="button" class="nav-item ${p.id === state.page ? 'active' : ''}" data-action="navigate" data-page="${p.id}" ${p.id === state.page ? 'aria-current="page"' : ''}><span class="nav-icon">${p.icon}</span>${p.label}</button>`).join('');
+  $('#side-nav').innerHTML = pages.map(p => `<button type="button" class="nav-item ${p.id === state.page ? 'active' : ''}" data-action="navigate" data-page="${p.id}" ${p.id === state.page ? 'aria-current="page"' : ''}><span class="nav-icon">${p.icon}</span>${p.label}${p.wip?'<small class="nav-wip-label">WIP</small>':''}</button>`).join('');
   $('#page-name').textContent = pages.find(p => p.id === state.page)?.label || 'Overview';
 }
 function warning() {
@@ -277,11 +277,11 @@ function renderShips() {
   ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,collabSeries:state.shipCollabSeries,hull:state.hull,shipLimit:state.shipVisibleCount,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity,shipAdvancedOpen:state.shipAdvancedOpen})}`;
 }
 function renderAugments() {
-  return sectionHeading('Augment Modules','SPECIAL EQUIPMENT','Browse verified game-client augments by name, rarity and eligible hull category. Announced-only modules are identified separately.')+
+  return sectionHeading('Augment Modules','SPECIAL EQUIPMENT','Browse source-linked modules. Skill impact and combat rankings are still being developed.',true)+
     renderAugmentIndex({records:AUGMENT_CATALOG,query:state.augmentQuery,type:state.augmentType,rarity:state.augmentRarity,limit:state.augmentVisibleCount});
 }
 function renderEquipment() {
-  return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Browse equipment by origin, type, or compatible hull.')}${warning()}
+  return `${sectionHeading('Equipment', 'EQUIPMENT INDEX', 'Equipment browsing works; performance recommendations are still in development.',true)}${warning()}
   ${renderCatalogIndex({kind:'equipment',records:EQUIPMENT,query:state.query,nation:state.gearNation,hull:state.gearHull,category:state.category,equipmentLimit:state.gearVisibleCount,rarity:state.gearRarity,sort:state.gearSort,descending:state.gearDescending,broadType:state.gearBroadType,equipmentGroup:state.gearGroup,equipmentAdvancedOpen:state.gearAdvancedOpen,renderCard:renderEquipmentRosterTile,sourceStatus:state.sync.status})}`;
 }
 function evidenceLine(record) {
@@ -336,7 +336,7 @@ function modeSelect() {
 }
 function renderFleet() {
   const mode = selectedMode(), plan = currentPlan();
-  return `${sectionHeading('Fleet Lab', 'TACTICAL PLANNING', 'Build formations manually or generate a fleet suggestion.')}
+  return `${sectionHeading('Fleet Lab', 'TACTICAL PLANNING', 'Build fleets manually or preview formations. Full ship-and-equipment synergy is still WIP.',true)}
   <div class="fleet-toolbar">${modeSelect()}<div class="fleet-controls"><span class="assignment-count">${countAssigned(plan)} / ${countSlots(plan)} assigned</span><button type="button" class="outline-btn compact" data-action="export-plan">Export JSON ↓</button><button type="button" class="ghost-btn danger" data-action="reset-plan">Clear plan</button></div></div>
   <div class="mode-description"><span class="mode-icon">${mode.icon}</span><div><strong>${E(mode.name)}</strong><p>${E(mode.summary)}</p></div></div>
   <details class="method-disclosure"><summary>View scenario criteria</summary>${contextPanel()}</details>${renderSuggestedFleet({mode,ships:SHIPS,workspace:plan,options:state.suggestOptions,preview:state.suggestPreview,sourceStatus:state.sync.status})}<div class="fleet-grid">${mode.fleetTypes.map(id => fleetCard(id, plan)).join('')}</div>
