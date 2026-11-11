@@ -46,6 +46,12 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 **Not implemented yet:** a complete verified game data model, comprehensive Koumakan wiki import, authoritative skill calculations, complete/current acquisition and crafting routes, reproducible damage/tier scores, numerical fleet optimization and validated optimal gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
+## Loadout Planner (WIP) — transparency update
+
+The planner's automatic equipment placements are **compatible placeholders, not validated recommendations**. The title and status now explicitly say **WIP** and **Unreviewed**. The options drawer is deliberately concise: current auto-filled item, compatible alternatives, equipment inspection, and a collapsed section of attributed specialist observations only when meaningful research exists. Earlier verbose audit text was unhelpfully robotic and has been removed from the default UI. No source-supported gear legality or user-saved equipment choices were discarded.
+
+Next major milestone: build recommendations that compete with conditional guides on **quality of decisions**, not quantity of prose. Each recommended gear choice must justify real ship skill synergy, target armor/movement, timing, fleet buffs, acquisition trade-offs and why a specific alternative loses or wins. See [Recommendation Evidence](docs/RECOMMENDATION_EVIDENCE.md).
+
 ## Equipment rationale audit (v0.8.6)
 
 An automatically filled six-position loadout is still a **source-compatible starting point, not a reviewed best-in-slot build**. The Why & alternatives drawer now gives the actual selection basis (e.g. sourced HIT +12 versus a candidate's +8), a separately attributed *research-informed option* only for verified exact gear IDs with explicit mission/armor/skill caveats, and known ship skill switches such as Aquila's second aircraft slot. Unknowns are labeled honestly, not invented to fill the page. See the [equipment recommendation evidence contract](docs/RECOMMENDATION_EVIDENCE.md).
