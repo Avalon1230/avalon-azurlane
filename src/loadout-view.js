@@ -149,7 +149,7 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}
         research+
         (slot.selected?'<button class="loadout-detail-inspect outline-btn compact" type="button" data-action="'+
           (slot.kind==='augment'?'loadout-augment-inspect':'loadout-inspect')+'"'+
-          (slot.kind==='augment'?' data-augment="'+E(slot.selected.id)+'"':' data-equip="'+E(slot.selected.id)+'"')+'">'+
+          (slot.kind==='augment'?' data-augment="'+E(slot.selected.id)+'"':' data-equip="'+E(slot.selected.id)+'"')+'>'+
           (slot.kind==='augment'?'Inspect sourced augment stats':'Inspect selected equipment stats and acquisition')+' ↗</button>':'')+
         '<h3 class="loadout-options-heading">Compatible equipment ('+slot.candidates.length+')</h3>'+
         '<label class="loadout-choice-search-label" for="loadout-choice-search">Browse source-eligible items · not ranked by performance</label>'+
