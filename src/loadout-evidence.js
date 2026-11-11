@@ -72,6 +72,7 @@ function sourceLink(key){
   return '<a href="'+E(source.url)+'" target="_blank" rel="noopener noreferrer">'+E(source.name)+'</a>';
 }
 function researchFor(item,mode){
+  if(item?.source!=='fernando')return null;
   const note=RESEARCHED[String(item?.sourceId||'')];
   return note&&note.category===item.category&&note.modes.includes(mode)?note:null;
 }
@@ -99,7 +100,7 @@ function candidateExplanation(slot,mode){
   const alt=alternatives[0];
   const rarity='Its recorded rarity is '+String(picked.rarity||'unknown')+'. ';
   return base+rarity+(alt?'The next candidate is '+alt.name+' ('+String(alt.rarity||'unknown')+'). ':'')+
-    'This is a rarity/availability-independent catalog sort, not a damage or survivability recommendation.';
+    'This is a rarity-driven catalog sort, not an item-specific damage or survivability comparison.';
 }
 function shipMechanic(model,slot){
   if(String(model?.sourceId)==='60701'&&slot.index===1&&slot.kind==='weapon')
