@@ -51,6 +51,28 @@ export function sortShipBrowseRows(rows, sort='name', descending=false) {
 
 const mainSet = new Set(MAIN_SHIP_FACTIONS);
 const collabSet = new Set(COLLABORATION_NATIONS);
+const COLLAB_SERIES_ALIASES = Object.freeze({
+  'KizunaAI':'Kizuna AI',
+  'Collab':'Other collaborations'
+});
+export function shipCollabSeries(record){
+  const source=nationForShip(record);
+  return collabSet.has(source)?(COLLAB_SERIES_ALIASES[source]||source):null;
+}
+export function shipCollabSeriesCounts(rows){
+  const groups=new Map();
+  for(const ship of rows){
+    const series=shipCollabSeries(ship);
+    if(!series)continue;
+    if(!groups.has(series))groups.set(series,{series,count:0,ship});
+    const group=groups.get(series);
+    group.count++;
+    // Choose a deterministic recognizable representative even if source ordering changes.
+    if(String(ship.name||'').localeCompare(String(group.ship.name||''))<0)group.ship=ship;
+  }
+  return [...groups.values()].sort((a,b)=>a.series.localeCompare(b.series));
+}
+
 const browseOrder = [
   ...MAIN_SHIP_FACTIONS,
   'META',
@@ -89,7 +111,7 @@ export function shipBrowseCounts(rows) {
  * Search both raw nationality names and AVALON group labels while retaining
  * existing name, hull, and rarity search behavior from catalog-filters.js.
  */
-export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 'all', rarity = 'all' } = {}) {
+export function filterShipBrowseRows(rows, { query = '', nation = 'all', collabSeries = 'all', hull = 'all', rarity = 'all' } = {}) {
   const hullMatched = SHIP_HULL_GROUPS[hull]
     ? filterShipRecords(rows).filter(ship=>SHIP_HULL_GROUPS[hull].includes(ship.hull))
     : filterShipRecords(rows,{hull});
@@ -100,11 +122,13 @@ export function filterShipBrowseRows(rows, { query = '', nation = 'all', hull = 
   return hullMatched.filter(ship => {
     const group = shipBrowseNation(ship);
     if (nation !== 'all' && nation !== group) return false;
+    if (nation === COLLAB_BROWSE_NATION && collabSeries !== 'all' && shipCollabSeries(ship) !== collabSeries) return false;
     if (rarity !== 'all') {
       const actual=ship.rarity==='Decisive'?'Ultra Rare':ship.rarity==='Priority'?'Super Rare':ship.rarity;
       if(actual!==rarity) return false;
     }
-    return !term || sourceMatches.has(ship) || group.toLocaleLowerCase().includes(term);
+    return !term || sourceMatches.has(ship) || group.toLocaleLowerCase().includes(term) ||
+      shipCollabSeries(ship)?.toLocaleLowerCase().includes(term);
   });
 }
 
@@ -125,5 +149,5 @@ export function groupedShipBrowseRows(rows, sort='name', descending=false) {
 export function shipBrowseDisplayNation(record) {
   const group = shipBrowseNation(record);
   const source = nationForShip(record);
-  return group === COLLAB_BROWSE_NATION ? 'Collab · ' + source : group;
+  return group === COLLAB_BROWSE_NATION ? 'Collab · ' + shipCollabSeries(record) : group;
 }

@@ -4,6 +4,15 @@ _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
+## Active collaboration directory refinement — 2026-11-12
+
+- **Requirement:** user requested a distinct landing for each collaboration franchise under Ship Index → Collab, with franchise-specific, genuine visual assets. This follows the existing nation landing and must not flatten all collaboration shipgirls into one roster.
+- **PR:** [#25](https://github.com/Avalon1230/avalon-azurlane/pull/25), branch `feat/collab-series-index`; release gate and merge/deployment verification pending.
+- **Implementation:** `shipCollabSeriesCounts` groups all 14 named series from the 894-ship nationality snapshot, canonicalizes Kizuna aliases, and preserves source nation fields. `catalog-index` renders a nested landing and filters only the chosen series, with existing sort/search/hull/rarity and profile navigation. Actual original in-game character thumbnails appear in every series card; a verified exact series logo overlays seven cards. Incorrect universal Collab emblems are not used as fake franchise logos. External logo hosts may return HTTP 429 to automated requests; the app must remove failed overlays while retaining the sourced game portrait.
+- **Known incomplete assets:** seven franchise-specific wordmarks still lack vetted and reliable sources; only verified logos may appear. Tests must not silently claim host-throttled images downloaded successfully.
+- **Parallel deferred WIP label request:** user also wants concise WIP labels on Equipment, Augments, Fleet Lab and Tier Boards. Track as a separate PR; labels should qualify unfinished recommendations, not imply catalogs or manually usable tools are broken.
+- **Release gate:** Node tests, seven-width Chromium smoke, 16 original-game augment HTTP probes and independently hosted franchise logo checks. Update this record with actual merge SHA, CI and Pages status once delivered.
+
 ## WIP clarity refinement — delivered 2026-11-12
 
 - **User's explicit instruction:** label the ship-profile planner **Loadout Planner (WIP)**. Screenshots of Aquila's equipment drawer show long generic source/selection-audit essays that sound robotic and fail the actual question, “Why is this piece better than its alternatives?” Slaimuda's comparative reasoning and source-specific conditions remain the quality benchmark for AVALON's future independent system, NOT a license to copy old rankings.

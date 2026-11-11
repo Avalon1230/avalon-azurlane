@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { SHIP_NATION_BY_SOURCE_ID } from '../src/catalog-filters.js';
 import {
   shipBrowseNation, shipBrowseCounts, filterShipBrowseRows,
-  groupedShipBrowseRows, shipBrowseDisplayNation, sortShipBrowseRows
+  groupedShipBrowseRows, shipBrowseDisplayNation, sortShipBrowseRows,
+  shipCollabSeries, shipCollabSeriesCounts
 } from '../src/ship-factions.js';
 
 const ship=(id,name,nation,hull='DD')=>({id:String(id),sourceId:String(id),name,nation,hull,rarity:'Rare',tags:[]});
@@ -88,4 +89,39 @@ test('rarity filter groups research variants into displayed rarity tiers',()=>{
   assert.deepEqual(filterShipBrowseRows(rows,{rarity:'Super Rare'}).map(x=>x.name),['Priority','Super Rare']);
   assert.deepEqual(filterShipBrowseRows(rows,{rarity:'Ultra Rare'}).map(x=>x.name),['Decisive','Ultra Rare']);
   assert.deepEqual(filterShipBrowseRows(rows,{rarity:'Normal'}).map(x=>x.name),['Normal']);
+});
+
+
+test('collaboration series groups keep every source ship and normalize aliases only for browsing',()=>{
+  const snapshot=Object.entries(SHIP_NATION_BY_SOURCE_ID).map(([id,nation])=>ship(id,'Source '+id,nation));
+  const grouped=shipCollabSeriesCounts(snapshot);
+  const total=grouped.reduce((sum,row)=>sum+row.count,0);
+  const fromNation=filterShipBrowseRows(snapshot,{nation:'Collab'});
+  assert.equal(total,fromNation.length);
+  assert.equal(grouped.length,14);
+  assert.equal(grouped.find(x=>x.series==='Venus Vacation').count,15);
+  assert.equal(grouped.find(x=>x.series==='Atelier Ryza').count,6);
+  assert.equal(grouped.find(x=>x.series==='Atelier Yumia').count,4);
+  assert.equal(grouped.find(x=>x.series==='NieR:Automata').count,2);
+  assert.deepEqual(shipCollabSeriesCounts([ship(1,'AI','Kizuna AI'),ship(2,'AI 2','KizunaAI')])
+    .map(x=>({series:x.series,count:x.count})),[{series:'Kizuna AI',count:2}]);
+  assert.equal(shipCollabSeries(ship(3,'Normal','Royal Navy')),null);
+});
+test('series selection respects source aliases, ship class and rarity without reclassifying main factions',()=>{
+  const rows=[
+    ship(1,'Ryza','Atelier Ryza','CL'),ship(2,'Klaudia','Atelier Ryza','CVL'),
+    ship(3,'Yumia','Atelier Yumia','CL'),ship(4,'AI','KizunaAI','DD'),
+    ship(5,'Eagle','Eagle Union','DD')
+  ];
+  assert.deepEqual(filterShipBrowseRows(rows,{nation:'Collab',collabSeries:'Atelier Ryza'})
+    .map(x=>x.name),['Ryza','Klaudia']);
+  assert.deepEqual(filterShipBrowseRows(rows,{nation:'Collab',collabSeries:'Atelier Yumia'})
+    .map(x=>x.name),['Yumia']);
+  assert.deepEqual(filterShipBrowseRows(rows,{nation:'Collab',collabSeries:'Kizuna AI',hull:'DD'})
+    .map(x=>x.name),['AI']);
+  assert.deepEqual(filterShipBrowseRows(rows,{nation:'Collab',collabSeries:'Atelier Ryza',hull:'Main'})
+    .map(x=>x.name),['Klaudia']);
+  assert.deepEqual(filterShipBrowseRows(rows,{nation:'Collab',collabSeries:'Atelier Ryza',query:'Yumia'}),[]);
+  assert.deepEqual(filterShipBrowseRows(rows,{query:'Kizuna AI'}).map(x=>x.name),['AI']);
+  assert.deepEqual(filterShipBrowseRows(rows,{nation:'Eagle Union',collabSeries:'Atelier Ryza'}).map(x=>x.name),['Eagle']);
 });

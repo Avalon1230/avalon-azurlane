@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import {chromium} from 'playwright';
 import {renderShipProfile} from '../src/ship-profiles.js';
 import {renderEquipmentIndex} from '../src/equipment-index.js';
+import {renderCatalogIndex} from '../src/catalog-index.js';
 import {renderLoadoutAlternatives} from '../src/loadout-view.js';
 import {renderAugmentIndex} from '../src/augment-index.js';
 import {allAugmentRecords} from '../src/augment-manifest.js';
@@ -34,6 +35,16 @@ const details={id:'60701',names:{en:'Aquila'},class:'Aircraft carrier',hullType:
 const profile=renderShipProfile({ship,data:details,loadoutModel:loadout,artworkSkins:[]});
 const equipment=renderEquipmentIndex({records:options.slice(0,32),advancedOpen:true,renderCard:
   row=>'<article class="equipment-roster-tile"><strong>'+row.name+'</strong></article>'});
+const collabSource=[
+  {id:'lyc-50101',sourceId:'50101',name:'Kizuna AI',nation:'KizunaAI',hull:'DD',rarity:'Elite'},
+  {id:'lyc-50201',sourceId:'50201',name:'Hololive Guest',nation:'Hololive',hull:'CV',rarity:'Super Rare'},
+  {id:'lyc-50301',sourceId:'50301',name:'Ryza',nation:'Atelier Ryza',hull:'CL',rarity:'Super Rare'},
+  {id:'lyc-50302',sourceId:'50302',name:'Klaudia',nation:'Atelier Ryza',hull:'CVL',rarity:'Super Rare'}
+];
+const collabLanding=renderCatalogIndex({kind:'ships',records:collabSource,nation:'Collab',
+  renderCard:row=>'<article class="catalog-card">'+row.name+'</article>'});
+const collabRoster=renderCatalogIndex({kind:'ships',records:collabSource,nation:'Collab',collabSeries:'Atelier Ryza',
+  renderCard:row=>'<article class="catalog-card">'+row.name+'</article>'});
 const alternatives=renderLoadoutAlternatives(loadout,3);
 const augments=renderAugmentIndex({records:allAugmentRecords()});
 const reviewedFighter={...item(85600,'Fighter',7),
@@ -65,6 +76,8 @@ try{
       ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav','#ship-loadout-title','.loadout-status-wip','.loadout-wip-note']],
       ['equipment index',equipment,['#catalog-search','.equipment-advanced-toggle','.equipment-category-tab','#equipment-hull-select']],
       ['augment directory',augments,['#augment-search','#augment-type-filter','#augment-rarity-filter','[data-action="augment-clear-filters"]','.augment-tile','.augment-load-more']],
+      ['collaboration series directory',collabLanding,['.collab-landing','.collab-series-grid','.collab-series-card','.collab-series-copy','#catalog-search']],
+      ['collaboration series roster',collabRoster,['.catalog-roster-label','.catalog-grid','.catalog-result-bar']],
       ['slot alternatives',profile+alternatives,['#loadout-choice-search','.loadout-more-choices','.loadout-choice-inspect','.picker-footer button']],
       ['researched gear evidence',profile+researchedEvidence,['.loadout-picker-current','.loadout-picker-research','.loadout-options-heading','.picker-footer button']]
     ]){

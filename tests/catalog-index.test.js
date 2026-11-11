@@ -129,9 +129,18 @@ test('faction landing shows main factions before META, Bulins and a single Colla
   assert.doesNotMatch(html,/catalog-filter-note/);
   assert.doesNotMatch(html,/Original Azur Lane game assets/);
   const collab=renderCatalogIndex({kind:'ships',records:rows,nation:'Collab',renderCard:card});
-  assert.match(collab,/data-ship="4"/);
-  assert.match(collab,/data-ship="5"/);
-  assert.doesNotMatch(collab,/data-ship="3"/);
+  assert.match(collab,/Choose a collaboration/);
+  assert.match(collab,/data-action="catalog-series" data-series="Atelier Ryza"/);
+  assert.match(collab,/data-action="catalog-series" data-series="Atelier Yumia"/);
+  assert.match(collab,/2 series/);
+  assert.doesNotMatch(collab,/data-ship=/);
+  const ryza=renderCatalogIndex({kind:'ships',records:rows,nation:'Collab',collabSeries:'Atelier Ryza',renderCard:card});
+  assert.match(ryza,/data-ship="4"/);
+  assert.doesNotMatch(ryza,/data-ship="5"|data-ship="3"/);
+  assert.match(ryza,/data-action="catalog-series-home"/);
+  const yumia=renderCatalogIndex({kind:'ships',records:rows,nation:'Collab',collabSeries:'Atelier Yumia',renderCard:card});
+  assert.match(yumia,/data-ship="5"/);
+  assert.doesNotMatch(yumia,/data-ship="4"/);
   const searched=renderCatalogIndex({kind:'ships',records:rows,query:'Atelier Yumia',renderCard:card});
   assert.match(searched,/data-ship="5"/);
 });
@@ -180,4 +189,38 @@ test('compact ship filters keep quick hull groups, selectable advanced hull and 
   const vanguard=renderCatalogIndex({kind:'ships',records,nation:'Eagle Union',hull:'Vanguard',renderCard:card});
   assert.match(vanguard,/data-ship="1"/);
   assert.doesNotMatch(vanguard,/data-ship="2"/);
+});
+
+
+test('series landing remains distinct from nation landing and does not misclassify ships',()=>{
+  const rows=[
+    shipRow(1,'Ryza','Atelier Ryza','CL'),
+    shipRow(2,'Klaudia','Atelier Ryza','CVL'),
+    shipRow(3,'Yumia','Atelier Yumia','CL'),
+    shipRow(4,'Aquila','Sardegna Empire','CV'),
+    shipRow(5,'Sora','Hololive','CV')
+  ];
+  const landing=renderCatalogIndex({kind:'ships',records:rows,nation:'Collab',renderCard:card});
+  assert.match(landing,/class="collab-series-grid"/);
+  assert.match(landing,/CROSSOVER ARCHIVE/);
+  assert.match(landing,/data-action="catalog-home"/);
+  assert.match(landing,/data-action="catalog-series" data-series="Atelier Ryza"/);
+  assert.match(landing,/data-action="catalog-series" data-series="Atelier Yumia"/);
+  assert.match(landing,/data-action="catalog-series" data-series="Hololive"/);
+  assert.match(landing,/Hololive_Production_logo.svg/);
+  assert.match(landing,/3 series/);
+  assert.match(landing,/4<\/strong><span>Collab ships/);
+  assert.doesNotMatch(landing,/data-series="Sardegna Empire"/);
+  assert.doesNotMatch(landing,/data-ship=/);
+  assert.doesNotMatch(landing,/nationality\/100\.png/);
+  const roster=renderCatalogIndex({kind:'ships',records:rows,nation:'Collab',collabSeries:'Atelier Ryza',hull:'Main',renderCard:card});
+  assert.match(roster,/Atelier Ryza<\/h2>/);
+  assert.match(roster,/data-ship="2"/);
+  assert.doesNotMatch(roster,/data-ship="1"|data-ship="3"|data-ship="4"/);
+  assert.match(roster,/catalog-series-home/);
+  assert.match(roster,/ship-hull-filter/);
+  const search=renderCatalogIndex({kind:'ships',records:rows,query:'Atelier Ryza',renderCard:card});
+  assert.match(search,/data-ship="1"/);
+  assert.match(search,/data-ship="2"/);
+  assert.doesNotMatch(search,/data-ship="3"|data-ship="4"/);
 });
