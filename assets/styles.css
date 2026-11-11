@@ -902,3 +902,57 @@
 .loadout-compact-slot.provisional .loadout-tile-heading span:first-child:after{
   content:" · check";color:#eecc90;font-size:8px
 }
+
+/* v0.8.4 — resolve intrinsic grid minimums instead of clipping page overflow. */
+.app-shell,.workspace,.page,.ship-profile-page,.ship-profile-top,.ship-profile-left,.ship-art-panel,.equipment-index{min-width:0;max-width:100%}
+.page{width:100%}
+.ship-profile-top{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+.ship-profile-overview,.ship-profile-identity,.ship-loadout-panel,.loadout-compact-slot{min-width:0;max-width:100%}
+.ship-profile-identity h1,.ship-profile-identity p{overflow-wrap:break-word}
+.ship-gear-origin{display:block;margin-top:5px;font-size:10px;line-height:1.4;font-weight:500;color:#91b8cd;overflow-wrap:anywhere}
+.loadout-choice-status{font-size:9px;font-weight:750;color:#f1d49c;line-height:1.25}
+.loadout-compact-slot:has(.loadout-choice-status) .loadout-tile-more{margin-top:auto}
+.loadout-skill-conditional{font-size:11px;line-height:1.5;color:#cfebf7;margin:2px 0;padding:9px 11px;background:#15334b;border-left:3px solid #79d6ee;border-radius:4px}
+.loadout-choice-search-label{display:block;font-size:11px;color:#accddd;font-weight:750;margin-top:6px}
+.loadout-choice-search{width:100%;min-width:0;min-height:42px;padding:10px 12px;border:1px solid #49718a;border-radius:7px;background:#0d293e;color:#eafaff}
+.loadout-more-choices{width:100%;min-height:40px;margin:12px 0}
+.assessment-configs{border:1px solid #3b6381;background:#132c42;border-radius:8px;padding:10px 12px;margin:10px 0}
+.assessment-configs>strong{font-size:12px;color:#e5f8ff}
+.assessment-configs p{margin:6px 0;font-size:12px;line-height:1.5}
+.assessment-configs small,.assessment-identity-source{font-size:10px;color:#9fc2d4;line-height:1.5}
+.assessment-unverified-art{width:56px;height:56px;display:grid;place-items:center;border:1px dashed #56748b;border-radius:8px;color:#a5bfd0;flex:0 0 56px}
+@media(max-width:1450px){
+  .loadout-slots.loadout-compact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1250px){
+  .ship-profile-top{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:800px){
+  .app-shell{grid-template-columns:minmax(0,1fr)}
+  .workspace,.sidebar,.side-nav,.topbar{min-width:0;max-width:100%}
+  .ship-profile-top,.ship-profile-layout{grid-template-columns:minmax(0,1fr)}
+  .loadout-tile-gear{grid-template-columns:43px minmax(0,1fr);justify-items:stretch;min-height:65px}
+  .loadout-tile-name{text-align:left;-webkit-line-clamp:3;line-clamp:3}
+}
+@media(max-width:480px){
+  .topbar{gap:8px;flex-wrap:wrap;padding:12px 14px}
+  .top-meta{min-width:0}
+  .page{padding:20px 14px 40px}
+  .ship-profile-overview{min-width:0;max-width:100%}
+  .ship-profile-identity h1{overflow-wrap:anywhere}
+  .loadout-slots.loadout-compact-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .loadout-tile-gear{grid-template-columns:36px minmax(0,1fr);gap:5px;justify-items:stretch;min-height:70px}
+  .loadout-tile-gear .asset-media,.loadout-compact-placeholder{width:36px;height:36px}
+  .loadout-tile-name{text-align:left;-webkit-line-clamp:3;line-clamp:3;overflow-wrap:break-word}
+  .equipment-search-row{flex-wrap:wrap}
+  .equipment-search-row .search-wrap{flex:1 1 170px}
+  .equipment-advanced-toggle{flex:0 0 auto}
+  .ship-art-panel-head{flex-wrap:wrap}
+  .ship-art-current{text-align:left}
+  .loadout-choice{min-width:0}
+  .loadout-choice>.outline-btn{flex:none;padding:8px 10px}
+}
+@media(max-width:370px){
+  .ship-profile-overview .ship-profile-cover{flex:0 0 100px;width:100px;height:145px;min-height:145px;max-height:145px}
+  .ship-profile-overview{flex-direction:row}
+}
