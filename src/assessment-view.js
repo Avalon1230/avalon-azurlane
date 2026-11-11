@@ -56,7 +56,7 @@ export function renderAssessmentBoard({ boardId='ships', ships=[], equipment=[],
   const unassessed=catalog.length?[...new Set(catalog.filter(x=>!unique.has(x.name?.toLocaleLowerCase())).map(x=>x.name))].length:null;
   const searchTerm=String(query||'').trim().toLocaleLowerCase();
   const matchedUnassessed = searchTerm && catalog.filter(x=>!unique.has(x.name.toLocaleLowerCase()) && x.name.toLocaleLowerCase().includes(searchTerm)).slice(0,12);
-  return `<div class="page-heading"><div class="eyebrow">AVALON / COMBAT INTELLIGENCE</div><h1>${boardId==='ships'?'Which ships should I build?':'Which equipment is worth investing in?'}</h1>
+  return `<div class="page-heading"><div class="eyebrow">AVALON / COMBAT INTELLIGENCE</div><h1>${boardId==='ships'?'Which ships should I build?':'Which equipment is worth investing in?'} <span class="page-wip-label">WIP</span></h1>
       <p>Game-mode recommendations, explanations, and alternatives.</p></div>
     <nav class="tier-tabs" aria-label="Tier board categories">${tabs(boardId)}</nav>
     <section class="tier-intro"><div class="eyebrow">${E(config.label.toUpperCase())} · PROVISIONAL RESEARCH</div><h2>${E(config.icon)} ${E(config.title)}</h2><p>${E(config.subtitle)}</p>
