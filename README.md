@@ -2,7 +2,7 @@
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
 
-> **Project status:** **v0.8.5 augment integrity and browsable directory (released; PR #21 merged, CI and Pages verified)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
+> **Project status:** **v0.8.6 evidence-led loadout explanation (release candidate; CI/deployment pending)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **A source-matched ship loadout planner is now available, but validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -46,6 +46,11 @@ For public hosting, GitHub Pages can serve the **repository root on `main`** onc
 
 **Not implemented yet:** a complete verified game data model, comprehensive Koumakan wiki import, authoritative skill calculations, complete/current acquisition and crafting routes, reproducible damage/tier scores, numerical fleet optimization and validated optimal gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
 
+## Equipment rationale audit (v0.8.6)
+
+An automatically filled six-position loadout is still a **source-compatible starting point, not a reviewed best-in-slot build**. The Why & alternatives drawer now gives the actual selection basis (e.g. sourced HIT +12 versus a candidate's +8), a separately attributed *research-informed option* only for verified exact gear IDs with explicit mission/armor/skill caveats, and known ship skill switches such as Aquila's second aircraft slot. Unknowns are labeled honestly, not invented to fill the page. See the [equipment recommendation evidence contract](docs/RECOMMENDATION_EVIDENCE.md).
+
+Current reviewed-source notes cover six exact gear IDs; **there is no 894-ship, 936-equipment combat scoring engine yet**. Detailed skill/armor/sync modeling and independent comparison remain next-pass work. Slaimuda's ECTL is a historical UI reference (discontinued in 2025); newer REGAL and Suchiguma guidance are attributed sources, not automatically imported ratings.
 ## Original augment icons and directory (v0.8.5)
 
 The dedicated **Augments** section provides 239 exact-ID source records and five October 2026 publisher-announced names, with name/ID, hull-type and rarity filters. Original icons use source `icon` keys, including 12 shared aliases, and the [JforPlay original-game `spweapon` archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon). The initial v0.8.5 release mistakenly used a regular-equipment icon path, causing missing images and unrelated gun art; this hotfix uses the independently checked augment images; announced-only names lack verified item IDs/art and retain clear placeholders. The same art is used in ship loadouts, alternative choosers and augment dossiers. This validates source identity, **not** CDN availability or optimized builds.

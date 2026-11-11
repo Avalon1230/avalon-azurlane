@@ -36,6 +36,18 @@ const equipment=renderEquipmentIndex({records:options.slice(0,32),advancedOpen:t
   row=>'<article class="equipment-roster-tile"><strong>'+row.name+'</strong></article>'});
 const alternatives=renderLoadoutAlternatives(loadout,3);
 const augments=renderAugmentIndex({records:allAugmentRecords()});
+const reviewedFighter={...item(85600,'Fighter',7),
+  name:'Prototype Carrier-Based La-9',rarity:'Ultra Rare',enhancement:'+13',stats:{hit:12}};
+const budgetFighter={...item(47160,'Fighter',7),
+  name:'Prototype BF-109G',rarity:'Super Rare',enhancement:'+13',stats:{hit:8}};
+const evidenceSlot={
+  index:1,kind:'weapon',type:'Fighter / Dive Bomber',
+  categories:['Fighter','Dive Bomber'],source:'Koumakan Wiki',verified:true,provisional:false,
+  selected:reviewedFighter,manual:false,candidates:[reviewedFighter,budgetFighter],
+  explanation:'Only a compatible source candidate'
+};
+const researchedEvidence=renderLoadoutAlternatives({
+  sourceId:'60701',mode:'boss',description:'Boss',slots:[evidenceSlot]},1);
 function shell(content){
   return '<!doctype html><html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1">'+
     '<style>'+css+'</style></head><body><div class="app-shell">'+
@@ -53,7 +65,8 @@ try{
       ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav']],
       ['equipment index',equipment,['#catalog-search','.equipment-advanced-toggle','.equipment-category-tab','#equipment-hull-select']],
       ['augment directory',augments,['#augment-search','#augment-type-filter','#augment-rarity-filter','[data-action="augment-clear-filters"]','.augment-tile','.augment-load-more']],
-      ['slot alternatives',profile+alternatives,['#loadout-choice-search','.loadout-more-choices','.loadout-choice-inspect','.picker-footer button']]
+      ['slot alternatives',profile+alternatives,['#loadout-choice-search','.loadout-more-choices','.loadout-choice-inspect','.picker-footer button']],
+      ['researched gear evidence',profile+researchedEvidence,['.loadout-evidence','.loadout-evidence-mechanic','.loadout-evidence-options','.picker-footer button']]
     ]){
       await page.setContent(shell(markup),{waitUntil:'domcontentloaded'});
       const measurements=await page.evaluate(selectors=>{

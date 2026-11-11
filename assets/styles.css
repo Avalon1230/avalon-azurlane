@@ -1002,3 +1002,23 @@
   .augment-tile{padding:9px 6px}
   .loadout-compact-slot.augment .augment-image{max-width:36px;height:36px}
 }
+
+
+/* v0.8.6: distinguish source-sorted candidate from item-specific evidence. */
+.loadout-evidence{margin:14px 0 18px;padding:14px 15px;border:1px solid #345a73;border-radius:10px;background:#0d2437;display:flex;flex-direction:column;gap:9px;min-width:0}
+.loadout-evidence h3{font-size:15px;line-height:1.35;color:#daf1fc;margin:0}
+.loadout-evidence h4{font-size:13px;line-height:1.35;color:#d5e9f6;margin:0 0 5px}
+.loadout-evidence p{font-size:12.5px;line-height:1.65;color:#b5cfdd;margin:0;overflow-wrap:anywhere}
+.loadout-evidence small{font-size:11px;line-height:1.5;color:#90b4c9;overflow-wrap:anywhere}
+.loadout-evidence small a{color:#7cdaff;text-decoration:underline;text-underline-offset:2px}
+.loadout-evidence-mechanic,.loadout-evidence-reviewed,.loadout-evidence-checks,.loadout-evidence-options{border-top:1px solid #2d5068;padding-top:12px;margin-top:4px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.loadout-evidence-reviewed{border-left:3px solid #71bfcc;padding-left:12px}
+.loadout-evidence-options ul{margin:5px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.loadout-evidence-options li{border:1px solid #35546d;border-radius:8px;background:#102b41;padding:11px 12px;display:flex;flex-direction:column;gap:6px;line-height:1.4;font-size:12px;color:#dcf2ff}
+.loadout-evidence-options li p{font-size:12px}
+.loadout-evidence-caveat{font-style:italic}
+@media(max-width:480px){
+  .loadout-evidence{padding:12px 10px}
+  .loadout-evidence p{font-size:12px}
+  .loadout-evidence-options li{padding:10px}
+}

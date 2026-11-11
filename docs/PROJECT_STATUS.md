@@ -4,6 +4,13 @@ _Last updated: 2026-11-11 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
+## Active development: v0.8.6 evidence-led loadout audit (2026-11-11)
+
+- **Starting baseline:** `58f94a2c19958e35becea6af71bd9d0ccf3d0d91` (`main` after successful v0.8.5 icon/filter hotfix and documentation closeout). Working branch `feat/v0.8.6-evidence-led-loadout-reasons`. Do not call shipped until PR, CI, and Pages finish.
+- **User-observed product gap:** 'Why this choice?' only justified hull/category compatibility. It is not a concrete combat recommendation; ECTL/Slaimuda sets a better conditional explanation standard but stopped updating Sep 2025. Current REGAL/Suchiguma data is more relevant but still third-party evidence.
+- **Implementation scope:** source-ID-matched, conditional expert comparisons for six gear items; actual attribute-rank audit vs a compatible alternative; Aquila second aircraft slot skill condition; explicit caveats and attribution; no automatic BIS badge or full fleet ranking. `src/loadout-evidence.js`, tests, existing alternatives drawer and stylesheet. Preserve manual choices and source legality.
+- **Acceptance:** new tests and Chromium viewport cases must pass; reviewed text must not be falsely attached by numeric ID collision or display as our own simulation. Update PR/merge/CI links after verified deployment.
+- **Next broader scope:** verified weapon armor/cadence/damage model, ship skills, target profile, fleet synergy and conditional alternatives across all catalog items. See `docs/RECOMMENDATION_EVIDENCE.md`. Never substitute a copied ECTL list or rarity ranking for a mechanics-backed recommender.
 ## v0.8.5 artwork and filter hotfix delivered (2026-11-11)
 
 - **Confirmed live regression:** user screenshot showed missing augment thumbnails, unrelated gun art, and clipped/overlapping filters in `/#/augments`. The previous initial release mapped correct augment IDs into a regular-equipment image URL; this was a source-path error, not an absent icon-key field.

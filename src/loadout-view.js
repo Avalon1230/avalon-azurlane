@@ -1,6 +1,7 @@
 import { imageMarkup } from './media.js';
 import { augmentImageMarkup } from './augment-assets.js';
 import { LOADOUT_MODES } from './loadout-intelligence.js';
+import { renderLoadoutDecisionEvidence } from './loadout-evidence.js';
 
 const E=v=>String(v??'').replace(/[&<>"']/g,c=>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -121,9 +122,9 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}
       '<div class="picker-head"><div><span class="eyebrow">SLOT '+(slot.index+1)+' · '+E(sourceStatus(slot))+'</span><h2>'+E(slot.type)+'</h2></div>'+
         '<button type="button" class="icon-btn" data-action="loadout-close-alternatives" aria-label="Close options">✕</button></div>'+
       '<div class="detail-scroll">'+
-        '<section class="loadout-detail-reason"><h3>Why this choice? · '+E(status)+'</h3>'+
+        '<section class="loadout-detail-reason"><h3>Why this item appears · '+E(status)+'</h3>'+
           '<p>'+E(slot.explanation)+'</p><small>'+E(slotNote(slot))+'</small>'+
-          '<p>'+E(note)+'</p></section>'+
+          '<p>'+E(note)+'</p></section>'+renderLoadoutDecisionEvidence(model,slot)+
         (slot.selected?'<button class="loadout-detail-inspect outline-btn compact" type="button" data-action="'+
           (slot.kind==='augment'?'loadout-augment-inspect':'loadout-inspect')+'"'+
           (slot.kind==='augment'?' data-augment="'+E(slot.selected.id)+'"':' data-equip="'+E(slot.selected.id)+'"')+'">'+

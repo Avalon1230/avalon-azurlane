@@ -2,6 +2,19 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.6] - 2026-11-11
+
+### Source evidence and explainability
+- Replaced the misleading loadout drawer headline **Why this choice?** with **Why this item appears** for automatic compatibility candidates.
+- Added a source-attribute decision audit: exact selected gear identity and enhancement, numeric HIT/RLD/Anti-Siren comparison where available, and explicit distinction between a sort explanation and damage/survivability evidence.
+- Added contextual research notes for six exact source-identified items (La-9, Mecklenburg 305mm, Tenrai, Saiun Kai, BF-109G, High Performance Hydraulic Steering Gear), with mission/armor/timing caveats and links to Suchiguma's research and Quick Gear Guide. The notes are expert reports, **not AVALON DPS simulations**.
+- Added an Aquila aircraft-slot-two skill decision in the options drawer and highlighted other eligible research-informed alternatives without silently overriding a user's selections.
+- No automatic performance ranking or best-in-slot badges were introduced for unreviewed gear. Full slot+target+fleet simulation is deliberately deferred.
+
+### Evidence and verification
+- Added `docs/RECOMMENDATION_EVIDENCE.md` specifying the missing independent mechanics checks and minimum evidence required for future recommendation certification.
+- Added regression tests for exact source ID matching, provenance, numeric selection comparisons, Aquila skill conditions, manual choices, and escaping; browser viewport fixtures cover the new evidence drawer.
+- PR CI and Pages results must be verified before declaring v0.8.6 released.
 ## [0.8.5 artwork and filter hotfix] - 2026-11-11
 
 - **Critical artwork fix:** The first v0.8.5 release requested the regular-equipment icon path `al.mrlar.dev/equips/<id>.webp` for augment IDs. This caused many missing images and some unrelated gun illustrations. Switched to the verified dedicated original-game [JforPlay spweapon archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon), with all 239 May 2026 source icon keys checked against actual repository filenames (including 12 aliases).
