@@ -4,6 +4,8 @@ _Last updated: 2026-11-11 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
+- **v0.8.3 verification candidate (2026-11-11, Asia/Shanghai):** resumed from verified `67489e9` after PR #17 landed during this session. Corrected exact MLB snapshot precedence over lossy Lycoris labels (including Langley and mixed carrier mounts), equipment type/category consistency, source equipment limit groups, and exact wiki Tempesta subclasses. Unknown subclasses now fail closed instead of pooling incompatible hulls. Local **170/170 tests passed**; full 894-ship / 936-equipment audit passes in all four modes with six checked wiki pages. **893 complete / 5,363 populated positions**; without wiki pages **888 / 5,338**. Royal Fortune's augment remains unsupported. See `docs/LOADOUT_AUDIT.md` and its dated JSON report for source hashes, conditions, and reproducibility. PR, CI, merge and deployment verification are pending; this entry does not claim release.
+
 - Repository: https://github.com/Avalon1230/avalon-azurlane
 - v0.7.0 delivered by [PR #4](https://github.com/Avalon1230/avalon-azurlane/pull/4), merged into main. **93/93 tests passed**, JavaScript syntax checks passed on feature branch [Actions run 42809749844](https://github.com/Avalon1230/avalon-azurlane/actions/runs/42809749844). GitHub Pages release deployment must be independently confirmed. See `docs/SHIP_PROFILES.md`.
 - Live site: https://avalon1230.github.io/avalon-azurlane/

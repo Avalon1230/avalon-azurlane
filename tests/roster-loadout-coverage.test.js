@@ -99,7 +99,9 @@ test('carrier, submarine carrier and Tempesta hulls respect their actual equipme
     {type:'Fighter'},{type:'Dive Bomber'},{type:'Torpedo Bomber'}
   ]};
   const cv=buildShipLoadout({ship:{hull:'CV',sourceId:'30715'},data:carrier,equipment:sampleGear});
-  assert.deepEqual(cv.slots.slice(0,3).map(x=>x.selected?.typeCode),[7,9,8]);
+  assert.deepEqual(cv.slots.slice(0,3).map(x=>x.typeCodes),[[7,9],[8,9],[8]]);
+  assert.ok(cv.slots[0].candidates.some(x=>x.typeCode===7));
+  assert.ok(cv.slots[0].candidates.some(x=>x.typeCode===9));
   const ssv=buildShipLoadout({ship:{hull:'SSV',sourceId:'31701'},data:{id:'31701',slots:[
     {type:'Torpedo (Submarine)'},{type:'Torpedo (Submarine)'},{type:'Reconnaissance'}
   ]},equipment:sampleGear});
@@ -152,7 +154,8 @@ test('newer Sailing Frigate loadouts are marked provisional where hull subclass 
   ]};
   const model=buildShipLoadout({ship:{hull:'IX',sourceId:'960017'},data:newer,equipment:sampleGear});
   assert.equal(model.slots.length,6);
-  assert.ok(model.slots.every(x=>x.selected));
+  assert.ok(model.slots.slice(0,5).every(x=>!x.selected&&x.candidates.length===0));
+  assert.match(model.slots[0].explanation,/exact hull subclass is missing/);
   assert.equal(model.slots[0].provisional,true);
   assert.equal(model.slots[5].selected?.name,'Greatstaff of the Lodestar');
   assert.match(model.slots[5].explanation,/publisher announced/i);

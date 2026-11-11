@@ -29,6 +29,8 @@ A web crawler's cached/indexed response for Koumakan (`https://azurlane.koumakan
 
 ## Evidence and scoring boundary
 
+The v0.8.3 [loadout audit](LOADOUT_AUDIT.md) records exact source hashes, wiki revisions and conditional coverage. Equipment normalization now retains `equip_limit` to prevent same-group combinations. The committed test fixture contains minimal factual source fields for offline regression checks; full upstream datasets remain excluded from the repository. Wiki `Type` supplies exact newer Tempesta subclasses only after GroupID validation.
+
 **Source identity ≠ verified performance ≠ tier.** This release does not calculate damage, tier rankings, best-in-slot choices, Gear Lab recipes, or acquisition costs. The `src/criteria.js` module lists data requirements for all eight supported game-mode categories. It does not turn these dimensions into invented numerical evaluations.
 
 Production scoring would additionally require reliable enemy tables, skill descriptions, enhancement/loadout validation, uptime and targeting assumptions, mode mechanics, tests, uncertainty and reproducible calculations. Every assessment must be dated and attributed. Community opinions are citations to consider, **not votes that define truth**.
