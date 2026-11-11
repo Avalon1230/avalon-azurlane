@@ -28,3 +28,4 @@ jobs:
       - run: google-chrome --version
       - run: node scripts/viewport-smoke.mjs
       - run: node scripts/augment-image-smoke.mjs
+      - run: node scripts/collab-logo-smoke.mjs
