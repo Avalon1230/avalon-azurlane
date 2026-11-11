@@ -4,6 +4,14 @@ _Last updated: 2026-11-11 (Asia/Manila). This file is the permanent cross-conver
 
 ## Source of truth and current development
 
+## WIP clarity refinement — 2026-11-12
+
+- **User's explicit instruction:** label the ship-profile planner **Loadout Planner (WIP)**. Screenshots of Aquila's equipment drawer show long generic source/selection-audit essays that sound robotic and fail the actual question, “Why is this piece better than its alternatives?” Slaimuda's comparative reasoning and source-specific conditions remain the quality benchmark for AVALON's future independent system, NOT a license to copy old rankings.
+- **Correction branch:** `fix/loadout-wip-label`, based on `main` `72a686be4ad7ae7493425713a96016734879a972` (v0.8.6). UI changes: conspicuous WIP title/status, auto-filled/unreviewed labels, plain current item, accessible compatible options, and optional collapsed specialist notes where sourced evidence exists. Remove repeated boilerplate, selection-audit essay and speculative “Why this choice?” messaging from default drawer.
+- **Scope boundary:** do not change user-selected gear, remove the six equipment positions, assert that current auto choices are best in slot, or claim a full combat scoring engine. Keep existing mode tabs, acquisition/stat inspection, candidate lists and independent original art.
+- **Next substantive work:** real data-driven ship+gear evaluation with source-corroborated mechanics (armor damage, cycle, aim/pattern, interception, skill activation, buffs, fleet timing, survivability), target/mode context, cost, rank and alternatives; only certify build choices after testing. See `docs/RECOMMENDATION_EVIDENCE.md`.
+- **Release gate:** PR review, Node unit suite, Chromium viewport suite and image HTTP smoke checks must pass; add actual merge and Pages verification when complete.
+
 ## Current release: v0.8.6 delivered (2026-11-11)
 
 - **Delivery:** [PR #23](https://github.com/Avalon1230/avalon-azurlane/pull/23) squash-merged into main as **`efb17a31f655712644d18198ac0550fd4c996acd`** after the screenshot-driven v0.8.5 augment hotfix. [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057421709) passed **194/194 Node tests, 35/35 seven-width Chromium viewport fixture cases and 16/16 HTTP/WebP image probes**. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057586713) passed and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057585457) succeeded for the merged release commit.
