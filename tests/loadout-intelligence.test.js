@@ -251,3 +251,20 @@ test('generic auxiliary slots show distinct tentative candidates rather than two
   assert.equal(model.slots[4].provisional,true);
   assert.match(renderLoadoutPanel(model),/Potential · verify/);
 });
+
+test('shared parser fills documented main guns and aircraft on unrelated ship classes',()=>{
+  const examples=[
+    {name:'Destroyer',hull:'DD',type:'DD Main Guns',gear:gear(1300,'Test DD Gun',1,'Destroyer Gun','Rare')},
+    {name:'Battleship',hull:'BB',type:'BB Main Guns',gear:gear(1320,'Test BB Gun',4,'Battleship Gun','Rare')},
+    {name:'Carrier',hull:'CV',type:'Fighters',gear:gear(1340,'Test Fighter',7,'Fighter','Rare')},
+    {name:'Submarine',hull:'SS',type:'Submarine Torpedoes',gear:gear(1360,'Test Sub Torpedo',13,'Submarine Torpedo','Rare')}
+  ];
+  for(const [index,sample] of examples.entries()){
+    const id=String(88801+index);
+    const profile={id,sourceId:id,name:sample.name,hull:sample.hull};
+    const details={id,slots:[{type:sample.type}]};
+    const result=buildShipLoadout({ship:profile,data:details,equipment:[sample.gear]});
+    assert.deepEqual(result.slots[0].selected?.id,sample.gear.id,
+      sample.name+' should not have an empty slot for '+sample.type);
+  }
+});
