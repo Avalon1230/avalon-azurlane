@@ -1,5 +1,10 @@
 # AVALON Tactical Loadout Intelligence — v0.8.5
 
+## v0.8.6 selection audits and research-informed alternatives
+
+The item displayed by the default picker is still selected from compatible source items using rarity, source HIT/RLD bonus or Anti-Siren attribute. These values are **not** weapon firing cycles, actual armor damage, skill activation rates or fleet effectiveness. The drawer now presents this ranking basis explicitly, comparing concrete reported values with a compatible alternative when possible, and flags the absence of an independent combat comparison. User choices remain labeled Personal pick.
+
+Six exact source gear IDs have additional attributed expert guidance with conditions and alternatives. This research does not automatically replace the candidate or assert universal best-in-slot; unsupported gear retains an honest unreviewed status. Aquila's second aircraft slot receives a specific skill-condition explanation. See [Recommendation Evidence](RECOMMENDATION_EVIDENCE.md) for sourced eligibility, skill, armor, timing, and independent benchmark requirements before a future verified recommendation badge.
 ## v0.8.5 augment icons and directory
 
 The May 2026 augment manifest supplies 239 verified item identities and explicit original icon keys. Twelve modules alias another original image filename rather than their own ID; the dedicated JforPlay/data_for_toy `spweapon` asset directory contains exact images for all 239 source keys. Initial v0.8.5 mistakenly used MrLar's ordinary `equips` path, leading to 404s and unrelated icons for overlapping IDs; this hotfix corrects that defect. Source-backed icons appear in the six-position planner, alternatives, dedicated Augments catalog and details; five October name-only official announcements remain without verified art, IDs or stats. CDN availability and publisher authorization are not implied.
