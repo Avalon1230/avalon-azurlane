@@ -66,6 +66,7 @@ test('all 13 distinct Lycoris slot label variants are recognized, not only wiki 
   assert.deepEqual(slotCategories('CB Main Guns / CA Main Guns'),
     ['Large Cruiser Gun','Heavy Cruiser Gun']);
   assert.deepEqual(slotCategories('DD Main Guns'),['Destroyer Gun']);
+  assert.deepEqual(slotCategories('DD/CL Main Guns'),['Destroyer Gun','Light Cruiser Gun']);
   assert.deepEqual(slotCategories('Fighters/Dive Bombers (LB1)'),['Fighter','Dive Bomber']);
   assert.deepEqual(slotCategories('some invented laser'),[]);
 });
