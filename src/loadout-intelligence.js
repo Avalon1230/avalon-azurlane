@@ -1,9 +1,17 @@
 /**
- * Tactical Loadout Intelligence v0.8.0 — sourced equipment *candidates*, not
- * verified best-in-slot recommendations. No unsourced rank, DPS or skill
- * synergy computations. The panel is an evidence-first planning station.
+ * AVALON Tactical Loadout Intelligence — source-backed eligibility and
+ * candidates, never an independently simulated or best-in-slot rating.
+ *
+ * Sources:
+ * - Exact GroupID Koumakan ship wiki slots (when available)
+ * - Lycoris ship records (894 ships)
+ * - Dated AzurLaneData complete five-slot manifest and exact hull IDs
+ * - Dated AzurLaneData augment manifest and documented hull eligibility
+ * - Fernando2603/AzurLane equipment IDs, types and hull restrictions
  */
-import { possibleEquipmentHulls } from './catalog-filters.js';
+import { possibleEquipmentHulls, EQUIPMENT_TYPE_HULL_SLOTS } from './catalog-filters.js';
+import { gameShipSlots } from './game-slot-manifest.js';
+import { candidateAugmentsForShip } from './augment-manifest.js';
 
 export const LOADOUT_MODES = Object.freeze([
   {id:'general',name:'General',description:'Balance documented eligibility, enhancement attributes and ship role.'},
@@ -11,105 +19,178 @@ export const LOADOUT_MODES = Object.freeze([
   {id:'mobbing',name:'Mobbing',description:'Review reload, target coverage, sustained waves and survivability.'},
   {id:'opsi',name:'OpSi',description:'Review armor, anti-Siren bonuses, fleet synergy and encounter mechanics.'}
 ]);
-const GEAR_RARITY=Object.freeze({'Ultra Rare':5,'Super Rare':4,'Elite':3,'Rare':2,'Normal':1});
+
+// These are source equipment type IDs, not a user-authored tier or performance scale.
+const CATEGORY_BY_TYPE=Object.freeze({
+  1:'Destroyer Gun',2:'Light Cruiser Gun',3:'Heavy Cruiser Gun',4:'Battleship Gun',
+  5:'Surface Torpedo',6:'Anti-Air Gun',7:'Fighter',8:'Torpedo Bomber',
+  9:'Dive Bomber',10:'Auxiliary',11:'Large Cruiser Gun',12:'Seaplane',
+  13:'Submarine Torpedo',14:'Anti-Submarine Weapon',15:'ASW Aircraft',
+  17:'Helicopter',18:'Cargo',20:'Missile',21:'Time-Fuze AA Gun'
+});
 const ALIASES=Object.freeze({
   'dd gun':'Destroyer Gun','dd guns':'Destroyer Gun','destroyer gun':'Destroyer Gun','destroyer guns':'Destroyer Gun',
   'cl gun':'Light Cruiser Gun','cl guns':'Light Cruiser Gun','light cruiser gun':'Light Cruiser Gun','light cruiser guns':'Light Cruiser Gun',
   'ca gun':'Heavy Cruiser Gun','ca guns':'Heavy Cruiser Gun','heavy cruiser gun':'Heavy Cruiser Gun','heavy cruiser guns':'Heavy Cruiser Gun',
   'cb gun':'Large Cruiser Gun','cb guns':'Large Cruiser Gun','large cruiser gun':'Large Cruiser Gun','large cruiser guns':'Large Cruiser Gun',
   'bb gun':'Battleship Gun','bb guns':'Battleship Gun','battleship gun':'Battleship Gun','battleship guns':'Battleship Gun',
+  'artillery (destroyer)':'Destroyer Gun',
+  'artillery (light cruiser)':'Light Cruiser Gun',
+  'artillery (heavy cruiser)':'Heavy Cruiser Gun',
+  'artillery (battleship)':'Battleship Gun',
+  'artillery (pocket battleship)':'Large Cruiser Gun',
   'torpedo':'Surface Torpedo','torpedoes':'Surface Torpedo','surface torpedo':'Surface Torpedo','surface torpedoes':'Surface Torpedo',
+  'torpedo (submarine)':'Submarine Torpedo',
   'submarine torpedo':'Submarine Torpedo','submarine torpedoes':'Submarine Torpedo',
   'aa gun':'Anti-Air Gun','aa guns':'Anti-Air Gun','anti-air gun':'Anti-Air Gun','anti-air guns':'Anti-Air Gun',
   'time-fuze aa gun':'Time-Fuze AA Gun','time fuze aa gun':'Time-Fuze AA Gun',
   'fighter':'Fighter','fighters':'Fighter','dive bomber':'Dive Bomber','dive bombers':'Dive Bomber',
   'torpedo bomber':'Torpedo Bomber','torpedo bombers':'Torpedo Bomber',
-  'seaplane':'Seaplane','seaplanes':'Seaplane','asw aircraft':'ASW Aircraft','asw plane':'ASW Aircraft',
+  'seaplane':'Seaplane','seaplanes':'Seaplane','reconnaissance':'Seaplane',
+  'asw aircraft':'ASW Aircraft','asw plane':'ASW Aircraft',
   'helicopter':'Helicopter','helicopters':'Helicopter',
   'asw':'Anti-Submarine Weapon','anti-submarine weapon':'Anti-Submarine Weapon',
   'auxiliary':'Auxiliary','auxiliaries':'Auxiliary','auxiliary equipment':'Auxiliary',
   'cargo':'Cargo','missile':'Missile'
 });
+const GEAR_RARITY=Object.freeze({'Ultra Rare':5,'Super Rare':4,'Elite':3,'Rare':2,'Normal':1});
 const MODE_STAT=Object.freeze({boss:'hit',mobbing:'reload',opsi:'anti_siren'});
 const MODE_STAT_NAMES=Object.freeze({hit:'HIT',reload:'RLD',anti_siren:'Anti-Siren'});
+const HULL_ID=Object.freeze({
+  DD:1,CL:2,CA:3,BC:4,BB:5,CVL:6,CV:7,SS:8,BBV:10,
+  AR:12,BM:13,SSV:17,CB:18,AE:19,IXS:22,IXV:23,IXM:24
+});
 
 export function slotCategories(type) {
   if(typeof type!=='string'||type.length>160)return [];
-  const parts=type.normalize('NFKC').replace(/\u00a0/g,' ').split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
+  const parts=type.normalize('NFKC').replace(/\u00a0/g,' ')
+    .split(/\s*(?:\/|,|\bor\b|\band\b|\||&)\s*/i);
   const result=[];
   for(const part of parts){
-    const key=part.toLowerCase().replace(/\s+/g,' ').trim();
-    if(!Object.hasOwn(ALIASES,key))continue;
+    const key=part.toLowerCase().replace(/\(\s*(?:lb\s*[123]|mlb|limit break\s*[123])\s*\)/gi,'')
+      .replace(/\b(?:main|secondary)\s+(guns?)\b/g,'$1')
+      .replace(/\s+/g,' ').trim();
     const cat=ALIASES[key];
-    if(!result.includes(cat))result.push(cat);
+    if(cat&&!result.includes(cat))result.push(cat);
   }
   return result;
 }
-
-export function verifiedShipSlots(data,wikiFacts=null) {
-  const wiki=wikiFacts && String(wikiFacts.sourceId)===String(data?.id)&&
-    Array.isArray(wikiFacts.slots)&&wikiFacts.slots.length===3?wikiFacts.slots:null;
-  const base=Array.isArray(data?.slots)?data.slots:[];
-  // Wiki facts cover 3 weapon slots. Add others ONLY if source lists them.
-  const slots=wiki?wiki.concat(base.slice(3)):base;
-  return slots.slice(0,7).map((slot,index)=>{
-    const type=typeof slot?.type==='string'?slot.type:'Unclassified';
-    const categories=slotCategories(type);
-    return {
-      index,type,categories,
-      minEfficiency:Number.isFinite(slot?.minEfficiency)?slot.minEfficiency:null,
-      maxEfficiency:Number.isFinite(slot?.maxEfficiency)?slot.maxEfficiency:null,
-      maxMounts:Number.isSafeInteger(slot?.maxMounts)?slot.maxMounts:null,
-      source:wiki && index<3?'Koumakan Wiki':'Lycoris-AzurAPI',
-      verified:categories.length>0
-    };
-  });
+function categoriesFromTypes(types){
+  return [...new Set((Array.isArray(types)?types:[])
+    .map(type=>CATEGORY_BY_TYPE[type]).filter(Boolean))];
+}
+function sameShip(wiki,data){
+  return wiki&&String(wiki.sourceId||'')===String(data?.id||'');
+}
+function sourcedGame(data,gameFacts){
+  if(gameFacts===null)return null; // Explicitly disable dated snapshot for isolated tests.
+  const game=gameFacts===undefined?gameShipSlots(data?.id):gameFacts;
+  return game&&String(game.sourceId||'')===String(data?.id||'')?game:null;
+}
+function slotFromText(sourceSlot,index,source,hullId){
+  const type=typeof sourceSlot?.type==='string'?sourceSlot.type:'Unclassified';
+  const categories=slotCategories(type);
+  return {index,type,categories,
+    typeCodes:[],hullId,
+    minEfficiency:Number.isFinite(sourceSlot?.minEfficiency)?sourceSlot.minEfficiency:null,
+    maxEfficiency:Number.isFinite(sourceSlot?.maxEfficiency)?sourceSlot.maxEfficiency:null,
+    maxMounts:Number.isSafeInteger(sourceSlot?.maxMounts)?sourceSlot.maxMounts:null,
+    source,verified:categories.length>0};
+}
+function slotFromGame(slot,index,hullId){
+  const types=Array.isArray(slot?.types)?slot.types:[];
+  const categories=categoriesFromTypes(types);
+  return {index,type:categories.join(' / ')||'Unclassified',
+    categories,typeCodes:types.slice(),hullId,
+    minEfficiency:null,
+    maxEfficiency:Number.isFinite(slot?.maxEfficiency)?slot.maxEfficiency:null,
+    maxMounts:Number.isSafeInteger(slot?.maxMounts)?slot.maxMounts:null,
+    source:'AzurLaneData · May 2026',verified:categories.length>0};
+}
+function choosePrimary(index,base,wiki,game,hullId){
+  // Prefer a precise, GroupID-checked wiki type. If a wiki category is outside
+  // our dictionary, fall back per slot instead of blanking the entire ship.
+  const wikiSlot=wiki?.slots?.[index];
+  if(wikiSlot){
+    const parsed=slotFromText(wikiSlot,index,'Koumakan Wiki',hullId);
+    if(parsed.verified)return parsed;
+  }
+  if(base[index]){
+    const parsed=slotFromText(base[index],index,'Lycoris-AzurAPI',hullId);
+    if(parsed.verified)return parsed;
+  }
+  const source=game?.slots?.[index];
+  if(source)return slotFromGame(source,index,hullId);
+  return slotFromText(base[index]||wikiSlot,index,'Unverified ship slot',hullId);
 }
 
 /**
- * Render the normal 3 + 2 + augment arrangement without claiming that generic
- * auxiliary positions are individually verified. Unusual ships can retain any
- * additional source-declared slots. Do not fabricate an augment item.
+ * Return verified first-three primary types plus any exact-ID sourced extra
+ * equipment positions. A 2026-05 source contains five full slots for 852
+ * currently indexed ships; for newer ships, keep the Lycoris source types.
  */
-export function loadoutDisplaySlots(data,wikiFacts=null) {
-  const sourced=verifiedShipSlots(data,wikiFacts);
-  const primary=Array.from({length:3},(_,index)=>sourced[index]?
-    {...sourced[index],kind:sourced[index].categories.includes('Auxiliary')?'auxiliary':'weapon',provisional:false}:
-    {index,kind:'weapon',type:'Weapon slot · details unavailable',categories:[],
-      source:'Ship-specific slot data unavailable',verified:false,provisional:false,
-      minEfficiency:null,maxEfficiency:null,maxMounts:null});
-  const extra=sourced.slice(3).map(slot=>({...slot,
-    kind:slot.categories.includes('Auxiliary')?'auxiliary':'special',provisional:false}));
+export function verifiedShipSlots(data,wikiFacts=null,gameFacts=null) {
+  const wiki=sameShip(wikiFacts,data)&&Array.isArray(wikiFacts.slots)&&wikiFacts.slots.length===3?wikiFacts:null;
+  const base=Array.isArray(data?.slots)?data.slots:[];
+  const game=sourcedGame(data,gameFacts);
+  const hullId=game?.hullId??null;
+  const slots=Array.from({length:3},(_,index)=>choosePrimary(index,base,wiki,game,hullId));
+  if(game?.slots?.length>3){
+    for(let index=3;index<Math.min(8,game.slots.length);index++)
+      slots.push(slotFromGame(game.slots[index],index,hullId));
+  }else{
+    for(let index=3;index<Math.min(8,base.length);index++)
+      slots.push(slotFromText(base[index],index,'Lycoris-AzurAPI',hullId));
+  }
+  return slots;
+}
+
+/**
+ * All 5 regular game slots, plus an augment position. If exact-ID auxiliary
+ * records are not available, mark potential slots as provisional.
+ * Actual augment candidates come only from verified source type/ship records.
+ */
+export function loadoutDisplaySlots(data,wikiFacts=null,gameFacts=undefined,ship=null) {
+  const game=sourcedGame(data,gameFacts);
+  const sourced=verifiedShipSlots(data,wikiFacts,game);
+  const primary=sourced.slice(0,3).map(slot=>({
+    ...slot,kind:slot.categories.includes('Auxiliary')?'auxiliary':'weapon',provisional:false
+  }));
+  const extra=sourced.slice(3).map(slot=>({
+    ...slot,kind:slot.categories.includes('Auxiliary')?'auxiliary':'special',
+    provisional:false
+  }));
   const slots=[...primary,...extra];
-  const documentedAux=extra.filter(slot=>slot.kind==='auxiliary').length;
-  for(let i=documentedAux;i<2;i++)slots.push({
-    index:slots.length,kind:'auxiliary',type:'Auxiliary',categories:['Auxiliary'],
-    source:'Standard equipment layout · ship-specific rules unverified',
+  const auxCount=extra.filter(slot=>slot.kind==='auxiliary').length;
+  for(let i=auxCount;i<2;i++)slots.push({
+    index:slots.length,kind:'auxiliary',type:'Auxiliary',categories:['Auxiliary'],typeCodes:[10],
+    hullId:game?.hullId??HULL_ID[ship?.hull]??null,
+    source:'Standard equipment layout · ship-specific slot unverified',
     verified:false,provisional:true,minEfficiency:null,maxEfficiency:null,maxMounts:null
   });
-  // Augments are a separate inventory system. A wiki-listed augment TYPE does
-  // not mean that a particular augment item or effect is verified.
-  const aug=typeof wikiFacts?.augmentType==='string'&&
-    String(wikiFacts.sourceId)===String(data?.id)?wikiFacts.augmentType.trim():null;
+  const hullId=game?.hullId??HULL_ID[ship?.hull]??null;
+  const augmentCandidates=candidateAugmentsForShip({shipId:game?.shipId??null,hullId});
+  const selectedType=typeof wikiFacts?.augmentType==='string'&&sameShip(wikiFacts,data)
+    ?wikiFacts.augmentType.trim():null;
   slots.push({
-    index:slots.length,kind:'augment',type:aug?'Augment · '+aug:'Augment',
-    augmentType:aug||null,source:aug?'Koumakan Wiki · type only':'Augment eligibility not verified',
-    categories:[],verified:false,provisional:false,
+    index:slots.length,kind:'augment',type:selectedType?'Augment · '+selectedType:'Augment',
+    augmentType:selectedType||null,
+    source:game?'AzurLaneData · exact ship ID / augment type':'Augment class eligibility only',
+    categories:[],typeCodes:[],hullId,
+    augmentCandidates,verified:augmentCandidates.length>0&&!!game,
+    provisional:augmentCandidates.length>0&&!game,
     minEfficiency:null,maxEfficiency:null,maxMounts:null
   });
   return slots;
 }
-
 function numericStat(item,key) {
   const n=item?.stats?.[key];
   return typeof n==='number'&&Number.isFinite(n)?n:null;
 }
 function orderCandidates(candidates,mode) {
   const primary=MODE_STAT[mode]||null;
-  // Prefer a comparable reported mode stat only when present; no DPS model.
   return candidates.slice().sort((a,b)=>{
-    const aStat=primary?numericStat(a,primary):null;
-    const bStat=primary?numericStat(b,primary):null;
+    const aStat=primary?numericStat(a,primary):null,bStat=primary?numericStat(b,primary):null;
     if(aStat!==null&&bStat!==null&&aStat!==bStat)return bStat-aStat;
     if(aStat!==null&&bStat===null)return -1;
     if(bStat!==null&&aStat===null)return 1;
@@ -119,59 +200,71 @@ function orderCandidates(candidates,mode) {
   });
 }
 export function candidatesForSlot(ship,slot,equipment,mode='general') {
-  if(!ship?.hull||(!slot?.verified&&!slot?.provisional)||slot?.kind==='augment'||!Array.isArray(equipment))return [];
+  if(slot?.kind==='augment')return slot.augmentCandidates||[];
+  if(!ship?.hull||(!slot?.verified&&!slot?.provisional)||!Array.isArray(equipment))return [];
   const allowed=new Set(slot.categories);
-  const matches=equipment.filter(item=>
-    item?.source==='fernando' && /^\d{2,8}$/.test(String(item.sourceId||'')) &&
-    Number.isInteger(item.typeCode) && allowed.has(item.category) &&
-    possibleEquipmentHulls(item).includes(ship.hull)
-  );
+  const exactHull=Number.isInteger(slot.hullId)?slot.hullId:null;
+  const matches=equipment.filter(item=>{
+    if(item?.source!=='fernando'||!/^\d{2,8}$/.test(String(item.sourceId||''))||
+      !Number.isInteger(item.typeCode)||!allowed.has(item.category))return false;
+    if(exactHull===null)return possibleEquipmentHulls(item).includes(ship.hull);
+    return EQUIPMENT_TYPE_HULL_SLOTS[String(item.typeCode)]?.some(([id])=>id===exactHull) &&
+      !item.forbiddenHullIds?.includes(exactHull);
+  });
   return orderCandidates(matches,mode);
 }
 export function candidateEvidence(slot,item,mode='general') {
-  if(slot?.kind==='augment')return slot.augmentType
-    ? 'Koumakan Wiki identifies augment type '+slot.augmentType+'. Individual module eligibility and effects have not been verified; no augment is selected.'
-    : 'This ship\'s augment eligibility and compatible module have not been verified. No module will be guessed.';
+  if(slot?.kind==='augment'){
+    if(!item)return 'No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module.';
+    const evidence=item.matchLevel==='ship-specific'
+      ?'This module is assigned to this ship’s exact internal collection ID in the dated augment source.'
+      :'This general module matches the ship’s hull type in the published augment-type eligibility data.';
+    return evidence+' Source rarity and availability are recorded; combat effects are not yet evaluated. Source snapshot: May 2026.';
+  }
   if(slot?.provisional)return item
-    ? 'This is a manually chosen potential Auxiliary: source category and hull restrictions match, but the slot itself is inferred from the standard layout. Ship-specific exceptions and duplicate restrictions remain unverified.'
-    : 'Auxiliary position inferred from the standard equipment layout, not verified for this individual ship. Explore source/hull-matched possibilities; no default equipment is assumed.';
+    ?'Source category '+item.category+' and hull restrictions match, but this auxiliary slot is inferred from the standard layout. Individual ship exceptions, uniqueness limits and build performance remain unverified.'
+    :'This auxiliary position is inferred from the common game layout, and has no verified candidate in the current source.';
   if(!item)return slot?.verified
-    ? 'No source-matched equipment candidate was found for this verified slot.'
-    : 'Ship-specific slot category is not verified, so no equipment is assigned.';
+    ?'The slot type is sourced, but no corresponding equipment is indexed as potentially compatible with this hull.'
+    :'Ship-specific slot category is not verified, so no equipment is assigned.';
   const pct=Number.isFinite(slot.maxEfficiency)?' · slot efficiency up to '+Math.round(slot.maxEfficiency*100)+'%':'';
   const parts=['Source category '+item.category+' matches '+slot.type+pct+'.',
     'The source records potential hull compatibility after class restrictions. Ship-specific exceptions still require checking.'];
-  const field=MODE_STAT[mode];
-  const stat=field?numericStat(item,field):null;
+  const field=MODE_STAT[mode],stat=field?numericStat(item,field):null;
   if(stat!==null)parts.push(MODE_STAT_NAMES[field]+' '+(stat>=0?'+':'')+stat+' is reported at the highest sourced enhancement; not a combat score.');
   else parts.push('No verified mode-specific performance advantage is established.');
   return parts.join(' ');
 }
 
-export function buildShipLoadout({ship=null,data=null,wikiFacts=null,equipment=[],mode='general',overrides={}}={}) {
+export function buildShipLoadout({ship=null,data=null,wikiFacts=null,gameFacts=undefined,
+  equipment=[],mode='general',overrides={}}={}) {
   const selectedMode=LOADOUT_MODES.some(item=>item.id===mode)?mode:'general';
-  const slots=loadoutDisplaySlots(data,wikiFacts).map(slot=>{
+  const usedAuxIds=new Set();
+  const slots=loadoutDisplaySlots(data,wikiFacts,gameFacts,ship).map(slot=>{
     const candidates=candidatesForSlot(ship,slot,equipment,selectedMode);
     const manualId=String(overrides?.[slot.index]||'');
     const manual=manualId?candidates.find(x=>x.id===manualId):null;
-    // Auto-fill only a sourced primary/auxiliary slot. For inferred aux slots
-    // show a choice, never a fictitious best-in-slot.
-    const selected=manual||(!slot.provisional&&slot.verified?candidates[0]:null)||null;
+    // Source-only planning choices: an automatically surfaced item is NOT a
+    // performance recommendation, nor an independent ship-specific legality check.
+    let selected=manual;
+    if(!selected){
+      selected=slot.kind==='auxiliary'
+        ?candidates.find(item=>!usedAuxIds.has(item.id))||null
+        :candidates[0]||null;
+    }
+    if(selected&&slot.kind==='auxiliary')usedAuxIds.add(selected.id);
     return {...slot,candidates,selected,manual:!!manual,
       explanation:candidateEvidence(slot,selected,selectedMode)};
   });
   return {
-    sourceId:String(data?.id||ship?.sourceId||''),
-    mode:selectedMode,
+    sourceId:String(data?.id||ship?.sourceId||''),mode:selectedMode,
     description:LOADOUT_MODES.find(x=>x.id===selectedMode).description,
-    slots,
-    augment:typeof wikiFacts?.augmentType==='string'&&
-      String(wikiFacts.sourceId)===String(data?.id)?wikiFacts.augmentType:null,
+    slots,augment:slots.find(x=>x.kind==='augment')?.selected||null,
     confidence:'Source-matched candidates · NOT independently combat-evaluated'
   };
 }
 export function validateManualChoice(model,slotIndex,equipmentId) {
   if(!model||!Number.isSafeInteger(slotIndex)||slotIndex<0)return false;
   const slot=model.slots.find(x=>x.index===slotIndex);
-  return slot?.kind!=='augment' && !!slot?.candidates.some(item=>item.id===equipmentId);
+  return !!slot?.candidates.some(item=>item.id===equipmentId);
 }
