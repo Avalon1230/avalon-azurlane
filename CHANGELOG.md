@@ -2,6 +2,13 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.6 WIP feature status] - 2026-11-12
+
+- Added understated **WIP** labels to **Equipment, Augments, Fleet Lab and Tier Boards** in sidebar navigation and page headings.
+- Functioning browsing, official/source-backed artwork, manual fleet assignments, the personalized tier editors and data search are unchanged.
+- Labels apply to incomplete **combat recommendations, augment analysis, fleet/gear synergy and full tier coverage**. Ship Index stays an ordinary roster; its existing Loadout Planner (WIP) label remains.
+- Added regression tests for page labels, usability boundaries and responsive styles. Source data, rankings, recommendation selection and ship count are not modified.
+
 ## [0.8.6 Collaboration series navigation] - 2026-11-12
 
 - Collaboration ships now have a dedicated second-level landing page in **Ship Index → Collab**, showing each franchise individually rather than opening one mixed roster.
