@@ -19,6 +19,7 @@ const sampleGear=[
   gear(23040,'Anti-Air Gun',6,'Anti-Air Gun'),
   gear(23060,'Auxiliary Repair Toolkit',10,'Auxiliary'),
   gear(23080,'Auxiliary Radar',10,'Auxiliary'),
+  gear(23090,'Auxiliary Compass',10,'Auxiliary'),
   gear(23100,'Fighter',7,'Fighter'),
   gear(23120,'Dive Bomber',9,'Dive Bomber'),
   gear(23140,'Torpedo Bomber',8,'Torpedo Bomber'),
@@ -79,8 +80,10 @@ test('Guam auto-fills all 5 sourced game slots and a source-compatible generic a
   assert.deepEqual(model.slots.map(x=>x.kind),
     ['weapon','weapon','weapon','auxiliary','auxiliary','augment']);
   assert.ok(model.slots.every(x=>x.selected),'all six slots must have sourced options');
-  assert.deepEqual(model.slots.slice(0,5).map(x=>x.selected.sourceId),
-    ['23000','23020','23040','23060','23080']);
+  assert.deepEqual(model.slots.slice(0,3).map(x=>x.selected.sourceId),
+    ['23000','23020','23040']);
+  assert.equal(new Set(model.slots.slice(3,5).map(x=>x.selected.sourceId)).size,2);
+  assert.ok(model.slots.slice(3,5).every(x=>x.selected.category==='Auxiliary'));
   assert.equal(model.slots[3].source,'AzurLaneData · May 2026');
   assert.equal(model.slots[3].provisional,false);
   assert.equal(model.slots[5].selected.kind,'augment');
