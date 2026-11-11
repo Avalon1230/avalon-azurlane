@@ -1022,3 +1022,29 @@
   .loadout-evidence p{font-size:12px}
   .loadout-evidence-options li{padding:10px}
 }
+
+
+/* WIP clarity: do not dress heuristic compatibility picks as recommendations. */
+.ship-loadout-compact .loadout-status-wip{color:#eec99d;border-color:#826443;background:#34281d;font-weight:800}
+.loadout-wip-note{margin:10px 0 12px;padding:11px 13px;border-left:3px solid #b28b56;background:#192838;border-radius:0 7px 7px 0;color:#c2d5df;font-size:11.5px;line-height:1.5}
+.loadout-wip-note strong{color:#f2d6a9}
+.loadout-picker-current{display:flex;flex-direction:column;gap:9px;border:1px solid #34576d;border-radius:9px;background:#132c41;padding:15px 14px;margin-bottom:14px}
+.loadout-picker-current-head{display:flex;flex-direction:column;align-items:start;gap:6px;min-width:0}
+.loadout-picker-current-head strong{font-size:14px;color:#eff8ff;overflow-wrap:anywhere}
+.loadout-picker-current-status{color:#e6c994;font-size:11px;font-weight:800}
+.loadout-picker-current p{font-size:12px;line-height:1.6;margin:0;color:#bbd2e1}
+.loadout-picker-current small{font-size:10px;color:#8badbf;line-height:1.5}
+.loadout-picker-research{margin:0 0 14px;border:1px solid #35566f;border-radius:9px;background:#0c2033;overflow:hidden}
+.loadout-picker-research>summary{padding:12px 15px;cursor:pointer;font-size:12px;font-weight:750;color:#aadff3}
+.loadout-picker-research>summary:hover,.loadout-picker-research>summary:focus-visible{background:#17364b}
+.loadout-picker-research>p{padding:0 14px;margin:2px 0 10px;font-size:11px;line-height:1.5;color:#a7bdce}
+.loadout-picker-research ul{margin:0 12px 13px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.loadout-picker-research li{display:flex;flex-direction:column;gap:6px;padding:11px;border-radius:7px;background:#143149;border:1px solid #365971;min-width:0}
+.loadout-picker-research li strong{font-size:12px;color:#e0f2ff}
+.loadout-picker-research li p{font-size:11px;line-height:1.5;color:#b8ccda;margin:0;overflow-wrap:anywhere}
+.loadout-picker-research li a{font-size:11px;color:#83dcf5;text-decoration:underline;overflow-wrap:anywhere}
+@media(max-width:480px){
+  .loadout-wip-note{font-size:11px;padding:9px 11px}
+  .loadout-picker-current{padding:12px 10px}
+  .loadout-picker-research ul{margin:0 8px 10px}
+}

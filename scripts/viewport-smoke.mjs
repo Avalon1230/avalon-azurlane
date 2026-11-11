@@ -62,11 +62,11 @@ try{
     const page=await browser.newPage({viewport:{width,height:800},deviceScaleFactor:1});
     await page.route(/^https?:\/\//,route=>route.abort());
     for(const [label,markup,selectors] of [
-      ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav']],
+      ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav','#ship-loadout-title','.loadout-status-wip','.loadout-wip-note']],
       ['equipment index',equipment,['#catalog-search','.equipment-advanced-toggle','.equipment-category-tab','#equipment-hull-select']],
       ['augment directory',augments,['#augment-search','#augment-type-filter','#augment-rarity-filter','[data-action="augment-clear-filters"]','.augment-tile','.augment-load-more']],
       ['slot alternatives',profile+alternatives,['#loadout-choice-search','.loadout-more-choices','.loadout-choice-inspect','.picker-footer button']],
-      ['researched gear evidence',profile+researchedEvidence,['.loadout-evidence','.loadout-evidence-mechanic','.loadout-evidence-options','.picker-footer button']]
+      ['researched gear evidence',profile+researchedEvidence,['.loadout-picker-current','.loadout-picker-research','.loadout-options-heading','.picker-footer button']]
     ]){
       await page.setContent(shell(markup),{waitUntil:'domcontentloaded'});
       const measurements=await page.evaluate(selectors=>{

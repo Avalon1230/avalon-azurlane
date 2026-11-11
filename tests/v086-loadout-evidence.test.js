@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {renderLoadoutDecisionEvidence,researchedOptions,RESEARCHED_EQUIPMENT_COUNT} from '../src/loadout-evidence.js';
-import {renderLoadoutAlternatives} from '../src/loadout-view.js';
+import {renderLoadoutAlternatives,renderLoadoutPanel} from '../src/loadout-view.js';
 
 const gear=(sourceId,name,category,stats={},extras={})=>({
   id:'fer-'+sourceId,sourceId:String(sourceId),source:'fernando',name,category,
@@ -85,10 +85,13 @@ test('loadout alternatives integrate reasoning, preserve actual options and esca
   const unsafe=gear('99903','<img src=x onerror=alert(1)>','Fighter',{hit:14});
   const s=slot(unsafe,[unsafe,la9,bf109]);
   const html=renderLoadoutAlternatives(model(s),0);
-  assert.match(html,/Why this item appears/);
-  assert.match(html,/Selection audit/);
-  assert.match(html,/Research-informed options in this eligible pool/);
-  assert.match(html,/Trade-off \/ alternative:/);
+  assert.match(html,/WORK IN PROGRESS/);
+  assert.match(html,/Compatible equipment \(3\)/);
+  assert.match(html,/Auto-filled candidate · not recommended/);
+  assert.match(html,/<details class="loadout-picker-research">/);
+  assert.match(html,/Specialist research notes \(2\)/);
+  assert.match(html,/Trade-off:/);
+  assert.doesNotMatch(html,/Selection audit · automatic source candidate/);
   assert.match(html,/data-action="loadout-select"/);
   assert.match(html,/&lt;img src=x onerror=alert\(1\)&gt;/);
   assert.doesNotMatch(html,/<img src=x onerror/);
@@ -99,4 +102,37 @@ test('new drawer content is scrollable and uses readable evidence styles',()=>{
   assert.match(css,/\.loadout-evidence-reviewed\{/);
   assert.match(css,/\.loadout-evidence-options ul\{/);
   assert.match(css,/\.loadout-evidence p\{font-size:12\.5px/);
+});
+
+
+test('WIP planner is conspicuous and never presents auto-filled gear as optimized',()=>{
+  const s=slot(la9,[la9,bf109]);
+  const html=renderLoadoutPanel(model(s,'general'));
+  assert.match(html,/Loadout Planner \(WIP\)/);
+  assert.match(html,/WIP · Unreviewed/);
+  assert.match(html,/Gear is auto-filled for source compatibility, not selected for combat performance/);
+  assert.match(html,/Auto-filled · unreviewed/);
+  assert.match(html,/Compatible options/);
+  assert.doesNotMatch(html,/Planning · Sourced/);
+  assert.doesNotMatch(html,/Why & alternatives/);
+});
+test('unresearched slot drawer stays short and does not repeat robotic audit panels',()=>{
+  const raw=gear('99901','Some unrelated weapon','Destroyer Gun',{});
+  const s=slot(raw,[raw]);
+  const html=renderLoadoutAlternatives(model(s,'general','10102'),0);
+  assert.match(html,/Compatible equipment \(1\)/);
+  assert.match(html,/not a combat recommendation/);
+  assert.doesNotMatch(html,/loadout-detail-reason/);
+  assert.doesNotMatch(html,/loadout-evidence/);
+  assert.doesNotMatch(html,/loadout-picker-research/);
+  assert.doesNotMatch(html,/Why this item appears/);
+  assert.doesNotMatch(html,/data-equip="fer-99901""/);
+});
+test('WIP label and research summary remain safe under untrusted names',()=>{
+  const unsafe=gear('99999','<img src=x onerror=alert(1)>','Fighter',{});
+  const s=slot(unsafe,[unsafe,la9]);
+  const html=renderLoadoutAlternatives(model(s,'boss'),0);
+  assert.match(html,/&lt;img src=x onerror=alert\(1\)&gt;/);
+  assert.doesNotMatch(html,/<img src=x onerror/);
+  assert.match(html,/<summary>Specialist research notes/);
 });

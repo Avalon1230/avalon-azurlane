@@ -76,10 +76,10 @@ test('resolved gear slots never render a contradictory Lycoris fallback alongsid
 });
 test('item tiles distinguish personal selections from mere compatibility candidates',()=>{
   const base=renderLoadoutPanel(model);
-  assert.match(base,/Compatible candidate/);
+  assert.match(base,/Auto-filled · unreviewed/);
   assert.doesNotMatch(base,/Reviewed recommendation/);
   const personal=renderLoadoutPanel({...model,slots:[{...slot,manual:true}]});
-  assert.match(personal,/Personal pick/);
+  assert.match(personal,/Your pick/);
 });
 test('Aquila loadout exposes role switch without pretending that arbitrary default is a healer preset',()=>{
   const second={...slot,index:1,kind:'weapon',type:'Fighter \/ Dive Bomber',
