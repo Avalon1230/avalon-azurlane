@@ -120,6 +120,9 @@ export function parseWikiShipFacts(wikitext, sourceId, {pageTitle='',revision=nu
     source:'Koumakan Wiki',sourceId:String(sourceId),pageTitle,
     revision:Number.isSafeInteger(revision)?revision:null,
     rarity:plain(fields.Rarity),
+    // Generic "Sailing Frigate" cannot establish equipment restrictions.
+    hullId:({'Sailing Frigate (Submarine)':22,'Sailing Frigate (Vanguard)':23,
+      'Sailing Frigate (Main)':24})[plain(fields.Type)]??null,
     armor:['Light','Medium','Heavy'].includes(armor)?armor:null,
     artist:artist||null,voiceActor:voiceActor||null,
     constructionTime:/^\d{2}:\d{2}:\d{2}$/.test(constructionTime)?constructionTime:null,
@@ -137,7 +140,7 @@ export async function loadWikiShipFacts(wikiUrl,sourceId,fetcher=fetch){
   const request=(async()=>{
     const u=new URL(WIKI_API);
     for(const [key,value]of Object.entries({
-      action:'parse',page:title,prop:'wikitext',format:'json',formatversion:'2',origin:'*'
+      action:'parse',page:title,prop:'wikitext|revid',format:'json',formatversion:'2',origin:'*'
     }))u.searchParams.set(key,value);
     const controller=new AbortController();
     const timer=setTimeout(()=>controller.abort(),10000);

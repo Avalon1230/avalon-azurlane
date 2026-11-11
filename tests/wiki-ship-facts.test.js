@@ -156,7 +156,7 @@ test('wiki loader validates URL, group ID and source template asynchronously',as
   assert.equal(result.stats.level125.health,7779);
   assert.equal(result.revision,88);
   assert.equal(urls.length,1);
-  assert.equal(urls[0].searchParams.get('prop'),'wikitext');
+  assert.equal(urls[0].searchParams.get('prop'),'wikitext|revid');
   assert.equal(urls[0].searchParams.get('origin'),'*');
   assert.equal(await loadWikiShipFacts('https://example.com/wiki/Amagi(CV)','30715',fetcher),null);
   assert.equal(await loadWikiShipFacts('https://azurlane.koumakan.jp/wiki/Amagi(CV)','30714',fetcher),null);

@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.3] - 2026-11-11
+
+### Fixed
+- Prefer exact ship, fully limit-broken slot arrays over lossy Lycoris display labels when wiki data is unavailable. Restores mixed aircraft mounts and corrects Langley's second slot from a destroyer gun to a fighter.
+- Require equipment type/category agreement and preserve item hull exclusions. Exact ship slot arrays establish type eligibility without an additional broad hull-map exclusion.
+- Parse exact Tempesta subclasses from GroupID-checked wiki facts. Unknown subclasses remain unfilled with a reason until verified, instead of pooling incompatible classes.
+- Enforce source equipment limit groups across defaults, saved choices and alternatives; reserve valid personal choices before filling remaining slots.
+
+### Verification
+- Added real-source fixtures spanning 21 ships, multiple factions, unusual hulls and six wiki pages. All 170 tests pass locally.
+- Reproducible audit checks all 894 ships, 936 equipment records and four modes, plus source identity of all 860 slot records and 239 augment records. With the verified wiki pages, 5,363/5,364 positions populate; Royal Fortune's augment remains unsupported. See docs/LOADOUT_AUDIT.md for conditional source coverage and provenance.
+
 ## [0.8.2] - 2026-11-11
 
 ### Fixed

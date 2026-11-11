@@ -1,0 +1,105 @@
+{
+  "hashes": {
+    "ships.json": "7cd2c8a7fda778c18341bb3a4045a91afbd09f3f1621a004111c3457cd6e6d6a",
+    "equipment.json": "29e52e99bbe1732f410230c71904c1ed88f24c22c86d4ff878bb901d8ec03ad4",
+    "augment-ships.json": "3787c9de6976f8d32ce9e797a96ee9d90911e51c15cac4e529d5a133c0fb3380",
+    "augments.json": "e20054104ba4897057823fd63c420f91197a2f0e22a2f40e42838701b1531aa2",
+    "wiki-guam.json": "7b90b5d0f30ff61aa9149b2cbda2d21924f19171b059e7b1bdeac0a940cd67a4",
+    "wiki-Járnbarðinn.json": "dcc7b7f163bcbf61de5a2c842453f33b11d59b0ac71bb464f19cfe507d2f08b2",
+    "wiki-merkuriy.json": "632d241fafb72333477881af089fa4a31ec7bd9a4bfd5ad4546e284990c39d9e",
+    "wiki-Ormrinn Langi.json": "325e038bb9133f8036a1898e44be690073e10b1d8b034e64dfe433b7c9e9619a",
+    "wiki-Riyala Bey.json": "0417c045d5181079db822f12223b85ae05a9e1717853966b3842b84bd48c419d",
+    "wiki-Selimiye.json": "491383891c27af161f9232877fcb9870a0ef7c8ca04139157e382797beff5b04"
+  },
+  "ships": 894,
+  "equipment": 936,
+  "manifestCount": 860,
+  "wiki": [
+    {
+      "sourceId": "11802",
+      "title": "Guam",
+      "revision": 306619,
+      "hullId": null
+    },
+    {
+      "sourceId": "960018",
+      "title": "Járnbarðinn",
+      "revision": 307327,
+      "hullId": 22
+    },
+    {
+      "sourceId": "960017",
+      "title": "Merkuriy",
+      "revision": 307430,
+      "hullId": 23
+    },
+    {
+      "sourceId": "960020",
+      "title": "Ormrinn Langi",
+      "revision": 307328,
+      "hullId": 23
+    },
+    {
+      "sourceId": "960021",
+      "title": "Riyala Bey",
+      "revision": 307301,
+      "hullId": 24
+    },
+    {
+      "sourceId": "960019",
+      "title": "Selimiye",
+      "revision": 307326,
+      "hullId": 24
+    }
+  ],
+  "modes": {
+    "general": {
+      "complete": 893,
+      "populated": 5363,
+      "empty": [
+        {
+          "id": "960001",
+          "name": "Royal Fortune",
+          "slot": 6,
+          "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+        }
+      ]
+    },
+    "boss": {
+      "complete": 893,
+      "populated": 5363,
+      "empty": [
+        {
+          "id": "960001",
+          "name": "Royal Fortune",
+          "slot": 6,
+          "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+        }
+      ]
+    },
+    "mobbing": {
+      "complete": 893,
+      "populated": 5363,
+      "empty": [
+        {
+          "id": "960001",
+          "name": "Royal Fortune",
+          "slot": 6,
+          "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+        }
+      ]
+    },
+    "opsi": {
+      "complete": 893,
+      "populated": 5363,
+      "empty": [
+        {
+          "id": "960001",
+          "name": "Royal Fortune",
+          "slot": 6,
+          "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+        }
+      ]
+    }
+  }
+}

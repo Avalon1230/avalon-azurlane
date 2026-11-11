@@ -1,4 +1,8 @@
-# AVALON Tactical Loadout Intelligence — v0.8.2
+# AVALON Tactical Loadout Intelligence — v0.8.3
+
+## Current matching corrections
+
+v0.8.3 supersedes the v0.8.2 precedence and restriction notes below: primary slots now use exact-ID wiki facts, then exact-ID fully limit-broken snapshot arrays, then Lycoris display labels. Mixed aircraft mounts are retained and Langley's incorrect gun label cannot override her fighter slot. Source equipment limit groups are enforced across defaults, saved picks and alternatives. Newer Tempesta hull subclasses are read from GroupID-checked wiki `Type` fields; if unavailable, regular slots remain unfilled with a reason. See [the source audit](LOADOUT_AUDIT.md) for all-mode coverage, offline/source-failure behavior and reproducible hashes. Retrofit and player progression remain outside this base-form MLB model.
 
 ## Objective
 

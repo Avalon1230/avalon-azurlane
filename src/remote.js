@@ -86,6 +86,7 @@ export function normalizeEquipment(input) {
     entries.push({id:`fer-${key}`,name:item.name.trim(),category:GEAR_TYPES[item.type]||`Other (type ${item.type ?? '?'})`,
       rarity:RARITIES[item.rarity]||'Unknown',rarityCode:item.rarity ?? null,
       typeCode:Number.isInteger(item.type)?item.type:null,
+      equipLimit:Number.isSafeInteger(item.equip_limit)&&item.equip_limit>=0?item.equip_limit:null,
       nationalityCode:Number.isInteger(item.nationality)?item.nationality:null,
       nation:nationForEquipment({nationalityCode:item.nationality}),
       forbiddenHullIds:Array.isArray(item.ship_type_forbidden)?item.ship_type_forbidden.filter(v=>Number.isInteger(v)&&v>=1&&v<=255):[],
