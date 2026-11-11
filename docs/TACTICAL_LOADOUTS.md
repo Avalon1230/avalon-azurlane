@@ -1,5 +1,10 @@
-# AVALON Tactical Loadout Intelligence — v0.8.3
+# AVALON Tactical Loadout Intelligence — v0.8.5
 
+## v0.8.5 augment icons and directory
+
+The May 2026 augment manifest supplies 239 verified item identities and explicit original icon keys. Twelve modules alias another original image filename rather than their own ID; the independent MrLar game-asset CDN serves the documented paths. Source-backed icons appear in the six-position planner, alternatives, dedicated Augments catalog and details; five October name-only official announcements remain without verified art, IDs or stats. CDN availability and publisher authorization are not implied.
+
+Alternatives are searchable with 50-at-a-time progressive continuation since v0.8.4; early descriptions of a permanent first-50 ceiling are superseded. This feature is not an augment-combat optimality assessment.
 ## Current matching corrections
 
 v0.8.3 supersedes the v0.8.2 precedence and restriction notes below: primary slots now use exact-ID wiki facts, then exact-ID fully limit-broken snapshot arrays, then Lycoris display labels. Mixed aircraft mounts are retained and Langley's incorrect gun label cannot override her fighter slot. Source equipment limit groups are enforced across defaults, saved picks and alternatives. Newer Tempesta hull subclasses are read from GroupID-checked wiki `Type` fields; if unavailable, regular slots remain unfilled with a reason. See [the source audit](LOADOUT_AUDIT.md) for all-mode coverage, offline/source-failure behavior and reproducible hashes. Retrofit and player progression remain outside this base-form MLB model.
@@ -33,7 +38,7 @@ The loadout panel explicitly says when no mode-specific advantage can be verifie
 
 - Each known equipment slot displays one source-backed candidate, real source-linked icon, category/hull/efficiency reasoning, and an **Inspect** action.
 - Inspect opens the existing scrollable equipment intelligence drawer **over the current ship profile**, including original icon, available source stats, acquisition locations, and evidence links. Close returns to the same ship.
-- **Explore alternatives** opens a separate modal with at most 50 immediately listed candidates, all selected from the source-matched pool. Choose a candidate to store a **personal pick** per exact ship GroupID and mission mode.
+- **Explore alternatives** opens a separate modal with the first 50 visible and a searchable, progressive continuation through the entire source-matched pool. Choose a candidate to store a **personal pick** per exact ship GroupID and mission mode.
 - Personal picks are saved in browser `localStorage` under `avalon.azurlane.loadouts.v1`. Every saved item is revalidated against the current live source category and hull constraints on render. Invalid/stale selections cannot silently override the source constraints.
 - Reset clears personal choices for the current ship/mode only. No user configuration is sent to a server.
 - A validated wiki augment *type* may be displayed, but an augment recommendation remains unverified until its own eligibility and effect data are integrated.
