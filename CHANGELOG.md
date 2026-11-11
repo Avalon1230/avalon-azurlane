@@ -14,13 +14,13 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 ### Evidence and verification
 - Added `docs/RECOMMENDATION_EVIDENCE.md` specifying the missing independent mechanics checks and minimum evidence required for future recommendation certification.
 - Added regression tests for exact source ID matching, provenance, numeric selection comparisons, Aquila skill conditions, manual choices, and escaping; browser viewport fixtures cover the new evidence drawer.
-- PR CI and Pages results must be verified before declaring v0.8.6 released.
+- [PR #23](https://github.com/Avalon1230/avalon-azurlane/pull/23) squash-merged as `efb17a31`. [PR CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057421709) passed **194/194 tests, 35/35 seven-width browser fixtures and 16/16 real image probes**. [Merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057586713) and [GitHub Pages](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43057585457) passed for the release SHA. This does not establish full live-session or across-catalog performance validity.
 ## [0.8.5 artwork and filter hotfix] - 2026-11-11
 
 - **Critical artwork fix:** The first v0.8.5 release requested the regular-equipment icon path `al.mrlar.dev/equips/<id>.webp` for augment IDs. This caused many missing images and some unrelated gun illustrations. Switched to the verified dedicated original-game [JforPlay spweapon archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon), with all 239 May 2026 source icon keys checked against actual repository filenames (including 12 aliases).
 - **Filters:** Search, Hull Class, and Rarity use a responsive grid with independently labeled dropdowns instead of compressed inline label/select controls.
 - **Regression coverage:** Real network HTTP/WebP checks on 16 icon samples; Chromium fixture viewport tests now include 360/390/560/768/1024/1280/1640px and assert the two filter controls do not collide. The initial v0.8.5 browser tests blocked all external image requests.
-- **Release gate:** CI and Pages deployment must complete before treating this hotfix as delivered.
+- **Delivery:** [PR #22](https://github.com/Avalon1230/avalon-azurlane/pull/22) merged as `2ddcc72b`; [branch tests](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055180724), [merged-main CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055403611) and [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43055403429) succeeded.
 ## [0.8.5] - 2026-11-11
 
 ### Added
