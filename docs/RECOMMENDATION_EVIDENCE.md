@@ -1,3 +1,7 @@
+## v0.8.7 supplement
+
+The equipment drawer can now compare supported gun damage, firing cycles and aircraft loading. [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md) explains the formulas, skill conditions, sources, tests and gaps. The historical sections below describe v0.8.6 and earlier. The current comparisons still do not prove a best-in-slot build or replace your saved choices.
+
 # AVALON equipment decision evidence — v0.8.6
 
 ## Problem established by user (2026-11-11)
@@ -53,3 +57,4 @@ Suggested data shape:
 ### Explicit follow-on plan
 
 Build testable source-ID-indexed weapon metrics from updated game data, not guessed values. Add user selection of target armor, enemy movement/skill condition and mission when those materially affect gear choice. Verify each mode's recommendation against at least one alternative and document uncertainty. Only then move first reviewed decisions from selection audit to an actual recommendation badge. Cover the whole game iteratively without presenting incomplete hardcoded lists as universal.
+

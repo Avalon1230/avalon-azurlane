@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-12",
+  "implementationCommit": "c3d83688b5bd422ff79059ccf2c01cd6e1580edc",
+  "pr": "https://github.com/Avalon1230/avalon-azurlane/pull/28",
+  "ci": "https://github.com/Avalon1230/avalon-azurlane/actions/runs/43165236994",
+  "node": {
+    "pass": 235,
+    "fail": 0
+  },
+  "viewport": {
+    "pass": 63,
+    "fail": 0
+  },
+  "appInteractions": {
+    "widths": [
+      390,
+      1280
+    ],
+    "pass": 10,
+    "fail": 0,
+    "fixtureBased": true,
+    "cases": [
+      "Prinz Eugen",
+      "Aquila healing",
+      "Aquila offense",
+      "Aquila missing aircraft",
+      "Aquila unsupported aircraft"
+    ]
+  },
+  "sourceIdentity": {
+    "equipment": 11,
+    "skills": 9,
+    "clientFiles": 2,
+    "shipSlotRecords": 860,
+    "formulaAndSchemaFiles": 2
+  },
+  "images": {
+    "augments": 16,
+    "logos": 2,
+    "logosThrottled": 5
+  },
+  "curatedFleetCandidates": 39,
+  "coverage": {
+    "command": "node --test --experimental-test-coverage tests/combat-mechanics.test.js tests/combat-qa.test.js",
+    "modules": {
+      "mechanics": {
+        "line": 100,
+        "branch": 94.87
+      },
+      "evaluator": {
+        "line": 100,
+        "branch": 89.13
+      },
+      "skills": {
+        "line": 100,
+        "branch": 100
+      },
+      "scenario": {
+        "line": 100,
+        "branch": 100
+      },
+      "view": {
+        "line": 100,
+        "branch": 50
+      }
+    },
+    "note": "Node V8 targeted-test coverage, not correctness, UI interaction coverage or real-game validation."
+  },
+  "rosterAudit": {
+    "hashes": {
+      "ships.json": "7cd2c8a7fda778c18341bb3a4045a91afbd09f3f1621a004111c3457cd6e6d6a",
+      "equipment.json": "29e52e99bbe1732f410230c71904c1ed88f24c22c86d4ff878bb901d8ec03ad4",
+      "augment-ships.json": "3787c9de6976f8d32ce9e797a96ee9d90911e51c15cac4e529d5a133c0fb3380",
+      "augments.json": "e20054104ba4897057823fd63c420f91197a2f0e22a2f40e42838701b1531aa2",
+      "wiki-guam.json": "7b90b5d0f30ff61aa9149b2cbda2d21924f19171b059e7b1bdeac0a940cd67a4",
+      "wiki-Járnbarðinn.json": "dcc7b7f163bcbf61de5a2c842453f33b11d59b0ac71bb464f19cfe507d2f08b2",
+      "wiki-merkuriy.json": "632d241fafb72333477881af089fa4a31ec7bd9a4bfd5ad4546e284990c39d9e",
+      "wiki-Ormrinn Langi.json": "325e038bb9133f8036a1898e44be690073e10b1d8b034e64dfe433b7c9e9619a",
+      "wiki-Riyala Bey.json": "0417c045d5181079db822f12223b85ae05a9e1717853966b3842b84bd48c419d",
+      "wiki-Selimiye.json": "491383891c27af161f9232877fcb9870a0ef7c8ca04139157e382797beff5b04"
+    },
+    "ships": 894,
+    "equipment": 936,
+    "manifestCount": 860,
+    "wiki": [
+      {
+        "sourceId": "11802",
+        "title": "Guam",
+        "revision": 306619,
+        "hullId": null
+      },
+      {
+        "sourceId": "960018",
+        "title": "Járnbarðinn",
+        "revision": 307327,
+        "hullId": 22
+      },
+      {
+        "sourceId": "960017",
+        "title": "Merkuriy",
+        "revision": 307430,
+        "hullId": 23
+      },
+      {
+        "sourceId": "960020",
+        "title": "Ormrinn Langi",
+        "revision": 307328,
+        "hullId": 23
+      },
+      {
+        "sourceId": "960021",
+        "title": "Riyala Bey",
+        "revision": 307301,
+        "hullId": 24
+      },
+      {
+        "sourceId": "960019",
+        "title": "Selimiye",
+        "revision": 307326,
+        "hullId": 24
+      }
+    ],
+    "modes": {
+      "general": {
+        "complete": 893,
+        "populated": 5363,
+        "empty": [
+          {
+            "id": "960001",
+            "name": "Royal Fortune",
+            "slot": 6,
+            "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+          }
+        ]
+      },
+      "boss": {
+        "complete": 893,
+        "populated": 5363,
+        "empty": [
+          {
+            "id": "960001",
+            "name": "Royal Fortune",
+            "slot": 6,
+            "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+          }
+        ]
+      },
+      "mobbing": {
+        "complete": 893,
+        "populated": 5363,
+        "empty": [
+          {
+            "id": "960001",
+            "name": "Royal Fortune",
+            "slot": 6,
+            "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+          }
+        ]
+      },
+      "opsi": {
+        "complete": 893,
+        "populated": 5363,
+        "empty": [
+          {
+            "id": "960001",
+            "name": "Royal Fortune",
+            "slot": 6,
+            "reason": "No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module."
+          }
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "No independent battle recording or real-game validation",
+    "May 2026 equipment snapshot not current-client-certified",
+    "Type98 shell-range conflict unresolved",
+    "No full-build or universal BIS recommendations",
+    "No moving-target accuracy, burn/barrage totals, fleet buffs, air losses or joint inventory solver",
+    "Absolute cooldowns are pinned author estimates, not exact client frame timing",
+    "Torpedo, submarine torpedo and AA numerical comparisons unsupported",
+    "Nondefault aircraft parallel values unsupported"
+  ],
+  "qaCorrections": [
+    "parallel and capacity",
+    "gun family gate",
+    "retained exclusions",
+    "malformed input and overflow gates",
+    "Aquila evaluated wing skill condition",
+    "session scenario reset"
+  ],
+  "derivedOverflowFollowup": {
+    "date": "2026-11-12",
+    "implementationCommit": "ca0971e3aa176c7db1515541310ed2e0f27f1421",
+    "ci": "https://github.com/Avalon1230/avalon-azurlane/actions/runs/43237250720",
+    "node": {
+      "pass": 238,
+      "fail": 0
+    },
+    "viewport": {
+      "pass": 63,
+      "fail": 0
+    },
+    "appInteractions": {
+      "pass": 10,
+      "fail": 0,
+      "widths": [
+        390,
+        1280
+      ],
+      "fixtureBased": true
+    },
+    "regressions": [
+      "finite volley/cycle with overflowing DPS and total",
+      "finite DPS with overflowing total",
+      "unknown or overflowing armor alternative"
+    ],
+    "result": "Reject invalid rows before ranking; preserve exclusion reasons and saved picks",
+    "sourceChecks": "860 ships, 11 equipment, 9 skills, two formula/schema files and two original-client files passed",
+    "limitations": "Extreme-input robustness validation, not a new real-game performance claim"
+  }
+}

@@ -208,8 +208,8 @@ export function suggestFleet({modeId,scenario='',ships,workspace,ownedOnly=false
   if(modeId==='campaign'&&scenario==='ch15')notes.push('Chapter 15-3/15-4 needs explicit AA, air-control and mob ASW checks; this builder cannot verify AA or ASW gear yet.');
   if(modeId==='campaign'&&scenario==='ch16')notes.push('Chapter 16 mechanics and opening submarine phase require encounter-specific validation; this formation is a role suggestion only.');
   if(modeId==='opsi')notes.push('Four surface fleets are matched jointly without duplicate ships; Siren modifiers, adaptation, and anti-heal mechanics are not simulated.');
-  if(!['campaign','opsi'].includes(modeId))notes.push('This mode lacks calibrated enemy/skill models. Treat suggestions as conservative formations, not encounter-clearing guarantees.');
-  notes.push('No equipment-slot optimizer or skill-timing simulator is active. Never infer tested synergy or DPS from these selections.');
+  if(!['campaign','opsi'].includes(modeId))notes.push('We haven’t modeled this mode’s enemies and skills yet. Treat these lineups as starting points, not guaranteed clears.');
+  notes.push('These suggestions do not optimize equipment or simulate skill timing. They cannot tell you the fleet’s DPS or prove its synergy.');
   return {modeId,scenario,plan,changes,locked,missing,notes,sourceIds:[...sources],reviewedAt:'2026-11-10',scope:'Qualitative role-matching heuristic only'};
 }
 
@@ -228,5 +228,5 @@ export function gearAdvisories(modeId,scenario){
     {label:'Burst synchronization',text:'Check debuff/buff skill windows against weapons and aircraft reload manually; no timeline simulator is active.',source:'regal'},
     {label:'Sustained fleet durability',text:'Reserve healing/defense for repeated sector fights, keeping specialized boss fleets available.',source:'opsi'}
   ];
-  return [{label:'Equipment validation pending',text:'Verify slot compatibility, enhancement, opponent mechanics and skill triggers before treating this formation as final.',source:'regal'}];
+  return [{label:'Check your gear',text:'Before you deploy, check that your gear fits, its enhancement is ready, and its timing suits the enemy and your ship’s skills.',source:'regal'}];
 }

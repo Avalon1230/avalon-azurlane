@@ -1,3 +1,7 @@
+## v0.8.7 supplement
+
+The equipment drawer now compares **gun damage and timing**, plus supported aircraft loading and skill conditions. Read [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md) for the formulas, sources, tests and missing mechanics. The historical sections below describe v0.8.6 and earlier. These limited comparisons do not award best-in-slot badges or change your saved gear.
+
 # AVALON Tactical Loadout Intelligence — v0.8.5
 
 ## v0.8.6 selection audits and research-informed alternatives
@@ -85,3 +89,4 @@ This source-backed preview must **not** be labeled best-in-slot, "S tier," or si
 - **v0.8.2:** build fully sourced skill/weapon effect and acquisition-cost models, documented mode-specific recommendations, comparison and validation.
 - **v0.8.3:** connect equipment selection to full Fleet Lab formations and ship-skill/gear interactions.
 - Future: equipment inventory / owned-only suggestions, historical snapshots and repeatable evaluations with uncertainty.
+

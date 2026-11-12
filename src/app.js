@@ -14,6 +14,9 @@ import { loadEquipmentDrops, renderEquipmentAcquisition } from './equipment-acqu
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { LOADOUT_MODES, buildShipLoadout, validateManualChoice } from './loadout-intelligence.js';
 import { renderLoadoutAlternatives } from './loadout-view.js';
+import {createCombatScenario} from './combat-scenario.js';
+const combatScenario=createCombatScenario();
+let combatContext = {};
 import { renderAugmentDetails } from './augment-view.js';
 import { allAugmentRecords } from './augment-manifest.js';
 import { renderAugmentIndex, AUGMENT_BATCH_SIZE } from './augment-index.js';
@@ -74,6 +77,9 @@ function saveLoadoutPicks() {
 }
 function currentShipLoadoutModel(ship,data,sourceId) {
   const id=String(sourceId||data?.id||ship?.sourceId||'');
+  // Direct profile URLs use a remote ID even when the merged catalog retains
+  // the curated ID. Match the profile renderer when rebuilding for actions.
+  ship=ship||SHIPS.find(x=>String(x.sourceId||'')===id);
   const saved=state.savedLoadouts?.[id]?.[state.profileLoadoutMode];
   return buildShipLoadout({
     ship,data,wikiFacts:wikiFactsCache.get(id)||null,
@@ -208,17 +214,17 @@ function warning() {
   // Do not interrupt ordinary browsing with successful source/asset notices.
   if (status !== 'partial' && status !== 'failed') return '';
   const summary = status === 'partial'
-    ? 'Some catalog data is unavailable. Available records can still be browsed.'
-    : 'Live catalog data is unavailable. Showing locally available records.';
+    ? 'Some catalog data could not load. You can still browse the records we have.'
+    : 'The live catalog could not load. Showing the built-in records for now.';
   return `<div class="info-banner source-availability-warning" role="status"><span class="info-dot">!</span><div><strong>Limited catalog data.</strong> ${E(summary)} <button class="inline-action" data-action="sync-data">Retry</button></div></div>`;
 }
 function sourceDisclosure() {
   const status = state.sync.status;
   const descriptions = {
-    ready: 'Live community indexes loaded.',
-    partial: 'Some live records are unavailable; local fallback and reachable sources remain usable.',
-    failed: 'Live sources are unavailable; showing the local fallback catalog.',
-    loading: 'Live data is loading; local fallback remains available.'
+    ready: 'Community catalogs are loaded.',
+    partial: 'Some records could not load. The built-in catalog and available sources still work.',
+    failed: 'Live sources could not load. You can still use the built-in catalog.',
+    loading: 'Loading live data. You can browse the built-in catalog while you wait.'
   };
   const checked = state.sync.shipVersion
     ? `<p>Ship snapshot: ${E(new Date(state.sync.shipVersion).toLocaleDateString())}.</p>` : '';
@@ -226,7 +232,7 @@ function sourceDisclosure() {
     <p>${E(descriptions[status] || descriptions.loading)} Current source response: ${state.sync.ships.toLocaleString()} ship entries, ${state.sync.equipment.toLocaleString()} equipment entries.</p>
     ${checked}
     <p>Original game-client artwork is linked from independent fan repositories, not hosted by Yostar or Manjuu. Last image audit: ${assetCoverage.availableShipThumbnails}/${assetCoverage.indexedShipsAtAudit} ship thumbnails and ${assetCoverage.availableEquipmentIcons} equipment icons. Some images may be unavailable.</p>
-    <p>Nation icons and other game artwork are owned by their respective rights holders. Browse and equipment compatibility data are third-party records, not publisher endorsements or verified combat results. Equipment hull filters show potential class eligibility, not individual ship or slot legality. Combat rankings are provisional scenario-specific research. Fleet suggestions use curated role matches rather than a complete numerical skill/gear simulator; ship profiles now offer source-matched equipment candidates, not yet optimized full loadouts; skill synergy, individual slot exceptions and damage calculations remain unfinished.</p>
+    <p>Game artwork belongs to its respective rights holders. Our catalogs use community data and are not publisher-endorsed. Hull filters help narrow down gear, but individual ships and slots can have exceptions. Rankings are early advice for specific matchups. Fleet suggestions match reviewed ship roles; they do not simulate a full battle. Loadouts show gear that fits, with limited damage and timing comparisons where we have enough data. Complete builds and skill synergy still need work.</p>
     <div class="source-disclosure-links">
       ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/IMAGE_ASSETS.md','Artwork credits & rights')}
       ${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/CATALOG_FILTERS.md','Catalog coverage & compatibility')}
@@ -240,7 +246,7 @@ function contextPanel() {
 
 function renderOverview() {
   return `<div class="hero">
-    <div class="hero-copy">${eyebrow('YOUR FLEET. YOUR DECISION.')}<h1>Intelligence<br><em>above instinct.</em></h1><p>A research-first Azur Lane workbench. Explore the entire game, organize your fleets, and trace decisions back to evidence.</p>
+    <div class="hero-copy">${eyebrow('YOUR FLEET. YOUR DECISION.')}<h1>Know your ships.<br><em>Build your fleet.</em></h1><p>Find ships and gear for the fights ahead. Plan your fleets, compare your options, and see the reasons behind the advice.</p>
       <div class="hero-actions"><button class="primary-btn" data-action="navigate" data-page="fleet">Open Fleet Lab <span>↗</span></button><button class="outline-btn" data-action="navigate" data-page="modes">Explore Game Modes</button><button class="outline-btn" data-action="navigate" data-page="tiers">Tier Boards ♛</button></div>
     </div>
     <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="radar-center"><div class="compass-rose">✦</div><span>AVALON</span><small>TACTICAL INTELLIGENCE</small></div><span class="coord coord-a">N 35° 42′</span><span class="coord coord-b">TACTICAL SYSTEM // 001</span></div>
@@ -277,7 +283,7 @@ function renderShips() {
   ${renderCatalogIndex({kind:'ships',records:SHIPS,query:state.query,nation:state.shipNation,collabSeries:state.shipCollabSeries,hull:state.hull,shipLimit:state.shipVisibleCount,renderCard:renderShipRosterTile,sourceStatus:state.sync.status,sort:state.shipSort,descending:state.shipDescending,rarity:state.shipRarity,shipAdvancedOpen:state.shipAdvancedOpen})}`;
 }
 function renderAugments() {
-  return sectionHeading('Augment Modules','SPECIAL EQUIPMENT','Browse source-linked modules. Skill impact and combat rankings are still being developed.',true)+
+  return sectionHeading('Augment Modules','SPECIAL EQUIPMENT','Browse augment modules and their sources. We are still checking how their skills affect the best choice.',true)+
     renderAugmentIndex({records:AUGMENT_CATALOG,query:state.augmentQuery,type:state.augmentType,rarity:state.augmentRarity,limit:state.augmentVisibleCount});
 }
 function renderEquipment() {
@@ -366,7 +372,7 @@ function renderPicker() {
   <div class="picker-footer"><button type="button" class="outline-btn compact" data-action="clear-slot" ${assigned?'':'disabled'}>Remove assignment</button><button type="button" class="ghost-btn" data-action="close-picker">Close</button></div></aside></div>`;
 }
 function renderSources() {
-  return `${sectionHeading('Trust the trail, not the hype.', 'SOURCES & METHODOLOGY', 'Sources are explicit; the project does not convert popular opinions into verified performance figures.')}
+  return `${sectionHeading('Where the advice comes from', 'SOURCES & METHODOLOGY', 'See where our data and advice come from, what we have checked, and what still needs work.')}
   ${sourceDisclosure()}<details class="method-disclosure"><summary>Wiki connectivity notes</summary><div class="source-alert"><strong>⚠ Wiki crawler mismatch — live site not declared broken</strong><p>Our web retrieval results for Koumakan contained unrelated fragments of novels, even on several indexed wiki pages. The retrieved pages may be cached, poisoned, or crawler-specific; the cause is unconfirmed. The wiki works in normal browsers reported by users. Koumakan’s /w/api.php endpoint has returned valid page metadata and Musashi wikitext from GitHub Actions; GroupID-checked wiki facts now load selectively for ship profiles; this does not imply full wiki ingestion, reuse permission or a complete game mechanics model. See Sources documentation.</p></div></details>
   <div class="source-grid">${SOURCES.map(source => `<article class="source-card">${eyebrow(source.type)}<h3>${E(source.name)}</h3><p>${E(source.note)}</p>${link(source.url,'Open source')}</article>`).join('')}</div>
   <div class="method-card"><h2>Three different things. Never one misleading tier.</h2><div class="method-grid"><div><span class="method-num">01</span><h3>Game facts</h3><p>Observed or sourced mechanics with version, link, validation status, and licensing notes.</p></div><div><span class="method-num">02</span><h3>Community evidence</h3><p>Tests, guides and discussion with attribution, limitations, and scenario context.</p></div><div><span class="method-num">03</span><h3>AVALON analysis</h3><p>Independent calculations and judgment, labeled as inference with assumptions and uncertainty.</p></div></div><p class="doc-link">${link('https://github.com/Avalon1230/avalon-azurlane/blob/main/docs/SOURCES.md','Read the complete provenance policy')}</p></div>`;
@@ -534,7 +540,7 @@ function render() {
       wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel
     })+(state.profileGearId?renderDetails(state.profileGearId):'')+
       (loadoutModel&&state.profileLoadoutPicker!==null
-        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount}):'')+
+        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount,combatContext:(combatContext=combatScenario.select(loadoutModel.sourceId,state.profileLoadoutPicker,loadoutModel.mode))}):'')+
       (loadoutModel&&state.profileAugmentId
         ?renderAugmentDetails(loadoutModel.slots.flatMap(slot=>slot.candidates)
           .find(item=>item.id===state.profileAugmentId&&item.kind==='augment')):'');
@@ -717,7 +723,7 @@ function handleAction(target) {
     const ship=SHIP_MAP.get(state.detail?.id);
     const data=detailedShipRecord(state.shipDetails.data,state.detail?.sourceId);
     const model=currentShipLoadoutModel(ship,data,state.detail?.sourceId);
-    if(!validateManualChoice(model,index,equipId))return notify('This item is not source-matched to that slot.');
+    if(!validateManualChoice(model,index,equipId))return notify('We cannot confirm that this item fits that slot.');
     const key=String(state.detail.sourceId);
     if(!/^\d{2,8}$/.test(key))return;
     if(!state.savedLoadouts[key]||typeof state.savedLoadouts[key]!=='object')state.savedLoadouts[key]={};
@@ -884,11 +890,21 @@ document.addEventListener('click', event => {
   const target = event.target.closest('[data-action]');
   if (!target || target.disabled) return;
   // A click within the picker should not close it unless it hits the backdrop itself.
-  if (['close-picker','close-detail','loadout-augment-close'].includes(target.dataset.action) && target.classList.contains('picker-backdrop') && event.target!==target) return;
+  if (['close-picker','close-detail','loadout-augment-close','loadout-close-alternatives'].includes(target.dataset.action) && target.classList.contains('picker-backdrop') && event.target!==target) return;
   if(target.dataset.action==='profile-art-close' && target.classList.contains('ship-art-overlay') && event.target!==target) return;
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  const combatField=event.target.dataset.combatField;
+  if(['armor','movement','reload','stat','duration','wing'].includes(combatField)){
+    combatContext[combatField]=['reload','stat','duration'].includes(combatField)?(event.target.value.trim()===''?null:Number(event.target.value)):event.target.value;
+    const scroll=event.target.closest('.detail-scroll')?.scrollTop||0;
+    render();
+    const restored=document.querySelector('[data-combat-field="'+combatField+'"]');
+    restored?.focus({preventScroll:true});
+    const container=restored?.closest('.detail-scroll');if(container)container.scrollTop=scroll;
+    return;
+  }
   const id=event.target.id, value=event.target.value;
   if(id==='augment-type-filter'||id==='augment-rarity-filter'){
     if(id==='augment-type-filter')state.augmentType=value;

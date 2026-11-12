@@ -15,6 +15,7 @@ jobs:
           node-version: '22'
       - run: npm run check
       - run: npm test
+      - run: npm run test:combat-source
   viewport:
     runs-on: ubuntu-24.04
     permissions:
@@ -27,5 +28,6 @@ jobs:
       - run: npm install --no-save playwright@1.56.1
       - run: google-chrome --version
       - run: node scripts/viewport-smoke.mjs
+      - run: node scripts/combat-interaction-smoke.mjs
       - run: node scripts/augment-image-smoke.mjs
       - run: node scripts/collab-logo-smoke.mjs

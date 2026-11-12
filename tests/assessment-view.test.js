@@ -13,7 +13,7 @@ test('ship recommendations explain context, alternatives and sources without edi
 });
 test('unsupported modes show not evaluated, not fabricated grades',()=>{
  const x=renderAssessmentBoard({boardId:'ships',filter:'exercises'});
- assert.match(x,/No reviewed assessments/);
+ assert.match(x,/No reviewed recommendations/);
  assert.doesNotMatch(x,/name="rank"/);
 });
 test('equipment lists researched gear, not personal pickers',()=>{

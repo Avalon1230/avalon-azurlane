@@ -1,8 +1,14 @@
+## v0.8.7 — Combat Mechanics Foundation (PR; not deployed)
+
+Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
+
+This is still **WIP**: it compares specific parts of a build, not a complete battle or a best-in-slot list. Moving targets, missing data and conflicting records can prevent a reliable comparison. Reload uses constants checked against the game client; that resolved the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+
 # AVALON — Azur Lane Intelligence
 
-An independent, evidence-driven **Azur Lane** research and fleet-planning project.
+An independent **Azur Lane** companion for choosing ships, comparing gear and planning fleets.
 
-> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **The ship loadout planner is explicitly labeled WIP: auto-filled gear is a compatibility placeholder, not a combat recommendation. Validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
+> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. Fleet Lab can suggest lineups from 39 reviewed ships and plan all four OpSi surface fleets together. **The loadout planner is WIP: auto-filled gear fits the recorded slots, but we haven’t confirmed the best builds. Complete combat optimization, skill-timing simulation and verified best-in-slot rankings are still ahead.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -12,7 +18,7 @@ The website's **Updates** section reads directly from `CHANGELOG.md`, so release
 
 ## Feature maturity labels
 
-AVALON clearly marks **Equipment, Augments, Fleet Lab and Tier Boards** as **WIP** in the navigation and section headings. Their catalogs, manually editable workspaces and already sourced records remain usable; labels qualify the **unfinished combat intelligence**, not basic browsing or user favorites. Ship Index remains a functional roster, while its loadout planner retains its own independent WIP warning.
+**Equipment, Augments, Fleet Lab and Tier Boards** carry a **WIP** label because their combat advice is still being developed. You can still browse the catalogs, edit fleets and save favorites. Ship Index works as a roster; its loadout planner has a separate WIP label.
 
 ## Collaboration archives
 
@@ -22,7 +28,7 @@ Every series card uses an **original in-game ship portrait** from that collabora
 
 ## Mission
 
-Make ship selection, equipment decisions, and fleet building more useful and explainable by combining verifiable game mechanics, attributed public community evidence, and independently reasoned analysis.
+Help you choose ships and gear with clear reasons: what works, when it works, and what you give up. Use game mechanics and credited community research, and be honest about what we haven’t checked.
 
 The goal is to answer practical questions across **the entire game**, such as:
 
@@ -35,7 +41,7 @@ The goal is to answer practical questions across **the entire game**, such as:
 
 Favorite-character ("waifu") selections are valid preferences, but will be kept separate from maximum-combat-efficiency comparisons.
 
-## Run the prototype
+## Run locally
 
 No build step or external JavaScript dependencies are needed. Serve the repository root over HTTP (ES modules do not load reliably from `file://`):
 
@@ -236,3 +242,8 @@ Code licensing and third-party data/media permissions will be handled explicitly
 This pass resolves source-trust and UI defects reported in the v0.8.3 browser review: Aquila's second-aircraft-slot fighter/healer versus dive-bomber/offense condition is explicitly described, the Series 8 Mecklenburg 305mm gun is not misidentified as MK7, and the ship's lower Equipment slots section reuses the planner's resolved source-slot model. The slot alternatives drawer supports filtering and progressive access to **every source-eligible item**, not only the first 50. Choices are visibly labeled **Compatible candidate** or **Personal pick**; no generic default is promoted to a reviewed best-in-slot choice. Responsive grid min-size rules reduce page-level overflow and keep controls reachable across phone/tablet/desktop layouts.
 
 The full-game optimization roadmap is unchanged. These fixes do not add a gear optimizer, canonical alias migrations, richer weapon dossiers or inventory-constrained fleets. The release merged in [PR #20](https://github.com/Avalon1230/avalon-azurlane/pull/20) at `65bec712`. PR and main quality checks passed **178/178 unit tests** and **15 browser fixture viewport checks** at 360/390/768/1024/1280 px; [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded. A full published-site visual regression and catalog-wide review are separate from these checks.
+
+
+### v0.8.7 QA corrections (PR #28, unmerged)
+
+Combat comparisons now preserve source parallel/capacity, reject unsupported weapon families and show exclusion reasons. Scenario assumptions reset between ships, slots and modes; evaluations preserve saved gear. Aquila current/reference wings use the skill condition of the evaluated wing. See [the correction evidence and limits](docs/COMBAT_MECHANICS.md). Aircraft DPS, effective healing, full optimization and current-client freshness remain unverified.

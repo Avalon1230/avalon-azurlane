@@ -41,19 +41,19 @@ test('acquisition parser rejects corrupt sources and unsafe values without inven
 test('equipment inspection distinguishes loading, documented, unknown and source failure states',()=>{
   const index=parseEquipmentDrops(sample());
   const loading=renderEquipmentAcquisition(gear('44320'),{status:'loading'});
-  assert.match(loading,/Looking up documented acquisition sources/);
+  assert.match(loading,/Checking where to get this gear/);
   const found=renderEquipmentAcquisition(gear('44320'),{status:'ready',index});
   assert.match(found,/Where to obtain/);
   assert.match(found,/Research \(Series 8\)/);
   assert.match(found,/May 2, 2026/);
-  assert.doesNotMatch(found,/No verified acquisition location/);
+  assert.doesNotMatch(found,/no confirmed location/);
   const recipe=renderEquipmentAcquisition(gear('1020'),{status:'ready',index});
   assert.match(recipe,/Gear Lab: crafting recipe recorded/);
   const unknown=renderEquipmentAcquisition(gear('99999'),{status:'ready',index});
-  assert.match(unknown,/This does not mean the equipment is unobtainable/);
+  assert.match(unknown,/It may still be obtainable/);
   const offline=renderEquipmentAcquisition(gear('44320'),{status:'error'});
   assert.match(offline,/data-action="equipment-acquisition-retry"/);
-  assert.match(offline,/Acquisition source is unavailable/);
+  assert.match(offline,/drop-data source could not load/);
 });
 test('acquisition fetch is lazy, read-only and points to the fixed source snapshot',async()=>{
   let requested='';

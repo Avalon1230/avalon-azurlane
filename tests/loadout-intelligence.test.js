@@ -106,7 +106,7 @@ test('missing slots and unsupported categories must not receive synthetic equipm
   const unsupported=buildShipLoadout({ship:unknownShip,data:{id:'99999999',slots:[{type:'Unconfirmed Beam Cannon'}]},equipment});
   assert.equal(unsupported.slots[0].selected,null);
   assert.equal(unsupported.slots[0].verified,false);
-  assert.match(candidateEvidence(unsupported.slots[0],null),/Ship-specific slot category is not verified/);
+  assert.match(candidateEvidence(unsupported.slots[0],null),/confirmed this ship’s slot type/);
 });
 test('ship profile embeds tactical planner beneath identity but outside artwork',()=>{
   const model=buildShipLoadout({ship,data,wikiFacts:wiki,equipment});
@@ -141,7 +141,7 @@ test('loadout UI escapes untrusted equipment names and ship slot types',()=>{
   assert.match(html,/&lt;svg onload=alert\(1\)&gt;/);
   assert.doesNotMatch(html,/<svg/);
   assert.doesNotMatch(html,/class="loadout-slot-explanation"/);
-  assert.match(renderLoadoutAlternatives(model,0),/not a combat recommendation/);
+  assert.match(renderLoadoutAlternatives(model,0),/not a performance ranking/);
 });
 
 test('standard ship display has exactly three weapon, two provisional auxiliary and one augment position',()=>{
@@ -159,7 +159,7 @@ test('standard ship display has exactly three weapon, two provisional auxiliary 
   assert.equal(model.slots[3].selected,null); // fixture contains no auxiliary candidates
   assert.equal(model.slots[4].selected,null);
   assert.equal(model.slots[5].selected?.kind,'augment');
-  assert.match(model.slots[3].explanation,/no corresponding equipment/);
+  assert.match(model.slots[3].explanation,/catalog has no matching gear/);
   assert.match(model.slots[5].explanation,/hull type/);
 });
 test('manually chosen auxiliaries remain source-matched and the auto-default is not called optimal',()=>{
@@ -214,3 +214,4 @@ test('compact planner uses two rows of three, retains click-to-inspect, and hide
   assert.match(detail,/data-action="loadout-select" data-slot="5" data-equip="aug-/);
   assert.match(renderLoadoutAlternatives(model,3),/Source: AzurLaneData/);
 });
+

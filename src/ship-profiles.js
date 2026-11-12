@@ -242,7 +242,7 @@ function acquisitionPanel(data,wiki=null) {
   return profilePanel('Acquisition',rows.length?
     '<div class="ship-info-rows">'+rows.map(([name,value])=>'<div><span>'+E(name)+'</span><strong>'+E(value)+'</strong></div>').join('')+'</div>'+
     (wiki?.dropNote?'<p class="ship-data-source">Historical availability; may not reflect current construction pools or active events.</p>':'')
-    :'<p class="profile-unavailable">Acquisition data unavailable in this source.</p>','ship-profile-acquire');
+    :'<p class="profile-unavailable">This source does not list where to get this ship.</p>','ship-profile-acquire');
 }
 
 function sourcePanel(data, ship, wiki=null) {
@@ -251,7 +251,7 @@ function sourcePanel(data, ship, wiki=null) {
   const basis=wiki
     ?'Ship stats, armor, mount counts, build time and progression facts are drawn from the ship’s verified Koumakan Wiki template, matched by game GroupID. Lycoris supplies skill descriptions and other fields without verified wiki equivalents.'
     :'This profile currently uses the Lycoris game-data snapshot. Wiki facts were not available or have not yet been verified for this ship; the statistics may use a different affinity or enhancement basis.';
-  return profilePanel('Sources & further research',
+  return profilePanel('Sources & more information',
     '<p>'+E(basis)+'</p>'+
     '<p>Exact barrage coefficients, augment eligibility, ship-specific equipment legality and alternative affinity variations still need separate verification. These profiles do not imply AVALON combat rankings.</p>'+
     '<div class="ship-profile-actions">'+
@@ -268,7 +268,7 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
     const message=status==='failed'
       ? 'Detailed game data could not be loaded. The ship index and saved fleet remain available.'
       : status==='ready'
-        ? 'No matching detailed record was found in the current source snapshot.'
+        ? 'We could not find this ship’s details in the current snapshot.'
         : 'Loading ship statistics, skills and equipment information…';
     return '<div class="ship-profile-page"><div class="ship-profile-loading">'+
       '<h1>'+E(name)+'</h1><p>'+message+'</p>'+back+
@@ -292,3 +292,4 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
     acquisitionPanel(data,wiki)+progression+sourcePanel(data,ship,wiki)+
     '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
 }
+

@@ -6,8 +6,8 @@
 
 export const TIER_BOARDS = Object.freeze({
   ships: {
-    title: 'Ship Combat', icon: '⚓', kind: 'ships', label: 'AVALON contextual assessments', readOnly: true,
-    subtitle: 'See which ships AVALON recommends for a particular mode and role, with rationale, evidence, trade-offs and confidence.',
+    title: 'Ship Combat', icon: '⚓', kind: 'ships', label: 'Recommendations by role', readOnly: true,
+    subtitle: 'See which ships suit each mode and role, why they work, and when to choose someone else.',
     tiers: ['EX', 'S', 'A', 'B', 'C', 'D'],
     meanings: { EX:'Exceptional', S:'Outstanding', A:'Strong', B:'Good', C:'Situational', D:'Low priority' },
     note: 'AVALON provisional editorial grades, not simulated performance or universal scores. Every grade is scoped to a role, source-linked, and revisable; unreviewed ships remain unevaluated.'

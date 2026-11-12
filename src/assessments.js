@@ -102,7 +102,7 @@ export const AVALON_ASSESSMENTS = Object.freeze([
 ]);
 
 export const GRADE_ORDER = Object.freeze({EX:0,S:1,A:2,B:3,C:4,D:5});
-export const confidenceLabel = Object.freeze({high:'Multiple relevant sources',moderate:'Guide-supported, provisional',low:'Exploratory'});
+export const confidenceLabel = Object.freeze({high:'Multiple relevant sources',moderate:'Guide-supported; still being reviewed',low:'Early research'});
 export function assessmentsFor(board, mode='all', query='', grade='all') {
   const term=String(query||'').trim().toLocaleLowerCase();
   return AVALON_ASSESSMENTS.filter(item=> item.board===board && (mode==='all'||item.mode===mode) && (grade==='all'||item.grade===grade) && (!term||[item.name,item.role,item.rationale,item.caveat,...item.alternatives].join(' ').toLocaleLowerCase().includes(term)))

@@ -48,16 +48,16 @@ export function renderEquipmentAcquisition(record,{status='idle',index=null,erro
   const hasSources=match&&(match.locations.length||match.craftable);
   let body='';
   if(status==='loading'||status==='idle')
-    body='<p class="equipment-acquisition-muted" role="status">Looking up documented acquisition sources…</p>';
+    body='<p class="equipment-acquisition-muted" role="status">Checking where to get this gear…</p>';
   else if(status==='error')
-    body='<p class="equipment-acquisition-muted" role="status">Acquisition source is unavailable. The equipment can still be researched through the wiki.</p>'+
-      '<button type="button" class="outline-btn compact" data-action="equipment-acquisition-retry">Retry acquisition lookup</button>';
+    body='<p class="equipment-acquisition-muted" role="status">The drop-data source could not load. You can still check the wiki for this gear.</p>'+
+      '<button type="button" class="outline-btn compact" data-action="equipment-acquisition-retry">Try again</button>';
   else if(hasSources)
     body=(match.locations.length?'<ul class="equipment-acquisition-list">'+
       match.locations.map(source=>'<li>'+esc(source)+'</li>').join('')+'</ul>':'')+
       (match.craftable?'<p class="equipment-acquisition-craft">Gear Lab: crafting recipe recorded in this snapshot.</p>':'');
   else
-    body='<p class="equipment-acquisition-muted">No verified acquisition location was recorded for this equipment in this snapshot. This does not mean the equipment is unobtainable.</p>';
+    body='<p class="equipment-acquisition-muted">This snapshot has no confirmed location for this gear. It may still be obtainable; check current events, shops or the wiki.</p>';
 
   return '<section class="equipment-acquisition-panel" aria-label="Where to obtain equipment">'+
     '<h3>Where to obtain</h3>'+body+

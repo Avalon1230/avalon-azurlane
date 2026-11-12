@@ -7,6 +7,7 @@ import {renderCatalogIndex} from '../src/catalog-index.js';
 import {renderLoadoutAlternatives} from '../src/loadout-view.js';
 import {renderAugmentIndex} from '../src/augment-index.js';
 import {allAugmentRecords} from '../src/augment-manifest.js';
+import {combatModel} from '../tests/helpers/combat-fixture.js';
 
 const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
 const ship={id:'lyc-60701',sourceId:'60701',name:'Aquila',hull:'CV',nation:'Sardegna Empire',rarity:'Super Rare'};
@@ -73,6 +74,8 @@ try{
     const page=await browser.newPage({viewport:{width,height:800},deviceScaleFactor:1});
     await page.route(/^https?:\/\//,route=>route.abort());
     for(const [label,markup,selectors] of [
+      ['combat guns',profile+renderLoadoutAlternatives(combatModel('40303'),0),['.combat-comparison','#combat-armor','#combat-reload','.combat-evidence']],
+      ['combat aircraft',profile+renderLoadoutAlternatives(combatModel('60701'),1),['.combat-comparison','#combat-wing','#combat-movement','.combat-evidence']],
       ['ship profile',profile,['.ship-profile-overview','.loadout-tile-more','.ship-art-preview','.ship-profile-nav','#ship-loadout-title','.loadout-status-wip','.loadout-wip-note']],
       ['equipment index',equipment,['#catalog-search','.equipment-advanced-toggle','.equipment-category-tab','#equipment-hull-select']],
       ['augment directory',augments,['#augment-search','#augment-type-filter','#augment-rarity-filter','[data-action="augment-clear-filters"]','.augment-tile','.augment-load-more']],
@@ -124,3 +127,4 @@ try{
 }finally{
   await browser.close();
 }
+

@@ -67,7 +67,7 @@ test('family mode only collapses exact-name source variants, not shared artwork'
   assert.match(html,/data-action="equipment-family-open" data-family-id="fer-1000"/);
   assert.match(html,/Warhawk Fighter<\/article>/);
   const panel=renderEquipmentFamilyDetails(records.slice(0,2));
-  assert.match(panel,/SOURCE-MATCHED VARIANTS/);
+  assert.match(panel,/EQUIPMENT VARIANTS/);
   assert.match(panel,/data-action="equip-details" data-equip="fer-1000"/);
   assert.match(panel,/data-action="equip-details" data-equip="fer-1020"/);
   assert.match(panel,/does <strong>not<\/strong> establish an upgrade path/);
