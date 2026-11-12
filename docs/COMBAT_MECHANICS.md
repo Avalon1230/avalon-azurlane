@@ -29,9 +29,13 @@ Checked **2026-11-12**. Dataset: [Linuxxy0's preserved MrLar AzurLaneData](https
 
 The source README explicitly permits data reuse under MIT and additionally requires credit to Manjuu, Yongshi and Yostar. The full MIT notice is retained in `THIRD_PARTY_NOTICES.md`. Only factual BWIKI reference values and links are recorded, not copied guide text or rankings. No permission to redistribute its prose or media is assumed. Koumakan Combat and Damage Calculations returned HTTP 403 during this pass; they are **not** represented as newly verified. An attempted upstream MrLar GitHub lookup returned 404. The accessible pinned extract is reproducible, but freshness beyond May is unresolved. Its parser is closed source: exact record reproduction does not independently validate every field against the game client.
 
+### Independent client corroboration
+
+[AzurLaneTools/AzurLaneLuaScripts](https://github.com/AzurLaneTools/AzurLaneLuaScripts/tree/3fb6befa2f969bd879de2341cdf41a571852a95f), commit **3fb6befa2f969bd879de2341cdf41a571852a95f** (2026-11-11), reports **EN 9.3.390** in versions/EN.txt (blob ec1da6e7c5c7299ee9f9904f968d9384d4ee657b). EN/mod/battle/data/battleconfig.lua blob **ccabc5632554a70d3bf1bc71a416c352e6fd14cb** establishes reload constants K1=6, K2=100, K3=3.14. battleformulas.lua blob **482c1407fa3a73584b94aaf9edbcf9faea4418b0** confirms how those constants are used. Online CI checks both exact blob identities and formula/constant facts. No client source file is redistributed: reuse permission for its code was not established; only mathematical facts and short verification strings are used. This verifies the reload formula independently, not every May equipment record's current stats.
+
 ## Formula boundaries
 
-- Reload seconds = raw reload / (6 × sqrt((final RLD + 100) × pi)); `reload_seconds` bypasses conversion.
+- Reload seconds = raw reload / (6 × sqrt((final RLD + 100) × 3.14)); `reload_seconds` bypasses conversion.
 - Gun cycle = reload + source volley delay + explicitly chosen approximate absolute cooldown (0.3s vanguard, 0.2s ordinary one-capacity BB in examples). These are published approximations, not frame-perfect animations.
 - Ideal volley = base damage × coefficient × slot efficiency × (1 + final stat × ratio / 100) × projectile count × mounts × weighted armor modifier. Excludes the random +0/1/2 term, rounding, crit, burn, hit probability, shields, all skills and mount staggering.
 - Air-wing load = weighted aircraft reload × 2.2 × loading multiplier + 0.033s. Interception uses intercept reload and omits 2.2. Aquila's dive-bomber loading multiplier is 0.9; the absolute cooldown is not reduced. This is loading time, not projectile arrival time.
@@ -52,7 +56,7 @@ No **Best Overall**, **Best Boss** or universal BIS badge is awarded. Attributed
 
 ## Contradictions and known gaps
 
-- Mk6 14340 raw reload 3611 converts to **24.009676s** at RLD 100, while BWIKI reports **24.02s**. The difference exceeds rounding to two decimals; timing rankings exclude this item pending resolution. Its independently corroborated direct-volley reference remains tested.
+- Resolved during development: using Math.PI yielded Mk6 reload 24.009676s versus BWIKI 24.02s. Direct inspection of the EN client constants establishes K3=3.14. The corrected result rounds to 24.02s and Mk6 can be compared. This is a verified formula correction, not a widened test tolerance.
 - Type 98 shell range is 45–55 in the extract versus 40–60 on BWIKI. Range-based targeting is not evaluated; no winner is inferred from that field.
 - Current gear, enhanced augments, retrofit states, full skill inventory, burn/armor-break, live buff stacking, movement/hit probability, air losses, wave layouts, real arrival timing, OpSi adaptation, gear inventory and four-fleet optimization remain incomplete.
 - Many catalog options fall outside the 11-record reviewed slice. The UI reports the compared/compatible counts. Unknown ships may still receive supported gun component calculations, but no invented skill evaluation.
@@ -61,6 +65,6 @@ No **Best Overall**, **Best Boss** or universal BIS badge is awarded. Attributed
 
 `node scripts/build-combat-data.mjs --check`; `node --test`; package syntax checks; `node scripts/verify-combat-source.mjs` (network required). Online CI checks pinned Git blob hashes and exact retained equipment/skill records. `node scripts/audit_loadouts.mjs .audit` rechecks the existing full downloaded roster. Chromium runs existing responsive fixtures plus gun/aircraft comparison drawers at seven widths, and actual app handlers at 390/1280px using isolated catalog fixtures.
 
-Independent QA should challenge formula conventions and absolute cooldowns; confirm Aquila skill conditions against a current client; resolve the two source discrepancies; inspect armor-driven HE/AP reversals and missing-data gates; verify saved gear survives changes, Escape and reload; and distinguish a numerical component calculation from a verified complete-build recommendation. Synthetic UI fixtures and hand calculations are not real-game battle validation.
+Independent QA should challenge formula conventions and absolute cooldowns; confirm Aquila skill conditions against a current client; verify the resolved reload constant and unresolved range discrepancy; inspect armor-driven HE/AP reversals and missing-data gates; verify saved gear survives changes, Escape and reload; and distinguish a numerical component calculation from a verified complete-build recommendation. Synthetic UI fixtures and hand calculations are not real-game battle validation.
 
 Next: v0.8.8 expands current source coverage, validates skill/accuracy/burn and target behavior, and supports trustworthy short loadout recommendations. v0.9 consumes validated timed events and inventory constraints for fleet-equipment synergy, including four OpSi fleets. Neither milestone is claimed complete here.

@@ -11,7 +11,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 ### Evidence boundaries
 - WIP: no universal BIS, full simulation, moving-target accuracy, burn/barrage totals, inventory optimization or four-fleet synergy. Compatibility defaults are unchanged.
-- Mk6 reload conflict is explicitly excluded from timing comparisons; Type98 range conflict is recorded. May 2026 extract is not certified current-client data; Koumakan access was blocked during research.
+- Reload uses the client constant 3.14 after resolving the initial Mk6 discrepancy; Type98 range conflict remains recorded. May 2026 extract is not certified current-client data; Koumakan access was blocked during research.
 - See docs/COMBAT_MECHANICS.md for formulas, representative comparisons, source revisions and QA handoff.
 
 ## [0.8.6] - 2026-11-11

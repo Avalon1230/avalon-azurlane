@@ -5,7 +5,6 @@ import {skillCondition} from './combat-skills.js';
 
 export const COMBAT_PRESET = Object.freeze({level:10,reload:100,stat:100,duration:60,armor:'mixed',movement:'ideal',enemyAA:0});
 export const MECHANICS_CONFLICTS = Object.freeze({
-  '14340':{field:'reload',reason:'Pinned raw reload converts to 24.0097s; independent BWIKI table reports 24.02s. Timing comparison withheld pending resolution.'},
   '31040':{field:'shell_range',reason:'Pinned extract gives 45–55; BWIKI reports 40–60. Range is not evaluated.'}
 });
 const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -34,8 +33,9 @@ export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
   const rows=[],excluded=[];
   for(const {candidate,item} of mapped){
     if(!item||item.skills.length||!sourceSlot.types.includes(item.type)||item.hull_restriction.includes(ship.hullId))continue;
-    if(MECHANICS_CONFLICTS[item.id]?.field==='reload'){
-      excluded.push({sourceId:String(item.id),name:item.name,reason:MECHANICS_CONFLICTS[item.id].reason});continue;
+    const conflict=data.conflicts?.[item.id]||MECHANICS_CONFLICTS[item.id];
+    if(conflict&&['reload','damage','coefficient','armor'].includes(conflict.field)){
+      excluded.push({sourceId:String(item.id),name:item.name,reason:conflict.reason});continue;
     }
     const types=model.slots.map(s=>s.index===index?item.type:s.selected?.typeCode);
     const skill=skillCondition(model.sourceId,types);
@@ -63,6 +63,8 @@ export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
     rows.push({id:candidate.id,name:candidate.name,sourceId:String(item.id),kind:'gun',cycle:cycle.value,
       volley:volley.value,dps:volley.value/cycle.value,activations:timeline.events.length,
       directTotal:volley.value*timeline.events.length,barrageTriggers:skill.every?Math.floor(timeline.events.length/skill.every):null,
+      armorDps:Object.fromEntries(['light','medium','heavy'].map(armor=>[armor,directVolley(item,{level:c.level,
+        stat:c.stat+statBonus(item,item.weapon.stat,c.level),efficiency:sourceSlot.maxEfficiency,mounts:sourceSlot.maxMounts,armor}).value/cycle.value])),
       pattern:{count:item.weapon.count,volley:item.weapon.volley_info,spread:item.weapon.spread_angle,splash:item.weapon.splash,pierce:item.weapon.pierce,velocity:item.weapon.velocity},skill,
       evidenceClass:'reproducible-component',limitations:['All projectiles hit one target. No crit, burn, barrage, skill buffs, aim delay or mount staggering. Absolute cooldown is an approximation.']});
   }
@@ -71,7 +73,12 @@ export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
   // Preserve raw alternatives. No arbitrary aggregate score or full-build recommendation.
   const damageLeader=guns?[...rows].sort((a,b)=>b.dps-a.dps)[0]:null;
   const timingLeader=[...rows].sort((a,b)=>a.cycle-b.cycle)[0];
-  return {status:'partial',recommended:null,rows,excluded,damageLeader,timingLeader,context:c,
+  const alternative=guns?rows.find(r=>r.id!==damageLeader.id&&Object.keys(r.armorDps).some(a=>r.armorDps[a]>damageLeader.armorDps[a]))||rows.find(r=>r.id!==damageLeader.id):null;
+  const betterArmor=alternative?Object.keys(alternative.armorDps).filter(a=>alternative.armorDps[a]>damageLeader.armorDps[a]):[];
+  const alternativeReason=betterArmor.length?'Higher ideal direct DPS against '+betterArmor.join('/')+' armor.':
+    alternative?.cycle<damageLeader?.cycle?'Earlier firing and more main-gun trigger opportunities; barrage damage is not included.':
+      'No modeled damage or timing advantage here; retain as a compatible option, not a superior choice.';
+  return {status:'partial',recommended:null,rows,excluded,damageLeader,timingLeader,alternative,alternativeReason,context:c,
     coverage:{compared:rows.length,compatible:slot.candidates.length},source:data.source,
     modeNote:model.mode==='mobbing'?'Wave coverage and overkill are unknown; faster cycles offer more firing opportunities.':
       model.mode==='opsi'?'Adaptation, survival, Anti-Siren effects and fleet timing are not modeled.':

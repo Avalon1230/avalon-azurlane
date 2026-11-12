@@ -5,7 +5,7 @@ export function reloadSeconds(weapon, level, reload) {
   if(!Number.isInteger(level)||level<0||!finite(reload)||!finite(weapon?.reload?.[level], Number.MIN_VALUE))
     return unknown('Missing enhancement or final RLD');
   return {status:'calculated',value:weapon.reload_seconds ? weapon.reload[level]
-    : weapon.reload[level]/(6*Math.sqrt((reload+100)*Math.PI))};
+    : weapon.reload[level]/(6*Math.sqrt((reload+100)*3.14))};
 }
 export function armorWeights(armor) {
   if(['light','medium','heavy'].includes(armor))return ['light','medium','heavy'].map(x=>+(x===armor));

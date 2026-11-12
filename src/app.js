@@ -885,7 +885,7 @@ document.addEventListener('click', event => {
   const target = event.target.closest('[data-action]');
   if (!target || target.disabled) return;
   // A click within the picker should not close it unless it hits the backdrop itself.
-  if (['close-picker','close-detail','loadout-augment-close'].includes(target.dataset.action) && target.classList.contains('picker-backdrop') && event.target!==target) return;
+  if (['close-picker','close-detail','loadout-augment-close','loadout-close-alternatives'].includes(target.dataset.action) && target.classList.contains('picker-backdrop') && event.target!==target) return;
   if(target.dataset.action==='profile-art-close' && target.classList.contains('ship-art-overlay') && event.target!==target) return;
   handleAction(target);
 });

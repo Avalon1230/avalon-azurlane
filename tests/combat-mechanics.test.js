@@ -28,13 +28,13 @@ test('all eleven IDs agree with independently imported Fernando identities and f
     assert.ok(ship.skills.includes(SKILL_RULES[id].skillId));
   }
 });
-test('independent BWIKI Mk6 damage agrees; reload disagreement is recorded and excluded',()=>{
+test('independent BWIKI Mk6 damage and rounded reload agree using client K3=3.14',()=>{
   const w=eq(14340).weapon;
   assert.equal(w.damage[10],156);assert.equal(w.count,3);assert.equal(w.coefficient[10],1.05);
   assert.deepEqual(w.armor_mod,[1.4,1.1,0.9]);
-  assert.ok(Math.abs(reloadSeconds(w,10,100).value-24.02)>0.005);
-  assert.equal(MECHANICS_CONFLICTS['14340'].field,'reload');
-  assert.ok(!compareSlot(combatModel(),0).rows.some(r=>r.sourceId==='14340'));
+  close(reloadSeconds(w,10,100).value,24.02,0.005);
+  assert.equal(MECHANICS_CONFLICTS['14340'],undefined);
+  assert.ok(compareSlot(combatModel(),0).rows.some(r=>r.sourceId==='14340'));
   // Hand calculation using independently published numbers, zero FP, one 100% mount.
   close(directVolley(eq(14340),{level:10,stat:0,efficiency:1,mounts:1,armor:'light'}).value,687.96);
 });
@@ -80,15 +80,15 @@ test('Aquila healing/offensive branches are exclusive and skill-version gated',(
 });
 test('airstrike cooldown uses the full wing and separate interception reload',()=>{
   const wing=[{item:eq(17340),mounts:2},{item:eq(19140),mounts:2},{item:eq(28140),mounts:4}];
-  const expected=(1639*2+1786*2+1550*4)/8/(6*Math.sqrt(200*Math.PI))*2.2;
+  const expected=(1639*2+1786*2+1550*4)/8/(6*Math.sqrt(200*3.14))*2.2;
   close(airstrikeCycle(wing,{level:10,reload:100,loadingMultiplier:0.9}).value,expected*0.9+0.033);
-  close(airstrikeCycle(wing,{level:10,reload:100,interception:true}).value,1492/(6*Math.sqrt(200*Math.PI))+0.033);
+  close(airstrikeCycle(wing,{level:10,reload:100,interception:true}).value,1492/(6*Math.sqrt(200*3.14))+0.033);
   assert.equal(airstrikeCycle([],{level:10,reload:100}).status,'unknown');
 });
-test('Hood: earlier 381 salvo and armor-specific AP alternative; conflicting Mk6 excluded',()=>{
+test('Hood: earlier 381 salvo vs Mk6 light direct damage and armor-specific AP alternative',()=>{
   const light=compareSlot(combatModel(),0,{armor:'light'}),heavy=compareSlot(combatModel(),0,{armor:'heavy'});
   assert.equal(light.status,'partial');assert.equal(light.timingLeader.sourceId,'24340');
-  assert.equal(light.damageLeader.sourceId,'24340');assert.equal(heavy.damageLeader.sourceId,'91000');
+  assert.equal(light.damageLeader.sourceId,'14340');assert.equal(heavy.damageLeader.sourceId,'91000');
   assert.equal(light.rows[0].skill.chance,0.7);assert.equal(light.recommended,null);
 });
 test('Prinz Eugen: HE leads light direct damage, AP leads medium; barrage count is separate',()=>{
@@ -129,6 +129,10 @@ test('contradictory identity, slot efficiency or missing mechanics fail closed',
   assert.equal(compareSlot(m,0).status,'unknown');
   const broken=structuredClone(data);for(const x of Object.values(broken.equipment))x.weapon=null;
   assert.equal(compareSlot(combatModel(),0,{},broken).status,'unknown');
+  const contradictory=structuredClone(data);contradictory.conflicts={14340:{field:'damage',reason:'Two source values disagree'}};
+  const result=compareSlot(combatModel(),0,{},contradictory);
+  assert.ok(result.excluded.some(r=>r.sourceId==='14340'));
+  assert.ok(!result.rows.some(r=>r.sourceId==='14340'));
 });
 test('evaluation and armor changes preserve six positions, compatibility and saved choices',()=>{
   const m=combatModel('20403','general',{0:'fer-24340'}),before=JSON.stringify(m);

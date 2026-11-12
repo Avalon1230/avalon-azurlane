@@ -2,7 +2,7 @@
 
 The existing loadout alternatives drawer now compares source-identified gun damage and firing cycles under explicit armor/RLD assumptions, and Aquila's whole-air-wing loading and slot-dependent role. Eleven pinned equipment records support representative tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. Personal selections are never replaced.
 
-This is a **WIP component calculator**, not a complete simulator or verified best-in-slot list. Moving targets and incomplete/contradictory inputs remain unknown. Mk6 timing is withheld due to a source discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+This is a **WIP component calculator**, not a complete simulator or verified best-in-slot list. Moving targets and incomplete/contradictory inputs remain unknown. Reload uses independently checked client constants, resolving the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
 
 # AVALON — Azur Lane Intelligence
 

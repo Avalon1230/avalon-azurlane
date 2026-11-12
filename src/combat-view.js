@@ -17,7 +17,7 @@ export function renderCombatComparison(model,index,context={}){
     body=(leader?'<p><strong>Direct-hit leader:</strong> '+E(leader.name)+' — '+n(leader.dps)+' ideal damage/s. Skills and accuracy can change the result.</p>':'<p><strong>Role first:</strong> Fighter keeps Aquila’s healing/shielding; dive bomber enables preload and shorter loading. Neither is universally better.</p>')+
       '<p><strong>Fastest compared:</strong> '+E(fast.name)+' — '+n(fast.cycle)+'s '+(fast.kind==='aircraft'?'whole-wing loading cycle':'estimated cycle')+'. '+
       (fast.kind==='aircraft'?'Choose the role your fleet needs.':'Useful when an earlier shot or more main-gun triggers matters.')+'</p>'+
-      (leader?'<p><strong>Alternative:</strong> '+E(result.rows.find(r=>r.id!==leader.id)?.name)+' — compare another armor setting or firing cycle below before choosing.</p>':'')+
+      (result.alternative?'<p><strong>Alternative:</strong> '+E(result.alternative.name)+' — '+E(result.alternativeReason)+'</p>':'')+
       '<details class="combat-evidence"><summary>Calculations, conditions & sources</summary><p>'+E(result.modeNote)+'</p>'+
       (c.wing==='reference'?'<p>Reference air wing comparison only: Hellcat in slot 1, tested option in this slot, Barracuda in slot 3. This does not describe or change your saved wing.</p>':'')+
       '<p>Snapshot: '+E(result.source.snapshotDate)+'; +10 equipment, base-form MLB slots, level-10 reviewed skill conditions, no augment/retrofit effects. Scenario stats are editable assumptions, not your ship’s stats. Aircraft use the current three aircraft choices and supplied final RLD.</p>'+
