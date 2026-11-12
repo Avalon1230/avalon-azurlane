@@ -1,5 +1,7 @@
 ## Final QA follow-up: derived numeric overflow — 2026-11-12
 
+Verified implementation: `ca0971e3aa176c7db1515541310ed2e0f27f1421`, [passing CI 43237250720](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43237250720). **238/238 Node tests, 63/63 responsive cases and 10/10 application sessions passed**, along with syntax, generated-data integrity and all pinned source checks. Roster audit: 894 ships, 936 equipment, 5,363 populated slots per mode. Targeted coverage: evaluator 100% lines / 90.21% branches; mechanics 100% / 95.73%. The following documentation-only commit records these results; PR #28 links final-head CI. Independent QA approval is still required.
+
 The evaluator now checks every derived DPS value, encounter damage total and armor comparison before adding an equipment row or choosing a leader. A finite volley and cycle can still produce an infinite quotient or total. Such an option is excluded with a visible reason; an unknown armor result is never converted to zero.
 
 The independent QA reproducer uses Z23’s 160% gun slot, light armor, FP 1e308, RLD 1e307 and 60 seconds. Type 98 and Mk12 volleys remain finite (about 8.448e307 and 1.2672e308), but derived DPS and totals overflow. The corrected result is unknown, with two exclusions and no leader. Additional regressions cover finite DPS with an overflowing total and overflow/unknown results for armor types other than the selected armor. These are extreme-input robustness tests, not new game-performance claims.

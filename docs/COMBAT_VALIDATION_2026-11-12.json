@@ -188,5 +188,35 @@
     "malformed input and overflow gates",
     "Aquila evaluated wing skill condition",
     "session scenario reset"
-  ]
+  ],
+  "derivedOverflowFollowup": {
+    "date": "2026-11-12",
+    "implementationCommit": "ca0971e3aa176c7db1515541310ed2e0f27f1421",
+    "ci": "https://github.com/Avalon1230/avalon-azurlane/actions/runs/43237250720",
+    "node": {
+      "pass": 238,
+      "fail": 0
+    },
+    "viewport": {
+      "pass": 63,
+      "fail": 0
+    },
+    "appInteractions": {
+      "pass": 10,
+      "fail": 0,
+      "widths": [
+        390,
+        1280
+      ],
+      "fixtureBased": true
+    },
+    "regressions": [
+      "finite volley/cycle with overflowing DPS and total",
+      "finite DPS with overflowing total",
+      "unknown or overflowing armor alternative"
+    ],
+    "result": "Reject invalid rows before ranking; preserve exclusion reasons and saved picks",
+    "sourceChecks": "860 ships, 11 equipment, 9 skills, two formula/schema files and two original-client files passed",
+    "limitations": "Extreme-input robustness validation, not a new real-game performance claim"
+  }
 }
