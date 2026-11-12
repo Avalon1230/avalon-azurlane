@@ -1,6 +1,6 @@
 ## v0.8.7 supplement
 
-The existing compatibility planner now has a separate, source-backed **component comparison** in its drawer. Damage/cycle calculations, skill conditions, exact evidence, uncertainty gates and tests are documented in [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md). Historical statements below about no numerical model describe v0.8.6 and earlier. The new limited model still does not award best-in-slot/Recommended badges or override saved selections.
+The equipment drawer now compares **gun damage and timing**, plus supported aircraft loading and skill conditions. Read [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md) for the formulas, sources, tests and missing mechanics. The historical sections below describe v0.8.6 and earlier. These limited comparisons do not award best-in-slot badges or change your saved gear.
 
 # AVALON Tactical Loadout Intelligence — v0.8.5
 

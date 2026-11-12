@@ -83,7 +83,7 @@ function candidateExplanation(slot,mode){
   if(slot.kind==='augment')return 'The automatic augment choice prioritizes source ship exclusivity or published class eligibility; its skill effects have not been compared.';
   const alternatives=(slot.candidates||[]).filter(x=>x.id!==picked.id&&x.category===picked.category);
   const [key,label]=METRIC[mode]||[];
-  const base='This item was automatically displayed from eligible source candidates. ';
+  const base='This gear was auto-filled because it fits. ';
   if(key){
     const chosen=numeric(picked,key);
     const alt=alternatives.find(x=>numeric(x,key)!==null);
@@ -92,21 +92,21 @@ function candidateExplanation(slot,mode){
       const diff=chosen-other;
       return base+'At the source enhancement, it has '+metricLabel(picked,key,label)+
         ' versus '+metricLabel(alt,key,label)+' on '+alt.name+' ('+
-        (diff>0?'+':'')+diff+' difference). This explains the sort criterion; it does NOT compare damage, reload cycle, armor or skill synergy.';
+        (diff>0?'+':'')+diff+' difference). That explains the sorting order, not which gear does more damage. Reload cycles, armor and skill synergy still matter.';
     }
-    if(chosen!==null)return base+'The mode sorting criterion is '+metricLabel(picked,key,label)+
-      ', but no directly comparable second item has a reported value. It is not a measured combat advantage.';
+    if(chosen!==null)return base+'This mode sorts by '+metricLabel(picked,key,label)+
+      ', but another item has no matching reported value to compare. That alone does not prove a combat advantage.';
   }
   const alt=alternatives[0];
   const rarity='Its recorded rarity is '+String(picked.rarity||'unknown')+'. ';
   return base+rarity+(alt?'The next candidate is '+alt.name+' ('+String(alt.rarity||'unknown')+'). ':'')+
-    'This is a rarity-driven catalog sort, not an item-specific damage or survivability comparison.';
+    'Rarity sets this order. It does not tell us which item deals more damage or keeps your ship alive longer.';
 }
 function shipMechanic(model,slot){
   if(String(model?.sourceId)==='60701'&&slot.index===1&&slot.kind==='weapon')
     return {
       title:'Aquila · aircraft slot 2 changes her skill behavior',
-      rule:'A Fighter in her second aircraft slot activates healing/shielding; a Dive Bomber instead activates the offensive preload/damage configuration. The right selection depends on whether this fleet needs sustain or offensive opening damage.',
+      rule:'A Fighter in her second aircraft slot activates healing/shielding; a Dive Bomber instead activates the offensive preload/damage configuration. Pick a Fighter when you need healing; pick a Dive Bomber when you want the offensive opening.',
       source:'skill'
     };
   return null;
@@ -139,25 +139,26 @@ export function renderLoadoutDecisionEvidence(model,slot){
   const insights=researchedOptions(slot,model?.mode||'general');
   const currentNote=selected?researchFor(selected,model?.mode||'general'):null;
   return '<section class="loadout-evidence">'+
-    '<h3>Selection audit · '+(slot.manual?'your choice':'automatic source candidate')+'</h3>'+
+    '<h3>Why this gear is shown · '+(slot.manual?'your choice':'auto-filled choice')+'</h3>'+
     '<p>'+E(method)+'</p>'+
-    (selected?'<p><strong>Recorded identity:</strong> '+E(selected.name)+' · source ID '+E(selected.sourceId)+' · '+
+    (selected?'<p><strong>Equipment record:</strong> '+E(selected.name)+' · source ID '+E(selected.sourceId)+' · '+
       E(selected.category)+' · enhancement '+E(selected.enhancement||'not stated')+'</p>':'')+
     (mechanic?'<section class="loadout-evidence-mechanic"><h4>'+E(mechanic.title)+'</h4><p>'+E(mechanic.rule)+'</p>'+
       '<small>Ship skill: '+sourceLink(mechanic.source)+'</small></section>':'')+
-    '<section class="loadout-evidence-checks"><h4>What is still required to recommend gear?</h4><p>'+
+    '<section class="loadout-evidence-checks"><h4>What else matters for this choice?</h4><p>'+
       E(checksFor(selected||slot.candidates?.[0],model?.mode||'general'))+
       '</p></section>'+
-    (currentNote?'<section class="loadout-evidence-reviewed"><h4>Published specialist comparison · '+E(currentNote.title)+'</h4>'+
+    (currentNote?'<section class="loadout-evidence-reviewed"><h4>What the guide says · '+E(currentNote.title)+'</h4>'+
       '<p>'+E(currentNote.evidence)+'</p><p><strong>When it applies:</strong> '+E(currentNote.conditions)+'</p>'+
       '<p><strong>Trade-off:</strong> '+E(currentNote.alternative)+'</p><small>Evidence: '+sourceLink(currentNote.source)+
-      ' · third-party comparison, not an independent AVALON simulation</small></section>':'')+
-    (insights.length?'<section class="loadout-evidence-options"><h4>Research-informed options in this eligible pool</h4>'+
-      '<p class="loadout-evidence-caveat">Specialist observations, not automatically assigned best-in-slot items. Conditions must be checked against the ship and target.</p>'+
+      ' · comparison by the linked author; not an AVALON simulation</small></section>':'')+
+    (insights.length?'<section class="loadout-evidence-options"><h4>Other options discussed in guides</h4>'+
+      '<p class="loadout-evidence-caveat">These are guide authors’ observations, not automatic best-in-slot picks. Check whether the ship and matchup fit their advice.</p>'+
       '<ul>'+insights.map(({item,note})=>'<li><strong>'+E(item.name)+'</strong>'+
         (item.id===selected?.id?' · selected':' · alternative')+
         '<p>'+E(note.evidence)+'</p><p><strong>Trade-off / alternative:</strong> '+E(note.alternative)+'</p>'+'<small>'+E(note.conditions)+' · '+sourceLink(note.source)+'</small></li>').join('')+
       '</ul></section>':
-      '<p class="loadout-evidence-caveat">No item-specific, independently evaluated recommendation is recorded for this slot and mission yet. Source compatibility alone cannot establish best-in-slot.</p>')+
+      '<p class="loadout-evidence-caveat">We haven’t confirmed the best gear for this slot and mission yet. Fitting the slot is only the first check.</p>')+
     '</section>';
 }
+

@@ -56,7 +56,7 @@ export function renderEquipmentFamilyDetails(members) {
   const name=members[0].name||'Equipment';
   return '<div class="picker-backdrop detail-backdrop" data-action="close-detail">'+
     '<aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Variants of '+E(name)+'">'+
-    '<div class="picker-head"><div><span class="eyebrow">SOURCE-MATCHED VARIANTS</span><h2>'+E(name)+'</h2></div>'+
+    '<div class="picker-head"><div><span class="eyebrow">EQUIPMENT VARIANTS</span><h2>'+E(name)+'</h2></div>'+
     '<button class="icon-btn" type="button" data-action="close-detail" aria-label="Close equipment variants">✕</button></div>'+
     '<div class="detail-scroll"><p class="equipment-family-notice">These records share the exact original name, equipment type and nation. Their stats and rarities may differ. This does <strong>not</strong> establish an upgrade path or equal performance.</p>'+
     '<div class="equipment-family-variants">'+members.map(item=>

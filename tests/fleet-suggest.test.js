@@ -72,7 +72,7 @@ test('partial plan explicitly signals missing candidates and unverified mechanic
  const out=suggestFleet({modeId:'opsi',ships:tiny,workspace:plan('opsi')});
  assert.ok(out.missing.length>0);
  assert.ok(out.notes.some(note=>note.includes('unfilled')));
- assert.ok(out.notes.some(note=>note.includes('simulator')));
+ assert.ok(out.notes.some(note=>note.includes('do not optimize equipment or simulate skill timing')));
 });
 test('duplicate locked ships and incompatible manual placements fail closed',()=>{
  const workspace=plan('campaign');workspace.fleets.mob['main-1']=ships[0].id;workspace.fleets.boss['main-1']=ships[0].id;
@@ -84,5 +84,5 @@ test('campaign and opsi equipment guidance is transparent, not a gear optimizer'
  const c=gearAdvisories('campaign','ch15');
  assert.ok(c.some(x=>x.label==='ASW coverage'));
  assert.ok(gearAdvisories('opsi','sectors').some(x=>x.label==='Burst synchronization'));
- assert.ok(gearAdvisories('meta','boss')[0].text.includes('Verify'));
+ assert.ok(gearAdvisories('meta','boss')[0].text.includes('check that your gear fits'));
 });

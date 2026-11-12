@@ -1,6 +1,6 @@
 ## v0.8.7 supplement
 
-The existing compatibility planner now has a separate, source-backed **component comparison** in its drawer. Damage/cycle calculations, skill conditions, exact evidence, uncertainty gates and tests are documented in [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md). Historical statements below about no numerical model describe v0.8.6 and earlier. The new limited model still does not award best-in-slot/Recommended badges or override saved selections.
+The equipment drawer can now compare supported gun damage, firing cycles and aircraft loading. [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md) explains the formulas, skill conditions, sources, tests and gaps. The historical sections below describe v0.8.6 and earlier. The current comparisons still do not prove a best-in-slot build or replace your saved choices.
 
 # AVALON equipment decision evidence — v0.8.6
 

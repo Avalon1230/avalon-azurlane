@@ -14,10 +14,10 @@ import { gameShipSlots } from './game-slot-manifest.js';
 import { candidateAugmentsForShip, announcedAugmentForShip } from './augment-manifest.js';
 
 export const LOADOUT_MODES = Object.freeze([
-  {id:'general',name:'General',description:'Balance documented eligibility, enhancement attributes and ship role.'},
-  {id:'boss',name:'Boss',description:'Review accuracy, firing cycle, armor interaction and single-target uptime.'},
-  {id:'mobbing',name:'Mobbing',description:'Review reload, target coverage, sustained waves and survivability.'},
-  {id:'opsi',name:'OpSi',description:'Review armor, anti-Siren bonuses, fleet synergy and encounter mechanics.'}
+  {id:'general',name:'General',description:'Start with gear that fits, then check how it supports your ship’s role.'},
+  {id:'boss',name:'Boss',description:'Match the boss’s armor and check whether your shots arrive when they matter.'},
+  {id:'mobbing',name:'Mobbing',description:'Look for reliable wave clearing and enough staying power for repeated fights.'},
+  {id:'opsi',name:'OpSi',description:'Check enemy armor, Anti-Siren effects and how this build works with your other fleets.'}
 ]);
 
 // These are source equipment type IDs, not a user-authored tier or performance scale.
@@ -252,7 +252,7 @@ export function candidatesForSlot(ship,slot,equipment,mode='general') {
 }
 export function candidateEvidence(slot,item,mode='general') {
   if(slot?.kind==='augment'){
-    if(!item)return 'No source-matched augment candidate was found. A wiki augment type alone is not proof of a particular module.';
+    if(!item)return 'We haven’t found a matching augment. A listed augment type does not confirm a specific module.';
     if(item.matchLevel==='announced-specific')
       return 'The publisher announced this module for this exact ship on October 21, 2026 (released October 22). The item ID, gameplay stats, crafting details and icon have not been independently verified. No combat effectiveness is inferred.';
     const evidence=item.matchLevel==='ship-specific'
@@ -260,19 +260,19 @@ export function candidateEvidence(slot,item,mode='general') {
       :'This general module matches the ship’s hull type in the published augment-type eligibility data.';
     return evidence+' Source rarity and availability are recorded; combat effects are not yet evaluated. Source snapshot: May 2026.';
   }
-  if(slot?.provisional&&slot.hullId===null)return 'The exact hull subclass is missing from the source. No equipment is assigned until its restrictions can be checked.';
+  if(slot?.provisional&&slot.hullId===null)return 'The source is missing this ship’s exact hull subclass. We need it to check which gear fits.';
   if(slot?.provisional)return item
     ?'Source category '+item.category+' and hull restrictions match, but this auxiliary slot is inferred from the standard layout. Individual ship exceptions, uniqueness limits and build performance remain unverified.'
     :'This auxiliary position is inferred from the common game layout, and has no verified candidate in the current source.';
   if(!item)return slot?.verified
-    ?'The slot type is sourced, but no corresponding equipment is indexed as potentially compatible with this hull.'
-    :'Ship-specific slot category is not verified, so no equipment is assigned.';
+    ?'We know the slot type, but our catalog has no matching gear for this hull.'
+    :'We haven’t confirmed this ship’s slot type, so it stays empty.';
   const pct=Number.isFinite(slot.maxEfficiency)?' · slot efficiency up to '+Math.round(slot.maxEfficiency*100)+'%':'';
   const parts=['Source category '+item.category+' matches '+slot.type+pct+'.',
-    'The source records potential hull compatibility after class restrictions. Ship-specific exceptions still require checking.'];
+    'The listed hull restrictions allow this gear. Ship-specific exceptions still need checking.'];
   const field=MODE_STAT[mode],stat=field?numericStat(item,field):null;
   if(stat!==null)parts.push(MODE_STAT_NAMES[field]+' '+(stat>=0?'+':'')+stat+' is reported at the highest sourced enhancement; not a combat score.');
-  else parts.push('No verified mode-specific performance advantage is established.');
+  else parts.push('We haven’t confirmed an advantage for this game mode.');
   return parts.join(' ');
 }
 

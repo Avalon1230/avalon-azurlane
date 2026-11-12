@@ -10,7 +10,7 @@ test('suggest controls include owned-only, scenario and generate; no claim of va
  assert.match(html,/id="suggest-scenario"/);
  assert.match(html,/id="suggest-owned-only"/);
  assert.match(html,/data-action="suggest-generate"/);
- assert.match(html,/candidate ships/);
+ assert.match(html,/reviewed ships/);
  assert.doesNotMatch(html,/HEURISTIC PREVIEW/);
 });
 test('preview shows traceable reasons and gaps without mutating output',()=>{
@@ -19,7 +19,7 @@ test('preview shows traceable reasons and gaps without mutating output',()=>{
  assert.match(html,/Suggested formation preview/);
  assert.match(html,/data-action="suggest-apply"/);
  assert.match(html,/Unfilled/);
- assert.match(html,/Qualitative role matching only/);
+ assert.match(html,/Matched by ship roles/);
 });
 test('HTML output escapes data from external ship names',()=>{
  const bad=[...ships,{id:'evil',name:'<svg onload=alert(1)>',hull:'CL'}];

@@ -13,9 +13,9 @@ function slotLabel(slot) {
   return 'Weapon / aircraft';
 }
 function sourceStatus(slot) {
-  if(slot.kind==='augment')return slot.verified?'Source-matched module':slot.provisional?'Class-matched · verify':'Module unverified';
+  if(slot.kind==='augment')return slot.verified?'Module matches our records':slot.provisional?'Class-matched · verify':'Module unverified';
   if(slot.provisional)return 'Potential slot · verify';
-  return slot.verified?'Source-matched':'Slot unverified';
+  return slot.verified?'Matches our records':'Slot unverified';
 }
 function slotNote(slot) {
   const efficiency=Number.isFinite(slot.maxEfficiency)?' · '+Math.round(slot.maxEfficiency*100)+'% max':'';
@@ -51,7 +51,7 @@ function renderCompactSlot(slot) {
     (slot.manual?'<span title="Personal pick">★</span>':'')+'</div>'+
     '<div class="loadout-tile-type" title="'+E(slot.type)+'">'+E(slot.type)+'</div>'+
     gear+
-    '<span class="loadout-choice-status" title="'+E(slot.manual?'Saved locally by you; not independently reviewed':'Automatically shown from the compatible source catalog; not a gear recommendation')+'">'+E(choiceStatus)+'</span>'+
+    '<span class="loadout-choice-status" title="'+E(slot.manual?'Your saved choice; not a performance rating':'This gear fits the recorded slot. We have not confirmed it as the best choice.')+'">'+E(choiceStatus)+'</span>'+
     '<button type="button" class="loadout-tile-more" data-action="loadout-slot-info" data-slot="'+slot.index+
     '" aria-label="Review compatible equipment for '+E(slot.type)+'">'+
     (slot.kind==='augment'?'Module options':'Compatible options')+' ↗</button>'+
@@ -65,19 +65,19 @@ export function renderLoadoutPanel(model) {
   const aquilaSecond=model.sourceId==='60701'?model.slots.find(slot=>slot.index===1):null;
   const aquilaAdvice=aquilaSecond?
     '<p class="loadout-skill-conditional"><strong>Aquila · slot 2 skill switch:</strong> Fighter = healing/shielding; Dive Bomber = offensive preload/damage. '+
-    'The displayed item is only a compatibility candidate, not a selected healer preset. '+
+    'Auto-filled gear is not a healer preset. Choose the role you need. '+
     (!['Fighter','Dive Bomber'].every(type=>aquilaSecond.categories.includes(type))?
-      'Both configurations are not independently confirmed by the current slot feed; check her in-game slot.':'Choose the appropriate type under Compatible options.')+
+      'Our slot data does not confirm both options; check her slot in-game.':'Choose the appropriate type under Compatible options.')+
     '</p>':'';
   return '<section class="ship-loadout-panel ship-loadout-compact" id="ship-profile-loadout" aria-labelledby="ship-loadout-title">'+
     '<div class="loadout-heading"><div><span class="eyebrow">AVALON TACTICAL INTELLIGENCE</span>'+
     '<h2 id="ship-loadout-title">Loadout Planner (WIP)</h2></div>'+
-    '<span class="loadout-status loadout-status-wip" title="Work in progress: compatible placeholders, not reviewed gear recommendations">WIP · Unreviewed</span></div>'+
-    '<p class="loadout-wip-note"><strong>Work in progress.</strong> Gear is auto-filled for source compatibility, not selected for combat performance. The right build depends on ship skills, mission, enemy armor and equipment interactions.</p>'+'<div class="loadout-modes" role="group" aria-label="Loadout mission context">'+tabs+'</div>'+
+    '<span class="loadout-status loadout-status-wip" title="Work in progress: auto-filled gear fits the slot, but is not a best-gear recommendation">WIP · Unreviewed</span></div>'+
+    '<p class="loadout-wip-note"><strong>Work in progress.</strong> Auto-filled gear fits the recorded slots, but we haven’t confirmed the best build yet. Check how each choice works with your ship’s skills, the enemy’s armor and your fleet.</p>'+'<div class="loadout-modes" role="group" aria-label="Loadout mission context">'+tabs+'</div>'+
     aquilaAdvice+
     '<div class="loadout-slots loadout-compact-grid" role="group" aria-label="Ship equipment positions">'+tiles+'</div>'+
     '<p class="loadout-brief">'+E(model.description)+'</p>'+
-    '<div class="loadout-footer"><span>Equipment evaluation pending</span>'+
+    '<div class="loadout-footer"><span>Best builds are still being reviewed</span>'+
       '<button type="button" class="loadout-reset" data-action="loadout-reset">Reset my picks</button></div>'+
 
     '</section>';
@@ -97,7 +97,7 @@ function renderResearchNotes(slot,mode){
   const entries=notes.map(({item,note})=>{
     const source=LOADOUT_EVIDENCE_SOURCES[note.source];
     return '<li><strong>'+E(item.name)+'</strong>'+
-      (item.id===slot.selected?.id?' · current candidate':' · eligible alternative')+
+      (item.id===slot.selected?.id?' · current choice':' · another option')+
       '<p>'+E(note.evidence)+'</p>'+
       '<p><strong>When it applies:</strong> '+E(note.conditions)+'</p>'+
       '<p><strong>Trade-off:</strong> '+E(note.alternative)+'</p>'+
@@ -105,7 +105,7 @@ function renderResearchNotes(slot,mode){
       '</li>';
   }).join('');
   return '<details class="loadout-picker-research"><summary>Specialist research notes ('+notes.length+')</summary>'+
-    '<p>Published findings for specific equipment and situations, not a ranked build for this ship.</p>'+
+    '<p>These guides discuss particular gear and matchups. They are not a ranked build for this ship.</p>'+
     '<ul>'+entries+'</ul></details>';
 }
 export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50,combatContext={}}={}) {
@@ -130,11 +130,11 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50,com
         (slot.selected?.id===item.id?' disabled':'')+'>'+
         (slot.selected?.id===item.id?'Selected':'Select')+'</button></div>';
   }).join('');
-  const status=slot.manual?'Your saved choice':slot.selected?'Auto-filled candidate · not recommended':'No current selection';
+  const status=slot.manual?'Your saved choice':slot.selected?'Auto-filled choice · not ranked':'No current selection';
   const statusExplanation=slot.manual
-    ?'Your choice is saved. AVALON has not independently compared it with alternatives.'
-    :slot.selected?'This was filled by the compatibility catalog, not a combat recommendation. The options below are not ranked by effectiveness.'
-    :'No equipment has been selected from this slot’s compatible catalog.';
+    ?'Your choice is saved. The comparisons below cover only the mechanics we can calculate, not the whole build.'
+    :slot.selected?'This gear fits the recorded slot. We haven’t confirmed it as the best pick, and the options list is not a performance ranking.'
+    :'You haven’t selected gear for this slot yet.';
   const current=slot.selected
     ?'<strong>'+E(slot.selected.name)+'</strong><span class="loadout-picker-current-status">'+E(status)+'</span>'
     :'<strong>Nothing selected</strong><span class="loadout-picker-current-status">'+E(status)+'</span>';

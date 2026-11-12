@@ -1,14 +1,14 @@
 ## v0.8.7 — Combat Mechanics Foundation (PR; not deployed)
 
-The existing loadout alternatives drawer now compares source-identified gun damage and firing cycles under explicit armor/RLD assumptions, and Aquila's whole-air-wing loading and slot-dependent role. Eleven pinned equipment records support representative tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. Personal selections are never replaced.
+Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
 
-This is a **WIP component calculator**, not a complete simulator or verified best-in-slot list. Moving targets and incomplete/contradictory inputs remain unknown. Reload uses independently checked client constants, resolving the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+This is still **WIP**: it compares specific parts of a build, not a complete battle or a best-in-slot list. Moving targets, missing data and conflicting records can prevent a reliable comparison. Reload uses constants checked against the game client; that resolved the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
 
 # AVALON — Azur Lane Intelligence
 
-An independent, evidence-driven **Azur Lane** research and fleet-planning project.
+An independent **Azur Lane** companion for choosing ships, comparing gear and planning fleets.
 
-> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. A first constraint-aware formation generator now suggests compatible ship assignments from a manually reviewed 39-ship candidate pool and handles all four OpSi surface fleets jointly. **The ship loadout planner is explicitly labeled WIP: auto-filled gear is a compatibility placeholder, not a combat recommendation. Validated best-in-slot rankings, combat optimization and skill-timing simulation are not yet implemented.**
+> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. Fleet Lab can suggest lineups from 39 reviewed ships and plan all four OpSi surface fleets together. **The loadout planner is WIP: auto-filled gear fits the recorded slots, but we haven’t confirmed the best builds. Complete combat optimization, skill-timing simulation and verified best-in-slot rankings are still ahead.**
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -18,7 +18,7 @@ The website's **Updates** section reads directly from `CHANGELOG.md`, so release
 
 ## Feature maturity labels
 
-AVALON clearly marks **Equipment, Augments, Fleet Lab and Tier Boards** as **WIP** in the navigation and section headings. Their catalogs, manually editable workspaces and already sourced records remain usable; labels qualify the **unfinished combat intelligence**, not basic browsing or user favorites. Ship Index remains a functional roster, while its loadout planner retains its own independent WIP warning.
+**Equipment, Augments, Fleet Lab and Tier Boards** carry a **WIP** label because their combat advice is still being developed. You can still browse the catalogs, edit fleets and save favorites. Ship Index works as a roster; its loadout planner has a separate WIP label.
 
 ## Collaboration archives
 
@@ -28,7 +28,7 @@ Every series card uses an **original in-game ship portrait** from that collabora
 
 ## Mission
 
-Make ship selection, equipment decisions, and fleet building more useful and explainable by combining verifiable game mechanics, attributed public community evidence, and independently reasoned analysis.
+Help you choose ships and gear with clear reasons: what works, when it works, and what you give up. Use game mechanics and credited community research, and be honest about what we haven’t checked.
 
 The goal is to answer practical questions across **the entire game**, such as:
 
@@ -41,7 +41,7 @@ The goal is to answer practical questions across **the entire game**, such as:
 
 Favorite-character ("waifu") selections are valid preferences, but will be kept separate from maximum-combat-efficiency comparisons.
 
-## Run the prototype
+## Run locally
 
 No build step or external JavaScript dependencies are needed. Serve the repository root over HTTP (ES modules do not load reliably from `file://`):
 

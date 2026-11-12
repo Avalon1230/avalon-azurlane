@@ -118,8 +118,8 @@ test('Aquila compares real whole wings, keeps fighter healing distinct from Hell
 });
 test('boss requires explicit armor; mobbing and OpSi report their unmodeled conditions',()=>{
   assert.equal(compareSlot(combatModel('20403','boss'),0).status,'unknown');
-  assert.match(compareSlot(combatModel('20403','mobbing'),0).modeNote,/Wave coverage/);
-  assert.match(compareSlot(combatModel('20403','opsi'),0).modeNote,/Adaptation/);
+  assert.match(compareSlot(combatModel('20403','mobbing'),0).modeNote,/damage wasted/);
+  assert.match(compareSlot(combatModel('20403','opsi'),0).modeNote,/OpSi adaptation/);
   assert.equal(compareSlot(combatModel(),0,{movement:'moving'}).status,'unknown');
 });
 test('contradictory identity, slot efficiency or missing mechanics fail closed',()=>{
@@ -142,8 +142,8 @@ test('evaluation and armor changes preserve six positions, compatibility and sav
 });
 test('UI shows short component comparisons and expandable evidence, never Best Overall',()=>{
   const html=renderLoadoutAlternatives(combatModel(),0);
-  assert.match(html,/Combat comparison \(WIP\)/);assert.match(html,/Direct-hit leader/);
+  assert.match(html,/Combat comparison \(WIP\)/);assert.match(html,/Highest direct damage/);
   assert.match(html,/<details class="combat-evidence">/);assert.match(html,/data-combat-field="armor"/);
   assert.doesNotMatch(html,/Best Overall|Best Boss/);
-  assert.match(renderCombatComparison(combatModel(),0,{movement:'moving'}),/accuracy is not modeled/);
+  assert.match(renderCombatComparison(combatModel(),0,{movement:'moving'}),/accounted for moving targets/);
 });

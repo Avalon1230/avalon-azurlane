@@ -38,15 +38,15 @@ try{
     await page.locator('[data-loadout-slot="0"] .loadout-tile-more').click();
     await page.locator('[data-action="loadout-select"]').first().waitFor();
     await page.locator('#combat-armor').selectOption('light');
-    await page.locator('.combat-comparison').getByText('Direct-hit leader:',{exact:false}).waitFor();
+    await page.locator('.combat-comparison').getByText('Highest direct damage:',{exact:false}).waitFor();
     assert.match(await page.locator('.combat-comparison').innerText(),/Twin 203mm Naval Gun Mount/);
     await page.locator('#combat-armor').selectOption('medium');
     const lead=await page.locator('.combat-comparison > p').allTextContents();
-    assert.ok(lead.some(t=>t.includes('Direct-hit leader: Twin 203mm (SK C/34)')));
+    assert.ok(lead.some(t=>t.includes('Highest direct damage: Twin 203mm (SK C/34)')));
     await page.locator('.combat-evidence summary').click();
     assert.equal(await page.locator('.combat-evidence').getAttribute('open'),'');
     await page.locator('#combat-movement').selectOption('moving');
-    assert.match(await page.locator('.combat-comparison').innerText(),/accuracy is not modeled/);
+    assert.match(await page.locator('.combat-comparison').innerText(),/accounted for moving targets/);
     assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),saved);
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('.loadout-picker-panel').count(),0);
@@ -76,7 +76,7 @@ try{
       if(['missing','invalid'].includes(variant)){
         assert.equal(await page.locator('[data-combat-equipment]').count(),0);
         await page.locator('.combat-exclusions summary').click();
-        assert.match(await page.locator('.combat-exclusions').innerText(),/Complete supported air wing/);
+        assert.match(await page.locator('.combat-exclusions').innerText(),/usable data for all three aircraft slots/);
       }else{
         await page.locator('.combat-evidence summary').click();
         assert.match(await page.locator('[data-combat-equipment="17340"]').innerText(),/healing/);

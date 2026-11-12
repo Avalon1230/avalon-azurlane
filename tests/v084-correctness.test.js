@@ -87,7 +87,7 @@ test('Aquila loadout exposes role switch without pretending that arbitrary defau
   const html=renderLoadoutPanel({sourceId:'60701',mode:'general',description:'General',slots:[second]});
   assert.match(html,/Fighter = healing\/shielding/);
   assert.match(html,/Dive Bomber = offensive preload\/damage/);
-  assert.match(html,/compatibility candidate, not a selected healer preset/);
+  assert.match(html,/Auto-filled gear is not a healer preset/);
 });
 test('responsive layout rules contain intrinsic min-width at each critical breakpoint',()=>{
   const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
@@ -96,3 +96,4 @@ test('responsive layout rules contain intrinsic min-width at each critical break
   assert.match(css,/\.loadout-slots\.loadout-compact-grid\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
   assert.match(css,/\.equipment-search-row\{flex-wrap:wrap\}/);
 });
+

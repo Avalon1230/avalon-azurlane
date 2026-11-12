@@ -1,6 +1,6 @@
 # AVALON Suggested Fleet Builder — v0.5.0
 
-**Implemented:** first constraint-aware, source-linked, qualitative formation generator in Fleet Lab. **Not implemented:** fully validated skill-effect interactions, numerical combat model, equipment slot assignment, damage/heal timing simulation, gear ownership or verified optimal fleets. Nothing generated here is a tested clear guarantee.
+Fleet Lab suggests ships by their reviewed roles while respecting fleet restrictions and your existing picks. The links explain the advice. It does **not** simulate damage, healing or skill timing, assign equipment, track gear ownership or prove an optimal fleet. A suggested lineup is a starting point, not a guaranteed clear.
 
 ## How to use
 

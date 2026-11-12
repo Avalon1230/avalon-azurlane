@@ -8,11 +8,11 @@ export const SKILL_RULES = Object.freeze({
 });
 export function skillCondition(shipId,slotTypes,{level=10,augmented=false,retrofit=false}={}) {
   const rule=SKILL_RULES[String(shipId)];
-  if(!rule)return {status:'unknown',reason:'Ship skills not yet modeled'};
-  if(level!==10||augmented||retrofit)return {status:'unknown',reason:'Only skill level 10, base-form, no augment skill replacement is reviewed'};
+  if(!rule)return {status:'unknown',reason:'We haven’t calculated this ship’s skill effects yet.'};
+  if(level!==10||augmented||retrofit)return {status:'unknown',reason:'These skill checks cover level 10 on the base ship, without augment replacements or retrofits.'};
   if(rule.branches){
     const branch=rule.branches[slotTypes?.[rule.slot]];
-    return branch?{status:'source-conditioned',skillId:rule.skillId,...branch}:{status:'unknown',reason:'Second aircraft type is unverified'};
+    return branch?{status:'source-conditioned',skillId:rule.skillId,...branch}:{status:'unknown',reason:'We cannot confirm the aircraft type in slot 2.'};
   }
   return {status:'source-conditioned',...rule};
 }

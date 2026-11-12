@@ -141,7 +141,7 @@ test('October 2026 official Tempesta augment names are usable without fabricated
     assert.deepEqual(item.stats,[]);
     assert.equal(item.craftable,null);
     const html=renderAugmentDetails(item);
-    assert.match(html,/Publisher-announced/);
+    assert.match(html,/publisher announced/);
     assert.match(html,/2026-10-21/);
     assert.doesNotMatch(html,/asset-img|<img/);
   }
@@ -155,7 +155,7 @@ test('newer Sailing Frigate loadouts are marked provisional where hull subclass 
   const model=buildShipLoadout({ship:{hull:'IX',sourceId:'960017'},data:newer,equipment:sampleGear});
   assert.equal(model.slots.length,6);
   assert.ok(model.slots.slice(0,5).every(x=>!x.selected&&x.candidates.length===0));
-  assert.match(model.slots[0].explanation,/exact hull subclass is missing/);
+  assert.match(model.slots[0].explanation,/missing this ship’s exact hull subclass/);
   assert.equal(model.slots[0].provisional,true);
   assert.equal(model.slots[5].selected?.name,'Greatstaff of the Lodestar');
   assert.match(model.slots[5].explanation,/publisher announced/i);

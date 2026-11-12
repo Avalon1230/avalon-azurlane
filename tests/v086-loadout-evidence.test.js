@@ -25,9 +25,9 @@ test('stat-based sort is explained with an actual source differential, not claim
   assert.match(html,/HIT \+12/);
   assert.match(html,/HIT \+8/);
   assert.match(html,/\+4 difference/);
-  assert.match(html,/does NOT compare damage, reload cycle, armor or skill synergy/);
+  assert.match(html,/Reload cycles, armor and skill synergy still matter/);
   assert.match(html,/enhancement \+13/);
-  assert.match(html,/Selection audit/);
+  assert.match(html,/Why this gear is shown/);
 });
 test('ship skill effect has an explicit conditional outcome for Aquila aircraft slot 2',()=>{
   const s=slot(la9,[la9,bf109],1);
@@ -44,7 +44,7 @@ test('reviewed source comparisons are conditional, sourced and item-ID accurate'
   assert.match(html,/52% more than FW-190 A-6/);
   assert.match(html,/medium\/heavy armor/);
   assert.match(html,/Suchiguma · Research Focus/);
-  assert.match(html,/third-party comparison, not an independent AVALON simulation/);
+  assert.match(html,/comparison by the linked author; not an AVALON simulation/);
   const matched=researchedOptions(s,'boss');
   assert.deepEqual(matched.map(x=>x.item.sourceId),['85600','47160']);
   assert.equal(RESEARCHED_EQUIPMENT_COUNT,6);
@@ -70,8 +70,8 @@ test('unreviewed gear states the actual limits instead of fabricating a recommen
   const two=gear('99902','Another unknown gun','Destroyer Gun');
   const s=slot(one,[one,two]);
   const html=renderLoadoutDecisionEvidence(model(s,'general','10102'),s);
-  assert.match(html,/rarity-driven catalog sort/);
-  assert.match(html,/No item-specific, independently evaluated recommendation/);
+  assert.match(html,/Rarity sets this order/);
+  assert.match(html,/confirmed the best gear for this slot and mission/);
   assert.match(html,/ammo type and armor multipliers/);
   assert.doesNotMatch(html,/Published specialist comparison/);
 });
@@ -87,7 +87,7 @@ test('loadout alternatives integrate reasoning, preserve actual options and esca
   const html=renderLoadoutAlternatives(model(s),0);
   assert.match(html,/WORK IN PROGRESS/);
   assert.match(html,/Compatible equipment \(3\)/);
-  assert.match(html,/Auto-filled candidate · not recommended/);
+  assert.match(html,/Auto-filled choice · not ranked/);
   assert.match(html,/<details class="loadout-picker-research">/);
   assert.match(html,/Specialist research notes \(2\)/);
   assert.match(html,/Trade-off:/);
@@ -110,7 +110,7 @@ test('WIP planner is conspicuous and never presents auto-filled gear as optimize
   const html=renderLoadoutPanel(model(s,'general'));
   assert.match(html,/Loadout Planner \(WIP\)/);
   assert.match(html,/WIP · Unreviewed/);
-  assert.match(html,/Gear is auto-filled for source compatibility, not selected for combat performance/);
+  assert.match(html,/Auto-filled gear fits the recorded slots/);
   assert.match(html,/Auto-filled · unreviewed/);
   assert.match(html,/Compatible options/);
   assert.doesNotMatch(html,/Planning · Sourced/);
@@ -121,7 +121,7 @@ test('unresearched slot drawer stays short and does not repeat robotic audit pan
   const s=slot(raw,[raw]);
   const html=renderLoadoutAlternatives(model(s,'general','10102'),0);
   assert.match(html,/Compatible equipment \(1\)/);
-  assert.match(html,/not a combat recommendation/);
+  assert.match(html,/not a performance ranking/);
   assert.doesNotMatch(html,/loadout-detail-reason/);
   assert.doesNotMatch(html,/loadout-evidence/);
   assert.doesNotMatch(html,/loadout-picker-research/);
@@ -136,3 +136,4 @@ test('WIP label and research summary remain safe under untrusted names',()=>{
   assert.doesNotMatch(html,/<img src=x onerror/);
   assert.match(html,/<summary>Specialist research notes/);
 });
+
