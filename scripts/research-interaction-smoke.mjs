@@ -34,6 +34,9 @@ try{
   assert.equal(await page.locator('.ship-profile-cover .research-frame-pr').count(),1);
   assert.equal(await page.locator('[data-loadout-slot]').count(),6);
   await page.locator('[data-action="research-open"]').click();
+  await page.locator('#research-start-date').fill('2026-01-01T12:00');
+  await page.locator('[data-action="research-set-start"]').click();
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.research.v1'))['29901'].start),await page.evaluate(()=>Date.parse('2026-01-01T12:00')));
   await page.locator('[data-action="research-start"]').click();
   assert.match(await page.locator('[data-research-countdown="60012"]').innerText(),/Time gate passed/);
   await page.locator('[data-research-mission="60012"]').check();
