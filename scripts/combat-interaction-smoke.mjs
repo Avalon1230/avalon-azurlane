@@ -35,7 +35,8 @@ try{
       return payload?route.fulfill({contentType:'application/json',body:JSON.stringify(payload)}):route.abort();
     });
     await page.goto(url+'/#/ships/40303');
-    await page.locator('[data-loadout-slot="0"] [data-action="loadout-slot-info"]').click();
+    await page.locator('[data-loadout-slot="0"] .loadout-tile-more').click();
+    await page.locator('[data-action="loadout-select"]').first().waitFor();
     await page.locator('#combat-armor').selectOption('light');
     await page.locator('.combat-comparison').getByText('Direct-hit leader:',{exact:false}).waitFor();
     assert.match(await page.locator('.combat-comparison').innerText(),/Twin 203mm Naval Gun Mount/);
@@ -67,7 +68,10 @@ try{
         return payload?route.fulfill({contentType:'application/json',body:JSON.stringify(payload)}):route.abort();
       });
       await page.goto(url+'/#/ships/60701');
-      const open=async index=>page.locator(`[data-loadout-slot="${index}"] [data-action="loadout-slot-info"]`).click();
+      const open=async index=>{
+        await page.locator(`[data-loadout-slot="${index}"] .loadout-tile-more`).click();
+        await page.locator('[data-action="loadout-select"]').first().waitFor();
+      };
       await open(1);
       if(['missing','invalid'].includes(variant)){
         assert.equal(await page.locator('[data-combat-equipment]').count(),0);
