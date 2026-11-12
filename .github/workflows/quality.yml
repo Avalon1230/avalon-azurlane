@@ -16,6 +16,7 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run test:combat-source
+      - run: npm run test:research-source
   viewport:
     runs-on: ubuntu-24.04
     permissions:
@@ -29,5 +30,12 @@ jobs:
       - run: google-chrome --version
       - run: node scripts/viewport-smoke.mjs
       - run: node scripts/combat-interaction-smoke.mjs
+      - run: node scripts/research-interaction-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-ui-screenshots
+          path: .audit/research-screens
+          include-hidden-files: true
       - run: node scripts/augment-image-smoke.mjs
       - run: node scripts/collab-logo-smoke.mjs

@@ -1,3 +1,5 @@
+import { researchShip, researchFrame } from './research-ships.js';
+import { renderResearchProgress } from './research-view.js';
 import { imageMarkup } from './media.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { trustedWikiImage } from './wiki-artwork.js';
@@ -127,11 +129,11 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=
       '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
   // Never replace the small shipyard portrait when changing skin art.
   return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview">' +
-    '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
+    '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + researchFrame(ship || data) + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
-    facts + '</div></section>' + (loadout?renderLoadoutPanel(loadout):'') + '</div>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
+    (researchShip(ship||data)?'<p class="research-identity">'+researchShip(ship||data).classification+' · Research Series '+researchShip(ship||data).series+'</p>':'')+facts + '</div></section>' + (loadout?renderLoadoutPanel(loadout):'') + '</div>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
 }
 
 function statPanel(data, level, wiki=null) {
@@ -239,6 +241,8 @@ function acquisitionPanel(data,wiki=null) {
     modes.length?['Construction pools',modes.join(' · ')]:null,
     wiki?.dropNote?['Wiki availability notes',wiki.dropNote]:null
   ].filter(Boolean);
+  const research=researchShip(data);
+  if(research)return profilePanel('Acquisition','<button type="button" class="outline-btn" data-action="research-open">Research &amp; Development</button><p>Series '+research.series+' · '+research.classification+' — requirements, missions and your progress.</p>','ship-profile-acquire');
   return profilePanel('Acquisition',rows.length?
     '<div class="ship-info-rows">'+rows.map(([name,value])=>'<div><span>'+E(name)+'</span><strong>'+E(value)+'</strong></div>').join('')+'</div>'+
     (wiki?.dropNote?'<p class="ship-data-source">Historical availability; may not reflect current construction pools or active events.</p>':'')
@@ -261,7 +265,7 @@ function sourcePanel(data, ship, wiki=null) {
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
 
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, error='' } = {}) {
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, researchState={}, error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
@@ -287,7 +291,7 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],...(progression?[['Progression','#ship-profile-progress']]:[]),['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
-    statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki)+
+    renderResearchProgress(ship||data,researchState)+statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki)+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data,wiki)+progression+sourcePanel(data,ship,wiki)+
     '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';

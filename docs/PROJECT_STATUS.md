@@ -2,6 +2,15 @@
 
 _Last updated: 2026-11-12 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
+## v0.8.8 — Research identity & progression (in development; do not merge)
+
+- Current deployed release remains v0.8.7. New branch: `feat/research-progression-v088`, based on main `1ae514a4854db783c7f8da6dd73993447eedfb5d`. PR #28 stays merged and is not reused. The current v0.8.8 commit/PR and final CI results will be recorded below before handoff.
+- Added exact-ID Research/series filtering; original PR/DR SVG portrait ornaments; profile labels; source-linked R&D modal with 376 missions for 47 ships, Commander levels, prerequisites and time gates; persistent manual start dates/completion; Dev/Fate planning selectors and 41 milestone sets. 34 ships list Fate stages in the pinned client.
+- Architecture: `research-manifest.js` holds selected factual records/provenance; `research-ships.js` handles identity, selection validation, isolated storage and timers; `research-view.js` renders progression and modal. Existing catalog/profile handlers integrate them. The shared loadout model explicitly blocks combat evaluation away from the reference Dev 30 / Fate 0 selection.
+- Limits: no full progression stats, blueprint totals, automatic account sync or progression-aware combat/skill calculations. Existing statistics/gear/skills are labeled reference data. Six ships lack milestone descriptions in the MIT source. Read [RESEARCH_SHIPS.md](RESEARCH_SHIPS.md) for exact versions, licensing limitations and QA targets.
+- Local verification so far: 249 Node tests pass; all three pinned research source checks pass (47 identities, 376 missions and 41 milestone sets). Browser/CI verification is pending on the new PR. Historical QA findings below are preserved.
+- Next: independent QA on filters, ornaments, mission correctness, timers and reference-state clarity; then verified full Dev/Fate stat/skill calculations and intelligent loadouts. v0.9 fleet timing/inventory synergy is still unimplemented. Commander authorizes any merge.
+
 ## Current release — v0.8.7 delivered (2026-11-12)
 
 - **Deployment:** [PR #28](https://github.com/Avalon1230/avalon-azurlane/pull/28), branch `feat/combat-mechanics-v087`, independently QA-approved at PR head `b063712302aba8746867f68d090a7a928b932311`, then **squash-merged into `main`** as **`5f949394586835d789788018699c860c0d0f3577`** following the commander's explicit authorization. PR is merged, not open; prior review notes below are historical.
@@ -216,4 +225,5 @@ When a new conversation starts: retrieve relevant prior decisions, inspect lates
 
 - Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
 - On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
+
 

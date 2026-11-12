@@ -26,3 +26,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+## Research ship factual records (v0.8.8)
+
+Research series, mission identifiers, functional objectives, time gates and Fate-stage identifiers are selected factual references to EN game-client data, pinned at AzurLaneTools/AzurLaneLuaScripts commit 3fb6befa2f969bd879de2341cdf41a571852a95f. No root LICENSE was found there; no open-source license or redistribution right for its client code is claimed. Full client scripts and descriptive flavor text are not included. Development milestone descriptions use the existing MIT MrLar-derived snapshot attribution above. Original AVALON SVG research ornaments contain no REGAL graphics or game character art. See docs/RESEARCH_SHIPS.md for exact source paths, hashes and limitations.

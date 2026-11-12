@@ -10,6 +10,14 @@ An independent **Azur Lane** companion for choosing ships, comparing gear and pl
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 
+## v0.8.8 — Research ship identity & progression (in review)
+
+Find PR and DR ships together with **Research**, then narrow by series alongside your existing filters. Original gold PR and prismatic DR ornaments distinguish their portraits. Open **Research & Development** in Acquisition for requirements, missions and persistent manual countdowns.
+
+Dev/Fate controls help track upgrades and show verified milestones. **Full stats for each progression setup are not calculated yet.** The existing level tabs, gear and skills remain reference data. Combat comparisons are unavailable for research selections other than Dev 30 / Fate 0. Your saved equipment stays yours.
+
+Coverage: 47 ships, Series 1–9, 376 source-linked missions, 34 listed Fate unlocks and 41 milestone sets. [Research sources, behavior and limits](docs/RESEARCH_SHIPS.md). This branch awaits independent QA; v0.8.7 remains the deployed release.
+
 ## v0.8.7 — Combat Mechanics Foundation (released 2026-11-12)
 
 Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
@@ -247,3 +255,4 @@ The full-game optimization roadmap is unchanged. These fixes do not add a gear o
 ### v0.8.7 QA corrections (PR #28, unmerged)
 
 Combat comparisons now preserve source parallel/capacity, reject unsupported weapon families and show exclusion reasons. Scenario assumptions reset between ships, slots and modes; evaluations preserve saved gear. Aquila current/reference wings use the skill condition of the evaluated wing. See [the correction evidence and limits](docs/COMBAT_MECHANICS.md). Aircraft DPS, effective healing, full optimization and current-client freshness remain unverified.
+

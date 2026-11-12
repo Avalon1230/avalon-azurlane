@@ -26,6 +26,7 @@ export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
   const slot=Array.isArray(model?.slots)?model.slots.find(s=>s?.index===index):null, ship=gameShipSlots(model?.sourceId);
   const rows=[],excluded=[];
   const fail=reason=>({status:'unknown',reason,rows,excluded,recommended:null});
+  if(model?.combatUnsupportedReason)return fail(model.combatUnsupportedReason);
   if(!slot||slot.kind!=='weapon'||!ship?.slots[index])return fail('No supported weapon slot');
   const c={...COMBAT_PRESET,...context}, weights=c.armor==='mixed'?[1/3,1/3,1/3]:c.armor;
   if(!['general','boss','mobbing','opsi'].includes(model.mode))return fail('Unknown encounter mode');

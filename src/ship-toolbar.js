@@ -1,3 +1,4 @@
+import { researchShip } from './research-ships.js';
 import { SHIP_HULL_GROUPS, SHIP_RARITIES, SHIP_SORTS } from './ship-factions.js';
 
 const E=value=>String(value??'').replace(/[&<>"']/g,c=>
@@ -5,7 +6,8 @@ const E=value=>String(value??'').replace(/[&<>"']/g,c=>
 const choice=(value,label,selected)=>'<option value="'+E(value)+'"'+(value===selected?' selected':'')+'>'+E(label)+'</option>';
 
 export function renderShipFilterToolbar({rows=[],query='',hull='all',rarity='all',
-  sort='rarity',descending=true,open=false}={}) {
+  sort='rarity',descending=true,open=false,research=false,researchSeries='all'}={}) {
+  const series=[...new Set(rows.map(researchShip).filter(Boolean).map(r=>r.series))].sort((a,b)=>a-b);
   const rawHulls=[...new Set(rows.map(x=>x.hull).filter(Boolean))].sort();
   const allowedHulls=['Vanguard','Main','Sub','DD','CL','CA','CB','BB','BC',
     'BBV','BM','CV','CVL','AR','AE','SS','SSV','Misc'];
@@ -36,6 +38,8 @@ export function renderShipFilterToolbar({rows=[],query='',hull='all',rarity='all
         (descending?'↓ Descending':'↑ Ascending')+'</button>'+
     '</div></div>'+
     '<div class="equipment-quick-categories ship-quick-categories" role="group" aria-label="Browse ship hull groups">'+
+      '<button type="button" class="equipment-category-tab'+(research?' active':'')+'" data-action="ship-research-toggle" aria-pressed="'+research+'">Research</button>'+
+      '<label class="equipment-filter-field"><span>Research series</span><select id="ship-research-series" aria-label="Research series">'+choice('all','All series',researchSeries)+series.map(n=>choice(String(n),'Series '+n,String(researchSeries))).join('')+'</select></label>'+
       quick.map(name=>'<button type="button" class="equipment-category-tab'+(hull===name?' active':'')+
         '" data-action="ship-hull-filter" data-hull="'+E(name)+'" aria-pressed="'+(hull===name)+'">'+
         E(name==='all'?'All ships':name)+'</button>').join('')+'</div>'+

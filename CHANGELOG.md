@@ -2,6 +2,15 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.8] - 2026-11-12
+
+### Added
+- Combined Research filter for PR and DR ships, Series 1–9 filtering, and original gold/prismatic AVALON portrait ornaments on the roster and profile.
+- Interactive Research & Development acquisition window with 47 source-identified ships, 376 mission objectives and time gates, prerequisites, manual completion tracking and persistent start-date countdowns.
+- Dev/Fate planning controls and 41 verified milestone sets. Fate appears only where the checked client lists it. Full progression stat calculations and development blueprint totals remain unimplemented.
+- Keep unsupported Dev/Fate selections out of combat comparisons; retain existing reference stat, equipment and skill panels without rewriting saved loadouts.
+- Research source-integrity checks, regression tests and responsive application interaction coverage.
+
 ## [0.8.7] - 2026-11-12
 
 ### QA corrections
