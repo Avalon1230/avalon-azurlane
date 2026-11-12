@@ -9,9 +9,9 @@ export function researchShip(ship) {
 }
 export function researchSelection(record, value={}) {
   const dev=Number.isInteger(value?.dev)&&value.dev>=0&&value.dev<=30?value.dev:30;
-  const fate=dev===30&&record?.fateIds.length===5&&Number.isInteger(value?.fate)&&value.fate>=0&&value.fate<=5?value.fate:0;
+  const fate=dev===30&&Array.isArray(record?.fateIds)&&record.fateIds.length===5&&Number.isInteger(value?.fate)&&value.fate>=0&&value.fate<=5?value.fate:0;
   const start=Number.isSafeInteger(value?.start)&&value.start>=0&&value.start<=8640000000000000-604800000?value.start:null;
-  const complete=Array.isArray(value?.complete)?value.complete.filter(id=>record?.missions.some(m=>m.id===id)):[];
+  const complete=Array.isArray(value?.complete)&&Array.isArray(record?.missions)?value.complete.filter(id=>record.missions.some(m=>m?.id===id)):[];
   return {dev,fate,start,complete:[...new Set(complete)]};
 }
 export function readResearchState(storage) {
@@ -38,7 +38,11 @@ export function countdownLabel(seconds) {
 }
 export function selectedMilestones(record,selection) {
   const state=researchSelection(record,selection);
-  return (record?.milestones||[]).filter(m=>m.descriptor.startsWith('Dev ')?Number(m.descriptor.slice(4))<=state.dev:Number(m.descriptor.slice(9))<=state.fate);
+  return (Array.isArray(record?.milestones)?record.milestones:[]).filter(m=>{
+    if(!m||typeof m.descriptor!=='string'||!Array.isArray(m.value))return false;
+    const match=m.descriptor.match(/^(Dev|Fate Sim) (\d+)$/);
+    return match&&Number(match[2])>0&&Number(match[2])<=(match[1]==='Dev'?state.dev:state.fate);
+  });
 }
 
 // Original AVALON ornament: compass crown, stepped rails and corner filigree.

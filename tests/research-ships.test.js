@@ -83,3 +83,10 @@ test('unsupported progression never reaches gun or aircraft comparisons',()=>{
  const result=compareSlot({sourceId:'99901',combatUnsupportedReason:'Selected Dev/Fate is unsupported'},0);
  assert.equal(result.status,'unknown');assert.equal(result.recommended,null);assert.deepEqual(result.rows,[]);assert.match(result.reason,/Dev\/Fate/);
 });
+test('incomplete research records cannot invent Fate or milestone availability',()=>{
+ for(const record of [null,{}, {fateIds:'12345',missions:'invalid',milestones:{}}, {milestones:[null,{}, {descriptor:'Other 1',value:[]},{descriptor:'Dev NaN',value:[]}]}]){
+  assert.equal(researchSelection(record,{dev:30,fate:5,complete:[60012]}).fate,0);
+  assert.deepEqual(researchSelection(record,{complete:[60012]}).complete,[]);
+  assert.deepEqual(selectedMilestones(record,{dev:30,fate:5}),[]);
+ }
+});
