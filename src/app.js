@@ -1,5 +1,6 @@
 import { researchShip, researchSelection, readResearchState, saveResearchState, missionCountdown, countdownLabel } from './research-ships.js';
 import { renderResearchModal } from './research-view.js';
+import { captureResearchDialog, restoreResearchDialog } from './research-dialog-state.js';
 let researchSaved=readResearchState({getItem:key=>localStorage.getItem(key)}), researchOpen=false, researchSaveError=false;
 function activeResearch(){return researchShip(state.detail?.sourceId||SHIP_MAP.get(state.detail?.id)?.sourceId);}
 function updateResearch(patch){const r=activeResearch();if(!r)return;researchSaved[r.id]=researchSelection(r,{...researchSaved[r.id],...patch});researchSaveError=!saveResearchState({setItem:(key,value)=>localStorage.setItem(key,value)},researchSaved);render();}
@@ -534,6 +535,7 @@ function resetEquipmentBatch() {
   state.gearVisibleCount=EQUIPMENT_ROSTER_BATCH_SIZE;
 }
 function render() {
+  const researchDialogState=captureResearchDialog(document);
   if(state.page!=='ships'||state.detail?.kind!=='ship')researchOpen=false;
   nav();
   document.body.classList.toggle('ship-art-viewing', state.artViewerOpen && state.page==='ships' && state.detail?.kind==='ship');
@@ -566,7 +568,7 @@ function render() {
   document.title = `${state.detail?.kind==='ship' ? (detailedShipRecord(state.shipDetails.data,state.detail.sourceId)?.names?.en || SHIP_MAP.get(state.detail.id)?.name || 'Ship Profile') : pages.find(p=>p.id===state.page)?.label} · AVALON Azur Lane Intelligence`;
   const dialog=document.getElementById('research-dialog');
   document.body.classList.toggle('research-viewing',Boolean(dialog));
-  if(dialog)dialog.focus({preventScroll:true});
+  if(dialog)restoreResearchDialog(document,researchDialogState);
   observeShipRosterScroll();
   observeEquipmentRosterScroll();
 }
