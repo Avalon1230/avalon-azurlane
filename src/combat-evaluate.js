@@ -53,8 +53,9 @@ export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
     if(item.weapon?.aircraft){
       const wing=[];
       for(let i=0;i<3;i++){
-        const selected=i===index?item:c.wing==='reference'?data.equipment[[17340,17340,28140][i]]:resolveCombatItem(model.slots.find(s=>s.index===i)?.selected,data);
+        const selected=i===index?item:c.wing==='reference'?data?.equipment?.[[17340,17340,28140][i]]:resolveCombatItem(model.slots.find(s=>s?.index===i)?.selected,data);
         if(!selected?.weapon?.aircraft||!ship.slots[i].types.includes(selected.type)||!Array.isArray(selected.hull_restriction)||selected.hull_restriction.includes(ship.hullId)||!Array.isArray(selected.skills)||selected.skills.length||ship.slots[i].parallel!==1)break;
+        if(data.conflicts?.[selected.id]&&['reload','damage','coefficient','armor'].includes(data.conflicts[selected.id].field))break;
         wing.push({item:selected,mounts:ship.slots[i].maxMounts});
       }
       skill=skillCondition(model.sourceId,wing.map(x=>x.item.type));

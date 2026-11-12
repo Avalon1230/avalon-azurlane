@@ -5,6 +5,12 @@ import {readFileSync} from 'node:fs';
 import {gameShipSlots,VERIFIED_SLOT_RECORDS} from '../src/game-slot-manifest.js';
 const fixture=JSON.parse(readFileSync(new URL('../data/combat-source.json',import.meta.url)));
 const {repository,commit,equipmentBlob,skillsBlob}=fixture.source;
+for(const [path,blob] of [['docs/equips/fomulas.md','9d371fbd0378543201a3bc50f1d94cafadc9e502'],['types/ships.d.ts','6361937beb2d6455b8c2db9e0e07506bdd400498']]){
+  const response=await fetch(`https://raw.githubusercontent.com/${repository}/${commit}/${path}`,{signal:AbortSignal.timeout(60000)});assert.ok(response.ok);
+  const bytes=Buffer.from(await response.arrayBuffer());
+  assert.equal(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),blob);
+  console.log('PASS pinned formula/schema identity: '+path+' '+blob);
+}
 {
   const response=await fetch(`https://raw.githubusercontent.com/${repository}/${commit}/data/ships.json`,{signal:AbortSignal.timeout(60000)});
   assert.ok(response.ok);

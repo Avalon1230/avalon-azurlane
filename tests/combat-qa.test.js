@@ -5,7 +5,7 @@ import {gameShipSlots} from '../src/game-slot-manifest.js';
 import {buildShipLoadout} from '../src/loadout-intelligence.js';
 import {combatModel,combatEquipment} from './helpers/combat-fixture.js';
 import {compareSlot} from '../src/combat-evaluate.js';
-import {directVolley,weaponCycle,gunAbsoluteCooldown,attackTimeline,airstrikeCycle} from '../src/combat-mechanics.js';
+import {directVolley,weaponCycle,gunAbsoluteCooldown,attackTimeline,airstrikeCycle,reloadSeconds,armorWeights} from '../src/combat-mechanics.js';
 import {createCombatScenario} from '../src/combat-scenario.js';
 const eq=COMBAT_DATA.equipment;
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-9,`${a} != ${b}`);
@@ -66,4 +66,12 @@ test('scenario resets between ships, slots and modes',()=>{
   const state=createCombatScenario();state.select('60701',1,'general').armor='heavy';
   assert.equal(state.select('60701',1,'general').armor,'heavy');
   for(const key of [['60701',0,'general'],['40303',0,'general'],['40303',0,'boss'],['60701',1,'general']])assert.deepEqual(state.select(...key),{});
+});
+test('numeric overflow, sparse armor and conflicting supporting aircraft fail closed',()=>{
+  assert.equal(reloadSeconds(eq[14340].weapon,10,Number.MAX_VALUE).status,'unknown');
+  assert.equal(weaponCycle({...eq[14340],weapon:{...eq[14340].weapon,delay:Number.MAX_VALUE}},{level:10,reload:100,absoluteCooldown:Number.MAX_VALUE}).status,'unknown');
+  assert.equal(armorWeights([1,,,]),null);
+  const data=structuredClone(COMBAT_DATA);data.conflicts={28140:{field:'reload',reason:'Conflicting aircraft reload'}};
+  assert.equal(compareSlot(combatModel('60701'),1,{},data).status,'unknown');
+  assert.equal(compareSlot(combatModel('60701'),1,{wing:'reference'},data).status,'unknown');
 });

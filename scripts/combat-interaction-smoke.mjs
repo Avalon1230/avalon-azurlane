@@ -80,6 +80,10 @@ try{
         const before=Number(await page.locator('[data-combat-equipment="17340"]').getAttribute('data-combat-cycle'));
         const raw=(COMBAT_DATA.equipment[27140].weapon.reload[10]*2+1639*2+1550*4)/8;
         assert.ok(Math.abs(before-(raw/(6*Math.sqrt(200*3.14))*2.2+0.033))<1e-9);
+        const offense=Number(await page.locator('[data-combat-equipment="19140"]').getAttribute('data-combat-cycle'));
+        const offenseRaw=(COMBAT_DATA.equipment[27140].weapon.reload[10]*2+1786*2+1550*4)/8;
+        assert.ok(Math.abs(offense-(offenseRaw/(6*Math.sqrt(200*3.14))*2.2*0.9+0.033))<1e-9);
+        assert.match(await page.locator('.combat-comparison').innerText(),/healing\/shielding/);
       }
       await page.locator('#combat-wing').selectOption('reference');
       const reference=Number(await page.locator('[data-combat-equipment="17340"]').getAttribute('data-combat-cycle'));

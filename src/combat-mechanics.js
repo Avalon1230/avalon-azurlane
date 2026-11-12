@@ -10,12 +10,13 @@ export function gunAbsoluteCooldown(item,capacity){
 export function reloadSeconds(weapon, level, reload) {
   if(!Number.isInteger(level)||level<0||!finite(reload)||(weapon?.reload_seconds!==undefined&&typeof weapon.reload_seconds!=='boolean')||!finite(weapon?.reload?.[level], Number.MIN_VALUE))
     return unknown('Missing enhancement or final RLD');
-  return {status:'calculated',value:weapon.reload_seconds ? weapon.reload[level]
-    : weapon.reload[level]/(6*Math.sqrt((reload+100)*3.14))};
+  const value=weapon.reload_seconds ? weapon.reload[level]
+    : weapon.reload[level]/(6*Math.sqrt((reload+100)*3.14));
+  return finite(value,Number.MIN_VALUE)?{status:'calculated',value}:unknown('Non-finite or underflowed reload');
 }
 export function armorWeights(armor) {
   if(['light','medium','heavy'].includes(armor))return ['light','medium','heavy'].map(x=>+(x===armor));
-  if(Array.isArray(armor)&&armor.length===3&&armor.every(x=>finite(x))&&Math.abs(armor.reduce((a,b)=>a+b,0)-1)<1e-9)return armor;
+  if(Array.isArray(armor)&&armor.length===3&&Array.from(armor).every(x=>finite(x))&&Math.abs(armor.reduce((a,b)=>a+b,0)-1)<1e-9)return armor;
   return null;
 }
 /** Ideal direct-hit damage, excludes random +0/1/2, crits, burns and all skills. */
@@ -38,7 +39,8 @@ export function weaponCycle(item,options={}) {
   const r=reloadSeconds(item?.weapon,level,reload);
   if(r.status!=='calculated')return r;
   if(item.weapon.aircraft||!finite(item.weapon.delay)||!finite(absoluteCooldown))return unknown('Volley/absolute cooldown required');
-  return {status:'calculated',value:r.value+item.weapon.delay+absoluteCooldown,reload:r.value};
+  const value=r.value+item.weapon.delay+absoluteCooldown;
+  return finite(value,Number.MIN_VALUE)?{status:'calculated',value,reload:r.value}:unknown('Non-finite weapon cycle');
 }
 /** Whole-wing weighted reload; never rank one aircraft by its standalone reload. */
 export function airstrikeCycle(wing,options={}) {
@@ -56,7 +58,8 @@ export function airstrikeCycle(wing,options={}) {
     total+=r.value*mounts;count+=mounts;
   }
   if(!count)return unknown('No intercepting aircraft');
-  return {status:'calculated',value:total/count*(interception?1:2.2)*loadingMultiplier+0.033};
+  const value=total/count*(interception?1:2.2)*loadingMultiplier+0.033;
+  return finite(value,Number.MIN_VALUE)?{status:'calculated',value}:unknown('Non-finite wing cycle');
 }
 /** Scheduling primitive, not an in-game timeline: arrival delays must be supplied. */
 export function attackTimeline(options={}) {
