@@ -1,20 +1,20 @@
-## v0.8.7 — Combat Mechanics Foundation (PR; not deployed)
-
-Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
-
-This is still **WIP**: it compares specific parts of a build, not a complete battle or a best-in-slot list. Moving targets, missing data and conflicting records can prevent a reliable comparison. Reload uses constants checked against the game client; that resolved the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
-
 # AVALON — Azur Lane Intelligence
 
 An independent **Azur Lane** companion for choosing ships, comparing gear and planning fleets.
 
-> **Project status:** **v0.8.6 evidence-led loadout explanation (released; PR #23, CI and Pages verified)**. Fleet Lab can suggest lineups from 39 reviewed ships and plan all four OpSi surface fleets together. **The loadout planner is WIP: auto-filled gear fits the recorded slots, but we haven’t confirmed the best builds. Complete combat optimization, skill-timing simulation and verified best-in-slot rankings are still ahead.**
+> **Project status:** **v0.8.7 Combat Mechanics Foundation released** through [PR #28](https://github.com/Avalon1230/avalon-azurlane/pull/28). Source-backed comparisons now cover selected gun damage, armor matchups and estimated reload timing, plus Aquila’s full-wing loading and skill-dependent aircraft choice. Fleet Lab still suggests lineups from 39 reviewed ships and plans four OpSi surface fleets together. **The loadout planner remains WIP: auto-filled gear is not a verified best-in-slot recommendation.** Complete combat optimization, skill-timing simulation and validated optimal builds are still ahead.
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
 [Live website](https://avalon1230.github.io/avalon-azurlane/) · [Release changelog](CHANGELOG.md) · [Development handoff](docs/PROJECT_STATUS.md) · [Koumakan connectivity diagnosis](docs/KOUMAKAN_ACCESS.md) · [GitHub commit history](https://github.com/Avalon1230/avalon-azurlane/commits/main)
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
+
+## v0.8.7 — Combat Mechanics Foundation (released 2026-11-12)
+
+Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
+
+This is still **WIP**: it compares specific parts of a build, not a complete battle or a best-in-slot list. Moving targets, missing data and conflicting records can prevent a reliable comparison. Reload uses constants checked against the game client; that resolved the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Feature maturity labels
 
