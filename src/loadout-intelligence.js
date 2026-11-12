@@ -113,6 +113,7 @@ function slotFromGame(slot,index,hullId){
     minEfficiency:null,
     maxEfficiency:Number.isFinite(slot?.maxEfficiency)?slot.maxEfficiency:null,
     maxMounts:Number.isSafeInteger(slot?.maxMounts)?slot.maxMounts:null,
+    parallel:slot?.parallel??null,capacity:slot?.capacity??null,
     source:'AzurLaneData · May 2026',verified:categories.length>0};
 }
 function choosePrimary(index,base,wiki,game,hullId){

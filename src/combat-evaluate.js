@@ -1,6 +1,6 @@
 import {COMBAT_DATA} from './combat-data.js';
 import {gameShipSlots} from './game-slot-manifest.js';
-import {directVolley,weaponCycle,airstrikeCycle,attackTimeline} from './combat-mechanics.js';
+import {directVolley,weaponCycle,airstrikeCycle,attackTimeline,gunAbsoluteCooldown} from './combat-mechanics.js';
 import {skillCondition} from './combat-skills.js';
 
 export const COMBAT_PRESET = Object.freeze({level:10,reload:100,stat:100,duration:60,armor:'mixed',movement:'ideal',enemyAA:0});
@@ -10,15 +10,22 @@ export const MECHANICS_CONFLICTS = Object.freeze({
 const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,'');
 export function resolveCombatItem(candidate,data=COMBAT_DATA){
   if(candidate?.source!=='fernando')return null;
-  const item=data.equipment[String(candidate.sourceId)];
-  if(!item||item.type!==candidate.typeCode||![item.name,...(item.aliases||[])].some(n=>norm(n)===norm(candidate.name)))return null;
+  const item=data?.equipment?.[String(candidate.sourceId)];
+  if(!item||!Array.isArray(item.aliases)||item.type!==candidate.typeCode||![item.name,...item.aliases].some(n=>norm(n)===norm(candidate.name)))return null;
   return item;
 }
-const statBonus=(item,stat,level)=>item.stats?.find(s=>s.stat===stat)?.values?.[level]??0;
+const statBonus=(item,stat,level)=>{
+  if(!Array.isArray(item.stats)||!item.stats.every(s=>s&&typeof s.stat==='string'&&Array.isArray(s.values)))return null;
+  const matching=item.stats.filter(s=>s.stat===stat);
+  if(matching.length>1)return null;
+  if(!matching.length)return 0; // Verified complete stat list has no bonus for this stat.
+  const v=matching[0].values[level];return typeof v==='number'&&Number.isFinite(v)&&v>=0?v:null;
+};
 /** A component comparison; the compatible pool is supplied by the existing planner. */
 export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
-  const slot=model?.slots?.find(s=>s.index===index), ship=gameShipSlots(model?.sourceId);
-  const fail=reason=>({status:'unknown',reason,rows:[],recommended:null});
+  const slot=Array.isArray(model?.slots)?model.slots.find(s=>s?.index===index):null, ship=gameShipSlots(model?.sourceId);
+  const rows=[],excluded=[];
+  const fail=reason=>({status:'unknown',reason,rows,excluded,recommended:null});
   if(!slot||slot.kind!=='weapon'||!ship?.slots[index])return fail('No supported weapon slot');
   const c={...COMBAT_PRESET,...context}, weights=c.armor==='mixed'?[1/3,1/3,1/3]:c.armor;
   if(!['general','boss','mobbing','opsi'].includes(model.mode))return fail('Unknown encounter mode');
@@ -27,44 +34,54 @@ export function compareSlot(model,index,context=COMBAT_PRESET,data=COMBAT_DATA){
   if(!Number.isInteger(c.level)||c.level<0||![c.reload,c.stat,c.duration].every(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0)||c.duration>600)
     return fail('Invalid scenario inputs');
   const sourceSlot=ship.slots[index];
-  if(slot.maxEfficiency!==sourceSlot.maxEfficiency||slot.maxMounts!==sourceSlot.maxMounts)
+  if(slot.maxEfficiency!==sourceSlot.maxEfficiency||slot.maxMounts!==sourceSlot.maxMounts||slot.parallel!==sourceSlot.parallel||slot.capacity!==sourceSlot.capacity)
     return fail('Live slot and mechanics snapshot disagree or slot efficiency is unavailable');
+  if(!Array.isArray(slot.candidates))return fail('Missing compatible candidate list');
   const mapped=slot.candidates.map(candidate=>({candidate,item:resolveCombatItem(candidate,data)}));
-  const rows=[],excluded=[];
   for(const {candidate,item} of mapped){
-    if(!item||item.skills.length||!sourceSlot.types.includes(item.type)||item.hull_restriction.includes(ship.hullId))continue;
+    const exclude=reason=>excluded.push({sourceId:String(candidate?.sourceId??'unknown'),name:candidate?.name??'Unknown equipment',reason});
+    if(!item){exclude('Missing or contradictory source identity');continue;}
+    if(!Array.isArray(item.skills)||!Array.isArray(item.hull_restriction)){exclude('Incomplete skill or hull restrictions');continue;}
+    if(item.skills.length){exclude('Equipment skill effects are unsupported');continue;}
+    if(!sourceSlot.types.includes(item.type)||item.hull_restriction.includes(ship.hullId)){exclude('Source slot or hull incompatibility');continue;}
     const conflict=data.conflicts?.[item.id]||MECHANICS_CONFLICTS[item.id];
     if(conflict&&['reload','damage','coefficient','armor'].includes(conflict.field)){
       excluded.push({sourceId:String(item.id),name:item.name,reason:conflict.reason});continue;
     }
-    const types=model.slots.map(s=>s.index===index?item.type:s.selected?.typeCode);
-    const skill=skillCondition(model.sourceId,types);
+    const types=model.slots.map(s=>s?.index===index?item.type:s?.selected?.typeCode);
+    let skill=skillCondition(model.sourceId,types);
     if(item.weapon?.aircraft){
       const wing=[];
       for(let i=0;i<3;i++){
         const selected=i===index?item:c.wing==='reference'?data.equipment[[17340,17340,28140][i]]:resolveCombatItem(model.slots.find(s=>s.index===i)?.selected,data);
-        if(!selected?.weapon?.aircraft||!ship.slots[i].types.includes(selected.type)||selected.hull_restriction.includes(ship.hullId))break;
+        if(!selected?.weapon?.aircraft||!ship.slots[i].types.includes(selected.type)||!Array.isArray(selected.hull_restriction)||selected.hull_restriction.includes(ship.hullId)||!Array.isArray(selected.skills)||selected.skills.length||ship.slots[i].parallel!==1)break;
         wing.push({item:selected,mounts:ship.slots[i].maxMounts});
       }
-      if(wing.length!==3||skill.status!=='source-conditioned'||!skill.role)continue;
+      skill=skillCondition(model.sourceId,wing.map(x=>x.item.type));
+      if(wing.length!==3||skill.status!=='source-conditioned'||!skill.role){exclude('Complete supported air wing and reviewed skill condition required');continue;}
       const air=airstrikeCycle(wing,{level:c.level,reload:c.reload,loadingMultiplier:skill.loadingMultiplier});
-      if(air.status!=='calculated')continue;
+      if(air.status!=='calculated'){exclude(air.reasons.join('; '));continue;}
+      if(!Array.isArray(item.armaments)||!item.armaments.every(a=>a&&Array.isArray(a.damage))){exclude('Incomplete aircraft payload records');continue;}
       rows.push({id:candidate.id,name:candidate.name,sourceId:String(item.id),kind:'aircraft',cycle:air.value,
-        intercepts:item.weapon.is_interceptor,payload:item.armaments.filter(a=>a.ammo!==5).map(a=>({id:a.id,name:a.name,count:a.count,damage:a.damage[c.level],armor:a.armor_mod,aim:a.aim_type})),skill,
+        wing:wing.map(x=>({id:x.item.id,name:x.item.name,mounts:x.mounts})),intercepts:item.weapon.is_interceptor,payload:item.armaments.filter(a=>a.ammo!==5).map(a=>({id:a.id,name:a.name,count:a.count,damage:a.damage[c.level]??null,armor:a.armor_mod,aim:a.aim_type})),skill,
         evidenceClass:'reproducible-component',limitations:['Payload hit rate, interception damage, aircraft losses, barrage and effective healing are not simulated.']});
       continue;
     }
-    const absoluteCooldown=item.type===4?0.2:0.3;
+    const cooldown=gunAbsoluteCooldown(item,sourceSlot.capacity);
+    if(cooldown.status!=='calculated'){exclude(cooldown.reasons.join('; '));continue;}
+    const bonus=statBonus(item,item.weapon?.stat,c.level);
+    if(bonus===null){exclude('Missing or contradictory equipment stat bonus');continue;}
+    const absoluteCooldown=cooldown.value;
     const cycle=weaponCycle(item,{level:c.level,reload:c.reload,absoluteCooldown});
     const volley=directVolley(item,{level:c.level,stat:c.stat+statBonus(item,item.weapon?.stat,c.level),
-      efficiency:sourceSlot.maxEfficiency,mounts:sourceSlot.maxMounts,armor:weights});
-    if(cycle.status!=='calculated'||volley.status!=='calculated')continue;
+      efficiency:sourceSlot.maxEfficiency,mounts:sourceSlot.maxMounts,parallel:sourceSlot.parallel,armor:weights});
+    if(cycle.status!=='calculated'||volley.status!=='calculated'){exclude([...(cycle.reasons||[]),...(volley.reasons||[])].join('; '));continue;}
     const timeline=attackTimeline({cycle:cycle.value,duration:c.duration});
     rows.push({id:candidate.id,name:candidate.name,sourceId:String(item.id),kind:'gun',cycle:cycle.value,
-      volley:volley.value,dps:volley.value/cycle.value,activations:timeline.events.length,
+      parallel:sourceSlot.parallel,capacity:sourceSlot.capacity,absoluteCooldown,volley:volley.value,dps:volley.value/cycle.value,activations:timeline.events.length,
       directTotal:volley.value*timeline.events.length,barrageTriggers:skill.every?Math.floor(timeline.events.length/skill.every):null,
       armorDps:Object.fromEntries(['light','medium','heavy'].map(armor=>[armor,directVolley(item,{level:c.level,
-        stat:c.stat+statBonus(item,item.weapon.stat,c.level),efficiency:sourceSlot.maxEfficiency,mounts:sourceSlot.maxMounts,armor}).value/cycle.value])),
+        stat:c.stat+bonus,efficiency:sourceSlot.maxEfficiency,mounts:sourceSlot.maxMounts,parallel:sourceSlot.parallel,armor}).value/cycle.value])),
       pattern:{count:item.weapon.count,volley:item.weapon.volley_info,spread:item.weapon.spread_angle,splash:item.weapon.splash,pierce:item.weapon.pierce,velocity:item.weapon.velocity},skill,
       evidenceClass:'reproducible-component',limitations:['All projectiles hit one target. No crit, burn, barrage, skill buffs, aim delay or mount staggering. Absolute cooldown is an approximation.']});
   }

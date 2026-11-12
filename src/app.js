@@ -14,7 +14,9 @@ import { loadEquipmentDrops, renderEquipmentAcquisition } from './equipment-acqu
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { LOADOUT_MODES, buildShipLoadout, validateManualChoice } from './loadout-intelligence.js';
 import { renderLoadoutAlternatives } from './loadout-view.js';
-const combatContext = {};
+import {createCombatScenario} from './combat-scenario.js';
+const combatScenario=createCombatScenario();
+let combatContext = {};
 import { renderAugmentDetails } from './augment-view.js';
 import { allAugmentRecords } from './augment-manifest.js';
 import { renderAugmentIndex, AUGMENT_BATCH_SIZE } from './augment-index.js';
@@ -535,7 +537,7 @@ function render() {
       wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel
     })+(state.profileGearId?renderDetails(state.profileGearId):'')+
       (loadoutModel&&state.profileLoadoutPicker!==null
-        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount,combatContext}):'')+
+        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount,combatContext:(combatContext=combatScenario.select(loadoutModel.sourceId,state.profileLoadoutPicker,loadoutModel.mode))}):'')+
       (loadoutModel&&state.profileAugmentId
         ?renderAugmentDetails(loadoutModel.slots.flatMap(slot=>slot.candidates)
           .find(item=>item.id===state.profileAugmentId&&item.kind==='augment')):'');
@@ -892,7 +894,7 @@ document.addEventListener('click', event => {
 document.addEventListener('change', event => {
   const combatField=event.target.dataset.combatField;
   if(['armor','movement','reload','stat','duration','wing'].includes(combatField)){
-    combatContext[combatField]=['reload','stat','duration'].includes(combatField)?Number(event.target.value):event.target.value;
+    combatContext[combatField]=['reload','stat','duration'].includes(combatField)?(event.target.value.trim()===''?null:Number(event.target.value)):event.target.value;
     const scroll=event.target.closest('.detail-scroll')?.scrollTop||0;
     render();
     const restored=document.querySelector('[data-combat-field="'+combatField+'"]');

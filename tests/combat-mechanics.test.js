@@ -36,13 +36,13 @@ test('independent BWIKI Mk6 damage and rounded reload agree using client K3=3.14
   assert.equal(MECHANICS_CONFLICTS['14340'],undefined);
   assert.ok(compareSlot(combatModel(),0).rows.some(r=>r.sourceId==='14340'));
   // Hand calculation using independently published numbers, zero FP, one 100% mount.
-  close(directVolley(eq(14340),{level:10,stat:0,efficiency:1,mounts:1,armor:'light'}).value,687.96);
+  close(directVolley(eq(14340),{level:10,stat:0,efficiency:1,mounts:1,parallel:1,armor:'light'}).value,687.96);
 });
 test('independent BWIKI Type98 +10 reference: 12x4, 110%, 100/50/20, 0.96s base',()=>{
   const w=eq(31040).weapon;
   assert.equal(w.damage[10],12);assert.equal(w.count,4);assert.deepEqual(w.armor_mod,[1,0.5,0.2]);
   close(reloadSeconds(w,10,100).value,0.96,0.005);
-  close(directVolley(eq(31040),{level:10,stat:0,efficiency:1,mounts:1,armor:'heavy'}).value,10.56);
+  close(directVolley(eq(31040),{level:10,stat:0,efficiency:1,mounts:1,parallel:1,armor:'heavy'}).value,10.56);
 });
 test('RLD scaling excludes volley and absolute cooldown; seconds-unit data is not rescaled',()=>{
   const w=eq(31040).weapon;
@@ -51,7 +51,7 @@ test('RLD scaling excludes volley and absolute cooldown; seconds-unit data is no
   assert.equal(reloadSeconds({reload:[2],reload_seconds:true},0,300).value,2);
 });
 test('armor mixture is weighted direct damage, never an invented utility score',()=>{
-  const input={level:10,stat:100,efficiency:1.4,mounts:3};
+  const input={level:10,stat:100,efficiency:1.4,mounts:3,parallel:1};
   const each=['light','medium','heavy'].map(armor=>directVolley(eq(14340),{...input,armor}).value);
   close(directVolley(eq(14340),{...input,armor:[0.5,0.25,0.25]}).value,each[0]*0.5+each[1]*0.25+each[2]*0.25);
   assert.equal(armorWeights([1,1,1]),null);
@@ -59,7 +59,7 @@ test('armor mixture is weighted direct damage, never an invented utility score',
 test('unknown or invalid weapon fields never turn into zero damage',()=>{
   for(const level of [-1,99,1.5,NaN])assert.equal(reloadSeconds(eq(14340).weapon,level,100).status,'unknown');
   const item=structuredClone(eq(14340));delete item.weapon.coefficient;
-  assert.equal(directVolley(item,{level:10,stat:100,efficiency:1,mounts:1,armor:'light'}).status,'unknown');
+  assert.equal(directVolley(item,{level:10,stat:100,efficiency:1,mounts:1,parallel:1,armor:'light'}).status,'unknown');
   assert.equal(weaponCycle(eq(14340),{level:10,reload:100}).status,'unknown');
   assert.equal(directVolley(eq(17340),{}).status,'unknown');
 });
@@ -79,7 +79,7 @@ test('Aquila healing/offensive branches are exclusive and skill-version gated',(
   assert.equal(skillCondition('20403',[],{augmented:true}).status,'unknown');
 });
 test('airstrike cooldown uses the full wing and separate interception reload',()=>{
-  const wing=[{item:eq(17340),mounts:2},{item:eq(19140),mounts:2},{item:eq(28140),mounts:4}];
+  const wing=[{item:eq(17340),mounts:2,parallel:1},{item:eq(19140),mounts:2,parallel:1},{item:eq(28140),mounts:4,parallel:1}];
   const expected=(1639*2+1786*2+1550*4)/8/(6*Math.sqrt(200*3.14))*2.2;
   close(airstrikeCycle(wing,{level:10,reload:100,loadingMultiplier:0.9}).value,expected*0.9+0.033);
   close(airstrikeCycle(wing,{level:10,reload:100,interception:true}).value,1492/(6*Math.sqrt(200*3.14))+0.033);

@@ -2,8 +2,24 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
+import {gameShipSlots,VERIFIED_SLOT_RECORDS} from '../src/game-slot-manifest.js';
 const fixture=JSON.parse(readFileSync(new URL('../data/combat-source.json',import.meta.url)));
 const {repository,commit,equipmentBlob,skillsBlob}=fixture.source;
+{
+  const response=await fetch(`https://raw.githubusercontent.com/${repository}/${commit}/data/ships.json`,{signal:AbortSignal.timeout(60000)});
+  assert.ok(response.ok);
+  const bytes=Buffer.from(await response.arrayBuffer());
+  assert.equal(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),'ca5045a54c671ec7b8c06ce1890329d0d9fbc114');
+  const ships=Object.values(JSON.parse(bytes));let checked=0;
+  for(const ship of ships){
+    const actual=gameShipSlots(ship.gid);if(!actual)continue;
+    assert.equal(actual.shipId,ship.id);assert.equal(actual.hullId,ship.hull);
+    assert.deepEqual(actual.slots,ship.slots.at(-1).map(s=>({types:s.types,maxEfficiency:s.efficiency,maxMounts:s.base,parallel:s.parallel??null,capacity:s.capacity??null})),ship.name);
+    checked++;
+  }
+  assert.equal(checked,VERIFIED_SLOT_RECORDS);
+  console.log(`PASS ${checked} pinned ship records: identities, types, efficiencies, mounts, parallel and capacity`);
+}
 for(const [file,blob,key] of [['equipments',equipmentBlob,'equipment'],['skills',skillsBlob,'skills']]){
   const url=`https://raw.githubusercontent.com/${repository}/${commit}/data/${file}.json`;
   const response=await fetch(url,{signal:AbortSignal.timeout(60000)});
