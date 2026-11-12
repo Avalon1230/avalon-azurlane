@@ -77,6 +77,9 @@ function saveLoadoutPicks() {
 }
 function currentShipLoadoutModel(ship,data,sourceId) {
   const id=String(sourceId||data?.id||ship?.sourceId||'');
+  // Direct profile URLs use a remote ID even when the merged catalog retains
+  // the curated ID. Match the profile renderer when rebuilding for actions.
+  ship=ship||SHIPS.find(x=>String(x.sourceId||'')===id);
   const saved=state.savedLoadouts?.[id]?.[state.profileLoadoutMode];
   return buildShipLoadout({
     ship,data,wikiFacts:wikiFactsCache.get(id)||null,

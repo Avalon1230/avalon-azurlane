@@ -117,6 +117,8 @@ try{
         await page.evaluate(()=>{location.hash='#/ships/60701';});await open(1);
         await page.locator('[data-action="loadout-select"][data-equip="fer-19140"]').click();
         picks['60701'].general[1]='fer-19140';
+        assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),picks);
+        await page.locator('.loadout-picker-panel').waitFor({state:'hidden'});
         await open(0);await page.locator('.combat-evidence summary').click();
         assert.match(await page.locator('[data-combat-equipment="17340"]').innerText(),/offense/);
         await page.locator('#combat-wing').selectOption('reference');
