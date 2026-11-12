@@ -1,3 +1,30 @@
+## QA correction pass — 2026-11-12
+
+Correction implementation 2f7d16de69bf87ab35d6a106e143f37a11bfb782 passed [CI 43164436960](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43164436960): **235/235 Node tests, 63/63 responsive cases, 10/10 actual-application sessions**, 860 exact ship records, 11 equipment / 9 skill records, two formula/schema blob checks and two original-client file checks. Syntax and generated-data integrity passed. 16 augment images and two logos downloaded; five logos remained HTTP 429 throttled and are not certified. Targeted Node coverage: mechanics 100% lines / 94.87% branches; evaluator 100% / 89.13%; skills and scenario state 100% / 100%; view 100% / 50%. Coverage does not establish real-game correctness. Final documentation-head CI must also pass before handoff.
+
+Both independent QA findings were addressed on the existing PR #28 branch. No merge is authorized. Reviewed comments: [first review](https://github.com/Avalon1230/avalon-azurlane/pull/28#issuecomment-6811005627), [follow-up review](https://github.com/Avalon1230/avalon-azurlane/pull/28#issuecomment-6815526411).
+
+- All 860 source ship records now retain slot parallel and capacity. Missing capacity remains null; battleship comparisons require a positive verified capacity. Live/source metadata disagreement fails closed. Gun volley includes projectile count × mounts × parallel.
+- Only gun families 1/2/3/4/11 receive gun component calculations. Torpedoes, submarine torpedoes, AA, auxiliaries and unknown families return unknown rather than fabricated gun DPS or timing. Aircraft retain their separate whole-wing loading path.
+- Specific exclusion reasons survive zero/one comparable option and are expandable in the drawer. Null/malformed windows, wing entries, stat lists, identities, conflicting records, sparse armor arrays and numeric overflow fail closed.
+- Aquila skill conditions are derived from the actual evaluated wing, including reference-wing substitutions. Current/reference comparisons cannot rewrite saved equipment. Nondefault aircraft parallel values remain unsupported.
+- Scenario assumptions are session-only and reset when a different ship/slot/mode comparison opens. Reopening the same comparison retains its settings. Empty numeric input is unknown, not zero.
+- Browser coverage uses the real application event handlers with isolated catalog fixtures: 390/1280px, fighter and dive-bomber saved configurations, full-wing numerical checks, reference wings, missing/unsupported planes, disclosures, Escape, ship/slot/mode changes and saved-storage equality across evaluation and reload. This is UI regression evidence, not independent battle validation.
+
+### Source and mathematical validation
+
+Checked 2026-11-12 against the unchanged MIT-attributed May 2026 snapshot, commit `3deb898433a03ed3d7d7ff877f0d1a9b505dfd44`. New exact identity checks: ships.json blob `ca5045a54c671ec7b8c06ce1890329d0d9fbc114`; types/ships.d.ts `6361937beb2d6455b8c2db9e0e07506bdd400498`; docs/equips/fomulas.md `9d371fbd0378543201a3bc50f1d94cafadc9e502`. Existing equipment/skill blobs and original EN client 9.3.390 reload constants are rechecked online. No additional third-party code is redistributed. Original-client verification establishes the reload divisor; the capacity-dependent absolute cooldowns are explicitly the pinned author's theorized averages, not independently certified client frame timings.
+
+| Reference case | Expected | Actual |
+| --- | --- | --- |
+| Gascogne 99901, Mk6 14340 +10, light armor, FP before gun 0, efficiency 1.8, mounts 1, parallel 2 | 156 × 1.05 × 1.8 × 1.25 × 3 × 1 × 2 × 1.4 = 3095.82 ideal damage | 3095.82 |
+| Same gun, final RLD 100, capacity 2, delay 0 | 3611 / (6 × sqrt(200 × 3.14)) + 0.033 = 24.0487644984s | 24.0487644984s |
+| Ordinary capacity 1 BB absolute cooldown | 0.2s estimate | 0.2s |
+| Aquila Hellcat/Hellcat/Barracuda, mounts 2/2/4, +10, RLD 100 | weighted raw reload × 2.2 / (6 × sqrt(200 × 3.14)) + 0.033 = 23.3630748502s | 23.3630748502s |
+| Aquila Hellcat/Helldiver/Barracuda, same conditions, level-10 offensive loading condition | weighted raw reload × 2.2 × 0.9 / (6 × sqrt(200 × 3.14)) + 0.033 = 21.5140072997s | 21.5140072997s |
+
+Floating-point assertions use 1e-9 tolerance. The pre-existing independent BWIKI Mk6 and Type98 damage/rounded-reload references still pass. Gascogne's full skill effects, effective healing, aircraft DPS, actual arrival times and complete-build recommendations remain unsupported. Missing mechanics never receive BIS claims.
+
 # Combat mechanics foundation — v0.8.7
 
 Status: implemented component calculator, **not a complete combat simulator or best-in-slot engine**. No saved equipment is changed by comparisons. Existing compatibility selection and six-position loadouts remain intact.
@@ -6,7 +33,7 @@ Status: implemented component calculator, **not a complete combat simulator or b
 
 `data/combat-source.json` retains 11 exact source equipment records and reviewed skill source records. `scripts/build-combat-data.mjs` generates the browser ES module and checks its SHA-256. `combat-mechanics.js` contains pure formulas, `combat-skills.js` typed conditions, `combat-evaluate.js` exact-ID/name/type joins and eligibility gates, and `combat-view.js` the concise drawer UI. These APIs consume ordinary records and the existing ship-slot manifest; the representative ships are tests, not separate calculators.
 
-The shipped pathway compares +10 direct gun damage per ideal volley and second, estimated cycles and finite-duration firing opportunities. Inputs declare final RLD, FP before the compared gun, armor weights and duration. Gun FP bonuses are added from the same enhancement record. There is no arbitrary combat score. General uses explicitly equal light/medium/heavy weights. Boss requires a chosen armor; mobbing reports firing opportunities but does not claim wave coverage; OpSi retains adaptation/survival warnings. Moving-target accuracy is unknown and suppresses damage comparison. Unsupported or conflicting records do not receive a numerical ranking.
+The implemented pathway compares +10 direct gun damage per ideal volley and second, estimated cycles and finite-duration firing opportunities. Inputs declare final RLD, FP before the compared gun, armor weights and duration. Gun FP bonuses are added from the same enhancement record. There is no arbitrary combat score. General uses explicitly equal light/medium/heavy weights. Boss requires a chosen armor; mobbing reports firing opportunities but does not claim wave coverage; OpSi retains adaptation/survival warnings. Moving-target accuracy is unknown and suppresses damage comparison. Unsupported or conflicting records do not receive a numerical ranking.
 
 Aircraft comparisons require the full wing. They calculate weighted loading time, expose actual armaments/interception capability, and apply Aquila's reviewed slot-two loading condition. The optional **Reference wing** uses Hellcat/Hellcat/Barracuda, replacing only the compared slot in the calculation. It is labeled separately from the user's actual wing and never saves these items. No aircraft DPS, interception damage or effective healing is invented.
 
@@ -36,8 +63,8 @@ The source README explicitly permits data reuse under MIT and additionally requi
 ## Formula boundaries
 
 - Reload seconds = raw reload / (6 × sqrt((final RLD + 100) × 3.14)); `reload_seconds` bypasses conversion.
-- Gun cycle = reload + source volley delay + explicitly chosen approximate absolute cooldown (0.3s vanguard, 0.2s ordinary one-capacity BB in examples). These are published approximations, not frame-perfect animations.
-- Ideal volley = base damage × coefficient × slot efficiency × (1 + final stat × ratio / 100) × projectile count × mounts × weighted armor modifier. Excludes the random +0/1/2 term, rounding, crit, burn, hit probability, shields, all skills and mount staggering.
+- Gun cycle = reload + source volley delay + explicitly chosen approximate absolute cooldown (0.3s DD/CL/CA/CB, 0.2s capacity-one BB, 0.033s capacity-greater-than-one BB). These are published approximations, not frame-perfect animations.
+- Ideal volley = base damage × coefficient × slot efficiency × (1 + final stat × ratio / 100) × projectile count × mounts × parallel × weighted armor modifier. Excludes the random +0/1/2 term, rounding, crit, burn, hit probability, shields, all skills and mount staggering.
 - Air-wing load = weighted aircraft reload × 2.2 × loading multiplier + 0.033s. Interception uses intercept reload and omits 2.2. Aquila's dive-bomber loading multiplier is 0.9; the absolute cooldown is not reduced. This is loading time, not projectile arrival time.
 
 ## Representative comparisons
@@ -69,6 +96,6 @@ Independent QA should challenge formula conventions and absolute cooldowns; conf
 
 Next: v0.8.8 expands current source coverage, validates skill/accuracy/burn and target behavior, and supports trustworthy short loadout recommendations. v0.9 consumes validated timed events and inventory constraints for fleet-equipment synergy, including four OpSi fleets. Neither milestone is claimed complete here.
 
-## Verified delivery results
+## Original implementation validation (superseded by QA correction results above)
 
 Implementation commit 9474cb21ec4c575efb767404bb4203939ee44b1f, [PR #28](https://github.com/Avalon1230/avalon-azurlane/pull/28), [passing CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43125170536). 227/227 Node tests, 63/63 viewport cases, 2/2 application-handler sessions, 11 equipment / 9 skill exact source matches, two client source-file identity checks and 16/16 augment images. Two logos passed; five remain host-throttled (HTTP 429). See [machine-readable validation](COMBAT_VALIDATION_2026-11-12.json). Targeted Node coverage: mechanics 100% lines / 94.20% branches; evaluator 100% / 91.92%; skills 100% / 90.91%; view 100% / 56%. These percentages do not certify game accuracy. Main remains unchanged; independent QA approval is required before merge.

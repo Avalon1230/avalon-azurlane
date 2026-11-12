@@ -1,10 +1,10 @@
 {
   "date": "2026-11-12",
-  "implementationCommit": "9474cb21ec4c575efb767404bb4203939ee44b1f",
+  "implementationCommit": "2f7d16de69bf87ab35d6a106e143f37a11bfb782",
   "pr": "https://github.com/Avalon1230/avalon-azurlane/pull/28",
-  "ci": "https://github.com/Avalon1230/avalon-azurlane/actions/runs/43125170536",
+  "ci": "https://github.com/Avalon1230/avalon-azurlane/actions/runs/43164436960",
   "node": {
-    "pass": 227,
+    "pass": 235,
     "fail": 0
   },
   "viewport": {
@@ -16,14 +16,23 @@
       390,
       1280
     ],
-    "pass": 2,
+    "pass": 10,
     "fail": 0,
-    "fixtureBased": true
+    "fixtureBased": true,
+    "cases": [
+      "Prinz Eugen",
+      "Aquila healing",
+      "Aquila offense",
+      "Aquila missing aircraft",
+      "Aquila unsupported aircraft"
+    ]
   },
   "sourceIdentity": {
     "equipment": 11,
     "skills": 9,
-    "clientFiles": 2
+    "clientFiles": 2,
+    "shipSlotRecords": 860,
+    "formulaAndSchemaFiles": 2
   },
   "images": {
     "augments": 16,
@@ -32,27 +41,27 @@
   },
   "curatedFleetCandidates": 39,
   "coverage": {
-    "command": "node --experimental-test-coverage --test tests/combat-mechanics.test.js",
+    "command": "node --test --experimental-test-coverage tests/combat-mechanics.test.js tests/combat-qa.test.js",
     "modules": {
       "mechanics": {
         "line": 100,
-        "branch": 94.2,
-        "function": 100
+        "branch": 94.87
       },
-      "evaluate": {
+      "evaluator": {
         "line": 100,
-        "branch": 91.92,
-        "function": 100
+        "branch": 89.13
       },
       "skills": {
         "line": 100,
-        "branch": 90.91,
-        "function": 100
+        "branch": 100
+      },
+      "scenario": {
+        "line": 100,
+        "branch": 100
       },
       "view": {
         "line": 100,
-        "branch": 56,
-        "function": 75
+        "branch": 50
       }
     },
     "note": "Node V8 targeted-test coverage, not correctness, UI interaction coverage or real-game validation."
@@ -167,6 +176,17 @@
     "May 2026 equipment snapshot not current-client-certified",
     "Type98 shell-range conflict unresolved",
     "No full-build or universal BIS recommendations",
-    "No moving-target accuracy, burn/barrage totals, fleet buffs, air losses or joint inventory solver"
+    "No moving-target accuracy, burn/barrage totals, fleet buffs, air losses or joint inventory solver",
+    "Absolute cooldowns are pinned author estimates, not exact client frame timing",
+    "Torpedo, submarine torpedo and AA numerical comparisons unsupported",
+    "Nondefault aircraft parallel values unsupported"
+  ],
+  "qaCorrections": [
+    "parallel and capacity",
+    "gun family gate",
+    "retained exclusions",
+    "malformed input and overflow gates",
+    "Aquila evaluated wing skill condition",
+    "session scenario reset"
   ]
 }

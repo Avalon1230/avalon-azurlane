@@ -4,6 +4,11 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 ## [0.8.7] - 2026-11-12
 
+### QA corrections
+- Preserve verified ship-slot parallel/capacity and use both in gun comparisons; reject unsupported weapon families and missing or contradictory calculation data.
+- Retain equipment exclusion reasons, harden malformed timelines/air wings, fix Aquila reference-wing skill conditions and reset scenarios between ships, slots and modes.
+- Expand source integrity and actual mobile/desktop application tests, including saved aircraft choices and whole-wing calculations. No merge or full-combat certification.
+
 ### Added
 - Combat mechanics foundation: source-identified direct gun damage, armor weights, reload/volley cycles, whole-air-wing loading and typed skill conditions with reproducible tests for Aquila, Nelson, Hood, Prinz Eugen and Z23.
 - Existing equipment drawer gains editable combat assumptions, concise component comparisons and expandable evidence. Personal picks, compatibility rules, artwork and six-position layout remain intact.

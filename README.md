@@ -243,3 +243,7 @@ This pass resolves source-trust and UI defects reported in the v0.8.3 browser re
 
 The full-game optimization roadmap is unchanged. These fixes do not add a gear optimizer, canonical alias migrations, richer weapon dossiers or inventory-constrained fleets. The release merged in [PR #20](https://github.com/Avalon1230/avalon-azurlane/pull/20) at `65bec712`. PR and main quality checks passed **178/178 unit tests** and **15 browser fixture viewport checks** at 360/390/768/1024/1280 px; [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded. A full published-site visual regression and catalog-wide review are separate from these checks.
 
+
+### v0.8.7 QA corrections (PR #28, unmerged)
+
+Combat comparisons now preserve source parallel/capacity, reject unsupported weapon families and show exclusion reasons. Scenario assumptions reset between ships, slots and modes; evaluations preserve saved gear. Aquila current/reference wings use the skill condition of the evaluated wing. See [the correction evidence and limits](docs/COMBAT_MECHANICS.md). Aircraft DPS, effective healing, full optimization and current-client freshness remain unverified.
