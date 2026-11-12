@@ -99,8 +99,7 @@ try{
   await page.waitForFunction(()=>{const image=document.querySelector('.ship-profile-cover img');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
   const image=await page.locator('.ship-profile-cover img').getAttribute('src');
   await page.screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'.png',fullPage:true});
-  const portrait=await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-portrait.png'});
-  console.log('LIVE_RESEARCH_PORTRAIT='+JSON.stringify({id,label,width,image,png:portrait.toString('base64')}));
+  await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-portrait.png'});
   console.log('PASS live '+label+' portrait and profile '+width+'px: '+image);
   await page.close();
  }
