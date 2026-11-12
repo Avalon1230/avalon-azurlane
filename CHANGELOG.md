@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.7] - 2026-11-12
+
+### Added
+- Combat mechanics foundation: source-identified direct gun damage, armor weights, reload/volley cycles, whole-air-wing loading and typed skill conditions with reproducible tests for Aquila, Nelson, Hood, Prinz Eugen and Z23.
+- Existing equipment drawer gains editable combat assumptions, concise component comparisons and expandable evidence. Personal picks, compatibility rules, artwork and six-position layout remain intact.
+- Eleven pinned equipment and nine skill records with MIT/game-owner notices, exact source/hash checks, online CI verification and responsive/application-interaction tests.
+
+### Evidence boundaries
+- WIP: no universal BIS, full simulation, moving-target accuracy, burn/barrage totals, inventory optimization or four-fleet synergy. Compatibility defaults are unchanged.
+- Mk6 reload conflict is explicitly excluded from timing comparisons; Type98 range conflict is recorded. May 2026 extract is not certified current-client data; Koumakan access was blocked during research.
+- See docs/COMBAT_MECHANICS.md for formulas, representative comparisons, source revisions and QA handoff.
+
 ## [0.8.6] - 2026-11-11
 
 ### Source evidence and explainability
@@ -420,3 +432,4 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 ### Notes
 - Independent fan project. Historical ECTL is a reference only, not the name or endorsement of this site.
 - Ratings, automated fleet optimization, audited skill calculations, and complete equipment-acquisition data are not implemented.
+

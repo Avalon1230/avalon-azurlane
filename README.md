@@ -1,3 +1,9 @@
+## v0.8.7 — Combat Mechanics Foundation (PR; not deployed)
+
+The existing loadout alternatives drawer now compares source-identified gun damage and firing cycles under explicit armor/RLD assumptions, and Aquila's whole-air-wing loading and slot-dependent role. Eleven pinned equipment records support representative tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. Personal selections are never replaced.
+
+This is a **WIP component calculator**, not a complete simulator or verified best-in-slot list. Moving targets and incomplete/contradictory inputs remain unknown. Mk6 timing is withheld due to a source discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+
 # AVALON — Azur Lane Intelligence
 
 An independent, evidence-driven **Azur Lane** research and fleet-planning project.
@@ -236,3 +242,4 @@ Code licensing and third-party data/media permissions will be handled explicitly
 This pass resolves source-trust and UI defects reported in the v0.8.3 browser review: Aquila's second-aircraft-slot fighter/healer versus dive-bomber/offense condition is explicitly described, the Series 8 Mecklenburg 305mm gun is not misidentified as MK7, and the ship's lower Equipment slots section reuses the planner's resolved source-slot model. The slot alternatives drawer supports filtering and progressive access to **every source-eligible item**, not only the first 50. Choices are visibly labeled **Compatible candidate** or **Personal pick**; no generic default is promoted to a reviewed best-in-slot choice. Responsive grid min-size rules reduce page-level overflow and keep controls reachable across phone/tablet/desktop layouts.
 
 The full-game optimization roadmap is unchanged. These fixes do not add a gear optimizer, canonical alias migrations, richer weapon dossiers or inventory-constrained fleets. The release merged in [PR #20](https://github.com/Avalon1230/avalon-azurlane/pull/20) at `65bec712`. PR and main quality checks passed **178/178 unit tests** and **15 browser fixture viewport checks** at 360/390/768/1024/1280 px; [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded. A full published-site visual regression and catalog-wide review are separate from these checks.
+

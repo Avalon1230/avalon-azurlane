@@ -1,3 +1,7 @@
+## v0.8.7 supplement
+
+The existing compatibility planner now has a separate, source-backed **component comparison** in its drawer. Damage/cycle calculations, skill conditions, exact evidence, uncertainty gates and tests are documented in [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md). Historical statements below about no numerical model describe v0.8.6 and earlier. The new limited model still does not award best-in-slot/Recommended badges or override saved selections.
+
 # AVALON equipment decision evidence — v0.8.6
 
 ## Problem established by user (2026-11-11)
@@ -53,3 +57,4 @@ Suggested data shape:
 ### Explicit follow-on plan
 
 Build testable source-ID-indexed weapon metrics from updated game data, not guessed values. Add user selection of target armor, enemy movement/skill condition and mission when those materially affect gear choice. Verify each mode's recommendation against at least one alternative and document uncertainty. Only then move first reviewed decisions from selection audit to an actual recommendation badge. Cover the whole game iteratively without presenting incomplete hardcoded lists as universal.
+

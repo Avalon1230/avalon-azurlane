@@ -1,3 +1,13 @@
+## v0.8.7 development — Combat Mechanics Foundation, 2026-11-12
+
+- Base: main bb55d8646ce5b48f0646db8bb2c47c59aaa67503 (v0.8.6). Dedicated branch: feat/combat-mechanics-v087. **Do not merge without independent QA.** This section records the implementation; the delivery commit is the commit introducing this section, with final SHA/CI links to follow in the PR.
+- Continuity recovered from prior project conversations, current GitHub main/recent history/open PRs, README/changelog and all six mission audit/spec files. Local checkout was stale v0.8.3; reconstructed current main in v087-work through the GitHub connector because local Git metadata and outbound Git networking were restricted. Main has not been changed.
+- Added pure combat formulas, exact-ID/name/type joins, typed skill conditions, finite-duration event primitives, source fixtures/build verifier and existing-drawer UI. 11 equipment / 9 skill records, five representative ships. Data and limitations: COMBAT_MECHANICS.md. Automatic source-compatibility selection is unchanged; no full recommendation certification or fleet solver.
+- Local verification: **227/227 Node tests**, syntax and manifest checks passed. Full downloaded-source audit reproduces **894 ships / 936 equipment / 239 source augments / 5,363 populated positions per mode**, Royal Fortune augment still unknown. Historical curated Fleet Lab pool remains 39; this release does not expand it. Browser/online/CI results are pending until the PR workflow runs.
+- Source discrepancy: Mk6 reload 24.009676s vs BWIKI 24.02s; item excluded from timing comparisons. Type98 shell-range disagreement retained; range is not modeled. Koumakan research access returned 403. May source freshness and closed-parser limits remain explicit.
+- QA priorities: formula conventions, skill versions, armor reversals, full-wing Aquila calculation, contradiction gates, personal picks, mobile drawers/controls and actual change/Escape handlers. Independent in-game battle validation remains outstanding.
+- Next: v0.8.8 current data, validated accuracy/burn/skills and intelligent loadouts; v0.9 timed fleet-equipment synergy and inventory/four-fleet constraints. No merge or deployment authorized before QA approval.
+
 # Project AVALON — Azur Lane Development Status
 
 _Last updated: 2026-11-12 (Asia/Manila). This file is the permanent cross-conversation development handoff. Verify GitHub branch history and CI before treating reported status as shipped._
@@ -174,3 +184,4 @@ When a new conversation starts: retrieve relevant prior decisions, inspect lates
 
 - Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
 - On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
+

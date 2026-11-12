@@ -1,3 +1,7 @@
+## v0.8.7 supplement
+
+The existing compatibility planner now has a separate, source-backed **component comparison** in its drawer. Damage/cycle calculations, skill conditions, exact evidence, uncertainty gates and tests are documented in [COMBAT_MECHANICS.md](COMBAT_MECHANICS.md). Historical statements below about no numerical model describe v0.8.6 and earlier. The new limited model still does not award best-in-slot/Recommended badges or override saved selections.
+
 # AVALON Tactical Loadout Intelligence — v0.8.5
 
 ## v0.8.6 selection audits and research-informed alternatives
@@ -85,3 +89,4 @@ This source-backed preview must **not** be labeled best-in-slot, "S tier," or si
 - **v0.8.2:** build fully sourced skill/weapon effect and acquisition-cost models, documented mode-specific recommendations, comparison and validation.
 - **v0.8.3:** connect equipment selection to full Fleet Lab formations and ship-skill/gear interactions.
 - Future: equipment inventory / owned-only suggestions, historical snapshots and repeatable evaluations with uncertainty.
+

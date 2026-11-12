@@ -14,6 +14,7 @@ import { loadEquipmentDrops, renderEquipmentAcquisition } from './equipment-acqu
 import { renderShipProfile, detailedShipRecord } from './ship-profiles.js';
 import { LOADOUT_MODES, buildShipLoadout, validateManualChoice } from './loadout-intelligence.js';
 import { renderLoadoutAlternatives } from './loadout-view.js';
+const combatContext = {};
 import { renderAugmentDetails } from './augment-view.js';
 import { allAugmentRecords } from './augment-manifest.js';
 import { renderAugmentIndex, AUGMENT_BATCH_SIZE } from './augment-index.js';
@@ -534,7 +535,7 @@ function render() {
       wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel
     })+(state.profileGearId?renderDetails(state.profileGearId):'')+
       (loadoutModel&&state.profileLoadoutPicker!==null
-        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount}):'')+
+        ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount,combatContext}):'')+
       (loadoutModel&&state.profileAugmentId
         ?renderAugmentDetails(loadoutModel.slots.flatMap(slot=>slot.candidates)
           .find(item=>item.id===state.profileAugmentId&&item.kind==='augment')):'');
@@ -889,6 +890,16 @@ document.addEventListener('click', event => {
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  const combatField=event.target.dataset.combatField;
+  if(['armor','movement','reload','stat','duration','wing'].includes(combatField)){
+    combatContext[combatField]=['reload','stat','duration'].includes(combatField)?Number(event.target.value):event.target.value;
+    const scroll=event.target.closest('.detail-scroll')?.scrollTop||0;
+    render();
+    const restored=document.querySelector('[data-combat-field="'+combatField+'"]');
+    restored?.focus({preventScroll:true});
+    const container=restored?.closest('.detail-scroll');if(container)container.scrollTop=scroll;
+    return;
+  }
   const id=event.target.id, value=event.target.value;
   if(id==='augment-type-filter'||id==='augment-rarity-filter'){
     if(id==='augment-type-filter')state.augmentType=value;

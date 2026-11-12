@@ -1,4 +1,5 @@
 import { imageMarkup } from './media.js';
+import { renderCombatComparison } from './combat-view.js';
 import { augmentImageMarkup } from './augment-assets.js';
 import { LOADOUT_MODES } from './loadout-intelligence.js';
 import { researchedOptions, LOADOUT_EVIDENCE_SOURCES } from './loadout-evidence.js';
@@ -107,7 +108,7 @@ function renderResearchNotes(slot,mode){
     '<p>Published findings for specific equipment and situations, not a ranked build for this ship.</p>'+
     '<ul>'+entries+'</ul></details>';
 }
-export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}) {
+export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50,combatContext={}}={}) {
   const slot=model?.slots?.find(s=>s.index===slotIndex);
   if(!slot)return '';
   const filtered=filteredLoadoutCandidates(slot,query);
@@ -146,7 +147,7 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}
         '<section class="loadout-picker-current"><div class="loadout-picker-current-head">'+current+'</div>'+
           '<p>'+E(statusExplanation)+'</p>'+
           '<small>Source: '+E(slotNote(slot))+'</small></section>'+
-        research+
+        renderCombatComparison(model,slotIndex,combatContext)+research+
         (slot.selected?'<button class="loadout-detail-inspect outline-btn compact" type="button" data-action="'+
           (slot.kind==='augment'?'loadout-augment-inspect':'loadout-inspect')+'"'+
           (slot.kind==='augment'?' data-augment="'+E(slot.selected.id)+'"':' data-equip="'+E(slot.selected.id)+'"')+'>'+
@@ -163,3 +164,4 @@ export function renderLoadoutAlternatives(model,slotIndex,{query='',limit=50}={}
       '</div><div class="picker-footer"><button type="button" class="ghost-btn" data-action="loadout-close-alternatives">Close</button></div>'+
     '</aside></div>';
 }
+
