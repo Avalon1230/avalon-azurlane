@@ -28,9 +28,15 @@ try{
   await page.addInitScript(value=>{if(!localStorage.getItem('avalon.azurlane.loadouts.v1'))localStorage.setItem('avalon.azurlane.loadouts.v1',JSON.stringify(value));},saved);
   await page.route(/^https?:\/\//,route=>{const u=route.request().url();if(u.startsWith(url))return route.continue();const payload=u.endsWith('/ship-list.json')?ships:u.endsWith('/ships.json')?details:u.endsWith('/equipment.json')?equipment:u.endsWith('/version.json')?{generatedAt:'fixture'}:null;return payload?route.fulfill({contentType:'application/json',body:JSON.stringify(payload)}):route.abort();});
   await page.goto(url+'/#/ships/29901');
+  assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'4637');
   await page.locator('#research-dev').selectOption('5');
+  assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'3583');
+  assert.match(await page.locator('[data-research-slot="1"]').innerText(),/2 mounts/);
+  await page.locator('[data-action="profile-level"][data-level="level125"]').click();
+  assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'3689');
+  await page.locator('[data-action="profile-level"][data-level="level120"]').click();
   assert.equal(await page.locator('#research-fate').isDisabled(),true);
-  assert.match(await page.locator('.research-progress').innerText(),/not calculated yet/);
+  assert.match(await page.locator('.research-progress').innerText(),/update for your selected/);
   assert.equal(await page.locator('.ship-profile-cover .research-frame-pr').count(),1);
   assert.equal(await page.locator('[data-loadout-slot]').count(),6);
   await page.locator('[data-action="research-open"]').click();
@@ -63,7 +69,14 @@ try{
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.research.v1'))['29901'].start),start);
   await page.locator('[data-action="research-close"]').last().click();
   await page.evaluate(()=>location.hash='#/ships/29904');await page.locator('.research-frame-dr').waitFor();assert.equal(await page.locator('#research-dev').inputValue(),'30');
-  await page.locator('#research-fate').selectOption('5');await page.screenshot({path:'.audit/research-screens/profile-'+width+'.png',fullPage:true});
+  await page.locator('#research-fate').selectOption('3');
+  assert.equal(await page.locator('[data-research-stat="luck"]').innerText(),'12');
+  assert.equal(await page.locator('[data-research-skill="18300"]').count(),1);
+  assert.equal(await page.locator('[data-research-skill="19290"]').count(),1);
+  await page.locator('#research-fate').selectOption('5');
+  assert.equal(await page.locator('[data-research-stat="luck"]').innerText(),'25');
+  assert.equal(await page.locator('[data-research-skill="18290"]').count(),1);
+  await page.screenshot({path:'.audit/research-screens/profile-'+width+'.png',fullPage:true});
   await page.evaluate(()=>location.hash='#/ships/29906');await page.locator('#research-dev').waitFor();assert.equal(await page.locator('#research-fate').count(),0);
   await page.evaluate(()=>location.hash='#/ships/99901');await page.locator('#research-dev').selectOption('10');
   await page.locator('[data-loadout-slot="0"] .loadout-tile-more').click();await page.locator('.combat-comparison').waitFor();
@@ -77,5 +90,18 @@ try{
   await page.locator('#catalog-search').fill('Duncan');await page.waitForTimeout(350);assert.equal(await page.locator('.ship-roster-tile').count(),1);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);
   console.log('PASS '+width+'px research filter/series, PR+DR frames, Dev/Fate, modal scroll/Escape/back, timers/reload, combat guard and saved gear');await page.close();
+ }
+ // Visual evidence uses the live catalogs and official portrait URLs, without fixture routes.
+ for(const [id,label,width] of [['29901','pr',1280],['29904','dr',390]]){
+  const page=await browser.newPage({viewport:{width,height:900}});
+  await page.goto(url+'/#/ships/'+id);
+  await page.locator('#research-dev').waitFor({timeout:90000});
+  await page.waitForFunction(()=>{const image=document.querySelector('.ship-profile-cover img');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
+  const image=await page.locator('.ship-profile-cover img').getAttribute('src');
+  await page.screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'.png',fullPage:true});
+  const portrait=await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-portrait.png'});
+  console.log('LIVE_RESEARCH_PORTRAIT='+JSON.stringify({id,label,width,image,png:portrait.toString('base64')}));
+  console.log('PASS live '+label+' portrait and profile '+width+'px: '+image);
+  await page.close();
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}

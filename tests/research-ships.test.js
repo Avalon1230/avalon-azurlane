@@ -46,7 +46,7 @@ test('Dev/Fate controls reject malformed states and require Dev 30 for Fate',()=
 test('milestones remain ship-specific with honest gaps and no invented stats',()=>{
  const reached=selectedMilestones(neptune,{dev:5});assert.equal(reached.length,1);assert.match(reached[0].value.join(' '),/199 base hp/);
  assert.equal(selectedMilestones(neptune,{dev:30,fate:5}).length,11);
- assert.match(renderResearchProgress(neptune.id,{dev:5}),/not calculated yet/);
+ assert.match(renderResearchProgress(neptune.id,{dev:5}),/update for your selected/);
  assert.equal(selectedMilestones(researchShip('29906'),{dev:30}).length,0);
 });
 test('47 ships have eight source-linked tasks, gates and prerequisite records',()=>{

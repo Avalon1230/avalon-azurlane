@@ -17,7 +17,7 @@ jobs:
       - run: npm test
       - run: npm run test:combat-source
       - run: npm run test:research-source
-      - run: node scripts/extract-research-client.mjs
+      - run: node scripts/verify-research-progression.mjs
   viewport:
     runs-on: ubuntu-24.04
     permissions:
