@@ -52,6 +52,13 @@ test('specific exclusions survive fewer than two comparable candidates',()=>{
   }
   m.slots[0].candidates=[null];assert.equal(compareSlot(m,0).excluded.length,1);
   assert.equal(compareSlot(m,0,{},null).status,'unknown');
+  const pair=combatModel();pair.slots[0].candidates=pair.slots[0].candidates.slice(0,2);
+  const badId=pair.slots[0].candidates[0].sourceId,data=structuredClone(COMBAT_DATA);
+  data.conflicts={[badId]:{field:'damage',reason:'Two source values disagree'}};
+  const single=compareSlot(pair,0,{},data);
+  assert.equal(single.status,'unknown');assert.equal(single.rows.length,1);
+  assert.equal(single.excluded.length,1);assert.equal(single.excluded[0].reason,'Two source values disagree');
+  assert.equal(single.recommended,null);
 });
 test('Aquila reference skill follows evaluated second slot, not saved second slot',()=>{
   const m=combatModel('60701','general',{1:'fer-19140'}),before=JSON.stringify(m);

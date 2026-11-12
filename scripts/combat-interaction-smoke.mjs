@@ -109,6 +109,17 @@ try{
       assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),picks);
       await page.reload();
       assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),picks);
+      if(variant==='healing'){
+        await page.evaluate(()=>{location.hash='#/ships/60701';});await open(1);
+        await page.locator('[data-action="loadout-select"][data-equip="fer-19140"]').click();
+        picks['60701'].general[1]='fer-19140';
+        await open(0);await page.locator('.combat-evidence summary').click();
+        assert.match(await page.locator('[data-combat-equipment="17340"]').innerText(),/offense/);
+        await page.locator('#combat-wing').selectOption('reference');
+        assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),picks);
+        await page.reload();
+        assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),picks);
+      }
       assert.deepEqual(errors,[]);
       console.log(`PASS ${width}px Aquila ${variant}: whole wing, reference, slot/ship/mode reset, saved selections and reload`);
       await page.close();
