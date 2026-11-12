@@ -5,6 +5,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 ## [0.8.7] - 2026-11-12
 
 ### QA corrections
+- Fix manual equipment selection from direct URLs for ships whose merged catalog keeps a curated ID; actual Aquila Fighter-to-Dive-Bomber selection is tested on mobile and desktop.
 - Preserve verified ship-slot parallel/capacity and use both in gun comparisons; reject unsupported weapon families and missing or contradictory calculation data.
 - Retain equipment exclusion reasons, harden malformed timelines/air wings, fix Aquila reference-wing skill conditions and reset scenarios between ships, slots and modes.
 - Expand source integrity and actual mobile/desktop application tests, including saved aircraft choices and whole-wing calculations. No merge or full-combat certification.
