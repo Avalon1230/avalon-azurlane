@@ -117,6 +117,7 @@ try{
   await page.locator('#ship-research-series').selectOption('9');
   assert.equal(await page.locator('.ship-roster-tile').count(),5);
   assert.equal(await page.locator('.ship-roster-tile .research-frame').count(),5);
+  await assertFrameClearance(page,'.ship-roster-portrait');
   await page.locator('#catalog-search').fill('Duncan');await page.waitForTimeout(350);assert.equal(await page.locator('.ship-roster-tile').count(),1);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);
   console.log('PASS '+width+'px research filter/series, PR+DR frames, Dev/Fate, modal scroll/Escape/back, timers/reload, combat guard and saved gear');await page.close();
@@ -128,6 +129,11 @@ try{
   await page.locator('.ship-profile-cover.portrait-'+label).waitFor({timeout:90000});
   // Live wiki/artwork responses refresh the profile; finish those requests before capture.
   await page.waitForLoadState('networkidle');
+  // Mobile artwork is lazy-loaded below the fold; exercise it before the full-page capture.
+  await page.locator('.ship-art-panel').scrollIntoViewIfNeeded();
+  await page.waitForFunction(()=>{const image=document.querySelector('.ship-art-preview-image');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
+  await page.waitForLoadState('networkidle');
+  await page.locator('.ship-profile-cover').scrollIntoViewIfNeeded();
   await page.waitForFunction(()=>{const image=document.querySelector('.ship-profile-cover img');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
   await assertFrameClearance(page);
   const image=await page.locator('.ship-profile-cover img').getAttribute('src');
@@ -138,8 +144,8 @@ try{
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}
 
-async function assertFrameClearance(page){
- const bounds=await page.locator('.ship-profile-cover').evaluate(el=>{
+async function assertFrameClearance(page,selector='.ship-profile-cover'){
+ const bounds=await page.locator(selector).first().evaluate(el=>{
   const outer=el.getBoundingClientRect(),art=el.querySelector('.asset-media').getBoundingClientRect();
   return {left:art.left-outer.left,right:outer.right-art.right,top:art.top-outer.top,bottom:outer.bottom-art.bottom};
  });
