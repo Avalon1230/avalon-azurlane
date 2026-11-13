@@ -50,6 +50,7 @@ try{
   assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'3583');
   assert.match(await page.locator('[data-research-slot="1"]').innerText(),/2 mounts/);
   await page.locator('[data-action="profile-level"][data-level="level125"]').click();
+  assert.equal(await page.locator('[data-action="profile-level"][data-level="level125"]').evaluate(el=>el===document.activeElement),true);
   assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'3689');
   await page.locator('[data-action="profile-level"][data-level="level120"]').click();
   assert.equal(await page.locator('#research-fate').isDisabled(),true);
@@ -125,11 +126,13 @@ try{
   const page=await browser.newPage({viewport:{width,height:900}});
   await page.goto(url+'/#/ships/'+id);
   await page.locator('.ship-profile-cover.portrait-'+label).waitFor({timeout:90000});
+  // Live wiki/artwork responses refresh the profile; finish those requests before capture.
+  await page.waitForLoadState('networkidle');
   await page.waitForFunction(()=>{const image=document.querySelector('.ship-profile-cover img');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
   await assertFrameClearance(page);
   const image=await page.locator('.ship-profile-cover img').getAttribute('src');
   await page.screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'.png',fullPage:true});
-  await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-portrait.png'});
+  await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'-portrait.png'});
   console.log('PASS live '+label+' portrait and profile '+width+'px: '+image);
   await page.close();
  }

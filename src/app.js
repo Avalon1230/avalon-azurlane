@@ -4,7 +4,7 @@ import { captureResearchDialog, restoreResearchDialog } from './research-dialog-
 const researchViews={};
 let researchSaved=readResearchState({getItem:key=>localStorage.getItem(key)}), researchOpen=false, researchSaveError=false;
 function activeResearch(){return researchShip(state.detail?.sourceId||SHIP_MAP.get(state.detail?.id)?.sourceId);}
-function refreshResearchPanel(){const el=document.activeElement,id=el?.id,top=window.scrollY;render();if(id)document.getElementById(id)?.focus({preventScroll:true});window.scrollTo(0,top);}
+function refreshResearchPanel(){const el=document.activeElement,id=el?.id,level=el?.dataset?.action==='profile-level'?el.dataset.level:null,top=window.scrollY;render();if(level)[...document.querySelectorAll('[data-action="profile-level"]')].find(node=>node.dataset.level===level)?.focus({preventScroll:true});if(id)document.getElementById(id)?.focus({preventScroll:true});window.scrollTo(0,top);}
 function updateResearch(patch){const r=activeResearch();if(!r)return;researchSaved[r.id]=researchSelection(r,{...researchSaved[r.id],...patch});researchSaveError=!saveResearchState({setItem:(key,value)=>localStorage.setItem(key,value)},researchSaved);refreshResearchPanel();}
 function closeResearch(){researchOpen=false;render();document.querySelector('[data-action="research-open"]')?.focus();}
 import { MODES, FLEET_BLUEPRINTS, SHIPS, EQUIPMENT, SOURCES } from './catalog.js';
@@ -805,7 +805,7 @@ function handleAction(target) {
     return;
   }
   if (action === 'profile-back') { closeShipProfile();return; }
-  if (action === 'profile-level') {state.profileLevel=target.dataset.level||'level120';render();return;}
+  if (action === 'profile-level') {state.profileLevel=target.dataset.level||'level120';refreshResearchPanel();return;}
   if (action === 'profile-skin') {
     const next=Number(target.dataset.index);
     if (!Number.isSafeInteger(next) || next<0 || next>100) return;
