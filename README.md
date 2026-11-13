@@ -1,258 +1,76 @@
 # AVALON — Azur Lane Intelligence
 
-An independent **Azur Lane** companion for choosing ships, comparing gear and planning fleets.
+**Find the right ships, choose your gear, and understand why a fleet works.**
 
-> **Project status:** **v0.8.8 Research Ship Identity & Progression released** through [PR #29](https://github.com/Avalon1230/avalon-azurlane/pull/29). Research ships now have a combined PR/DR filter, series browsing, distinctive original frames, source-checked R&D mission tracking and Dev/Fate statistics across 47 ships. The v0.8.7 combat comparison foundation remains available. **The loadout planner is still WIP:** compatibility alone does not establish a best build, and progression-aware combat and complete fleet optimization remain ahead.
->
-> **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
+Azur Lane has too many ships, skills and equipment choices for a single tier number to tell the whole story. A ship that feels unstoppable in one fight may be the wrong pick for another. AVALON is a fan-made companion for exploring those choices, comparing what matters and putting together a fleet with a purpose.
 
-[Live website](https://avalon1230.github.io/avalon-azurlane/) · [Release changelog](CHANGELOG.md) · [Development handoff](docs/PROJECT_STATUS.md) · [Koumakan connectivity diagnosis](docs/KOUMAKAN_ACCESS.md) · [GitHub commit history](https://github.com/Avalon1230/avalon-azurlane/commits/main)
+**[Open AVALON](https://avalon1230.github.io/avalon-azurlane/)** · [See what's new](CHANGELOG.md) · [Follow development](docs/PROJECT_STATUS.md)
 
-The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
+## Explore AVALON
 
-## v0.8.8 — Research ship identity & progression (released 2026-11-13)
+- **Ship Index:** Browse the 894-ship catalog by faction, hull type, rarity or name. Open a ship's profile for stats, skills, equipment slots, acquisition details and original in-game artwork. Skins have their own gallery.
+- **Research & Development:** Find Priority and Decisive ships by research series, explore Development and Fate Simulation stats where available, and keep track of shipyard missions and timers yourself.
+- **Equipment & Augments:** Search gear by type and nation, inspect its stats, see which hulls may be able to use it, and check recorded acquisition routes. The augment directory is separate from ordinary equipment.
+- **Loadout Planner (WIP):** Try a six-position loadout, explore compatible alternatives and save your own picks for General, Boss, Mobbing or OpSi. Automatic choices are starting points, not proven best-in-slot builds.
+- **Fleet Lab (WIP):** Arrange fleets for different modes, including four Operation Siren surface fleets. Generate role-based suggestions from a smaller, reviewed candidate pool; nothing replaces your selections unless you apply it.
+- **Tier Boards (WIP):** Read scenario-specific ship and gear assessments, with reasons and alternatives. Personal favorites and the *Must Protect!* board have their own space—they aren't combat rankings.
 
-Find PR and DR ships together with **Research**, then narrow by series alongside your existing filters. Original gold PR and prismatic DR ornaments distinguish their portraits. Open **Research & Development** in Acquisition for requirements, missions and persistent manual countdowns.
+## Where to start
 
-Dev/Fate controls now update verified stats, weapon mounts, efficiencies and unlocked skills for all 47 research ships. Choose a ship level to compare completed stages at 100 affinity. Unsupported level/stage combinations explain what is missing instead of showing another setup's numbers. [Calculation details and reference cases](docs/RESEARCH_STATISTICS.md). Combat comparisons are unavailable for research selections other than Dev 30 / Fate 0. Your saved equipment stays yours.
+**Looking at a new ship?** Open the Ship Index, choose her faction and use the hull and rarity filters to narrow the roster. Her profile brings together the details you need, from skills to equipment and artwork.
 
-Coverage: 47 ships, Series 1–9, 376 source-linked missions, 34 listed Fate unlocks and 41 milestone sets. [Research sources, behavior and limits](docs/RESEARCH_SHIPS.md). Independent QA approved this release; merged-main CI and GitHub Pages publish v0.8.8. Progression-aware combat and blueprint totals remain unfinished.
+**Working on a PR or DR ship?** Use the Research filter to find her, compare completed Development and Fate stages, then open **Research & Development** under Acquisition to track her shipyard missions. The mission tracker is manual, so you stay in control of what gets marked complete.
 
-## v0.8.7 — Combat Mechanics Foundation (released 2026-11-12)
+**Preparing for a particular fight?** Start with the mode and role, not just rarity. A fleet built for campaign mobbing has different priorities from an Operation Siren boss fleet. Fleet Lab can help sketch out a formation, and equipment details can help you weigh individual choices.
 
-Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
+## What the recommendations mean
 
-This is still **WIP**: it compares specific parts of a build, not a complete battle or a best-in-slot list. Moving targets, missing data and conflicting records can prevent a reliable comparison. Reload uses constants checked against the game client; that resolved the initial Mk6 discrepancy. See [mechanics, evidence, limits and QA](docs/COMBAT_MECHANICS.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+A gun being equippable doesn't make it the best gun for that ship. The same goes for rarity, damage on paper or a popular tier-list position. Skills, enemy armor, fleet support and the job you're asking a ship to do all matter.
 
-## Feature maturity labels
+AVALON is still growing into the full fleet adviser we want it to be. Current combat comparisons cover selected, checked mechanics rather than a complete battle simulation. Research ships can display Development and Fate stat changes, but combat comparisons currently use **Dev 30 / Fate 0**. Fleet suggestions come from a curated set of candidates, not a complete optimizer for every ship and piece of gear.
 
-**Equipment, Augments, Fleet Lab and Tier Boards** carry a **WIP** label because their combat advice is still being developed. You can still browse the catalogs, edit fleets and save favorites. Ship Index works as a roster; its loadout planner has a separate WIP label.
+You can browse, experiment and save your own choices today. Where a comparison isn't ready, the site should say so rather than make up an answer.
 
-## Collaboration archives
+## The bigger picture
 
-Ship Index now has two levels for collaborations: **Collab → choose franchise → that series' ship roster**, preserving the existing hull, rarity, and search controls. Series names come from verified ship nationality data, with **14 distinct franchises** in the May/November 2026 catalog snapshot (Atelier Ryza and Atelier Yumia remain separate).
+This project is for **the whole game**, not just the latest difficult campaign chapter: Main Campaign, Operation Siren, META Showdown, Exercises, events, Challenge Mode, Guild Operations and long-term account progression.
 
-Every series card uses an **original in-game ship portrait** from that collaboration. Seven series also use identified franchise wordmarks from Wikimedia Commons. Those trademarks are owned by their respective creators; the remaining cards intentionally keep their actual character art instead of inventing franchise symbols. Wikimedia may throttle remote requests; when a logo cannot load, its underlying game portrait remains visible. This does not establish that every individual logo image is reliably available from every browser.
+The long-term goal is a fleet builder that understands ship skills, timing, enemy mechanics, equipment availability and how ships support one another. For OpSi, that means planning four fleets together without assigning the same ship or limited equipment twice. We want advice that explains the trade-offs, not just a button that declares something “best.”
 
-## Mission
+## Run it locally
 
-Help you choose ships and gear with clear reasons: what works, when it works, and what you give up. Use game mechanics and credited community research, and be honest about what we haven’t checked.
-
-The goal is to answer practical questions across **the entire game**, such as:
-
-- Which ships and equipment perform best for my chosen content: campaign, Operation Siren, META Showdown, PvP, or events?
-- How should I assign **four Operation Siren fleets** for general exploration, Abyssal bosses, strongholds, and Arbiters?
-- Which fleet can reliably clear a difficult map, including Chapter 15-4, given the ships and gear I own?
-- What build handles a particular META boss's mechanics, and what trade-offs does it make?
-- Which equipment should I craft or research next, where can I obtain it, and what does it improve?
-- Why does a ship excel in one scenario but underperform elsewhere? What changed after a game update?
-
-Favorite-character ("waifu") selections are valid preferences, but will be kept separate from maximum-combat-efficiency comparisons.
-
-## Run locally
-
-No build step or external JavaScript dependencies are needed. Serve the repository root over HTTP (ES modules do not load reliably from `file://`):
+AVALON is a lightweight static website. There's no build step or package installation needed to view it. From the repository folder, start a local server:
 
 ```bash
 python -m http.server 8765
 ```
 
-Then open **http://localhost:8765**. The page includes all eight game-mode families, hull-compatible fleet plans (including four OpSi surface fleets), browser-local persistence, JSON export, source status, search, a detailed ship-profile page and equipment detail drawers. The app makes optional runtime requests to [Lycoris-AzurAPI](https://github.com/iujab/Lycoris-AzurAPI) (up to **894 source ship records**) and [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane) (up to **936 source equipment records**). These records remain on their upstream servers; the repo does not mirror their raw data or game art. If a source fails, the small editorial index remains available. Consult [data-source contracts](docs/DATA_SOURCES.md) for coverage, limitations, permissions and freshness.
+Then open [http://localhost:8765](http://localhost:8765). Serving over HTTP matters because the app uses JavaScript modules; opening `index.html` directly from your files won't work reliably.
 
-Run automated checks with Node.js 20+:
+Some ship data and images are requested from community-hosted sources as you browse, so those details need an internet connection. Your saved fleet and equipment selections live in your browser; use the available JSON export if you want a copy.
+
+For development checks, use Node.js 20 or newer:
 
 ```bash
 npm run check
 npm test
 ```
 
-For public hosting, GitHub Pages can serve the **repository root on `main`** once Pages is enabled in repository Settings. A live site is **not** implied by these source files.
+## Notes, sources and development
 
-**Not implemented yet:** a complete verified game data model, comprehensive Koumakan wiki import, authoritative skill calculations, complete/current acquisition and crafting routes, reproducible damage/tier scores, numerical fleet optimization and validated optimal gear loadouts, or account/ALAS import. Upstream equipment stats are source-reported and may not be correct or complete. A role hint, rarity, source record, or evaluation criterion is **not** a performance ranking.
+Want to see what changed, how a calculation works or where the artwork comes from? The details live here rather than crowding the front page.
 
-## Loadout Planner (WIP) — transparency update
-
-The planner's automatic equipment placements are **compatible placeholders, not validated recommendations**. The title and status now explicitly say **WIP** and **Unreviewed**. The options drawer is deliberately concise: current auto-filled item, compatible alternatives, equipment inspection, and a collapsed section of attributed specialist observations only when meaningful research exists. Earlier verbose audit text was unhelpfully robotic and has been removed from the default UI. No source-supported gear legality or user-saved equipment choices were discarded.
-
-Next major milestone: build recommendations that compete with conditional guides on **quality of decisions**, not quantity of prose. Each recommended gear choice must justify real ship skill synergy, target armor/movement, timing, fleet buffs, acquisition trade-offs and why a specific alternative loses or wins. See [Recommendation Evidence](docs/RECOMMENDATION_EVIDENCE.md).
-
-## Equipment rationale audit (v0.8.6)
-
-An automatically filled six-position loadout is still a **source-compatible starting point, not a reviewed best-in-slot build**. The Why & alternatives drawer now gives the actual selection basis (e.g. sourced HIT +12 versus a candidate's +8), a separately attributed *research-informed option* only for verified exact gear IDs with explicit mission/armor/skill caveats, and known ship skill switches such as Aquila's second aircraft slot. Unknowns are labeled honestly, not invented to fill the page. See the [equipment recommendation evidence contract](docs/RECOMMENDATION_EVIDENCE.md).
-
-Current reviewed-source notes cover six exact gear IDs; **there is no 894-ship, 936-equipment combat scoring engine yet**. Detailed skill/armor/sync modeling and independent comparison remain next-pass work. Slaimuda's ECTL is a historical UI reference (discontinued in 2025); newer REGAL and Suchiguma guidance are attributed sources, not automatically imported ratings.
-## Original augment icons and directory (v0.8.5)
-
-The dedicated **Augments** section provides 239 exact-ID source records and five October 2026 publisher-announced names, with name/ID, hull-type and rarity filters. Original icons use source `icon` keys, including 12 shared aliases, and the [JforPlay original-game `spweapon` archive](https://github.com/JforPlay/data_for_toy/tree/main/spweapon). The initial v0.8.5 release mistakenly used a regular-equipment icon path, causing missing images and unrelated gun art; this hotfix uses the independently checked augment images; announced-only names lack verified item IDs/art and retain clear placeholders. The same art is used in ship loadouts, alternative choosers and augment dossiers. This validates source identity, **not** CDN availability or optimized builds.
-
-Equipment assessment artwork requires numeric source ID and an expected source title or verified alias. The release also fixes augment-dossier Escape/backdrop behavior, missing Progression anchors and the equipment search placeholder. Gear optimization, skill-effect simulation and current full acquisition costs remain future work.
-
-## Full ship and equipment catalogs (v0.8.4)
-
-AVALON now lets you browse **every indexed ship and equipment record**, rather than rendering only the first 72 cards. The **Ship Index opens to a faction registry** with larger, high-contrast, original in-game nationality insignia and source-derived ship counts. Main factions appear first, followed by META, **Bulins** (the source's Universal utility ships), and **Collab** (combined crossover franchises with original franchise names retained on ship records). Full-roster searching recognizes both category labels and original crossover names. Select a nation to open a dense, wiki-inspired gallery of clickable original ship portraits, compact buttons for hull/index and rarity, with rarity-descending sorting by default, optional Name/Rarity/Hull ordering, and continuous scroll that automatically loads the next 60 portraits instead of numbered ship pages. Each portrait leads to a dedicated, deep-linkable ship information page, with a return-to-roster control. A **Nations** button returns to the registry. The **Equipment Index** now uses a compact, sticky search/sort toolbar and quick broad-type tabs (Guns, Torpedoes, Aircraft, AA, Auxiliary, ASW, Special). Nation, source rarity, potentially compatible hull, and precise equipment type are retained in a collapsible advanced panel with removable active-filter chips. The default is type-grouped rarity descending, with a selectable **All items** mode for truly global sorting, optional grouping by nation/rarity, and conservative exact-name variant families. Authentic icon tiles load continuously without numbered pages.
-
-- **Ships:** filter by nation/faction, hull type (DD, CL, CA, BB, CV, etc.), or search across names, hulls, rarity and nationality. Full nation mapping is sourced from Lycoris-AzurAPI's 894-ship database and joined to the compact live ship index by stable numeric ID.
-- **Equipment:** filter by nation of origin, equipment category, and the hull classes **potentially able to equip** the item. Availability combines equipment `type`, explicit `ship_type_forbidden` exclusions, and equipment-slot types observed in the ship database. This denotes **some ships of the hull type**, not automatic legality for every individual ship or slot. Nation is not an equipment faction lock.
-
-**Roster scrolling (v0.7.5):** Ships load in sequential batches on the same scrollable roster, with no ship page numbers. Search, rarity, hull, and nation changes reset the loaded batch; returning from a ship profile retains the loaded count and scroll position. Equipment now loads the same way, with independent 60-item scroll batches.
-
-**Roster-wide loadout completion (v0.8.2, preserved in v0.8.4):** Fixed all 13 original Lycoris slot descriptions and Koumakan wiki gun/limit-break labels, so primary equipment isn't left empty because the same weapon type has different wording. An **exact GroupID-based May 2, 2026 AzurLaneData five-slot metadata manifest** confirms both auxiliary slots and exact hull IDs for 852 of our 894 indexed ships; other ships continue to use the newer Lycoris roster with clearly disclosed compatibility uncertainty. A separate validated augment manifest provides generic hull-compatible and exact ship-exclusive modules, with a sourced augment dossier rather than a borrowed equipment icon; five October 2026 Tempesta modules appear by publisher-confirmed name with unknown stats. The independent roster audit populates **893 of 894 six-position loadouts** with source-matched candidates (**5,363/5,364 positions**); the one unresolved item is Royal Fortune's augment. These items are **not independently evaluated best-in-slot builds**, nor guaranteed to be in a user's inventory. See [Tactical Loadout Data Contract](docs/TACTICAL_LOADOUTS.md).
-
-**Compact six-position loadout refinement (v0.8.1):** The loadout planner now presents a responsive **3×2 grid** (three documented combat positions, two auxiliary positions, and a separate augment position on the standard layout). Long per-slot reasons and alternatives are available on demand, while tapping a selected icon opens equipment stats and documented acquisition sources. When the current ship source does not explicitly identify auxiliary slots, they are shown as **provisional** and receive no automatic equipment; individual source/hull-matched options can be reviewed or personally selected with uncertainty retained. A Koumakan augment type is **not** evidence for any particular module; augment recommendations await a dedicated data source. Genuine additional source-defined positions are never discarded, including unusual hulls.
-
-**Tactical Loadout Intelligence (v0.8.0):** Ship profiles now include a mode-selectable loadout planner directly below the permanent portrait/identity card, alongside the untouched official artwork gallery. For each source-backed weapon slot, it shows an authentic equipment icon, a conservative source-matched candidate, and an explicit reason grounded in slot type, efficiency, hull restrictions, and available enhancement attributes. Switch between **General, Boss, Mobbing, and OpSi**; open any candidate in the existing equipment details/acquisition drawer without leaving the ship; explore source-matched alternatives; and keep personal picks saved locally per ship and mode. **These are research candidates, not independently proven best-in-slot recommendations**. Some ships/slots remain unverified if exact types cannot be resolved. See [Tactical Loadout Data Contract](docs/TACTICAL_LOADOUTS.md).
-
-**Equipment acquisition and accessible inspections (v0.7.9):** Equipment details now scroll internally at any viewport height, including tall stat lists, with a stable header and Close footer. Opening an equipment record lazily fetches a read-only [May 2, 2026 community equipment-drop snapshot](https://github.com/Linuxxy0/AzurLaneData-2026-5-2-16-08-11/blob/main/data/equip_drops.json) and reports available source-ID-matched farming locations (for example Research Series 8 for source ID 44320), tech boxes, or recorded Gear Lab crafting. Records without an exact match remain **unverified**, never assumed unobtainable. All displayed acquisition locations are *historical source information*, not a current drop guarantee; verify event availability by server. Ship nation rosters use a matching compact search/sort bar with advanced hull/rarity filters behind an expandable panel, leaving the ship faction landing and all existing filter behavior intact. See [Equipment Acquisition Data](docs/EQUIPMENT_ACQUISITION.md).
-
-**Compact equipment research controls (v0.7.8):** Only the compact search and sort toolbar remains sticky while scrolling; broad equipment categories are immediately visible, and the detailed filters stay collapsed unless opened. Active filters remain visible and removable. Type grouping is explicit and sorting applies within each group; choose **All items (global sort)** to compare source rarity across every category and nation. Optional **Exact-name families** collapses only validated Fernando source records sharing identical normalized source name, equipment type, and nation. Family membership does **not** establish an upgrade path, equivalent stats, or performance. The per-variant inspection panel remains accessible.
-
-**Equipment gallery and icon audit (v0.7.7):** All **936** equipment records now resolve icons through the source's actual `equipment_icon.json`. **417 item IDs intentionally reference a different shared icon filename**; all 936 referenced filenames were checked against the host's asset tree. Equipment defaults to descending source rarity with compact, clickable source-icon tiles and 60-item continuous scrolling. Nation, category, potentially compatible hull, rarity, name, and type controls remain available. The original equipment inspection drawer still shows sourced stats and provenance, never invented rankings.
-
-**Complete paintings (v0.7.2):** The gallery reads a compact local metadata index of **894 ships and 2,613 skins** generated from [Fernando2603/AzurLane `ship_skin.json`](https://github.com/Fernando2603/AzurLane/blob/main/ship_skin.json). The browser displays the upstream's reconstructed original `painting.png` (or source-listed `painting_n.png` as a load fallback), never an incomplete Live2D effect-layer WebP. The PNG binaries are not stored in AVALON; the manifest loads only when a ship profile is opened. Character portraits remain fixed, and artwork is fitted without clipping in the panel and fullscreen viewer. Koumakan's MediaWiki API is queried on demand for each ship's referenced **default artwork**, and AVALON prefers that verified wiki image when present. Other skins use reconstructed PNG paintings. Two new faction icons (Tulipa and Liga de Pedrería) use verified wiki URLs. Bulk wiki ship-stat replication remains **unimplemented** pending source/rights verification.
-
-**Artwork gallery (v0.7.1):** Each ship retains its fixed shipyard portrait while a separate artwork window shows original skin illustrations. Click artwork to enlarge it and use the optional browser fullscreen control; skin selectors have readable contrast. When raw game painting layers are incomplete, the gallery prefers a source-listed static alternative where available. Faction icons no longer show overlapping name abbreviations.
-
-**Wiki-enriched ship records (v0.7.4):** Wiki editor comments are ignored when parsing ship facts, preventing editorial dividers from appearing in voice-actor and other fields. In addition to the existing game-data snapshot, the browser reads each selected ship's verified Koumakan `{{Ship}}` infobox through the official MediaWiki Action API, checks its numeric GroupID, and uses the source's **Base/Lv.100/Lv.120/Lv.125** stats, oil, ASW, armor, build time, voice actor, illustrator, gear max mounts/efficiencies, limit breaks and tech values. The UI labels stats according to the source basis (wiki Lv.100+ typically shows 100 affinity and max enhancements; Lycoris may differ). Invalid/unavailable wiki records fall back to Lycoris and are not presented as a verified numerical match. Rarity colors now preserve purple for Elite and a separate iridescent palette for UR/DR; roster navigation and fleet assignment sit outside the ship identity card. Barrage data and ship-specific augment legality remain outstanding.
-
-**Detailed ship records:** Opening a ship loads the full Lycoris `ships.json` source on demand (about 5 MB, session-cached), adding Lv.100/Lv.120 stats, skills, equipment efficiencies, ship artwork and skins, construction/acquisition, limit breaks, and fleet tech where provided. The full source is not required for initial catalog loading. Remaining source gaps (detailed barrage damage, current augment icons/effects, ship-specific exceptions, and fleet synergy) remain unverified; consult [Ship Profile Data Contract](docs/SHIP_PROFILES.md).
-
-A previous **890/894 count** discrepancy came from collapsing four pairs of distinct same-name ships (Enterprise, Neptune, Fubuki and Kasumi). The importer now preserves their unique source IDs and all 894 source records.
-
-The new nationality metadata is a dated compact source snapshot; newly released IDs without mappings appear as **Unclassified**, never as a guessed nation. See [catalog filter methodology and limitations](docs/CATALOG_FILTERS.md).
-
-## Original game artwork (v0.5.1)
-
-The UI shows **genuine extracted in-game shipyard portraits and equipment icons**, linked to independently hosted Azur Lane game-client assets, not AI-generated substitutes. The first portrait source is [iujab/azurlane-images](https://github.com/iujab/azurlane-images), with **746/894** matching thumbnail IDs in its previous audit. For the remaining ships—and as a backup when a primary thumbnail fails—the site now links to original **`shipyard.png`** files from [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane), strictly by each character's source-verified base-skin ID. The local skin manifest establishes base-skin IDs for **894/894** ships; that is a *mapping count*, not a claim that every remote image has been visually confirmed or always loads. Equipment icons have **936/936** mapped, file-verified paths using the source-provided icon alias map (417 equipment variants intentionally share base files). Failed remote requests retain readable hull/name placeholders.
-
-Artwork remains copyright of the Azur Lane rights holders. These repositories are **community hosts, not official publisher image servers**, and host fan-use statements do not establish formal rights-holder permission. AVALON embeds their images rather than bundling an artwork catalog; small actual-application screenshots in docs/qa are retained as visual QA evidence. See [image sources, restrictions and provenance](docs/IMAGE_ASSETS.md). No synthetic portraits or weapons art are used.
-
-The existing v0.5 fleet suggestion module is also now wired into the live Fleet Lab, with preserved user assignments and explicit, qualitative (not simulated) role matching.
-
-## Combat recommendations and personal favorites (v0.3.1)
-
-Open the [Tier Boards](https://avalon1230.github.io/avalon-azurlane/#/tiers) page:
-
-1. **Ship Combat — AVALON editorial assessments.** Displays provisional context-bound EX/S/A/B recommendations, why that ship fits, when not to use it, alternatives, sources, confidence and review date. This is **not** a personal tier editor or a simulated damage ranking. Unreviewed ships stay **Not Yet Evaluated**.
-2. **Equipment — AVALON editorial gear assessments.** Shows provisional equipment recommendations for specific target armor, situations, and roles, along with caveats, alternative gear, references, confidence and review dates. It is **not** a personal tier editor, nor a numerical best-in-slot engine.
-3. **Waifu Favorites — personal and subjective.** Editable rankings for a limited, individually reviewed set of adult-portrayed characters; childlike or ambiguous portrayals are excluded.
-4. **Must Protect! — Headpats Division — personal and platonic.** Editable wholesome rankings for selected childlike or little characters.
-
-The new [AVALON assessments](src/assessments.js) combine select specialist guide evidence with explicit editorial judgment. **EX = defining for the stated role; S = highly recommended; A = strong with trade-offs; B = workable budget/situational option**. Those judgments are provisional and only comparable **within the same mode and role**; they are neither copied source grades nor computed numerical combat results. Sources include [Research Focus](https://suchiguma.github.io/miniguides/research-focus/), [Chapter 15](https://suchiguma.github.io/guides/chapter-15/), [Chapter 16](https://suchiguma.github.io/guides/chapter-16-fleets/), [REGAL](https://azur-lane-regal.suchiguma.com/), and additional linked references. Unreviewed ships and unsupported modes remain unevaluated; source coverage and confidence are visible on each card.
-
-**Roadmap:** Expand review coverage beyond the initial evidence-backed editorial samples, then build versioned game data and reproducible combat comparisons, with numerical damage/survival/utility calculations where legitimately supported. Eventually distinguish independent AVALON evaluation from third-party expert consensus.
-
-The two character boards remain draggable/editable, independently stored in this browser, and JSON-exportable. They do not sync across devices and contain no copyrighted art. Individual curation, **not hull class**, determines which character board includes each ship.
-
-## Full-game coverage
-
-**The main campaign is only one part of the platform.** Chapter 15 is an initial practical example, not the product's organizing principle.
-
-| Area | Analysis goals |
+| Looking for… | Read this |
 | --- | --- |
-| **Main Campaign** | Normal and Hard stages, mob and boss fleets, auto/manual, threat level, air control, ASW, oil-efficient farming |
-| **Operation Siren (OpSi)** | Four-fleet assignments, exploration/sector clearing, corrosion hazards, Siren strongholds, Abyssal bosses, Arbiters, adaptation and endurance |
-| **META Showdown** | Boss-specific mechanics, damage optimization, fleet synchronization, survival and consistency |
-| **Exercises (PvP)** | Offense and defense, counter-fleets, opening burst, survivability, current opponent trends |
-| **Events and War Archives** | Limited-time maps, EX/challenge encounters where applicable, farming priorities and archived content |
-| **Challenge Mode and Daily Raids** | Mechanics-specific loadouts, reliable clears, score/time optimization where relevant |
-| **Guild Operations** | Guild boss and encounter-specific fleet support |
-| **Account progression** | Ship leveling, research/development, retrofits, augments, gear crafting, resource allocation, farming priorities |
+| Releases and bug fixes | [Changelog](CHANGELOG.md) |
+| Current work, QA and development handoff | [Project status](docs/PROJECT_STATUS.md) |
+| Research ships, shipyard missions and Dev/Fate calculations | [Research ships](docs/RESEARCH_SHIPS.md) · [Research statistics](docs/RESEARCH_STATISTICS.md) |
+| Equipment choices and combat calculations | [Loadout data](docs/TACTICAL_LOADOUTS.md) · [Combat mechanics](docs/COMBAT_MECHANICS.md) · [Recommendation evidence](docs/RECOMMENDATION_EVIDENCE.md) |
+| Fleet suggestions and the long-term optimizer | [Fleet Lab guide](docs/FLEET_SUGGESTIONS.md) · [Optimizer plan](docs/FLEET_OPTIMIZER_SPEC.md) |
+| Data sources, artwork and reuse details | [Data sources](docs/DATA_SOURCES.md) · [Artwork sources](docs/IMAGE_ASSETS.md) · [Third-party notices](THIRD_PARTY_NOTICES.md) |
 
-This is an **extensible mode registry**, not a fixed list: new or temporary content can be added without rebuilding the ranking system. Recommendations must name their mode and scenario and never imply that one tier automatically applies everywhere.
+## Credits
 
-## Suggested Fleet Builder — first working implementation (v0.5)
+AVALON is an independent Azur Lane fan project. It isn't affiliated with or endorsed by Manjuu, Yostar, the Azur Lane Wiki, ECTL, REGAL or the community guide authors whose work we reference.
 
-Open [Fleet Lab](https://avalon1230.github.io/avalon-azurlane/#/fleet), select a game mode and scenario, and use **Generate suggestion**. AVALON proposes a reviewable formation from its 39 manually curated candidate ship profiles, using **global role/slot matching** to avoid duplicates and preserve any manually assigned ships. You can mark individual reviewed candidates available and enable **Use only my checked ships**. Nothing changes the saved plan until you press **Apply additions**; unfilled roles and weak/unverified role matches are flagged, with contextual source links and gear-check advisories.
-
-OpSi's four surface fleets and submarine team are considered **together**, preventing duplicate ship use across the proposed fleets. For later Campaign stages, the builder differentiates Chapter 15 and Chapter 16 requirements. Other modes receive explicitly provisional formations, without claims of stage-specific best builds.
-
-This is a **qualitative heuristic**, not a damage/eHP simulator or final synergistic optimizer. Ships from the larger remote catalog are not blindly assigned because rarity and hull type do not establish their verified skills. **Automatic equipment assignment, exact skill interactions, attack timelines and item inventory limits remain future work.** See [Suggested Fleet Builder instructions](docs/FLEET_SUGGESTIONS.md) and [full optimizer specification](docs/FLEET_OPTIMIZER_SPEC.md).
-
-## Automatic Fleet & Equipment Optimizer — core requirement
-
-The goal is not merely a tier list or an editable fleet grid. AVALON should **build a feasible formation and full equipment loadout for a specific encounter**, analyzing ship synergy, conditional skills, reload/debuff timing, enemy armor, survivability, AA/ASW, progression, and gear availability. For Operation Siren it must **optimize all four surface fleets together** rather than reuse the same ships or limited gear copies. Recommendations must include alternatives, supporting sources and uncertainty instead of claiming unvalidated numerical optima.
-
-See the complete [Fleet Optimizer architecture and acceptance criteria](docs/FLEET_OPTIMIZER_SPEC.md). **The first role-based formation generator is implemented in v0.5. The full ship-and-equipment synergy optimizer specified here remains future work.**
-
-## Planned features
-
-1. **Comprehensive ship database and contextual rankings:** searchable statistics, skills, retrofits, augments, acquisition details, and assessments separated by game mode and role.
-2. **Equipment encyclopedia:** source-reported identities and enhancement attributes; verified compatibility, strengths, alternatives, crafting paths, and upgrade priorities remain future work.
-3. **Mode-aware fleet builder:** campaign mobs/bosses, four-fleet OpSi compositions, META Showdown, Exercises, guild bosses, support carriers, submarines, and temporary event challenges.
-4. **Acquisition and progression planner:** Gear Lab recipes, research blueprints, material availability, farming strategies, and economical substitutes.
-5. **Explainable recommendations:** assumptions, evidence, competing options, limitations, and review dates, including clearly labeled AVALON assessments.
-6. **Patch awareness:** changed ship, enemy, mode, or equipment records trigger re-review rather than silently retaining outdated recommendations.
-
-## Sources and attribution
-
-| Source | Intended use | Notes |
-| --- | --- | --- |
-| [Azur Lane Wiki (Koumakan)](https://azurlane.koumakan.jp/wiki/Azur_Lane_Wiki) | Intended primary factual reference | **API access confirmed**: GitHub Actions successfully queried `/w/api.php` for site metadata, Musashi/Unicorn page metadata, and Musashi wikitext. Browser-visible wiki pages may still return 403 to automated clients, and cached search pages showed unrelated novel fragments. Automated ingestion awaits schema validation and reuse permissions; see [diagnostic](docs/KOUMAKAN_ACCESS.md). |
-| [Historical English Community Tier List](https://slaimuda.github.io/ectl/#/home) | Historical assessments and design inspiration | This project does **not** use its identity or claim its endorsement |
-| [REGAL](https://azur-lane-regal.suchiguma.com/) | Modern endgame evaluations and comparative analysis | Distinguish the source author's judgments from game facts |
-| [Operation Siren reference](https://azur-lane.wiki/index.php/Operation_Siren) | OpSi map/fleet systems and progression reference | Validate mechanics against current primary sources and regional versions |
-| [Chapter 15 strategy guide](https://suchiguma.github.io/guides/chapter-15/) | Example of a specific scenario guide, **not the site's core scope** | Record game context and when recommendations were published |
-| Public player discussions and test reports | Observations, counterarguments, practical fleet results | Attribute authors and preserve test conditions; do not turn upvotes into proof |
-
-Third-party game art, database content, ratings, and guide text must **not** be copied wholesale without verifying the relevant rights and attribution requirements. Linking to a source does not itself grant permission to reproduce its content.
-
-## v0.2 data and evaluation boundaries
-
-- [Ship source index](https://github.com/iujab/Lycoris-AzurAPI/blob/main/data/ship-list.json): community extraction (ship ID, English name, hull family, rarity); source version observed November 9, 2026.
-- [Equipment source index](https://github.com/Fernando2603/AzurLane/blob/main/equipment.json): community extraction (gear ID, identity, type, rarity, reported enhancement attributes); source update observed November 6, 2026.
-- [Data contracts and source limitations](docs/DATA_SOURCES.md): schema validation, licensing caveats, failure behavior, and ambiguity rules. Automated Koumakan import remains on hold.
-- **Performance is not inferred from rarity.** The eight game-mode evaluation frameworks explain the factors to assess later; they do not generate tier rankings.
-- The source data is requested at runtime from its maintainers. Public source availability and browser CORS policies affect loading, and user-side source data is not uploaded to AVALON.
-
-## Evidence standard
-
-We will keep three categories of knowledge distinct:
-
-| Category | Examples | Required treatment |
-| --- | --- | --- |
-| **Game data** | Ship stats, weapon reload, armor modifiers, skill effects, crafting requirements | Source URL, version/region where relevant, checked date, validation status |
-| **Community evidence** | Public tests, theorycrafting, guide recommendations, reproducible comparisons | Attribution, scenario and gear conditions, sample limitations, disagreements |
-| **AVALON assessment** | Relative performance, fleet recommendation, mathematical estimates, inferred synergies | Explicit assumptions, cited inputs, method, uncertainties, alternatives |
-
-**No invented consensus.** A recommendation from this project is an independently analyzed conclusion, not an official community vote. AI-generated conclusions are hypotheses until they are supported by verifiable data or testing.
-
-## Ranking philosophy
-
-There is no meaningful universal "best ship" without context. Evaluations should account for:
-
-- **Game mode and scenario:** campaign, OpSi, META Showdown, Exercises, event maps, Challenge Mode, Guild Operations, and future modes.
-- **Encounter and intended role:** enemy armor, air pressure, ASW, bosses, wave clearing, defensive PvP, endurance, and score/damage goals.
-- **Mode-specific constraints:** OpSi multi-fleet assignments and adaptation, PvP timing and counterplay, event mechanics, auto vs. manual, and threat level where relevant.
-- Ship level, limit breaks, retrofit/development/fate simulation, skills, and affinity.
-- Equipment availability and enhancement.
-- Fleet synergy, survivability, damage, consistency, and opportunity cost.
-
-When evidence is insufficient, show **provisional / unknown**, not a fabricated score.
-
-## Initial implementation plan
-
-1. Document provenance, licensing boundaries, and a minimal validated data schema.
-2. Build a fast, searchable, responsive ship-and-equipment reference.
-3. Import allowable source data through a versioned, auditable pipeline.
-4. Implement a mode registry and scenario-aware assessments backed by reproducible calculations and reviewed evidence, starting with representative examples from different parts of the game.
-5. Add multi-mode fleet optimization (including four-fleet OpSi planning) and equipment acquisition planning.
-
-The initial technical direction is a lightweight static web frontend with structured data and optional Python tooling for validation/imports. An AI service or continuously running backend is **not required** for the first version.
-
-## Independence
-
-AVALON is an independent fan project and is not affiliated with or endorsed by Manjuu, Yostar, Azur Lane Wiki maintainers, ECTL contributors, REGAL authors, or other cited community members. All product names and visual assets remain the property of their respective owners.
-
-Code licensing and third-party data/media permissions will be handled explicitly before distributing reusable code or assets.
-
-## v0.8.4 targeted correctness and layout pass
-
-This pass resolves source-trust and UI defects reported in the v0.8.3 browser review: Aquila's second-aircraft-slot fighter/healer versus dive-bomber/offense condition is explicitly described, the Series 8 Mecklenburg 305mm gun is not misidentified as MK7, and the ship's lower Equipment slots section reuses the planner's resolved source-slot model. The slot alternatives drawer supports filtering and progressive access to **every source-eligible item**, not only the first 50. Choices are visibly labeled **Compatible candidate** or **Personal pick**; no generic default is promoted to a reviewed best-in-slot choice. Responsive grid min-size rules reduce page-level overflow and keep controls reachable across phone/tablet/desktop layouts.
-
-The full-game optimization roadmap is unchanged. These fixes do not add a gear optimizer, canonical alias migrations, richer weapon dossiers or inventory-constrained fleets. The release merged in [PR #20](https://github.com/Avalon1230/avalon-azurlane/pull/20) at `65bec712`. PR and main quality checks passed **178/178 unit tests** and **15 browser fixture viewport checks** at 360/390/768/1024/1280 px; [Pages deployment](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43043703810) succeeded. A full published-site visual regression and catalog-wide review are separate from these checks.
-
-
-### v0.8.7 QA corrections (PR #28, unmerged)
-
-Combat comparisons now preserve source parallel/capacity, reject unsupported weapon families and show exclusion reasons. Scenario assumptions reset between ships, slots and modes; evaluations preserve saved gear. Aquila current/reference wings use the skill condition of the evaluated wing. See [the correction evidence and limits](docs/COMBAT_MECHANICS.md). Aircraft DPS, effective healing, full optimization and current-client freshness remain unverified.
-
+Azur Lane's characters, artwork and trademarks belong to their respective owners. Game artwork is linked from community-maintained sources, and research from other players is credited rather than presented as our own. See [third-party notices](THIRD_PARTY_NOTICES.md) for attribution and [artwork sources](docs/IMAGE_ASSETS.md) for image provenance and reuse considerations.
