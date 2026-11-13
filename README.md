@@ -2,7 +2,7 @@
 
 An independent **Azur Lane** companion for choosing ships, comparing gear and planning fleets.
 
-> **Project status:** **v0.8.7 Combat Mechanics Foundation released** through [PR #28](https://github.com/Avalon1230/avalon-azurlane/pull/28). Source-backed comparisons now cover selected gun damage, armor matchups and estimated reload timing, plus Aquila’s full-wing loading and skill-dependent aircraft choice. Fleet Lab still suggests lineups from 39 reviewed ships and plans four OpSi surface fleets together. **The loadout planner remains WIP: auto-filled gear is not a verified best-in-slot recommendation.** Complete combat optimization, skill-timing simulation and validated optimal builds are still ahead.
+> **Project status:** **v0.8.8 Research Ship Identity & Progression released** through [PR #29](https://github.com/Avalon1230/avalon-azurlane/pull/29). Research ships now have a combined PR/DR filter, series browsing, distinctive original frames, source-checked R&D mission tracking and Dev/Fate statistics across 47 ships. The v0.8.7 combat comparison foundation remains available. **The loadout planner is still WIP:** compatibility alone does not establish a best build, and progression-aware combat and complete fleet optimization remain ahead.
 >
 > **Identity:** This is **not** ECTL, an official revival of ECTL, or an officially endorsed Azur Lane project.
 
@@ -10,13 +10,13 @@ An independent **Azur Lane** companion for choosing ships, comparing gear and pl
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 
-## v0.8.8 — Research ship identity & progression (in review)
+## v0.8.8 — Research ship identity & progression (released 2026-11-13)
 
 Find PR and DR ships together with **Research**, then narrow by series alongside your existing filters. Original gold PR and prismatic DR ornaments distinguish their portraits. Open **Research & Development** in Acquisition for requirements, missions and persistent manual countdowns.
 
 Dev/Fate controls now update verified stats, weapon mounts, efficiencies and unlocked skills for all 47 research ships. Choose a ship level to compare completed stages at 100 affinity. Unsupported level/stage combinations explain what is missing instead of showing another setup's numbers. [Calculation details and reference cases](docs/RESEARCH_STATISTICS.md). Combat comparisons are unavailable for research selections other than Dev 30 / Fate 0. Your saved equipment stays yours.
 
-Coverage: 47 ships, Series 1–9, 376 source-linked missions, 34 listed Fate unlocks and 41 milestone sets. [Research sources, behavior and limits](docs/RESEARCH_SHIPS.md). This branch awaits independent QA; v0.8.7 remains the deployed release.
+Coverage: 47 ships, Series 1–9, 376 source-linked missions, 34 listed Fate unlocks and 41 milestone sets. [Research sources, behavior and limits](docs/RESEARCH_SHIPS.md). Independent QA approved this release; merged-main CI and GitHub Pages publish v0.8.8. Progression-aware combat and blueprint totals remain unfinished.
 
 ## v0.8.7 — Combat Mechanics Foundation (released 2026-11-12)
 
