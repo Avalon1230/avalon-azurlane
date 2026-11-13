@@ -2,6 +2,16 @@
 
 _Last updated: 2026-11-13 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
+## Active development — v0.8.9 ship profile UX (2026-11-13)
+
+- Branch: `feat/ship-profile-ux-v089`, based on verified GitHub main `fcc57a6fb80ec62c3b7ced955d0f651e1d314efd`. PR #29, #30 and #31 are already merged. This feature awaits independent QA and must not be merged without Commander authorization.
+- Implemented: combined Research & Statistics; Dev 0/5/10/15/20/25/30 plus Detailed levels; saved intermediate-stage retention; same-level/100-affinity deltas, stage/checkpoint/Fate comparisons and upgrade disclosures; outer PR/DR frames and source-ID-mapped META treatments; clearer player-facing wording.
+- Preserved: all v0.8.8 source/calculation modules, six-position loadouts and personal picks, R&D acquisition dialog/start dates/mission tracking, combat guards, Fleet Lab and the PR #31 architecture. No simulation-engine expansion.
+- Architecture: new `research-comparison.js` derives comparisons from the existing calculator; `research-stats-view.js` composes the controls and stats. Display preferences stay separate from saved progression/mission state. `portraitIdentity` uses the research manifest and existing source nationality map.
+- Local verification: 268/268 Node tests, syntax/generated-data checks, 63 responsive cases, 10 combat sessions and four research interaction sessions passed. Outbound catalog requests were blocked locally; real-art captures and remote source checks must pass in CI before completion is claimed. Current delivery SHA/PR and CI results will be recorded after publication.
+- QA focus: numerical sign and baseline labels, Fate 3/5 skill changes, unavailable low-level combinations, intermediate selection after reload, keyboard focus, bottom-mission scroll, saved gear and outer-frame clearance. See [UX contract](SHIP_PROFILE_UX.md).
+- Next: complete CI and inspect PR/DR/META real-art captures, independent QA, then wait for Commander merge authorization. Published application remains v0.8.8 until a separately authorized merge/deploy.
+
 ## Current release — v0.8.8 delivered (2026-11-13)
 
 - **Release and authority:** [PR #29](https://github.com/Avalon1230/avalon-azurlane/pull/29) was independently QA-approved at head `b8bd797844fb4d6b7217f0f62b041c51941f4b42`, then explicitly authorized by the Commander and **squash-merged into `main` as `420010434f29605787802f3c218a66c6c5313da3`**. The feature branch was `feat/research-progression-v088`; the PR is closed/merged. The QA notes further below reflect the pre-merge state and are retained as historical development records.

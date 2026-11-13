@@ -27,8 +27,8 @@ export function renderAugmentDetails(augment){
     '<section class="equipment-acquisition-panel"><h3>Who can use it and where the data comes from</h3>'+
     '<p>'+E(scope)+'</p>'+
     '<p>Rarity: '+E(augment.rarity)+' · Type: '+E(augment.typeCode??'Unverified')+
-    ' · Craftable: '+(augment.craftable===null?'Unverified':augment.craftable?'Recorded as craftable':'Not recorded as craftable')+
-    ' · Obtainable: '+(augment.obtainable===null?'Unverified':augment.obtainable?'Recorded as obtainable':'Availability unverified')+'</p>'+ 
+    ' · Craftable: '+(augment.craftable===null?'Unverified':augment.craftable?'Listed as craftable':'No crafting route listed')+
+    ' · Obtainable: '+(augment.obtainable===null?'Unverified':augment.obtainable?'Listed as obtainable':'Availability not confirmed')+'</p>'+ 
     '<p>'+(announced?'Ship GroupID: ':'Source record ID: ')+E(augment.sourceId)+'</p></section>'+ 
     '<div class="profile-table">'+(stats||'<p>We don’t have the stat increases for this module yet.</p>')+'</div>'+
     '<p class="equipment-acquisition-provenance">Source: <a class="text-link" href="'+link+

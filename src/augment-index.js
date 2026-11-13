@@ -47,7 +47,7 @@ export function renderAugmentIndex({records=[],query='',type='all',rarity='all',
   const cards=visible.map(item=>{
     const announced=item.source==='official-announcement';
     const scope=announced?'Announcement only':item.limitGroup>0?'Ship-exclusive':'General / class eligible';
-    const sub=announced?'ID, stats and icon unverified':'Source ID '+E(item.sourceId)+' · '+E(AUGMENT_TYPE_NAMES[typeKey(item)]||'Unknown type');
+    const sub=announced?'Stats and artwork are not available yet':'Source ID '+E(item.sourceId)+' · '+E(AUGMENT_TYPE_NAMES[typeKey(item)]||'Unknown type');
     return '<button type="button" class="augment-tile'+(announced?' augment-announced':'')+
       '" data-action="augment-details" data-augment="'+E(item.id)+'" aria-label="Inspect '+E(item.name)+' augment details">'+
       '<span class="augment-art">'+augmentImageMarkup(item,'asset-augment-tile')+'</span>'+

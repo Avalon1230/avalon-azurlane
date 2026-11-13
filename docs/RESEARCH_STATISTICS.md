@@ -1,3 +1,7 @@
+## v0.8.9 comparisons
+
+The calculation and data below are unchanged. The combined panel now compares completed stages at the same ship level and 100 affinity, including exact signed stat differences, mount/preload changes, efficiency percentage points and skill replacements. See [Ship profile UX](SHIP_PROFILE_UX.md) for baseline choices and unavailable-state behavior.
+
 # Research statistics: calculation and QA references
 
 The profile calculates all 47 research ships from completed Dev 0–30 and, where available, Fate 0–5 stages. Ship-level tabs select 1, 100, 120 or 125. Minimum level requirements come from each selected stage; impossible combinations show a reason instead of another configuration's stats.

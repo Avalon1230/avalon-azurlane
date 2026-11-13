@@ -9,7 +9,7 @@ Azur Lane has too many ships, skills and equipment choices for a single tier num
 ## Explore AVALON
 
 - **Ship Index:** Browse the 894-ship catalog by faction, hull type, rarity or name. Open a ship's profile for stats, skills, equipment slots, acquisition details and original in-game artwork. Skins have their own gallery.
-- **Research & Development:** Find Priority and Decisive ships by research series, explore Development and Fate Simulation stats where available, and keep track of shipyard missions and timers yourself.
+- **Research & Development:** Find Priority and Decisive ships by research series, compare Development checkpoints and Fate Simulation in one Research & Statistics panel, and keep track of shipyard missions and timers yourself.
 - **Equipment & Augments:** Search gear by type and nation, inspect its stats, see which hulls may be able to use it, and check recorded acquisition routes. The augment directory is separate from ordinary equipment.
 - **Loadout Planner (WIP):** Try a six-position loadout, explore compatible alternatives and save your own picks for General, Boss, Mobbing or OpSi. Automatic choices are starting points, not proven best-in-slot builds.
 - **Fleet Lab (WIP):** Arrange fleets for different modes, including four Operation Siren surface fleets. Generate role-based suggestions from a smaller, reviewed candidate pool; nothing replaces your selections unless you apply it.

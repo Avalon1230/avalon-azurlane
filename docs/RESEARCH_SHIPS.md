@@ -1,3 +1,7 @@
+## v0.8.9 profile update
+
+Development and Statistics now share one Research & Statistics panel. Checkpoints, exact comparisons, separate acquisition tracking and portrait identity rules are documented in [Ship profile UX](SHIP_PROFILE_UX.md). Earlier overlay-frame descriptions below are historical and superseded by outer borders.
+
 # Research ships — v0.8.8
 
 Research brings PR and DR ships together in one Ship Index filter. It works with nation, hull, rarity, collaboration and text filters; a Series selector narrows the same results. Exact game GroupIDs in the research registry identify ships. Rarity alone never enables a research frame or modal.

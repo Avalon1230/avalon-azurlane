@@ -16,7 +16,7 @@ test('suggest controls include owned-only, scenario and generate; no claim of va
 test('preview shows traceable reasons and gaps without mutating output',()=>{
  const preview=suggestFleet({modeId:'daily',scenario:'daily',ships,workspace});
  const html=renderSuggestedFleet({mode,ships,workspace,preview,options:{scenario:'daily'}});
- assert.match(html,/Suggested formation preview/);
+ assert.match(html,/Review suggested fleet/);
  assert.match(html,/data-action="suggest-apply"/);
  assert.match(html,/Unfilled/);
  assert.match(html,/Matched by ship roles/);

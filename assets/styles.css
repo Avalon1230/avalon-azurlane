@@ -1092,7 +1092,7 @@
 
 /* Original AVALON research portrait ornaments. */
 .ship-roster-portrait,.ship-profile-cover{position:relative;isolation:isolate}
-.research-frame{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible;fill:none;stroke:#e8c77c;stroke-width:1.2;filter:drop-shadow(0 1px 2px #07182c)}
+.research-frame{position:absolute;inset:0;pointer-events:none;border:2px solid var(--portrait-edge,#e8c77c);border-radius:inherit;z-index:1}
 .research-frame .research-rail{stroke-width:2.1}.research-frame .research-crown{fill:#e8c77c;stroke:#fff1bc;stroke-width:.6}.research-filigree{stroke-width:.7}
 .research-frame-dr{stroke:#a6e9ff;filter:drop-shadow(0 0 2px #7775d4)}.research-frame-dr .research-rail{stroke:#e8c1ff}.research-frame-dr .research-filigree{stroke:#a6f0ce}.research-frame-dr .research-crown{fill:#ffd4a6;stroke:#b0caff}
 .research-identity{color:#e8c77c;font-weight:700}.research-controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px}.research-controls label{display:grid;gap:6px;max-width:100%}.research-controls select,.research-controls input{background:#0c1b30;color:#edf4ff;border:1px solid #60738f;border-radius:6px;padding:8px;max-width:100%}
@@ -1100,3 +1100,23 @@
 .research-dialog{width:min(760px,100%);max-height:calc(100dvh - 40px);display:flex;flex-direction:column;background:#0c1b30;color:#e7eefb;border:1px solid #9a865b;border-radius:14px;box-shadow:0 20px 80px #0008;overflow:hidden;min-height:0}
 .research-dialog header{display:flex;justify-content:space-between;align-items:start;gap:12px;padding:18px;border-bottom:1px solid #344055;flex-shrink:0}.research-dialog h2{font-size:1.25rem;margin:7px 0 0}.research-dialog-body{overflow:auto;overscroll-behavior:contain;padding:18px;min-height:0}.research-dialog p{line-height:1.6}.research-dialog a{color:#a6d9ff}.research-missions{padding-left:24px}.research-missions li{padding:12px 0;border-bottom:1px solid #344055}.research-mission-heading{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}.research-missions small{color:#acbcd1}.research-dialog details{margin:20px 0}.research-dialog summary{cursor:pointer}.research-dialog-body>button{margin-top:12px}
 @media(max-width:600px){.research-overlay{padding:8px}.research-dialog{max-height:calc(100dvh - 16px)}.research-dialog header,.research-dialog-body{padding:12px}.research-dialog h2{font-size:1.05rem}.research-controls{align-items:stretch}.research-controls label{width:100%}}
+
+/* v0.8.9: borders have their own space outside the artwork. */
+.ship-roster-portrait:is(.portrait-pr,.portrait-dr,.portrait-meta),
+.ship-profile-overview .ship-profile-cover:is(.portrait-pr,.portrait-dr,.portrait-meta){padding:7px;box-sizing:border-box;gap:0}
+.portrait-pr{--portrait-edge:#e8c77c;background:linear-gradient(135deg,#ffe7a3,#715229 50%,#e8c77c)!important}
+.portrait-dr{--portrait-edge:#b7e9ff;background:conic-gradient(from 30deg,#ffe4a3,#ffaada,#bca7ff,#8ee5ff,#b6ffd3,#ffe4a3)!important}
+.portrait-meta{--portrait-edge:#ed865b;background:repeating-linear-gradient(135deg,#181c29 0 9px,#56362e 9px 11px)!important}
+.research-frame-meta{border-style:double;border-width:4px}
+.portrait-meta .asset-media{background:radial-gradient(ellipse at bottom,#66322b,#141923)!important}
+.portrait-pr .asset-media{background:linear-gradient(145deg,#594326,#202532)!important}
+.portrait-dr .asset-media{background:linear-gradient(145deg,#354c67,#302b45)!important}
+.ship-roster-portrait:is(.portrait-pr,.portrait-dr,.portrait-meta) .asset-media{min-height:0}
+.research-controls{align-items:center;flex-wrap:wrap}
+.research-detail-toggle{display:flex!important;align-items:center;gap:6px}
+.research-detail-toggle input{width:auto;min-height:auto}
+.research-compare-control{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}
+.research-compare-control select{max-width:100%;min-width:0;min-height:40px;border:1px solid #557088;border-radius:7px;padding:8px 10px;background:#0d2034;color:#e3edf7;font:inherit}
+.research-delta{display:block;color:#9ed8d1;font-variant-numeric:tabular-nums}
+.research-comparison-basis{font-size:.85rem;color:#b9cbdc}
+.research-upgrade-changes{margin-top:12px}.research-upgrade-changes li{margin:8px 0}

@@ -1,4 +1,4 @@
-import { researchFrame } from './research-ships.js';
+import { researchFrame, portraitIdentity } from './research-ships.js';
 import { imageMarkup } from './media.js';
 
 const E = value => String(value ?? '').replace(/[&<>"']/g, c => (
@@ -16,7 +16,7 @@ export function renderShipRosterTile(ship) {
   return '<button type="button" class="ship-roster-tile rarity-'+rarity+'" '+
     'data-action="ship-details" data-ship="'+E(ship.id)+'" aria-label="View '+E(name)+' ship profile">'+
     '<span class="ship-roster-name">'+E(name)+'</span>'+
-    '<span class="ship-roster-portrait">'+imageMarkup(ship,'ship','asset-roster-ship')+researchFrame(ship)+'</span>'+
+    '<span class="ship-roster-portrait portrait-'+portraitIdentity(ship)+'">'+imageMarkup(ship,'ship','asset-roster-ship')+researchFrame(ship)+'</span>'+
     '<span class="ship-roster-footer"><span>'+E(hull)+'</span><span class="ship-roster-open" aria-hidden="true">↗</span></span>'+
     '</button>';
 }

@@ -1,7 +1,6 @@
 import { researchProgression, RESEARCH_LEVELS } from './research-progression.js';
 import { renderResearchStats, renderResearchGear, renderResearchSkills } from './research-stats-view.js';
-import { researchShip, researchFrame } from './research-ships.js';
-import { renderResearchProgress } from './research-view.js';
+import { researchShip, researchFrame, portraitIdentity } from './research-ships.js';
 import { imageMarkup } from './media.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { trustedWikiImage } from './wiki-artwork.js';
@@ -131,7 +130,7 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=
       '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
   // Never replace the small shipyard portrait when changing skin art.
   return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview">' +
-    '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + researchFrame(ship || data) + '</div>' +
+    '<div class="ship-profile-cover '+(portraitIdentity(ship||data)?'portrait-'+portraitIdentity(ship||data):'')+'">' + imageMarkup(ship || data,'ship','asset-profile') + researchFrame(ship || data) + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
@@ -171,7 +170,7 @@ function gearPanel(data,wiki=null,loadout=null) {
   const slots=resolved.length?resolved:(wikiVerified?wiki.slots:(Array.isArray(data.slots)?data.slots:[]));
   const rows=slots.map((slot,i)=>{
     const source=resolved.length
-      ?'<small class="ship-gear-origin">'+E(slot.provisional?'Potential slot · not ship-verified':slot.source||'Unverified')+'</small>'
+      ?'<small class="ship-gear-origin">'+E(slot.provisional?'Possible slot · check in-game':slot.source||'Unverified')+'</small>'
       :'';
     const efficiency=Number.isFinite(slot.minEfficiency)||Number.isFinite(slot.maxEfficiency)
       ?'<span>Efficiency '+pct(slot.minEfficiency)+' → '+pct(slot.maxEfficiency)+'</span>':'';
@@ -254,12 +253,14 @@ function acquisitionPanel(data,wiki=null) {
 function sourcePanel(data, ship, wiki=null) {
   const url=trustedWikiUrl(data.wikiUrl);
   const sourceId = data.id || ship?.sourceId;
-  const basis=wiki
+  const basis=researchShip(ship||data)
+    ?'Research stats, mounts and skill changes use this ship’s pinned client records at 100 affinity. Other profile details come from the wiki and Lycoris where available. Open the calculation notes for the source revision.'
+    :wiki
     ?'Ship stats, armor, mount counts, build time and progression facts are drawn from the ship’s verified Koumakan Wiki template, matched by game GroupID. Lycoris supplies skill descriptions and other fields without verified wiki equivalents.'
-    :'This profile currently uses the Lycoris game-data snapshot. Wiki facts were not available or have not yet been verified for this ship; the statistics may use a different affinity or enhancement basis.';
+    :'These details come from Lycoris. We could not confirm this ship against the wiki, so affinity and upgrade assumptions may differ.';
   return profilePanel('Sources & more information',
     '<p>'+E(basis)+'</p>'+
-    '<p>Exact barrage coefficients, augment eligibility, ship-specific equipment legality and alternative affinity variations still need separate verification. These profiles do not imply AVALON combat rankings.</p>'+
+    '<p>Barrage damage, augment compatibility and other affinity values still need checking. Use this profile to plan your build; it is not a combat ranking.</p>'+
     '<div class="ship-profile-actions">'+
     (url?'<a class="outline-btn compact" href="'+E(url)+'" target="_blank" rel="noopener noreferrer">Full Koumakan entry ↗</a>':'')+
     '<a class="outline-btn compact" href="https://github.com/iujab/Lycoris-AzurAPI" target="_blank" rel="noopener noreferrer">Game-data source ↗</a></div>'+
@@ -267,14 +268,14 @@ function sourcePanel(data, ship, wiki=null) {
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
 
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, researchState={}, error='' } = {}) {
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, researchState={}, researchView={}, error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
     const message=status==='failed'
       ? 'Detailed game data could not be loaded. The ship index and saved fleet remain available.'
       : status==='ready'
-        ? 'We could not find this ship’s details in the current snapshot.'
+        ? 'We could not find this ship’s details in our current records.'
         : 'Loading ship statistics, skills and equipment information…';
     return '<div class="ship-profile-page"><div class="ship-profile-loading">'+
       '<h1>'+E(name)+'</h1><p>'+message+'</p>'+back+
@@ -292,10 +293,10 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
   return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki,loadoutModel)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [...(loadoutModel?[['Loadout','#ship-profile-loadout']]:[]),
-      ['Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],...(research?[['Progression','#ship-research-progress']]:progression?[['Progression','#ship-profile-progress']]:[]),['Acquisition','#ship-profile-acquire']]
+      [research?'Research & Statistics':'Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],...(progression?[['Progression','#ship-profile-progress']]:[]),['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
-    renderResearchProgress(ship||data,researchState)+(researchModel?renderResearchStats(researchModel,level)+renderResearchGear(researchModel)+renderResearchSkills(researchModel):statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki))+
+    (researchModel?renderResearchStats(researchModel,level,ship||data,researchState,researchView)+renderResearchGear(researchModel)+renderResearchSkills(researchModel):statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki))+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data,wiki)+progression+sourcePanel(data,ship,wiki)+
     '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';

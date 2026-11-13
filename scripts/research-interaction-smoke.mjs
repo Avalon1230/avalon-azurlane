@@ -15,6 +15,7 @@ const server=createServer((req,res)=>{
 });
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
 const ships=Object.values(RESEARCH_MANIFEST.records).map(r=>({id:r.id,name:r.name,hullType:r.id==='99901'?'Battleship':'Light Cruiser',nationality:'Royal Navy',rarity:r.classification==='DR'?'Decisive':'Priority'}));
+ships.push({id:'970701',name:'Hiryuu META',hullType:'Aircraft Carrier',nationality:'META',rarity:'Super Rare'});
 ships.push(...Array.from({length:100},(_,i)=>({id:String(10000+i),name:'Fixture '+i,hullType:'Destroyer',nationality:'Eagle Union',rarity:'Rare'})));
 const details=Object.fromEntries(ships.map(s=>[s.id,{id:s.id,names:{en:s.name},nationality:s.nationality,hullType:s.hullType,rarity:s.rarity,slots:[],skills:[],stats:{level120:{health:100}},obtainedFrom:{obtainedFrom:'Research and Development'}}]));
 const equipment=Object.fromEntries(Array.from({length:110},(_,i)=>[String(99000+i),{name:'Fixture auxiliary '+i,type:10,rarity:3,stats:{},ship_type_forbidden:[]}]));
@@ -29,6 +30,22 @@ try{
   await page.route(/^https?:\/\//,route=>{const u=route.request().url();if(u.startsWith(url))return route.continue();const payload=u.endsWith('/ship-list.json')?ships:u.endsWith('/ships.json')?details:u.endsWith('/equipment.json')?equipment:u.endsWith('/version.json')?{generatedAt:'fixture'}:null;return payload?route.fulfill({contentType:'application/json',body:JSON.stringify(payload)}):route.abort();});
   await page.goto(url+'/#/ships/29901');
   assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'4637');
+  assert.equal(await page.locator('#ship-profile-stats #research-dev').count(),1);
+  assert.equal(await page.locator('#research-dev option').count(),7);
+  assert.equal(await page.locator('[data-research-delta="health"]').innerText(),'+1265');
+  await page.locator('#research-detailed').check();
+  assert.equal(await page.locator('#research-dev option').count(),31);
+  await page.locator('#research-dev').focus();
+  await page.locator('#research-dev').selectOption('7');
+  assert.equal(await page.locator('#research-dev').evaluate(el=>el===document.activeElement),true);
+  await page.locator('#research-detailed').uncheck();
+  assert.equal(await page.locator('#research-dev').inputValue(),'7');
+  assert.equal(await page.locator('#research-dev option').count(),8);
+  await page.reload();
+  assert.equal(await page.locator('#research-dev').inputValue(),'7');
+  await page.locator('#research-compare').selectOption('previous');
+  assert.match(await page.locator('.research-comparison-basis').innerText(),/Dev 6/);
+  await page.locator('#research-compare').selectOption('start');
   await page.locator('#research-dev').selectOption('5');
   assert.equal(await page.locator('[data-research-stat="health"]').innerText(),'3583');
   assert.match(await page.locator('[data-research-slot="1"]').innerText(),/2 mounts/);
@@ -39,6 +56,7 @@ try{
   assert.match(await page.locator('.research-progress').innerText(),/update for your selected/);
   assert.equal(await page.locator('.ship-profile-cover .research-frame-pr').count(),1);
   assert.equal(await page.locator('[data-loadout-slot]').count(),6);
+  await assertFrameClearance(page);
   await page.locator('[data-action="research-open"]').click();
   await page.locator('#research-start-date').fill('2026-01-01T12:00');
   await page.locator('[data-action="research-set-start"]').click();
@@ -75,8 +93,19 @@ try{
   assert.equal(await page.locator('[data-research-skill="19290"]').count(),1);
   await page.locator('#research-fate').selectOption('5');
   assert.equal(await page.locator('[data-research-stat="luck"]').innerText(),'25');
+  await page.locator('#research-compare').selectOption('developed');
+  assert.equal(await page.locator('[data-research-delta="luck"]').innerText(),'+25');
+  await page.locator('.research-upgrade-changes summary').click();
+  assert.match(await page.locator('.research-upgrade-changes').innerText(),/Flintlock/);
+  await page.locator('#research-compare').selectOption('previous');
+  assert.equal(await page.locator('[data-research-delta="luck"]').innerText(),'+7');
   assert.equal(await page.locator('[data-research-skill="18290"]').count(),1);
   await page.screenshot({path:'.audit/research-screens/profile-'+width+'.png',fullPage:true});
+  await page.evaluate(()=>location.hash='#/ships/970701');
+  await page.locator('.ship-profile-cover.portrait-meta').waitFor();
+  assert.equal(await page.locator('#research-dev').count(),0);
+  await assertFrameClearance(page);
+  await page.screenshot({path:'.audit/research-screens/meta-'+width+'.png',fullPage:true});
   await page.evaluate(()=>location.hash='#/ships/29906');await page.locator('#research-dev').waitFor();assert.equal(await page.locator('#research-fate').count(),0);
   await page.evaluate(()=>location.hash='#/ships/99901');await page.locator('#research-dev').selectOption('10');
   await page.locator('[data-loadout-slot="0"] .loadout-tile-more').click();await page.locator('.combat-comparison').waitFor();
@@ -92,11 +121,12 @@ try{
   console.log('PASS '+width+'px research filter/series, PR+DR frames, Dev/Fate, modal scroll/Escape/back, timers/reload, combat guard and saved gear');await page.close();
  }
  // Visual evidence uses the live catalogs and official portrait URLs, without fixture routes.
- for(const [id,label,width] of [['29901','pr',1280],['29904','dr',390]]){
+ for(const [id,label,width] of (process.env.SKIP_LIVE_ART==='1'?[]:[['29901','pr',1280],['29901','pr',390],['29904','dr',1280],['29904','dr',390],['970701','meta',1280],['970701','meta',390]])){
   const page=await browser.newPage({viewport:{width,height:900}});
   await page.goto(url+'/#/ships/'+id);
-  await page.locator('#research-dev').waitFor({timeout:90000});
+  await page.locator('.ship-profile-cover.portrait-'+label).waitFor({timeout:90000});
   await page.waitForFunction(()=>{const image=document.querySelector('.ship-profile-cover img');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
+  await assertFrameClearance(page);
   const image=await page.locator('.ship-profile-cover img').getAttribute('src');
   await page.screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'.png',fullPage:true});
   await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-portrait.png'});
@@ -104,3 +134,11 @@ try{
   await page.close();
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}
+
+async function assertFrameClearance(page){
+ const bounds=await page.locator('.ship-profile-cover').evaluate(el=>{
+  const outer=el.getBoundingClientRect(),art=el.querySelector('.asset-media').getBoundingClientRect();
+  return {left:art.left-outer.left,right:outer.right-art.right,top:art.top-outer.top,bottom:outer.bottom-art.bottom};
+ });
+ for(const [edge,gap]of Object.entries(bounds))assert.ok(gap>=6,edge+' artwork clearance: '+gap);
+}

@@ -13,9 +13,9 @@ function slotLabel(slot) {
   return 'Weapon / aircraft';
 }
 function sourceStatus(slot) {
-  if(slot.kind==='augment')return slot.verified?'Module matches our records':slot.provisional?'Class-matched · verify':'Module unverified';
-  if(slot.provisional)return 'Potential slot · verify';
-  return slot.verified?'Matches our records':'Slot unverified';
+  if(slot.kind==='augment')return slot.verified?'Module matches our records':slot.provisional?'Fits this class · check ship':'Module not confirmed';
+  if(slot.provisional)return 'Possible slot · check in-game';
+  return slot.verified?'Matches our records':'Slot not confirmed';
 }
 function slotNote(slot) {
   const efficiency=Number.isFinite(slot.maxEfficiency)?' · '+Math.round(slot.maxEfficiency*100)+'% max':'';
@@ -27,7 +27,7 @@ function renderCompactSlot(slot) {
   const picked=slot.selected;
   const name=picked?.name||(
     slot.kind==='augment'?(slot.augmentType?'Type: '+slot.augmentType:'Augment not verified')
-      :slot.provisional?'Choose auxiliary':'No verified equipment'
+      :slot.provisional?'Choose auxiliary':'No confirmed equipment'
   );
   // Augments use exact source icon mappings, never the regular gear icon mapper.
   const isAugment=slot.kind==='augment';
