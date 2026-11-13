@@ -26,6 +26,38 @@ AVALON must evaluate **ship × ship × equipment × skill × timing × enemy × 
 - Every mechanic/effect retains `sourceUrl`, `sourceRevision`, `region`, `checkedAt`, `verificationStatus`, and notes on conflicting or incomplete sources. Game-version changes invalidate dependent recommendations until reviewed.
 - Do not mirror third-party creative content or full guides by default. Check permission/licensing before importing and republishing structured datasets at scale.
 
+## Source roles and verification gates (Commander-approved direction, 2026-11-13)
+
+**Koumakan is AVALON's preferred *encyclopedic starting point for the whole game*, not merely an artwork service.** Look there for ships and their skills, equipment, synergies, enemies and where they appear, stage and event mechanics, progression, and acquisition. Koumakan is an independently maintained community wiki, not a publisher-operated official database. A wiki entry is useful evidence; it is not automatically the newest or numerically definitive record.
+
+- **Original client data and official game notices** corroborate or supersede exact IDs, coefficients, triggers, restrictions, regional differences, new releases and patches. Retain the source version and explain material disagreements with wiki entries rather than quietly choosing a convenient number.
+- **Community guides and expert assessments** (including Slaimuda/ECTL archives, Suchiguma, REGAL and player testing) are supplementary hypotheses, practical experience and counterexamples. Read *why* an option is recommended and under what conditions. Never treat a guide's grade, ranking or conclusion as a game mechanic or an AVALON calculation; attribute any reported results.
+- **AVALON** owns the final analysis. Use the validated mechanics and encounter data to compare feasible builds and fleets independently. Where a calculation disagrees with an expert, investigate assumptions, missing mechanics and observed outcomes; do not silently copy either answer.
+
+### Wiki-first ingestion, without making the wiki a single point of failure
+
+1. Resolve stable ship, equipment, skill, enemy, stage and variant identities; retain wiki page/revision, source IDs, region, timestamps and original links. Do not join different characters or gear variants by name alone.
+2. Parse only documented, checked fields into typed records. Distinguish facts explicitly provided by the source from interpreted skill effects and inferred synergies. An unparsed description is not an executable combat rule.
+3. Compare against pinned client records, official updates and prior known-good revisions. Mark source disagreement, missing fields and stale versions; preserve the last verified record as *dated*, not secretly current.
+4. Discover new wiki/client revisions and newly released entries with respectful, low-volume checks and caching. Queue changed records for verification. Do not promise that a new wiki page or item is instantly available or automatically correct.
+5. Keep source fetching separate from simulation and UI. A missing or rate-limited wiki response must not erase locally saved fleet/gear selections or turn a formerly unknown value into zero. Observe reuse rights and attribution.
+
+### Encounter simulation and recommendation QA gate
+
+A recommendation must be traceable to an **encounter specification**: mode/map/boss, enemy composition and location (and waves when known), armor and relevant threats, fight duration or victory condition, player progression, owned ships/gear and counts, plus source versions. A known enemy name without verified encounter mechanics is not a fully modeled battle.
+
+Before calling an outcome an AVALON simulation, document and test the implemented mechanics—including attack schedules, skill-trigger timing, buff eligibility/stacking, target movement/hit assumptions, aircraft/interception, damage and survival—as applicable. Unknown encounter behavior must remain a stated assumption or be excluded; do not generate precise clear rates or absolute DPS from unsupported components.
+
+Every evaluated option must retain:
+- **Evidence category:** sourced fact, independently calculated result, modeled prediction, observed in-game result, or attributed expert opinion.
+- **Comparison basis:** encounter, fleet, progression, gear, objective, alternatives and the reason the winner changes (or does not) as conditions change.
+- **Reproducibility:** source/version fingerprints, calculation inputs, event traces where relevant, deterministic tests and uncertainty ranges or explicit unsupported labels.
+- **Real-game calibration:** comparison against recorded battles or reproducible player tests before a modeled result is described as validated performance.
+
+Independent QA must challenge at least: a stale wiki/client conflict; a new ship with incomplete wiki coverage; conflicting expert recommendations; a skill condition that changes with equipment; a timing-based reversal of standalone damage rankings; invalid hull/slot assignments; four-fleet duplicate ship or scarce-gear assignment; and a case where missing enemy data prevents confident ranking.
+
+The ship-profile loadout planner and Fleet Lab should eventually consume the **same validated encounter, skill and equipment models**. They are different views of one decision system, not separate collections of hard-coded recommendations. Present the useful conclusion to players first; keep technical evidence available without making the interface read like an audit report.
+
 ## Structured mechanics model (minimum)
 
 A ship has: stable canonical identity and variants/retrofits, hull/armor/faction, ship and skill levels, equipped slots and compatibility rules, weapon efficiencies, aircraft capacity, base/derived stats, position dependencies, fleet-tech/buff conditions and ownership/progression.
@@ -82,4 +114,4 @@ First prove the pipeline on diverse, **representative** situations—not make th
 
 **Definition of done:** Given a declared encounter and roster, AVALON must output a feasible, fully equipped, explainable fleet that respects inventory/skill conditions, cites its mechanics, identifies weak points, proposes alternatives, and distinguishes verified results from hypotheses. For OpSi, do this across all four surface fleets without duplication.
 
-**Current implementation status:** v0.5 includes an initial qualitative, deterministic **global role-matching fleet suggester**, with four OpSi fleets jointly considered for unique ship assignments, curated candidate roles, and manual-preview/apply. This is **not** a validated synergy engine, numeric combat optimizer, gear-loadout solver, or skill event simulator. The complete design in this document remains a future implementation target; see [v0.5 usage and boundaries](FLEET_SUGGESTIONS.md).
+**Current implementation status (v0.8.8):** Fleet Lab retains the initial qualitative, deterministic **global role-matching fleet suggester**, with four OpSi fleets jointly considered for unique ship assignments, curated candidate roles, and manual-preview/apply. v0.8.7 also introduced limited source-backed gun and aircraft timing comparisons; v0.8.8 added research-ship Dev/Fate statistics. These are foundations, **not** a validated encounter simulator, research-aware combat solver, complete gear optimizer, or fleet synergy engine. The full design remains future implementation work; see [Fleet Lab usage](FLEET_SUGGESTIONS.md), [combat calculation boundaries](COMBAT_MECHANICS.md) and [research stats](RESEARCH_STATISTICS.md).
