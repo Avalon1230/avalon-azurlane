@@ -43,6 +43,7 @@ function shipNationLanding(records) {
     '<label class="search-wrap nation-landing-search"><span aria-hidden="true">⌕</span>' +
     '<input id="catalog-search" type="search" value="" placeholder="Search every ship or nation…" ' +
     'aria-label="Search ships across all nations" autocomplete="off"></label>' +
+    '<button type="button" class="outline-btn" data-action="ship-research-toggle">Research · PR &amp; DR</button>'+
     group('Main factions', main) +
     group('META · BULINS · COLLAB', special, 'nation-special-registry') +
     (!nations.length ? '<p class="empty">No ship data available yet.</p>' : '') +
@@ -86,7 +87,7 @@ function groupedCards(rows,kind,card,totals,sort='rarity',descending=true,collab
   ).join('');
 }
 
-export function renderCatalogIndex({kind,records,query='',nation='all',collabSeries='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false,shipAdvancedOpen=false}){
+export function renderCatalogIndex({kind,records,query='',nation='all',collabSeries='all',hull='all',category='all',page=1,renderCard,sourceStatus='ready',sort='rarity',descending=true,rarity='all',shipLimit=SHIP_ROSTER_BATCH_SIZE,equipmentLimit=EQUIPMENT_ROSTER_BATCH_SIZE,broadType='all',equipmentGroup='type',equipmentAdvancedOpen=false,shipAdvancedOpen=false,research=false,researchSeries='all'}){
   if(kind!=='ships'&&kind!=='equipment')throw new Error('Unknown catalog');
   if(!Array.isArray(records)||typeof renderCard!=='function')throw new Error('Invalid catalog data');
   if(kind==='equipment')return renderEquipmentIndex({
@@ -95,12 +96,12 @@ export function renderCatalogIndex({kind,records,query='',nation='all',collabSer
     equipmentLimit,renderCard
   });
   const ship=kind==='ships';
-  if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1)
+  if (ship && nation === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1 && !research && researchSeries==='all')
     return shipNationLanding(records);
-  if(ship && nation === COLLAB_BROWSE_NATION && collabSeries === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1)
+  if(ship && nation === COLLAB_BROWSE_NATION && collabSeries === 'all' && !String(query).trim() && hull === 'all' && rarity === 'all' && page === 1 && !research && researchSeries==='all')
     return shipCollabLanding(records);
   const facetRecords=ship
-    ?filterShipBrowseRows(records,{query,hull,rarity})
+    ?filterShipBrowseRows(records,{query,hull,rarity,research,researchSeries})
     :filterEquipmentRecords(records,{query,hull,category,rarity});
   const facets=ship ? shipBrowseCounts(facetRecords) : nationCounts(facetRecords,kind);
   const knownNations = new Set((ship ? shipBrowseCounts(records) : nationCounts(records,kind)).map(x => x.nation));
@@ -117,7 +118,7 @@ export function renderCatalogIndex({kind,records,query='',nation='all',collabSer
   const batchSize=ship?SHIP_ROSTER_BATCH_SIZE:EQUIPMENT_ROSTER_BATCH_SIZE;
   const visible=ordered.slice(0,Math.max(batchSize,Math.trunc(Number(requestedLimit)||batchSize)));
   const totals=new Map((ship ? shipBrowseCounts(filtered) : nationCounts(filtered,kind)).map(x=>[x.nation,x.count]));
-  const filters=renderShipFilterToolbar({rows:records,query,hull,rarity,sort,descending,open:shipAdvancedOpen});
+  const filters=renderShipFilterToolbar({rows:records,query,hull,rarity,sort,descending,open:shipAdvancedOpen,research,researchSeries});
   const text='Showing '+visible.length.toLocaleString()+' of '+ordered.length.toLocaleString()+
     ' matching '+(ship?'ships':'equipment')+' · '+records.length.toLocaleString()+' total';
   const heading = ship
@@ -148,3 +149,4 @@ export function renderCatalogIndex({kind,records,query='',nation='all',collabSer
       : '')+
     '</div>';
 }
+

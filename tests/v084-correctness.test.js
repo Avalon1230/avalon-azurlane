@@ -59,11 +59,11 @@ test('slot picker escapes input instead of inserting executable markup',()=>{
   assert.doesNotMatch(html,/value="" autofocus/);
 });
 test('resolved gear slots never render a contradictory Lycoris fallback alongside planner',()=>{
-  const ship={id:'lyc-99901',sourceId:'99901',name:'Langley',hull:'CVL',rarity:'Rare'};
-  const data={id:'99901',names:{en:'Langley'},slots:[
+  const ship={id:'lyc-10701',sourceId:'10701',name:'Langley',hull:'CVL',rarity:'Rare'};
+  const data={id:'10701',names:{en:'Langley'},slots:[
     {type:'Artillery (Destroyer)'},{type:'Artillery (Destroyer)'}
   ],stats:{},skills:[]};
-  const resolved={sourceId:'99901',mode:'general',description:'General',slots:[
+  const resolved={sourceId:'10701',mode:'general',description:'General',slots:[
     {index:0,kind:'weapon',type:'Fighter',source:'AzurLaneData · May 2026',verified:true,
       categories:['Fighter'],selected:null,manual:false,candidates:[],
       explanation:'No compatible equipment'}

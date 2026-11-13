@@ -1,3 +1,4 @@
+import { researchShip } from './research-ships.js';
 /**
  * AVALON Ship Index browsing taxonomy.
  * Original source nationality is never rewritten: the index groups named
@@ -111,7 +112,7 @@ export function shipBrowseCounts(rows) {
  * Search both raw nationality names and AVALON group labels while retaining
  * existing name, hull, and rarity search behavior from catalog-filters.js.
  */
-export function filterShipBrowseRows(rows, { query = '', nation = 'all', collabSeries = 'all', hull = 'all', rarity = 'all' } = {}) {
+export function filterShipBrowseRows(rows, { query = '', nation = 'all', collabSeries = 'all', hull = 'all', rarity = 'all', research = false, researchSeries = 'all' } = {}) {
   const hullMatched = SHIP_HULL_GROUPS[hull]
     ? filterShipRecords(rows).filter(ship=>SHIP_HULL_GROUPS[hull].includes(ship.hull))
     : filterShipRecords(rows,{hull});
@@ -121,6 +122,9 @@ export function filterShipBrowseRows(rows, { query = '', nation = 'all', collabS
     : null;
   return hullMatched.filter(ship => {
     const group = shipBrowseNation(ship);
+    const record=researchShip(ship);
+    if((research||researchSeries!=='all')&&!record)return false;
+    if(researchSeries!=='all'&&String(record?.series)!==String(researchSeries))return false;
     if (nation !== 'all' && nation !== group) return false;
     if (nation === COLLAB_BROWSE_NATION && collabSeries !== 'all' && shipCollabSeries(ship) !== collabSeries) return false;
     if (rarity !== 'all') {
@@ -151,3 +155,4 @@ export function shipBrowseDisplayNation(record) {
   const source = nationForShip(record);
   return group === COLLAB_BROWSE_NATION ? 'Collab · ' + shipCollabSeries(record) : group;
 }
+

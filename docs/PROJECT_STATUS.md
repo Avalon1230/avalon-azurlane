@@ -1,6 +1,18 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-12 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-13 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## v0.8.8 — Independent QA corrections (awaiting review; do not merge)
+
+- Branch `feat/research-progression-v088`, [PR #29](https://github.com/Avalon1230/avalon-azurlane/pull/29), remains open and unmerged. Implementation commit **09cf28a1ec303b659086a0beaa9e48facf3de770**; the following documentation/evidence commit records these results. Read the PR head for the final delivery SHA. Deployed release remains v0.8.7.
+- Fixed the R&D rerender regression: preserve body scroll, focused control, date input and open details. Browser tests complete the last mission below the fold, verify focus/scroll immediately, then verify persistence after reload. Start-relative gates and manual completion remain unchanged.
+- Completed Dev/Fate statistics for all 47 research ships using 188 exact client forms, 1,410 Dev stages and 170 Fate stages. Ship levels 1/100/120/125, fixed 100 affinity, completed stages only. Weapon mounts/preloads/efficiencies and unlocked skill descriptions now follow the selected state, including Drake's Fate 3 and Fate 5 replacements. Invalid/minimum-level/contradictory data returns unknown. No interpolation or silent reference-stat fallback.
+- Architecture: `research-progression-data.js` stores selected factual source records; `research-progression.js` calculates them; `research-stats-view.js` renders them; `research-dialog-state.js` preserves modal interaction state. Existing identity/filter/mission/storage modules and all six saved loadout positions remain intact. Combat keeps its Dev 30 / Fate 0 guard; port stats do not silently become combat inputs.
+- [Implementation CI 43332133024](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43332133024) passed **261/261 Node tests**, **63 responsive cases**, **10 combat application sessions**, **4 research application sessions**, and **2 live-art profile sessions**. Syntax/generated data and all combat/research checks passed, including ten new pinned client file checks. All 16 augment images loaded; four collaboration logos loaded and three returned HTTP 429 (not certified). The final delivery commit is checked again; its CI link is in PR #29.
+- [Screenshots](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43332133024/artifacts/13995950755) include live Neptune PR desktop and Drake DR mobile profiles with official portraits. Cropped portraits were visually inspected: original gold/prismatic ornaments preserve the faces. Authentic isolated game frame assets remain unverified in the checked project catalog; original AVALON SVGs remain the documented fallback, with no REGAL graphics.
+- Remaining limits: blueprint costs/totals, partial blueprint progress, other affinity values, partial mission XP/count tracking, account sync and progression-aware combat/buff simulation. Source licensing/freshness limits, exact hashes, formulas and numerical expected/actual cases are in [RESEARCH_STATISTICS.md](RESEARCH_STATISTICS.md). Older 41-set milestone prose is separate from the complete current numeric data.
+- Existing roster remains 894 ships / 936 equipment / 239 augments; previous audit found 5,363 populated positions per mode. This correction does not change those catalogs. Historical v0.8.8 baseline: initial planning-only delivery passed 250 tests; independent QA identified the scroll/focus regression and required full progression statistics. Those findings are preserved in the PR discussion.
+- Next: independent QA should challenge intermediate rounding, minimum levels, mount replacement, Fate skill timing, bottom-mission/date focus, live-art frames and saved gear. Intelligent loadouts and v0.9 fleet timing/inventory synergy remain separate work. Commander authorizes any merge.
 
 ## Current release — v0.8.7 delivered (2026-11-12)
 
@@ -216,4 +228,5 @@ When a new conversation starts: retrieve relevant prior decisions, inspect lates
 
 - Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
 - On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
+
 

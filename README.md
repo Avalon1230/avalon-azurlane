@@ -10,6 +10,14 @@ An independent **Azur Lane** companion for choosing ships, comparing gear and pl
 
 The website's **Updates** section reads directly from `CHANGELOG.md`, so release notes and public change tracking share a single source.
 
+## v0.8.8 — Research ship identity & progression (in review)
+
+Find PR and DR ships together with **Research**, then narrow by series alongside your existing filters. Original gold PR and prismatic DR ornaments distinguish their portraits. Open **Research & Development** in Acquisition for requirements, missions and persistent manual countdowns.
+
+Dev/Fate controls now update verified stats, weapon mounts, efficiencies and unlocked skills for all 47 research ships. Choose a ship level to compare completed stages at 100 affinity. Unsupported level/stage combinations explain what is missing instead of showing another setup's numbers. [Calculation details and reference cases](docs/RESEARCH_STATISTICS.md). Combat comparisons are unavailable for research selections other than Dev 30 / Fate 0. Your saved equipment stays yours.
+
+Coverage: 47 ships, Series 1–9, 376 source-linked missions, 34 listed Fate unlocks and 41 milestone sets. [Research sources, behavior and limits](docs/RESEARCH_SHIPS.md). This branch awaits independent QA; v0.8.7 remains the deployed release.
+
 ## v0.8.7 — Combat Mechanics Foundation (released 2026-11-12)
 
 Open a ship’s equipment options to compare gun damage and firing times against your chosen armor. For Aquila, compare the loading time of her full air wing and see how slot 2 changes her role. This first pass covers eleven equipment records, with tests for Aquila, Nelson, Hood, Prinz Eugen and Z23. It never replaces your saved gear.
@@ -116,7 +124,7 @@ The new nationality metadata is a dated compact source snapshot; newly released 
 
 The UI shows **genuine extracted in-game shipyard portraits and equipment icons**, linked to independently hosted Azur Lane game-client assets, not AI-generated substitutes. The first portrait source is [iujab/azurlane-images](https://github.com/iujab/azurlane-images), with **746/894** matching thumbnail IDs in its previous audit. For the remaining ships—and as a backup when a primary thumbnail fails—the site now links to original **`shipyard.png`** files from [Fernando2603/AzurLane](https://github.com/Fernando2603/AzurLane), strictly by each character's source-verified base-skin ID. The local skin manifest establishes base-skin IDs for **894/894** ships; that is a *mapping count*, not a claim that every remote image has been visually confirmed or always loads. Equipment icons have **936/936** mapped, file-verified paths using the source-provided icon alias map (417 equipment variants intentionally share base files). Failed remote requests retain readable hull/name placeholders.
 
-Artwork remains copyright of the Azur Lane rights holders. These repositories are **community hosts, not official publisher image servers**, and host fan-use statements do not establish formal rights-holder permission. AVALON embeds but does not mirror or bundle their binary image files. See [image sources, restrictions and provenance](docs/IMAGE_ASSETS.md). No synthetic portraits or weapons art are used.
+Artwork remains copyright of the Azur Lane rights holders. These repositories are **community hosts, not official publisher image servers**, and host fan-use statements do not establish formal rights-holder permission. AVALON embeds their images rather than bundling an artwork catalog; small actual-application screenshots in docs/qa are retained as visual QA evidence. See [image sources, restrictions and provenance](docs/IMAGE_ASSETS.md). No synthetic portraits or weapons art are used.
 
 The existing v0.5 fleet suggestion module is also now wired into the live Fleet Lab, with preserved user assignments and explicit, qualitative (not simulated) role matching.
 
@@ -247,3 +255,4 @@ The full-game optimization roadmap is unchanged. These fixes do not add a gear o
 ### v0.8.7 QA corrections (PR #28, unmerged)
 
 Combat comparisons now preserve source parallel/capacity, reject unsupported weapon families and show exclusion reasons. Scenario assumptions reset between ships, slots and modes; evaluations preserve saved gear. Aquila current/reference wings use the skill condition of the evaluated wing. See [the correction evidence and limits](docs/COMBAT_MECHANICS.md). Aircraft DPS, effective healing, full optimization and current-client freshness remain unverified.
+
