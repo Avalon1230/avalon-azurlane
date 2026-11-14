@@ -33,11 +33,11 @@ jobs:
       - run: node scripts/viewport-smoke.mjs
       - run: node scripts/combat-interaction-smoke.mjs
       - run: node scripts/research-interaction-smoke.mjs
-      - name: Capture merged v0.8.9 for visual comparison
+      - name: Capture pre-refinement PR head for visual comparison
         run: |
-          git fetch origin 5445bc5763e4b7f30beb88840e8bc81d3a775714 --depth=1
+          git fetch origin df4a175165bf292c1c94c894405defd20b36cf91 --depth=1
           mkdir -p .audit/card-before
-          git archive 5445bc5763e4b7f30beb88840e8bc81d3a775714 | tar -x -C .audit/card-before
+          git archive df4a175165bf292c1c94c894405defd20b36cf91 | tar -x -C .audit/card-before
           CARD_BASELINE=1 node scripts/research-interaction-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()

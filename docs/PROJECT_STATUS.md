@@ -2,7 +2,16 @@
 
 _Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active — v0.8.10 whole-card identity corrective polish
+## Active — v0.8.10 dock-reference refinement on PR #33
+
+- Resumed verified open head `df4a175165bf292c1c94c894405defd20b36cf91`; local tracked files matched GitHub. Independent QA review `5904060792` passed structure/functionality but left reference-based visual acceptance pending. Do not merge.
+- Recovered and visually inspected all three Commander-supplied in-game screenshots: `image(20261114-144552).png` (mixed research/ordinary dock), `image(20261114-144704).png` (META dock), and `download(3).png` (mixed dock). The earlier missing-reference limitation below is historical and now resolved.
+- Reference observations: full-size portraits, narrow metallic research rails with shaped shoulder/corner details, dark lower name rails, gold/prismatic research identity; blackened META shells with burnt-orange seams and warm backing. Oath gems, floral/white oath trims, favorites, locks, fleet badges and levels are separate account overlays and are not copied into identity styling.
+- Refined the entire existing card shell: layered metallic PR rails, more articulated prismatic DR shoulders, lower name/hull rails with small end caps; scorched black/orange META trim with pinned Elite violet/Super Rare gold accents and a warmer backing. Original artwork remains full-size; ordinary styles and all gameplay/state modules remain unchanged.
+- META animation is deliberately deferred. The static ember finish carries the identity without perpetual animation on a full mobile roster; it requires no motion fallback and is inherently reduced-motion safe. No claim of reproducing the game's animated frame or exact asset fidelity.
+- Verification pending implementation CI and fresh visual review. The screenshot baseline is now pre-refinement PR head `df4a175`, with all five identities captured as roster/hero at 390/1280px. Existing merged-v0.8.9 comparisons remain historical.
+
+## Historical — v0.8.10 whole-card structural correction
 
 - Created `feat/ship-card-identity-v0810` from verified latest main `5445bc5763e4b7f30beb88840e8bc81d3a775714`, including merged PR #32 and its release handoff. Do not merge this correction without Commander authorization.
 - Corrected the design boundary: frames now belong to the entire Ship Index tile (name/artwork/hull) and the entire profile identity hero. The portrait containers have no identity class, frame child or decorative padding. Full ordinary-card artwork dimensions are restored.

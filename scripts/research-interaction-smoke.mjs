@@ -199,6 +199,15 @@ async function assertFrameClearance(page,selector='.ship-profile-overview'){
   const empty={left:f.left+parseFloat(style.paddingLeft),right:f.right-parseFloat(style.paddingRight),top:f.top+parseFloat(style.paddingTop),bottom:f.bottom-parseFloat(style.paddingBottom)};
   for(const edge of ['left','right','top','bottom'])if(Math.abs(empty[edge]-outer[edge])>1)throw Error('Frame center does not match whole card: '+edge);
   if(getComputedStyle(portrait).padding!=='0px')throw Error('Portrait padding shrinks the artwork');
+  if(el.matches('.ship-roster-tile')){
+   const name=el.querySelector('.ship-roster-name').getBoundingClientRect(),footer=el.querySelector('.ship-roster-footer').getBoundingClientRect();
+   if(name.top<p.bottom-1||footer.top<name.bottom-1)throw Error('Dock name and hull rails must follow artwork without overlap');
+   for(const pseudo of ['::before','::after']){
+    const cap=getComputedStyle(el.querySelector('.ship-roster-footer'),pseudo);
+    if(parseFloat(cap.width)>14||cap.pointerEvents!=='none')throw Error('Rail ornaments must be small and non-interactive');
+   }
+  }
+  if(el.classList.contains('portrait-meta')&&getComputedStyle(frame).animationName!=='none')throw Error('META static finish must not start perpetual animation');
   // Removing classification must not increase artwork area or change grid dimensions.
   const classes=el.className;el.className=classes.split(' ').filter(c=>!c.startsWith('portrait-')).join(' ');
   const ordinary=art.getBoundingClientRect(),baseline=el.getBoundingClientRect();el.className=classes;
