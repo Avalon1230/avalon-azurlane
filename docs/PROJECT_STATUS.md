@@ -10,8 +10,8 @@ _Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversatio
 - Long Equipment/Skills panels now follow the two-column summary at full desktop width, with compact internal two-column lists. The top identity/loadout/artwork layout is unchanged. Mobile remains one column.
 - Missing Fate records now say “We don’t have Fate Simulation details for this ship yet.” Dev-locked Fate still explains Dev 30; absent source data is never promoted to a claim that the game feature is unreleased.
 - Expanded regression coverage: 273 Node tests; four research app sessions now check both META rarities and ordinary ships in roster/profile, actual PR/DR silhouette differences, masked artwork clearance and unchanged ordinary framing. Ten live desktop/mobile sessions cover Neptune, Drake, Hiryuu META (Super Rare), Hunter META (Elite) and Enterprise (ordinary), including loaded portrait, gallery, roster captures and full-width detail assertions. New CI checks validate the pinned META rarity extract against the upstream source.
-- Local checks: 273/273 Node tests, 63 responsive cases, 10 combat sessions, four research sessions, syntax/generated data passed. Remote source checks and refreshed live artwork evidence are awaiting this correction's CI. Calculators, research data, comparisons, acquisition tracking, saved equipment, six-slot loadouts and PR #31 architecture are preserved.
-- Next: inspect refreshed real-art evidence and return the new head for independent QA. No merge or deployment is authorized.
+- Local checks: 273/273 Node tests, 63 responsive cases, 10 combat sessions, four research sessions, syntax/generated data passed. Implementation `b0685e7e7cb65a65e0050381ed09e15965ff8a1d` passed [CI 43561382550](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43561382550), including all pinned source checks and ten live-art sessions. Refreshed portrait/roster captures and representative full desktop/mobile profiles were visually inspected; see [evidence](qa/README.md). Calculators, research data, comparisons, acquisition tracking, saved equipment, six-slot loadouts and PR #31 architecture are preserved.
+- Next: independent QA of the correction and evidence commits on PR #32; consult the PR head and its CI for the final delivery SHA. No merge or deployment is authorized.
 
 ## Active development — v0.8.9 ship profile UX (2026-11-13)
 
@@ -259,5 +259,3 @@ When a new conversation starts: retrieve relevant prior decisions, inspect lates
 
 - Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
 - On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
-
-

@@ -1,19 +1,22 @@
-# v0.8.9 — real-art portrait and profile evidence
+# v0.8.9 — independent QA correction evidence
 
-Captured from the actual application with live catalogs and original game artwork in [passing CI 43366734271](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43366734271), commit `382fe99721ee249b0649c8b2c83317a25e002e40`. No fixture image/catalog routing was used in these six live sessions. Mobile galleries were scrolled into view and required to finish loading before capture.
+Captured from the actual application using live catalogs and original game artwork in [passing CI 43561382550](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43561382550), implementation commit `b0685e7e7cb65a65e0050381ed09e15965ff8a1d`. All ten live desktop/mobile sessions passed without fixture catalog or image routing. Each session requires loaded profile, gallery and roster artwork. These captures supersede the earlier v0.8.9 evidence.
 
-| Viewport | PR Neptune | DR Drake | Hiryuu META |
-| --- | --- | --- | --- |
-| Desktop, 1280px | ![PR desktop](live-pr-1280-portrait.png) | ![DR desktop](live-dr-1280-portrait.png) | ![META desktop](live-meta-1280-portrait.png) |
-| Mobile, 390px | ![PR mobile](live-pr-390-portrait.png) | ![DR mobile](live-dr-390-portrait.png) | ![META mobile](live-meta-390-portrait.png) |
+| Ship / identity | Desktop portrait | Mobile portrait | Desktop roster | Mobile roster |
+| --- | --- | --- | --- | --- |
+| Neptune — PR | ![Desktop portrait](live-pr-1280-portrait.png) | ![Mobile portrait](live-pr-390-portrait.png) | ![Desktop roster](live-pr-1280-roster.png) | ![Mobile roster](live-pr-390-roster.png) |
+| Drake — DR | ![Desktop portrait](live-dr-1280-portrait.png) | ![Mobile portrait](live-dr-390-portrait.png) | ![Desktop roster](live-dr-1280-roster.png) | ![Mobile roster](live-dr-390-roster.png) |
+| Hunter META — Elite | ![Desktop portrait](live-meta-elite-1280-portrait.png) | ![Mobile portrait](live-meta-elite-390-portrait.png) | ![Desktop roster](live-meta-elite-1280-roster.png) | ![Mobile roster](live-meta-elite-390-roster.png) |
+| Hiryuu META — Super Rare | ![Desktop portrait](live-meta-1280-portrait.png) | ![Mobile portrait](live-meta-390-portrait.png) | ![Desktop roster](live-meta-1280-roster.png) | ![Mobile roster](live-meta-390-roster.png) |
+| Enterprise — ordinary | ![Desktop portrait](live-ordinary-1280-portrait.png) | ![Mobile portrait](live-ordinary-390-portrait.png) | ![Desktop roster](live-ordinary-1280-roster.png) | ![Mobile roster](live-ordinary-390-roster.png) |
 
-These are untouched application screenshot crops, not generated art. The 7px outer frame area is separate from the image. PR uses gold, DR a prismatic surround, and META a dark/copper treatment. Profile and roster geometry is also checked in the interaction tests. Original artwork rights remain with the game rights holders; these small captures document implementation QA, not a reusable artwork asset pack.
+PR uses a raised crown and stepped feet; DR uses a beveled octagon with notched side rails. Elite META uses violet chamfered framing and background, while Super Rare META uses copper/gold rails, raised end caps and an ember background. META identity and rarity are checked against pinned source IDs, not names. Ordinary Enterprise retains its existing unornamented treatment. The CSS mask excludes the complete artwork rectangle; browser tests check the mask, padding, artwork bounds and distinct PR/DR outlines.
 
-[Full desktop/mobile profiles and interaction screenshots](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43366734271/artifacts/14009914224). Downloaded archive SHA-256: `ea2a07e81a9ffee8b88bf1d71534f29bef1fd06fbbef267e4c6bdd33ae877fe5`.
+Desktop Equipment and Skills panels span the width below the summary, removing the long empty column below Sources. Full-width geometry is asserted for every desktop live session. Mobile remains one column. Portraits, roster crops and representative full desktop/mobile profiles were visually inspected. All screenshots are actual application captures, not generated artwork. Artwork rights remain with the game rights holders.
 
-Sources: [Neptune](https://raw.githubusercontent.com/iujab/azurlane-images/main/thumbnails/29901.png), [Drake](https://raw.githubusercontent.com/iujab/azurlane-images/main/thumbnails/29904.png), [Hiryuu META](https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/9707010/shipyard.png). Full galleries continue using the existing source-mapped artwork loader.
+[All full profiles, portrait/roster crops and interaction screenshots](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43561382550/artifacts/14100885833). Downloaded archive SHA-256: `350f1c17b71d50b0726a946ed6327c020e84fbf994dd8b63bd6335c429328e1e`.
 
-Visual inspection covered the portrait treatments and representative loaded desktop/mobile profiles, including the combined controls and deltas. Independent QA is still required; these captures do not validate battle performance.
+Verification: 273 Node tests, 63 responsive cases, 10 combat sessions, four fixture research sessions, ten live-art sessions, syntax/generated-data and pinned combat/research/META source checks passed. Independent QA remains required; PR #32 is not merged. These checks do not establish game-battle performance.
 
 ---
 
