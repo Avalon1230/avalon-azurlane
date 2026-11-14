@@ -1,6 +1,27 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-13 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## v0.8.9 — independent QA corrections (2026-11-14)
+
+- Resumed open PR #32 from verified head `9bb72ce2d106558bc46167e5814391a92b91c511`; all local tracked files matched GitHub before editing. Addressing [review 5886325699](https://github.com/Avalon1230/avalon-azurlane/pull/32#pullrequestreview-5886325699). Do not merge.
+- PR now has a raised crown/stepped-foot silhouette; DR has a faceted octagonal outline with notched side rails. The entire artwork rectangle is excluded from each frame by a CSS mask, with reserved exterior padding. No overlay paths touch the art.
+- META identity still requires the exact source-ID nationality map. New `portrait-rarity.js` pins the rarity of 66 META IDs to Lycoris commit `8be1af11a0d4257ef57a92ada0ff12cc9e4dc97e`. Elite uses violet chamfered framing/background; Super Rare uses heavier copper/gold rails, raised end caps and an ember background. Unknown rarities use a neutral frame. Labels supplied by a caller cannot override pinned rarity.
+- Long Equipment/Skills panels now follow the two-column summary at full desktop width, with compact internal two-column lists. The top identity/loadout/artwork layout is unchanged. Mobile remains one column.
+- Missing Fate records now say “We don’t have Fate Simulation details for this ship yet.” Dev-locked Fate still explains Dev 30; absent source data is never promoted to a claim that the game feature is unreleased.
+- Expanded regression coverage: 273 Node tests; four research app sessions now check both META rarities and ordinary ships in roster/profile, actual PR/DR silhouette differences, masked artwork clearance and unchanged ordinary framing. Ten live desktop/mobile sessions cover Neptune, Drake, Hiryuu META (Super Rare), Hunter META (Elite) and Enterprise (ordinary), including loaded portrait, gallery, roster captures and full-width detail assertions. New CI checks validate the pinned META rarity extract against the upstream source.
+- Local checks: 273/273 Node tests, 63 responsive cases, 10 combat sessions, four research sessions, syntax/generated data passed. Implementation `b0685e7e7cb65a65e0050381ed09e15965ff8a1d` passed [CI 43561382550](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43561382550), including all pinned source checks and ten live-art sessions. Refreshed portrait/roster captures and representative full desktop/mobile profiles were visually inspected; see [evidence](qa/README.md). Calculators, research data, comparisons, acquisition tracking, saved equipment, six-slot loadouts and PR #31 architecture are preserved.
+- Next: independent QA of the correction and evidence commits on PR #32; consult the PR head and its CI for the final delivery SHA. No merge or deployment is authorized.
+
+## Active development — v0.8.9 ship profile UX (2026-11-13)
+
+- Branch: `feat/ship-profile-ux-v089`, based on verified GitHub main `fcc57a6fb80ec62c3b7ced955d0f651e1d314efd`. PR #29, #30 and #31 are already merged. [PR #32](https://github.com/Avalon1230/avalon-azurlane/pull/32) awaits independent QA and must not be merged without Commander authorization. Runtime implementation is `8bd69b80644647a349b82d70593ad82115b3d44a`; expanded screenshot/roster tests are `382fe99721ee249b0649c8b2c83317a25e002e40`. The following evidence-only commit records this delivery; consult PR head for its SHA.
+- Implemented: combined Research & Statistics; Dev 0/5/10/15/20/25/30 plus Detailed levels; saved intermediate-stage retention; same-level/100-affinity deltas, stage/checkpoint/Fate comparisons and upgrade disclosures; outer PR/DR frames and source-ID-mapped META treatments; clearer player-facing wording.
+- Preserved: all v0.8.8 source/calculation modules, six-position loadouts and personal picks, R&D acquisition dialog/start dates/mission tracking, combat guards, Fleet Lab and the PR #31 architecture. No simulation-engine expansion.
+- Architecture: new `research-comparison.js` derives comparisons from the existing calculator; `research-stats-view.js` composes the controls and stats. Display preferences stay separate from saved progression/mission state. `portraitIdentity` uses the research manifest and existing source nationality map.
+- Verification: [CI 43366734271](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43366734271) passed on `382fe99721ee249b0649c8b2c83317a25e002e40`: 268/268 Node tests, syntax/generated-data and pinned combat/research source checks, 63 responsive cases, 10 combat sessions, four research interaction sessions, and six live PR/DR/META profile/portrait captures at 390/1280px. Browser checks include loaded artwork galleries, profile and roster frame clearance, keyboard focus, persistence and saved gear. Portraits and representative full desktop/mobile captures were visually inspected. See [evidence](qa/README.md) and [full screenshots](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43366734271/artifacts/14009914224). The earlier screenshot race was fixed by awaiting live request completion, without weakening image or interaction assertions.
+- QA focus: numerical sign and baseline labels, Fate 3/5 skill changes, unavailable low-level combinations, intermediate selection after reload, keyboard focus, bottom-mission scroll, saved gear and outer-frame clearance. See [UX contract](SHIP_PROFILE_UX.md).
+- Next: independent QA of PR #32, then wait for Commander merge authorization. Published application remains v0.8.8 until a separately authorized merge/deploy. No claim of game-battle validation, universal best-in-slot or complete current-source coverage. External image hosts remain fallible; partial blueprint/mission counts and progression-aware combat remain outside this milestone.
 
 ## Current release — v0.8.8 delivered (2026-11-13)
 
@@ -238,5 +259,3 @@ When a new conversation starts: retrieve relevant prior decisions, inspect lates
 
 - Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
 - On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
-
-

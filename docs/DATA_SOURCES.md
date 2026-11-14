@@ -55,3 +55,7 @@ Production scoring would additionally require reliable enemy tables, skill descr
 - The base Fernando equipment source does not contain complete acquisition routes. From v0.7.9, equipment details optionally load the dated May 2, 2026 AzurLaneData `equip_drops.json` snapshot on demand by exact numeric source ID. Known locations and Gear Lab recipe flags are displayed with source provenance; unknown, offline, outdated, or server-dependent availability is **not guessed**. See [Equipment Acquisition Data](EQUIPMENT_ACQUISITION.md).
 - Rarity from the source may reflect a ship's base form, even if the curated label includes "(Retrofit)".
 - Indexed game records are not an endorsement from their authors; the AVALON application remains unaffiliated with game developers, maintainers and the original ECTL.
+
+## v0.8.9 META portrait rarity facts
+
+`src/portrait-rarity.js` contains only 66 source-ID → rarity pairs selected from the [Lycoris ship list at commit 8be1af11](https://github.com/iujab/Lycoris-AzurAPI/blob/8be1af11a0d4257ef57a92ada0ff12cc9e4dc97e/data/ship-list.json), checked November 14, 2026. META membership remains the existing exact-ID nationality map. These small factual records drive cosmetic framing, not battle calculations; names, skill text and artwork are not included. The upstream repository is marked GPL-3.0; no upstream implementation code is copied. CI verifies every selected rarity against that pinned version. New or changed ships require an explicit metadata refresh; unknowns receive neutral framing.

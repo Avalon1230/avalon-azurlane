@@ -89,7 +89,7 @@ test('profile portrait is fixed while changing independently selected artwork',(
   const first=renderShipProfile({ship,data:details,skinIndex:0,artworkSkins});
   const second=renderShipProfile({ship,data:details,skinIndex:1,artworkSkins});
   assert.match(first,/class="ship-profile-overview"/);
-  assert.match(first,/class="ship-profile-cover"/);
+  assert.match(first,/class="ship-profile-cover[^"]*"/);
   assert.match(first,/class="ship-art-panel"/);
   assert.match(first,/class="ship-art-preview"/);
   assert.match(first,/data-action="profile-art-open"/);

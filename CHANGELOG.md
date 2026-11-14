@@ -2,6 +2,22 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.9] - 2026-11-13
+
+### Changed
+- Combine research progression and statistics in one panel, with Dev checkpoints, optional individual levels, integrated Fate controls and same-level numerical comparisons.
+- Show mount, preload, efficiency and skill changes against a chosen baseline while preserving saved upgrades, mission tracking and equipment.
+- Move PR/DR borders outside portrait artwork; add distinct META frames and backgrounds using source-linked nationality metadata.
+
+### QA corrections
+- Give PR and DR distinct external frame silhouettes; differentiate Elite and Super Rare META with source-ID-verified rarity treatments.
+- Use full desktop width for Equipment and Skills while keeping the compact loadout.
+- Extend real-art desktop/mobile regression coverage to both META rarities and ordinary ships, including roster tiles and masked frame clearance.
+
+### Verification
+- Add regression coverage for intermediate selections, exact stat differences, Fate replacements, identity and saved progress. Extend mobile/desktop interaction and live-art screenshot coverage.
+- Combat calculations and source datasets are unchanged. Research-aware combat simulation remains future work.
+
 ## [0.8.8] - 2026-11-12
 
 ### Added

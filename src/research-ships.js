@@ -1,3 +1,5 @@
+import { META_PORTRAIT_RARITIES } from './portrait-rarity.js';
+import { SHIP_NATION_BY_SOURCE_ID } from './catalog-filters.js';
 import { RESEARCH_MANIFEST } from './research-manifest.js';
 
 export const RESEARCH_STORAGE_KEY='avalon.research.v1';
@@ -45,9 +47,24 @@ export function selectedMilestones(record,selection) {
   });
 }
 
-// Original AVALON ornament: compass crown, stepped rails and corner filigree.
-// The transparent center preserves the official portrait; never borrowed artwork.
+// Identity comes from exact research records or the existing source-ID nationality map.
+export function portraitIdentity(ship) {
+ const r=researchShip(ship);if(r)return r.classification.toLowerCase();
+ const id=String(typeof ship==='object'&&ship!==null?ship.sourceId??ship.id:ship??'');
+ return SHIP_NATION_BY_SOURCE_ID[id]==='META'?'meta':'';
+}
+// Rarity styling is pinned by source identity, not inferred from a name or supplied label.
+export function portraitTreatment(ship) {
+ const identity=portraitIdentity(ship);
+ if(identity!=='meta')return identity;
+ const id=String(typeof ship==='object'&&ship!==null?ship.sourceId??ship.id:ship??'');
+ return {'Elite':'meta-elite','Super Rare':'meta-super-rare'}[META_PORTRAIT_RARITIES[id]] || 'meta';
+}
+export function portraitClasses(ship) {
+ const identity=portraitIdentity(ship),treatment=portraitTreatment(ship);
+ return identity?'portrait-'+identity+(treatment!==identity?' portrait-'+treatment:''):'';
+}
 export function researchFrame(ship) {
-  const r=researchShip(ship);if(!r)return '';
-  return `<svg class="research-frame research-frame-${r.classification.toLowerCase()}" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${r.classification==='DR'?'<defs><linearGradient id="research-prism-'+r.id+'" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe4a3"/><stop offset=".25" stop-color="#ffaada"/><stop offset=".5" stop-color="#bca7ff"/><stop offset=".75" stop-color="#8ee5ff"/><stop offset="1" stop-color="#b6ffd3"/></linearGradient></defs>':''}<path style="${r.classification==='DR'?'stroke:url(#research-prism-'+r.id+')':''}" class="research-rail" d="M3 30V12L12 3H35 M65 3H88L97 12V30 M97 70V88L88 97H65 M35 97H12L3 88V70"/><path class="research-filigree" d="M3 25L8 20V12H20L25 3 M75 3L80 8H88V20L97 25 M97 75L92 80V88H80L75 97 M25 97L20 92H12V80L3 75 M32 4L40 8L50 2L60 8L68 4 M40 96L50 90L60 96"/><path class="research-crown" d="M43 4L50 12L57 4L50 0Z M0 47L5 50L0 53 M100 47L95 50L100 53"/>${r.classification==='DR'?'<path class="research-filigree" d="M5 37L10 30V18L18 10H30 M70 10H82L90 18V30L95 37 M5 63L10 70V82L18 90H30 M70 90H82L90 82V70L95 63"/>':''}</svg>`;
+ const identity=portraitIdentity(ship),treatment=portraitTreatment(ship);
+ return identity?'<span class="research-frame research-frame-'+identity+(treatment!==identity?' research-frame-'+treatment:'')+'" data-frame-shape="'+treatment+'" aria-hidden="true"></span>':'';
 }

@@ -21,7 +21,7 @@ export function renderSuggestedFleet({mode,ships,workspace,options={},preview=nu
       return `<details class="suggest-fleet"><summary>${E(fleetId.toUpperCase())} <span>${delta.length} suggested · ${locks.length} retained · ${absent.length} unfilled</span></summary><div class="suggest-items">${content}</div></details>`;
     }).join('');
     const advisories=gearAdvisories(mode.id,current).map(x=>`<li><strong>${E(x.label)}:</strong> ${E(x.text)} ${profileLink(x.source)}</li>`).join('');
-    result=`<div class="suggest-results"><div class="suggest-result-head"><div><strong>Suggested formation preview</strong><small>${count} new · ${preview.locked.length} preserved · ${missing} unfilled · ${unverified} role mismatches</small></div><button type="button" class="small-btn" data-action="suggest-apply" ${!count?'disabled':''}>Apply ${count} additions</button></div>
+    result=`<div class="suggest-results"><div class="suggest-result-head"><div><strong>Review suggested fleet</strong><small>${count} new · ${preview.locked.length} preserved · ${missing} unfilled · ${unverified} roles to check</small></div><button type="button" class="small-btn" data-action="suggest-apply" ${!count?'disabled':''}>Apply ${count} additions</button></div>
     <div class="suggest-note"><strong>Matched by ship roles.</strong> We haven’t simulated this fleet’s damage, skill timing or gear. Check the lineup before taking it into battle.</div>
     ${groups}<div class="suggest-advice"><strong>Gear and timing to check</strong><ul>${advisories}</ul></div>
     <div class="suggest-cautions"><strong>Limitations and next checks</strong><ul>${preview.notes.map(x=>`<li>${E(x)}</li>`).join('')}</ul></div></div>`;

@@ -30,7 +30,7 @@ test('research entry works from nation landing and exposes one combined filter',
  assert.match(filtered,/research-series/);assert.doesNotMatch(filtered,/data-ship="fake"/);
 });
 test('original PR and DR ornaments preserve portraits and keep center transparent',()=>{
- assert.match(researchFrame(roster[0]),/research-frame-pr/);assert.match(researchFrame(roster[1]),/linearGradient/);
+ assert.match(researchFrame(roster[0]),/research-frame-pr/);assert.match(researchFrame(roster[1]),/research-frame-dr/);
  assert.match(renderShipRosterTile(roster[1]),/research-frame-dr/);assert.equal(researchFrame(roster[2]),'');
  assert.match(researchFrame(roster[0]),/aria-hidden="true"/);assert.doesNotMatch(researchFrame(roster[0]),/<image|<rect/);
 });

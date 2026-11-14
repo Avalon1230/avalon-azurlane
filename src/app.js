@@ -1,9 +1,11 @@
 import { researchShip, researchSelection, readResearchState, saveResearchState, missionCountdown, countdownLabel } from './research-ships.js';
 import { renderResearchModal } from './research-view.js';
 import { captureResearchDialog, restoreResearchDialog } from './research-dialog-state.js';
+const researchViews={};
 let researchSaved=readResearchState({getItem:key=>localStorage.getItem(key)}), researchOpen=false, researchSaveError=false;
 function activeResearch(){return researchShip(state.detail?.sourceId||SHIP_MAP.get(state.detail?.id)?.sourceId);}
-function updateResearch(patch){const r=activeResearch();if(!r)return;researchSaved[r.id]=researchSelection(r,{...researchSaved[r.id],...patch});researchSaveError=!saveResearchState({setItem:(key,value)=>localStorage.setItem(key,value)},researchSaved);render();}
+function refreshResearchPanel(){const el=document.activeElement,id=el?.id,level=el?.dataset?.action==='profile-level'?el.dataset.level:null,top=window.scrollY;render();if(level)[...document.querySelectorAll('[data-action="profile-level"]')].find(node=>node.dataset.level===level)?.focus({preventScroll:true});if(id)document.getElementById(id)?.focus({preventScroll:true});window.scrollTo(0,top);}
+function updateResearch(patch){const r=activeResearch();if(!r)return;researchSaved[r.id]=researchSelection(r,{...researchSaved[r.id],...patch});researchSaveError=!saveResearchState({setItem:(key,value)=>localStorage.setItem(key,value)},researchSaved);refreshResearchPanel();}
 function closeResearch(){researchOpen=false;render();document.querySelector('[data-action="research-open"]')?.focus();}
 import { MODES, FLEET_BLUEPRINTS, SHIPS, EQUIPMENT, SOURCES } from './catalog.js';
 import { SHIP_MAP, compatible, createWorkspace, assignShip, normalizeWorkspace, countAssigned, findFirstVacancy, slotsForFleet, wikiLookupUrl, searchCatalog, escapeHtml, refreshShipIndex } from './domain.js';
@@ -160,7 +162,7 @@ function saveTierBoards() {
   catch { notify('Cannot save tiers in this browser. Use Export JSON to back up your selections.'); }
 }
 function movePersonalTier(itemId, tier) {
-  if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Combat assessments come from published research, not personal placements.');
+  if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Combat assessments cannot be edited here. Use a personal board to arrange your favorites.');
   const eligible = catalogForBoard(state.tierBoard, SHIPS, EQUIPMENT);
   try {
     state.tierBoards = moveTierItem(state.tierBoards, state.tierBoard, itemId, tier, eligible);
@@ -169,7 +171,7 @@ function movePersonalTier(itemId, tier) {
   } catch (err) { notify(err.message); }
 }
 function exportTierBoard() {
-  if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Research assessments are published sources, not a personal board to export.');
+  if (TIER_BOARDS[state.tierBoard].readOnly) return notify('Switch to a personal board to export your own rankings.');
   const content = JSON.stringify({
     app: 'avalon-azurlane', format: 1, kind: 'personal-tier-board',
     boardId: state.tierBoard, exportedAt: new Date().toISOString(),
@@ -339,7 +341,7 @@ function renderDetails(gearId=null) {
   const rows=ship?[
     ['Nation / browse group',shipBrowseDisplayNation(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
   ]:[
-    ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Potentially equippable hulls',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Source ID',item.sourceId||'Editorial']
+    ['Nation of origin',nationForEquipment(item)],['Category',item.category],['Hull compatibility to check',possibleEquipmentHulls(item).join(', ')||'Not verified'],['Rarity',item.rarity||'Unverified'],['Highest enhancement reported',item.enhancement||'Not loaded'],['Source ID',item.sourceId||'Editorial']
   ];
   const statRows=!ship?Object.entries(item.stats||{}).map(([k,v])=>[k.replaceAll('_',' ').toUpperCase(),String(v)]):[];
   return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect ${ship?'ship':'equipment'}"><div class="picker-head"><div>${eyebrow(ship?'SHIP INTELLIGENCE':'EQUIPMENT INTELLIGENCE')}<h2>${E(item.name)}</h2></div><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div>
@@ -553,7 +555,7 @@ function render() {
     $('#app-content').innerHTML=renderShipProfile({
       ship, data, status:state.shipDetails.status, error:state.shipDetails.error,
       level:state.profileLevel,skinIndex:state.profileSkin,viewerOpen:state.artViewerOpen,artworkSkins,
-      wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel,researchState:researchSaved[recordId]||{}
+      wikiFacts:wikiFactsCache.get(recordId)||null,loadoutModel,researchState:researchSaved[recordId]||{},researchView:researchViews[recordId]||{}
     })+(researchOpen?renderResearchModal(recordId,researchSaved[recordId],Date.now(),researchSaveError):'')+(state.profileGearId?renderDetails(state.profileGearId):'')+
       (loadoutModel&&state.profileLoadoutPicker!==null
         ?renderLoadoutAlternatives(loadoutModel,state.profileLoadoutPicker,{query:state.profileLoadoutPickerQuery,limit:state.profileLoadoutVisibleCount,combatContext:(combatContext=combatScenario.select(loadoutModel.sourceId,state.profileLoadoutPicker,loadoutModel.mode))}):'')+
@@ -803,7 +805,7 @@ function handleAction(target) {
     return;
   }
   if (action === 'profile-back') { closeShipProfile();return; }
-  if (action === 'profile-level') {state.profileLevel=target.dataset.level||'level120';render();return;}
+  if (action === 'profile-level') {state.profileLevel=target.dataset.level||'level120';refreshResearchPanel();return;}
   if (action === 'profile-skin') {
     const next=Number(target.dataset.index);
     if (!Number.isSafeInteger(next) || next<0 || next>100) return;
@@ -1134,6 +1136,7 @@ document.addEventListener('change',event=>{
  const el=event.target,r=activeResearch();
  if(el.id==='ship-research-series'){state.shipResearchSeries=el.value;state.shipResearch=el.value!=='all'||state.shipResearch;state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();return;}
  if(!r)return;
+ if(el.id==='research-detailed'||el.id==='research-compare'){researchViews[r.id]={...researchViews[r.id],...(el.id==='research-detailed'?{detailed:el.checked}:{compare:el.value})};refreshResearchPanel();return;}
  if(el.id==='research-dev')updateResearch({dev:Number(el.value)});
  if(el.id==='research-fate')updateResearch({fate:Number(el.value)});
  if(el.dataset.researchMission){const id=Number(el.dataset.researchMission),s=researchSelection(r,researchSaved[r.id]);updateResearch({complete:el.checked?[...s.complete,id]:s.complete.filter(x=>x!==id)});}
