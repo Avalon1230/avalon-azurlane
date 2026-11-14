@@ -1,5 +1,7 @@
 # Current visual evidence
 
+[v0.8.10 recovered dock-reference refinement](v0810-dock/README.md) is the current evidence, including all five identities at mobile and desktop sizes, original-reference details and the static META decision.
+
 [v0.8.10 whole-card before/after comparisons](v0810/README.md) supersede the thumbnail-frame design below. The earlier screenshots are retained as historical evidence.
 
 ---
