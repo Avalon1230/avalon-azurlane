@@ -25,6 +25,7 @@ const equipment=Object.fromEntries(Array.from({length:110},(_,i)=>[String(99000+
 for(const item of Object.values(COMBAT_DATA.equipment))equipment[item.id]={name:item.name,type:item.type,rarity:item.rarity,stats:{},ship_type_forbidden:item.hull_restriction};
 const saved={'99901':{general:{0:'fer-24140'}}};
 mkdirSync('.audit/research-screens',{recursive:true});
+const mixedTiles=new Map();
 const browser=await chromium.launch({headless:true,channel:'chrome'});
 try{
  for(const width of (baseline?[]:[360,390,768,1280])){
@@ -138,6 +139,14 @@ try{
   await page.locator('.ship-roster-tile').filter({hasText:'Enterprise'}).waitFor();
   await assertOrdinaryPortrait(page,'.ship-roster-portrait');
   await page.locator('#catalog-search').fill('');
+  await page.evaluate(async()=>{
+   const {renderShipRosterTile}=await import('./src/ship-roster.js');
+   const test=document.createElement('div');test.id='mixed-name-test';test.className='ship-gallery';test.style.margin='16px';
+   test.innerHTML=['10706','29901','29904','970101','970701'].map(sourceId=>renderShipRosterTile({id:'lyc-'+sourceId,sourceId,name:'LongShipNameWithoutSpacesForWrapping',hull:'CL'})).join('');
+   document.querySelector('#catalog-start').prepend(test);
+  });
+  await assertMixedNames(page,'#mixed-name-test .ship-roster-tile');
+  await page.locator('#mixed-name-test').evaluate(el=>el.remove());
   await page.locator('[data-action="ship-research-toggle"]').click();
   await page.locator('#ship-research-series').selectOption('9');
   assert.equal(await page.locator('.ship-roster-tile').count(),5);
@@ -176,6 +185,9 @@ try{
   await page.waitForLoadState('networkidle');
   if(!baseline){if(label==='ordinary')await assertOrdinaryPortrait(page,tileSelector+' .ship-roster-portrait');else await assertFrameClearance(page,tileSelector);}
   await screenshotCard(page,tileSelector,'.audit/research-screens/'+prefix+label+'-'+width+'-roster.png');
+  if(!mixedTiles.has(width))mixedTiles.set(width,[]);
+  mixedTiles.get(width).push(await page.locator(tileSelector).evaluate(el=>el.outerHTML));
+  if(label==='ordinary')await captureMixedRoster(page,mixedTiles.get(width),width,prefix);
   console.log('PASS live '+label+' portrait and profile '+width+'px: '+image);
   await page.close();
  }
@@ -201,7 +213,7 @@ async function assertFrameClearance(page,selector='.ship-profile-overview'){
   if(getComputedStyle(portrait).padding!=='0px')throw Error('Portrait padding shrinks the artwork');
   if(el.matches('.ship-roster-tile')){
    const name=el.querySelector('.ship-roster-name').getBoundingClientRect(),footer=el.querySelector('.ship-roster-footer').getBoundingClientRect();
-   if(name.top<p.bottom-1||footer.top<name.bottom-1)throw Error('Dock name and hull rails must follow artwork without overlap');
+   if(name.bottom>p.top+1||footer.top<p.bottom-1)throw Error('Every roster must place name above artwork and hull below it');
    for(const pseudo of ['::before','::after']){
     const cap=getComputedStyle(el.querySelector('.ship-roster-footer'),pseudo);
     if(parseFloat(cap.width)>14||cap.pointerEvents!=='none')throw Error('Rail ornaments must be small and non-interactive');
@@ -235,3 +247,44 @@ async function assertWideDetails(page,width){
  assert.ok(size.gear>=size.layout-2,'equipment uses full summary width');
  assert.ok(size.skills>=size.layout-2,'skills use full summary width');
 }
+
+async function captureMixedRoster(page,tiles,width,prefix){
+ // Focused mixed-roster harness: unchanged production tiles collected from the live app.
+ // Only the surrounding catalog is reduced to these five subjects; no tile styles or data are changed.
+ await page.locator('#catalog-start').evaluate((el,tiles)=>{
+  el.innerHTML='<h2>Mixed-roster regression fixture</h2><p>PR / DR / META Super Rare / META Elite / ordinary</p><div class="catalog-grid ship-gallery">'+tiles.join('')+'</div>';
+ },tiles);
+ await page.locator('.ship-gallery').scrollIntoViewIfNeeded();
+ await page.waitForFunction(()=>[...document.querySelectorAll('.ship-gallery img')].every(i=>i.complete&&i.naturalWidth>0));
+ if(!baseline){
+  await assertMixedNames(page);
+  for(const tile of await page.locator('.ship-roster-tile.portrait-pr,.ship-roster-tile.portrait-dr,.ship-roster-tile.portrait-meta').all()){
+   await assertFrameClearance(page,'.ship-roster-tile[data-ship="'+await tile.getAttribute('data-ship')+'"]');
+  }
+ }
+ await screenshotCard(page,'.ship-gallery','.audit/research-screens/'+prefix+'mixed-'+width+'.png');
+ await page.screenshot({path:'.audit/research-screens/'+prefix+'mixed-page-'+width+'.png',fullPage:true});
+ if(!baseline){
+  // A long, unbroken synthetic name stresses wrapping identically across classifications.
+  await page.locator('.ship-roster-name').evaluateAll(els=>els.forEach(el=>el.textContent='LongShipNameWithoutSpacesForWrapping'));
+  await assertMixedNames(page);
+ }
+ console.log('PASS mixed roster '+width+'px: five identities, common name metrics, full art, long-name wrapping');
+}
+async function assertMixedNames(page,selector='.ship-roster-tile'){
+ const sizes=await page.locator(selector).evaluateAll(tiles=>tiles.map(el=>{
+  const name=el.querySelector('.ship-roster-name'),art=el.querySelector('.ship-roster-portrait'),foot=el.querySelector('.ship-roster-footer');
+  const n=name.getBoundingClientRect(),a=art.getBoundingClientRect(),f=foot.getBoundingClientRect(),c=el.getBoundingClientRect(),style=getComputedStyle(name);
+  if(n.top>c.top+2||n.bottom>a.top+1||a.bottom>f.top+1)throw Error('Name / art / hull order or overlap');
+  if(name.scrollWidth>name.clientWidth+1||name.scrollHeight>name.clientHeight+1)throw Error('Name clipping');
+  if(c.left<0||c.right>innerWidth+1)throw Error('Card overflow');
+  return {nameHeight:n.height,width:c.width,height:c.height,artHeight:a.height,font:style.fontSize,weight:style.fontWeight,line:style.lineHeight,padding:style.padding,align:style.justifyContent};
+ }));
+ for(const item of sizes){
+  for(const key of ['width','height','nameHeight','artHeight'])assert.ok(Math.abs(item[key]-sizes[0][key])<=2,'consistent mixed '+key+JSON.stringify(sizes));
+  for(const key of ['font','weight','line','padding','align'])assert.equal(item[key],sizes[0][key],'shared nameplate '+key);
+  assert.ok(item.artHeight>=109,'long names must not shrink portraits below mobile baseline');
+ }
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+}
+

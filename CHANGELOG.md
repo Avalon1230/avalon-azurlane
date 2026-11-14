@@ -476,3 +476,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Independent fan project. Historical ECTL is a reference only, not the name or endorsement of this site.
 - Ratings, automated fleet optimization, audited skill calculations, and complete equipment-acquisition data are not implemented.
 
+
+### v0.8.10 final QA correction
+
+- Restored top nameplates on every Ship Index roster identity, preserving dock frames, generous artwork and rarity styling. Added mixed-roster and long-name regression checks.

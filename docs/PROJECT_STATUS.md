@@ -2,7 +2,13 @@
 
 _Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active — v0.8.10 dock-reference refinement on PR #33
+## Active - v0.8.10 final nameplate correction (2026-11-15)
+- Resumed PR #33 at verified head `2cc2c5028d65f7085768ea6803141b4f817ebad3`. Do not merge.
+- Removed special-card name/art ordering overrides: every roster now follows the shared name / portrait / hull DOM order. Shared nameplate typography and spacing remain unchanged; special separators use inset shadows to avoid adding nameplate height. Dock frames, rarity colors, hero cards, ordinary styling and gameplay/state modules are unchanged.
+- Added DOM/CSS ordering regression and mixed-identity browser checks for common metrics, artwork bounds, wrapping and overflow. Screenshot harness collects unchanged production tiles from live searches and places the five subjects in the production grid; this arrangement is explicitly labeled as a regression fixture.
+- Baseline captures now use the starting head above. Verification/evidence pending CI; older evidence below remains historical.
+
+## Historical — v0.8.10 dock-reference refinement on PR #33
 
 - Resumed verified open head `df4a175165bf292c1c94c894405defd20b36cf91`; local tracked files matched GitHub. Independent QA review `5904060792` passed structure/functionality but left reference-based visual acceptance pending. Do not merge.
 - Recovered and visually inspected all three Commander-supplied in-game screenshots: `image(20261114-144552).png` (mixed research/ordinary dock), `image(20261114-144704).png` (META dock), and `download(3).png` (mixed dock). The earlier missing-reference limitation below is historical and now resolved.

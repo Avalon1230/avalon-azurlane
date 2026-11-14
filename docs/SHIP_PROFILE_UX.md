@@ -13,9 +13,9 @@ Research ships now have one **Research & Statistics** panel. Development, Fate S
 
 ## Dock-reference refinement — v0.8.10
 
-The three recovered Commander-supplied dock screenshots have now been inspected. Research cards use narrow metallic frames with small sculpted details and a lower dark name rail. META uses blackened framing, ember seams and a warm backing. White floral trims and top gems are oath decorations; account overlays are excluded from identity styling.
+The three recovered Commander-supplied dock screenshots have now been inspected. Research cards use narrow metallic frames with small sculpted details and a dark top nameplate. META uses blackened framing, ember seams and a warm backing. White floral trims and top gems are oath decorations; account overlays are excluded from identity styling.
 
-Special roster cards now place the name strip under the full-size artwork, above the hull rail. Small metallic end caps stay on the hull rail, not over faces. PR has gold articulated shoulders and rails; DR retains prismatic metal with a distinct shoulder contour. META has scorched dark/orange framing while pinned rarity retains violet Elite and gold Super Rare accents. The corresponding profile hero uses the same exterior metal and background vocabulary. Ordinary cards are untouched.
+All roster cards use the same name-at-top, artwork-in-center, hull-at-bottom order. Nameplates inherit the shared typography, padding, wrapping and minimum height; special-color separators use inset shadows so they do not add layout height. Small metallic end caps stay on the hull rail, not over faces. PR has gold articulated shoulders and rails; DR retains prismatic metal with a distinct shoulder contour. META has scorched dark/orange framing while pinned rarity retains violet Elite and gold Super Rare accents. The corresponding profile hero uses the same exterior metal and background vocabulary. Ordinary cards are untouched.
 
 The entire card remains the frame boundary. No portrait padding, new image crop, altered image fit, or smaller artwork area is introduced. The static META ember finish is intentional; animation is deferred to avoid perpetual effects across mobile rosters. Reference fidelity is interpretive, not a claim that AVALON uses authentic game frame assets.
 

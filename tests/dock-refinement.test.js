@@ -18,3 +18,15 @@ test('dock CSS keeps the static META shell scoped to verified identity',()=>{
  assert.match(dock,/\.portrait-meta-super-rare\{--meta-rarity:#f0d38e/);
  assert.match(dock,/pointer-events:none/);
 });
+
+test('all roster identities keep name, portrait and hull in shared DOM and CSS order',()=>{
+ for(const sourceId of ['10706','29901','29904','970101','970701']){
+  const tile=renderShipRosterTile({id:'lyc-'+sourceId,sourceId,name:'Long ship name for wrapping',hull:'CL'});
+  assert.ok(tile.indexOf('class="ship-roster-name"')<tile.indexOf('class="ship-roster-portrait"'));
+  assert.ok(tile.indexOf('class="ship-roster-portrait"')<tile.indexOf('class="ship-roster-footer"'));
+ }
+ const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
+ for(const rule of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)){
+  if(/ship-roster-(name|portrait)/.test(rule[1]))assert.doesNotMatch(rule[2],/\border\s*:/,'classification must not reorder name or art');
+ }
+});
