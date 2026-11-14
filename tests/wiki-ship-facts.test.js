@@ -131,8 +131,8 @@ test('wiki enriched profile shows Lv125, correct Lv120, max mounts, armor, artis
   assert.match(html,/ship-skill-icon/);
   assert.match(html,/ship-data-source/);
   assert.match(html,/Koumakan Wiki/);
-  assert.ok(html.indexOf('data-action="profile-back"')<html.indexOf('class="ship-profile-overview"'));
-  assert.ok(html.indexOf('data-action="add-ship"')<html.indexOf('class="ship-profile-overview"'));
+  assert.ok(html.indexOf('data-action="profile-back"')<html.indexOf('class="ship-profile-overview'));
+  assert.ok(html.indexOf('data-action="add-ship"')<html.indexOf('class="ship-profile-overview'));
   const overview=html.match(/<section class="ship-profile-overview">([\s\S]+?)<\/section>/)?.[1]||'';
   assert.doesNotMatch(overview,/profile-back|add-ship/);
   const at120=renderShipProfile({ship,data:info,wikiFacts:wiki,level:'level120'});

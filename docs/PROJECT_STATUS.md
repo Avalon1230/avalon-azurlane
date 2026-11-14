@@ -2,6 +2,16 @@
 
 _Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
+## Active — v0.8.10 whole-card identity corrective polish
+
+- Created `feat/ship-card-identity-v0810` from verified latest main `5445bc5763e4b7f30beb88840e8bc81d3a775714`, including merged PR #32 and its release handoff. Do not merge this correction without Commander authorization.
+- Corrected the design boundary: frames now belong to the entire Ship Index tile (name/artwork/hull) and the entire profile identity hero. The portrait containers have no identity class, frame child or decorative padding. Full ordinary-card artwork dimensions are restored.
+- PR uses restrained gold stepped corners; DR uses prismatic beveled corners; META uses asymmetric corners with verified Elite violet or Super Rare gold treatments. No repeating stripe pattern or oversized crown. Exact research/META identity and pinned rarity metadata remain unchanged.
+- Original in-game reference screenshots could not be visually recovered in this session. Search recovered written briefs; the two recent image records describe AVALON site screenshots, not original game references. Image materialization failed. Do not claim pixel-level comparison with the Commander's game screenshots. Reattachment was requested while implementation continued under the explicit whole-card requirements.
+- Regression checks require the frame to be a direct child of the complete card, its empty mask center to match the card bounds, zero portrait padding, no reduced artwork dimensions relative to ordinary styling, and consistent card height. Existing functional tests remain in place. CI captures both current cards and the exact merged v0.8.9 baseline using real catalogs/artwork for Neptune, Drake, Hunter META, Hiryuu META and Enterprise at 390/1280px.
+- Calculations, Dev/Fate comparisons, acquisition tracking, persisted six-slot loadouts, equipment logic, Fleet Lab and combat modules are unchanged. Full-width Equipment/Skills layout remains intact.
+- Verification and visual evidence: pending implementation CI and visual inspection. Next: independent visual QA against the original game references; no merge or deployment.
+
 ## Current release — v0.8.9 merged (2026-11-14)
 
 - **Release authority:** Following independent QA pass [review #5902558653](https://github.com/Avalon1230/avalon-azurlane/pull/32#pullrequestreview-5902558653), the Commander explicitly authorized merging [PR #32](https://github.com/Avalon1230/avalon-azurlane/pull/32). PR head `117a9b4289ca0a1eb21db7df3b3856ea3fba4886` was squash-merged into `main` as **`f69b56c1b85852992e937acd4a1b200250310fcb`**. Merge and main-head identity independently verified. PR #32 is closed. The QA and active-development sections below are **historical pre-merge notes**, not open work.

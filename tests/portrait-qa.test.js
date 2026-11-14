@@ -27,10 +27,10 @@ test('PR and DR emit separate silhouette identities and preserve an empty masked
  assert.match(researchFrame('29901'),/data-frame-shape="pr"/);
  assert.match(researchFrame('29904'),/data-frame-shape="dr"/);
  const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
- const shape=type=>css.match(new RegExp('\\.portrait-'+type+'\\{[^}]*--frame-shape:([^}]+)'))?.[1];
+ const shape=type=>css.match(new RegExp('\\.portrait-'+type+'\\{[^}]*--card-shape:([^}]+)'))?.[1];
  assert.ok(shape('pr'));assert.ok(shape('dr'));assert.notEqual(shape('pr'),shape('dr'));
  assert.match(css,/mask-composite:exclude/);
- assert.match(css,/padding:var\(--frame-top\) var\(--frame-side\) var\(--frame-bottom\)/);
+ assert.match(css,/inset:-4px/);
 });
 test('long panels follow the two-column summary instead of remaining in a narrow left column',()=>{
  const html=renderShipProfile({ship:{sourceId:'29901'},data:{id:'29901',names:{en:'Neptune'},stats:{},skills:[],slots:[]}});

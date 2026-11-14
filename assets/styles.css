@@ -1098,22 +1098,32 @@
 .research-dialog header{display:flex;justify-content:space-between;align-items:start;gap:12px;padding:18px;border-bottom:1px solid #344055;flex-shrink:0}.research-dialog h2{font-size:1.25rem;margin:7px 0 0}.research-dialog-body{overflow:auto;overscroll-behavior:contain;padding:18px;min-height:0}.research-dialog p{line-height:1.6}.research-dialog a{color:#a6d9ff}.research-missions{padding-left:24px}.research-missions li{padding:12px 0;border-bottom:1px solid #344055}.research-mission-heading{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}.research-missions small{color:#acbcd1}.research-dialog details{margin:20px 0}.research-dialog summary{cursor:pointer}.research-dialog-body>button{margin-top:12px}
 @media(max-width:600px){.research-overlay{padding:8px}.research-dialog{max-height:calc(100dvh - 16px)}.research-dialog header,.research-dialog-body{padding:12px}.research-dialog h2{font-size:1.05rem}.research-controls{align-items:stretch}.research-controls label{width:100%}}
 
-/* Original external silhouettes. The masked center excludes the entire artwork box. */
-.portrait-pr{--frame-top:22px;--frame-side:8px;--frame-bottom:9px;--frame-fill:linear-gradient(135deg,#fff1ba,#b88b39 48%,#ffdf88);--frame-shape:polygon(0 14px,24% 14px,24% 6px,36% 11px,50% 0,64% 11px,76% 6px,76% 14px,100% 14px,100% 100%,72% 100%,72% calc(100% - 3px),28% calc(100% - 3px),28% 100%,0 100%)}
-.portrait-dr{--frame-top:15px;--frame-side:13px;--frame-bottom:15px;--frame-fill:conic-gradient(from 30deg,#ffe4a3,#ffaada,#bca7ff,#8ee5ff,#b6ffd3,#ffe4a3);--frame-shape:polygon(13px 0,calc(100% - 13px) 0,100% 13px,100% 32%,calc(100% - 5px) 38%,100% 44%,100% calc(100% - 13px),calc(100% - 13px) 100%,13px 100%,0 calc(100% - 13px),0 44%,5px 38%,0 32%,0 13px)}
-.portrait-meta{--frame-top:10px;--frame-side:8px;--frame-bottom:10px;--frame-fill:#87939f;--frame-shape:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
-.portrait-meta-elite{--frame-fill:repeating-linear-gradient(135deg,#c3a4ef 0 3px,#65537b 3px 6px);--frame-shape:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px);--frame-side:10px}
-.portrait-meta-super-rare{--frame-top:18px;--frame-side:11px;--frame-bottom:18px;--frame-fill:repeating-linear-gradient(90deg,#ffdc9b 0 3px,#744333 3px 5px,#df975f 5px 8px);--frame-shape:polygon(0 7px,32% 7px,40% 0,60% 0,68% 7px,100% 7px,100% calc(100% - 7px),68% calc(100% - 7px),60% 100%,40% 100%,32% calc(100% - 7px),0 calc(100% - 7px))}
-.ship-roster-portrait:is(.portrait-pr,.portrait-dr,.portrait-meta),
-.ship-profile-overview .ship-profile-cover:is(.portrait-pr,.portrait-dr,.portrait-meta){padding:var(--frame-top) var(--frame-side) var(--frame-bottom);box-sizing:border-box;gap:0;border:0;border-radius:0;background:transparent!important;overflow:hidden}
-.research-frame{position:absolute;inset:0;z-index:0;pointer-events:none;box-sizing:border-box;padding:var(--frame-top) var(--frame-side) var(--frame-bottom);background:var(--frame-fill);clip-path:var(--frame-shape);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
-.ship-roster-portrait:is(.portrait-pr,.portrait-dr,.portrait-meta) .asset-media{min-height:0}
-:is(.portrait-pr,.portrait-dr,.portrait-meta)>.asset-media{position:relative;z-index:1;border-radius:0}
-.portrait-pr .asset-media{background:linear-gradient(145deg,#594326,#202532)!important}
-.portrait-dr .asset-media{background:linear-gradient(145deg,#354c67,#302b45)!important}
-.portrait-meta .asset-media{background:linear-gradient(145deg,#27323b,#141923)!important}
-.portrait-meta-elite .asset-media{background:radial-gradient(ellipse at bottom,#594070,#191728)!important}
-.portrait-meta-super-rare .asset-media{background:radial-gradient(ellipse at bottom,#84432c,#181820)!important}
+/* v0.8.10: classification belongs to the complete card, never the thumbnail.
+   The frame is out of flow; its empty center is the full card border box. */
+.portrait-pr{--card-edge:#dcb96d;--card-fill:linear-gradient(135deg,#fff0b9,#b88d48 55%,#e9ca85);--card-shape:polygon(0 7px,7px 7px,7px 0,calc(100% - 7px) 0,calc(100% - 7px) 7px,100% 7px,100% calc(100% - 7px),calc(100% - 7px) calc(100% - 7px),calc(100% - 7px) 100%,7px 100%,7px calc(100% - 7px),0 calc(100% - 7px))}
+.portrait-dr{--card-edge:#bedee9;--card-fill:linear-gradient(135deg,#c4ecf4,#d5c4eb 35%,#edc9cd 65%,#e7e9b5);--card-shape:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)}
+.portrait-meta{--card-edge:#9daab5;--card-fill:linear-gradient(140deg,#b2bec7,#536574);--card-shape:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.portrait-meta-elite{--card-edge:#bd9cde;--card-fill:linear-gradient(140deg,#dac3f0,#775992 60%,#c5a9df)}
+.portrait-meta-super-rare{--card-edge:#dfb575;--card-fill:linear-gradient(140deg,#f5deb1,#936d40 60%,#e6c086)}
+:is(.ship-roster-tile,.ship-profile-overview):is(.portrait-pr,.portrait-dr,.portrait-meta){position:relative;isolation:isolate;overflow:visible;border-color:var(--card-edge);border-radius:3px;box-shadow:0 2px 8px #0005}
+.research-frame{position:absolute;inset:-4px;z-index:2;pointer-events:none;box-sizing:border-box;padding:3px;background:var(--card-fill);clip-path:var(--card-shape);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
+.ship-roster-tile:is(.portrait-pr,.portrait-dr,.portrait-meta) .ship-roster-name{border-radius:2px 2px 0 0}
+.ship-roster-tile:is(.portrait-pr,.portrait-dr,.portrait-meta) .ship-roster-footer{border-radius:0 0 2px 2px;border-top:1px solid var(--card-edge)}
+.ship-roster-tile.portrait-pr .ship-roster-name{background:linear-gradient(110deg,#735a31,#b18d4c);color:#fff7df}
+.ship-roster-tile.portrait-dr .ship-roster-name{background:linear-gradient(110deg,#bbdbe7,#d7c9e6,#ecd7c5);color:#1b3043}
+.ship-roster-tile.portrait-meta .ship-roster-name{background:#27313e;border-bottom:1px solid var(--card-edge)}
+.ship-roster-tile.portrait-meta-elite .ship-roster-name{color:#ead9fc;background:linear-gradient(110deg,#30263f,#524063)}
+.ship-roster-tile.portrait-meta-super-rare .ship-roster-name{color:#ffebc6;background:linear-gradient(110deg,#332a25,#5e4931)}
+.ship-roster-tile.portrait-meta .ship-roster-footer{color:var(--card-edge);background:#151c27}
+.portrait-meta-elite .ship-roster-portrait{background:radial-gradient(ellipse at bottom,#68537e,#272335)!important}
+.portrait-meta-super-rare .ship-roster-portrait{background:radial-gradient(ellipse at bottom,#806347,#292725)!important}
+.ship-profile-overview.portrait-pr{background:linear-gradient(120deg,#27313b,#10273b 65%)}
+.ship-profile-overview.portrait-dr{background:linear-gradient(120deg,#29364a,#10273b 65%)}
+.ship-profile-overview.portrait-meta-elite{background:linear-gradient(120deg,#302b41,#10273b 70%)}
+.ship-profile-overview.portrait-meta-super-rare{background:linear-gradient(120deg,#37302c,#10273b 70%)}
+.ship-profile-overview:is(.portrait-pr,.portrait-dr,.portrait-meta) .ship-profile-cover{border:0;border-radius:2px;padding:0}
+.ship-profile-overview.portrait-meta-elite .ship-profile-cover{background:radial-gradient(ellipse at bottom,#68537e,#272335)}
+.ship-profile-overview.portrait-meta-super-rare .ship-profile-cover{background:radial-gradient(ellipse at bottom,#806347,#292725)}
 /* Keep the compact top/loadout untouched; give long equipment and skill panels full width. */
 .ship-profile-details{display:grid;gap:17px;margin-top:17px;min-width:0}
 @media(min-width:1181px){
