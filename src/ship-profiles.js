@@ -1,6 +1,6 @@
 import { researchProgression, RESEARCH_LEVELS } from './research-progression.js';
 import { renderResearchStats, renderResearchGear, renderResearchSkills } from './research-stats-view.js';
-import { researchShip, researchFrame, portraitIdentity } from './research-ships.js';
+import { researchShip, researchFrame, portraitClasses } from './research-ships.js';
 import { imageMarkup } from './media.js';
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { trustedWikiImage } from './wiki-artwork.js';
@@ -130,7 +130,7 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=
       '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
   // Never replace the small shipyard portrait when changing skin art.
   return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview">' +
-    '<div class="ship-profile-cover '+(portraitIdentity(ship||data)?'portrait-'+portraitIdentity(ship||data):'')+'">' + imageMarkup(ship || data,'ship','asset-profile') + researchFrame(ship || data) + '</div>' +
+    '<div class="ship-profile-cover '+portraitClasses(ship||data)+'">' + imageMarkup(ship || data,'ship','asset-profile') + researchFrame(ship || data) + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
@@ -296,9 +296,9 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       [research?'Research & Statistics':'Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],...(progression?[['Progression','#ship-profile-progress']]:[]),['Acquisition','#ship-profile-acquire']]
       .map(([label,href])=>'<button type="button" data-action="profile-jump" data-section="'+E(href.slice(1))+'">'+E(label)+'</button>').join('')+'</nav>'+
     '<div class="ship-profile-layout"><div class="ship-profile-main">'+
-    (researchModel?renderResearchStats(researchModel,level,ship||data,researchState,researchView)+renderResearchGear(researchModel)+renderResearchSkills(researchModel):statPanel(data,level,wiki)+gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki))+
+    (researchModel?renderResearchStats(researchModel,level,ship||data,researchState,researchView):statPanel(data,level,wiki))+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data,wiki)+progression+sourcePanel(data,ship,wiki)+
-    '</div></div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
+    '</div></div><div class="ship-profile-details">'+(researchModel?renderResearchGear(researchModel)+renderResearchSkills(researchModel):gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki))+'</div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
 }
 

@@ -18,6 +18,7 @@ jobs:
       - run: npm run test:combat-source
       - run: npm run test:research-source
       - run: node scripts/verify-research-progression.mjs
+      - run: node scripts/verify-portrait-source.mjs
   viewport:
     runs-on: ubuntu-24.04
     permissions:

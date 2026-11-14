@@ -1,3 +1,4 @@
+import { META_PORTRAIT_RARITIES } from './portrait-rarity.js';
 import { SHIP_NATION_BY_SOURCE_ID } from './catalog-filters.js';
 import { RESEARCH_MANIFEST } from './research-manifest.js';
 
@@ -52,7 +53,18 @@ export function portraitIdentity(ship) {
  const id=String(typeof ship==='object'&&ship!==null?ship.sourceId??ship.id:ship??'');
  return SHIP_NATION_BY_SOURCE_ID[id]==='META'?'meta':'';
 }
-export function researchFrame(ship) {
+// Rarity styling is pinned by source identity, not inferred from a name or supplied label.
+export function portraitTreatment(ship) {
  const identity=portraitIdentity(ship);
- return identity?'<span class="research-frame research-frame-'+identity+'" aria-hidden="true"></span>':'';
+ if(identity!=='meta')return identity;
+ const id=String(typeof ship==='object'&&ship!==null?ship.sourceId??ship.id:ship??'');
+ return {'Elite':'meta-elite','Super Rare':'meta-super-rare'}[META_PORTRAIT_RARITIES[id]] || 'meta';
+}
+export function portraitClasses(ship) {
+ const identity=portraitIdentity(ship),treatment=portraitTreatment(ship);
+ return identity?'portrait-'+identity+(treatment!==identity?' portrait-'+treatment:''):'';
+}
+export function researchFrame(ship) {
+ const identity=portraitIdentity(ship),treatment=portraitTreatment(ship);
+ return identity?'<span class="research-frame research-frame-'+identity+(treatment!==identity?' research-frame-'+treatment:'')+'" data-frame-shape="'+treatment+'" aria-hidden="true"></span>':'';
 }

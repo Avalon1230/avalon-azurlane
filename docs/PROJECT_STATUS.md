@@ -1,6 +1,17 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-13 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## v0.8.9 — independent QA corrections (2026-11-14)
+
+- Resumed open PR #32 from verified head `9bb72ce2d106558bc46167e5814391a92b91c511`; all local tracked files matched GitHub before editing. Addressing [review 5886325699](https://github.com/Avalon1230/avalon-azurlane/pull/32#pullrequestreview-5886325699). Do not merge.
+- PR now has a raised crown/stepped-foot silhouette; DR has a faceted octagonal outline with notched side rails. The entire artwork rectangle is excluded from each frame by a CSS mask, with reserved exterior padding. No overlay paths touch the art.
+- META identity still requires the exact source-ID nationality map. New `portrait-rarity.js` pins the rarity of 66 META IDs to Lycoris commit `8be1af11a0d4257ef57a92ada0ff12cc9e4dc97e`. Elite uses violet chamfered framing/background; Super Rare uses heavier copper/gold rails, raised end caps and an ember background. Unknown rarities use a neutral frame. Labels supplied by a caller cannot override pinned rarity.
+- Long Equipment/Skills panels now follow the two-column summary at full desktop width, with compact internal two-column lists. The top identity/loadout/artwork layout is unchanged. Mobile remains one column.
+- Missing Fate records now say “We don’t have Fate Simulation details for this ship yet.” Dev-locked Fate still explains Dev 30; absent source data is never promoted to a claim that the game feature is unreleased.
+- Expanded regression coverage: 273 Node tests; four research app sessions now check both META rarities and ordinary ships in roster/profile, actual PR/DR silhouette differences, masked artwork clearance and unchanged ordinary framing. Ten live desktop/mobile sessions cover Neptune, Drake, Hiryuu META (Super Rare), Hunter META (Elite) and Enterprise (ordinary), including loaded portrait, gallery, roster captures and full-width detail assertions. New CI checks validate the pinned META rarity extract against the upstream source.
+- Local checks: 273/273 Node tests, 63 responsive cases, 10 combat sessions, four research sessions, syntax/generated data passed. Remote source checks and refreshed live artwork evidence are awaiting this correction's CI. Calculators, research data, comparisons, acquisition tracking, saved equipment, six-slot loadouts and PR #31 architecture are preserved.
+- Next: inspect refreshed real-art evidence and return the new head for independent QA. No merge or deployment is authorized.
 
 ## Active development — v0.8.9 ship profile UX (2026-11-13)
 

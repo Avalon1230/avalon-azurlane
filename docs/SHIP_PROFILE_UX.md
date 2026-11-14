@@ -15,12 +15,18 @@ Research ships now have one **Research & Statistics** panel. Development, Fate S
 
 PR/DR identity still comes from the exact research manifest. META identity comes from the existing `SHIP_NATION_BY_SOURCE_ID` nationality map; no name matching, ID-prefix inference or rarity guessing. Existing mapped META ships receive the treatment; unknown new IDs wait for metadata updates.
 
-Portrait containers reserve 7px of padding around artwork. Border decorations occupy only that outer area. PR uses gold, DR uses a prismatic surround, and META uses dark diagonal metal with a copper double border and ember background. These are original AVALON treatments, not claimed official game frames. Original image URLs, artwork gallery and rarity labels remain intact.
+Portrait containers reserve at least 7px around artwork, with additional headroom for silhouettes. A CSS mask excludes the complete artwork rectangle from decoration. PR has a raised crown and stepped feet; DR has beveled corners and notched side rails, visibly distinct even in grayscale. META Elite uses a violet chamfered frame/background, while Super Rare uses heavier copper/gold rails, raised end caps and an ember background. META rarity comes from the exact-ID pinned extract in `portrait-rarity.js`, validated by `scripts/verify-portrait-source.mjs`; unknown rarity stays neutral. These are original AVALON treatments, not claimed official game frames. Original image URLs, artwork gallery and rarity labels remain intact.
+
+## Desktop detail layout and copy
+
+Equipment and Skills follow the summary columns and use the full available width. Their lists use two columns on desktop and one on mobile, while the compact six-slot planner is unchanged.
+
+Missing Fate data means “We don’t have Fate Simulation details for this ship yet.” A known Dev requirement is described separately. “Not yet released” is reserved for current, independently verified release evidence; no such release assertion is introduced by this patch.
 
 ## Verification and boundaries
 
 Unit tests cover exact same-level deltas, checkpoints/intermediates, impossible baselines, Fate skill changes, shared-panel structure, identity and storage immutability. Browser tests exercise controls and focus, intermediate reloads, modal scroll/focus and mission persistence, combat guards, saved gear, six slots and profile frame clearance at 360/390/768/1280px. Existing responsive and combat tests remain required.
 
-Live CI captures PR, DR and META profiles and portrait crops at 390/1280px, requiring each original portrait to load. Local fixture runs may use `SKIP_LIVE_ART=1` when outbound network is blocked; that does not certify real artwork. CI runs the live checks without that flag.
+Live CI captures PR, DR, Super Rare META, Elite META and ordinary Enterprise profiles, portrait crops and roster tiles at 390/1280px, requiring each original portrait to load. Local fixture runs may use `SKIP_LIVE_ART=1` when outbound network is blocked; that does not certify real artwork. CI runs the live checks without that flag.
 
 The combat model remains Dev 30 / Fate 0. No research-aware damage calculation, new source data, inventory optimizer or battle simulator is introduced. The source and simulation contract in PR #31 is unchanged.
