@@ -129,8 +129,8 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=
     '<dl class="ship-profile-facts">'+knownFacts.map(([key,value])=>
       '<div><dt>'+E(key)+'</dt><dd>'+E(value)+'</dd></div>').join('')+'</dl>':'';
   // Never replace the small shipyard portrait when changing skin art.
-  return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview">' +
-    '<div class="ship-profile-cover '+portraitClasses(ship||data)+'">' + imageMarkup(ship || data,'ship','asset-profile') + researchFrame(ship || data) + '</div>' +
+  return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview '+portraitClasses(ship||data)+'">' + researchFrame(ship||data) +
+    '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +

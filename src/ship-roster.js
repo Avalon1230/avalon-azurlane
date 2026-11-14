@@ -13,10 +13,11 @@ export function renderShipRosterTile(ship) {
   const rarity=RARITY_CLASS[ship.rarity] || 'unknown';
   const name=ship.name || 'Unknown';
   const hull=ship.hull || 'OTHER';
-  return '<button type="button" class="ship-roster-tile rarity-'+rarity+'" '+
+  const identity=portraitClasses(ship);
+  return '<button type="button" class="ship-roster-tile rarity-'+rarity+(identity?' '+identity:'')+'" '+
     'data-action="ship-details" data-ship="'+E(ship.id)+'" aria-label="View '+E(name)+' ship profile">'+
     '<span class="ship-roster-name">'+E(name)+'</span>'+
-    '<span class="ship-roster-portrait '+portraitClasses(ship)+'">'+imageMarkup(ship,'ship','asset-roster-ship')+researchFrame(ship)+'</span>'+
+    '<span class="ship-roster-portrait">'+imageMarkup(ship,'ship','asset-roster-ship')+'</span>'+
     '<span class="ship-roster-footer"><span>'+E(hull)+'</span><span class="ship-roster-open" aria-hidden="true">↗</span></span>'+
-    '</button>';
+    researchFrame(ship)+'</button>';
 }

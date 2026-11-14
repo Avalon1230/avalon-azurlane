@@ -11,7 +11,21 @@ Research ships now have one **Research & Statistics** panel. Development, Fate S
 - A level/stage combination the existing calculator cannot support remains unavailable. A missing comparison does not become zero. Fate requires Dev 30 and the existing five-stage source record.
 - Detailed/comparison display preferences are session-only and keyed by ship. Existing `avalon.research.v1` state and mission IDs are unchanged. Progression selection, mission completion and start timestamps remain persisted. Gear storage is unchanged.
 
-## Portrait identity
+## Dock-reference refinement — v0.8.10
+
+The three recovered Commander-supplied dock screenshots have now been inspected. Research cards use narrow metallic frames with small sculpted details and a lower dark name rail. META uses blackened framing, ember seams and a warm backing. White floral trims and top gems are oath decorations; account overlays are excluded from identity styling.
+
+Special roster cards now place the name strip under the full-size artwork, above the hull rail. Small metallic end caps stay on the hull rail, not over faces. PR has gold articulated shoulders and rails; DR retains prismatic metal with a distinct shoulder contour. META has scorched dark/orange framing while pinned rarity retains violet Elite and gold Super Rare accents. The corresponding profile hero uses the same exterior metal and background vocabulary. Ordinary cards are untouched.
+
+The entire card remains the frame boundary. No portrait padding, new image crop, altered image fit, or smaller artwork area is introduced. The static META ember finish is intentional; animation is deferred to avoid perpetual effects across mobile rosters. Reference fidelity is interpretive, not a claim that AVALON uses authentic game frame assets.
+
+## Historical whole-card identity — v0.8.10 structural correction
+
+The Commander clarified that the frame belongs around the **complete roster tile and profile hero**, not the portrait container. This supersedes the v0.8.9 thumbnail-frame contract below. The name, artwork and hull information share one exterior boundary. Portraits retain ordinary-card dimensions, no frame padding and no nested decorative frame. PR has restrained gold stepped corners, DR prismatic bevels, and META asymmetric corners with pinned Elite violet/Super Rare gold treatment. The original in-game screenshots remain unavailable for direct visual comparison; no exact visual-match claim is made.
+
+Browser tests compare artwork dimensions and whole-card height with identity styling removed, check the exterior mask against the full card, and preserve ordinary styling. Live screenshots capture full heroes and roster tiles with their exterior perimeter at 390/1280px, alongside the same ships rendered from merged v0.8.9. Independent visual acceptance is required in addition to passing tests.
+
+## Historical portrait identity — v0.8.9
 
 PR/DR identity still comes from the exact research manifest. META identity comes from the existing `SHIP_NATION_BY_SOURCE_ID` nationality map; no name matching, ID-prefix inference or rarity guessing. Existing mapped META ships receive the treatment; unknown new IDs wait for metadata updates.
 

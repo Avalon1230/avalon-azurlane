@@ -2,6 +2,14 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.10] - 2026-11-14
+
+### Changed
+- Refine research and META whole-card shells against recovered in-game dock references: metallic research rails, integrated lower name/hull strips and static scorched META framing, without oath/account overlays.
+- Move PR, DR and source-verified META identity frames to the perimeter of the complete roster tile and profile hero, restoring the artwork area used by ordinary cards.
+- Replace oversized crowns and striped thumbnail surrounds with restrained exterior rails and distinct stepped, beveled and asymmetric card silhouettes.
+- Add whole-card geometry regression checks and same-ship before/after desktop/mobile real-art screenshots against merged v0.8.9.
+
 ## [0.8.9] - 2026-11-13
 
 ### Changed

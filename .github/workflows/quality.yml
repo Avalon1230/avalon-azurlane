@@ -33,6 +33,12 @@ jobs:
       - run: node scripts/viewport-smoke.mjs
       - run: node scripts/combat-interaction-smoke.mjs
       - run: node scripts/research-interaction-smoke.mjs
+      - name: Capture pre-refinement PR head for visual comparison
+        run: |
+          git fetch origin df4a175165bf292c1c94c894405defd20b36cf91 --depth=1
+          mkdir -p .audit/card-before
+          git archive df4a175165bf292c1c94c894405defd20b36cf91 | tar -x -C .audit/card-before
+          CARD_BASELINE=1 node scripts/research-interaction-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
