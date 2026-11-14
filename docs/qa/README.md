@@ -1,3 +1,9 @@
+# Current visual evidence
+
+[v0.8.10 whole-card before/after comparisons](v0810/README.md) supersede the thumbnail-frame design below. The earlier screenshots are retained as historical evidence.
+
+---
+
 # v0.8.9 — independent QA correction evidence
 
 Captured from the actual application using live catalogs and original game artwork in [passing CI 43561382550](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43561382550), implementation commit `b0685e7e7cb65a65e0050381ed09e15965ff8a1d`. All ten live desktop/mobile sessions passed without fixture catalog or image routing. Each session requires loaded profile, gallery and roster artwork. These captures supersede the earlier v0.8.9 evidence.
