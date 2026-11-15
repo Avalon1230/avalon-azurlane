@@ -1,5 +1,7 @@
 # Current visual evidence
 
+[META rarity correction: refreshed CI screenshots and pending visual review](v0810-meta-rarity/README.md) is the latest handoff. Earlier reviewed images below predate the violet/gold background correction.
+
 [Final consistent-top-nameplate correction](v0810-nameplates/README.md) supersedes the placement shown below. Includes mixed-identity desktop/mobile comparisons and unchanged ordinary/profile checks.
 
 [v0.8.10 recovered dock-reference refinement](v0810-dock/README.md) is the current evidence, including all five identities at mobile and desktop sizes, original-reference details and the static META decision.
