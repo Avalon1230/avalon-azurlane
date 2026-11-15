@@ -1,5 +1,7 @@
 # Current visual evidence
 
+[Unified META bronze frames](v0810-bronze/README.md) is the latest visually inspected evidence: desktop/mobile roster/hero comparisons, mixed rosters, retained rarity backgrounds and unchanged PR/DR/ordinary controls.
+
 [META rarity correction: refreshed CI screenshots and pending visual review](v0810-meta-rarity/README.md) is the latest handoff. Earlier reviewed images below predate the violet/gold background correction.
 
 [Final consistent-top-nameplate correction](v0810-nameplates/README.md) supersedes the placement shown below. Includes mixed-identity desktop/mobile comparisons and unchanged ordinary/profile checks.
@@ -43,3 +45,4 @@ These are cropped **actual application screenshots**, captured by `scripts/resea
 | ![Neptune PR ornament](research-pr-portrait.png) | ![Drake DR ornament](research-dr-portrait.png) |
 
 Portrait sources: [Neptune](https://raw.githubusercontent.com/iujab/azurlane-images/main/thumbnails/29901.png), [Drake](https://raw.githubusercontent.com/iujab/azurlane-images/main/thumbnails/29904.png). Official game artwork is hosted by a community mirror; artwork rights remain with the game rights holders. These small screenshots document QA appearance, not a reusable asset pack or a new artwork license. The original AVALON SVG ornaments are separate from the underlying portraits and contain no REGAL graphics.
+
