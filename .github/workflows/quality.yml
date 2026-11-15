@@ -33,11 +33,11 @@ jobs:
       - run: node scripts/viewport-smoke.mjs
       - run: node scripts/combat-interaction-smoke.mjs
       - run: node scripts/research-interaction-smoke.mjs
-      - name: Capture pre-META-palette PR head for visual comparison
+      - name: Capture pre-unified-bronze PR head for visual comparison
         run: |
-          git fetch origin a0f60302b840484cf33c8aac20771abc208bf8ea --depth=1
+          git fetch origin 62da901c0f50941bc183ab4903580fb99cdc0469 --depth=1
           mkdir -p .audit/card-before
-          git archive a0f60302b840484cf33c8aac20771abc208bf8ea | tar -x -C .audit/card-before
+          git archive 62da901c0f50941bc183ab4903580fb99cdc0469 | tar -x -C .audit/card-before
           CARD_BASELINE=1 node scripts/research-interaction-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()

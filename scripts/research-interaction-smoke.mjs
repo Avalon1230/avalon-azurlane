@@ -299,9 +299,29 @@ async function assertMetaPalette(page,selector){
   const hueMatches=hex=>{const [r,g,b]=rgb(hex);return elite?b>r&&r>g:r>g&&g>b;};
   const back=style.getPropertyValue('--meta-back'),base=style.getPropertyValue('--meta-base'),rail=style.getPropertyValue('--meta-rail');
   const edge=style.getPropertyValue('--card-edge'),light=style.getPropertyValue('--card-light');
-  for(const color of [back,rail,edge,light])if(!hueMatches(color))throw Error('META rarity must color broad backgrounds and exterior accents');
+  for(const color of [back,rail])if(!hueMatches(color))throw Error('META rarity must color broad backgrounds and nameplates');
   const frame=getComputedStyle(el.querySelector(':scope > .research-frame'));
-  for(const color of [edge,light])if(!frame.backgroundImage.includes(cssRgb(color)))throw Error('META frame ignores rarity accent');
+  if(edge.trim()!=='#56301f'||light.trim()!=='#e08a43')throw Error('META exterior must share scorched bronze');
+  const exterior=()=>{
+   const f=getComputedStyle(el.querySelector(':scope > .research-frame')),card=getComputedStyle(el);
+   const footer=el.querySelector('.ship-roster-footer');
+   const out=[f.backgroundImage,f.clipPath,card.borderColor,card.boxShadow];
+   if(footer){
+    out.push(getComputedStyle(footer).borderBottomColor);
+    for(const pseudo of ['::before','::after']){
+     const cap=getComputedStyle(footer,pseudo);out.push(cap.backgroundImage,cap.borderColor,cap.borderTopColor,cap.boxShadow,cap.borderRadius);
+    }
+   }
+   return out;
+  };
+  const original=exterior(),classes=el.className,bounds=el.getBoundingClientRect();
+  el.classList.remove('portrait-meta-elite','portrait-meta-super-rare');
+  el.classList.add(elite?'portrait-meta-super-rare':'portrait-meta-elite');
+  const alternate=exterior(),other=getComputedStyle(el).getPropertyValue('--meta-back'),otherBounds=el.getBoundingClientRect();
+  el.className=classes;
+  if(JSON.stringify(original)!==JSON.stringify(alternate))throw Error('META rarities must share identical exterior rails and ornaments');
+  if(other===back)throw Error('META rarity backgrounds must remain distinct');
+  if(bounds.width!==otherBounds.width||bounds.height!==otherBounds.height)throw Error('META rarity must not change card dimensions');
   const roster=el.matches('.ship-roster-tile');
   const background=getComputedStyle(roster?el.querySelector('.ship-roster-portrait'):el).backgroundImage;
   if(!background.includes(cssRgb(back))||!background.includes(cssRgb(base)))throw Error('META backing ignores rarity');

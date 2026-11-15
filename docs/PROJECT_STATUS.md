@@ -2,7 +2,13 @@
 
 _Last updated: 2026-11-15 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active - v0.8.10 META rarity palette correction (2026-11-15)
+## Active - v0.8.10 unified META bronze exterior (2026-11-15)
+- Resumed PR #33 at `62da901c0f50941bc183ab4903580fb99cdc0469`. Independent review [5908619918](https://github.com/Avalon1230/avalon-azurlane/pull/33#pullrequestreview-5908619918) accepted the preceding rarity backgrounds and completed its previously blocked visual review. The Commander's later instruction unifies exterior identity; do not merge.
+- All META ships now share the original scorched-bronze frame fill, rail colors and corner ornaments. Approved violet/charcoal Elite and dark-gold/amber Super Rare backgrounds/nameplates remain unchanged. Top name / full portrait / hull order, silhouettes and dimensions are preserved.
+- Tests compare frame, card border, hero rails, footer rails and corner ornament styles while switching rarity on the same element; backgrounds must differ and dimensions remain equal. Source-ID, contrast, static motion, wrapping and full-card geometry checks remain.
+- No PR/DR/ordinary styling or gameplay/state code changed. Verification and real-art visual inspection pending CI.
+
+## Historical - v0.8.10 META rarity palette correction (2026-11-15)
 - Resumed PR #33 at verified head `a0f60302b840484cf33c8aac20771abc208bf8ea`; read independent review [5908517822](https://github.com/Avalon1230/avalon-azurlane/pull/33#pullrequestreview-5908517822). Visual sign-off is held for insufficient META rarity separation; do not merge.
 - META Elite uses violet/charcoal backing and purple exterior highlights; Super Rare uses dark gold/amber backing and gold highlights. Broad name/footer strips, portrait backing and hero backgrounds share source-ID-derived rarity tokens; blackened geometry and static treatment remain.
 - Top names, full-card framing, artwork dimensions, PR/DR/ordinary designs and hero structure are unchanged. No research, acquisition, loadout, Fleet Lab or combat modules changed.
@@ -301,3 +307,4 @@ When a new conversation starts: retrieve relevant prior decisions, inspect lates
 
 - Confirm images for New Jersey (`10517`), Amagi(CV) (`30715`), and other static/Live2D skins in a browser. Static alternatives may not exist for every source painting; do not claim visual completeness without review.
 - On mobile and desktop, confirm artwork lightbox opens, closes and enters/exits fullscreen; the base ship portrait must never change with skin selection.
+

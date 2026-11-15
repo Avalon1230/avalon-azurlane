@@ -36,3 +36,12 @@ test('META palette follows verified source identity despite misleading display n
  assert.equal(portraitTreatment({sourceId:'970701',name:'Hunter META',rarity:'Elite'}),'meta-super-rare');
  assert.equal(portraitTreatment({sourceId:'10706',name:'Hunter META',rarity:'Elite'}),'');
 });
+
+test('META rarity rules cannot override the shared exterior frame',()=>{
+ const css=readFileSync(new URL('../assets/styles.css',import.meta.url),'utf8');
+ for(const rule of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)){
+  if(/\.portrait-meta-(elite|super-rare)/.test(rule[1])){
+   assert.doesNotMatch(rule[2],/--card-(?:edge|light|dark|fill|shape)\s*:/);
+  }
+ }
+});

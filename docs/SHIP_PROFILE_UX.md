@@ -48,3 +48,7 @@ The combat model remains Dev 30 / Fate 0. No research-aware damage calculation, 
 ## META rarity palette correction - v0.8.10
 
 Pinned source-ID rarity now colors the broad card backing as well as text: Elite uses deep violet/charcoal with purple seams, while Super Rare uses dark gold/amber with gold seams. The nameplate, footer, portrait backing and profile hero share the palette. Both retain the same blackened exterior silhouette and static finish. Top-nameplate geometry and all other identities are unchanged.
+
+## Unified META bronze exterior - final v0.8.10 hierarchy
+
+The exterior frame communicates META identity: every rarity shares scorched bronze, burnt-orange seams and blackened-metal corners. Rarity is communicated by the approved violet/charcoal Elite or dark-gold/amber Super Rare backgrounds and nameplates, using verified source IDs. The earlier rarity-colored exterior treatment is superseded. Geometry, artwork space, top names and static motion remain unchanged.
