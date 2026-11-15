@@ -1,3 +1,17 @@
+# Current visual evidence
+
+[Unified META bronze frames](v0810-bronze/README.md) is the latest visually inspected evidence: desktop/mobile roster/hero comparisons, mixed rosters, retained rarity backgrounds and unchanged PR/DR/ordinary controls.
+
+[META rarity correction: refreshed CI screenshots and pending visual review](v0810-meta-rarity/README.md) is the latest handoff. Earlier reviewed images below predate the violet/gold background correction.
+
+[Final consistent-top-nameplate correction](v0810-nameplates/README.md) supersedes the placement shown below. Includes mixed-identity desktop/mobile comparisons and unchanged ordinary/profile checks.
+
+[v0.8.10 recovered dock-reference refinement](v0810-dock/README.md) is the current evidence, including all five identities at mobile and desktop sizes, original-reference details and the static META decision.
+
+[v0.8.10 whole-card before/after comparisons](v0810/README.md) supersede the thumbnail-frame design below. The earlier screenshots are retained as historical evidence.
+
+---
+
 # v0.8.9 — independent QA correction evidence
 
 Captured from the actual application using live catalogs and original game artwork in [passing CI 43561382550](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43561382550), implementation commit `b0685e7e7cb65a65e0050381ed09e15965ff8a1d`. All ten live desktop/mobile sessions passed without fixture catalog or image routing. Each session requires loaded profile, gallery and roster artwork. These captures supersede the earlier v0.8.9 evidence.
@@ -31,3 +45,4 @@ These are cropped **actual application screenshots**, captured by `scripts/resea
 | ![Neptune PR ornament](research-pr-portrait.png) | ![Drake DR ornament](research-dr-portrait.png) |
 
 Portrait sources: [Neptune](https://raw.githubusercontent.com/iujab/azurlane-images/main/thumbnails/29901.png), [Drake](https://raw.githubusercontent.com/iujab/azurlane-images/main/thumbnails/29904.png). Official game artwork is hosted by a community mirror; artwork rights remain with the game rights holders. These small screenshots document QA appearance, not a reusable asset pack or a new artwork license. The original AVALON SVG ornaments are separate from the underlying portraits and contain no REGAL graphics.
+

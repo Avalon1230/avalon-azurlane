@@ -7,7 +7,8 @@ import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 import {RESEARCH_MANIFEST} from '../src/research-manifest.js';
 import {COMBAT_DATA} from '../src/combat-data.js';
-const root=fileURLToPath(new URL('..',import.meta.url)).replace(/[\\/]$/,'');
+const baseline=process.env.CARD_BASELINE==='1';
+const root=baseline?resolve('.audit/card-before'):fileURLToPath(new URL('..',import.meta.url)).replace(/[\\/]$/,'');
 const server=createServer((req,res)=>{
  const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname),file=resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
  if(!file.startsWith(root+sep)){res.writeHead(403).end();return;}
@@ -24,9 +25,10 @@ const equipment=Object.fromEntries(Array.from({length:110},(_,i)=>[String(99000+
 for(const item of Object.values(COMBAT_DATA.equipment))equipment[item.id]={name:item.name,type:item.type,rarity:item.rarity,stats:{},ship_type_forbidden:item.hull_restriction};
 const saved={'99901':{general:{0:'fer-24140'}}};
 mkdirSync('.audit/research-screens',{recursive:true});
+const mixedTiles=new Map();
 const browser=await chromium.launch({headless:true,channel:'chrome'});
 try{
- for(const width of [360,390,768,1280]){
+ for(const width of (baseline?[]:[360,390,768,1280])){
   const page=await browser.newPage({viewport:{width,height:800}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(value=>{if(!localStorage.getItem('avalon.azurlane.loadouts.v1'))localStorage.setItem('avalon.azurlane.loadouts.v1',JSON.stringify(value));},saved);
   await page.route(/^https?:\/\//,route=>{const u=route.request().url();if(u.startsWith(url))return route.continue();const payload=u.endsWith('/ship-list.json')?ships:u.endsWith('/ships.json')?details:u.endsWith('/equipment.json')?equipment:u.endsWith('/version.json')?{generatedAt:'fixture'}:null;return payload?route.fulfill({contentType:'application/json',body:JSON.stringify(payload)}):route.abort();});
@@ -57,7 +59,7 @@ try{
   await page.locator('[data-action="profile-level"][data-level="level120"]').click();
   assert.equal(await page.locator('#research-fate').isDisabled(),true);
   assert.match(await page.locator('.research-progress').innerText(),/update for your selected/);
-  assert.equal(await page.locator('.ship-profile-cover .research-frame-pr').count(),1);
+  assert.equal(await page.locator('.ship-profile-overview > .research-frame-pr').count(),1);
   const prShape=await page.locator('.research-frame-pr').evaluate(el=>getComputedStyle(el).clipPath);
   assert.equal(await page.locator('[data-loadout-slot]').count(),6);
   await assertFrameClearance(page);
@@ -108,13 +110,13 @@ try{
   assert.equal(await page.locator('[data-research-skill="18290"]').count(),1);
   await page.screenshot({path:'.audit/research-screens/profile-'+width+'.png',fullPage:true});
   await page.evaluate(()=>location.hash='#/ships/970701');
-  await page.locator('.ship-profile-cover.portrait-meta').waitFor();
+  await page.locator('.ship-profile-overview.portrait-meta').waitFor();
   assert.equal(await page.locator('#research-dev').count(),0);
   await assertFrameClearance(page);
   assert.equal(await page.locator('.portrait-meta-super-rare').count(),1);
   await page.screenshot({path:'.audit/research-screens/meta-'+width+'.png',fullPage:true});
   await page.evaluate(()=>location.hash='#/ships/970101');
-  await page.locator('.ship-profile-cover.portrait-meta-elite').waitFor();
+  await page.locator('.ship-profile-overview.portrait-meta-elite').waitFor();
   await assertFrameClearance(page);
   await page.screenshot({path:'.audit/research-screens/meta-elite-'+width+'.png',fullPage:true});
   await page.evaluate(()=>location.hash='#/ships/10706');
@@ -128,20 +130,28 @@ try{
   assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('avalon.azurlane.loadouts.v1'))),saved);
   await page.locator('[data-action="profile-back"]').click();
   await page.locator('#catalog-search').fill('META');
-  await page.locator('.ship-roster-portrait.portrait-meta-elite').waitFor();
-  await page.locator('.ship-roster-portrait.portrait-meta-super-rare').waitFor();
-  await assertFrameClearance(page,'.ship-roster-portrait.portrait-meta-elite');
-  await assertFrameClearance(page,'.ship-roster-portrait.portrait-meta-super-rare');
+  await page.locator('.ship-roster-tile.portrait-meta-elite').waitFor();
+  await page.locator('.ship-roster-tile.portrait-meta-super-rare').waitFor();
+  await assertFrameClearance(page,'.ship-roster-tile.portrait-meta-elite');
+  await assertFrameClearance(page,'.ship-roster-tile.portrait-meta-super-rare');
   await page.screenshot({path:'.audit/research-screens/meta-roster-'+width+'.png',fullPage:true});
   await page.locator('#catalog-search').fill('Enterprise');
   await page.locator('.ship-roster-tile').filter({hasText:'Enterprise'}).waitFor();
   await assertOrdinaryPortrait(page,'.ship-roster-portrait');
   await page.locator('#catalog-search').fill('');
+  await page.evaluate(async()=>{
+   const {renderShipRosterTile}=await import('./src/ship-roster.js');
+   const test=document.createElement('div');test.id='mixed-name-test';test.className='ship-gallery';test.style.margin='16px';
+   test.innerHTML=['10706','29901','29904','970101','970701'].map(sourceId=>renderShipRosterTile({id:'lyc-'+sourceId,sourceId,name:'LongShipNameWithoutSpacesForWrapping',hull:'CL'})).join('');
+   document.querySelector('#catalog-start').prepend(test);
+  });
+  await assertMixedNames(page,'#mixed-name-test .ship-roster-tile');
+  await page.locator('#mixed-name-test').evaluate(el=>el.remove());
   await page.locator('[data-action="ship-research-toggle"]').click();
   await page.locator('#ship-research-series').selectOption('9');
   assert.equal(await page.locator('.ship-roster-tile').count(),5);
   assert.equal(await page.locator('.ship-roster-tile .research-frame').count(),5);
-  await assertFrameClearance(page,'.ship-roster-portrait');
+  await assertFrameClearance(page,'.ship-roster-tile');
   await page.locator('#catalog-search').fill('Duncan');await page.waitForTimeout(350);assert.equal(await page.locator('.ship-roster-tile').count(),1);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);
   console.log('PASS '+width+'px research filter/series, PR+DR frames, Dev/Fate, modal scroll/Escape/back, timers/reload, combat guard and saved gear');await page.close();
@@ -150,7 +160,7 @@ try{
  for(const [id,label,width] of (process.env.SKIP_LIVE_ART==='1'?[]:[['29901','pr',1280],['29901','pr',390],['29904','dr',1280],['29904','dr',390],['970701','meta',1280],['970701','meta',390],['970101','meta-elite',1280],['970101','meta-elite',390],['10706','ordinary',1280],['10706','ordinary',390]])){
   const page=await browser.newPage({viewport:{width,height:900}});
   await page.goto(url+'/#/ships/'+id);
-  await page.locator(label==='ordinary'?'.ship-profile-cover':'.ship-profile-cover.portrait-'+label).waitFor({timeout:90000});
+  await page.locator(baseline||label==='ordinary'?'.ship-profile-cover':'.ship-profile-overview.portrait-'+label).waitFor({timeout:90000});
   // Live wiki/artwork responses refresh the profile; finish those requests before capture.
   await page.waitForLoadState('networkidle');
   // Mobile artwork is lazy-loaded below the fold; exercise it before the full-page capture.
@@ -159,11 +169,12 @@ try{
   await page.waitForLoadState('networkidle');
   await page.locator('.ship-profile-cover').scrollIntoViewIfNeeded();
   await page.waitForFunction(()=>{const image=document.querySelector('.ship-profile-cover img');return image?.complete&&image.naturalWidth>0;},{},{timeout:60000});
-  if(label==='ordinary')await assertOrdinaryPortrait(page,'.ship-profile-cover');else await assertFrameClearance(page);
+  if(!baseline){if(label==='ordinary')await assertOrdinaryPortrait(page,'.ship-profile-cover');else await assertFrameClearance(page);}
   await assertWideDetails(page,width);
   const image=await page.locator('.ship-profile-cover img').getAttribute('src');
-  await page.screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'.png',fullPage:true});
-  await page.locator('.ship-profile-cover').screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'-portrait.png'});
+  const prefix=baseline?'before-':'live-';
+  await page.screenshot({path:'.audit/research-screens/'+prefix+label+'-'+width+'.png',fullPage:true});
+  await screenshotCard(page,'.ship-profile-overview','.audit/research-screens/'+prefix+label+'-'+width+'-hero.png');
   const catalogId=await page.locator('.ship-profile-toolbar [data-action="add-ship"]').getAttribute('data-ship');
   const name=await page.locator('.ship-profile-identity h1').innerText();
   await page.locator('[data-action="profile-back"]').click();
@@ -171,23 +182,53 @@ try{
   const tileSelector='.ship-roster-tile[data-ship="'+catalogId+'"]';
   await page.locator(tileSelector).waitFor();
   await page.waitForFunction(selector=>{const image=document.querySelector(selector+' img');return image?.complete&&image.naturalWidth>0;},tileSelector,{timeout:60000});
-  if(label==='ordinary')await assertOrdinaryPortrait(page,tileSelector+' .ship-roster-portrait');else await assertFrameClearance(page,tileSelector+' .ship-roster-portrait');
-  await page.locator(tileSelector).screenshot({path:'.audit/research-screens/live-'+label+'-'+width+'-roster.png'});
+  await page.waitForLoadState('networkidle');
+  if(!baseline){if(label==='ordinary')await assertOrdinaryPortrait(page,tileSelector+' .ship-roster-portrait');else await assertFrameClearance(page,tileSelector);}
+  await screenshotCard(page,tileSelector,'.audit/research-screens/'+prefix+label+'-'+width+'-roster.png');
+  if(!mixedTiles.has(width))mixedTiles.set(width,[]);
+  mixedTiles.get(width).push(await page.locator(tileSelector).evaluate(el=>el.outerHTML));
+  if(label==='ordinary')await captureMixedRoster(page,mixedTiles.get(width),width,prefix);
   console.log('PASS live '+label+' portrait and profile '+width+'px: '+image);
   await page.close();
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));}
 
-async function assertFrameClearance(page,selector='.ship-profile-cover'){
- const bounds=await page.locator(selector).first().evaluate(el=>{
-  const outer=el.getBoundingClientRect(),art=el.querySelector('.asset-media').getBoundingClientRect();
-  const frame=el.querySelector('.research-frame'),style=getComputedStyle(frame);
-  if(!style.maskComposite.split(',').every(value=>value.trim()==='exclude')||style.maskImage==='none')throw Error('frame has no empty center: '+style.maskComposite);
-  const content={left:outer.left+parseFloat(style.paddingLeft),top:outer.top+parseFloat(style.paddingTop),right:outer.right-parseFloat(style.paddingRight),bottom:outer.bottom-parseFloat(style.paddingBottom)};
-  for(const edge of ['left','right','top','bottom'])if(Math.abs(content[edge]-art[edge])>1)throw Error('frame overlaps artwork at '+edge);
-  return {left:art.left-outer.left,right:outer.right-art.right,top:art.top-outer.top,bottom:outer.bottom-art.bottom};
+async function screenshotCard(page,selector,path){
+ await page.locator(selector).scrollIntoViewIfNeeded();
+ const box=await page.locator(selector).boundingBox();
+ // Include the external frame, which is intentionally outside the card's layout box.
+ await page.screenshot({path,clip:{x:box.x-5,y:box.y-5,width:box.width+10,height:box.height+10}});
+}
+
+async function assertFrameClearance(page,selector='.ship-profile-overview'){
+ const result=await page.locator(selector).first().evaluate(el=>{
+  const frame=el.querySelector(':scope > .research-frame');
+  if(!frame)throw Error('Identity frame must be a direct child of the entire card');
+  const portrait=el.querySelector('.ship-profile-cover,.ship-roster-portrait'),art=portrait.querySelector('.asset-media');
+  if(portrait.querySelector('.research-frame'))throw Error('Nested thumbnail frame');
+  const outer=el.getBoundingClientRect(),f=frame.getBoundingClientRect(),style=getComputedStyle(frame),p=portrait.getBoundingClientRect(),a=art.getBoundingClientRect();
+  if(!style.maskComposite.split(',').every(v=>v.trim()==='exclude'))throw Error('Frame needs an empty center');
+  const empty={left:f.left+parseFloat(style.paddingLeft),right:f.right-parseFloat(style.paddingRight),top:f.top+parseFloat(style.paddingTop),bottom:f.bottom-parseFloat(style.paddingBottom)};
+  for(const edge of ['left','right','top','bottom'])if(Math.abs(empty[edge]-outer[edge])>1)throw Error('Frame center does not match whole card: '+edge);
+  if(getComputedStyle(portrait).padding!=='0px')throw Error('Portrait padding shrinks the artwork');
+  if(el.matches('.ship-roster-tile')){
+   const name=el.querySelector('.ship-roster-name').getBoundingClientRect(),footer=el.querySelector('.ship-roster-footer').getBoundingClientRect();
+   if(name.bottom>p.top+1||footer.top<p.bottom-1)throw Error('Every roster must place name above artwork and hull below it');
+   for(const pseudo of ['::before','::after']){
+    const cap=getComputedStyle(el.querySelector('.ship-roster-footer'),pseudo);
+    if(parseFloat(cap.width)>14||cap.pointerEvents!=='none')throw Error('Rail ornaments must be small and non-interactive');
+   }
+  }
+  if(el.classList.contains('portrait-meta')&&getComputedStyle(frame).animationName!=='none')throw Error('META static finish must not start perpetual animation');
+  // Removing classification must not increase artwork area or change grid dimensions.
+  const classes=el.className;el.className=classes.split(' ').filter(c=>!c.startsWith('portrait-')).join(' ');
+  const ordinary=art.getBoundingClientRect(),baseline=el.getBoundingClientRect();el.className=classes;
+  return {width:a.width,baseWidth:ordinary.width,height:a.height,baseHeight:ordinary.height,cardHeight:outer.height,baseCardHeight:baseline.height,portraitWidth:p.width};
  });
- for(const [edge,gap]of Object.entries(bounds))assert.ok(gap>=6,edge+' artwork clearance: '+gap);
+ assert.ok(result.width>=result.baseWidth-1,'identity must not reduce artwork width');
+ assert.ok(result.height>=result.baseHeight-1,'identity must not reduce artwork height');
+ assert.ok(Math.abs(result.cardHeight-result.baseCardHeight)<=2,'identity must not change card alignment');
+ await assertMetaPalette(page,selector);
 }
 
 async function assertOrdinaryPortrait(page,selector){
@@ -206,4 +247,91 @@ async function assertWideDetails(page,width){
  });
  assert.ok(size.gear>=size.layout-2,'equipment uses full summary width');
  assert.ok(size.skills>=size.layout-2,'skills use full summary width');
+}
+
+async function captureMixedRoster(page,tiles,width,prefix){
+ // Focused mixed-roster harness: unchanged production tiles collected from the live app.
+ // Only the surrounding catalog is reduced to these five subjects; no tile styles or data are changed.
+ await page.locator('#catalog-start').evaluate((el,tiles)=>{
+  el.innerHTML='<h2>Mixed-roster regression fixture</h2><p>PR / DR / META Super Rare / META Elite / ordinary</p><div class="catalog-grid ship-gallery">'+tiles.join('')+'</div>';
+ },tiles);
+ await page.locator('.ship-gallery').scrollIntoViewIfNeeded();
+ await page.waitForFunction(()=>[...document.querySelectorAll('.ship-gallery img')].every(i=>i.complete&&i.naturalWidth>0));
+ if(!baseline){
+  await assertMixedNames(page);
+  for(const tile of await page.locator('.ship-roster-tile.portrait-pr,.ship-roster-tile.portrait-dr,.ship-roster-tile.portrait-meta').all()){
+   await assertFrameClearance(page,'.ship-roster-tile[data-ship="'+await tile.getAttribute('data-ship')+'"]');
+  }
+ }
+ await screenshotCard(page,'.ship-gallery','.audit/research-screens/'+prefix+'mixed-'+width+'.png');
+ await page.screenshot({path:'.audit/research-screens/'+prefix+'mixed-page-'+width+'.png',fullPage:true});
+ if(!baseline){
+  // A long, unbroken synthetic name stresses wrapping identically across classifications.
+  await page.locator('.ship-roster-name').evaluateAll(els=>els.forEach(el=>el.textContent='LongShipNameWithoutSpacesForWrapping'));
+  await assertMixedNames(page);
+ }
+ console.log('PASS mixed roster '+width+'px: five identities, common name metrics, full art, long-name wrapping');
+}
+async function assertMixedNames(page,selector='.ship-roster-tile'){
+ const sizes=await page.locator(selector).evaluateAll(tiles=>tiles.map(el=>{
+  const name=el.querySelector('.ship-roster-name'),art=el.querySelector('.ship-roster-portrait'),foot=el.querySelector('.ship-roster-footer');
+  const n=name.getBoundingClientRect(),a=art.getBoundingClientRect(),f=foot.getBoundingClientRect(),c=el.getBoundingClientRect(),style=getComputedStyle(name);
+  if(n.top>c.top+2||n.bottom>a.top+1||a.bottom>f.top+1)throw Error('Name / art / hull order or overlap');
+  if(name.scrollWidth>name.clientWidth+1||name.scrollHeight>name.clientHeight+1)throw Error('Name clipping');
+  if(c.left<0||c.right>innerWidth+1)throw Error('Card overflow');
+  return {nameHeight:n.height,width:c.width,height:c.height,artHeight:a.height,font:style.fontSize,weight:style.fontWeight,line:style.lineHeight,padding:style.padding,align:style.justifyContent};
+ }));
+ for(const item of sizes){
+  for(const key of ['width','height','nameHeight','artHeight'])assert.ok(Math.abs(item[key]-sizes[0][key])<=2,'consistent mixed '+key+JSON.stringify(sizes));
+  for(const key of ['font','weight','line','padding','align'])assert.equal(item[key],sizes[0][key],'shared nameplate '+key);
+  assert.ok(item.artHeight>=109,'long names must not shrink portraits below mobile baseline');
+ }
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+}
+
+
+async function assertMetaPalette(page,selector){
+ await page.locator(selector).first().evaluate(el=>{
+  if(!el.classList.contains('portrait-meta'))return;
+  const style=getComputedStyle(el),elite=el.classList.contains('portrait-meta-elite');
+  const rgb=hex=>hex.trim().replace('#','').match(/../g).map(v=>parseInt(v,16));
+  const cssRgb=hex=>'rgb('+rgb(hex).join(', ')+')';
+  const hueMatches=hex=>{const [r,g,b]=rgb(hex);return elite?b>r&&r>g:r>g&&g>b;};
+  const back=style.getPropertyValue('--meta-back'),base=style.getPropertyValue('--meta-base'),rail=style.getPropertyValue('--meta-rail');
+  const edge=style.getPropertyValue('--card-edge'),light=style.getPropertyValue('--card-light');
+  for(const color of [back,rail])if(!hueMatches(color))throw Error('META rarity must color broad backgrounds and nameplates');
+  const frame=getComputedStyle(el.querySelector(':scope > .research-frame'));
+  if(edge.trim()!=='#56301f'||light.trim()!=='#e08a43')throw Error('META exterior must share scorched bronze');
+  const exterior=()=>{
+   const f=getComputedStyle(el.querySelector(':scope > .research-frame')),card=getComputedStyle(el);
+   const footer=el.querySelector('.ship-roster-footer');
+   const out=[f.backgroundImage,f.clipPath,card.borderColor,card.boxShadow];
+   if(footer){
+    out.push(getComputedStyle(footer).borderBottomColor);
+    for(const pseudo of ['::before','::after']){
+     const cap=getComputedStyle(footer,pseudo);out.push(cap.backgroundImage,cap.borderColor,cap.borderTopColor,cap.boxShadow,cap.borderRadius);
+    }
+   }
+   return out;
+  };
+  const original=exterior(),classes=el.className,bounds=el.getBoundingClientRect();
+  el.classList.remove('portrait-meta-elite','portrait-meta-super-rare');
+  el.classList.add(elite?'portrait-meta-super-rare':'portrait-meta-elite');
+  const alternate=exterior(),other=getComputedStyle(el).getPropertyValue('--meta-back'),otherBounds=el.getBoundingClientRect();
+  el.className=classes;
+  if(JSON.stringify(original)!==JSON.stringify(alternate))throw Error('META rarities must share identical exterior rails and ornaments');
+  if(other===back)throw Error('META rarity backgrounds must remain distinct');
+  if(bounds.width!==otherBounds.width||bounds.height!==otherBounds.height)throw Error('META rarity must not change card dimensions');
+  const roster=el.matches('.ship-roster-tile');
+  const background=getComputedStyle(roster?el.querySelector('.ship-roster-portrait'):el).backgroundImage;
+  if(!background.includes(cssRgb(back))||!background.includes(cssRgb(base)))throw Error('META backing ignores rarity');
+  if(roster){
+   const name=getComputedStyle(el.querySelector('.ship-roster-name')),foot=getComputedStyle(el.querySelector('.ship-roster-footer'));
+   if(!name.backgroundImage.includes(cssRgb(rail))||!foot.backgroundImage.includes(cssRgb(back)))throw Error('META name/footer must carry visible rarity backing');
+   const luminance=hex=>rgb(hex).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+   const text=luminance(style.getPropertyValue('--meta-rarity'));
+   for(const color of [rail,back,base])if((text+.05)/(luminance(color)+.05)<4.5)throw Error('META name/footer contrast below 4.5:1');
+  }
+  if(frame.animationName!=='none')throw Error('META animation remains deferred');
+ });
 }

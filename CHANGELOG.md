@@ -2,6 +2,14 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.10] - 2026-11-14
+
+### Changed
+- Refine research and META whole-card shells against recovered in-game dock references: metallic research rails, integrated lower name/hull strips and static scorched META framing, without oath/account overlays.
+- Move PR, DR and source-verified META identity frames to the perimeter of the complete roster tile and profile hero, restoring the artwork area used by ordinary cards.
+- Replace oversized crowns and striped thumbnail surrounds with restrained exterior rails and distinct stepped, beveled and asymmetric card silhouettes.
+- Add whole-card geometry regression checks and same-ship before/after desktop/mobile real-art screenshots against merged v0.8.9.
+
 ## [0.8.9] - 2026-11-13
 
 ### Changed
@@ -468,3 +476,15 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 - Independent fan project. Historical ECTL is a reference only, not the name or endorsement of this site.
 - Ratings, automated fleet optimization, audited skill calculations, and complete equipment-acquisition data are not implemented.
 
+
+### v0.8.10 final QA correction
+
+- Restored top nameplates on every Ship Index roster identity, preserving dock frames, generous artwork and rarity styling. Added mixed-roster and long-name regression checks.
+
+### v0.8.10 META rarity correction
+
+- Made Elite META violet/charcoal and Super Rare META gold/amber across broad card backgrounds and scorched exterior highlights, using pinned rarity metadata. Preserved top nameplates, full artwork and static frames.
+
+### v0.8.10 unified META exterior
+
+- Unified META exterior rails and ornaments in scorched bronze while preserving distinct Elite violet and Super Rare amber backgrounds/nameplates. No layout or gameplay changes.

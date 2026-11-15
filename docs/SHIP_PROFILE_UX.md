@@ -11,7 +11,21 @@ Research ships now have one **Research & Statistics** panel. Development, Fate S
 - A level/stage combination the existing calculator cannot support remains unavailable. A missing comparison does not become zero. Fate requires Dev 30 and the existing five-stage source record.
 - Detailed/comparison display preferences are session-only and keyed by ship. Existing `avalon.research.v1` state and mission IDs are unchanged. Progression selection, mission completion and start timestamps remain persisted. Gear storage is unchanged.
 
-## Portrait identity
+## Dock-reference refinement — v0.8.10
+
+The three recovered Commander-supplied dock screenshots have now been inspected. Research cards use narrow metallic frames with small sculpted details and a dark top nameplate. META uses blackened framing, ember seams and a warm backing. White floral trims and top gems are oath decorations; account overlays are excluded from identity styling.
+
+All roster cards use the same name-at-top, artwork-in-center, hull-at-bottom order. Nameplates inherit the shared typography, padding, wrapping and minimum height; special-color separators use inset shadows so they do not add layout height. Small metallic end caps stay on the hull rail, not over faces. PR has gold articulated shoulders and rails; DR retains prismatic metal with a distinct shoulder contour. META has scorched dark/orange framing while pinned rarity retains violet Elite and gold Super Rare accents. The corresponding profile hero uses the same exterior metal and background vocabulary. Ordinary cards are untouched.
+
+The entire card remains the frame boundary. No portrait padding, new image crop, altered image fit, or smaller artwork area is introduced. The static META ember finish is intentional; animation is deferred to avoid perpetual effects across mobile rosters. Reference fidelity is interpretive, not a claim that AVALON uses authentic game frame assets.
+
+## Historical whole-card identity — v0.8.10 structural correction
+
+The Commander clarified that the frame belongs around the **complete roster tile and profile hero**, not the portrait container. This supersedes the v0.8.9 thumbnail-frame contract below. The name, artwork and hull information share one exterior boundary. Portraits retain ordinary-card dimensions, no frame padding and no nested decorative frame. PR has restrained gold stepped corners, DR prismatic bevels, and META asymmetric corners with pinned Elite violet/Super Rare gold treatment. The original in-game screenshots remain unavailable for direct visual comparison; no exact visual-match claim is made.
+
+Browser tests compare artwork dimensions and whole-card height with identity styling removed, check the exterior mask against the full card, and preserve ordinary styling. Live screenshots capture full heroes and roster tiles with their exterior perimeter at 390/1280px, alongside the same ships rendered from merged v0.8.9. Independent visual acceptance is required in addition to passing tests.
+
+## Historical portrait identity — v0.8.9
 
 PR/DR identity still comes from the exact research manifest. META identity comes from the existing `SHIP_NATION_BY_SOURCE_ID` nationality map; no name matching, ID-prefix inference or rarity guessing. Existing mapped META ships receive the treatment; unknown new IDs wait for metadata updates.
 
@@ -30,3 +44,11 @@ Unit tests cover exact same-level deltas, checkpoints/intermediates, impossible 
 Live CI captures PR, DR, Super Rare META, Elite META and ordinary Enterprise profiles, portrait crops and roster tiles at 390/1280px, requiring each original portrait to load. Local fixture runs may use `SKIP_LIVE_ART=1` when outbound network is blocked; that does not certify real artwork. CI runs the live checks without that flag.
 
 The combat model remains Dev 30 / Fate 0. No research-aware damage calculation, new source data, inventory optimizer or battle simulator is introduced. The source and simulation contract in PR #31 is unchanged.
+
+## META rarity palette correction - v0.8.10
+
+Pinned source-ID rarity now colors the broad card backing as well as text: Elite uses deep violet/charcoal with purple seams, while Super Rare uses dark gold/amber with gold seams. The nameplate, footer, portrait backing and profile hero share the palette. Both retain the same blackened exterior silhouette and static finish. Top-nameplate geometry and all other identities are unchanged.
+
+## Unified META bronze exterior - final v0.8.10 hierarchy
+
+The exterior frame communicates META identity: every rarity shares scorched bronze, burnt-orange seams and blackened-metal corners. Rarity is communicated by the approved violet/charcoal Elite or dark-gold/amber Super Rare backgrounds and nameplates, using verified source IDs. The earlier rarity-colored exterior treatment is superseded. Geometry, artwork space, top names and static motion remain unchanged.
