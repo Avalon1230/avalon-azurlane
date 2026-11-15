@@ -44,3 +44,7 @@ Unit tests cover exact same-level deltas, checkpoints/intermediates, impossible 
 Live CI captures PR, DR, Super Rare META, Elite META and ordinary Enterprise profiles, portrait crops and roster tiles at 390/1280px, requiring each original portrait to load. Local fixture runs may use `SKIP_LIVE_ART=1` when outbound network is blocked; that does not certify real artwork. CI runs the live checks without that flag.
 
 The combat model remains Dev 30 / Fate 0. No research-aware damage calculation, new source data, inventory optimizer or battle simulator is introduced. The source and simulation contract in PR #31 is unchanged.
+
+## META rarity palette correction - v0.8.10
+
+Pinned source-ID rarity now colors the broad card backing as well as text: Elite uses deep violet/charcoal with purple seams, while Super Rare uses dark gold/amber with gold seams. The nameplate, footer, portrait backing and profile hero share the palette. Both retain the same blackened exterior silhouette and static finish. Top-nameplate geometry and all other identities are unchanged.

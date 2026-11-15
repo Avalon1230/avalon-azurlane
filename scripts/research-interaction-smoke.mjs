@@ -228,6 +228,7 @@ async function assertFrameClearance(page,selector='.ship-profile-overview'){
  assert.ok(result.width>=result.baseWidth-1,'identity must not reduce artwork width');
  assert.ok(result.height>=result.baseHeight-1,'identity must not reduce artwork height');
  assert.ok(Math.abs(result.cardHeight-result.baseCardHeight)<=2,'identity must not change card alignment');
+ await assertMetaPalette(page,selector);
 }
 
 async function assertOrdinaryPortrait(page,selector){
@@ -288,3 +289,29 @@ async function assertMixedNames(page,selector='.ship-roster-tile'){
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 }
 
+
+async function assertMetaPalette(page,selector){
+ await page.locator(selector).first().evaluate(el=>{
+  if(!el.classList.contains('portrait-meta'))return;
+  const style=getComputedStyle(el),elite=el.classList.contains('portrait-meta-elite');
+  const rgb=hex=>hex.trim().replace('#','').match(/../g).map(v=>parseInt(v,16));
+  const cssRgb=hex=>'rgb('+rgb(hex).join(', ')+')';
+  const hueMatches=hex=>{const [r,g,b]=rgb(hex);return elite?b>r&&r>g:r>g&&g>b;};
+  const back=style.getPropertyValue('--meta-back'),base=style.getPropertyValue('--meta-base'),rail=style.getPropertyValue('--meta-rail');
+  const edge=style.getPropertyValue('--card-edge'),light=style.getPropertyValue('--card-light');
+  for(const color of [back,rail,edge,light])if(!hueMatches(color))throw Error('META rarity must color broad backgrounds and exterior accents');
+  const frame=getComputedStyle(el.querySelector(':scope > .research-frame'));
+  for(const color of [edge,light])if(!frame.backgroundImage.includes(cssRgb(color)))throw Error('META frame ignores rarity accent');
+  const roster=el.matches('.ship-roster-tile');
+  const background=getComputedStyle(roster?el.querySelector('.ship-roster-portrait'):el).backgroundImage;
+  if(!background.includes(cssRgb(back))||!background.includes(cssRgb(base)))throw Error('META backing ignores rarity');
+  if(roster){
+   const name=getComputedStyle(el.querySelector('.ship-roster-name')),foot=getComputedStyle(el.querySelector('.ship-roster-footer'));
+   if(!name.backgroundImage.includes(cssRgb(rail))||!foot.backgroundImage.includes(cssRgb(back)))throw Error('META name/footer must carry visible rarity backing');
+   const luminance=hex=>rgb(hex).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+   const text=luminance(style.getPropertyValue('--meta-rarity'));
+   for(const color of [rail,back,base])if((text+.05)/(luminance(color)+.05)<4.5)throw Error('META name/footer contrast below 4.5:1');
+  }
+  if(frame.animationName!=='none')throw Error('META animation remains deferred');
+ });
+}

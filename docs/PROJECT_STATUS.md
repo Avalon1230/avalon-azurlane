@@ -1,8 +1,15 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-14 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-15 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active - v0.8.10 final nameplate correction (2026-11-15)
+## Active - v0.8.10 META rarity palette correction (2026-11-15)
+- Resumed PR #33 at verified head `a0f60302b840484cf33c8aac20771abc208bf8ea`; read independent review [5908517822](https://github.com/Avalon1230/avalon-azurlane/pull/33#pullrequestreview-5908517822). Visual sign-off is held for insufficient META rarity separation; do not merge.
+- META Elite uses violet/charcoal backing and purple exterior highlights; Super Rare uses dark gold/amber backing and gold highlights. Broad name/footer strips, portrait backing and hero backgrounds share source-ID-derived rarity tokens; blackened geometry and static treatment remain.
+- Top names, full-card framing, artwork dimensions, PR/DR/ordinary designs and hero structure are unchanged. No research, acquisition, loadout, Fleet Lab or combat modules changed.
+- Added misleading-name/rarity metadata regression and computed browser checks for violet/gold backgrounds, matching exterior accents, 4.5:1 name/footer contrast and no animation. Existing geometry, mixed-roster and long-name checks remain.
+- Verification and refreshed real-art evidence pending CI. Baseline is the starting head above; earlier evidence below is historical.
+
+## Historical - v0.8.10 final nameplate correction (2026-11-15)
 - Resumed PR #33 at verified head `2cc2c5028d65f7085768ea6803141b4f817ebad3`. Do not merge.
 - Removed special-card name/art ordering overrides: every roster now follows the shared name / portrait / hull DOM order. Shared nameplate typography and spacing remain unchanged; special separators use inset shadows to avoid adding nameplate height. Dock frames, rarity colors, hero cards, ordinary styling and gameplay/state modules are unchanged.
 - Added DOM/CSS ordering regression and mixed-identity browser checks for common metrics, artwork bounds, wrapping and overflow. Screenshot harness collects unchanged production tiles from live searches and places the five subjects in the production grid; this arrangement is explicitly labeled as a regression fixture.

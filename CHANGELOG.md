@@ -480,3 +480,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 ### v0.8.10 final QA correction
 
 - Restored top nameplates on every Ship Index roster identity, preserving dock frames, generous artwork and rarity styling. Added mixed-roster and long-name regression checks.
+
+### v0.8.10 META rarity correction
+
+- Made Elite META violet/charcoal and Super Rare META gold/amber across broad card backgrounds and scorched exterior highlights, using pinned rarity metadata. Preserved top nameplates, full artwork and static frames.
