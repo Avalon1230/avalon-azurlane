@@ -1,3 +1,4 @@
+import {liveShip} from './live-content.js';
 /**
  * Source-verified group ID -> ship collection ID, exact game hull code and
  * fully limit-broken equipment slots. Extracted from the read-only 2026-05-02
@@ -873,6 +874,8 @@ const GAME_SLOTS={
 export const VERIFIED_SLOT_RECORDS=Object.keys(GAME_SLOTS).length;
 export function gameShipSlots(sourceId){
  const id=String(sourceId??'');
+ const current=liveShip(id)?.slots;
+ if(current)return {...current,slots:current.slots.map(slot=>({...slot,types:slot.types.slice()}))};
  if(!/^\d{4,8}$/.test(id)||!Object.hasOwn(GAME_SLOTS,id))return null;
  const [shipId,hullId,rows]=GAME_SLOTS[id];
  return {sourceId:id,shipId,hullId,slots:rows.map(([types,efficiency,mounts,parallel,capacity])=>({

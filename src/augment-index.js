@@ -57,7 +57,7 @@ export function renderAugmentIndex({records=[],query='',type='all',rarity='all',
   }).join('');
   return '<section class="augment-index" id="augment-catalog-start">'+
     '<div class="augment-intro"><strong>Source-linked augment directory</strong>'+
-    '<p>'+AUGMENT_ICON_COUNT+' dated game records with original icon mappings; five October 2026 announcements are separate and lack verified artwork or stats. Source compatibility is not an effectiveness ranking.</p></div>'+
+    '<p>'+AUGMENT_ICON_COUNT+' dated game records, '+records.filter(x=>x.source==='avalon-verified').length+' AVALON-verified additions and five October 2026 name-only announcements. Source compatibility is not an effectiveness ranking.</p></div>'+
     '<div class="augment-toolbar"><label class="search-wrap"><span aria-hidden="true">⌕</span>'+
     '<input id="augment-search" type="search" value="'+E(query)+'" aria-label="Search augments" placeholder="Search augment name, ID, class…" autocomplete="off"></label>'+
     '<label class="augment-filter"><span>Hull class</span><select id="augment-type-filter" aria-label="Augment compatible class">'+
@@ -68,7 +68,7 @@ export function renderAugmentIndex({records=[],query='',type='all',rarity='all',
     '</select></label>'+
     '<button type="button" class="outline-btn compact" data-action="augment-clear-filters">Clear</button></div>'+
     '<p class="catalog-result-bar" role="status">Showing '+visible.length+' of '+filtered.length+
-    ' matching augments · '+records.length+' records total. Source date: May 2, 2026; announcement-only names: October 2026.</p>'+
+    ' matching augments · '+records.length+' records total. Each detail lists its source date.</p>'+
     '<div class="augment-gallery">'+(cards||'<p class="empty">No augments match these filters.</p>')+'</div>'+
     (visible.length<filtered.length?'<button type="button" class="outline-btn augment-load-more" data-action="augment-load-more">Show more ('+
       (filtered.length-visible.length)+' remaining)</button>':'')+

@@ -1,3 +1,4 @@
+import {liveShip} from './live-content.js';
 import { researchProgression, RESEARCH_LEVELS } from './research-progression.js';
 import { renderResearchStats, renderResearchGear, renderResearchSkills } from './research-stats-view.js';
 import { researchShip, researchFrame, portraitClasses } from './research-ships.js';
@@ -18,6 +19,7 @@ const STAT_FIELDS = Object.freeze([
 
 export function detailedShipRecord(dataset, sourceId) {
   const id = String(sourceId ?? '');
+  if(liveShip(id))return liveShip(id).detail;
   if (!/^\d{2,8}$/.test(id) || !dataset || typeof dataset !== 'object' || Array.isArray(dataset)) return null;
   const record = dataset[id];
   return record && String(record.id) === id && record.names?.en ? record : null;
@@ -206,9 +208,10 @@ function skillsPanel(data,wiki=null) {
           '.png" alt="" loading="lazy" decoding="async">':'';
       return '<article class="ship-skill skill-'+E(['red','yellow','blue'].includes(x.color)?x.color:'other')+'">' +
         '<div class="ship-skill-head">'+skillIcon+'<h3>'+E(name)+'</h3></div>'+
-        '<p>'+E(x.description||'Description unavailable')+'</p></article>';
+      (x.augmentOnly?'<small class="ship-data-source">Requires exclusive augment at +10 · replaces the base skill</small>':'')+
+      '<p>'+E(x.description||'Description unavailable')+'</p></article>';
     }).join('')+'</div>' +
-    '<p class="ship-data-source">Skill descriptions: Lycoris game-data snapshot'+
+    '<p class="ship-data-source">Skill descriptions: '+(data.source==='avalon-verified'?'AVALON summaries of pinned wiki/client mechanics':'Lycoris game-data snapshot')+
     (wiki?' · icons corroborated against Koumakan skill IDs.':'.')+'</p>'
     :'<p class="profile-unavailable">Skill descriptions unavailable.</p>','ship-profile-skills');
 }
@@ -246,6 +249,7 @@ function acquisitionPanel(data,wiki=null) {
   if(research)return profilePanel('Acquisition','<button type="button" class="outline-btn" data-action="research-open">Research &amp; Development</button><p>Series '+research.series+' · '+research.classification+' — requirements, missions and your progress.</p>','ship-profile-acquire');
   return profilePanel('Acquisition',rows.length?
     '<div class="ship-info-rows">'+rows.map(([name,value])=>'<div><span>'+E(name)+'</span><strong>'+E(value)+'</strong></div>').join('')+'</div>'+
+    (data.eventId?'<p class="event-related"><a class="text-link" href="#/events/'+E(data.eventId)+'">Event missions, rewards & regional deadlines →</a></p>':'')+
     (wiki?.dropNote?'<p class="ship-data-source">Historical availability; may not reflect current construction pools or active events.</p>':'')
     :'<p class="profile-unavailable">This source does not list where to get this ship.</p>','ship-profile-acquire');
 }
@@ -253,6 +257,8 @@ function acquisitionPanel(data,wiki=null) {
 function sourcePanel(data, ship, wiki=null) {
   const url=trustedWikiUrl(data.wikiUrl);
   const sourceId = data.id || ship?.sourceId;
+  const reviewed=liveShip(sourceId);
+  if(reviewed)return profilePanel('Sources & more information','<p>AVALON maintains this source-verified record independently of optional fan catalogs. Statistics are from the GroupID-matched Koumakan template; equipment restrictions and skill mechanics are corroborated against the pinned EN client.</p><p>Level 100+ statistics use 100 affinity and maximum enhancements. Augment upgrades are described separately and are not applied to displayed base statistics or combat comparisons.</p><a class="text-link" href="'+E(reviewed.provenance.wikiUrl)+'" target="_blank" rel="noopener noreferrer">Koumakan entry ↗</a><p class="ship-data-source">Wiki revision '+E(reviewed.provenance.wikiRevision)+' · '+E(reviewed.provenance.wikiRevisionDate)+' · reviewed '+E(reviewed.provenance.checkedAt.slice(0,10))+' · CC BY-NC-SA 4.0. Skill descriptions are AVALON summaries, not simulated performance.</p><a class="text-link" href="https://github.com/AzurLaneTools/AzurLaneLuaScripts/tree/'+E(reviewed.provenance.clientCommit)+'/EN" target="_blank" rel="noopener noreferrer">Pinned EN client ↗</a>');
   const basis=researchShip(ship||data)
     ?'Research stats, mounts and skill changes use this ship’s pinned client records at 100 affinity. Other profile details come from the wiki and Lycoris where available. Open the calculation notes for the source revision.'
     :wiki

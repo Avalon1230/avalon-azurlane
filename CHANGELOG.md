@@ -2,6 +2,21 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.11] - 2026-11-16 (Unreleased)
+
+### Added
+- Events in primary navigation: ongoing, upcoming and archive sections; search, year/category/region/status filters; chronological cards and accessible occurrence timeline.
+- Eight source-attributed event identities with 34 separate regional originals, reruns, campaigns and permanent additions. Coverage is explicitly partial.
+- Event detail routes with regional schedules, missions, rewards, cosmetics, stage notes, release histories, source revisions and linked ship/augment profiles.
+- Manila-default exact countdowns with EN/JP/CN isolation, inclusive date-only deadlines, maintenance/TBA states, revision support and automatic boundary updates, including return from background tabs.
+- Independent verified Ririsa and Mikari profiles, statistics, paraphrased skills, source-matched original art, exact client slots, and Liliel’s Rod / Miriella’s Bow exclusive augments. Stable GroupIDs prevent duplicates when upstream catalogs catch up.
+- Cosmetic gear skins remain outside combat equipment; event encounter extensions preserve the existing Fleet Lab evidence and simulation boundaries.
+- Controlled-clock, schema, history, identity, persistence, offline/error, responsive and keyboard regression coverage, plus a bounded pinned-client source verifier.
+
+### Preserved
+- Approved v0.8.10 PR/DR/META styling, research calculations and mission tracking, saved six-slot loadouts and existing Fleet Lab/combat behavior.
+- No merge or deployment. Independent source and visual QA is required before the Commander authorizes release.
+
 ## [0.8.10] - 2026-11-14
 
 ### Changed

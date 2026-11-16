@@ -1,3 +1,4 @@
+import {liveAugment} from './live-content.js';
 /**
  * Source-identity matched original game-client Augment Module artwork.
  *
@@ -31,6 +32,8 @@ export function augmentIconKey(augment){
   return AUGMENT_ICON_ALIASES[id]||id;
 }
 export function augmentIconUrl(augment){
+  const reviewed=liveAugment(augment?.sourceId);
+  if(augment?.source==='avalon-verified'&&reviewed&&augment.id===reviewed.id)return reviewed.iconUrl;
   const key=augmentIconKey(augment);
   return key?AUGMENT_ASSET_BASE+key+'.webp':null;
 }

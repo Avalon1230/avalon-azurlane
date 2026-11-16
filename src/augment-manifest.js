@@ -1,3 +1,4 @@
+import {liveAugment,liveAugments} from './live-content.js';
 /**
  * Dated source-verified game augment metadata, extracted from
  * Linuxxy0/AzurLaneData data/augments.json (2026-05-02).
@@ -282,6 +283,7 @@ export function announcedAugmentForShip(sourceId) {
 }
 export function augmentRecord(sourceId){
   const id=String(sourceId??'').replace(/^aug-/,'');
+  if(liveAugment(id))return structuredClone(liveAugment(id));
   if(!/^\d{4,8}$/.test(id)||!Object.hasOwn(AUGMENTS,id))return null;
   const [name,type,group,rarity,obtainable,craftable,serverEN,stats]=AUGMENTS[id];
   return {
@@ -295,7 +297,7 @@ export function augmentRecord(sourceId){
 }
 export function candidateAugmentsForShip({shipId=null,hullId=null}={}){
   if(!Number.isSafeInteger(hullId))return [];
-  const candidates=[];
+  const candidates=liveAugments().filter(a=>a.limitGroup===shipId&&AUGMENT_HULLS[a.typeCode]?.includes(hullId)).map(a=>structuredClone(a));
   for(const id of Object.keys(AUGMENTS)){
     const [name,type,group,rarity,obtainable,craftable,serverEN]=AUGMENTS[id];
     if(!obtainable||!serverEN)continue;
@@ -320,6 +322,7 @@ export function augmentHullIds(typeCode){
  */
 export function allAugmentRecords(){
   return [
+    ...liveAugments().map(a=>structuredClone(a)),
     ...Object.keys(AUGMENTS).map(augmentRecord),
     ...Object.keys(OFFICIAL_AUGMENTS).map(announcedAugmentForShip)
   ];

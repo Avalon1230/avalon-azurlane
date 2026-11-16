@@ -16,7 +16,7 @@ export const MAIN_SHIP_FACTIONS = Object.freeze(
 // earlier Fernando nationality.json datasets. Unknown factions remain separate
 // rather than accidentally being classified as collaborations.
 export const COLLABORATION_NATIONS = Object.freeze([
-  'Atelier Ryza', 'Atelier Yumia', 'Bilibili', 'Black Rock Shooter',
+  '2.5 Dimensional Seduction', 'Atelier Ryza', 'Atelier Yumia', 'Bilibili', 'Black Rock Shooter',
   'DanMachi', 'Date A Live', 'Hololive', 'Kizuna AI', 'KizunaAI',
   'Neptunia', 'NieR:Automata', 'Senran Kagura', 'SSSS',
   'The Idolmaster', 'To LOVE-Ru', 'Utawarerumono', 'Venus Vacation',

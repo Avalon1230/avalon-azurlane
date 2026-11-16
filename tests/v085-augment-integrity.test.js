@@ -19,9 +19,9 @@ test('augment IDs have 239 source-matched icon keys and precisely 12 source alia
   assert.equal(AUGMENT_ICON_COUNT,239);
   assert.equal(verified.length,239);
   assert.equal(announced.length,5);
-  assert.equal(records.length,244);
+  assert.equal(records.length,246);
   assert.equal(Object.keys(AUGMENT_ICON_ALIASES).length,12);
-  assert.equal(new Set(records.map(x=>x.id)).size,244);
+  assert.equal(new Set(records.map(x=>x.id)).size,246);
   for(const row of verified){
     assert.match(row.sourceId,/^\d{4,8}$/);
     assert.match(augmentIconKey(row),/^\d{4,8}$/);
@@ -48,14 +48,14 @@ test('augments have searchable and progressively accessible first-class director
   const html=renderAugmentIndex({records});
   assert.match(html,/Augment Modules|Source-linked augment directory/);
   assert.equal((html.match(/data-action="augment-details"/g)||[]).length,60);
-  assert.match(html,/Show more \(184 remaining\)/);
+  assert.match(html,/Show more \(186 remaining\)/);
   assert.match(html,/augment-type-filter/);
   assert.match(html,/augment-rarity-filter/);
   const match=filterAugmentRecords(records,{query:'Huggy Pillow of Bravery'});
   assert.equal(match.length,1);
   assert.equal(match[0].sourceId,'10000');
   const all=renderAugmentIndex({records,limit:1000});
-  assert.equal((all.match(/data-action="augment-details"/g)||[]).length,244);
+  assert.equal((all.match(/data-action="augment-details"/g)||[]).length,246);
   assert.doesNotMatch(all,/data-action="augment-load-more"/);
   const empty=renderAugmentIndex({records,query:'unlikely_zzz_ <script>alert(1)</script>'});
   assert.match(empty,/No augments match these filters/);

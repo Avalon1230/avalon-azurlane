@@ -1,3 +1,4 @@
+import {liveShip} from './live-content.js';
 import { shipyardPortraitUrl, shipyardManifestCoverage } from './shipyard-assets.js';
 import { verifiedEquipmentIconUrl, EQUIPMENT_ICON_COUNT } from './equipment-assets.js';
 
@@ -25,6 +26,8 @@ function recordId(record) {
 }
 export function shipImageSources(record) {
   const id=recordId(record)||CORE_SHIP_IDS[nameKey(typeof record==='string'?record:record?.name)];
+  const reviewed=liveShip(id)?.artwork?.[0]?.images?.wiki;
+  if(reviewed)return {primary:reviewed,fallback:liveShip(id).portraitFallback||null};
   // Retain the lighter existing shipyard thumbnail where the audited file exists.
   // Use an exact, source-ID-matched original shipyard portrait for missing records.
   const thumbnail=id && SHIP_ASSET_IDS.has(id) ? SHIP_ASSET_HOST+id+'.png' : null;

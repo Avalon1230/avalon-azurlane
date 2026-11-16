@@ -1,0 +1,5 @@
+# Independently maintained live content
+
+`november-2026.json` contains exact source-ID-matched Ririsa/Mikari profiles and their exclusive augments. It fills a source-verified coverage gap independently of optional runtime feeds. Statistics are extracted from the specific Koumakan revisions listed in each record; skill mechanics are AVALON paraphrases, and slot/augment identities are corroborated against the pinned EN client. The retained client file hashes permit repeatable verification without redistributing whole scripts. Supplementary asset directories establish exact original-art file availability, not data authority.
+
+Wiki-derived content has the attribution/license described in [the event data notice](../events/README.md). Read [Events maintenance](../../docs/EVENTS.md) before editing. Generate the runtime module with `node scripts/build-live-content.mjs`; do not hand-edit `src/live-content-data.js`. Stable AVALON IDs survive later upstream releases, and GroupIDs must never be confused with collection or augment item IDs.

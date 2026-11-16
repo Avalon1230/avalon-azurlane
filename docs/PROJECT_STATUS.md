@@ -1,6 +1,17 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-15 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-16 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## Active development — v0.8.11 Operation CHRONICLE (unmerged)
+
+- Resumed verified `main` at `1c228da902799da2431696beab626c4ac35be0d9` on **`feat/operation-chronicle-v0811`**. Completed PR #33 remains untouched. The released version remains v0.8.10.
+- Added integrated Events navigation/routes, regional cards and timeline, persistent filters, encyclopedia details, one-identity release histories, source disclosures and guarded links to existing Fleet Lab.
+- Reviewed seed: **8 event identities / 34 regional occurrences**. The featured event is **It’s Showtime! Angels’ Azur Stage** (2.5 Dimensional Seduction). EN/JP/CN deadlines are independent; EN is UTC−7, JP UTC+9 and CN UTC+8. Manila is the default display zone. EN/JP mission unlocks are date-only; CN’s published midnight unlocks can count down. JP’s upcoming Effulgence Before Eclipse War Archives addition remains TBA.
+- Local verified ship records `avl-1180001` / `avl-1180002` preserve exact GroupIDs 1180001/1180002 and collection IDs 10181/10182. Augments `aug-15960` / `aug-15980` have exact eligibility, stats and skill upgrades. They work without the optional fan feeds. Cosmetic gear skins never become combat equipment.
+- Data, validation, storage, views and clock are separated. Sources and coverage gaps: [Events documentation](EVENTS.md). No runtime wiki crawl; selected API revisions were checked, wiki-derived material attributed under CC BY-NC-SA 4.0, and original art remains externally hosted with placeholders/fallbacks.
+- Current verification: local Node and source checks recorded in the feature PR; CI browser checks and screenshot evidence are being finalized. Do not treat pending checks as passed. Final commit/CI/evidence links will be recorded below before handoff.
+- Deferred: complete event history; uncataloged regional permanent additions; detailed enemy/boss records, story synopsis and furniture inventory; exact unannounced EN/JP unlock times; full encounter simulation/recommendations. No drop rates, launch estimates, shop grace periods or unsupported client IDs invented.
+- **Next:** finish CI and visual evidence, request independent QA through the new PR, then await Commander authorization. **Do not merge or deploy.**
 
 ## Current release — v0.8.10 dock-inspired whole-card identity (2026-11-15)
 

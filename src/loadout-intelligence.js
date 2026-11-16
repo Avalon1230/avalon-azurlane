@@ -114,7 +114,7 @@ function slotFromGame(slot,index,hullId){
     maxEfficiency:Number.isFinite(slot?.maxEfficiency)?slot.maxEfficiency:null,
     maxMounts:Number.isSafeInteger(slot?.maxMounts)?slot.maxMounts:null,
     parallel:slot?.parallel??null,capacity:slot?.capacity??null,
-    source:'AzurLaneData · May 2026',verified:categories.length>0};
+    source:slot?.source||'AzurLaneData · May 2026',verified:categories.length>0};
 }
 function choosePrimary(index,base,wiki,game,hullId){
   // Prefer a precise, GroupID-checked wiki type, then exact MLB arrays.
