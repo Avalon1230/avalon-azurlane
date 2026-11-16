@@ -52,7 +52,7 @@ try{
   assert.equal(await page.getByLabel('Content for server').inputValue(),'EN');await overflow(page);
   await page.getByRole('button',{name:'Obtainable content',exact:true}).focus();await page.keyboard.press('Enter');
   await page.getByRole('link',{name:'Liliel Angel Paratroopers/Ririsa ↗',exact:true}).click();await page.locator('.ship-profile-overview').waitFor();
-  assert.equal(await page.locator('[data-loadout-slot]').count(),6);assert.match(await page.locator('#app-content').innerText(),/5123|5,123/);assert.match(await page.locator('#app-content').innerText(),/Liliel/);await saved(page);await overflow(page);
+  assert.equal(await page.evaluate(()=>window.scrollY),0,'Event profile link starts at the profile header');assert.equal(await page.locator('[data-loadout-slot]').count(),6);assert.match(await page.locator('#app-content').innerText(),/5123|5,123/);assert.match(await page.locator('#app-content').innerText(),/Liliel/);await saved(page);await overflow(page);
   await page.goBack();await page.getByRole('heading',{name:'Schedule & deadlines',exact:true}).waitFor();
   await page.getByRole('link',{name:'Miriella’s Bow ↗',exact:true}).click();await page.getByRole('dialog').waitFor();assert.match(await page.getByRole('dialog').innerText(),/25 → 35/);await overflow(page);
   await page.getByRole('button',{name:'Close augment details',exact:true}).focus();await page.keyboard.press('Shift+Tab');assert.equal(await page.getByRole('button',{name:'Close',exact:true}).evaluate(el=>el===document.activeElement),true);await page.keyboard.press('Tab');assert.equal(await page.getByRole('button',{name:'Close augment details',exact:true}).evaluate(el=>el===document.activeElement),true);await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').count(),0);
@@ -80,7 +80,7 @@ try{
  for(const width of [390,1280]){
   const {page,errors}=await pageFor(width,{liveArt:true});await page.goto(url+'/#/events');await page.locator('[data-event-card="angels-azur-stage"]').waitFor();
   await page.waitForFunction(()=>[...document.querySelectorAll('.event-featured img')].every(i=>i.complete),{},{timeout:25000}).catch(()=>{});
-  await capture(page,'events-'+width,true);await overflow(page);
+  for(const card of await page.locator('[data-event-card]').all()){await card.scrollIntoViewIfNeeded();await card.evaluate(el=>Promise.all([...el.querySelectorAll('img')].map(i=>i.complete?Promise.resolve():new Promise(resolve=>{i.addEventListener('load',resolve,{once:true});i.addEventListener('error',resolve,{once:true});setTimeout(resolve,8000);}))))};await page.evaluate(()=>scrollTo(0,0));await capture(page,'events-'+width,true);await overflow(page);await page.locator('#events-ongoing').scrollIntoViewIfNeeded();await capture(page,'featured-'+width);
   await page.locator('[data-event-card="angels-azur-stage"] h3 a').click();await page.locator('.event-detail-heading').waitFor();await capture(page,'detail-'+width);
   await page.getByRole('button',{name:'Obtainable content',exact:true}).click();await capture(page,'rewards-'+width);
   await page.getByRole('link',{name:'Liliel Angel Paratroopers/Ririsa ↗',exact:true}).click();await page.locator('.ship-profile-overview').waitFor();
@@ -91,5 +91,5 @@ try{
   await page.goto(url+'/#/events/divergent-chessboard');await page.getByRole('button',{name:'History',exact:true}).click();await capture(page,'history-'+width);assert.deepEqual(errors,[]);await page.close();
  }
  writeFileSync(out+'/report.json',JSON.stringify({observationTime:'2026-11-16T04:00:00Z',catalog:'production, partial (8 identities / 34 occurrences)',externalData:'unavailable by design; art requested from real source URLs',results:report},null,2));
- console.log('PASS CHRONICLE: four responsive interaction sessions; catalog retry; controlled launch/unlock/end transitions; two real-art screenshot sessions (16 captures).');
+ console.log('PASS CHRONICLE: four responsive interaction sessions; catalog retry; controlled launch/unlock/end transitions; two real-art screenshot sessions (18 captures).');
 }finally{await browser.close();server.close();}

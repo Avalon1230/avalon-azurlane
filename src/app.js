@@ -1141,7 +1141,7 @@ window.addEventListener('hashchange', () => {
     researchOpen=false;
     state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};state.artViewerOpen=false;
     state.profileSkin=0;state.profileLevel='level120';state.profileLoadoutMode='general';state.profileGearId=null;state.profileLoadoutPicker=null;
-    state.artViewerOpen=false;render();void loadShipProfileData();
+    state.artViewerOpen=false;state.profileAugmentId=null;render();window.scrollTo({top:0,behavior:'instant'});$('#app-content').focus({preventScroll:true});void loadShipProfileData();
     return;
   }
   if(route==='ships' && state.page==='ships' && state.detail?.kind==='ship'){

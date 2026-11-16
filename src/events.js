@@ -71,6 +71,8 @@ export function validateEventCatalog(catalog){
       else check(o.end==null,p,'permanent additions cannot expire');
       if(o.start?.kind==='exact'&&o.end?.kind==='exact')check(Date.parse(o.start.value)<Date.parse(o.end.value),p,'end must follow start');
       if(o.start?.date&&o.end?.date)check(o.start.date<=o.end.date,p,'end date must follow start date');
+      if(o.start?.date&&o.end?.kind==='exact'&&validInstant(o.end.value)&&validZone(o.start.zone))check(o.start.date<=dateInZone(Date.parse(o.end.value),o.start.zone),p,'end must follow start date');
+      if(o.start?.kind==='exact'&&o.end?.date&&validInstant(o.start.value)&&validZone(o.end.zone))check(dateInZone(Date.parse(o.start.value),o.end.zone)<=o.end.date,p,'end date must follow start');
       if(o.end)check(['exact','date','tba'].includes(o.end.kind),p,'end cannot depend on maintenance completion');
       if(o.releaseState==='released')check(validInstant(o.releaseConfirmedAt),p,'release observation required');
       const phaseIds=new Set();
@@ -148,10 +150,11 @@ export function formatEventTime(t,zone=EVENT_ZONE){
   if(!t||t.kind==='tba')return 'TBA';
   if(t.kind==='exact')return new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(new Date(t.value));
   const date=new Intl.DateTimeFormat('en-GB',{timeZone:'UTC',day:'2-digit',month:'short',year:'numeric'}).format(new Date(t.date+'T12:00:00Z'));
-  return date+' · '+t.zone+(t.kind==='maintenance'?' · after maintenance':' · time TBA');
+  const regionZone=({'Etc/GMT+7':'EN server (UTC−7)','Asia/Tokyo':'Japan (UTC+9)','Asia/Shanghai':'China (UTC+8)'})[t.zone]||t.zone;
+  return date+' · '+regionZone+(t.kind==='maintenance'?' · after maintenance':' · time TBA');
 }
 export function eventCountdown(t,now=Date.now()){
-  if(t?.kind!=='exact')return t?.kind==='maintenance'?'After maintenance · exact time TBA':t?.kind==='date'?'Date confirmed · time TBA':'TBA';
+  if(t?.kind!=='exact')return t?.kind==='maintenance'?'After maintenance · exact time TBA':t?.kind==='date'?(dateInZone(now,t.zone)>t.date?'Scheduled date passed · exact time unconfirmed':'Date confirmed · time TBA'):'TBA';
   if(!validInstant(t.value)||!Number.isFinite(now))return 'TBA';
   const left=Math.max(0,Math.ceil((Date.parse(t.value)-now)/1000));
   if(!left)return 'Deadline reached';

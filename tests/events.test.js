@@ -63,7 +63,7 @@ test('date-only launch does not imply a precise launch, end is inclusive in sour
  assert.equal(occurrenceStatus(o,Date.parse('2026-11-15T15:00:00Z')),'pending');
  assert.equal(occurrenceStatus(o,Date.parse('2026-11-17T15:00:00Z')),'ended');
  assert.equal(eventCountdown(o.start,now),'Date confirmed · time TBA');
- assert.match(formatEventTime(o.start,'Asia/Manila'),/Asia\/Tokyo · time TBA/);
+ assert.match(formatEventTime(o.start,'Asia/Manila'),/Japan \(UTC\+9\) · time TBA/);
 });
 test('maintenance starts await confirmed release; duration estimates never become timers',()=>{
  const start=Date.parse('2026-11-12T07:00:00Z'),live=Date.parse(en.releaseConfirmedAt);
@@ -168,4 +168,10 @@ test('malformed catalogs fail validation without throwing or publishing partial 
  for(const bad of [null,{}, {...catalog,events:{}},{...catalog,events:[null]}, {...catalog,events:[{...collab,occurrences:[null]}]}, {...catalog,events:[{...collab,content:{}}]}])assert.ok(validateEventCatalog(bad).length);
  assert.equal(validInstant('2026-99-31T00:00:00Z'),false);
  const c=clone();c.events[0].content[0].occurrenceIds=['other-event'];assert.match(validateEventCatalog(c).join(),/matching occurrences/);
+});
+
+
+test('mixed-precision revised schedules reject reversed bounds',()=>{
+ const c=clone(),o=c.events[0].occurrences[0];o.start.date='2026-12-01';assert.match(validateEventCatalog(c).join(),/end must follow start date/);
+ assert.equal(eventCountdown({kind:'date',date:'2026-11-10',zone:'Asia/Tokyo'},now),'Scheduled date passed · exact time unconfirmed');
 });
