@@ -2,7 +2,9 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
-## [0.8.11] - 2026-11-16 (Unreleased)
+## [0.8.11] - 2026-11-16
+
+Unreleased; independent QA and Commander authorization pending.
 
 ### Added
 - Events in primary navigation: ongoing, upcoming and archive sections; search, year/category/region/status filters; chronological cards and accessible occurrence timeline.
