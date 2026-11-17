@@ -69,7 +69,9 @@ test('maintenance starts await confirmed release; duration estimates never becom
  const start=Date.parse('2026-11-12T07:00:00Z'),live=Date.parse(en.releaseConfirmedAt);
  assert.equal(occurrenceStatus(en,start-1),'upcoming');assert.equal(occurrenceStatus(en,start),'pending');
  assert.equal(occurrenceStatus(en,live),'ongoing');assert.match(eventCountdown(en.start,now),/exact time TBA/);
- assert.equal(occurrenceStatus({...en,releaseState:'antest('TBA, delayed and revised schedules cannot retain stale timers/status',()=>{
+ assert.equal(occurrenceStatus({...en,releaseState:'announced'},now),'pending');
+});
+test('TBA, delayed and revised schedules cannot retain stale timers/status',()=>{
  const clock=Date.parse('2026-11-16T04:00:00Z');
  const tba={kind:'tba',zone:'Asia/Tokyo'};
  assert.equal(occurrenceStatus({...run,start:tba,releaseState:'announced'},clock),'unknown');
@@ -77,7 +79,6 @@ test('maintenance starts await confirmed release; duration estimates never becom
  const later={...run,start:exact('2026-11-18T03:00:00Z'),end:exact('2026-11-20T05:00:00Z')};
  assert.equal(occurrenceStatus(later,clock),'upcoming');assert.notEqual(eventStateSignature({events:[{occurrences:[run]}]},'EN',clock),eventStateSignature({events:[{occurrences:[later]}]},'EN',clock));
  assert.equal(eventCountdown(tba,clock),'TBA');
-});tCountdown(tba,now),'TBA');
 });
 test('permanent availability is distinct from expired events and JP announced additions',()=>{
  const fool=catalog.events.find(e=>e.id==='the-fools-scales').occurrences.find(o=>o.kind==='war-archives');
