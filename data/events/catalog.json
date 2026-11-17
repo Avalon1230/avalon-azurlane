@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-15T13:00:41Z",
+  "updatedAt": "2026-11-17T12:32:00Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -411,6 +411,118 @@
       "checkedAt": "2026-11-15T13:04:07Z",
       "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
       "shortTitle": "Koumakan"
+    },
+    "en-yostar-20250319-virtual-tower": {
+      "title": "Yostar EN: 2025-03-19 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/03/19/maintenance-notice-3-20-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2025-03-19",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20250416-pledge-of-the-radiant-court": {
+      "title": "Yostar EN: 2025-04-16 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/04/16/maintenance-notice-4-17-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2025-04-16",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20251015-tempesta-fountain-of-youth": {
+      "title": "Yostar EN: 2025-10-15 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/10/15/maintenance-notice-10-16-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2025-10-15",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20251105-violet-tempest-blooming-lycoris": {
+      "title": "Yostar EN: 2025-11-05 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/11/05/maintenance-notice-11-6-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2025-11-05",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20251217-parallel-superimposition": {
+      "title": "Yostar EN: 2025-12-17 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/12/17/maintenance-notice-12-18-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2025-12-17",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260128-revelations-of-dust": {
+      "title": "Yostar EN: 2026-01-28 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/01/28/maintenance-notice-1-29-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-01-28",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260506-anthem-of-remembrance": {
+      "title": "Yostar EN: 2026-05-06 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/05/06/maintenance-notice-5-7-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-05-06",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260611-confluence-of-nothingness": {
+      "title": "Yostar EN: 2026-06-11 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/06/11/maintenance-notice-6-12-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-06-11",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260617-interlude-of-illusions": {
+      "title": "Yostar EN: 2026-06-17 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/06/17/maintenance-notice-6-18-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-06-17",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260708-frostfall": {
+      "title": "Yostar EN: 2026-07-08 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/07/08/maintenance-notice-7-9-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-07-08",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260826-welcome-to-little-academy": {
+      "title": "Yostar EN: 2026-08-26 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/08/26/maintenance-notice-8-27-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-08-26",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20261014-tempesta-sleeping-sea": {
+      "title": "Yostar EN: 2026-10-14 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/10/14/maintenance-notice-10-15-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-10-14",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20261014-tempesta-islas-de-libertad": {
+      "title": "Yostar EN: 2026-10-14 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/10/14/maintenance-notice-10-15-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2026-10-14",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20250409-big-lessons-apr-2025": {
+      "title": "Yostar EN: 2025-04-09 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/04/09/maintenance-notice-4-10-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T12:32:00Z",
+      "publishedAt": "2025-04-09",
+      "shortTitle": "Official EN"
     }
   },
   "events": [
@@ -3149,6 +3261,931 @@
           ]
         }
       ],
+      "stages": []
+    },
+    {
+      "id": "virtual-tower",
+      "title": "Virtual Tower",
+      "category": "major",
+      "description": "Virtual Tower is confirmed permanently available in EN War Archives, following the 2025-03-20 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20250319-virtual-tower"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "virtual-tower-en-war-archives-20250320",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250319-virtual-tower"
+            ],
+            "date": "2025-03-20",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "pledge-of-the-radiant-court",
+      "title": "Pledge of the Radiant Court",
+      "category": "major",
+      "description": "Pledge of the Radiant Court is confirmed permanently available in EN War Archives, following the 2025-04-17 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "pledge-of-the-radiant-court-en-war-archives-20250417",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250416-pledge-of-the-radiant-court"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ],
+            "date": "2025-04-17",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "tempesta-fountain-of-youth",
+      "title": "Tempesta and the Fountain of Youth",
+      "category": "major",
+      "description": "Tempesta and the Fountain of Youth is confirmed permanently available in EN War Archives, following the 2025-10-16 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20251015-tempesta-fountain-of-youth"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-fountain-of-youth-en-war-archives-20251016",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251015-tempesta-fountain-of-youth"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251015-tempesta-fountain-of-youth"
+            ],
+            "date": "2025-10-16",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "violet-tempest-blooming-lycoris",
+      "title": "Violet Tempest, Blooming Lycoris",
+      "category": "major",
+      "description": "Violet Tempest, Blooming Lycoris is confirmed permanently available in EN War Archives, following the 2025-11-06 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20251105-violet-tempest-blooming-lycoris"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "violet-tempest-blooming-lycoris-en-war-archives-20251106",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251105-violet-tempest-blooming-lycoris"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251105-violet-tempest-blooming-lycoris"
+            ],
+            "date": "2025-11-06",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "parallel-superimposition",
+      "title": "Parallel Superimposition",
+      "category": "major",
+      "description": "Parallel Superimposition is confirmed permanently available in EN War Archives, following the 2025-12-18 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "parallel-superimposition-en-war-archives-20251218",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251217-parallel-superimposition"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ],
+            "date": "2025-12-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "revelations-of-dust",
+      "title": "Revelations of Dust",
+      "category": "major",
+      "description": "Revelations of Dust is confirmed permanently available in EN War Archives, following the 2026-01-29 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20260128-revelations-of-dust",
+        "en-yostar-20250319-virtual-tower"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "revelations-of-dust-en-war-archives-20260129",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260128-revelations-of-dust"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260128-revelations-of-dust"
+            ],
+            "date": "2026-01-29",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "revelations-of-dust-en-rerun-20250320",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250319-virtual-tower"
+            ],
+            "date": "2025-03-20",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-03-26T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250319-virtual-tower"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "anthem-of-remembrance",
+      "title": "Anthem of Remembrance",
+      "category": "major",
+      "description": "Anthem of Remembrance is confirmed permanently available in EN War Archives, following the 2026-05-07 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20260506-anthem-of-remembrance",
+        "en-yostar-20251105-violet-tempest-blooming-lycoris"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "anthem-of-remembrance-en-war-archives-20260507",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260506-anthem-of-remembrance"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260506-anthem-of-remembrance"
+            ],
+            "date": "2026-05-07",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "anthem-of-remembrance-en-rerun-20251106",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251105-violet-tempest-blooming-lycoris"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251105-violet-tempest-blooming-lycoris"
+            ],
+            "date": "2025-11-06",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-11-12T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20251105-violet-tempest-blooming-lycoris"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "confluence-of-nothingness",
+      "title": "Confluence of Nothingness",
+      "category": "major",
+      "description": "Confluence of Nothingness is confirmed permanently available in EN War Archives, following the 2026-06-12 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20260611-confluence-of-nothingness"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "confluence-of-nothingness-en-war-archives-20260612",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260611-confluence-of-nothingness"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260611-confluence-of-nothingness"
+            ],
+            "date": "2026-06-12",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "interlude-of-illusions",
+      "title": "Interlude of Illusions",
+      "category": "major",
+      "description": "Interlude of Illusions is confirmed permanently available in EN War Archives, following the 2026-06-18 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20260617-interlude-of-illusions"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "interlude-of-illusions-en-war-archives-20260618",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260617-interlude-of-illusions"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260617-interlude-of-illusions"
+            ],
+            "date": "2026-06-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "frostfall",
+      "title": "Frostfall",
+      "category": "major",
+      "description": "Frostfall is confirmed permanently available in EN War Archives, following the 2026-07-09 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20260708-frostfall",
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "frostfall-en-war-archives-20260709",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260708-frostfall"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260708-frostfall"
+            ],
+            "date": "2026-07-09",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "frostfall-en-rerun-20250417",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250416-pledge-of-the-radiant-court"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ],
+            "date": "2025-04-17",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-04-23T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "welcome-to-little-academy",
+      "title": "Welcome to Little Academy",
+      "category": "major",
+      "description": "Welcome to Little Academy is confirmed permanently available in EN War Archives, following the 2026-08-27 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20260826-welcome-to-little-academy"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "welcome-to-little-academy-en-war-archives-20260827",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260826-welcome-to-little-academy"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260826-welcome-to-little-academy"
+            ],
+            "date": "2026-08-27",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "tempesta-sleeping-sea",
+      "title": "Tempesta and the Sleeping Sea",
+      "category": "major",
+      "description": "Tempesta and the Sleeping Sea is confirmed permanently available in EN War Archives, following the 2026-10-15 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-sleeping-sea"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-sleeping-sea-en-war-archives-20261015",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20261014-tempesta-sleeping-sea"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-sleeping-sea"
+            ],
+            "date": "2026-10-15",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "tempesta-islas-de-libertad",
+      "title": "Tempesta and Islas de Libertád",
+      "category": "major",
+      "description": "Tempesta and Islas de Libertád is confirmed permanently available in EN War Archives, following the 2026-10-15 maintenance. Original/rerun histories are being researched separately.",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-islas-de-libertad"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-islas-de-libertad-en-war-archives-20261015",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20261014-tempesta-islas-de-libertad"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-islas-de-libertad"
+            ],
+            "date": "2026-10-15",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "a-note-through-the-firmament",
+      "title": "A Note Through the Firmament",
+      "category": "major",
+      "description": "A Note Through the Firmament: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "a-note-through-the-firmament-en-original-20251218",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251217-parallel-superimposition"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ],
+            "date": "2025-12-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-01-07T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "hammanns-scrumptious-spells",
+      "title": "Hammann’s Scrumptious Spells",
+      "category": "mini",
+      "description": "Hammann’s Scrumptious Spells: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "hammanns-scrumptious-spells-en-original-20251218",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251217-parallel-superimposition"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ],
+            "date": "2025-12-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-01-07T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "the-strict-maid-isnt-so-strict",
+      "title": "The Strict Maid Isn’t So Strict",
+      "category": "mini",
+      "description": "The Strict Maid Isn’t So Strict: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-sleeping-sea"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "the-strict-maid-isnt-so-strict-en-original-20261015",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20261014-tempesta-sleeping-sea"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-sleeping-sea"
+            ],
+            "date": "2026-10-15",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-11-04T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-sleeping-sea"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "joint-operation-big-shots-proclamation",
+      "title": "Joint Operation — The Big Shot’s Proclamation",
+      "category": "raid",
+      "description": "Joint Operation — The Big Shot’s Proclamation: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20260826-welcome-to-little-academy"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "joint-operation-big-shots-proclamation-en-original-20260827",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260826-welcome-to-little-academy"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260826-welcome-to-little-academy"
+            ],
+            "date": "2026-08-27",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-09-07T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20260826-welcome-to-little-academy"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "light-of-the-martyrium",
+      "title": "Light of the Martyrium",
+      "category": "major",
+      "description": "Light of the Martyrium: EN rerun history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20260617-interlude-of-illusions"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "light-of-the-martyrium-en-rerun-20260618",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260617-interlude-of-illusions"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260617-interlude-of-illusions"
+            ],
+            "date": "2026-06-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-06-24T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20260617-interlude-of-illusions"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "sharing-sweet-slumbers",
+      "title": "Sharing Sweet Slumbers",
+      "category": "mini",
+      "description": "Sharing Sweet Slumbers: EN rerun history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20260611-confluence-of-nothingness"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "sharing-sweet-slumbers-en-rerun-20260612",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260611-confluence-of-nothingness"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260611-confluence-of-nothingness"
+            ],
+            "date": "2026-06-12",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-06-24T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20260611-confluence-of-nothingness"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "big-lessons-for-the-little-lady",
+      "title": "Big Lessons for the Little Lady",
+      "category": "mini",
+      "description": "Big Lessons for the Little Lady: EN rerun history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20250409-big-lessons-apr-2025"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "big-lessons-for-the-little-lady-en-rerun-20250410",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250409-big-lessons-apr-2025"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250409-big-lessons-apr-2025"
+            ],
+            "date": "2025-04-10",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-04-23T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250409-big-lessons-apr-2025"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "shipbuilding-support-northern-parliament",
+      "title": "Shipbuilding Support Plan: Northern Parliament",
+      "category": "mini",
+      "description": "Shipbuilding Support Plan: Northern Parliament: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "shipbuilding-support-northern-parliament-en-original-20250417",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250416-pledge-of-the-radiant-court"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ],
+            "date": "2025-04-17",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-04-23T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ]
+          }
+        }
+      ],
+      "content": [],
       "stages": []
     }
   ]
