@@ -43,7 +43,7 @@ import {normalizeEventFilters,parseEventRoute} from './events.js';
 import {createEventClock} from './events-clock.js';
 
 const eventState={status:'idle',catalog:null,error:'',eventId:null,occurrenceId:null,filters:readEventFilters({getItem:key=>localStorage.getItem(key)})};
-const eventClock=createEventClock({document,read:()=>({active:state.page==='events',catalog:eventState.catalog,region:eventState.eventId?null:eventState.filters.region}),onTransition:()=>{refreshEventView();notify('Event schedules have updated.');}});
+const eventClock=createEventClock({document,read:()=>({active:state.page==='events',catalog:eventState.catalog,region:eventState.eventId?null:eventState.filters.region,scope:eventState.eventId?'detail:'+eventState.eventId:'index:'+eventState.filters.region}),onTransition:()=>{refreshEventView();notify('Event schedules have updated.');}});
 async function ensureEvents(){
   if(eventState.status==='loading'||eventState.status==='ready')return;
   eventState.status='loading';eventState.error='';if(state.page==='events')render();
@@ -1126,7 +1126,7 @@ document.addEventListener('keydown', event => {
 });
 function openLinkedContentRoute(hash){
   const eventRoute=parseEventRoute(hash);
-  if(eventRoute){go('events');eventState.eventId=eventRoute.eventId;history.replaceState(null,'',hash);render();$('#app-content').focus({preventScroll:true});return true;}
+  if(eventRoute){go('events');eventState.eventId=eventRoute.eventId;eventState.occurrenceId=eventRoute.occurrenceId||null;history.replaceState(null,'',hash);render();$('#app-content').focus({preventScroll:true});return true;}
   const augment=hash.match(/^#\/augments\/(aug-(?:announced-)?\d{4,8})$/);
   if(augment){go('augments');state.detail={kind:'augment',id:augment[1]};history.replaceState(null,'',hash);render();document.querySelector('.detail-panel .icon-btn')?.focus();return true;}
   const equipment=hash.match(/^#\/equipment\/(\d{2,8})$/);

@@ -1,8 +1,19 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-16 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-17 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
 ## Active development — v0.8.11 Operation CHRONICLE (unmerged)
+
+### Independent QA corrections — 2026-11-17
+
+- Resumed PR #34 at `14fb1aeb71f0320b502dd7c3efc8a18b25203868`; recovered [review 5932532409](https://github.com/Avalon1230/avalon-azurlane/pull/34#pullrequestreview-5932532409) and the Commander's four-section requirement. No new PR, merge or catalog rewrite.
+- Ongoing, Upcoming, Past Events and War Archives are separate occurrence contexts. A completed identity can appear in both historical and permanent views. Only verified regional release observations establish War Archives availability; future additions explicitly remain unavailable. Source JSON remains eight identities / 34 occurrences.
+- Historical cards/timeline links preserve their occurrence and regional reward scope. Expired limited rewards are not inherited by permanent content. Ship names gain a natural break after the slash; countdown signatures reset silently on view/region changes while genuine boundaries still notify.
+- Local verification: 319 Node tests and syntax/generated-data checks pass. Updated CI browser assertions cover both ships at 360/390px, four sections, regional availability, historical links, future wording and false notifications. Refreshed CI/screenshots pending for this correction; prior results below are the baseline, not evidence for the correction.
+- Next: finish full CI, inspect and attach refreshed desktop/mobile evidence, then return to independent QA. Do not merge.
+
+### Initial implementation verification (before QA corrections)
+
 
 - Resumed verified `main` at `1c228da902799da2431696beab626c4ac35be0d9` on **`feat/operation-chronicle-v0811`**. Completed PR #33 remains untouched. The released version remains v0.8.10.
 - Added integrated Events navigation/routes, regional cards and timeline, persistent filters, encyclopedia details, one-identity release histories, source disclosures and guarded links to existing Fleet Lab.

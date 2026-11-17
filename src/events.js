@@ -119,11 +119,16 @@ export function occurrenceStatus(o,now=Date.now()){
   if(o.releaseState==='delayed')return 'delayed';
   if(before(o.start,now)===true)return 'upcoming';
   const observed=o.releaseState==='released'&&now>=Date.parse(o.releaseConfirmedAt);
-  if(o.start?.kind==='exact'&&before(o.start,now)===false||observed)return o.kind==='war-archives'?'permanent':'ongoing';
+  // Permanent availability requires a verified release observation, even after an exact announced date.
+  if(o.kind==='war-archives'){
+    if(observed)return 'permanent';
+    return o.start?.kind==='tba'?'unknown':'pending';
+  }
+  if(o.start?.kind==='exact'&&before(o.start,now)===false||observed)return 'ongoing';
   if(['date','maintenance'].includes(o.start?.kind))return 'pending';
   return 'unknown';
 }
-export function eventSection(status){return status==='ongoing'?'ongoing':['ended','permanent'].includes(status)?'archive':'upcoming';}
+export function eventSection(status){return status==='ongoing'?'ongoing':status==='ended'?'past':status==='permanent'?'war-archives':'upcoming';}
 export function occurrenceSortTime(o){return o.start?.value?Date.parse(o.start.value):o.start?.date?Date.parse(o.start.date+'T00:00:00Z'):null;}
 export function eventRows(catalog,filters={},now=Date.now()){
   const {region='EN',query='',year='all',category='all',status='all',sort='newest'}=filters;
@@ -135,7 +140,7 @@ export function eventRows(catalog,filters={},now=Date.now()){
     const runs=event.occurrences.filter(o=>o.region===region&&(year==='all'||String(o.start.value||o.start.date||'').slice(0,4)===year));
     const ranked=runs.map(o=>({event,occurrence:o,status:occurrenceStatus(o,now)})).filter(r=>status==='all'||r.status===status);
     // One identity per section. Multiple historical reruns live in the detail chronology.
-    for(const section of ['ongoing','upcoming','archive']){
+    for(const section of ['ongoing','upcoming','past','war-archives']){
       const candidates=ranked.filter(r=>eventSection(r.status)===section).sort((a,b)=>(occurrenceSortTime(b.occurrence)??-Infinity)-(occurrenceSortTime(a.occurrence)??-Infinity));
       if(candidates.length)rows.push({...candidates[0],section});
     }
@@ -165,7 +170,7 @@ export function eventStateSignature(catalog,region,now=Date.now()){
   return (catalog?.events||[]).flatMap(e=>e.occurrences.filter(o=>!region||o.region===region).map(o=>[o.id,occurrenceStatus(o,now),...(o.phases||[]).map(p=>ended(p.at,now))].join(':'))).join('|');
 }
 export const DEFAULT_EVENT_FILTERS=Object.freeze({region:'EN',query:'',year:'all',category:'all',status:'all',sort:'newest',view:'cards',zone:EVENT_ZONE});
-export function parseEventRoute(hash){const match=String(hash).match(/^#\/events(?:\/([a-z0-9][a-z0-9-]{0,95}))?$/);return match?{page:'events',eventId:match[1]||null}:null;}
+export function parseEventRoute(hash){const match=String(hash).match(/^#\/events(?:\/([a-z0-9][a-z0-9-]{0,95})(?:\?occurrence=([a-z0-9][a-z0-9-]{0,95}))?)?$/);return match?{page:'events',eventId:match[1]||null,...(match[2]?{occurrenceId:match[2]}:{})}:null;}
 export function normalizeEventFilters(raw={}){
   return {...DEFAULT_EVENT_FILTERS,
     region:Object.hasOwn(EVENT_REGIONS,raw?.region)?raw.region:'EN',

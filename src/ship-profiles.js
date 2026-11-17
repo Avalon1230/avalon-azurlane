@@ -133,7 +133,7 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=
   // Never replace the small shipyard portrait when changing skin art.
   return '<div class="ship-profile-top"><div class="ship-profile-left"><section class="ship-profile-overview '+portraitClasses(ship||data)+'">' + researchFrame(ship||data) +
     '<div class="ship-profile-cover">' + imageMarkup(ship || data,'ship','asset-profile') + '</div>' +
-    '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName) + '</h1>' +
+    '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName).replaceAll('/', '/<wbr>') + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
     (researchShip(ship||data)?'<p class="research-identity">'+researchShip(ship||data).classification+' · Research Series '+researchShip(ship||data).series+'</p>':'')+facts + '</div></section>' + (loadout?renderLoadoutPanel(loadout):'') + '</div>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';

@@ -81,7 +81,7 @@ test('TBA, delayed and revised schedules cannot retain stale timers/status',()=>
 });
 test('permanent availability is distinct from expired events and JP announced additions',()=>{
  const fool=catalog.events.find(e=>e.id==='the-fools-scales').occurrences.find(o=>o.kind==='war-archives');
- assert.equal(occurrenceStatus(fool,now),'permanent');assert.equal(eventSection('permanent'),'archive');
+ assert.equal(occurrenceStatus(fool,now),'permanent');assert.equal(eventSection('permanent'),'war-archives');
  const upcoming=catalog.events.find(e=>e.id==='effulgence-before-eclipse').occurrences.find(o=>o.kind==='war-archives');
  assert.equal(upcoming.region,'JP');assert.equal(occurrenceStatus(upcoming,now),'unknown');
  assert.equal(eventRows(catalog,{region:'EN'},now).some(r=>r.section==='upcoming'),false);
@@ -94,10 +94,10 @@ test('search matches franchise, rewards and aliases; year/category/status/region
  assert.ok(eventRows(catalog,{category:'research',status:'ongoing'},now).every(r=>r.event.category==='research'&&r.status==='ongoing'));
  assert.equal(eventRows(catalog,{query:'no-such-event'},now).length,0);
 });
-test('archive sorting changes chronologically while retaining one identity per section',()=>{
- const oldest=eventRows(catalog,{sort:'oldest'},now).filter(r=>r.section==='archive');
- const newest=eventRows(catalog,{sort:'newest'},now).filter(r=>r.section==='archive');
- assert.deepEqual(oldest.map(r=>r.event.id),newest.map(r=>r.event.id).reverse());
+test('past event sorting changes chronologically while retaining one identity per section',()=>{
+ const oldest=eventRows(catalog,{sort:'oldest'},now).filter(r=>r.section==='past');
+ const newest=eventRows(catalog,{sort:'newest'},now).filter(r=>r.section==='past');
+ assert.ok(oldest.length>0);assert.deepEqual(oldest.map(r=>r.event.id),newest.map(r=>r.event.id).reverse());
  assert.equal(new Set(oldest.map(r=>r.event.id)).size,oldest.length);
 });
 test('routes accept direct event IDs and reject path injection/extra segments',()=>{
@@ -174,4 +174,72 @@ test('malformed catalogs fail validation without throwing or publishing partial 
 test('mixed-precision revised schedules reject reversed bounds',()=>{
  const c=clone(),o=c.events[0].occurrences[0];o.start.date='2026-12-01';assert.match(validateEventCatalog(c).join(),/end must follow start date/);
  assert.equal(eventCountdown({kind:'date',date:'2026-11-10',zone:'Asia/Tokyo'},now),'Scheduled date passed · exact time unconfirmed');
+});
+
+test('completed runs and verified permanent availability have independent regional sections',()=>{
+ const enRows=eventRows(catalog,{region:'EN'},now);
+ assert.deepEqual(enRows.filter(r=>r.event.id==='the-fools-scales').map(r=>r.section).sort(),['past','war-archives']);
+ assert.equal(enRows.filter(r=>r.event.id==='divergent-chessboard').every(r=>r.section==='past'),true);
+ for(const region of ['JP','CN']){
+  const rows=eventRows(catalog,{region},now);
+  assert.equal(rows.some(r=>r.section==='war-archives'),false);
+  assert.equal(rows.some(r=>r.event.id==='the-fools-scales'&&r.section==='past'),true);
+ }
+ const jp=eventRows(catalog,{region:'JP'},now).filter(r=>r.event.id==='effulgence-before-eclipse');
+ assert.deepEqual(jp.map(r=>r.section).sort(),['past','upcoming']);
+ assert.equal(new Set(enRows.map(r=>r.event.id)).size,8);
+});
+test('four sections and counts agree between cards and timeline, with occurrence-specific links',()=>{
+ for(const view of ['cards','timeline']){
+  const html=renderEvents({catalog,filters:{...filters,view},now});
+  for(const id of ['ongoing','upcoming','past','war-archives'])assert.match(html,new RegExp('id="events-'+id+'"'));
+  assert.match(html,/Past Events<\/h2><span>5 identities/);
+  assert.match(html,/War Archives<\/h2><span>1 identity/);
+  const e=catalog.events.find(e=>e.id==='the-fools-scales');
+  for(const o of e.occurrences.filter(o=>o.region==='EN'&&(view==='timeline'||o.kind!=='original'))){
+   assert.ok(html.includes('#/events/'+e.id+'?occurrence='+o.id));
+  }
+ }
+ assert.equal(eventRows(catalog,{status:'ended'},now).some(r=>r.section!=='past'),false);
+ assert.equal(eventRows(catalog,{status:'permanent'},now).some(r=>r.section!=='war-archives'),false);
+});
+test('future permanent addition needs observed release even when its exact planned start passes',()=>{
+ const e=catalog.events.find(e=>e.id==='effulgence-before-eclipse'),o=e.occurrences.find(o=>o.kind==='war-archives');
+ const start=now+1000,observation=now+3000;
+ for(const kind of ['tba','maintenance','date','exact']){
+  const future={...o,start:kind==='exact'?exact(new Date(start).toISOString()):{...o.start,kind,...(kind==='tba'?{}:{date:'2026-11-16'})},releaseState:'announced'};
+  assert.notEqual(occurrenceStatus(future,observation),'permanent');
+  const released={...future,releaseState:'released',releaseConfirmedAt:new Date(observation).toISOString()};
+  assert.notEqual(occurrenceStatus(released,observation-1),'permanent');
+  assert.equal(occurrenceStatus(released,observation),'permanent');
+ }
+});
+test('cards, timeline, detail and history describe planned availability until observation',()=>{
+ const c=clone(),e=c.events.find(e=>e.id==='effulgence-before-eclipse'),o=e.occurrences.find(o=>o.kind==='war-archives');
+ const f={...filters,region:'JP',query:e.title};
+ const render=()=>[...['cards','timeline'].map(view=>renderEvents({catalog:c,filters:{...f,view},now})),renderEventDetail({catalog:c,eventId:e.id,filters:f,now})];
+ for(const html of render()){assert.match(html,/Planned War Archives addition · not available yet/);assert.doesNotMatch(html,/Permanent content/);}
+ o.releaseState='released';o.releaseConfirmedAt=new Date(now).toISOString();
+ for(const html of render()){assert.match(html,/Permanent content · available in War Archives/);assert.doesNotMatch(html,/Planned War Archives addition/);}
+});
+test('historical shop and reward scopes do not leak into permanent or other regional runs',()=>{
+ const c=clone(),e=c.events.find(e=>e.id==='the-fools-scales'),past=e.occurrences.find(o=>o.region==='EN'&&o.kind==='original'),permanent=e.occurrences.find(o=>o.kind==='war-archives');
+ e.content.push({id:'limited-shop-fixture',kind:'shop',name:'Expired limited exchange',description:'Historical test shop',sourceIds:e.sourceIds,regions:['EN'],occurrenceIds:[past.id]});
+ const render=occurrenceId=>renderEventDetail({catalog:c,eventId:e.id,occurrenceId,filters,now});
+ assert.match(render(past.id),/Expired limited exchange/);assert.match(render(past.id),/This run has ended/);
+ assert.doesNotMatch(render(permanent.id),/Expired limited exchange/);
+ const jp=e.occurrences.find(o=>o.region==='JP');assert.doesNotMatch(render(jp.id),/Expired limited exchange/);
+ assert.match(render(jp.id),/JP historical rewards/);
+ assert.deepEqual(parseEventRoute('#/events/'+e.id+'?occurrence='+past.id),{page:'events',eventId:e.id,occurrenceId:past.id});
+ assert.equal(parseEventRoute('#/events/'+e.id+'?occurrence=../bad'),null);
+});
+test('clock scope changes at frozen time are silent; subsequent same-scope boundaries notify once',()=>{
+ let time=Date.parse(run.end.value)-1000,changes=0;const state={active:true,catalog:{events:[{occurrences:[run]}]},region:'EN',scope:'index:EN'};
+ const document={hidden:false,querySelectorAll:()=>[],addEventListener:()=>{},removeEventListener:()=>{}};
+ const clock=createEventClock({document,read:()=>state,onTransition:()=>{changes++;clock.sync();},now:()=>time,setIntervalFn:()=>1,clearIntervalFn:()=>{}});
+ clock.sync();
+ for(const [region,scope] of [['JP','index:JP'],['EN','index:EN'],[null,'detail:first'],[null,'detail:second'],['EN','index:EN']]){
+  Object.assign(state,{region,scope});clock.sync();clock.tick();assert.equal(changes,0);
+ }
+ time+=1000;clock.tick();clock.tick();assert.equal(changes,1);clock.destroy();
 });

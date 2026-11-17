@@ -8,7 +8,7 @@ Azur Lane has too many ships, skills and equipment choices for a single tier num
 
 ## Explore AVALON
 
-- **Events:** Browse ongoing, announced and historical events for EN, JP and CN. Search rewards, use the chronological timeline, and open regional schedules, missions and linked profiles. Exact countdowns default to Manila; unconfirmed schedules stay TBA. The initial archive contains eight verified identities and is explicitly incomplete.
+- **Events:** Browse Ongoing, Upcoming, Past Events and verified War Archives releases separately for EN, JP and CN. Completed runs remain in Past Events even when a regional permanent release also exists. Search rewards, use the chronological timeline, and open regional schedules, missions and linked profiles. Exact countdowns default to Manila; unconfirmed schedules stay TBA. The initial catalog contains eight verified identities and is explicitly incomplete.
 - **Ship Index:** Browse the runtime ship catalog and independently maintained verified additions by faction, hull type, rarity or name. Open a ship's profile for stats, skills, equipment slots, acquisition details and original in-game artwork. Skins have their own gallery.
 - **Research & Development:** Find Priority and Decisive ships by research series, compare Development checkpoints and Fate Simulation in one Research & Statistics panel, and keep track of shipyard missions and timers yourself.
 - **Equipment & Augments:** Search gear by type and nation, inspect its stats, see which hulls may be able to use it, and check recorded acquisition routes. The augment directory is separate from ordinary equipment.
