@@ -130,6 +130,12 @@ The five checked event-page infoboxes explicitly say **All Servers**. They suppo
 
 Virtual Tower and Anthem of Remembrance explicitly describe minor events. Interlude of Illusions uses the smaller S.P. format. Frostfall uses Coalition battles and is classified as a raid; Welcome to Little Academy retains the major-event designation from its page. Other archive entries use the wiki E.X./S.P. grouping. The UI classification is separate from permanent availability. Five checked page banners are linked where their file metadata is available.
 
+## Completion recheck — November 18, 2026 (Asia/Manila)
+
+Recovered implementation `6874171cd26df203b1220d491feeec28c58d6abb` already contains the expanded catalog and final capture fixes. Fresh bounded source requests returned the same Events and War Archives revisions recorded above. All 51 dated identities × three regional dates matched the catalog; all 53 cataloged archive memberships matched the current-content index. All 24 preliminary EN publisher-backed occurrences and eight historical date pairs were re-read without finding a title, type, date or availability discrepancy. This audit does not upgrade unknown regional availability or infer unpublished rewards.
+
+The latest implementation [full CI 44092525437](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44092525437) and the formerly pending [run 44087442837](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44087442837) both completed successfully. The local suite was rerun with 325/325 passing tests and a passing catalog audit. [39 original browser captures, file hashes and verification limits](qa/v0812-chronicle/README.md) are preserved for independent QA. The closure commit changes evidence and documentation only; the PR records its final SHA and complete CI result.
+
 ## Repeatable maintenance procedure
 
 1. Read a small selected set of current Koumakan indexes/pages through permitted access. Cache requests, identify the client, respect maxlag and Retry-After, and stop on access/rate limits. Record revision IDs, timestamps and attribution.

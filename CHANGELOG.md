@@ -2,7 +2,7 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
-## [0.8.12] - 2026-11-17
+## [0.8.12] - Unreleased
 
 Unreleased; independent QA and Commander merge authorization required.
 
@@ -12,7 +12,7 @@ Unreleased; independent QA and Commander merge authorization required.
 - Reconciled all 51 dated War Archives identities in Koumakan Events revision 307833 with the current-content index revision 307578. Retained 24 individually checked publisher-backed EN occurrences and added 22 regional historical occurrences from five selected event pages. All 29 preliminary identities and 58 occurrence IDs remain stable.
 - Corrected Virtual Tower, Anthem of Remembrance and Interlude of Illusions to mini-events; identified Frostfall as a coalition raid. Date-only records retain their actual precision. No expired rewards are inherited by permanent additions.
 - Default-collapsed **Search & filters** preserves selected server, query, filters and keyboard focus; the visible summary shows active selections. Cards/Timeline remain accessible outside it. Expansion and navigation do not produce schedule-change notifications.
-- Added a revision-attributed [evidence ledger](docs/EVENTS_BACKFILL.md), source-fact consistency and regional-isolation regressions, plus actual 360/390/1280px browser evidence.
+- Added a revision-attributed [evidence ledger](docs/EVENTS_BACKFILL.md), source-fact consistency and regional-isolation regressions, plus [39 actual 360/390/1280px browser captures](docs/qa/v0812-chronicle/README.md), inspected November 18. The implementation passed all 325 Node tests and complete CI; external collaboration-logo throttling is disclosed in the evidence.
 
 **Coverage boundaries:** Complete reconciliation of the checked War Archives index is not a complete historical encyclopedia. Many original/rerun schedules, regional rewards, stages, drops and artwork still need verification. Anthem of Remembrance and Frostfall remain EN-only for permanent availability. Normal wiki HTML returned 403; bounded documented API requests succeeded. No bulk mirroring or runtime scraping.
 

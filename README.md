@@ -6,6 +6,8 @@ Azur Lane has too many ships, skills and equipment choices for a single tier num
 
 **[Open AVALON](https://avalon1230.github.io/avalon-azurlane/)** · [See what's new](CHANGELOG.md) · [Follow development](docs/PROJECT_STATUS.md)
 
+**Release status:** The live release is v0.8.11 (8 event identities / 34 occurrences). The v0.8.12 expansion below remains unmerged in [PR #35](https://github.com/Avalon1230/avalon-azurlane/pull/35); [source and screenshot evidence](docs/qa/v0812-chronicle/README.md) is ready for independent QA.
+
 ## Explore AVALON
 
 - **Events:** Browse Ongoing, Upcoming, Past Events and verified War Archives releases separately for EN, JP and CN. Completed runs remain in Past Events even when a regional permanent release also exists. Search rewards, use the chronological timeline, and open regional schedules, missions and linked profiles. Exact countdowns default to Manila; unconfirmed schedules stay TBA. The source-reviewed expansion branch contains 66 cataloged identities and 221 occurrences, with 53 confirmed EN War Archives entries and 51 each for JP and CN; the game-wide historical catalog is still incomplete. Advanced search/filter controls collapse by default to prioritize event information.
