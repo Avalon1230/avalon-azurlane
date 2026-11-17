@@ -1,4 +1,6 @@
-# v0.8.11 CHRONICLE — developer verification and independent QA handoff
+# v0.8.11 CHRONICLE — initial implementation evidence
+
+**Historical baseline:** classification, availability wording and mobile names in these captures are superseded by the [November 17 QA corrections](../v0811-corrections/README.md).
 
 [PR #34](https://github.com/Avalon1230/avalon-azurlane/pull/34) is unmerged. These are developer verification results; independent QA and Commander authorization are still required.
 
