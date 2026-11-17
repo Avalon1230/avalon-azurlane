@@ -1,4 +1,5 @@
 /** Offline CHRONICLE coverage audit; does not infer availability from age. */
+import {auditBackfillEvidence} from './event-evidence.mjs';
 import {readFileSync} from 'node:fs';
 import {validateEventCatalog,occurrenceStatus} from '../src/events.js';
 const catalog=JSON.parse(readFileSync(new URL('../data/events/catalog.json',import.meta.url),'utf8'));
@@ -15,3 +16,6 @@ for(const region of ['EN','JP','CN']){
 const noObservation=all.filter(r=>r.occurrence.kind==='war-archives'&&r.occurrence.releaseState==='released'&&!r.occurrence.releaseConfirmedAt);
 if(noObservation.length){console.error('Unconfirmed permanent entries: '+noObservation.map(r=>r.occurrence.id).join(', '));process.exitCode=1;}
 console.log('CHRONICLE CATALOG AUDIT: '+catalog.events.length+' identities, '+all.length+' occurrences, '+Object.keys(catalog.sources).length+' sources; coverage='+catalog.coverage+'.');
+
+const evidence=JSON.parse(readFileSync(new URL('../data/events/backfill-evidence.json',import.meta.url)));
+console.log('REVIEWED FACTS:',auditBackfillEvidence(catalog,evidence));

@@ -6,19 +6,19 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 Unreleased; independent QA and Commander merge authorization required.
 
-### Operation CHRONICLE: Publisher-verified historical backfill
+### Operation CHRONICLE: Regional history and War Archives reconciliation
 
-- Expanded partial catalog **8 → 29 event identities** and **34 → 58 regional occurrences**. Permanent entries for EN increased **1 → 14**, each linked to an official maintenance notice; no JP/CN availability is assumed.
-- Added 13 EN War Archives identities and 11 EN original/rerun occurrences, including historical Frostfall, Anthem of Remembrance and Revelations of Dust reruns, while keeping event shop and claim rewards occurrence-specific.
-- Kept unreleased future War Archives additions unavailable until a verified release observation. Dates announced only as after-maintenance remain date-precision, not invented timestamps.
-- Introduced default-collapsed **Search & filters** on Events with EN/JP/CN region and active-filter summary visible; filter state persists while expanding/collapsing, Cards/Timeline controls remain outside.
-- Added [source-by-source EN evidence ledger](docs/EVENTS_BACKFILL.md) and offline coverage audit, source/region/disclosure regression tests, and responsive-browser evidence checks.
+- Expanded the partial catalog **8 → 66 event identities** and **34 → 221 regional occurrences**. War Archives coverage is **EN 53 / JP 51 / CN 51**, with one separately announced JP addition still TBA.
+- Reconciled all 51 dated War Archives identities in Koumakan Events revision 307833 with the current-content index revision 307578. Retained 24 individually checked publisher-backed EN occurrences and added 22 regional historical occurrences from five selected event pages. All 29 preliminary identities and 58 occurrence IDs remain stable.
+- Corrected Virtual Tower, Anthem of Remembrance and Interlude of Illusions to mini-events; identified Frostfall as a coalition raid. Date-only records retain their actual precision. No expired rewards are inherited by permanent additions.
+- Default-collapsed **Search & filters** preserves selected server, query, filters and keyboard focus; the visible summary shows active selections. Cards/Timeline remain accessible outside it. Expansion and navigation do not produce schedule-change notifications.
+- Added a revision-attributed [evidence ledger](docs/EVENTS_BACKFILL.md), source-fact consistency and regional-isolation regressions, plus actual 360/390/1280px browser evidence.
 
-**Known boundaries:** Koumakan's exact Events and War Archives indexes returned HTTP 403 in the available browsing environment; this batch relies on dated official Yostar EN announcements and is *not* a complete wiki extraction. JP/CN permanent additions, comprehensive original/rerun histories, stage/reward details and future updates remain pending.
+**Coverage boundaries:** Complete reconciliation of the checked War Archives index is not a complete historical encyclopedia. Many original/rerun schedules, regional rewards, stages, drops and artwork still need verification. Anthem of Remembrance and Frostfall remain EN-only for permanent availability. Normal wiki HTML returned 403; bounded documented API requests succeeded. No bulk mirroring or runtime scraping.
 
-## [0.8.11] - 2026-11-16
+## [0.8.11] - 2026-11-17
 
-Unreleased; independent QA and Commander authorization pending.
+Released through Commander-authorized PR #34 after independent QA.
 
 ### Added
 - Events in primary navigation: Ongoing, Upcoming, Past Events and War Archives sections; search, year/category/region/status filters; chronological cards and accessible occurrence timeline.
@@ -36,7 +36,7 @@ Unreleased; independent QA and Commander authorization pending.
 
 ### Preserved
 - Approved v0.8.10 PR/DR/META styling, research calculations and mission tracking, saved six-slot loadouts and existing Fleet Lab/combat behavior.
-- No merge or deployment. Independent source and visual QA is required before the Commander authorizes release.
+- Released independently of the still-unmerged v0.8.12 expansion.
 
 ## [0.8.10] - 2026-11-14
 

@@ -1,0 +1,1145 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-17T13:11:32Z",
+  "coverage": "partial",
+  "indexSourceIds": [
+    "wiki-v0812-8",
+    "wiki-v0812-20231"
+  ],
+  "preservedEventIds": [
+    "angels-azur-stage",
+    "effulgence-before-eclipse",
+    "divergent-chessboard",
+    "visitors-dyed-in-red",
+    "the-fools-scales",
+    "tempesta-corridor-of-fog",
+    "bayard-blueprint-completion",
+    "island-development-season-v",
+    "virtual-tower",
+    "pledge-of-the-radiant-court",
+    "tempesta-fountain-of-youth",
+    "violet-tempest-blooming-lycoris",
+    "parallel-superimposition",
+    "revelations-of-dust",
+    "anthem-of-remembrance",
+    "confluence-of-nothingness",
+    "interlude-of-illusions",
+    "frostfall",
+    "welcome-to-little-academy",
+    "tempesta-sleeping-sea",
+    "tempesta-islas-de-libertad",
+    "a-note-through-the-firmament",
+    "hammanns-scrumptious-spells",
+    "the-strict-maid-isnt-so-strict",
+    "joint-operation-big-shots-proclamation",
+    "light-of-the-martyrium",
+    "sharing-sweet-slumbers",
+    "big-lessons-for-the-little-lady",
+    "shipbuilding-support-northern-parliament"
+  ],
+  "preservedOccurrenceIds": [
+    "angels-azur-stage-2026-en",
+    "angels-azur-stage-2026-jp",
+    "angels-azur-stage-2026-cn",
+    "effulgence-2023-en",
+    "effulgence-2025-en",
+    "effulgence-2023-jp",
+    "effulgence-2025-jp",
+    "effulgence-2023-cn",
+    "effulgence-2025-cn",
+    "effulgence-jp-war-archives",
+    "divergent-chessboard-cn-original-2017",
+    "divergent-chessboard-jp-original-2017",
+    "divergent-chessboard-en-original-2018",
+    "divergent-chessboard-cn-rerun-2018",
+    "divergent-chessboard-jp-rerun-2018",
+    "divergent-chessboard-en-rerun-2019",
+    "visitors-dyed-in-red-cn-original-2017",
+    "visitors-dyed-in-red-jp-original-2017",
+    "visitors-dyed-in-red-en-original-2018",
+    "visitors-dyed-in-red-cn-rerun-2018",
+    "visitors-dyed-in-red-jp-rerun-2018",
+    "visitors-dyed-in-red-en-rerun-2019",
+    "the-fools-scales-en-original-2023",
+    "the-fools-scales-en-rerun-2025",
+    "the-fools-scales-jp-original-2023",
+    "the-fools-scales-jp-rerun-2025",
+    "the-fools-scales-cn-original-2023",
+    "the-fools-scales-cn-rerun-2025",
+    "the-fools-scales-en-war-archives-2026",
+    "tempesta-corridor-of-fog-en-original-2026",
+    "tempesta-corridor-of-fog-jp-original-2026",
+    "tempesta-corridor-of-fog-cn-original-2026",
+    "bayard-blueprint-completion-en-campaign-2026",
+    "island-development-season-v-en-campaign-2026",
+    "virtual-tower-en-war-archives-20250320",
+    "pledge-of-the-radiant-court-en-war-archives-20250417",
+    "tempesta-fountain-of-youth-en-war-archives-20251016",
+    "violet-tempest-blooming-lycoris-en-war-archives-20251106",
+    "parallel-superimposition-en-war-archives-20251218",
+    "revelations-of-dust-en-war-archives-20260129",
+    "revelations-of-dust-en-rerun-20250320",
+    "anthem-of-remembrance-en-war-archives-20260507",
+    "anthem-of-remembrance-en-rerun-20251106",
+    "confluence-of-nothingness-en-war-archives-20260612",
+    "interlude-of-illusions-en-war-archives-20260618",
+    "frostfall-en-war-archives-20260709",
+    "frostfall-en-rerun-20250417",
+    "welcome-to-little-academy-en-war-archives-20260827",
+    "tempesta-sleeping-sea-en-war-archives-20261015",
+    "tempesta-islas-de-libertad-en-war-archives-20261015",
+    "a-note-through-the-firmament-en-original-20251218",
+    "hammanns-scrumptious-spells-en-original-20251218",
+    "the-strict-maid-isnt-so-strict-en-original-20261015",
+    "joint-operation-big-shots-proclamation-en-original-20260827",
+    "light-of-the-martyrium-en-rerun-20260618",
+    "sharing-sweet-slumbers-en-rerun-20260612",
+    "big-lessons-for-the-little-lady-en-rerun-20250410",
+    "shipbuilding-support-northern-parliament-en-original-20250417"
+  ],
+  "archiveIndexRows": [
+    {
+      "eventId": "visitors-dyed-in-red",
+      "wikiTitle": "Visitors Dyed in Red Rerun",
+      "dates": {
+        "EN": "2019-09-26",
+        "JP": "2018-09-28",
+        "CN": "2018-09-28"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "fallen-wings",
+      "wikiTitle": "Fallen Wings Rerun",
+      "dates": {
+        "EN": "2020-04-09",
+        "JP": "2020-04-09",
+        "CN": "2020-04-09"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "encircling-graf-spee",
+      "wikiTitle": "Encircling Graf Spee",
+      "dates": {
+        "EN": "2020-04-16",
+        "JP": "2019-05-09",
+        "CN": "2019-05-09"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "winter-s-crown",
+      "wikiTitle": "Winter's Crown Rerun",
+      "dates": {
+        "EN": "2020-05-14",
+        "JP": "2019-06-13",
+        "CN": "2019-06-13"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "strive-wish-and-strategize",
+      "wikiTitle": "Strive, Wish and Strategize",
+      "dates": {
+        "EN": "2020-07-30",
+        "JP": "2019-03-07",
+        "CN": "2019-03-07"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "divergent-chessboard",
+      "wikiTitle": "Opposite-Colored Rerun",
+      "dates": {
+        "EN": "2020-10-15",
+        "JP": "2019-08-15",
+        "CN": "2019-08-15"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "glorious-battle",
+      "wikiTitle": "Glorious Battle",
+      "dates": {
+        "EN": "2020-11-12",
+        "JP": "2020-11-12",
+        "CN": "2020-11-12"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "iris-of-light-and-dark",
+      "wikiTitle": "Iris of Light and Dark Rerun",
+      "dates": {
+        "EN": "2021-03-12",
+        "JP": "2020-05-14",
+        "CN": "2020-05-14"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "ink-stained-steel-sakura",
+      "wikiTitle": "Ink-Stained Steel Sakura Rerun",
+      "dates": {
+        "EN": "2021-04-08",
+        "JP": "2020-07-02",
+        "CN": "2020-07-02"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "crimson-echoes",
+      "wikiTitle": "Crimson Echoes Rerun",
+      "dates": {
+        "EN": "2021-10-14",
+        "JP": "2021-01-21",
+        "CN": "2021-01-21"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "scherzo-of-iron-and-blood",
+      "wikiTitle": "Scherzo of Iron and Blood",
+      "dates": {
+        "EN": "2021-12-16",
+        "JP": "2021-05-13",
+        "CN": "2021-05-13"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "moonlit-overture",
+      "wikiTitle": "Prelude under the Moon",
+      "dates": {
+        "EN": "2022-04-07",
+        "JP": "2021-04-08",
+        "CN": "2021-04-08"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "crescendo-of-polaris",
+      "wikiTitle": "Crescendo of Polaris",
+      "dates": {
+        "EN": "2022-01-13",
+        "JP": "2021-10-14",
+        "CN": "2021-10-14"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "empyreal-tragicomedy",
+      "wikiTitle": "Empyreal Tragicomedy",
+      "dates": {
+        "EN": "2022-05-13",
+        "JP": "2022-01-13",
+        "CN": "2022-01-13"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "ashen-simulacrum",
+      "wikiTitle": "Ashen Simulacrum",
+      "dates": {
+        "EN": "2022-07-21",
+        "JP": "2022-04-07",
+        "CN": "2022-04-07"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "the-solomon-ranger",
+      "wikiTitle": "The Solomon Ranger",
+      "dates": {
+        "EN": "2022-09-01",
+        "JP": "2022-04-07",
+        "CN": "2022-04-07"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "swirling-cherry-blossoms",
+      "wikiTitle": "Swirling Cherry Blossoms",
+      "dates": {
+        "EN": "2022-10-13",
+        "JP": "2022-07-21",
+        "CN": "2022-07-21"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "the-enigma-and-the-shark",
+      "wikiTitle": "The Enigma and the Shark",
+      "dates": {
+        "EN": "2022-12-15",
+        "JP": "2022-09-01",
+        "CN": "2022-09-01"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "universe-in-unison",
+      "wikiTitle": "Universe in Unison",
+      "dates": {
+        "EN": "2022-11-17",
+        "JP": "2022-10-13",
+        "CN": "2022-10-13"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "microlayer-medley",
+      "wikiTitle": "Microlayer Medley",
+      "dates": {
+        "EN": "2023-03-16",
+        "JP": "2022-11-17",
+        "CN": "2022-11-17"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "stars-of-the-shimmering-fjord",
+      "wikiTitle": "Stars of the Shimmering Fjord",
+      "dates": {
+        "EN": "2023-03-16",
+        "JP": "2022-11-17",
+        "CN": "2022-11-17"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "skybound-oratorio",
+      "wikiTitle": "Skybound Oratorio",
+      "dates": {
+        "EN": "2023-04-20",
+        "JP": "2023-03-09",
+        "CN": "2023-03-09"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "the-way-home-in-the-night",
+      "wikiTitle": "The Way Home in the Night",
+      "dates": {
+        "EN": "2023-04-20",
+        "JP": "2023-03-09",
+        "CN": "2023-03-09"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "northern-overture",
+      "wikiTitle": "Northern Overture",
+      "dates": {
+        "EN": "2023-05-11",
+        "JP": "2023-04-20",
+        "CN": "2023-04-20"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "aurora-noctis",
+      "wikiTitle": "Aurora Noctis",
+      "dates": {
+        "EN": "2023-08-31",
+        "JP": "2023-05-11",
+        "CN": "2023-05-11"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "counterattack-within-the-fjord",
+      "wikiTitle": "Counterattack Within the Fjord",
+      "dates": {
+        "EN": "2024-07-11",
+        "JP": "2023-07-13",
+        "CN": "2023-07-13"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "inverted-orthant",
+      "wikiTitle": "Inverted Orthant",
+      "dates": {
+        "EN": "2023-12-07",
+        "JP": "2023-08-31",
+        "CN": "2023-08-31"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "dreamwaker-s-butterfly",
+      "wikiTitle": "Dreamwaker's Butterfly",
+      "dates": {
+        "EN": "2024-01-18",
+        "JP": "2024-01-18",
+        "CN": "2024-01-18"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "mirror-involution",
+      "wikiTitle": "Mirror Involution",
+      "dates": {
+        "EN": "2024-01-18",
+        "JP": "2024-01-18",
+        "CN": "2024-01-18"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "khorovod-of-dawn-s-rime",
+      "wikiTitle": "Khorovod of Dawn's Rime",
+      "dates": {
+        "EN": "2024-02-22",
+        "JP": "2024-02-22",
+        "CN": "2024-02-22"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "sundered-blue",
+      "wikiTitle": "Sundered Blue",
+      "dates": {
+        "EN": "2024-03-21",
+        "JP": "2024-03-21",
+        "CN": "2024-03-21"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "the-flame-touched-dagger",
+      "wikiTitle": "The Flame-Touched Dagger",
+      "dates": {
+        "EN": "2024-06-13",
+        "JP": "2024-06-13",
+        "CN": "2024-06-13"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "upon-the-shimmering-blue",
+      "wikiTitle": "Upon the Shimmering Blue",
+      "dates": {
+        "EN": "2024-07-18",
+        "JP": "2024-07-18",
+        "CN": "2024-07-18"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "daedalian-hymn",
+      "wikiTitle": "Daedalian Hymn",
+      "dates": {
+        "EN": "2024-08-29",
+        "JP": "2024-08-29",
+        "CN": "2024-08-29"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "tower-of-transcendence",
+      "wikiTitle": "Tower of Transcendence",
+      "dates": {
+        "EN": "2024-10-17",
+        "JP": "2024-10-17",
+        "CN": "2024-10-17"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "abyssal-refrain",
+      "wikiTitle": "Abyssal Refrain",
+      "dates": {
+        "EN": "2025-01-09",
+        "JP": "2025-01-09",
+        "CN": "2025-01-09"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "virtual-tower",
+      "wikiTitle": "Virtual Tower",
+      "dates": {
+        "EN": "2025-03-20",
+        "JP": "2025-03-20",
+        "CN": "2025-03-20"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "pledge-of-the-radiant-court",
+      "wikiTitle": "Pledge of the Radiant Court",
+      "dates": {
+        "EN": "2025-04-17",
+        "JP": "2025-04-17",
+        "CN": "2025-04-17"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "aquilifer-s-ballade",
+      "wikiTitle": "Aquilifer's Ballade",
+      "dates": {
+        "EN": "2025-06-19",
+        "JP": "2025-06-19",
+        "CN": "2025-06-19"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "rondo-at-rainbow-s-end",
+      "wikiTitle": "Rondo at Rainbow's End",
+      "dates": {
+        "EN": "2025-07-17",
+        "JP": "2025-07-17",
+        "CN": "2025-07-17"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "tempesta-fountain-of-youth",
+      "wikiTitle": "Tempesta and the Fountain of Youth",
+      "dates": {
+        "EN": "2025-10-16",
+        "JP": "2025-10-16",
+        "CN": "2025-10-16"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "violet-tempest-blooming-lycoris",
+      "wikiTitle": "Violet Tempest, Blooming Lycoris",
+      "dates": {
+        "EN": "2025-11-06",
+        "JP": "2025-11-06",
+        "CN": "2025-11-06"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "parallel-superimposition",
+      "wikiTitle": "Parallel Superimposition",
+      "dates": {
+        "EN": "2025-12-18",
+        "JP": "2025-12-18",
+        "CN": "2025-12-18"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "revelations-of-dust",
+      "wikiTitle": "Revelations of Dust",
+      "dates": {
+        "EN": "2026-01-29",
+        "JP": "2026-01-29",
+        "CN": "2026-01-29"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "operation-convergence",
+      "wikiTitle": "Operation Convergence",
+      "dates": {
+        "EN": "2026-04-09",
+        "JP": "2026-04-09",
+        "CN": "2026-04-09"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "confluence-of-nothingness",
+      "wikiTitle": "Confluence of Nothingness",
+      "dates": {
+        "EN": "2026-06-12",
+        "JP": "2026-06-12",
+        "CN": "2026-06-12"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "interlude-of-illusions",
+      "wikiTitle": "Interlude of Illusions",
+      "dates": {
+        "EN": "2026-06-18",
+        "JP": "2026-06-18",
+        "CN": "2026-06-18"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "welcome-to-little-academy",
+      "wikiTitle": "Welcome to Little Academy",
+      "dates": {
+        "EN": "2026-08-27",
+        "JP": "2026-08-27",
+        "CN": "2026-08-27"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "tempesta-sleeping-sea",
+      "wikiTitle": "Tempesta and the Sleeping Sea",
+      "dates": {
+        "EN": "2026-10-15",
+        "JP": "2026-10-15",
+        "CN": "2026-10-15"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "tempesta-islas-de-libertad",
+      "wikiTitle": "Tempesta and Islas de Libertád",
+      "dates": {
+        "EN": "2026-10-15",
+        "JP": "2026-10-15",
+        "CN": "2026-10-15"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    },
+    {
+      "eventId": "the-fools-scales",
+      "wikiTitle": "The Fool's Scales",
+      "dates": {
+        "EN": "2026-11-05",
+        "JP": "2026-11-05",
+        "CN": "2026-11-05"
+      },
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ]
+    }
+  ],
+  "publisherOccurrences": [
+    {
+      "eventId": "virtual-tower",
+      "occurrenceId": "virtual-tower-en-war-archives-20250320",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2025-03-20",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20250319-virtual-tower"
+      ]
+    },
+    {
+      "eventId": "pledge-of-the-radiant-court",
+      "occurrenceId": "pledge-of-the-radiant-court-en-war-archives-20250417",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2025-04-17",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ]
+    },
+    {
+      "eventId": "tempesta-fountain-of-youth",
+      "occurrenceId": "tempesta-fountain-of-youth-en-war-archives-20251016",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2025-10-16",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20251015-tempesta-fountain-of-youth"
+      ]
+    },
+    {
+      "eventId": "violet-tempest-blooming-lycoris",
+      "occurrenceId": "violet-tempest-blooming-lycoris-en-war-archives-20251106",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2025-11-06",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20251105-violet-tempest-blooming-lycoris"
+      ]
+    },
+    {
+      "eventId": "parallel-superimposition",
+      "occurrenceId": "parallel-superimposition-en-war-archives-20251218",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2025-12-18",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition"
+      ]
+    },
+    {
+      "eventId": "revelations-of-dust",
+      "occurrenceId": "revelations-of-dust-en-war-archives-20260129",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-01-29",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20260128-revelations-of-dust"
+      ]
+    },
+    {
+      "eventId": "revelations-of-dust",
+      "occurrenceId": "revelations-of-dust-en-rerun-20250320",
+      "region": "EN",
+      "kind": "rerun",
+      "start": "2025-03-20",
+      "end": "2025-03-26T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20250319-virtual-tower"
+      ]
+    },
+    {
+      "eventId": "anthem-of-remembrance",
+      "occurrenceId": "anthem-of-remembrance-en-war-archives-20260507",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-05-07",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20260506-anthem-of-remembrance"
+      ]
+    },
+    {
+      "eventId": "anthem-of-remembrance",
+      "occurrenceId": "anthem-of-remembrance-en-rerun-20251106",
+      "region": "EN",
+      "kind": "rerun",
+      "start": "2025-11-06",
+      "end": "2025-11-12T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20251105-violet-tempest-blooming-lycoris"
+      ]
+    },
+    {
+      "eventId": "confluence-of-nothingness",
+      "occurrenceId": "confluence-of-nothingness-en-war-archives-20260612",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-06-12",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20260611-confluence-of-nothingness"
+      ]
+    },
+    {
+      "eventId": "interlude-of-illusions",
+      "occurrenceId": "interlude-of-illusions-en-war-archives-20260618",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-06-18",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20260617-interlude-of-illusions"
+      ]
+    },
+    {
+      "eventId": "frostfall",
+      "occurrenceId": "frostfall-en-war-archives-20260709",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-07-09",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20260708-frostfall"
+      ]
+    },
+    {
+      "eventId": "frostfall",
+      "occurrenceId": "frostfall-en-rerun-20250417",
+      "region": "EN",
+      "kind": "rerun",
+      "start": "2025-04-17",
+      "end": "2025-04-23T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ]
+    },
+    {
+      "eventId": "welcome-to-little-academy",
+      "occurrenceId": "welcome-to-little-academy-en-war-archives-20260827",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-08-27",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20260826-welcome-to-little-academy"
+      ]
+    },
+    {
+      "eventId": "tempesta-sleeping-sea",
+      "occurrenceId": "tempesta-sleeping-sea-en-war-archives-20261015",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-10-15",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-sleeping-sea"
+      ]
+    },
+    {
+      "eventId": "tempesta-islas-de-libertad",
+      "occurrenceId": "tempesta-islas-de-libertad-en-war-archives-20261015",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-10-15",
+      "end": null,
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-islas-de-libertad"
+      ]
+    },
+    {
+      "eventId": "a-note-through-the-firmament",
+      "occurrenceId": "a-note-through-the-firmament-en-original-20251218",
+      "region": "EN",
+      "kind": "original",
+      "start": "2025-12-18",
+      "end": "2026-01-07T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition"
+      ]
+    },
+    {
+      "eventId": "hammanns-scrumptious-spells",
+      "occurrenceId": "hammanns-scrumptious-spells-en-original-20251218",
+      "region": "EN",
+      "kind": "original",
+      "start": "2025-12-18",
+      "end": "2026-01-07T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition"
+      ]
+    },
+    {
+      "eventId": "the-strict-maid-isnt-so-strict",
+      "occurrenceId": "the-strict-maid-isnt-so-strict-en-original-20261015",
+      "region": "EN",
+      "kind": "original",
+      "start": "2026-10-15",
+      "end": "2026-11-04T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-sleeping-sea"
+      ]
+    },
+    {
+      "eventId": "joint-operation-big-shots-proclamation",
+      "occurrenceId": "joint-operation-big-shots-proclamation-en-original-20260827",
+      "region": "EN",
+      "kind": "original",
+      "start": "2026-08-27",
+      "end": "2026-09-07T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20260826-welcome-to-little-academy"
+      ]
+    },
+    {
+      "eventId": "light-of-the-martyrium",
+      "occurrenceId": "light-of-the-martyrium-en-rerun-20260618",
+      "region": "EN",
+      "kind": "rerun",
+      "start": "2026-06-18",
+      "end": "2026-06-24T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20260617-interlude-of-illusions"
+      ]
+    },
+    {
+      "eventId": "sharing-sweet-slumbers",
+      "occurrenceId": "sharing-sweet-slumbers-en-rerun-20260612",
+      "region": "EN",
+      "kind": "rerun",
+      "start": "2026-06-12",
+      "end": "2026-06-24T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20260611-confluence-of-nothingness"
+      ]
+    },
+    {
+      "eventId": "big-lessons-for-the-little-lady",
+      "occurrenceId": "big-lessons-for-the-little-lady-en-rerun-20250410",
+      "region": "EN",
+      "kind": "rerun",
+      "start": "2025-04-10",
+      "end": "2025-04-23T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20250409-big-lessons-apr-2025"
+      ]
+    },
+    {
+      "eventId": "shipbuilding-support-northern-parliament",
+      "occurrenceId": "shipbuilding-support-northern-parliament-en-original-20250417",
+      "region": "EN",
+      "kind": "original",
+      "start": "2025-04-17",
+      "end": "2025-04-23T23:59:00-07:00",
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ]
+    }
+  ],
+  "selectedHistory": [
+    {
+      "eventId": "virtual-tower",
+      "kind": "original",
+      "start": "2022-03-24",
+      "end": "2022-04-06",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-54300"
+      ]
+    },
+    {
+      "eventId": "virtual-tower",
+      "kind": "rerun",
+      "start": "2024-03-14",
+      "end": "2024-03-20",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-54300"
+      ]
+    },
+    {
+      "eventId": "frostfall",
+      "kind": "original",
+      "start": "2023-03-23",
+      "end": "2023-04-05",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-62382"
+      ]
+    },
+    {
+      "eventId": "frostfall",
+      "kind": "rerun",
+      "start": "2025-04-17",
+      "end": "2025-04-23",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-62382"
+      ]
+    },
+    {
+      "eventId": "anthem-of-remembrance",
+      "kind": "original",
+      "start": "2023-08-03",
+      "end": "2023-08-16",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-63768"
+      ]
+    },
+    {
+      "eventId": "anthem-of-remembrance",
+      "kind": "rerun",
+      "start": "2025-11-06",
+      "end": "2025-11-12",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-63768"
+      ]
+    },
+    {
+      "eventId": "welcome-to-little-academy",
+      "kind": "original",
+      "start": "2024-06-27",
+      "end": "2024-07-10",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-70908"
+      ]
+    },
+    {
+      "eventId": "interlude-of-illusions",
+      "kind": "original",
+      "start": "2024-07-25",
+      "end": "2024-08-07",
+      "regions": [
+        "EN",
+        "JP",
+        "CN"
+      ],
+      "sourceIds": [
+        "wiki-v0812-71156"
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {auditBackfillEvidence} from '../scripts/event-evidence.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {validateEventCatalog,validInstant,validZone,dateInZone,occurrenceStatus,eventSection,eventRows,formatEventTime,eventCountdown,eventStateSignature,normalizeEventFilters,parseEventRoute} from '../src/events.js';
@@ -6,7 +7,7 @@ import {loadEventCatalog,readEventFilters,saveEventFilters} from '../src/events-
 import {renderEvents,renderEventDetail} from '../src/events-view.js';
 import {createEventClock} from '../src/events-clock.js';
 const catalog=JSON.parse(readFileSync(new URL('../data/events/catalog.json',import.meta.url)));
-const now=Date.parse('2026-11-17T12:36:00Z');
+const now=Date.parse('2026-11-17T14:36:00Z');
 const collab=catalog.events.find(e=>e.id==='angels-azur-stage');
 const en=collab.occurrences.find(o=>o.region==='EN');
 const filters=normalizeEventFilters();
@@ -15,8 +16,8 @@ const exact=value=>({kind:'exact',zone:'UTC',value,sourceIds:[en.sourceIds[0]]})
 const run={...en,start:exact('2026-11-16T03:00:00Z'),end:exact('2026-11-16T05:00:00Z'),releaseState:'announced'};
 
 test('verified expanded catalog preserves regional releases and source revisions',()=>{
- assert.deepEqual(validateEventCatalog(catalog),[]);assert.equal(catalog.events.length,29);
- assert.equal(new Set(catalog.events.flatMap(e=>e.occurrences.map(o=>o.id))).size,58);
+ assert.deepEqual(validateEventCatalog(catalog),[]);assert.equal(catalog.events.length,66);
+ assert.equal(new Set(catalog.events.flatMap(e=>e.occurrences.map(o=>o.id))).size,221);
  assert.equal(collab.occurrences.length,3);assert.equal(catalog.coverage,'partial');
 });
 test('schema rejects identity, occurrence and regional-run duplicates',()=>{
@@ -132,7 +133,7 @@ test('unknown art, incomplete content and malicious source text render safely',(
 });
 test('local catalog loader handles HTTP failures, invalid JSON/schema and timeouts without partial publication',async()=>{
  const response=body=>({ok:true,text:async()=>body});
- assert.equal((await loadEventCatalog(async()=>response(JSON.stringify(catalog)))).events.length,29);
+ assert.equal((await loadEventCatalog(async()=>response(JSON.stringify(catalog)))).events.length,66);
  await assert.rejects(loadEventCatalog(async()=>({ok:false,status:503})),/HTTP 503/);
  await assert.rejects(loadEventCatalog(async()=>response('{bad')));
  await assert.rejects(loadEventCatalog(async()=>response(JSON.stringify({...catalog,schemaVersion:99}))),/validation/);
@@ -180,22 +181,24 @@ test('mixed-precision revised schedules reject reversed bounds',()=>{
 test('completed runs and verified permanent availability have independent regional sections',()=>{
  const enRows=eventRows(catalog,{region:'EN'},now);
  assert.deepEqual(enRows.filter(r=>r.event.id==='the-fools-scales').map(r=>r.section).sort(),['past','war-archives']);
- assert.equal(enRows.filter(r=>r.event.id==='divergent-chessboard').every(r=>r.section==='past'),true);
+ assert.deepEqual(enRows.filter(r=>r.event.id==='divergent-chessboard').map(r=>r.section).sort(),['past','war-archives']);
+ assert.deepEqual(enRows.filter(r=>r.event.id==='tempesta-corridor-of-fog').map(r=>r.section),['past']);
  for(const region of ['JP','CN']){
   const rows=eventRows(catalog,{region},now);
-  assert.equal(rows.some(r=>r.section==='war-archives'),false);
+  assert.equal(rows.filter(r=>r.section==='war-archives').length,51);
+  assert.equal(rows.some(r=>r.event.id==='frostfall'&&r.section==='war-archives'),false);
   assert.equal(rows.some(r=>r.event.id==='the-fools-scales'&&r.section==='past'),true);
  }
  const jp=eventRows(catalog,{region:'JP'},now).filter(r=>r.event.id==='effulgence-before-eclipse');
  assert.deepEqual(jp.map(r=>r.section).sort(),['past','upcoming']);
- assert.equal(new Set(enRows.map(r=>r.event.id)).size,29);
+ assert.equal(new Set(enRows.map(r=>r.event.id)).size,66);
 });
 test('four sections and counts agree between cards and timeline, with occurrence-specific links',()=>{
  for(const view of ['cards','timeline']){
   const html=renderEvents({catalog,filters:{...filters,view},now});
   for(const id of ['ongoing','upcoming','past','war-archives'])assert.match(html,new RegExp('id="events-'+id+'"'));
-  assert.match(html,/Past Events<\/h2><span>16 identities/);
-  assert.match(html,/War Archives<\/h2><span>14 identities/);
+  assert.match(html,/Past Events<\/h2><span>19 identities/);
+  assert.match(html,/War Archives<\/h2><span>53 identities/);
   const e=catalog.events.find(e=>e.id==='the-fools-scales');
   for(const o of e.occurrences.filter(o=>o.region==='EN'&&(view==='timeline'||o.kind!=='original'))){
    assert.ok(html.includes('#/events/'+e.id+'?occurrence='+o.id));
@@ -245,7 +248,7 @@ test('clock scope changes at frozen time are silent; subsequent same-scope bound
  time+=1000;clock.tick();clock.tick();assert.equal(changes,1);clock.destroy();
 });
 
-test('expanded EN War Archives have dated official provenance and are not inherited by JP/CN',()=>{
+test('publisher backfill retains dated EN evidence; regional additions need their own indexed evidence',()=>{
  const additions=['virtual-tower','pledge-of-the-radiant-court','tempesta-fountain-of-youth','violet-tempest-blooming-lycoris','parallel-superimposition','revelations-of-dust','anthem-of-remembrance','confluence-of-nothingness','interlude-of-illusions','frostfall','welcome-to-little-academy','tempesta-sleeping-sea','tempesta-islas-de-libertad'];
  const archives=catalog.events.filter(e=>additions.includes(e.id));
  assert.equal(archives.length,13);
@@ -254,18 +257,17 @@ test('expanded EN War Archives have dated official provenance and are not inheri
   assert.ok(o,'EN War Archives record missing: '+event.id);assert.equal(o.region,'EN');
   assert.equal(occurrenceStatus(o,now),'permanent');
   assert.equal(o.start.kind,'maintenance');assert.equal(o.start.zone,'Etc/GMT+7');
-  assert.ok(o.sourceIds.every(id=>catalog.sources[id]?.type==='official'));
-  assert.ok(o.sourceIds.every(id=>catalog.sources[id]?.publishedAt));
-  assert.ok(!event.occurrences.some(o=>o.region!=='EN'&&o.kind==='war-archives'));
+  assert.ok(o.sourceIds.some(id=>catalog.sources[id]?.type==='official'&&catalog.sources[id]?.publishedAt));
+  for(const regional of event.occurrences.filter(o=>o.region!=='EN'&&o.kind==='war-archives'))assert.ok(regional.sourceIds.includes('wiki-v0812-8'));
  }
- assert.equal(eventRows(catalog,{region:'EN'},now).filter(r=>r.section==='war-archives').length,14);
- for(const region of ['JP','CN'])assert.equal(eventRows(catalog,{region},now).filter(r=>r.section==='war-archives').length,0);
+ assert.equal(eventRows(catalog,{region:'EN'},now).filter(r=>r.section==='war-archives').length,53);
+ for(const region of ['JP','CN'])assert.equal(eventRows(catalog,{region},now).filter(r=>r.section==='war-archives').length,51);
 });
 test('past EN originals and reruns remain separate from permanent additions',()=>{
  const frost=catalog.events.find(e=>e.id==='frostfall');
- assert.deepEqual(frost.occurrences.map(o=>o.kind).sort(),['rerun','war-archives']);
+ assert.deepEqual(frost.occurrences.filter(o=>o.region==='EN').map(o=>o.kind).sort(),['original','rerun','war-archives']);
  const dust=catalog.events.find(e=>e.id==='revelations-of-dust');
- assert.deepEqual(dust.occurrences.map(o=>o.kind).sort(),['rerun','war-archives']);
+ assert.deepEqual(dust.occurrences.filter(o=>o.region==='EN').map(o=>o.kind).sort(),['rerun','war-archives']);
  const past=eventRows(catalog,{region:'EN'},now).filter(r=>r.section==='past');
  assert.ok(past.length>5);
  for(const e of [frost,dust]){
@@ -281,9 +283,28 @@ test('filter disclosure hides controls by default but retains region, search and
  const compact=renderEvents({catalog,filters:active,now});
  assert.match(compact,/aria-expanded="false" aria-controls="event-controls"/);
  assert.match(compact,/id="event-controls" hidden/);
- assert.match(compact,/EN server · Search active · Ended/);
+ assert.match(compact,/EN server · Search: “Frostfall” · Ended/);
  const expanded=renderEvents({catalog,filters:active,now,filtersExpanded:true});
  assert.match(expanded,/aria-expanded="true" aria-controls="event-controls"/);
  assert.match(expanded,/id="event-controls"><label/);
  assert.match(expanded,/value="Frostfall"/);
+});
+
+const backfill=JSON.parse(readFileSync(new URL('../data/events/backfill-evidence.json',import.meta.url)));
+test('all reviewed source dates and pre-backfill stable IDs agree with the separate evidence ledger',()=>{
+ assert.deepEqual(auditBackfillEvidence(catalog,backfill),{indexedIdentities:51,publisherOccurrences:24,selectedHistories:8,verifiedPermanent:155});
+});
+test('evidence audit rejects regional date drift, invented availability and removed stable history',()=>{
+ for(const mutate of [
+  c=>{c.events.find(e=>e.id==='visitors-dyed-in-red').occurrences.find(o=>o.region==='EN'&&o.kind==='war-archives').start.date='2018-09-28';},
+  c=>{const e=c.events.find(e=>e.id==='frostfall');e.occurrences.push({...e.occurrences.find(o=>o.kind==='war-archives'),id:'invented-jp-archive',region:'JP'});},
+  c=>c.events[0].occurrences.pop()
+ ]){const c=clone();mutate(c);assert.throws(()=>auditBackfillEvidence(c,backfill));}
+});
+test('regional archive dates are independently recorded and do not use inferred midnight countdowns',()=>{
+ const e=catalog.events.find(e=>e.id==='visitors-dyed-in-red');
+ const dates=Object.fromEntries(e.occurrences.filter(o=>o.kind==='war-archives').map(o=>[o.region,o.start.date]));
+ assert.deepEqual(dates,{EN:'2019-09-26',JP:'2018-09-28',CN:'2018-09-28'});
+ for(const o of e.occurrences.filter(o=>o.kind==='war-archives')){assert.equal(o.start.kind,'date');assert.equal(o.start.value,undefined);assert.notEqual(occurrenceStatus({...o,releaseState:'announced'},now),'permanent');}
+ for(const id of ['frostfall','anthem-of-remembrance'])for(const region of ['JP','CN'])assert.equal(eventRows(catalog,{region},now).some(r=>r.event.id===id&&r.section==='war-archives'),false);
 });

@@ -1,6 +1,6 @@
 # Events & live content — Operation CHRONICLE
 
-v0.8.11 is released. v0.8.12 is an unmerged, source-audited EN backfill (29 identities / 58 occurrences and 14 EN War Archives entries); see [backfill ledger](EVENTS_BACKFILL.md). The catalog is deliberately partial. An empty section means no matching verified record is present, not that the game has no events.
+v0.8.11 is released. v0.8.12 is an unmerged, source-audited regional backfill (66 identities / 221 occurrences; War Archives: EN 53, JP 51, CN 51); see [backfill ledger](EVENTS_BACKFILL.md). The catalog is deliberately partial. An empty section means no matching verified record is present, not that the game has no events.
 
 ## Architecture
 
@@ -108,3 +108,11 @@ Wiki-matched level statistics use 100 affinity at level 100+ and maximum enhance
 7. Update CHANGELOG, this coverage ledger and PROJECT_STATUS. Open a PR with exact sources and screenshots. Regular ChatGPT performs independent QA; Commander AVALON alone authorizes merging and release.
 
 For ongoing maintenance, review publisher notices at each announced maintenance, expand history in small source-audited year/event batches, and periodically reconcile source IDs and artwork availability. The app does not automatically ingest announcements; no scheduled maintenance job is claimed.
+
+### v0.8.12 backfill evidence contract
+
+`data/events/backfill-evidence.json` stores reviewed facts separately from the runtime catalog: 51 archive-index identities with explicit regional dates, the initial 24 publisher-backed occurrences, eight selected history records with explicit All Servers scope, and the pre-expansion stable IDs. `scripts/event-evidence.mjs` compares these facts to the catalog in CI. This is an offline consistency check, **not a fresh live-source audit**. Update both only after re-reading the cited sources; record disagreements rather than manufacturing consensus. See [EVENTS_BACKFILL.md](EVENTS_BACKFILL.md) for the revision-pinned reconciliation and remaining gaps.
+
+The Events index explicitly groups CN/JP in one column. That joint source statement is recorded as two independently addressable occurrences; EN dates come from the separate EN column. A missing regional cell is never copied from another region. The War Archives detail index omits addition dates for Anthem of Remembrance and Frostfall; only their separately verified EN additions are published here. Archived availability does not transfer original event rewards.
+
+Search & filters starts collapsed on page load. Its native button exposes `aria-expanded` and `aria-controls`; hidden controls leave keyboard order. The visible summary identifies the region, actual query and active selections. Expansion preserves focus and query/filters; Cards/Timeline remain outside. Only the existing Events preferences key is persisted. A disclosure toggle is not an event-schedule change.
