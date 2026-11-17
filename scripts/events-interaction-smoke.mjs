@@ -47,7 +47,7 @@ try{
   assert.equal(await past.locator('[data-event-card="the-fools-scales"]').count(),1);assert.equal(await war.locator('[data-event-card="the-fools-scales"]').count(),1);
   assert.equal(await war.locator('[data-event-card="divergent-chessboard"]').count(),0);
   await past.locator('[data-event-card="the-fools-scales"] h3 a').click();await page.locator('#event-rewards').waitFor();assert.match(await page.locator('#event-rewards').innerText(),/This run has ended/);
-  await page.goBack();await war.locator('h3 a').click();await page.locator('#event-rewards').waitFor();assert.match(await page.locator('#event-rewards').innerText(),/available in War Archives/);assert.doesNotMatch(await page.locator('#event-rewards').innerText(),/Painlevé/);
+  await page.goBack();await war.locator('[data-event-card="the-fools-scales"] h3 a').click();await page.locator('#event-rewards').waitFor();assert.match(await page.locator('#event-rewards').innerText(),/available in War Archives/);assert.doesNotMatch(await page.locator('#event-rewards').innerText(),/Painlevé/);
   await page.goto(url+'/#/events');await page.locator('[data-action="events-filters-toggle"]').click();await page.locator('#event-region').waitFor();
   for(const region of ['JP','CN']){await page.getByLabel('Server region').selectOption(region);assert.equal(await war.locator('[data-event-card]').count(),0);}
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
