@@ -2,6 +2,15 @@
 
 _Last updated: 2026-11-17 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
+## Active development — v0.8.12 Operation CHRONICLE Historical Backfill (unmerged)
+
+- **Branch:** feat/chronicle-archive-backfill-v0812; based on released main c73b39f295529ba0855b05db13eedc6059d93e6a. Commander authorized proceeding after noting that the initial catalog covers only eight identities and one EN War Archives entry. Work does not merge; regular ChatGPT independently reviews before Commander approval.
+- **Verified expansion:** 29 event identities, 58 regional occurrences; 14 EN War Archives entries (13 newly researched) and 11 new EN historical originals/reruns from dated official Yostar notices. JP/CN catalog records are preserved unchanged. Every new source has URL, publication date and check timestamp. **This is still partial coverage, not the full Koumakan Events index.**
+- **Source access:** Direct Koumakan Events / War Archives HTML indexes returned HTTP 403 to the browsing environment on 2026-11-17. Expanded records were corroborated against independent official EN notices, not invented from another server. See [source ledger](EVENTS_BACKFILL.md) for per-event evidence and gaps.
+- **UI:** Events filter section now defaults collapsed with visible EN/JP/CN server and active filter chips/summary; expansion never resets query, filters or saved progress. Cards/Timeline remain outside.
+- **Safety/validation:** Retains separate Past Events versus War Archives and stable occurrence-specific historical rewards. Adds offline audit of regional counts, reviewed fixture tests and controlled browser checks. Source/CI status to be verified on PR head; no merge or deployment authorized.
+- **Next:** Complete CI and independent QA; backfill remaining event history and JP/CN independently via permitted wiki/API and dated official sources, then plan The Bridge CIC separately. Do not couple with any live asset-cache hotfix without reviewing current branches.
+
 ## Current release — v0.8.11 Operation CHRONICLE (2026-11-17)
 
 - **Authorized merge:** Commander AVALON approved after independent corrective QA [review #5933059313](https://github.com/Avalon1230/avalon-azurlane/pull/34#pullrequestreview-5933059313). [PR #34](https://github.com/Avalon1230/avalon-azurlane/pull/34), reviewed head `61ae58c64f08660f1f34d36f62ce7e96c0d13fc5`, was **squash-merged** to `main` as **`891701a1835e42a021528edb1ae4d34b6ff48748`**. GitHub verified closed/merged PR and matching `main` head. The former development sections below are historical, not outstanding work.
