@@ -32,6 +32,15 @@ async function wholePersonalName(page,name){
  const result=await page.locator('.ship-profile-identity h1').evaluate((el,name)=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const i=node.textContent.indexOf(name);if(i<0)continue;const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+name.length);const rects=[...range.getClientRects()];return {lines:new Set(rects.map(r=>Math.round(r.top))).size,inside:rects.every(r=>r.left>=el.getBoundingClientRect().left-1&&r.right<=el.getBoundingClientRect().right+1)};}return null;},name);
  assert.deepEqual(result,{lines:1,inside:true},name+' remains whole inside the profile heading');
 }
+async function openFilters(page){
+ const toggle=page.locator('[data-action="events-filters-toggle"]');await toggle.waitFor();
+ if(await toggle.getAttribute('aria-expanded')==='false')await toggle.click();
+ await page.locator('#event-region').waitFor({state:'visible'});
+}
+async function closeFilters(page){
+ const toggle=page.locator('[data-action="events-filters-toggle"]');await toggle.waitFor();
+ if(await toggle.getAttribute('aria-expanded')==='true')await toggle.click();
+}
 async function saved(page){assert.equal(await page.evaluate(()=>localStorage.getItem('avalon.azurlane.loadouts.v1')),loadouts,'Saved six-slot loadout storage remains identical');}
 async function capture(page,name,fullPage=false){await page.screenshot({path:out+'/'+name+'.png',fullPage});}
 try{
@@ -39,7 +48,7 @@ try{
   const {page,errors}=await pageFor(width);
   await page.goto(url+'/#/events');await page.locator('[data-event-card="angels-azur-stage"]').waitFor();
   assert.equal(await page.locator('[data-action="events-filters-toggle"]').getAttribute('aria-expanded'),'false');
-  await page.locator('[data-action="events-filters-toggle"]').click();
+  await openFilters(page);
   assert.equal(await page.locator('#event-region').inputValue(),'EN');assert.equal(await page.locator('#event-zone').inputValue(),'Asia/Manila');
   assert.equal(await page.getByRole('heading',{name:'Ongoing',exact:true}).count(),1);assert.equal(await page.getByRole('heading',{name:'Upcoming',exact:true}).count(),1);assert.equal(await page.getByRole('heading',{name:'Past Events',exact:true}).count(),1);assert.equal(await page.getByRole('heading',{name:'War Archives',exact:true}).count(),1);
   await overflow(page);await saved(page);
@@ -48,14 +57,14 @@ try{
   assert.equal(await war.locator('[data-event-card="divergent-chessboard"]').count(),0);
   await past.locator('[data-event-card="the-fools-scales"] h3 a').click();await page.locator('#event-rewards').waitFor();assert.match(await page.locator('#event-rewards').innerText(),/This run has ended/);
   await page.goBack();await war.locator('[data-event-card="the-fools-scales"] h3 a').click();await page.locator('#event-rewards').waitFor();assert.match(await page.locator('#event-rewards').innerText(),/available in War Archives/);assert.doesNotMatch(await page.locator('#event-rewards').innerText(),/Painlevé/);
-  await page.goto(url+'/#/events');await page.locator('[data-action="events-filters-toggle"]').click();await page.locator('#event-region').waitFor();
+  await page.goto(url+'/#/events');await openFilters(page);
   for(const region of ['JP','CN']){await page.getByLabel('Server region').selectOption(region);assert.equal(await war.locator('[data-event-card]').count(),0);}
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
   await page.getByLabel('Search events & rewards').fill('Mikari');assert.equal(await page.locator('[data-event-card]').count(),1);assert.equal(await page.locator('#event-query').evaluate(el=>el===document.activeElement),true);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
   await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Status',{exact:true}).selectOption('unknown');
   assert.match(await page.locator('[data-event-card]').innerText(),/Effulgence Before Eclipse/);assert.match(await page.locator('[data-event-card]').innerText(),/Planned War Archives addition · not available yet/);assert.doesNotMatch(await page.locator('[data-event-card]').innerText(),/Permanent content/);assert.equal(await page.locator('[data-event-countdown]').count(),0);
-  await page.reload();await page.locator('[data-action="events-filters-toggle"]').click();assert.equal(await page.locator('#event-region').inputValue(),'JP');assert.equal(await page.locator('#event-status').inputValue(),'unknown');
+  await page.reload();await openFilters(page);assert.equal(await page.locator('#event-region').inputValue(),'JP');assert.equal(await page.locator('#event-status').inputValue(),'unknown');
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
   await page.getByLabel('Year',{exact:true}).selectOption('2018');await page.getByLabel('Chronology').selectOption('oldest');
   assert.ok(await page.locator('[data-event-card]').count()>0);
@@ -109,7 +118,7 @@ try{
   await page.getByRole('link',{name:'Liliel Angel Paratroopers/Ririsa ↗',exact:true}).click();await page.locator('.ship-profile-overview').waitFor();
   await page.waitForFunction(()=>[...document.querySelectorAll('.ship-art-preview-image,.asset-img')].every(i=>i.complete),{},{timeout:25000}).catch(()=>{});await capture(page,'ririsa-'+width);await overflow(page);
   await page.goto(url+'/#/ships/1180002');await page.locator('.ship-profile-overview').waitFor();await page.waitForFunction(()=>[...document.querySelectorAll('.ship-art-preview-image,.asset-img')].every(i=>i.complete),{},{timeout:25000}).catch(()=>{});await capture(page,'mikari-'+width);
-  await page.goto(url+'/#/events');await page.locator('[data-action="events-filters-toggle"]').click();await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Status',{exact:true}).selectOption('unknown');await page.locator('[data-action="events-filters-toggle"]').click();await capture(page,'upcoming-jp-'+width,true);await page.locator('[data-action="events-filters-toggle"]').click();
+  await page.goto(url+'/#/events');await openFilters(page);await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Status',{exact:true}).selectOption('unknown');await closeFilters(page);await capture(page,'upcoming-jp-'+width,true);await openFilters(page);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();await page.getByLabel('Status',{exact:true}).selectOption('ended');await page.getByRole('button',{name:'Timeline',exact:true}).click();await capture(page,'past-'+width,true);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();await page.locator('#events-war-archives').scrollIntoViewIfNeeded();await capture(page,'war-archives-'+width);
   await page.locator('section[aria-labelledby="events-past"] [data-event-card="the-fools-scales"] h3 a').click();await page.getByRole('button',{name:'Obtainable content',exact:true}).click();await capture(page,'past-detail-'+width);
