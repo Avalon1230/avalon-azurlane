@@ -1,0 +1,29 @@
+{
+  "observationTime": "2026-11-17T14:36:00Z",
+  "catalog": "production, partial (66 identities / 221 occurrences)",
+  "externalData": "unavailable by design; art requested from real source URLs",
+  "results": [
+    {
+      "width": 360,
+      "checks": "routes, offline profiles, exact IDs, filters, persistence, region dates, timeline, history, keyboard, image failure and overflow passed"
+    },
+    {
+      "width": 390,
+      "checks": "routes, offline profiles, exact IDs, filters, persistence, region dates, timeline, history, keyboard, image failure and overflow passed"
+    },
+    {
+      "width": 768,
+      "checks": "routes, offline profiles, exact IDs, filters, persistence, region dates, timeline, history, keyboard, image failure and overflow passed"
+    },
+    {
+      "width": 1280,
+      "checks": "routes, offline profiles, exact IDs, filters, persistence, region dates, timeline, history, keyboard, image failure and overflow passed"
+    },
+    {
+      "scope": "EN/JP and index/detail navigation produces no false schedule notifications"
+    },
+    {
+      "clock": "exact start, unlock and end transitions passed under Playwright controlled clock"
+    }
+  ]
+}

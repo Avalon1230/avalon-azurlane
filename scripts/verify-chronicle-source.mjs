@@ -32,4 +32,4 @@ for(const [id,augment] of Object.entries(data.augments)){
  for(let i=0;i<2;i++){assert.equal(base['value_'+(i+1)],augment.stats[i].base);assert.equal(max['value_'+(i+1)],augment.stats[i].max);}
  assert.deepEqual(max.skill_upgrade[0],augment.skillUpgrade);
 }
-console.log('PASS CHRONICLE: eight validated event identities, 34 regional occurrences, four SHA256/blob-pinned client files, two ship identities/slots/skill IDs and two exclusive augments. Wiki-derived stats and prose require independent source review.');
+console.log('PASS CHRONICLE: '+catalog.events.length+' validated event identities, '+catalog.events.flatMap(e=>e.occurrences).length+' regional occurrences, four SHA256/blob-pinned client files, two ship identities/slots/skill IDs and two exclusive augments. Backfill dates are checked separately against the revision-attributed ledger; wiki-derived stats and prose require independent source review.');

@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "implementationSha": "6874171cd26df203b1220d491feeec28c58d6abb",
+  "workflowRun": 44092525437,
+  "artifactId": 14332961019,
+  "artifactName": "chronicle-ui-screenshots",
+  "artifactZipSha256": "0bb47effddb8b21491d40ab742e6ad5d63f72e71f1f663928866b377aec95b1f",
+  "observationTime": "2026-11-17T14:36:00Z",
+  "reviewDate": "2026-11-18",
+  "reviewTimezone": "Asia/Manila",
+  "files": [
+    {
+      "file": "detail-1280.png",
+      "bytes": 489096,
+      "sha256": "8d471a04f136f156727fea58dc598239c328a12a0c304af8145cbb3ec868bc5b"
+    },
+    {
+      "file": "detail-360.png",
+      "bytes": 152517,
+      "sha256": "a0ae11931feeea5d4d210a3e77b2dc40d1111d0e76c13c9a91176fd1f7769be5"
+    },
+    {
+      "file": "detail-390.png",
+      "bytes": 169555,
+      "sha256": "5f3bc8ae8cdc90cb7a0683db3684777430a60836940e47bf39fa9cf49b8da04e"
+    },
+    {
+      "file": "events-collapsed-1280.png",
+      "bytes": 375062,
+      "sha256": "9fbd135eec0e24b79ae66c9d97060caed29de6dde973a52a379f3332477ed24e"
+    },
+    {
+      "file": "events-collapsed-360.png",
+      "bytes": 141004,
+      "sha256": "ab67293316c87c4726864126c275b4a4012e25c748f0eab045ce209ba369e419"
+    },
+    {
+      "file": "events-collapsed-390.png",
+      "bytes": 141162,
+      "sha256": "4a2323da00778ad7cf7d4047f994844b0b45fbc35ce631d9fb1ad4553d44d2aa"
+    },
+    {
+      "file": "events-expanded-1280.png",
+      "bytes": 244885,
+      "sha256": "392186bf66815fa2ca58d8b320ecffe6b65b9d3f05140697f9b21521ece7fadd"
+    },
+    {
+      "file": "events-expanded-360.png",
+      "bytes": 85773,
+      "sha256": "65031d9d553e86053bdf930a0f7300de959e18762948317473b1f420a743dc65"
+    },
+    {
+      "file": "events-expanded-390.png",
+      "bytes": 83426,
+      "sha256": "12128d10e31e34c26d73a1207b4e57fbf6170c19d7f3ebb7c84d77528f0b6ce5"
+    },
+    {
+      "file": "history-1280.png",
+      "bytes": 152204,
+      "sha256": "b95b760bd86fb86ceb949cc90d7946d0e05c59da8a888983d7e08e323ee1280b"
+    },
+    {
+      "file": "history-360.png",
+      "bytes": 63867,
+      "sha256": "25bdae271c95a4b1fb2d54c566669204bbef872bc7b327a4a20ec8f550779d9b"
+    },
+    {
+      "file": "history-390.png",
+      "bytes": 63921,
+      "sha256": "6232f2c0d6f0096110471ef524b1ad20b97ed30c0d955a1304dc5ec6421eb4b6"
+    },
+    {
+      "file": "mikari-1280.png",
+      "bytes": 523325,
+      "sha256": "0256fa0439af09125bb420193a9d35922d5f06a6a93a3d70035e6036b8e073d3"
+    },
+    {
+      "file": "mikari-360.png",
+      "bytes": 138148,
+      "sha256": "03483b1134b27fbf208ea638dd611d7da08318eb8035f6ab474b7f69a500dde5"
+    },
+    {
+      "file": "mikari-390.png",
+      "bytes": 152457,
+      "sha256": "45d39624a425ea493e7623c8e2ae1c9c3ee44aaf4e200df04338160b92ff4f83"
+    },
+    {
+      "file": "ongoing-1280.png",
+      "bytes": 432849,
+      "sha256": "4675f16d66fc386229053673c1d3bb3f12bd7abb17d04b6b380763fadb34384f"
+    },
+    {
+      "file": "ongoing-360.png",
+      "bytes": 135729,
+      "sha256": "aaaf5374f568d77772f3b0d07cefb6ec6bfe31d4d7795aadf4516a131af1d3ed"
+    },
+    {
+      "file": "ongoing-390.png",
+      "bytes": 139848,
+      "sha256": "0ed505c5482aa6e1569a4de4dd7f69376dfa7fd33ddfd559e0b49b43602e13f1"
+    },
+    {
+      "file": "past-1280.png",
+      "bytes": 318408,
+      "sha256": "9282fe8eaaec5682de31897248f616a24256818cada09bddfea2462c434b4377"
+    },
+    {
+      "file": "past-360.png",
+      "bytes": 118518,
+      "sha256": "5b975c9bb272759a0a3bef9dbd239591d2b932e780359c532c2ebb0da4f0ad41"
+    },
+    {
+      "file": "past-390.png",
+      "bytes": 123513,
+      "sha256": "c614d6f2d3040ac2d1aad346cb0106d8ea126f483ef133d8dce1220555d075d3"
+    },
+    {
+      "file": "past-detail-1280.png",
+      "bytes": 187394,
+      "sha256": "96c779281b32bc0c9e4dabc3ac2d56103492cf08c4413aacea1b3d43995b0582"
+    },
+    {
+      "file": "past-detail-360.png",
+      "bytes": 64335,
+      "sha256": "9fc2e621fff2e4faef6d82a9cf21bb8ba1a0affa61bdd12cfe5f564902caa73e"
+    },
+    {
+      "file": "past-detail-390.png",
+      "bytes": 65183,
+      "sha256": "5d5c528d926398b105df898b4a801d37adb7049c9141fb211a917f90d90d8c1c"
+    },
+    {
+      "file": "report.json",
+      "bytes": 1181,
+      "sha256": "5caada6c1b7ae87418d091df75fadd89d54d88d5a983ad337c767b03197c60ba"
+    },
+    {
+      "file": "rewards-1280.png",
+      "bytes": 204504,
+      "sha256": "620bec56f0be6cb836f19f7c4dc35a8904057bc891f4e45563710a0b64d8b02c"
+    },
+    {
+      "file": "rewards-360.png",
+      "bytes": 71116,
+      "sha256": "39b531798eb21737caa0972978293add8ce9052f758dc1c9dff7cd2eb942dc84"
+    },
+    {
+      "file": "rewards-390.png",
+      "bytes": 74671,
+      "sha256": "c1bca651396bd1d090c83845c4d4df36d797b2460eef5e7bbbf478891e5f0429"
+    },
+    {
+      "file": "ririsa-1280.png",
+      "bytes": 528475,
+      "sha256": "288154655cb985a2da88178b182fc1be13fa26612d5675375f45abcea2062282"
+    },
+    {
+      "file": "ririsa-360.png",
+      "bytes": 134581,
+      "sha256": "b9ec3ce9f44ba1fc6d97296c70538287a29fa745892d16650fa48da8a3db13eb"
+    },
+    {
+      "file": "ririsa-390.png",
+      "bytes": 154032,
+      "sha256": "513e757f009c2c8e6fa79b78a6199e5e716a2b76032cbdc566ed6dc0d5501bae"
+    },
+    {
+      "file": "server-summary-1280.png",
+      "bytes": 307920,
+      "sha256": "ccbf8382d551495c2485ffe2313f8a7a85a8a0cdeb2a54edb9bc283e654c607a"
+    },
+    {
+      "file": "server-summary-360.png",
+      "bytes": 126386,
+      "sha256": "b71da167c06adc15851999d21041bfd8fae5ce48b796c478adbb2deec22bc561"
+    },
+    {
+      "file": "server-summary-390.png",
+      "bytes": 130267,
+      "sha256": "7b00a4a6363a65a3a16ba208036a8026b309d400ccee557c4791ade878f28c8a"
+    },
+    {
+      "file": "upcoming-jp-1280.png",
+      "bytes": 192596,
+      "sha256": "f5ef2249c61ad5fda5c72cdd76fe4787663e4f114253d82f61e64ef5f347abdf"
+    },
+    {
+      "file": "upcoming-jp-360.png",
+      "bytes": 67349,
+      "sha256": "aa6b8215e422124ff4b99ee4636471b14bec26b13e530e397f6e11bec2ad13e0"
+    },
+    {
+      "file": "upcoming-jp-390.png",
+      "bytes": 68863,
+      "sha256": "a60b632a5e78aac666bcbf7bb9e2ba7e45c4b8e27606eda0d5b2abf2ab39890a"
+    },
+    {
+      "file": "war-archives-1280.png",
+      "bytes": 494699,
+      "sha256": "fce82bb93ba5c4aca5c155611d54f7f8965458fe159ae162facb85434afb3aec"
+    },
+    {
+      "file": "war-archives-360.png",
+      "bytes": 154347,
+      "sha256": "8c1023bf1024e1aef8ca463d892e3c3d7232ee3326eb747b53dcb2166b542be8"
+    },
+    {
+      "file": "war-archives-390.png",
+      "bytes": 159613,
+      "sha256": "91c798414713bac926d329bd2641e7a986c8971cd74196e5253a0001f35c9d25"
+    }
+  ]
+}

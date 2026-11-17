@@ -42,7 +42,7 @@ import {loadEventCatalog,readEventFilters,saveEventFilters} from './events-store
 import {normalizeEventFilters,parseEventRoute} from './events.js';
 import {createEventClock} from './events-clock.js';
 
-const eventState={status:'idle',catalog:null,error:'',eventId:null,occurrenceId:null,filters:readEventFilters({getItem:key=>localStorage.getItem(key)})};
+const eventState={status:'idle',catalog:null,error:'',eventId:null,occurrenceId:null,filtersExpanded:false,filters:readEventFilters({getItem:key=>localStorage.getItem(key)})};
 const eventClock=createEventClock({document,read:()=>({active:state.page==='events',catalog:eventState.catalog,region:eventState.eventId?null:eventState.filters.region,scope:eventState.eventId?'detail:'+eventState.eventId:'index:'+eventState.filters.region}),onTransition:()=>{refreshEventView();notify('Event schedules have updated.');}});
 async function ensureEvents(){
   if(eventState.status==='loading'||eventState.status==='ready')return;
@@ -611,6 +611,7 @@ function render() {
 function handleAction(target) {
   const {action,page,mode,ship,equip,fleet,slot,board} = target.dataset;
   if(action==='events-retry'){void ensureEvents();return;}
+  if(action==='events-filters-toggle'){eventState.filtersExpanded=!eventState.filtersExpanded;refreshEventView();return;}
   if(action==='events-view'){updateEventFilters({view:target.dataset.view});return;}
   if(action==='events-clear'){eventState.filters=normalizeEventFilters();updateEventFilters({});return;}
   if(action==='event-jump'){const section=document.getElementById(target.dataset.section);section?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}

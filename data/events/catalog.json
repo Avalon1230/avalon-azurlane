@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-15T13:00:41Z",
+  "updatedAt": "2026-11-17T13:11:32Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -411,6 +411,202 @@
       "checkedAt": "2026-11-15T13:04:07Z",
       "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
       "shortTitle": "Koumakan"
+    },
+    "en-yostar-20250319-virtual-tower": {
+      "title": "Yostar EN: 2025-03-19 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/03/19/maintenance-notice-3-20-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2025-03-19",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20250416-pledge-of-the-radiant-court": {
+      "title": "Yostar EN: 2025-04-16 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/04/16/maintenance-notice-4-17-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2025-04-16",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20251015-tempesta-fountain-of-youth": {
+      "title": "Yostar EN: 2025-10-15 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/10/15/maintenance-notice-10-16-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2025-10-15",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20251105-violet-tempest-blooming-lycoris": {
+      "title": "Yostar EN: 2025-11-05 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/11/05/maintenance-notice-11-6-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2025-11-05",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20251217-parallel-superimposition": {
+      "title": "Yostar EN: 2025-12-17 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/12/17/maintenance-notice-12-18-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2025-12-17",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260128-revelations-of-dust": {
+      "title": "Yostar EN: 2026-01-28 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/01/28/maintenance-notice-1-29-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-01-28",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260506-anthem-of-remembrance": {
+      "title": "Yostar EN: 2026-05-06 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/05/06/maintenance-notice-5-7-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-05-06",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260611-confluence-of-nothingness": {
+      "title": "Yostar EN: 2026-06-11 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/06/11/maintenance-notice-6-12-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-06-11",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260617-interlude-of-illusions": {
+      "title": "Yostar EN: 2026-06-17 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/06/17/maintenance-notice-6-18-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-06-17",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260708-frostfall": {
+      "title": "Yostar EN: 2026-07-08 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/07/08/maintenance-notice-7-9-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-07-08",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20260826-welcome-to-little-academy": {
+      "title": "Yostar EN: 2026-08-26 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/08/26/maintenance-notice-8-27-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-08-26",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20261014-tempesta-sleeping-sea": {
+      "title": "Yostar EN: 2026-10-14 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/10/14/maintenance-notice-10-15-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-10-14",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20261014-tempesta-islas-de-libertad": {
+      "title": "Yostar EN: 2026-10-14 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/10/14/maintenance-notice-10-15-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2026-10-14",
+      "shortTitle": "Official EN"
+    },
+    "en-yostar-20250409-big-lessons-apr-2025": {
+      "title": "Yostar EN: 2025-04-09 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2025/04/09/maintenance-notice-4-10-12-a-m-utc-7/",
+      "type": "official",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "publishedAt": "2025-04-09",
+      "shortTitle": "Official EN"
+    },
+    "wiki-v0812-8": {
+      "title": "Koumakan: Events",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307833",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "307833",
+      "revisedAt": "2026-11-13T08:19:21Z",
+      "pageId": 8,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-v0812-20231": {
+      "title": "Koumakan: War Archives",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307578",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "307578",
+      "revisedAt": "2026-11-05T12:14:23Z",
+      "pageId": 20231,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-v0812-54300": {
+      "title": "Koumakan: Virtual Tower",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=271217",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "271217",
+      "revisedAt": "2025-03-19T12:31:29Z",
+      "pageId": 54300,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-v0812-62382": {
+      "title": "Koumakan: Frostfall",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=304221",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "304221",
+      "revisedAt": "2026-08-28T10:26:54Z",
+      "pageId": 62382,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-v0812-63768": {
+      "title": "Koumakan: Anthem of Remembrance",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=289873",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "289873",
+      "revisedAt": "2025-11-09T16:47:08Z",
+      "pageId": 63768,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-v0812-70908": {
+      "title": "Koumakan: Welcome to Little Academy",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=304222",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "304222",
+      "revisedAt": "2026-08-28T10:40:58Z",
+      "pageId": 70908,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-v0812-71156": {
+      "title": "Koumakan: Interlude of Illusions",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=306846",
+      "type": "wiki",
+      "checkedAt": "2026-11-17T13:11:32Z",
+      "revision": "306846",
+      "revisedAt": "2026-10-13T12:28:32Z",
+      "pageId": 71156,
+      "shortTitle": "Koumakan",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
     }
   },
   "events": [
@@ -1909,12 +2105,14 @@
       "sourceIds": [
         "history-wiki-chessboard-en",
         "history-wiki-chessboard-cnjp",
-        "history-wiki-chessboard-rerun"
+        "history-wiki-chessboard-rerun",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
       ],
-      "verifiedAt": "2026-11-15T13:04:07Z",
+      "verifiedAt": "2026-11-17T13:11:32Z",
       "missing": [
         "Exact original and rerun times are not verified.",
-        "Regional War Archives addition dates and current regional acquisition routes are not yet included.",
+        "Current regional acquisition routes and permanent rewards still need individual verification.",
         "Full map, reward and drop tables are not yet transcribed."
       ],
       "occurrences": [
@@ -2079,6 +2277,66 @@
             "history-wiki-chessboard-rerun"
           ],
           "phases": []
+        },
+        {
+          "id": "divergent-chessboard-en-war-archives-20201015",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-10-15",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "divergent-chessboard-jp-war-archives-20190815",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-08-15",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "divergent-chessboard-cn-war-archives-20190815",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-08-15",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
         }
       ],
       "content": [
@@ -2168,12 +2426,14 @@
       "description": "Sakura Empire event history with separate Normal and Hard progression. Boss victories award Ema during its limited runs.",
       "sourceIds": [
         "history-wiki-visitors",
-        "history-wiki-visitors-rerun"
+        "history-wiki-visitors-rerun",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
       ],
-      "verifiedAt": "2026-11-15T13:04:07Z",
+      "verifiedAt": "2026-11-17T13:11:32Z",
       "missing": [
         "Exact launch and closure times are not verified.",
-        "Regional War Archives addition dates and current regional acquisition routes are not yet included.",
+        "Current regional acquisition routes and permanent rewards still need individual verification.",
         "Full stage, enemy and reward tables are not yet transcribed."
       ],
       "occurrences": [
@@ -2338,6 +2598,66 @@
             "history-wiki-visitors-rerun"
           ],
           "phases": []
+        },
+        {
+          "id": "visitors-dyed-in-red-en-war-archives-20190926",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-09-26",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "visitors-dyed-in-red-jp-war-archives-20180928",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2018-09-28",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "visitors-dyed-in-red-cn-war-archives-20180928",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2018-09-28",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
         }
       ],
       "content": [
@@ -2402,12 +2722,13 @@
       "sourceIds": [
         "history-wiki-fools-scales",
         "history-yostar-20261104",
-        "history-wiki-war-archives"
+        "history-wiki-war-archives",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
       ],
-      "verifiedAt": "2026-11-15T13:04:07Z",
+      "verifiedAt": "2026-11-17T13:11:32Z",
       "missing": [
         "Original and rerun schedules are date-only.",
-        "JP and CN permanent-addition schedules have not been verified for this catalog.",
         "Complete stage enemies, shop quantities and reward tables remain to be added."
       ],
       "occurrences": [
@@ -2583,15 +2904,58 @@
             "kind": "maintenance",
             "zone": "Etc/GMT+7",
             "sourceIds": [
-              "history-yostar-20261104"
+              "history-yostar-20261104",
+              "wiki-v0812-8"
             ],
             "date": "2026-11-05"
           },
           "end": null,
           "sourceIds": [
-            "history-yostar-20261104"
+            "history-yostar-20261104",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
           ],
           "phases": []
+        },
+        {
+          "id": "the-fools-scales-jp-war-archives-20261105",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-11-05",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-fools-scales-cn-war-archives-20261105",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-11-05",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
         }
       ],
       "content": [
@@ -3150,6 +3514,5100 @@
         }
       ],
       "stages": []
+    },
+    {
+      "id": "virtual-tower",
+      "title": "Virtual Tower",
+      "category": "mini",
+      "description": "Explore Virtual Tower release history and verified War Archives schedules. Select a server to check its recorded availability.",
+      "sourceIds": [
+        "en-yostar-20250319-virtual-tower",
+        "wiki-v0812-8",
+        "wiki-v0812-20231",
+        "wiki-v0812-54300"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops and maps still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "virtual-tower-en-war-archives-20250320",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250319-virtual-tower",
+              "wiki-v0812-8"
+            ],
+            "date": "2025-03-20",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "virtual-tower-jp-war-archives-20250320",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-03-20",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "virtual-tower-cn-war-archives-20250320",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-03-20",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "virtual-tower-en-original-20220324",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-03-24",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2022-04-06",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-54300"
+          ]
+        },
+        {
+          "id": "virtual-tower-jp-original-20220324",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-03-24",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2022-04-06",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-54300"
+          ]
+        },
+        {
+          "id": "virtual-tower-cn-original-20220324",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-03-24",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2022-04-06",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-54300"
+          ]
+        },
+        {
+          "id": "virtual-tower-en-rerun-20240314",
+          "region": "EN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-03-14",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-03-20",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-54300"
+          ]
+        },
+        {
+          "id": "virtual-tower-jp-rerun-20240314",
+          "region": "JP",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-03-14",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-03-20",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-54300"
+          ]
+        },
+        {
+          "id": "virtual-tower-cn-rerun-20240314",
+          "region": "CN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-03-14",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-03-20",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-54300"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-54300"
+          ]
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/1/1e/Virtual_Tower_Event_Banner_EN.jpg",
+        "alt": "Virtual Tower official EN event banner",
+        "sourceIds": [
+          "wiki-v0812-54300"
+        ],
+        "sourceUrl": "https://azurlane.koumakan.jp/wiki/File:Virtual_Tower_Event_Banner_EN.jpg",
+        "uploadedAt": "2022-03-24T15:34:23Z"
+      }
+    },
+    {
+      "id": "pledge-of-the-radiant-court",
+      "title": "Pledge of the Radiant Court",
+      "category": "major",
+      "description": "Revisit Pledge of the Radiant Court through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "pledge-of-the-radiant-court-en-war-archives-20250417",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250416-pledge-of-the-radiant-court",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court",
+              "wiki-v0812-8"
+            ],
+            "date": "2025-04-17",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "pledge-of-the-radiant-court-jp-war-archives-20250417",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-04-17",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "pledge-of-the-radiant-court-cn-war-archives-20250417",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-04-17",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "tempesta-fountain-of-youth",
+      "title": "Tempesta and the Fountain of Youth",
+      "category": "major",
+      "description": "Revisit Tempesta and the Fountain of Youth through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20251015-tempesta-fountain-of-youth",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-fountain-of-youth-en-war-archives-20251016",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251015-tempesta-fountain-of-youth",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251015-tempesta-fountain-of-youth",
+              "wiki-v0812-8"
+            ],
+            "date": "2025-10-16",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "tempesta-fountain-of-youth-jp-war-archives-20251016",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-10-16",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "tempesta-fountain-of-youth-cn-war-archives-20251016",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-10-16",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "violet-tempest-blooming-lycoris",
+      "title": "Violet Tempest, Blooming Lycoris",
+      "category": "major",
+      "description": "Revisit Violet Tempest, Blooming Lycoris through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20251105-violet-tempest-blooming-lycoris",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "violet-tempest-blooming-lycoris-en-war-archives-20251106",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251105-violet-tempest-blooming-lycoris",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251105-violet-tempest-blooming-lycoris",
+              "wiki-v0812-8"
+            ],
+            "date": "2025-11-06",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "violet-tempest-blooming-lycoris-jp-war-archives-20251106",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-11-06",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "violet-tempest-blooming-lycoris-cn-war-archives-20251106",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-11-06",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "parallel-superimposition",
+      "title": "Parallel Superimposition",
+      "category": "major",
+      "description": "Revisit Parallel Superimposition through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "parallel-superimposition-en-war-archives-20251218",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251217-parallel-superimposition",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition",
+              "wiki-v0812-8"
+            ],
+            "date": "2025-12-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "parallel-superimposition-jp-war-archives-20251218",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-12-18",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "parallel-superimposition-cn-war-archives-20251218",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-12-18",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "revelations-of-dust",
+      "title": "Revelations of Dust",
+      "category": "major",
+      "description": "Explore Revelations of Dust release history and verified War Archives schedules. Select a server to check its recorded availability.",
+      "sourceIds": [
+        "en-yostar-20260128-revelations-of-dust",
+        "en-yostar-20250319-virtual-tower",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "revelations-of-dust-en-war-archives-20260129",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260128-revelations-of-dust",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260128-revelations-of-dust",
+              "wiki-v0812-8"
+            ],
+            "date": "2026-01-29",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "revelations-of-dust-en-rerun-20250320",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250319-virtual-tower"
+            ],
+            "date": "2025-03-20",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-03-26T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250319-virtual-tower"
+            ]
+          }
+        },
+        {
+          "id": "revelations-of-dust-jp-war-archives-20260129",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-01-29",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "revelations-of-dust-cn-war-archives-20260129",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-01-29",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "anthem-of-remembrance",
+      "title": "Anthem of Remembrance",
+      "category": "mini",
+      "description": "Explore Anthem of Remembrance release history and verified War Archives schedules. Select a server to check its recorded availability.",
+      "sourceIds": [
+        "en-yostar-20260506-anthem-of-remembrance",
+        "en-yostar-20251105-violet-tempest-blooming-lycoris",
+        "wiki-v0812-63768",
+        "wiki-v0812-20231",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops and maps still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "anthem-of-remembrance-en-war-archives-20260507",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260506-anthem-of-remembrance"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260506-anthem-of-remembrance"
+            ],
+            "date": "2026-05-07",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "anthem-of-remembrance-en-rerun-20251106",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251105-violet-tempest-blooming-lycoris",
+            "wiki-v0812-63768"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251105-violet-tempest-blooming-lycoris"
+            ],
+            "date": "2025-11-06",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-11-12T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20251105-violet-tempest-blooming-lycoris"
+            ]
+          }
+        },
+        {
+          "id": "anthem-of-remembrance-en-original-20230803",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-08-03",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2023-08-16",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-63768"
+          ]
+        },
+        {
+          "id": "anthem-of-remembrance-jp-original-20230803",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-08-03",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2023-08-16",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-63768"
+          ]
+        },
+        {
+          "id": "anthem-of-remembrance-cn-original-20230803",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-08-03",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2023-08-16",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-63768"
+          ]
+        },
+        {
+          "id": "anthem-of-remembrance-jp-rerun-20251106",
+          "region": "JP",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-11-06",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2025-11-12",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-63768"
+          ]
+        },
+        {
+          "id": "anthem-of-remembrance-cn-rerun-20251106",
+          "region": "CN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-11-06",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2025-11-12",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-63768"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-63768"
+          ]
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/6/6c/Anthem_of_Remembrance_Banner_EN.png",
+        "alt": "Anthem of Remembrance official EN event banner",
+        "sourceIds": [
+          "wiki-v0812-63768"
+        ],
+        "sourceUrl": "https://azurlane.koumakan.jp/wiki/File:Anthem_of_Remembrance_Banner_EN.png",
+        "uploadedAt": "2023-09-16T07:06:49Z"
+      }
+    },
+    {
+      "id": "confluence-of-nothingness",
+      "title": "Confluence of Nothingness",
+      "category": "major",
+      "description": "Revisit Confluence of Nothingness through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20260611-confluence-of-nothingness",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "confluence-of-nothingness-en-war-archives-20260612",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260611-confluence-of-nothingness",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260611-confluence-of-nothingness",
+              "wiki-v0812-8"
+            ],
+            "date": "2026-06-12",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "confluence-of-nothingness-jp-war-archives-20260612",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-06-12",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "confluence-of-nothingness-cn-war-archives-20260612",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-06-12",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "interlude-of-illusions",
+      "title": "Interlude of Illusions",
+      "category": "mini",
+      "description": "Explore Interlude of Illusions release history and verified War Archives schedules. Select a server to check its recorded availability.",
+      "sourceIds": [
+        "en-yostar-20260617-interlude-of-illusions",
+        "wiki-v0812-8",
+        "wiki-v0812-20231",
+        "wiki-v0812-71156"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops and maps still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "interlude-of-illusions-en-war-archives-20260618",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260617-interlude-of-illusions",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260617-interlude-of-illusions",
+              "wiki-v0812-8"
+            ],
+            "date": "2026-06-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "interlude-of-illusions-jp-war-archives-20260618",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-06-18",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "interlude-of-illusions-cn-war-archives-20260618",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-06-18",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "interlude-of-illusions-en-original-20240725",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-25",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-71156"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-08-07",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-71156"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-71156"
+          ]
+        },
+        {
+          "id": "interlude-of-illusions-jp-original-20240725",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-25",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-71156"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-08-07",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-71156"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-71156"
+          ]
+        },
+        {
+          "id": "interlude-of-illusions-cn-original-20240725",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-25",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-71156"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-08-07",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-71156"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-71156"
+          ]
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/9/97/Interlude_of_Illusions_Event_Banner_EN.png",
+        "alt": "Interlude of Illusions official EN event banner",
+        "sourceIds": [
+          "wiki-v0812-71156"
+        ],
+        "sourceUrl": "https://azurlane.koumakan.jp/wiki/File:Interlude_of_Illusions_Event_Banner_EN.png",
+        "uploadedAt": "2024-07-25T22:02:28Z"
+      }
+    },
+    {
+      "id": "frostfall",
+      "title": "Frostfall",
+      "category": "raid",
+      "description": "Explore Frostfall release history and verified War Archives schedules. Select a server to check its recorded availability.",
+      "sourceIds": [
+        "en-yostar-20260708-frostfall",
+        "en-yostar-20250416-pledge-of-the-radiant-court",
+        "wiki-v0812-62382",
+        "wiki-v0812-20231",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops and maps still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "frostfall-en-war-archives-20260709",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260708-frostfall"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260708-frostfall"
+            ],
+            "date": "2026-07-09",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "frostfall-en-rerun-20250417",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250416-pledge-of-the-radiant-court",
+            "wiki-v0812-62382"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ],
+            "date": "2025-04-17",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-04-23T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ]
+          }
+        },
+        {
+          "id": "frostfall-en-original-20230323",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-23",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2023-04-05",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-62382"
+          ]
+        },
+        {
+          "id": "frostfall-jp-original-20230323",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-23",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2023-04-05",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-62382"
+          ]
+        },
+        {
+          "id": "frostfall-cn-original-20230323",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-23",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2023-04-05",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-62382"
+          ]
+        },
+        {
+          "id": "frostfall-jp-rerun-20250417",
+          "region": "JP",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-04-17",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2025-04-23",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-62382"
+          ]
+        },
+        {
+          "id": "frostfall-cn-rerun-20250417",
+          "region": "CN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-04-17",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2025-04-23",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-62382"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-62382"
+          ]
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/5/52/Frostfall_Event_Banner_EN.png",
+        "alt": "Frostfall official EN event banner",
+        "sourceIds": [
+          "wiki-v0812-62382"
+        ],
+        "sourceUrl": "https://azurlane.koumakan.jp/wiki/File:Frostfall_Event_Banner_EN.png",
+        "uploadedAt": "2023-03-26T04:44:12Z"
+      }
+    },
+    {
+      "id": "welcome-to-little-academy",
+      "title": "Welcome to Little Academy",
+      "category": "major",
+      "description": "Explore Welcome to Little Academy release history and verified War Archives schedules. Select a server to check its recorded availability.",
+      "sourceIds": [
+        "en-yostar-20260826-welcome-to-little-academy",
+        "wiki-v0812-8",
+        "wiki-v0812-20231",
+        "wiki-v0812-70908"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops and maps still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "welcome-to-little-academy-en-war-archives-20260827",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260826-welcome-to-little-academy",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260826-welcome-to-little-academy",
+              "wiki-v0812-8"
+            ],
+            "date": "2026-08-27",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "welcome-to-little-academy-jp-war-archives-20260827",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-08-27",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "welcome-to-little-academy-cn-war-archives-20260827",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-08-27",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "welcome-to-little-academy-en-original-20240627",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-06-27",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-70908"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-07-10",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-70908"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-70908"
+          ]
+        },
+        {
+          "id": "welcome-to-little-academy-jp-original-20240627",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-06-27",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-70908"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-07-10",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-70908"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-70908"
+          ]
+        },
+        {
+          "id": "welcome-to-little-academy-cn-original-20240627",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-06-27",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-70908"
+            ]
+          },
+          "end": {
+            "kind": "date",
+            "date": "2024-07-10",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-70908"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-70908"
+          ]
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/e/e4/Welcome_to_Little_Academy_Event_Banner_EN.png",
+        "alt": "Welcome to Little Academy official EN event banner",
+        "sourceIds": [
+          "wiki-v0812-70908"
+        ],
+        "sourceUrl": "https://azurlane.koumakan.jp/wiki/File:Welcome_to_Little_Academy_Event_Banner_EN.png",
+        "uploadedAt": "2024-06-27T19:53:49Z"
+      }
+    },
+    {
+      "id": "tempesta-sleeping-sea",
+      "title": "Tempesta and the Sleeping Sea",
+      "category": "major",
+      "description": "Revisit Tempesta and the Sleeping Sea through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-sleeping-sea",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-sleeping-sea-en-war-archives-20261015",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20261014-tempesta-sleeping-sea",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-sleeping-sea",
+              "wiki-v0812-8"
+            ],
+            "date": "2026-10-15",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "tempesta-sleeping-sea-jp-war-archives-20261015",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-10-15",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "tempesta-sleeping-sea-cn-war-archives-20261015",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-10-15",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "tempesta-islas-de-libertad",
+      "title": "Tempesta and Islas de Libertád",
+      "category": "major",
+      "description": "Revisit Tempesta and Islas de Libertád through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-islas-de-libertad",
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-islas-de-libertad-en-war-archives-20261015",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20261014-tempesta-islas-de-libertad",
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-islas-de-libertad",
+              "wiki-v0812-8"
+            ],
+            "date": "2026-10-15",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          }
+        },
+        {
+          "id": "tempesta-islas-de-libertad-jp-war-archives-20261015",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-10-15",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "tempesta-islas-de-libertad-cn-war-archives-20261015",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-10-15",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "a-note-through-the-firmament",
+      "title": "A Note Through the Firmament",
+      "category": "major",
+      "description": "A Note Through the Firmament: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "a-note-through-the-firmament-en-original-20251218",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251217-parallel-superimposition"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ],
+            "date": "2025-12-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-01-07T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "hammanns-scrumptious-spells",
+      "title": "Hammann’s Scrumptious Spells",
+      "category": "mini",
+      "description": "Hammann’s Scrumptious Spells: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20251217-parallel-superimposition",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "hammanns-scrumptious-spells-en-original-20251218",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20251217-parallel-superimposition"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ],
+            "date": "2025-12-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-01-07T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20251217-parallel-superimposition"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "the-strict-maid-isnt-so-strict",
+      "title": "The Strict Maid Isn’t So Strict",
+      "category": "mini",
+      "description": "The Strict Maid Isn’t So Strict: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20261014-tempesta-sleeping-sea"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "the-strict-maid-isnt-so-strict-en-original-20261015",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20261014-tempesta-sleeping-sea"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-sleeping-sea"
+            ],
+            "date": "2026-10-15",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-11-04T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20261014-tempesta-sleeping-sea"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "joint-operation-big-shots-proclamation",
+      "title": "Joint Operation — The Big Shot’s Proclamation",
+      "category": "raid",
+      "description": "Joint Operation — The Big Shot’s Proclamation: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20260826-welcome-to-little-academy"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "joint-operation-big-shots-proclamation-en-original-20260827",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260826-welcome-to-little-academy"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260826-welcome-to-little-academy"
+            ],
+            "date": "2026-08-27",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-09-07T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20260826-welcome-to-little-academy"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "light-of-the-martyrium",
+      "title": "Light of the Martyrium",
+      "category": "major",
+      "description": "Light of the Martyrium: EN rerun history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20260617-interlude-of-illusions",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "light-of-the-martyrium-en-rerun-20260618",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260617-interlude-of-illusions"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260617-interlude-of-illusions"
+            ],
+            "date": "2026-06-18",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-06-24T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20260617-interlude-of-illusions"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "sharing-sweet-slumbers",
+      "title": "Sharing Sweet Slumbers",
+      "category": "mini",
+      "description": "Sharing Sweet Slumbers: EN rerun history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20260611-confluence-of-nothingness",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "sharing-sweet-slumbers-en-rerun-20260612",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20260611-confluence-of-nothingness"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20260611-confluence-of-nothingness"
+            ],
+            "date": "2026-06-12",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2026-06-24T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20260611-confluence-of-nothingness"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "big-lessons-for-the-little-lady",
+      "title": "Big Lessons for the Little Lady",
+      "category": "mini",
+      "description": "Big Lessons for the Little Lady: EN rerun history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20250409-big-lessons-apr-2025",
+        "wiki-v0812-8"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "big-lessons-for-the-little-lady-en-rerun-20250410",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250409-big-lessons-apr-2025"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250409-big-lessons-apr-2025"
+            ],
+            "date": "2025-04-10",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-04-23T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250409-big-lessons-apr-2025"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "shipbuilding-support-northern-parliament",
+      "title": "Shipbuilding Support Plan: Northern Parliament",
+      "category": "mini",
+      "description": "Shipbuilding Support Plan: Northern Parliament: EN event history verified from the dated Yostar maintenance notice. The limited rewards and missions are historical only.",
+      "sourceIds": [
+        "en-yostar-20250416-pledge-of-the-radiant-court"
+      ],
+      "verifiedAt": "2026-11-17T12:32:00Z",
+      "missing": [
+        "Earlier original/rerun dates and other regional releases have not been verified.",
+        "Historical shops, stages and rewards need occurrence-specific verification."
+      ],
+      "occurrences": [
+        {
+          "id": "shipbuilding-support-northern-parliament-en-original-20250417",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T12:32:00Z",
+          "sourceIds": [
+            "en-yostar-20250416-pledge-of-the-radiant-court"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ],
+            "date": "2025-04-17",
+            "note": "Added following EN maintenance; exact completion time is not published."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "value": "2025-04-23T23:59:00-07:00",
+            "sourceIds": [
+              "en-yostar-20250416-pledge-of-the-radiant-court"
+            ]
+          }
+        }
+      ],
+      "content": [],
+      "stages": []
+    },
+    {
+      "id": "fallen-wings",
+      "title": "Fallen Wings",
+      "aliases": [
+        "Fallen Wings Rerun",
+        "Fallen Wings"
+      ],
+      "category": "major",
+      "description": "Revisit Fallen Wings through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "fallen-wings-en-war-archives-20200409",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-04-09",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "fallen-wings-jp-war-archives-20200409",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-04-09",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "fallen-wings-cn-war-archives-20200409",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-04-09",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "encircling-graf-spee",
+      "title": "Encircling Graf Spee",
+      "aliases": [
+        "Encircling Graf Spee"
+      ],
+      "category": "mini",
+      "description": "Revisit Encircling Graf Spee through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "encircling-graf-spee-en-war-archives-20200416",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-04-16",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "encircling-graf-spee-jp-war-archives-20190509",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-05-09",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "encircling-graf-spee-cn-war-archives-20190509",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-05-09",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "winter-s-crown",
+      "title": "Winter's Crown",
+      "aliases": [
+        "Winter's Crown Rerun",
+        "Winter's Crown"
+      ],
+      "category": "major",
+      "description": "Revisit Winter's Crown through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "winter-s-crown-en-war-archives-20200514",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-05-14",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "winter-s-crown-jp-war-archives-20190613",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-06-13",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "winter-s-crown-cn-war-archives-20190613",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-06-13",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "strive-wish-and-strategize",
+      "title": "Strive, Wish and Strategize",
+      "aliases": [
+        "Strive, Wish and Strategize"
+      ],
+      "category": "mini",
+      "description": "Revisit Strive, Wish and Strategize through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "strive-wish-and-strategize-en-war-archives-20200730",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-07-30",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "strive-wish-and-strategize-jp-war-archives-20190307",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-03-07",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "strive-wish-and-strategize-cn-war-archives-20190307",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2019-03-07",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "glorious-battle",
+      "title": "Glorious Battle",
+      "aliases": [
+        "Glorious Battle"
+      ],
+      "category": "mini",
+      "description": "Revisit Glorious Battle through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "glorious-battle-en-war-archives-20201112",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-11-12",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "glorious-battle-jp-war-archives-20201112",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-11-12",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "glorious-battle-cn-war-archives-20201112",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-11-12",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "iris-of-light-and-dark",
+      "title": "Iris of Light and Dark",
+      "aliases": [
+        "Iris of Light and Dark Rerun",
+        "Iris of Light and Dark"
+      ],
+      "category": "major",
+      "description": "Revisit Iris of Light and Dark through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "iris-of-light-and-dark-en-war-archives-20210312",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-03-12",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "iris-of-light-and-dark-jp-war-archives-20200514",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-05-14",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "iris-of-light-and-dark-cn-war-archives-20200514",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-05-14",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "ink-stained-steel-sakura",
+      "title": "Ink-Stained Steel Sakura",
+      "aliases": [
+        "Ink-Stained Steel Sakura Rerun",
+        "Ink-Stained Steel Sakura"
+      ],
+      "category": "major",
+      "description": "Revisit Ink-Stained Steel Sakura through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "ink-stained-steel-sakura-en-war-archives-20210408",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-04-08",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "ink-stained-steel-sakura-jp-war-archives-20200702",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-07-02",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "ink-stained-steel-sakura-cn-war-archives-20200702",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2020-07-02",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "crimson-echoes",
+      "title": "Crimson Echoes",
+      "aliases": [
+        "Crimson Echoes Rerun",
+        "Crimson Echoes"
+      ],
+      "category": "major",
+      "description": "Revisit Crimson Echoes through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "crimson-echoes-en-war-archives-20211014",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-10-14",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "crimson-echoes-jp-war-archives-20210121",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-01-21",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "crimson-echoes-cn-war-archives-20210121",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-01-21",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "scherzo-of-iron-and-blood",
+      "title": "Scherzo of Iron and Blood",
+      "aliases": [
+        "Scherzo of Iron and Blood"
+      ],
+      "category": "major",
+      "description": "Revisit Scherzo of Iron and Blood through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "scherzo-of-iron-and-blood-en-war-archives-20211216",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-12-16",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "scherzo-of-iron-and-blood-jp-war-archives-20210513",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-05-13",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "scherzo-of-iron-and-blood-cn-war-archives-20210513",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-05-13",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "moonlit-overture",
+      "title": "Moonlit Overture",
+      "aliases": [
+        "Prelude under the Moon",
+        "Moonlit Overture (Prelude under the Moon)"
+      ],
+      "category": "mini",
+      "description": "Revisit Moonlit Overture through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "moonlit-overture-en-war-archives-20220407",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-04-07",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "moonlit-overture-jp-war-archives-20210408",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-04-08",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "moonlit-overture-cn-war-archives-20210408",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-04-08",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "crescendo-of-polaris",
+      "title": "Crescendo of Polaris",
+      "aliases": [
+        "Crescendo of Polaris",
+        "Passionate Polaris"
+      ],
+      "category": "mini",
+      "description": "Revisit Crescendo of Polaris through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "crescendo-of-polaris-en-war-archives-20220113",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-01-13",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "crescendo-of-polaris-jp-war-archives-20211014",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-10-14",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "crescendo-of-polaris-cn-war-archives-20211014",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2021-10-14",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "empyreal-tragicomedy",
+      "title": "Empyreal Tragicomedy",
+      "aliases": [
+        "Empyreal Tragicomedy"
+      ],
+      "category": "major",
+      "description": "Revisit Empyreal Tragicomedy through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "empyreal-tragicomedy-en-war-archives-20220513",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-05-13",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "empyreal-tragicomedy-jp-war-archives-20220113",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-01-13",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "empyreal-tragicomedy-cn-war-archives-20220113",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-01-13",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "ashen-simulacrum",
+      "title": "Ashen Simulacrum",
+      "aliases": [
+        "Ashen Simulacrum"
+      ],
+      "category": "major",
+      "description": "Revisit Ashen Simulacrum through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "ashen-simulacrum-en-war-archives-20220721",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-07-21",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "ashen-simulacrum-jp-war-archives-20220407",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-04-07",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "ashen-simulacrum-cn-war-archives-20220407",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-04-07",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "the-solomon-ranger",
+      "title": "The Solomon Ranger",
+      "aliases": [
+        "The Solomon Ranger"
+      ],
+      "category": "mini",
+      "description": "Revisit The Solomon Ranger through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "the-solomon-ranger-en-war-archives-20220901",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-09-01",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-solomon-ranger-jp-war-archives-20220407",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-04-07",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-solomon-ranger-cn-war-archives-20220407",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-04-07",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "swirling-cherry-blossoms",
+      "title": "Swirling Cherry Blossoms",
+      "aliases": [
+        "Swirling Cherry Blossoms"
+      ],
+      "category": "major",
+      "description": "Revisit Swirling Cherry Blossoms through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "swirling-cherry-blossoms-en-war-archives-20221013",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-10-13",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "swirling-cherry-blossoms-jp-war-archives-20220721",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-07-21",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "swirling-cherry-blossoms-cn-war-archives-20220721",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-07-21",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "the-enigma-and-the-shark",
+      "title": "The Enigma and the Shark",
+      "aliases": [
+        "The Enigma and the Shark"
+      ],
+      "category": "mini",
+      "description": "Revisit The Enigma and the Shark through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "the-enigma-and-the-shark-en-war-archives-20221215",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-12-15",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-enigma-and-the-shark-jp-war-archives-20220901",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-09-01",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-enigma-and-the-shark-cn-war-archives-20220901",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-09-01",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "universe-in-unison",
+      "title": "Universe in Unison",
+      "aliases": [
+        "Universe in Unison"
+      ],
+      "category": "mini",
+      "description": "Revisit Universe in Unison through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "universe-in-unison-en-war-archives-20221117",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-11-17",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "universe-in-unison-jp-war-archives-20221013",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-10-13",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "universe-in-unison-cn-war-archives-20221013",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-10-13",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "microlayer-medley",
+      "title": "Microlayer Medley",
+      "aliases": [
+        "Microlayer Medley"
+      ],
+      "category": "major",
+      "description": "Revisit Microlayer Medley through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "microlayer-medley-en-war-archives-20230316",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-16",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "microlayer-medley-jp-war-archives-20221117",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-11-17",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "microlayer-medley-cn-war-archives-20221117",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-11-17",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "stars-of-the-shimmering-fjord",
+      "title": "Stars of the Shimmering Fjord",
+      "aliases": [
+        "Stars of the Shimmering Fjord"
+      ],
+      "category": "mini",
+      "description": "Revisit Stars of the Shimmering Fjord through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "stars-of-the-shimmering-fjord-en-war-archives-20230316",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-16",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "stars-of-the-shimmering-fjord-jp-war-archives-20221117",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-11-17",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "stars-of-the-shimmering-fjord-cn-war-archives-20221117",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2022-11-17",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "skybound-oratorio",
+      "title": "Skybound Oratorio",
+      "aliases": [
+        "Skybound Oratorio"
+      ],
+      "category": "major",
+      "description": "Revisit Skybound Oratorio through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "skybound-oratorio-en-war-archives-20230420",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-04-20",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "skybound-oratorio-jp-war-archives-20230309",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-09",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "skybound-oratorio-cn-war-archives-20230309",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-09",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "the-way-home-in-the-night",
+      "title": "The Way Home in the Night",
+      "aliases": [
+        "The Way Home in the Night"
+      ],
+      "category": "mini",
+      "description": "Revisit The Way Home in the Night through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "the-way-home-in-the-night-en-war-archives-20230420",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-04-20",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-way-home-in-the-night-jp-war-archives-20230309",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-09",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-way-home-in-the-night-cn-war-archives-20230309",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-03-09",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "northern-overture",
+      "title": "Northern Overture",
+      "aliases": [
+        "Northern Overture"
+      ],
+      "category": "major",
+      "description": "Revisit Northern Overture through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "northern-overture-en-war-archives-20230511",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-05-11",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "northern-overture-jp-war-archives-20230420",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-04-20",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "northern-overture-cn-war-archives-20230420",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-04-20",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "aurora-noctis",
+      "title": "Aurora Noctis",
+      "aliases": [
+        "Aurora Noctis"
+      ],
+      "category": "major",
+      "description": "Revisit Aurora Noctis through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "aurora-noctis-en-war-archives-20230831",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-08-31",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "aurora-noctis-jp-war-archives-20230511",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-05-11",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "aurora-noctis-cn-war-archives-20230511",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-05-11",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "counterattack-within-the-fjord",
+      "title": "Counterattack Within the Fjord",
+      "aliases": [
+        "Counterattack Within the Fjord"
+      ],
+      "category": "mini",
+      "description": "Revisit Counterattack Within the Fjord through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "counterattack-within-the-fjord-en-war-archives-20240711",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-11",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "counterattack-within-the-fjord-jp-war-archives-20230713",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-07-13",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "counterattack-within-the-fjord-cn-war-archives-20230713",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-07-13",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "inverted-orthant",
+      "title": "Inverted Orthant",
+      "aliases": [
+        "Inverted Orthant"
+      ],
+      "category": "major",
+      "description": "Revisit Inverted Orthant through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "inverted-orthant-en-war-archives-20231207",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-12-07",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "inverted-orthant-jp-war-archives-20230831",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-08-31",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "inverted-orthant-cn-war-archives-20230831",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2023-08-31",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "dreamwaker-s-butterfly",
+      "title": "Dreamwaker's Butterfly",
+      "aliases": [
+        "Dreamwaker's Butterfly"
+      ],
+      "category": "major",
+      "description": "Revisit Dreamwaker's Butterfly through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "dreamwaker-s-butterfly-en-war-archives-20240118",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-01-18",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "dreamwaker-s-butterfly-jp-war-archives-20240118",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-01-18",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "dreamwaker-s-butterfly-cn-war-archives-20240118",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-01-18",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "mirror-involution",
+      "title": "Mirror Involution",
+      "aliases": [
+        "Mirror Involution"
+      ],
+      "category": "major",
+      "description": "Revisit Mirror Involution through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "mirror-involution-en-war-archives-20240118",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-01-18",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "mirror-involution-jp-war-archives-20240118",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-01-18",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "mirror-involution-cn-war-archives-20240118",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-01-18",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "khorovod-of-dawn-s-rime",
+      "title": "Khorovod of Dawn's Rime",
+      "aliases": [
+        "Khorovod of Dawn's Rime"
+      ],
+      "category": "major",
+      "description": "Revisit Khorovod of Dawn's Rime through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "khorovod-of-dawn-s-rime-en-war-archives-20240222",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-02-22",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "khorovod-of-dawn-s-rime-jp-war-archives-20240222",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-02-22",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "khorovod-of-dawn-s-rime-cn-war-archives-20240222",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-02-22",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "sundered-blue",
+      "title": "Sundered Blue",
+      "aliases": [
+        "Sundered Blue"
+      ],
+      "category": "mini",
+      "description": "Revisit Sundered Blue through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "sundered-blue-en-war-archives-20240321",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-03-21",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "sundered-blue-jp-war-archives-20240321",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-03-21",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "sundered-blue-cn-war-archives-20240321",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-03-21",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "the-flame-touched-dagger",
+      "title": "The Flame-Touched Dagger",
+      "aliases": [
+        "The Flame-Touched Dagger"
+      ],
+      "category": "mini",
+      "description": "Revisit The Flame-Touched Dagger through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "the-flame-touched-dagger-en-war-archives-20240613",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-06-13",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-flame-touched-dagger-jp-war-archives-20240613",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-06-13",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "the-flame-touched-dagger-cn-war-archives-20240613",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-06-13",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "upon-the-shimmering-blue",
+      "title": "Upon the Shimmering Blue",
+      "aliases": [
+        "Upon the Shimmering Blue"
+      ],
+      "category": "major",
+      "description": "Revisit Upon the Shimmering Blue through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "upon-the-shimmering-blue-en-war-archives-20240718",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-18",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "upon-the-shimmering-blue-jp-war-archives-20240718",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-18",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "upon-the-shimmering-blue-cn-war-archives-20240718",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-07-18",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "daedalian-hymn",
+      "title": "Daedalian Hymn",
+      "aliases": [
+        "Daedalian Hymn"
+      ],
+      "category": "major",
+      "description": "Revisit Daedalian Hymn through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "daedalian-hymn-en-war-archives-20240829",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-08-29",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "daedalian-hymn-jp-war-archives-20240829",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-08-29",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "daedalian-hymn-cn-war-archives-20240829",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-08-29",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "tower-of-transcendence",
+      "title": "Tower of Transcendence",
+      "aliases": [
+        "Tower of Transcendence"
+      ],
+      "category": "major",
+      "description": "Revisit Tower of Transcendence through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "tower-of-transcendence-en-war-archives-20241017",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-10-17",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "tower-of-transcendence-jp-war-archives-20241017",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-10-17",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "tower-of-transcendence-cn-war-archives-20241017",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2024-10-17",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "abyssal-refrain",
+      "title": "Abyssal Refrain",
+      "aliases": [
+        "Abyssal Refrain"
+      ],
+      "category": "major",
+      "description": "Revisit Abyssal Refrain through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "abyssal-refrain-en-war-archives-20250109",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-01-09",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "abyssal-refrain-jp-war-archives-20250109",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-01-09",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "abyssal-refrain-cn-war-archives-20250109",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-01-09",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "aquilifer-s-ballade",
+      "title": "Aquilifer's Ballade",
+      "aliases": [
+        "Aquilifer's Ballade"
+      ],
+      "category": "major",
+      "description": "Revisit Aquilifer's Ballade through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "aquilifer-s-ballade-en-war-archives-20250619",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-06-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "aquilifer-s-ballade-jp-war-archives-20250619",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-06-19",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "aquilifer-s-ballade-cn-war-archives-20250619",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-06-19",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "rondo-at-rainbow-s-end",
+      "title": "Rondo at Rainbow's End",
+      "aliases": [
+        "Rondo at Rainbow's End"
+      ],
+      "category": "major",
+      "description": "Revisit Rondo at Rainbow's End through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "rondo-at-rainbow-s-end-en-war-archives-20250717",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-07-17",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "rondo-at-rainbow-s-end-jp-war-archives-20250717",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-07-17",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "rondo-at-rainbow-s-end-cn-war-archives-20250717",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2025-07-17",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
+    },
+    {
+      "id": "operation-convergence",
+      "title": "Operation Convergence",
+      "aliases": [
+        "Operation Convergence"
+      ],
+      "category": "mini",
+      "description": "Revisit Operation Convergence through its verified regional War Archives release. Original and rerun schedules are still being documented.",
+      "verifiedAt": "2026-11-17T13:11:32Z",
+      "sourceIds": [
+        "wiki-v0812-8",
+        "wiki-v0812-20231"
+      ],
+      "occurrences": [
+        {
+          "id": "operation-convergence-en-war-archives-20260409",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-04-09",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "operation-convergence-jp-war-archives-20260409",
+          "region": "JP",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-04-09",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        },
+        {
+          "id": "operation-convergence-cn-war-archives-20260409",
+          "region": "CN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-17T13:11:32Z",
+          "start": {
+            "kind": "date",
+            "date": "2026-04-09",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-v0812-8"
+            ]
+          },
+          "sourceIds": [
+            "wiki-v0812-8",
+            "wiki-v0812-20231"
+          ],
+          "note": "Regional addition date recorded by Koumakan; exact release time was not published in the checked index. Availability verified retrospectively."
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "Full original and rerun history remains incomplete.",
+        "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
+      ]
     }
   ]
 }
