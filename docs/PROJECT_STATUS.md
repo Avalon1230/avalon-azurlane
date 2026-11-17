@@ -2,7 +2,17 @@
 
 _Last updated: 2026-11-17 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active development — v0.8.11 Operation CHRONICLE (unmerged)
+## Current release — v0.8.11 Operation CHRONICLE (2026-11-17)
+
+- **Authorized merge:** Commander AVALON approved after independent corrective QA [review #5933059313](https://github.com/Avalon1230/avalon-azurlane/pull/34#pullrequestreview-5933059313). [PR #34](https://github.com/Avalon1230/avalon-azurlane/pull/34), reviewed head `61ae58c64f08660f1f34d36f62ce7e96c0d13fc5`, was **squash-merged** to `main` as **`891701a1835e42a021528edb1ae4d34b6ff48748`**. GitHub verified closed/merged PR and matching `main` head. The former development sections below are historical, not outstanding work.
+- **Delivered:** Integrated Events navigation, search, filters, timeline, four distinct sections **Ongoing / Upcoming / Past Events / War Archives**, and regional event detail pages with source records. Server-specific EN/JP/CN schedules and Asia/Manila display, TBA/maintenance handling, countdowns with scope-safe updates, one identity across originals/reruns/permanent additions, protected historical rewards and permanent availability only after observed release.
+- **Owned game facts:** Initial, explicitly partial catalog contains **8 event identities / 34 regional occurrences**. Featured *It's Showtime! Angels’ Azur Stage* collaboration provides source-verified Liliel Angel Paratroopers/Ririsa and Miriella Angel Paratroopers/Mikari, stable GroupIDs 1180001/1180002, augments 15960/15980, mission and cosmetic records. Distinct cosmetic gear skins never become combat equipment. Original art, evidence-bound stats, source attribution and saved existing ship/loadout identities are preserved.
+- **Independent QA / verification:** [Passing head CI 44017621724](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44017621724) reports **319/319 Node tests**, 63 responsive checks, preserved combat/research and original-art suites, bounded pinned-source checks, regional and countdown controlled-clock browser tests. [22 desktop/mobile correction captures](qa/v0811-corrections/README.md) document before/after acceptance. Prior [requested changes](https://github.com/Avalon1230/avalon-azurlane/pull/34#pullrequestreview-5932532409) resolved: separate historical/permanent sections, future addition wording, full mobile personal names, and no false scope-change notifications.
+- **Release verification:** Post-merge `main` CI / GitHub Pages deploy should be checked independently. Do not treat successful pre-merge PR tests as proof of deployed site.
+- **Deferred:** Full historical event coverage, comprehensive enemy/boss/stage/shop/drop records, some regional dates and art, authoritative offset-versus-IANA-zone guard, event-specific validated fleet recommendations. Keep event data updates small, versioned, region-specific and source-audited; primary encyclopedia is Koumakan, verified game client and publisher announcements confirm new facts. See [EVENTS.md](EVENTS.md).
+- **Next:** Validate deployment and catalog usability; continue source-audited event history backfill and event intelligence readiness without restarting or duplicating v0.8.11 implementation.
+
+## Historical development — v0.8.11 Operation CHRONICLE (pre-merge)
 
 ### Independent QA corrections — 2026-11-17
 
@@ -25,7 +35,7 @@ _Last updated: 2026-11-17 (Asia/Manila). This is the permanent cross-conversatio
 - Deferred: complete event history; uncataloged regional permanent additions; detailed enemy/boss records, story synopsis and furniture inventory; exact unannounced EN/JP unlock times; full encounter simulation/recommendations. No drop rates, launch estimates, shop grace periods or unsupported client IDs invented.
 - **Next:** independent QA of source accuracy, regional schedules, integration and visual quality on PR #34, then await Commander authorization. Continue event data maintenance through small reviewed batches using the documented update procedure. **Do not merge or deploy.**
 
-## Current release — v0.8.10 dock-inspired whole-card identity (2026-11-15)
+## Previous release — v0.8.10 dock-inspired whole-card identity (2026-11-15)
 
 - **Authorization and merge:** Following independent visual QA of the Commander's three recovered in-game dock references, [review #5909146669](https://github.com/Avalon1230/avalon-azurlane/pull/33#pullrequestreview-5909146669) recorded a PASS on PR #33 at head `e3aa94631d87f86a0442896548e9b3e567abe51b`. The Commander expressly authorized release; PR #33 was **squash-merged** to `main` as **`967a8aa9237bf9319687f49d306b68990616774a`**. GitHub independently confirmed PR closure and the merge as the main head. PR #33 is no longer open.
 - **Visual result:** Frames wrap the entire roster tile and profile hero, never the portrait thumbnail. Full-size original character art and consistent top name / artwork / hull-footer order are preserved. PR receives articulated gold dock-inspired rails; DR receives a distinct prismatic treatment. All META ships share a scorched-bronze exterior; pinned source-backed Elite violet/charcoal versus Super Rare dark-gold/amber backgrounds and nameplates distinguish rarity. Ordinary Enterprise remains visually unchanged. No fictional oath, fleet, lock or level state is added.
