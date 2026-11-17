@@ -6,7 +6,7 @@ import {loadEventCatalog,readEventFilters,saveEventFilters} from '../src/events-
 import {renderEvents,renderEventDetail} from '../src/events-view.js';
 import {createEventClock} from '../src/events-clock.js';
 const catalog=JSON.parse(readFileSync(new URL('../data/events/catalog.json',import.meta.url)));
-const now=Date.parse('2026-11-16T04:00:00Z');
+const now=Date.parse('2026-11-17T12:36:00Z');
 const collab=catalog.events.find(e=>e.id==='angels-azur-stage');
 const en=collab.occurrences.find(o=>o.region==='EN');
 const filters=normalizeEventFilters();
@@ -14,9 +14,9 @@ const clone=()=>structuredClone(catalog);
 const exact=value=>({kind:'exact',zone:'UTC',value,sourceIds:[en.sourceIds[0]]});
 const run={...en,start:exact('2026-11-16T03:00:00Z'),end:exact('2026-11-16T05:00:00Z'),releaseState:'announced'};
 
-test('reviewed seed validates: eight identities, region-specific releases and source revisions',()=>{
- assert.deepEqual(validateEventCatalog(catalog),[]);assert.equal(catalog.events.length,8);
- assert.equal(new Set(catalog.events.flatMap(e=>e.occurrences.map(o=>o.id))).size,34);
+test('verified expanded catalog preserves regional releases and source revisions',()=>{
+ assert.deepEqual(validateEventCatalog(catalog),[]);assert.equal(catalog.events.length,29);
+ assert.equal(new Set(catalog.events.flatMap(e=>e.occurrences.map(o=>o.id))).size,58);
  assert.equal(collab.occurrences.length,3);assert.equal(catalog.coverage,'partial');
 });
 test('schema rejects identity, occurrence and regional-run duplicates',()=>{
@@ -131,7 +131,7 @@ test('unknown art, incomplete content and malicious source text render safely',(
 });
 test('local catalog loader handles HTTP failures, invalid JSON/schema and timeouts without partial publication',async()=>{
  const response=body=>({ok:true,text:async()=>body});
- assert.equal((await loadEventCatalog(async()=>response(JSON.stringify(catalog)))).events.length,8);
+ assert.equal((await loadEventCatalog(async()=>response(JSON.stringify(catalog)))).events.length,29);
  await assert.rejects(loadEventCatalog(async()=>({ok:false,status:503})),/HTTP 503/);
  await assert.rejects(loadEventCatalog(async()=>response('{bad')));
  await assert.rejects(loadEventCatalog(async()=>response(JSON.stringify({...catalog,schemaVersion:99}))),/validation/);
@@ -194,7 +194,7 @@ test('four sections and counts agree between cards and timeline, with occurrence
   const html=renderEvents({catalog,filters:{...filters,view},now});
   for(const id of ['ongoing','upcoming','past','war-archives'])assert.match(html,new RegExp('id="events-'+id+'"'));
   assert.match(html,/Past Events<\/h2><span>5 identities/);
-  assert.match(html,/War Archives<\/h2><span>1 identity/);
+  assert.match(html,/War Archives<\\/h2><span>14 identities/);
   const e=catalog.events.find(e=>e.id==='the-fools-scales');
   for(const o of e.occurrences.filter(o=>o.region==='EN'&&(view==='timeline'||o.kind!=='original'))){
    assert.ok(html.includes('#/events/'+e.id+'?occurrence='+o.id));
