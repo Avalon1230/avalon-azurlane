@@ -2,6 +2,18 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.12] — Unreleased (independent QA and Commander merge authorization required)
+
+### Operation CHRONICLE: Publisher-verified historical backfill
+
+- Expanded partial catalog **8 → 29 event identities** and **34 → 58 regional occurrences**. Permanent entries for EN increased **1 → 14**, each linked to an official maintenance notice; no JP/CN availability is assumed.
+- Added 13 EN War Archives identities and 11 EN original/rerun occurrences, including historical Frostfall, Anthem of Remembrance and Revelations of Dust reruns, while keeping event shop and claim rewards occurrence-specific.
+- Kept unreleased future War Archives additions unavailable until a verified release observation. Dates announced only as after-maintenance remain date-precision, not invented timestamps.
+- Introduced default-collapsed **Search & filters** on Events with EN/JP/CN region and active-filter summary visible; filter state persists while expanding/collapsing, Cards/Timeline controls remain outside.
+- Added [source-by-source EN evidence ledger](docs/EVENTS_BACKFILL.md) and offline coverage audit, source/region/disclosure regression tests, and responsive-browser evidence checks.
+
+**Known boundaries:** Koumakan's exact Events and War Archives indexes returned HTTP 403 in the available browsing environment; this batch relies on dated official Yostar EN announcements and is *not* a complete wiki extraction. JP/CN permanent additions, comprehensive original/rerun histories, stage/reward details and future updates remain pending.
+
 ## [0.8.11] - 2026-11-16
 
 Unreleased; independent QA and Commander authorization pending.
