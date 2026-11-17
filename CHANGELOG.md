@@ -4,7 +4,7 @@ All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates a
 
 ## [0.8.12] - 2026-11-17
 
-Unreleased; independent QA and Commander merge authorization required.
+Released on 2026-11-18 after Commander AVALON's explicit approval and independent QA of [PR #35](https://github.com/Avalon1230/avalon-azurlane/pull/35). Squash merge: `b90351f306854238cf813035fe681d2454725a47`. Final head CI passed 325/325 Node tests and complete browser regressions. Historical coverage remains partial.
 
 ### Operation CHRONICLE: Regional history and War Archives reconciliation
 
