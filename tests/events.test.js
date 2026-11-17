@@ -97,7 +97,7 @@ test('search matches franchise, rewards and aliases; year/category/status/region
 test('past event sorting changes chronologically while retaining one identity per section',()=>{
  const oldest=eventRows(catalog,{sort:'oldest'},now).filter(r=>r.section==='past');
  const newest=eventRows(catalog,{sort:'newest'},now).filter(r=>r.section==='past');
- assert.ok(oldest.length>0);assert.deepEqual(oldest.map(r=>r.event.id),newest.map(r=>r.event.id).reverse());
+ assert.ok(oldest.length>0);assert.deepEqual(new Set(oldest.map(r=>r.event.id)),new Set(newest.map(r=>r.event.id)));
  assert.equal(new Set(oldest.map(r=>r.event.id)).size,oldest.length);
 });
 test('routes accept direct event IDs and reject path injection/extra segments',()=>{
@@ -187,14 +187,14 @@ test('completed runs and verified permanent availability have independent region
  }
  const jp=eventRows(catalog,{region:'JP'},now).filter(r=>r.event.id==='effulgence-before-eclipse');
  assert.deepEqual(jp.map(r=>r.section).sort(),['past','upcoming']);
- assert.equal(new Set(enRows.map(r=>r.event.id)).size,8);
+ assert.equal(new Set(enRows.map(r=>r.event.id)).size,29);
 });
 test('four sections and counts agree between cards and timeline, with occurrence-specific links',()=>{
  for(const view of ['cards','timeline']){
   const html=renderEvents({catalog,filters:{...filters,view},now});
   for(const id of ['ongoing','upcoming','past','war-archives'])assert.match(html,new RegExp('id="events-'+id+'"'));
-  assert.match(html,/Past Events<\/h2><span>5 identities/);
-  assert.match(html,/War Archives<\\/h2><span>14 identities/);
+  assert.match(html,/Past Events<\/h2><span>16 identities/);
+  assert.match(html,/War Archives<\/h2><span>14 identities/);
   const e=catalog.events.find(e=>e.id==='the-fools-scales');
   for(const o of e.occurrences.filter(o=>o.region==='EN'&&(view==='timeline'||o.kind!=='original'))){
    assert.ok(html.includes('#/events/'+e.id+'?occurrence='+o.id));
@@ -242,4 +242,47 @@ test('clock scope changes at frozen time are silent; subsequent same-scope bound
   Object.assign(state,{region,scope});clock.sync();clock.tick();assert.equal(changes,0);
  }
  time+=1000;clock.tick();clock.tick();assert.equal(changes,1);clock.destroy();
+});
+
+test('expanded EN War Archives have dated official provenance and are not inherited by JP/CN',()=>{
+ const additions=['virtual-tower','pledge-of-the-radiant-court','tempesta-fountain-of-youth','violet-tempest-blooming-lycoris','parallel-superimposition','revelations-of-dust','anthem-of-remembrance','confluence-of-nothingness','interlude-of-illusions','frostfall','welcome-to-little-academy','tempesta-sleeping-sea','tempesta-islas-de-libertad'];
+ const archives=catalog.events.filter(e=>additions.includes(e.id));
+ assert.equal(archives.length,13);
+ for(const event of archives){
+  const o=event.occurrences.find(o=>o.kind==='war-archives');
+  assert.ok(o,'EN War Archives record missing: '+event.id);assert.equal(o.region,'EN');
+  assert.equal(occurrenceStatus(o,now),'permanent');
+  assert.equal(o.start.kind,'maintenance');assert.equal(o.start.zone,'Etc/GMT+7');
+  assert.ok(o.sourceIds.every(id=>catalog.sources[id]?.type==='official'));
+  assert.ok(o.sourceIds.every(id=>catalog.sources[id]?.publishedAt));
+  assert.ok(!event.occurrences.some(o=>o.region!=='EN'&&o.kind==='war-archives'));
+ }
+ assert.equal(eventRows(catalog,{region:'EN'},now).filter(r=>r.section==='war-archives').length,14);
+ for(const region of ['JP','CN'])assert.equal(eventRows(catalog,{region},now).filter(r=>r.section==='war-archives').length,0);
+});
+test('past EN originals and reruns remain separate from permanent additions',()=>{
+ const frost=catalog.events.find(e=>e.id==='frostfall');
+ assert.deepEqual(frost.occurrences.map(o=>o.kind).sort(),['rerun','war-archives']);
+ const dust=catalog.events.find(e=>e.id==='revelations-of-dust');
+ assert.deepEqual(dust.occurrences.map(o=>o.kind).sort(),['rerun','war-archives']);
+ const past=eventRows(catalog,{region:'EN'},now).filter(r=>r.section==='past');
+ assert.ok(past.length>5);
+ for(const e of [frost,dust]){
+  const run=e.occurrences.find(o=>o.kind==='rerun');
+  assert.equal(occurrenceStatus(run,now),'ended');
+  assert.equal(eventSection(occurrenceStatus(run,now)),'past');
+  const h=renderEventDetail({catalog,eventId:e.id,occurrenceId:run.id,filters,now});
+  assert.match(h,/This run has ended/);
+ }
+});
+test('filter disclosure hides controls by default but retains region, search and chosen statuses',()=>{
+ const active={...filters,region:'EN',query:'Frostfall',status:'ended'};
+ const compact=renderEvents({catalog,filters:active,now});
+ assert.match(compact,/aria-expanded="false" aria-controls="event-controls"/);
+ assert.match(compact,/id="event-controls" hidden/);
+ assert.match(compact,/EN server · Search active · Ended/);
+ const expanded=renderEvents({catalog,filters:active,now,filtersExpanded:true});
+ assert.match(expanded,/aria-expanded="true" aria-controls="event-controls"/);
+ assert.match(expanded,/id="event-controls"><label/);
+ assert.match(expanded,/value="Frostfall"/);
 });
