@@ -1,6 +1,6 @@
 # Events & live content — Operation CHRONICLE
 
-v0.8.11 is an unmerged feature release. The catalog is deliberately partial. An empty section means no matching verified record is present, not that the game has no events.
+v0.8.11 is released. v0.8.12 is an unmerged, source-audited EN backfill (29 identities / 58 occurrences and 14 EN War Archives entries); see [backfill ledger](EVENTS_BACKFILL.md). The catalog is deliberately partial. An empty section means no matching verified record is present, not that the game has no events.
 
 ## Architecture
 
