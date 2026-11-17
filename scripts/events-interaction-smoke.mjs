@@ -42,7 +42,19 @@ async function closeFilters(page){
  if(await toggle.getAttribute('aria-expanded')==='true')await toggle.click();
 }
 async function saved(page){assert.equal(await page.evaluate(()=>localStorage.getItem('avalon.azurlane.loadouts.v1')),loadouts,'Saved six-slot loadout storage remains identical');}
-async function capture(page,name,fullPage=false){await page.screenshot({path:out+'/'+name+'.png',fullPage});}
+async function capture(page,name,fullPage=false){
+ // Lazy artwork starts loading when a section is revealed. Capture settled pixels,
+ // not an intermediate progressive image, without waiting on off-screen assets.
+ const pending=await page.locator('img').evaluateAll(async images=>{
+  const visible=images.filter(img=>{const r=img.getBoundingClientRect();return r.width&&r.height&&r.bottom>0&&r.top<innerHeight;});
+  await Promise.all(visible.map(async img=>{
+   if(!img.complete)await new Promise(resolve=>{const finish=()=>{clearTimeout(timer);resolve();};const timer=setTimeout(finish,12000);img.addEventListener('load',finish,{once:true});img.addEventListener('error',finish,{once:true});});
+   if(img.complete&&img.naturalWidth)await img.decode().catch(()=>{});
+  }));return visible.filter(img=>img.isConnected&&!img.complete).map(img=>img.currentSrc);
+ });
+ assert.deepEqual(pending,[],name+': visible source artwork must settle before screenshot');
+ await page.screenshot({path:out+'/'+name+'.png',fullPage});
+}
 try{
  for(const width of [360,390,768,1280]){
   const {page,errors}=await pageFor(width);
