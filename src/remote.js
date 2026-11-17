@@ -121,6 +121,8 @@ export function mergeShipCatalog(editorial,remote) {
     const index=known!==undefined?known:mergeByName?namedIndex:undefined;
     if(index!==undefined){
       claimed.add(index);
+      // Preserve AVALON's reviewed identity when the optional feed catches up.
+      if(original[index].source==='avalon-verified')continue;
       original[index]={...original[index],rarity:ship.rarity,sourceHull:ship.sourceHull,
         nation:ship.nation,source:'lycoris',sourceId:ship.sourceId,verified:'sourced'};
     }else {

@@ -1,0 +1,116 @@
+{
+  "implementationCommit": "990d82f0def3c16e48cb86b1824b205eaf6d3b39",
+  "runId": 43815396818,
+  "artifactId": 14202317207,
+  "observationTime": "2026-11-16T04:00:00Z",
+  "captures": [
+    {
+      "file": "archive-1280.png",
+      "width": 1280,
+      "height": 2310,
+      "sha256": "f83962ef5516ccf95a5e15908f90c28ed90e6f8ad66ccbbb6aeae03ff7ec89a2"
+    },
+    {
+      "file": "archive-390.png",
+      "width": 390,
+      "height": 2922,
+      "sha256": "47e507950aac29a2a1aecc498aa929f3c824d31f7aceabc1b3da74983a686872"
+    },
+    {
+      "file": "detail-1280.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "4647ad3deae18fed228c0dcbf838c809b87d54881f37482ea477b5d5feabbbb3"
+    },
+    {
+      "file": "detail-390.png",
+      "width": 390,
+      "height": 900,
+      "sha256": "92532e07468321fc335adef59b942f5a998fc7907525569f2444b6cc9741fcef"
+    },
+    {
+      "file": "events-1280.png",
+      "width": 1280,
+      "height": 3362,
+      "sha256": "927f5aba6de878d0d9c6c176ded67b6e416d967215e0bfa9b6157b67fca6c23e"
+    },
+    {
+      "file": "events-390.png",
+      "width": 390,
+      "height": 5051,
+      "sha256": "7db1b3449b3755ba99925dc23bfe34f293d9c3a0a9730a993d8514923d9ed7bd"
+    },
+    {
+      "file": "featured-1280.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "ee1f0caf1a2be1f848cccf4137babbfa6f52034cde32c75658dbdd9d0c9c911d"
+    },
+    {
+      "file": "featured-390.png",
+      "width": 390,
+      "height": 900,
+      "sha256": "c39bff0d3a2363ca51d3c19bb806e6657a6d118d95eb5f97a3b56fa0cc07e315"
+    },
+    {
+      "file": "history-1280.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "639f61b7aab803b699edbc4db2721f43511665c532ca27bb619f5d19c97d91e4"
+    },
+    {
+      "file": "history-390.png",
+      "width": 390,
+      "height": 900,
+      "sha256": "abb6503f139771a3c99fc24684c017ec4a22d2870c5b864918ce0fe0a287ff8c"
+    },
+    {
+      "file": "mikari-1280.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "0256fa0439af09125bb420193a9d35922d5f06a6a93a3d70035e6036b8e073d3"
+    },
+    {
+      "file": "mikari-390.png",
+      "width": 390,
+      "height": 900,
+      "sha256": "5fe9882c74703efd929170bf4030365890deccfe181fcbc6af1e935fe5e484ed"
+    },
+    {
+      "file": "rewards-1280.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "93f6eccefa93b57e3d426a3bce48773c182689f9b0ca6df9f9a3b90c64fa1bab"
+    },
+    {
+      "file": "rewards-390.png",
+      "width": 390,
+      "height": 900,
+      "sha256": "094f8f694d0d084d946eb20c5f7b069431c95f47d8ea0755f37f48460f446719"
+    },
+    {
+      "file": "ririsa-1280.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "a1440b4065ead51b6fe6dc11f8522de281e4dad16bf0e99cd0ba100e5dd382e0"
+    },
+    {
+      "file": "ririsa-390.png",
+      "width": 390,
+      "height": 900,
+      "sha256": "5c76ef006e27b81de0ffd997fdcd0f2b542ab232ee0b79d7b503a898925f4345"
+    },
+    {
+      "file": "upcoming-jp-1280.png",
+      "width": 1280,
+      "height": 1620,
+      "sha256": "dde695f93998e37af84e058eda2b01640362b3dd62a65c0fc6ba9a0074af8174"
+    },
+    {
+      "file": "upcoming-jp-390.png",
+      "width": 390,
+      "height": 1924,
+      "sha256": "5c1eabc9390f9f0c72e584cffa132bd27e714c93b744f4304bf9176ad8386864"
+    }
+  ]
+}

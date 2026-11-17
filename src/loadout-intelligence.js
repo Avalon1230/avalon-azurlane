@@ -114,7 +114,7 @@ function slotFromGame(slot,index,hullId){
     maxEfficiency:Number.isFinite(slot?.maxEfficiency)?slot.maxEfficiency:null,
     maxMounts:Number.isSafeInteger(slot?.maxMounts)?slot.maxMounts:null,
     parallel:slot?.parallel??null,capacity:slot?.capacity??null,
-    source:'AzurLaneData · May 2026',verified:categories.length>0};
+    source:slot?.source||'AzurLaneData · May 2026',verified:categories.length>0};
 }
 function choosePrimary(index,base,wiki,game,hullId){
   // Prefer a precise, GroupID-checked wiki type, then exact MLB arrays.
@@ -204,7 +204,8 @@ export function loadoutDisplaySlots(data,wikiFacts=null,gameFacts=undefined,ship
   slots.push({
     index:slots.length,kind:'augment',type:selectedType?'Augment · '+selectedType:'Augment',
     augmentType:selectedType||null,
-    source:announcement?'Yostar official announcement · October 2026':
+    source:augmentCandidates.some(a=>a.source==='avalon-verified')?'AVALON · pinned EN client / exact ship ID':
+      announcement?'Yostar official announcement · October 2026':
       game?'AzurLaneData · exact ship ID / augment type':'Augment class eligibility only',
     categories:[],typeCodes:[],hullId,
     augmentCandidates,verified:augmentCandidates.length>0&&(!!game||!!announcement),

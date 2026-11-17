@@ -68,3 +68,12 @@ The current [AVALON assessment records](../src/assessments.js) are independently
 The primary references include Suchiguma's [Research Focus](https://suchiguma.github.io/miniguides/research-focus/), [Chapter 15](https://suchiguma.github.io/guides/chapter-15/), and [Chapter 16 Fleets](https://suchiguma.github.io/guides/chapter-16-fleets/), plus [REGAL](https://azur-lane-regal.suchiguma.com/) and clearly labeled secondary guides. The original authors are not endorsing AVALON and their sites may change independently. Where there is no reviewed evidence, the interface says **Not Yet Evaluated** instead of inventing a grade.
 
 **Confidence is qualitative**, not an estimated success percentage. High or moderate confidence is not a substitute for controlled measurements; independent ship, gear, mode and enemy tests remain required before numerical performance claims or fully automated fleet optimization.
+
+
+## CHRONICLE event and live-content records (v0.8.11)
+
+`data/events/catalog.json` is AVALON-owned, reviewed and versioned; it does not depend on a fan catalog release. Koumakan is the primary encyclopedia, with exact revision URLs. Official EN/JP/CN announcements verify their own schedules, while pinned client records establish identities, slots and augment mechanics. Supplementary art hosts establish file availability only. The selected wiki access reported CC BY-NC-SA 4.0; derived summaries retain attribution and that license (see `data/events/README.md`). Original game art remains subject to the game/franchise rights holders.
+
+`data/live-content/november-2026.json` holds the two independent ship records and two augments. GroupIDs, collection IDs and item IDs are distinct. No name-based replacement of saved IDs is allowed. `scripts/build-live-content.mjs` generates the runtime module; `scripts/verify-chronicle-source.mjs` checks four pinned client files by SHA256 and Git blob before comparing selected literal records. It never executes Lua. The browser only fetches the local catalog, not the wiki API.
+
+See [Events schema and maintenance procedure](EVENTS.md) for coverage, exact sources, regional uncertainty, deduplication, encounter evidence boundaries and the review workflow.

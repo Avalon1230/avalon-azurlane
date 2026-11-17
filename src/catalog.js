@@ -3,6 +3,7 @@
  * identities are loaded from clearly attributed third-party JSON at runtime. No game art or
  * third-party database content is bundled here. See docs/SOURCES.md.
  */
+import {LIVE_SHIPS} from './live-content.js';
 export const MODES = [
   { id: 'campaign', name: 'Main Campaign', eyebrow: 'PVE · CHAPTERS', icon: '⚓', summary: 'Normal/Hard maps, mob and boss fleets, AA, ASW and stage-specific farming.', metrics: ['Mob + boss', 'Support air', 'Submarines'], fleetTypes: ['mob', 'boss', 'support', 'sub'] },
   { id: 'opsi', name: 'Operation Siren', eyebrow: 'PVE · ENDURANCE', icon: '◈', summary: 'Four-fleet operations, strongholds, Abyssal bosses and Arbiters.', metrics: ['4 surface fleets', 'Boss matchups', 'Sustain'], fleetTypes: ['opsi-a', 'opsi-b', 'opsi-c', 'opsi-d', 'sub'] },
@@ -55,6 +56,7 @@ export const SLOT_LAYOUTS = {
 
 // Role hints are working labels for search, not performance scores.
 export const SHIPS = [
+  ...LIVE_SHIPS,
   { id: 'musashi', name: 'Musashi', hull: 'BB', tags: ['Battleship', 'Barrage'] },
   { id: 'bismarck-zwei', name: 'Bismarck Zwei', hull: 'BB', tags: ['Battleship', 'Boss utility'] },
   { id: 'new-jersey', name: 'New Jersey', hull: 'BB', tags: ['Battleship', 'Damage'] },

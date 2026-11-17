@@ -36,6 +36,34 @@ import { nationForEquipment, possibleEquipmentHulls } from './catalog-filters.js
 import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
 import { renderSuggestedFleet } from './fleet-suggest-view.js';
+import {LIVE_SHIPS,liveShip} from './live-content.js';
+import {renderEvents,renderEventDetail} from './events-view.js';
+import {loadEventCatalog,readEventFilters,saveEventFilters} from './events-store.js';
+import {normalizeEventFilters,parseEventRoute} from './events.js';
+import {createEventClock} from './events-clock.js';
+
+const eventState={status:'idle',catalog:null,error:'',eventId:null,occurrenceId:null,filters:readEventFilters({getItem:key=>localStorage.getItem(key)})};
+const eventClock=createEventClock({document,read:()=>({active:state.page==='events',catalog:eventState.catalog,region:eventState.eventId?null:eventState.filters.region,scope:eventState.eventId?'detail:'+eventState.eventId:'index:'+eventState.filters.region}),onTransition:()=>{refreshEventView();notify('Event schedules have updated.');}});
+async function ensureEvents(){
+  if(eventState.status==='loading'||eventState.status==='ready')return;
+  eventState.status='loading';eventState.error='';if(state.page==='events')render();
+  try{eventState.catalog=await loadEventCatalog();eventState.status='ready';}
+  catch(error){eventState.status='error';eventState.error=error.message;}
+  if(state.page==='events')refreshEventView();
+}
+function refreshEventView(){
+  const el=document.activeElement,id=el?.id,href=el?.getAttribute('href'),action=el?.dataset?.action,view=el?.dataset?.view,pos=el?.selectionStart,scroll=window.scrollY;
+  render();
+  const next=id?document.getElementById(id):href?[...document.querySelectorAll('a[href]')].find(n=>n.getAttribute('href')===href):action?[...document.querySelectorAll('[data-action]')].find(n=>n.dataset.action===action&&n.dataset.view===view):null;
+  next?.focus({preventScroll:true});try{if(pos!=null)next?.setSelectionRange(pos,pos);}catch{/* search inputs may not support selection */}
+  window.scrollTo(0,scroll);
+}
+function updateEventFilters(patch){
+  eventState.filters=normalizeEventFilters({...eventState.filters,...patch});
+  if(patch.region)eventState.occurrenceId=null;
+  if(!saveEventFilters({setItem:(key,value)=>localStorage.setItem(key,value)},eventState.filters))notify('Event preferences could not be saved in this browser.');
+  refreshEventView();
+}
 
 const $ = selector => document.querySelector(selector);
 const E = escapeHtml;
@@ -48,6 +76,7 @@ const AUGMENT_BY_ID=new Map(AUGMENT_CATALOG.map(item=>[item.id,item]));
 const pages = [
   { id: 'overview', label: 'Overview', icon: '⌂' },
   { id: 'modes', label: 'Game Modes', icon: '◈' },
+  { id: 'events', label: 'Events', icon: '◇' },
   { id: 'ships', label: 'Ship Index', icon: '♙' },
   { id: 'equipment', label: 'Equipment', wip: true, icon: '⚙' },
   { id: 'augments', label: 'Augments', wip: true, icon: '✦' },
@@ -195,6 +224,7 @@ function notify(message) {
 function go(page) {
   if (!pages.some(p => p.id === page)) page = 'overview';
   state.page = page;
+  eventState.eventId=null;eventState.occurrenceId=null;
   state.query = '';
   state.hull = 'all';
   state.category = 'all';
@@ -209,6 +239,7 @@ function go(page) {
   if (location.hash !== hash) history.replaceState(null, '', hash);
   render();
   if (page === 'updates') void loadChangelog();
+  if (page === 'events') void ensureEvents();
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 function selectedMode() { return MODES.find(mode => mode.id === state.modeId); }
@@ -335,8 +366,8 @@ function renderDetails(gearId=null) {
   const d=gearId?{kind:'equipment',id:gearId}:state.detail;
   if(d?.kind==='equipment-family')
     return renderEquipmentFamilyDetails(equipmentFamilyMembers(EQUIPMENT,d.id));
-  const item=d.kind==='ship'?SHIP_MAP.get(d.id):EQUIPMENT.find(x=>x.id===d.id);
-  if (!item) return '';
+  const item=d.kind==='ship'?SHIP_MAP.get(d.id):EQUIPMENT.find(x=>x.id===d.id||d.sourceId&&String(x.sourceId)===d.sourceId);
+  if (!item) return `<div class="picker-backdrop detail-backdrop" data-action="close-detail"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Equipment record"><div class="picker-head"><h2>Equipment record unavailable</h2><button class="icon-btn" data-action="close-detail" aria-label="Close detail">✕</button></div><p>${state.sync.status==='loading'?'Loading the equipment catalog…':'This equipment is not available in the current catalog. Its event reference remains in Events.'}</p></aside></div>`;
   const ship=d.kind==='ship';
   const rows=ship?[
     ['Nation / browse group',shipBrowseDisplayNation(item)],['Hull',item.sourceHull||item.hull],['Hull code',item.hull],['Rarity',item.rarity||'Unverified'],['Role hints',(item.tags||[]).join(', ')||'Not yet evaluated'],['Record ID',item.sourceId||'Editorial']
@@ -420,7 +451,7 @@ function renderUpdates() {
 }
 
 const wikiArtCache=new Map();
-const wikiFactsCache=new Map();
+const wikiFactsCache=new Map(LIVE_SHIPS.map(s=>[s.sourceId,liveShip(s.sourceId).wiki]));
 function loadWikiFactsForCurrentShip() {
   const sourceId=String(state.detail?.sourceId||'');
   const record=detailedShipRecord(state.shipDetails.data,sourceId);
@@ -444,6 +475,7 @@ function loadWikiArtForCurrentShip() {
   }).catch(()=>wikiArtCache.set(sourceId,null));
 }
 async function loadShipProfileData() {
+  if(liveShip(state.detail?.sourceId)){render();return;}
   if(state.shipDetails.status==='loading')return;
   if(state.shipDetails.status==='ready'){
     loadWikiArtForCurrentShip();
@@ -541,14 +573,14 @@ function render() {
   if(state.page!=='ships'||state.detail?.kind!=='ship')researchOpen=false;
   nav();
   document.body.classList.toggle('ship-art-viewing', state.artViewerOpen && state.page==='ships' && state.detail?.kind==='ship');
-  const views = { overview:renderOverview, modes:renderModes, ships:renderShips, equipment:renderEquipment, augments:renderAugments, fleet:renderFleet, sources:renderSources, updates:renderUpdates,
+  const views = { overview:renderOverview, modes:renderModes, events:()=>eventState.eventId?renderEventDetail(eventState):renderEvents(eventState), ships:renderShips, equipment:renderEquipment, augments:renderAugments, fleet:renderFleet, sources:renderSources, updates:renderUpdates,
     tiers: () => renderTierView({ boardId: state.tierBoard, boards: state.tierBoards, ships: SHIPS, equipment: EQUIPMENT, query: state.tierQuery, filter: state.tierFilter, sourceStatus: state.sync.status }) };
   if (state.page === 'ships' && state.detail?.kind === 'ship') {
     const ship=SHIP_MAP.get(state.detail.id) || SHIPS.find(x=>String(x.sourceId||'')===state.detail.sourceId);
     const data=detailedShipRecord(state.shipDetails.data,state.detail.sourceId || ship?.sourceId);
     const recordId=String(state.detail.sourceId || ship?.sourceId || '');
     const wikiPainting=wikiArtCache.get(recordId);
-    const artworkSkins=artworkSkinsForShip(state.shipDetails.artwork,recordId)
+    const artworkSkins=(liveShip(recordId)?.artwork||artworkSkinsForShip(state.shipDetails.artwork,recordId))
       .map((skin,index)=>index===0 && wikiPainting
         ? {...skin,images:{...skin.images,wiki:wikiPainting}}:skin);
     const loadoutModel=data?currentShipLoadoutModel(ship,data,recordId):null;
@@ -573,9 +605,16 @@ function render() {
   if(dialog)restoreResearchDialog(document,researchDialogState);
   observeShipRosterScroll();
   observeEquipmentRosterScroll();
+  if(state.page==='events'&&eventState.eventId){const title=eventState.catalog?.events.find(e=>e.id===eventState.eventId)?.title;if(title)document.title=title+' · AVALON Events';}
+  eventClock.sync();
 }
 function handleAction(target) {
   const {action,page,mode,ship,equip,fleet,slot,board} = target.dataset;
+  if(action==='events-retry'){void ensureEvents();return;}
+  if(action==='events-view'){updateEventFilters({view:target.dataset.view});return;}
+  if(action==='events-clear'){eventState.filters=normalizeEventFilters();updateEventFilters({});return;}
+  if(action==='event-jump'){const section=document.getElementById(target.dataset.section);section?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
+  if(action==='event-fleet'){state.modeId='events';go('fleet');return;}
   if(action==='ship-research-toggle'){state.shipResearch=!state.shipResearch;state.shipResearchSeries='all';state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render();return;}
   if(action==='research-open'){if(activeResearch()){researchOpen=true;render();}return;}
   if(action==='research-close'){closeResearch();return;}
@@ -770,9 +809,9 @@ function handleAction(target) {
     document.querySelector('.detail-panel .icon-btn')?.focus();return;
   }
   if (action === 'loadout-augment-close') {
-    if(state.detail?.kind==='augment')state.detail=null;
+    if(state.detail?.kind==='augment'){state.detail=null;if(location.hash.startsWith('#/augments/'))history.replaceState(null,'','#/augments');}
     else state.profileAugmentId=null;
-    render();return;
+    render();document.getElementById('augment-search')?.focus({preventScroll:true});return;
   }
   if (action === 'loadout-inspect') {
     const equipId=target.dataset.equip;
@@ -853,7 +892,7 @@ function handleAction(target) {
   if (action === 'equip-details') { state.detail={kind:'equipment',id:equip};render();void ensureEquipmentAcquisition();return; }
   if (action === 'close-detail') {
     if(state.profileGearId){state.profileGearId=null;render();return;}
-    state.detail=null;return render();
+    state.detail=null;if(/^#\/(augments|equipment)\//.test(location.hash))history.replaceState(null,'','#/'+state.page);return render();
   }
   if (action === 'navigate') return go(page);
   if (action === 'open-mode') { state.modeId = mode; return go('fleet'); }
@@ -891,6 +930,7 @@ function handleAction(target) {
 
 document.addEventListener('error', event => {
   const img=event.target;
+  if(img?.matches?.('img[data-event-art]')){if(img.dataset.fallbackSrc){const next=img.dataset.fallbackSrc;delete img.dataset.fallbackSrc;img.src=next;return;}img.parentElement?.classList.add('event-art-failed');img.remove();return;}
   if(img?.matches?.('img.ship-art-preview-image, img.ship-art-viewer-image')) {
     const fallback=img.dataset.fallbackSrc || img.dataset.lastResortSrc;
     if(fallback){
@@ -921,6 +961,12 @@ document.addEventListener('click', event => {
   handleAction(target);
 });
 document.addEventListener('change', event => {
+  const eventField=event.target.dataset.eventFilter;
+  if(eventField&&state.page==='events'){
+    if(eventField==='occurrence'){eventState.occurrenceId=event.target.value;refreshEventView();}
+    else if(eventField!=='query')updateEventFilters({[eventField]:event.target.value});
+    return;
+  }
   const combatField=event.target.dataset.combatField;
   if(['armor','movement','reload','stat','duration','wing'].includes(combatField)){
     combatContext[combatField]=['reload','stat','duration'].includes(combatField)?(event.target.value.trim()===''?null:Number(event.target.value)):event.target.value;
@@ -986,6 +1032,7 @@ document.addEventListener('change', event => {
   if (event.target.id === 'hull-filter') { state.hull=event.target.value;state.shipVisibleCount=SHIP_ROSTER_BATCH_SIZE;render(); }
 });
 document.addEventListener('input', event => {
+  if(event.target.dataset.eventFilter==='query'&&state.page==='events'){updateEventFilters({query:event.target.value});return;}
   const id = event.target.id;
   if (id==='loadout-choice-search' && state.profileLoadoutPicker!==null) {
     const value=event.target.value,pos=event.target.selectionStart;
@@ -1062,6 +1109,8 @@ document.addEventListener('keydown', event => {
   const dialog=document.getElementById('research-dialog');
   if(dialog&&event.key==='Escape'){event.preventDefault();closeResearch();return;}
   if(dialog&&event.key==='Tab'){const items=[...dialog.querySelectorAll('button,input,select,summary,a[href]')].filter(x=>!x.disabled&&x.getClientRects().length);const first=items[0],last=items.at(-1);if(event.shiftKey&&(document.activeElement===first||document.activeElement===dialog)){event.preventDefault();last?.focus();}else if(!event.shiftKey&&(document.activeElement===last||document.activeElement===dialog)){event.preventDefault();first?.focus();}}
+  const detailDialog=!dialog&&document.querySelector('.detail-panel[role="dialog"]');
+  if(detailDialog&&event.key==='Tab'){const items=[...detailDialog.querySelectorAll('button,input,select,summary,a[href]')].filter(x=>!x.disabled&&x.getClientRects().length);const first=items[0],last=items.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}}
 
   if (event.key==='Escape' && state.artViewerOpen) {
     state.artViewerOpen=false;
@@ -1069,20 +1118,30 @@ document.addEventListener('keydown', event => {
     render();
   }
   else if(event.key==='Escape' && state.profileAugmentId){state.profileAugmentId=null;render();}
-  else if(event.key==='Escape' && state.detail?.kind==='augment'){state.detail=null;render();}
+  else if(event.key==='Escape' && state.detail?.kind==='augment'){state.detail=null;if(location.hash.startsWith('#/augments/'))history.replaceState(null,'','#/augments');render();document.getElementById('augment-search')?.focus({preventScroll:true});}
   else if(event.key==='Escape' && state.profileGearId){state.profileGearId=null;render();}
   else if(event.key==='Escape' && state.profileLoadoutPicker!==null){state.profileLoadoutPicker=null;render();}
   else if (event.key==='Escape' && state.detail?.kind==='ship') closeShipProfile();
   else if (event.key==='Escape' && (state.picker||state.detail)) {state.picker=null;state.detail=null;render();}
 });
+function openLinkedContentRoute(hash){
+  const eventRoute=parseEventRoute(hash);
+  if(eventRoute){go('events');eventState.eventId=eventRoute.eventId;eventState.occurrenceId=eventRoute.occurrenceId||null;history.replaceState(null,'',hash);render();$('#app-content').focus({preventScroll:true});return true;}
+  const augment=hash.match(/^#\/augments\/(aug-(?:announced-)?\d{4,8})$/);
+  if(augment){go('augments');state.detail={kind:'augment',id:augment[1]};history.replaceState(null,'',hash);render();document.querySelector('.detail-panel .icon-btn')?.focus();return true;}
+  const equipment=hash.match(/^#\/equipment\/(\d{2,8})$/);
+  if(equipment){go('equipment');const item=EQUIPMENT.find(e=>String(e.sourceId)===equipment[1]);state.detail={kind:'equipment',id:item?.id||'fer-'+equipment[1],sourceId:equipment[1]};history.replaceState(null,'',hash);render();void ensureEquipmentAcquisition();return true;}
+  return false;
+}
 window.addEventListener('hashchange', () => {
+  if(openLinkedContentRoute(location.hash))return;
   const route=location.hash.replace(/^#\//,'');
   const match=route.match(/^ships\/(\d{2,8})$/);
   if (match) {
     researchOpen=false;
     state.page='ships';state.detail={kind:'ship',id:'lyc-'+match[1],sourceId:match[1]};state.artViewerOpen=false;
     state.profileSkin=0;state.profileLevel='level120';state.profileLoadoutMode='general';state.profileGearId=null;state.profileLoadoutPicker=null;
-    state.artViewerOpen=false;render();void loadShipProfileData();
+    state.artViewerOpen=false;state.profileAugmentId=null;render();window.scrollTo({top:0,behavior:'instant'});$('#app-content').focus({preventScroll:true});void loadShipProfileData();
     return;
   }
   if(route==='ships' && state.page==='ships' && state.detail?.kind==='ship'){
@@ -1093,7 +1152,7 @@ window.addEventListener('hashchange', () => {
 });
 
 async function syncData() {
-  state.sync.status='loading'; render();
+  state.sync.status='loading'; state.page==='events'?refreshEventView():render();
   try {
     const result=await loadLiveCatalogs();
     if (result.ships) {
@@ -1112,9 +1171,9 @@ async function syncData() {
       state.pendingPlans=null;
       savePlans();
     }
-    render();
+    state.page==='events'?refreshEventView():render();
   } catch(error) {
-    state.sync={...state.sync,status:'failed',errors:[error.message]}; render();
+    state.sync={...state.sync,status:'failed',errors:[error.message]}; state.page==='events'?refreshEventView():render();
   }
 }
 loadPlans();
@@ -1123,7 +1182,9 @@ loadSuggestOptions();
 loadSavedLoadouts();
 const initial = location.hash.replace(/^#\//,'');
 const initialShip = initial.match(/^ships\/(\d{2,8})$/);
-if (initialShip) {
+if(openLinkedContentRoute(location.hash)){
+  // Events and linked catalog entries are navigable on a fresh load.
+}else if (initialShip) {
   go('ships');
   state.detail={kind:'ship',id:'lyc-'+initialShip[1],sourceId:initialShip[1]};
   history.replaceState(null,'','#/ships/'+initialShip[1]);

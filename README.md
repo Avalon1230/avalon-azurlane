@@ -8,12 +8,15 @@ Azur Lane has too many ships, skills and equipment choices for a single tier num
 
 ## Explore AVALON
 
-- **Ship Index:** Browse the 894-ship catalog by faction, hull type, rarity or name. Open a ship's profile for stats, skills, equipment slots, acquisition details and original in-game artwork. Skins have their own gallery.
+- **Events:** Browse Ongoing, Upcoming, Past Events and verified War Archives releases separately for EN, JP and CN. Completed runs remain in Past Events even when a regional permanent release also exists. Search rewards, use the chronological timeline, and open regional schedules, missions and linked profiles. Exact countdowns default to Manila; unconfirmed schedules stay TBA. The initial catalog contains eight verified identities and is explicitly incomplete.
+- **Ship Index:** Browse the runtime ship catalog and independently maintained verified additions by faction, hull type, rarity or name. Open a ship's profile for stats, skills, equipment slots, acquisition details and original in-game artwork. Skins have their own gallery.
 - **Research & Development:** Find Priority and Decisive ships by research series, compare Development checkpoints and Fate Simulation in one Research & Statistics panel, and keep track of shipyard missions and timers yourself.
 - **Equipment & Augments:** Search gear by type and nation, inspect its stats, see which hulls may be able to use it, and check recorded acquisition routes. The augment directory is separate from ordinary equipment.
 - **Loadout Planner (WIP):** Try a six-position loadout, explore compatible alternatives and save your own picks for General, Boss, Mobbing or OpSi. Automatic choices are starting points, not proven best-in-slot builds.
 - **Fleet Lab (WIP):** Arrange fleets for different modes, including four Operation Siren surface fleets. Generate role-based suggestions from a smaller, reviewed candidate pool; nothing replaces your selections unless you apply it.
 - **Tier Boards (WIP):** Read scenario-specific ship and gear assessments, with reasons and alternatives. Personal favorites and the *Must Protect!* board have their own space—they aren't combat rankings.
+
+The November 2026 **2.5 Dimensional Seduction** collaboration is the first featured event. Ririsa and Mikari have locally maintained profiles, source-verified slots and exclusive augments even when optional catalogs are unavailable.
 
 ## Where to start
 
@@ -55,6 +58,8 @@ For development checks, use Node.js 20 or newer:
 npm run check
 npm test
 ```
+
+Event architecture, the coverage ledger, source IDs, and update procedure are documented in [Events & live content](docs/EVENTS.md). Event data is versioned with the app; countdowns update automatically, while new announcements require a reviewed catalog update.
 
 ## Notes, sources and development
 

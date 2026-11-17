@@ -1,6 +1,29 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-15 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-17 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## Active development — v0.8.11 Operation CHRONICLE (unmerged)
+
+### Independent QA corrections — 2026-11-17
+
+- Resumed PR #34 at `14fb1aeb71f0320b502dd7c3efc8a18b25203868`; recovered [review 5932532409](https://github.com/Avalon1230/avalon-azurlane/pull/34#pullrequestreview-5932532409) and the Commander's four-section requirement. No new PR, merge or catalog rewrite.
+- Ongoing, Upcoming, Past Events and War Archives are separate occurrence contexts. A completed identity can appear in both historical and permanent views. Only verified regional release observations establish War Archives availability; future additions explicitly remain unavailable. Source JSON remains eight identities / 34 occurrences.
+- Historical cards/timeline links preserve their occurrence and regional reward scope. Expired limited rewards are not inherited by permanent content. Ship names gain a natural break after the slash; countdown signatures reset silently on view/region changes while genuine boundaries still notify.
+- Verification: correction `481b0d2dca15c6106b41523c989d21d0afc61981` passed [full CI 44017033045](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44017033045): 319 Node tests, syntax/generated-data and all source checks, existing viewport/combat/research/art checks, plus four responsive Events sessions and controlled-clock scope/boundary regressions. [22 refreshed desktop/mobile captures and acceptance mapping](qa/v0811-corrections/README.md) inspected or verified byte-identical to the inspected baseline. The following evidence commit changes docs/images only; consult PR head CI for its final status.
+- Next: short independent QA re-review of the four corrections; await Commander authorization. Nonblocking offset/zone consistency validation remains deferred. Do not merge or deploy.
+
+### Initial implementation verification (before QA corrections)
+
+
+- Resumed verified `main` at `1c228da902799da2431696beab626c4ac35be0d9` on **`feat/operation-chronicle-v0811`**. Completed PR #33 remains untouched. The released version remains v0.8.10.
+- Added integrated Events navigation/routes, regional cards and timeline, persistent filters, encyclopedia details, one-identity release histories, source disclosures and guarded links to existing Fleet Lab.
+- Reviewed seed: **8 event identities / 34 regional occurrences**. The featured event is **It’s Showtime! Angels’ Azur Stage** (2.5 Dimensional Seduction). EN/JP/CN deadlines are independent; EN is UTC−7, JP UTC+9 and CN UTC+8. Manila is the default display zone. EN/JP mission unlocks are date-only; CN’s published midnight unlocks can count down. JP’s upcoming Effulgence Before Eclipse War Archives addition remains TBA.
+- Local verified ship records `avl-1180001` / `avl-1180002` preserve exact GroupIDs 1180001/1180002 and collection IDs 10181/10182. Augments `aug-15960` / `aug-15980` have exact eligibility, stats and skill upgrades. They work without the optional fan feeds. Cosmetic gear skins never become combat equipment.
+- Data, validation, storage, views and clock are separated. Sources and coverage gaps: [Events documentation](EVENTS.md). No runtime wiki crawl; selected API revisions were checked, wiki-derived material attributed under CC BY-NC-SA 4.0, and original art remains externally hosted with placeholders/fallbacks.
+- **Delivery:** [PR #34](https://github.com/Avalon1230/avalon-azurlane/pull/34), unmerged. Implementation `990d82f0def3c16e48cb86b1824b205eaf6d3b39` passed [Quality checks 43815396818](https://github.com/Avalon1230/avalon-azurlane/actions/runs/43815396818): **313 Node tests**, syntax/generated-data and all pinned-source checks, 63 responsive cases, ten combat sessions, four research sessions, ten current plus ten baseline original-art sessions, and the new Events checks at 360/390/768/1280px with controlled launch/unlock/end transitions and catalog retry. Existing original augment probes passed 16/16; two external logos passed and five were host-throttled, not certified.
+- **Visual evidence:** [18 actual-application desktop/mobile captures and QA handoff](qa/v0811-chronicle/README.md), visually inspected after CI. The production seed is shown at a disclosed fixed clock; optional data feeds are unavailable deliberately, while original art is fetched from its source URLs. New profiles retain their own facts offline. The final navigation fix restores the ship profile header when following an event reward link. The following evidence commit changes documentation/images only; consult PR head CI for the delivery commit.
+- Deferred: complete event history; uncataloged regional permanent additions; detailed enemy/boss records, story synopsis and furniture inventory; exact unannounced EN/JP unlock times; full encounter simulation/recommendations. No drop rates, launch estimates, shop grace periods or unsupported client IDs invented.
+- **Next:** independent QA of source accuracy, regional schedules, integration and visual quality on PR #34, then await Commander authorization. Continue event data maintenance through small reviewed batches using the documented update procedure. **Do not merge or deploy.**
 
 ## Current release — v0.8.10 dock-inspired whole-card identity (2026-11-15)
 

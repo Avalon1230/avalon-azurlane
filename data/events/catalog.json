@@ -1,0 +1,3155 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-15T13:00:41Z",
+  "coverage": "partial",
+  "sources": {
+    "official-en-collab-20261112": {
+      "title": "Yostar EN: November 12 maintenance notice",
+      "url": "https://azurlane.yo-star.com/news/2026/11/11/maintenance-notice-11-12-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "publishedAt": "2026-11-11",
+      "shortTitle": "Official EN"
+    },
+    "official-jp-collab-20261112": {
+      "title": "Yostar JP: November 12 maintenance, marked completed",
+      "url": "https://azurlane.jp/news/771",
+      "type": "official",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "publishedAt": "2026-11-10",
+      "shortTitle": "Official JP"
+    },
+    "official-cn-collab-20261112": {
+      "title": "Azur Lane CN: November 12 maintenance notice (official TapTap feed)",
+      "url": "https://www.taptap.cn/moment/869277954591424622?group_id=2657",
+      "type": "official",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "publishedAt": "2026-11-10",
+      "shortTitle": "Official CN"
+    },
+    "official-cn-live-20261112": {
+      "title": "Azur Lane CN: November 12 live hotfix",
+      "url": "https://www.taptap.cn/moment/870039693318688612?group_id=2657",
+      "type": "official",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "publishedAt": "2026-11-12",
+      "shortTitle": "Official CN"
+    },
+    "official-en-collab-launch": {
+      "title": "Yostar launch press release, distributed by Games Press",
+      "url": "https://www.gamespress.com/Azur-Lane-x-25-Dimensional-Seduction-Collaboration-Its-Showtime-Angels",
+      "type": "official",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "publishedAt": "2026-11-12",
+      "shortTitle": "Official EN"
+    },
+    "wiki-angels-azur-stage": {
+      "title": "Koumakan: It's Showtime! Angels' Azur Stage",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307891",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "revisedAt": "2026-11-14T02:41:56Z",
+      "pageId": 99533,
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "307891",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseVerifiedVia": "https://azurlane.koumakan.jp/w/api.php?action=query&meta=siteinfo&siprop=rightsinfo&format=json",
+      "shortTitle": "Koumakan"
+    },
+    "wiki-liliel": {
+      "title": "Koumakan: Liliel Angel Paratroopers/Ririsa",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307890",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "revisedAt": "2026-11-14T02:41:03Z",
+      "pageId": 99591,
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "307890",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseVerifiedVia": "https://azurlane.koumakan.jp/w/api.php?action=query&meta=siteinfo&siprop=rightsinfo&format=json",
+      "shortTitle": "Koumakan"
+    },
+    "wiki-miriella": {
+      "title": "Koumakan: Miriella Angel Paratroopers/Mikari",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307889",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "revisedAt": "2026-11-14T02:40:57Z",
+      "pageId": 99593,
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "307889",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseVerifiedVia": "https://azurlane.koumakan.jp/w/api.php?action=query&meta=siteinfo&siprop=rightsinfo&format=json",
+      "shortTitle": "Koumakan"
+    },
+    "wiki-liliel-rod": {
+      "title": "Koumakan: Liliel's Rod",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307862",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "revisedAt": "2026-11-13T12:36:45Z",
+      "pageId": 99594,
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "307862",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseVerifiedVia": "https://azurlane.koumakan.jp/w/api.php?action=query&meta=siteinfo&siprop=rightsinfo&format=json",
+      "shortTitle": "Koumakan"
+    },
+    "wiki-miriella-bow": {
+      "title": "Koumakan: Miriella's Bow",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307863",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "revisedAt": "2026-11-13T12:36:49Z",
+      "pageId": 99595,
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "307863",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseVerifiedVia": "https://azurlane.koumakan.jp/w/api.php?action=query&meta=siteinfo&siprop=rightsinfo&format=json",
+      "shortTitle": "Koumakan"
+    },
+    "wiki-effulgence": {
+      "title": "Koumakan: Effulgence Before Eclipse",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=295610",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "revisedAt": "2026-03-31T22:56:55Z",
+      "pageId": 67783,
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "295610",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseVerifiedVia": "https://azurlane.koumakan.jp/w/api.php?action=query&meta=siteinfo&siprop=rightsinfo&format=json",
+      "shortTitle": "Koumakan"
+    },
+    "client-collab-augments": {
+      "title": "EN client 9.3.392: EN/sharecfgdata/spweapon_data_statistics.lua",
+      "url": "https://github.com/AzurLaneTools/AzurLaneLuaScripts/blob/479c350c5824b8bc8b385102bdc4d31b310e3e0a/EN/sharecfgdata/spweapon_data_statistics.lua",
+      "type": "client",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "blob": "2eaa492bf54a0644f4e24ea5d4aca5ade3f3f852",
+      "sha256": "6730e3447cb4f00f92b47bd6d2d2345e35a098a7ff6cd7dbee69f9bd982d85ca",
+      "revision": "479c350c5824b8bc8b385102bdc4d31b310e3e0a",
+      "shortTitle": "Pinned client"
+    },
+    "client-collab-skills": {
+      "title": "EN client 9.3.392: EN/sharecfg/skill_data_template.lua",
+      "url": "https://github.com/AzurLaneTools/AzurLaneLuaScripts/blob/479c350c5824b8bc8b385102bdc4d31b310e3e0a/EN/sharecfg/skill_data_template.lua",
+      "type": "client",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "blob": "726caa9dbb5be4d87399d0e4c285009fc9224f9b",
+      "sha256": "030a26eee6a26d07ab80d1924c61e76eaf00a5473c48c4941664ce80ad6e4311",
+      "revision": "479c350c5824b8bc8b385102bdc4d31b310e3e0a",
+      "shortTitle": "Pinned client"
+    },
+    "client-collab-gear-skins": {
+      "title": "EN client 9.3.392: EN/sharecfg/equip_skin_template.lua",
+      "url": "https://github.com/AzurLaneTools/AzurLaneLuaScripts/blob/479c350c5824b8bc8b385102bdc4d31b310e3e0a/EN/sharecfg/equip_skin_template.lua",
+      "type": "client",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "blob": "2b0e42486a6059078c6d464627762d74b189441f",
+      "sha256": "d87d0805c56cfa8c2e63c85528b9e7c7357eae7c6ad2cdb6ab6d4d5e979963f3",
+      "revision": "479c350c5824b8bc8b385102bdc4d31b310e3e0a",
+      "shortTitle": "Pinned client"
+    },
+    "wiki-collab-banner": {
+      "title": "Koumakan: It's Showtime! Angels' Azur Stage banner",
+      "url": "https://azurlane.koumakan.jp/wiki/File:It%27s_Showtime!_Angels%27_Azur_Stage_Event_Banner_EN.jpg",
+      "type": "wiki",
+      "checkedAt": "2026-11-15T13:00:41Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "revision": "upload 2026-11-12T21:50:39Z",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-chessboard-en": {
+      "title": "Koumakan Wiki — Divergent Chessboard",
+      "url": "https://azurlane.koumakan.jp/wiki/Divergent_Chessboard",
+      "type": "wiki",
+      "pageId": 16185,
+      "revision": "230617",
+      "revisionAt": "2022-11-23T01:34:54Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=230617",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-chessboard-cnjp": {
+      "title": "Koumakan Wiki — Opposite-Colored",
+      "url": "https://azurlane.koumakan.jp/wiki/Opposite-Colored",
+      "type": "wiki",
+      "pageId": 2465,
+      "revision": "170170",
+      "revisionAt": "2022-03-09T20:50:51Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=170170",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-chessboard-rerun": {
+      "title": "Koumakan Wiki — Opposite-Colored Rerun",
+      "url": "https://azurlane.koumakan.jp/wiki/Opposite-Colored_Rerun",
+      "type": "wiki",
+      "pageId": 11269,
+      "revision": "230616",
+      "revisionAt": "2022-11-23T01:34:29Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=230616",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-visitors": {
+      "title": "Koumakan Wiki — Visitors Dyed in Red",
+      "url": "https://azurlane.koumakan.jp/wiki/Visitors_Dyed_in_Red",
+      "type": "wiki",
+      "pageId": 1990,
+      "revision": "253833",
+      "revisionAt": "2023-10-05T16:45:51Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=253833",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-visitors-rerun": {
+      "title": "Koumakan Wiki — Visitors Dyed in Red Rerun",
+      "url": "https://azurlane.koumakan.jp/wiki/Visitors_Dyed_in_Red_Rerun",
+      "type": "wiki",
+      "pageId": 7899,
+      "revision": "253835",
+      "revisionAt": "2023-10-05T16:50:32Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=253835",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-fools-scales": {
+      "title": "Koumakan Wiki — The Fool's Scales",
+      "url": "https://azurlane.koumakan.jp/wiki/The_Fool%27s_Scales",
+      "type": "wiki",
+      "pageId": 67405,
+      "revision": "307561",
+      "revisionAt": "2026-11-05T11:45:01Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307561",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-corridor-fog": {
+      "title": "Koumakan Wiki — Tempesta and the Corridor of Fog",
+      "url": "https://azurlane.koumakan.jp/wiki/Tempesta_and_the_Corridor_of_Fog",
+      "type": "wiki",
+      "pageId": 99371,
+      "revision": "307360",
+      "revisionAt": "2026-10-24T19:50:13Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307360",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-war-archives": {
+      "title": "Koumakan Wiki — War Archives",
+      "url": "https://azurlane.koumakan.jp/wiki/War_Archives",
+      "type": "wiki",
+      "pageId": 20231,
+      "revision": "307578",
+      "revisionAt": "2026-11-05T12:14:23Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307578",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-yostar-20261104": {
+      "title": "Yostar EN maintenance notice — November 5, 2026",
+      "url": "https://azurlane.yo-star.com/news/2026/11/04/maintenance-notice-11-5-12-a-m-utc-7/",
+      "type": "official",
+      "publishedAt": "2026-11-04",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "shortTitle": "Official EN"
+    },
+    "history-yostar-20261021": {
+      "title": "Yostar EN maintenance notice — October 22, 2026",
+      "url": "https://azurlane.yo-star.com/news/2026/10/21/maintenance-notice-10-22-12-a-m-utc-7-2/",
+      "type": "official",
+      "publishedAt": "2026-10-21",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "shortTitle": "Official EN"
+    },
+    "history-wiki-ship-89904": {
+      "title": "Koumakan Wiki — Bayard",
+      "url": "https://azurlane.koumakan.jp/wiki/Bayard",
+      "type": "wiki",
+      "pageId": 71133,
+      "revision": "289902",
+      "revisionAt": "2025-11-10T14:45:00Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=289902",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-960018": {
+      "title": "Koumakan Wiki — Járnbarðinn",
+      "url": "https://azurlane.koumakan.jp/wiki/J%C3%A1rnbar%C3%B0inn",
+      "type": "wiki",
+      "pageId": 99407,
+      "revision": "307327",
+      "revisionAt": "2026-10-24T00:37:38Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307327",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-90104": {
+      "title": "Koumakan Wiki — Kersaint",
+      "url": "https://azurlane.koumakan.jp/wiki/Kersaint",
+      "type": "wiki",
+      "pageId": 67490,
+      "revision": "307574",
+      "revisionAt": "2026-11-05T12:04:34Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307574",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-80702": {
+      "title": "Koumakan Wiki — Painlevé",
+      "url": "https://azurlane.koumakan.jp/wiki/Painlev%C3%A9",
+      "type": "wiki",
+      "pageId": 67489,
+      "revision": "307573",
+      "revisionAt": "2026-11-05T12:04:04Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307573",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-960021": {
+      "title": "Koumakan Wiki — Riyala Bey",
+      "url": "https://azurlane.koumakan.jp/wiki/Riyala_Bey",
+      "type": "wiki",
+      "pageId": 99410,
+      "revision": "307301",
+      "revisionAt": "2026-10-23T17:53:36Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307301",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-40502": {
+      "title": "Koumakan Wiki — Tirpitz",
+      "url": "https://azurlane.koumakan.jp/wiki/Tirpitz",
+      "type": "wiki",
+      "pageId": 1315,
+      "revision": "307673",
+      "revisionAt": "2026-11-12T20:32:56Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=307673",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-40146": {
+      "title": "Koumakan Wiki — Z46",
+      "url": "https://azurlane.koumakan.jp/wiki/Z46",
+      "type": "wiki",
+      "pageId": 1273,
+      "revision": "298902",
+      "revisionAt": "2026-05-27T07:36:05Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=298902",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-wiki-ship-30706": {
+      "title": "Koumakan Wiki — Zuikaku",
+      "url": "https://azurlane.koumakan.jp/wiki/Zuikaku",
+      "type": "wiki",
+      "pageId": 1443,
+      "revision": "301657",
+      "revisionAt": "2026-06-12T13:06:23Z",
+      "revisionUrl": "https://azurlane.koumakan.jp/w/index.php?oldid=301657",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-art-chessboard": {
+      "title": "Koumakan artwork file — EventBanner Divergent Chessboard.png",
+      "url": "https://azurlane.koumakan.jp/wiki/File:EventBanner_Divergent_Chessboard.png",
+      "type": "wiki",
+      "pageId": 16188,
+      "publishedAt": "2018-12-14",
+      "revision": "imageinfo upload 2018-12-14T02:38:06Z",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-art-visitors": {
+      "title": "Koumakan artwork file — Visitors Dyed In Red EN.png",
+      "url": "https://azurlane.koumakan.jp/wiki/File:Visitors_Dyed_In_Red_EN.png",
+      "type": "wiki",
+      "pageId": 15497,
+      "publishedAt": "2018-09-30",
+      "revision": "imageinfo upload 2018-09-30T09:42:21Z",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-art-fools-scales": {
+      "title": "Koumakan artwork file — The Fool's Scales Event Banner EN.png",
+      "url": "https://azurlane.koumakan.jp/wiki/File:The_Fool%27s_Scales_Event_Banner_EN.png",
+      "type": "wiki",
+      "pageId": 63770,
+      "publishedAt": "2023-08-17",
+      "revision": "imageinfo upload 2023-08-17T16:23:45Z",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    },
+    "history-art-tempesta-fog": {
+      "title": "Koumakan artwork file — Tempesta and the Corridor of Fog Event Banner EN.jpg",
+      "url": "https://azurlane.koumakan.jp/wiki/File:Tempesta_and_the_Corridor_of_Fog_Event_Banner_EN.jpg",
+      "type": "wiki",
+      "pageId": 99270,
+      "publishedAt": "2026-10-23",
+      "revision": "imageinfo upload 2026-10-23T00:03:34Z",
+      "checkedAt": "2026-11-15T13:04:07Z",
+      "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
+      "shortTitle": "Koumakan"
+    }
+  },
+  "events": [
+    {
+      "id": "angels-azur-stage",
+      "title": "It’s Showtime! Angels’ Azur Stage",
+      "category": "collaboration",
+      "franchise": "2.5 Dimensional Seduction",
+      "aliases": [
+        "It's Showtime! Angels' Azur Stage",
+        "開幕！天使たちのアズールステージ",
+        "开幕！天使们的碧蓝舞台"
+      ],
+      "description": "A collaboration with two mission-reward shipgirls, exclusive augments, cosmetic gear skins and three special challenges.",
+      "sourceIds": [
+        "wiki-angels-azur-stage",
+        "official-en-collab-20261112",
+        "official-jp-collab-20261112",
+        "official-cn-collab-20261112",
+        "official-en-collab-launch"
+      ],
+      "verifiedAt": "2026-11-15T13:00:41Z",
+      "missing": [
+        "Stage enemy compositions, boss statistics and verified encounter mechanics are not yet cataloged.",
+        "Story synopsis and detailed furniture inventory are not yet cataloged.",
+        "Exact EN/JP daily mission unlock times have not been confirmed; dates remain date-only.",
+        "No event currency shop, drop rates or separate post-event claim grace period has been verified."
+      ],
+      "occurrences": [
+        {
+          "id": "angels-azur-stage-2026-en",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "official-en-collab-20261112",
+            "wiki-angels-azur-stage",
+            "official-en-collab-launch"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "official-en-collab-20261112"
+            ],
+            "date": "2026-11-12",
+            "note": "Launch follows maintenance; the planned maintenance duration is not an exact release time."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "official-en-collab-20261112"
+            ],
+            "value": "2026-11-26T23:59:00-07:00"
+          },
+          "phases": [
+            {
+              "id": "mission-day-2",
+              "kind": "mission",
+              "label": "Angel’s Stage L · day 2 mission unlock",
+              "at": {
+                "kind": "date",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "date": "2026-11-13"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-3",
+              "kind": "mission",
+              "label": "Angel’s Stage L · day 3 mission unlock",
+              "at": {
+                "kind": "date",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "date": "2026-11-14"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-4",
+              "kind": "mission",
+              "label": "Angel’s Stage L · day 4 mission unlock",
+              "at": {
+                "kind": "date",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "date": "2026-11-15"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-5",
+              "kind": "mission",
+              "label": "Angel’s Stage L · day 5 mission unlock",
+              "at": {
+                "kind": "date",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "date": "2026-11-16"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-6",
+              "kind": "mission",
+              "label": "Angel’s Stage L · day 6 mission unlock",
+              "at": {
+                "kind": "date",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "date": "2026-11-17"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-7",
+              "kind": "mission",
+              "label": "Angel’s Stage L · day 7 mission unlock",
+              "at": {
+                "kind": "date",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "date": "2026-11-18"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "cosmetic-sales-close",
+              "kind": "shop",
+              "label": "Outfit, furniture and Battle UI sales close",
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "value": "2026-11-26T23:59:00-07:00"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            },
+            {
+              "id": "event-claim-deadline",
+              "kind": "claim",
+              "label": "Event missions and limited rewards end",
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "official-en-collab-20261112"
+                ],
+                "value": "2026-11-26T23:59:00-07:00"
+              },
+              "sourceIds": [
+                "official-en-collab-20261112"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "angels-azur-stage-2026-jp",
+          "kind": "original",
+          "region": "JP",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "official-jp-collab-20261112",
+            "wiki-angels-azur-stage"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "official-jp-collab-20261112"
+            ],
+            "date": "2026-11-12",
+            "note": "Launch follows maintenance; the planned maintenance duration is not an exact release time."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "official-jp-collab-20261112"
+            ],
+            "value": "2026-11-26T23:59:00+09:00"
+          },
+          "phases": [
+            {
+              "id": "mission-day-2",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 2",
+              "at": {
+                "kind": "date",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "date": "2026-11-13"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-3",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 3",
+              "at": {
+                "kind": "date",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "date": "2026-11-14"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-4",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 4",
+              "at": {
+                "kind": "date",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "date": "2026-11-15"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-5",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 5",
+              "at": {
+                "kind": "date",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "date": "2026-11-16"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-6",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 6",
+              "at": {
+                "kind": "date",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "date": "2026-11-17"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-7",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 7",
+              "at": {
+                "kind": "date",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "date": "2026-11-18"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "cosmetic-sales-close",
+              "kind": "shop",
+              "label": "Outfit, furniture and Battle UI sales close",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "value": "2026-11-25T23:59:00+09:00"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            },
+            {
+              "id": "event-claim-deadline",
+              "kind": "claim",
+              "label": "Event missions and limited rewards end",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "official-jp-collab-20261112"
+                ],
+                "value": "2026-11-26T23:59:00+09:00"
+              },
+              "sourceIds": [
+                "official-jp-collab-20261112"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "angels-azur-stage-2026-cn",
+          "kind": "original",
+          "region": "CN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "official-cn-collab-20261112",
+            "wiki-angels-azur-stage",
+            "official-cn-live-20261112"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "official-cn-collab-20261112"
+            ],
+            "date": "2026-11-12",
+            "note": "Launch follows maintenance; the planned maintenance duration is not an exact release time."
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "official-cn-collab-20261112"
+            ],
+            "value": "2026-11-26T23:59:00+08:00"
+          },
+          "phases": [
+            {
+              "id": "mission-day-2",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 2",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-13T00:00:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-3",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 3",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-14T00:00:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-4",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 4",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-15T00:00:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-5",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 5",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-16T00:00:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-6",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 6",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-17T00:00:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "mission-day-7",
+              "kind": "mission",
+              "label": "Stage L mission / Stage M reward group · day 7",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-18T00:00:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "cosmetic-sales-close",
+              "kind": "shop",
+              "label": "Outfit, furniture and Battle UI sales close",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-25T23:59:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            },
+            {
+              "id": "event-claim-deadline",
+              "kind": "claim",
+              "label": "Event missions and limited rewards end",
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "official-cn-collab-20261112"
+                ],
+                "value": "2026-11-26T23:59:00+08:00"
+              },
+              "sourceIds": [
+                "official-cn-collab-20261112"
+              ]
+            }
+          ]
+        }
+      ],
+      "content": [
+        {
+          "id": "liliel-ririsa",
+          "kind": "ship",
+          "name": "Liliel Angel Paratroopers/Ririsa",
+          "description": "Super Rare light aircraft carrier. Angel’s Stage L, day 1: defeat 100 enemies. Claim the mission reward; construction is unavailable.",
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "wiki-liliel"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "shipId": "1180001",
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "miriella-mikari",
+          "kind": "ship",
+          "name": "Miriella Angel Paratroopers/Mikari",
+          "description": "Super Rare light cruiser. Angel’s Stage M, day 1: earn 10 S-rank victories and claim the mission reward. Construction is unavailable.",
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "wiki-miriella"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "shipId": "1180002",
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "liliels-rod",
+          "kind": "augment",
+          "name": "Liliel’s Rod",
+          "description": "Ririsa only. Stage L day 2 reward: 250 enemies. AVI 32 → 40 and RLD 9 → 15 at +10; Liliel’s Explosion upgrades at +10.",
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "wiki-liliel-rod",
+            "client-collab-augments"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "augmentId": "aug-15960",
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "miriellas-bow",
+          "kind": "augment",
+          "name": "Miriella’s Bow",
+          "description": "Mikari only. Stage M day 1 login reward. FP 25 → 35 and ACC 5 → 15 at +10; Miriella’s Resonance upgrades at +10.",
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "wiki-miriella-bow",
+            "client-collab-augments"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "augmentId": "aug-15980",
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "augment-common-effect",
+          "kind": "mechanic",
+          "name": "Angel Paratroopers",
+          "description": "Both exclusive augments add 10 percentage points to slot 1 efficiency in battle, plus 5 with another 2.5 Dimensional Seduction ship in the fleet.",
+          "sourceIds": [
+            "client-collab-skills"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-l-track",
+          "kind": "mission",
+          "name": "Angel’s Stage L",
+          "description": "Daily cumulative enemy targets, days 1–7: 100 / 250 / 400 / 600 / 850 / 1,150 / 1,500. Rewards: Ririsa; Rod; Liliel shell; Rod torpedo; Ririsa suitcase; Wings; Liliel halo.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-1",
+          "kind": "mission",
+          "name": "Stage M · Day 1",
+          "description": "S-rank victories ×10 → Mikari; Login → Bow.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-2",
+          "kind": "mission",
+          "name": "Stage M · Day 2",
+          "description": "Commissions ×2 → T2 tech packs ×2; Exercises ×2 → Coins ×100.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-3",
+          "kind": "mission",
+          "name": "Stage M · Day 3",
+          "description": "Daily Challenges ×3 → T2 parts ×6; Retire ships ×2 → Bow torpedo.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-4",
+          "kind": "mission",
+          "name": "Stage M · Day 4",
+          "description": "Tactical training ×2 → T2 books ×4; Enhance ships ×5 → Wings.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-5",
+          "kind": "mission",
+          "name": "Stage M · Day 5",
+          "description": "Defeat enemies ×20 → Mikari suitcase; Restock dorm snacks ×5 → T3 tech packs ×2.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-6",
+          "kind": "mission",
+          "name": "Stage M · Day 6",
+          "description": "Open tech box ×1 → T3 parts ×6; Build ships ×2 → Miriella shell.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "stage-m-day-7",
+          "kind": "mission",
+          "name": "Stage M · Day 7",
+          "description": "Tactical training ×2 → Miriella halo; Defeat boss fleets ×3 → T3 books ×4.",
+          "sourceIds": [
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "mission-unlock-rules",
+          "kind": "mechanic",
+          "name": "Daily mission and claim gates",
+          "description": "Stage L opens one mission daily through November 18; complete the preceding mission to reveal the next. Stage M records progress together, but reward groups open daily and must be claimed in order.",
+          "sourceIds": [
+            "official-jp-collab-20261112",
+            "official-cn-collab-20261112",
+            "official-en-collab-20261112"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1541",
+          "kind": "gear-skin",
+          "name": "Angel's Halo (Liliel)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1541",
+          "iconId": "999141",
+          "equipTypes": [
+            10
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1542",
+          "kind": "gear-skin",
+          "name": "Angel's Halo (Miriella)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1542",
+          "iconId": "999142",
+          "equipTypes": [
+            10
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1543",
+          "kind": "gear-skin",
+          "name": "Suitcase Shell (Ririsa)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1543",
+          "iconId": "999111",
+          "equipTypes": [
+            4,
+            11
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1544",
+          "kind": "gear-skin",
+          "name": "Suitcase Shell (Mikari)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1544",
+          "iconId": "999112",
+          "equipTypes": [
+            4,
+            11
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1545",
+          "kind": "gear-skin",
+          "name": "Angel's Rod Torpedo",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1545",
+          "iconId": "999121",
+          "equipTypes": [
+            5,
+            13
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1546",
+          "kind": "gear-skin",
+          "name": "Angel's Bow Torpedo",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1546",
+          "iconId": "999122",
+          "equipTypes": [
+            5,
+            13
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1547",
+          "kind": "gear-skin",
+          "name": "Angel Wing Shell (Liliel)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1547",
+          "iconId": "999113",
+          "equipTypes": [
+            1,
+            2,
+            3
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1548",
+          "kind": "gear-skin",
+          "name": "Angel Wing Shell (Miriella)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1548",
+          "iconId": "999114",
+          "equipTypes": [
+            1,
+            2,
+            3
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1549",
+          "kind": "gear-skin",
+          "name": "Angel's Wings (Torpedo Bomber)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1549",
+          "iconId": "999131",
+          "equipTypes": [
+            8
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1550",
+          "kind": "gear-skin",
+          "name": "Angel's Wings (Fighter)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1550",
+          "iconId": "999131",
+          "equipTypes": [
+            7
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1551",
+          "kind": "gear-skin",
+          "name": "Angel's Wings (Dive Bomber)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1551",
+          "iconId": "999131",
+          "equipTypes": [
+            9
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1552",
+          "kind": "gear-skin",
+          "name": "Angel's Wings (Torpedo Bomber)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1552",
+          "iconId": "999131",
+          "equipTypes": [
+            8
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1553",
+          "kind": "gear-skin",
+          "name": "Angel's Wings (Fighter)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1553",
+          "iconId": "999131",
+          "equipTypes": [
+            7
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "gear-skin-1554",
+          "kind": "gear-skin",
+          "name": "Angel's Wings (Dive Bomber)",
+          "description": "Cosmetic appearance only. Earn through the Stage L/M mission rewards.",
+          "sourceIds": [
+            "client-collab-gear-skins",
+            "wiki-angels-azur-stage"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "sourceId": "1554",
+          "iconId": "999131",
+          "equipTypes": [
+            9
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "both-in-heart-and-mind",
+          "kind": "outfit",
+          "name": "Both in Heart and Mind",
+          "description": "Ririsa’s Dynamic outfit, sold separately in the skin shop.",
+          "sourceIds": [
+            "official-en-collab-20261112"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "shipId": "1180001",
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en"
+          ]
+        },
+        {
+          "id": "for-my-lucky-star",
+          "kind": "outfit",
+          "name": "For My Lucky Star",
+          "description": "Mikari’s Dynamic outfit, sold separately in the skin shop.",
+          "sourceIds": [
+            "official-en-collab-20261112"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "shipId": "1180002",
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en"
+          ]
+        },
+        {
+          "id": "jp-cn-outfits",
+          "kind": "outfit",
+          "name": "Collaboration outfits",
+          "description": "Ririsa and Mikari each have a Dynamic outfit. Regional sales close November 25 at 23:59 local server time.",
+          "sourceIds": [
+            "official-jp-collab-20261112",
+            "official-cn-collab-20261112"
+          ],
+          "regions": [
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "manga-club",
+          "kind": "furniture",
+          "name": "Manga Club",
+          "description": "Limited themed furniture collection; the stage furniture uses gems. Check the regional sales deadline above.",
+          "sourceIds": [
+            "official-en-collab-20261112",
+            "official-jp-collab-20261112"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        },
+        {
+          "id": "battle-ui",
+          "kind": "cosmetic",
+          "name": "Angels’ Stage Battle UI",
+          "description": "Choose one pack: Basic includes the theme and 1,000 Coins; Premium includes the theme and 3,060 Gems. Only one version can be purchased.",
+          "sourceIds": [
+            "official-en-collab-20261112",
+            "official-jp-collab-20261112",
+            "official-cn-collab-20261112"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        }
+      ],
+      "stages": [
+        {
+          "id": "special-challenges",
+          "kind": "stage",
+          "name": "Special challenges · 3 stages",
+          "description": "One-time rewards: Cognitive Chips ×100, then ×200, then Cosplayers’ Journey Commemoration furniture. No oil cost, morale loss, ship drops, normal item drops or experience. Stage enemy details await verification.",
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "official-jp-collab-20261112"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ]
+        }
+      ],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/c/cb/It%27s_Showtime%21_Angels%27_Azur_Stage_Event_Banner_EN.jpg",
+        "alt": "Official It’s Showtime! Angels’ Azur Stage event artwork",
+        "sourceIds": [
+          "wiki-collab-banner",
+          "official-en-collab-launch"
+        ],
+        "fallbackUrl": "https://imgeucdn.gamespress.com/cdn/files/Games%20Press/2026/11/051023-8376a687/00.png?bgcolor=transparent&format=png&mode=max&otf=y&quality=90&sky=be5e60dc9f404168348438c6c0e0af6bb87433510d5da246d1c4b051b570bf93&w=533"
+      },
+      "featured": true
+    },
+    {
+      "id": "effulgence-before-eclipse",
+      "title": "Effulgence Before Eclipse",
+      "category": "major",
+      "description": "Sakura Empire event featuring Unzen. Original and rerun dates share one event identity; JP War Archives addition is announced for a future maintenance.",
+      "sourceIds": [
+        "wiki-effulgence",
+        "official-jp-collab-20261112"
+      ],
+      "verifiedAt": "2026-11-15T13:00:41Z",
+      "missing": [
+        "Full historical mission, reward and enemy records are not yet cataloged.",
+        "JP permanent-addition date remains TBA; no EN permanent-addition schedule is inferred."
+      ],
+      "occurrences": [
+        {
+          "id": "effulgence-2023-en",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2023-09-14"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2023-10-04"
+          },
+          "phases": []
+        },
+        {
+          "id": "effulgence-2025-en",
+          "kind": "rerun",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2025-11-13"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2025-11-19"
+          },
+          "phases": []
+        },
+        {
+          "id": "effulgence-2023-jp",
+          "kind": "original",
+          "region": "JP",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2023-09-14"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2023-10-04"
+          },
+          "phases": []
+        },
+        {
+          "id": "effulgence-2025-jp",
+          "kind": "rerun",
+          "region": "JP",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2025-11-13"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2025-11-19"
+          },
+          "phases": []
+        },
+        {
+          "id": "effulgence-2023-cn",
+          "kind": "original",
+          "region": "CN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2023-09-14"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2023-10-04"
+          },
+          "phases": []
+        },
+        {
+          "id": "effulgence-2025-cn",
+          "kind": "rerun",
+          "region": "CN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:00:41Z",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2025-11-13"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "wiki-effulgence"
+            ],
+            "date": "2025-11-19"
+          },
+          "phases": []
+        },
+        {
+          "id": "effulgence-jp-war-archives",
+          "kind": "war-archives",
+          "region": "JP",
+          "releaseState": "announced",
+          "sourceIds": [
+            "official-jp-collab-20261112"
+          ],
+          "start": {
+            "kind": "tba",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "official-jp-collab-20261112"
+            ],
+            "note": "Official notice: next or later maintenance; exact date not announced."
+          },
+          "phases": []
+        }
+      ],
+      "content": [],
+      "stages": [
+        {
+          "id": "effulgence-map-overview",
+          "kind": "stage",
+          "name": "Historical map overview",
+          "description": "Six Normal maps, six Hard maps, SP and EX. Sakura Emblems supported event-shop exchanges and milestone rewards during the limited occurrences.",
+          "sourceIds": [
+            "wiki-effulgence"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "effulgence-2023-en",
+            "effulgence-2025-en",
+            "effulgence-2023-jp",
+            "effulgence-2025-jp",
+            "effulgence-2023-cn",
+            "effulgence-2025-cn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "divergent-chessboard",
+      "title": "Divergent Chessboard",
+      "category": "major",
+      "description": "Iron Blood event history, also known as Opposite-Colored on CN and JP. Normal and Hard maps award event points during the limited run.",
+      "sourceIds": [
+        "history-wiki-chessboard-en",
+        "history-wiki-chessboard-cnjp",
+        "history-wiki-chessboard-rerun"
+      ],
+      "verifiedAt": "2026-11-15T13:04:07Z",
+      "missing": [
+        "Exact original and rerun times are not verified.",
+        "Regional War Archives addition dates and current regional acquisition routes are not yet included.",
+        "Full map, reward and drop tables are not yet transcribed."
+      ],
+      "occurrences": [
+        {
+          "id": "divergent-chessboard-cn-original-2017",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-chessboard-cnjp"
+            ],
+            "date": "2017-08-02"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-chessboard-cnjp"
+            ],
+            "date": "2017-08-22"
+          },
+          "sourceIds": [
+            "history-wiki-chessboard-cnjp"
+          ],
+          "phases": []
+        },
+        {
+          "id": "divergent-chessboard-jp-original-2017",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-chessboard-cnjp"
+            ],
+            "date": "2017-12-26"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-chessboard-cnjp"
+            ],
+            "date": "2018-01-12"
+          },
+          "sourceIds": [
+            "history-wiki-chessboard-cnjp"
+          ],
+          "phases": []
+        },
+        {
+          "id": "divergent-chessboard-en-original-2018",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-chessboard-en"
+            ],
+            "date": "2018-12-13"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-chessboard-en"
+            ],
+            "date": "2018-12-30"
+          },
+          "sourceIds": [
+            "history-wiki-chessboard-en"
+          ],
+          "phases": []
+        },
+        {
+          "id": "divergent-chessboard-cn-rerun-2018",
+          "region": "CN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-chessboard-rerun"
+            ],
+            "date": "2018-06-28"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-chessboard-rerun"
+            ],
+            "date": "2018-07-15"
+          },
+          "sourceIds": [
+            "history-wiki-chessboard-rerun"
+          ],
+          "phases": []
+        },
+        {
+          "id": "divergent-chessboard-jp-rerun-2018",
+          "region": "JP",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-chessboard-rerun"
+            ],
+            "date": "2018-06-28"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-chessboard-rerun"
+            ],
+            "date": "2018-07-15"
+          },
+          "sourceIds": [
+            "history-wiki-chessboard-rerun"
+          ],
+          "phases": []
+        },
+        {
+          "id": "divergent-chessboard-en-rerun-2019",
+          "region": "EN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-chessboard-rerun"
+            ],
+            "date": "2019-10-31"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-chessboard-rerun"
+            ],
+            "date": "2019-11-13"
+          },
+          "sourceIds": [
+            "history-wiki-chessboard-rerun"
+          ],
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "ship-40146",
+          "kind": "ship",
+          "name": "Z46",
+          "description": "A historical rerun reward; boss drops are listed at B4 and D4.",
+          "sourceIds": [
+            "history-wiki-chessboard-rerun",
+            "history-wiki-ship-40146"
+          ],
+          "regions": [
+            "CN",
+            "JP",
+            "EN"
+          ],
+          "occurrenceIds": [
+            "divergent-chessboard-cn-rerun-2018",
+            "divergent-chessboard-jp-rerun-2018",
+            "divergent-chessboard-en-rerun-2019"
+          ],
+          "shipId": "40146",
+          "rarity": "Super Rare",
+          "acquisition": "Limited construction or B4/D4 boss drop during the rerun."
+        },
+        {
+          "id": "ship-40502",
+          "kind": "ship",
+          "name": "Tirpitz",
+          "description": "A historical rerun event-shop reward.",
+          "sourceIds": [
+            "history-wiki-chessboard-rerun",
+            "history-wiki-ship-40502"
+          ],
+          "regions": [
+            "CN",
+            "JP",
+            "EN"
+          ],
+          "occurrenceIds": [
+            "divergent-chessboard-cn-rerun-2018",
+            "divergent-chessboard-jp-rerun-2018",
+            "divergent-chessboard-en-rerun-2019"
+          ],
+          "shipId": "40502",
+          "rarity": "Super Rare",
+          "acquisition": "Event point exchange shop during the rerun."
+        },
+        {
+          "id": "rerun-stage-set",
+          "kind": "mechanic",
+          "name": "Rerun stages",
+          "description": "Eight Normal stages, eight Hard stages and an EX stage; the limited run awards points for boss victories outside EX.",
+          "sourceIds": [
+            "history-wiki-chessboard-rerun"
+          ],
+          "regions": [
+            "CN",
+            "JP",
+            "EN"
+          ],
+          "occurrenceIds": [
+            "divergent-chessboard-cn-rerun-2018",
+            "divergent-chessboard-jp-rerun-2018",
+            "divergent-chessboard-en-rerun-2019"
+          ]
+        }
+      ],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/c/c5/EventBanner_Divergent_Chessboard.png",
+        "alt": "EventBanner Divergent Chessboard.png",
+        "credit": "Original Azur Lane event artwork; rights belong to the game owners. Hosted by Koumakan Wiki.",
+        "sourceIds": [
+          "history-art-chessboard"
+        ]
+      },
+      "aliases": [
+        "Opposite-Colored"
+      ]
+    },
+    {
+      "id": "visitors-dyed-in-red",
+      "title": "Visitors Dyed in Red",
+      "category": "major",
+      "description": "Sakura Empire event history with separate Normal and Hard progression. Boss victories award Ema during its limited runs.",
+      "sourceIds": [
+        "history-wiki-visitors",
+        "history-wiki-visitors-rerun"
+      ],
+      "verifiedAt": "2026-11-15T13:04:07Z",
+      "missing": [
+        "Exact launch and closure times are not verified.",
+        "Regional War Archives addition dates and current regional acquisition routes are not yet included.",
+        "Full stage, enemy and reward tables are not yet transcribed."
+      ],
+      "occurrences": [
+        {
+          "id": "visitors-dyed-in-red-cn-original-2017",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-visitors"
+            ],
+            "date": "2017-09-28"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-visitors"
+            ],
+            "date": "2017-10-12"
+          },
+          "sourceIds": [
+            "history-wiki-visitors"
+          ],
+          "phases": []
+        },
+        {
+          "id": "visitors-dyed-in-red-jp-original-2017",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-visitors"
+            ],
+            "date": "2017-10-27"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-visitors"
+            ],
+            "date": "2017-11-09"
+          },
+          "sourceIds": [
+            "history-wiki-visitors"
+          ],
+          "phases": []
+        },
+        {
+          "id": "visitors-dyed-in-red-en-original-2018",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-visitors"
+            ],
+            "date": "2018-09-30"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-visitors"
+            ],
+            "date": "2018-10-19"
+          },
+          "sourceIds": [
+            "history-wiki-visitors"
+          ],
+          "phases": []
+        },
+        {
+          "id": "visitors-dyed-in-red-cn-rerun-2018",
+          "region": "CN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-visitors-rerun"
+            ],
+            "date": "2018-03-29"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-visitors-rerun"
+            ],
+            "date": "2018-04-12"
+          },
+          "sourceIds": [
+            "history-wiki-visitors-rerun"
+          ],
+          "phases": []
+        },
+        {
+          "id": "visitors-dyed-in-red-jp-rerun-2018",
+          "region": "JP",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-visitors-rerun"
+            ],
+            "date": "2018-03-27"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-visitors-rerun"
+            ],
+            "date": "2018-04-10"
+          },
+          "sourceIds": [
+            "history-wiki-visitors-rerun"
+          ],
+          "phases": []
+        },
+        {
+          "id": "visitors-dyed-in-red-en-rerun-2019",
+          "region": "EN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-visitors-rerun"
+            ],
+            "date": "2019-03-21"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-visitors-rerun"
+            ],
+            "date": "2019-04-03"
+          },
+          "sourceIds": [
+            "history-wiki-visitors-rerun"
+          ],
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "ship-30706",
+          "kind": "ship",
+          "name": "Zuikaku",
+          "description": "The original event lists Zuikaku as a B3/D3 boss drop and an Ema exchange reward.",
+          "sourceIds": [
+            "history-wiki-visitors",
+            "history-wiki-ship-30706"
+          ],
+          "regions": [
+            "CN",
+            "JP",
+            "EN"
+          ],
+          "occurrenceIds": [
+            "visitors-dyed-in-red-cn-original-2017",
+            "visitors-dyed-in-red-jp-original-2017",
+            "visitors-dyed-in-red-en-original-2018"
+          ],
+          "shipId": "30706",
+          "rarity": "Super Rare",
+          "acquisition": "Original run: limited construction, B3/D3 boss drop or 8,000 Ema in the event shop."
+        },
+        {
+          "id": "ema-currency",
+          "kind": "currency",
+          "name": "Ema",
+          "description": "Collect Ema from event boss victories. Six Normal and six Hard maps are recorded for the original run.",
+          "sourceIds": [
+            "history-wiki-visitors"
+          ],
+          "regions": [
+            "CN",
+            "JP",
+            "EN"
+          ],
+          "occurrenceIds": [
+            "visitors-dyed-in-red-cn-original-2017",
+            "visitors-dyed-in-red-jp-original-2017",
+            "visitors-dyed-in-red-en-original-2018"
+          ]
+        }
+      ],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/e/ec/Visitors_Dyed_In_Red_EN.png",
+        "alt": "Visitors Dyed In Red EN.png",
+        "credit": "Original Azur Lane event artwork; rights belong to the game owners. Hosted by Koumakan Wiki.",
+        "sourceIds": [
+          "history-art-visitors"
+        ]
+      }
+    },
+    {
+      "id": "the-fools-scales",
+      "title": "The Fool's Scales",
+      "category": "major",
+      "description": "An Iris Libre and Vichya Dominion event with a shared original and rerun history. The EN version is now permanently available in War Archives.",
+      "sourceIds": [
+        "history-wiki-fools-scales",
+        "history-yostar-20261104",
+        "history-wiki-war-archives"
+      ],
+      "verifiedAt": "2026-11-15T13:04:07Z",
+      "missing": [
+        "Original and rerun schedules are date-only.",
+        "JP and CN permanent-addition schedules have not been verified for this catalog.",
+        "Complete stage enemies, shop quantities and reward tables remain to be added."
+      ],
+      "occurrences": [
+        {
+          "id": "the-fools-scales-en-original-2023",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2023-08-17"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2023-08-30"
+          },
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "phases": []
+        },
+        {
+          "id": "the-fools-scales-en-rerun-2025",
+          "region": "EN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2025-10-16"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2025-10-22"
+          },
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "phases": []
+        },
+        {
+          "id": "the-fools-scales-jp-original-2023",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2023-08-17"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2023-08-30"
+          },
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "phases": []
+        },
+        {
+          "id": "the-fools-scales-jp-rerun-2025",
+          "region": "JP",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2025-10-16"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2025-10-22"
+          },
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "phases": []
+        },
+        {
+          "id": "the-fools-scales-cn-original-2023",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2023-08-17"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2023-08-30"
+          },
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "phases": []
+        },
+        {
+          "id": "the-fools-scales-cn-rerun-2025",
+          "region": "CN",
+          "kind": "rerun",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2025-10-16"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-fools-scales"
+            ],
+            "date": "2025-10-22"
+          },
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "phases": []
+        },
+        {
+          "id": "the-fools-scales-en-war-archives-2026",
+          "region": "EN",
+          "kind": "war-archives",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261104"
+            ],
+            "date": "2026-11-05"
+          },
+          "end": null,
+          "sourceIds": [
+            "history-yostar-20261104"
+          ],
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "ship-80702",
+          "kind": "ship",
+          "name": "Painlevé",
+          "description": "Historical live-event acquisition; the old event shop does not reopen with War Archives.",
+          "sourceIds": [
+            "history-wiki-fools-scales",
+            "history-wiki-ship-80702"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "the-fools-scales-en-original-2023",
+            "the-fools-scales-en-rerun-2025",
+            "the-fools-scales-jp-original-2023",
+            "the-fools-scales-jp-rerun-2025",
+            "the-fools-scales-cn-original-2023",
+            "the-fools-scales-cn-rerun-2025"
+          ],
+          "shipId": "80702",
+          "rarity": "Super Rare",
+          "acquisition": "Limited construction, event shop or map drop during the original run and rerun."
+        },
+        {
+          "id": "ship-90104",
+          "kind": "ship",
+          "name": "Kersaint",
+          "description": "Historical event-point milestone reward.",
+          "sourceIds": [
+            "history-wiki-fools-scales",
+            "history-wiki-ship-90104"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "the-fools-scales-en-original-2023",
+            "the-fools-scales-en-rerun-2025",
+            "the-fools-scales-jp-original-2023",
+            "the-fools-scales-jp-rerun-2025",
+            "the-fools-scales-cn-original-2023",
+            "the-fools-scales-cn-rerun-2025"
+          ],
+          "shipId": "90104",
+          "rarity": "Elite",
+          "acquisition": "Accumulate event points during the original run or rerun."
+        },
+        {
+          "id": "fools-majesty",
+          "kind": "currency",
+          "name": "Fool's Majesty",
+          "description": "Limited runs include six Normal maps, six Hard maps, SP and EX. Event points are used for milestones and the exchange shop.",
+          "sourceIds": [
+            "history-wiki-fools-scales"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "the-fools-scales-en-original-2023",
+            "the-fools-scales-en-rerun-2025",
+            "the-fools-scales-jp-original-2023",
+            "the-fools-scales-jp-rerun-2025",
+            "the-fools-scales-cn-original-2023",
+            "the-fools-scales-cn-rerun-2025"
+          ]
+        },
+        {
+          "id": "permanent-access",
+          "kind": "mechanic",
+          "name": "War Archives",
+          "description": "EN permanent addition confirmed in the November 5 update. Archives do not reopen event-point shops or event missions.",
+          "sourceIds": [
+            "history-yostar-20261104",
+            "history-wiki-war-archives"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "the-fools-scales-en-war-archives-2026"
+          ]
+        }
+      ],
+      "stages": [],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/4/40/The_Fool%27s_Scales_Event_Banner_EN.png",
+        "alt": "The Fool's Scales Event Banner EN.png",
+        "credit": "Original Azur Lane event artwork; rights belong to the game owners. Hosted by Koumakan Wiki.",
+        "sourceIds": [
+          "history-art-fools-scales"
+        ]
+      }
+    },
+    {
+      "id": "tempesta-corridor-of-fog",
+      "title": "Tempesta and the Corridor of Fog",
+      "category": "major",
+      "description": "A Tempesta adventure with five featured ships, six T stages, SP and EX. Collect Flasks of Fog during the limited run for exchanges and milestones.",
+      "sourceIds": [
+        "history-wiki-corridor-fog",
+        "history-yostar-20261021"
+      ],
+      "verifiedAt": "2026-11-15T13:04:07Z",
+      "missing": [
+        "JP and CN exact times and separate claim deadlines remain unverified.",
+        "Complete stage enemy compositions and drop tables are not yet imported.",
+        "No drop probabilities or fleet-efficiency recommendations are verified."
+      ],
+      "occurrences": [
+        {
+          "id": "tempesta-corridor-of-fog-en-original-2026",
+          "region": "EN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261021"
+            ],
+            "date": "2026-10-22"
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261021"
+            ],
+            "value": "2026-11-04T23:59:00-07:00"
+          },
+          "sourceIds": [
+            "history-yostar-20261021"
+          ],
+          "phases": [
+            {
+              "id": "pt-shop-closes",
+              "kind": "shop",
+              "label": "PT exchange shop closes",
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "history-yostar-20261021"
+                ],
+                "value": "2026-11-11T23:59:00-07:00"
+              },
+              "sourceIds": [
+                "history-yostar-20261021"
+              ]
+            },
+            {
+              "id": "milestone-claims-close",
+              "kind": "claim",
+              "label": "Accumulated PT rewards expire",
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "history-yostar-20261021"
+                ],
+                "value": "2026-11-11T23:59:00-07:00"
+              },
+              "sourceIds": [
+                "history-yostar-20261021"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tempesta-corridor-of-fog-jp-original-2026",
+          "region": "JP",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-corridor-fog"
+            ],
+            "date": "2026-10-22"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "history-wiki-corridor-fog"
+            ],
+            "date": "2026-11-04"
+          },
+          "sourceIds": [
+            "history-wiki-corridor-fog"
+          ],
+          "phases": []
+        },
+        {
+          "id": "tempesta-corridor-of-fog-cn-original-2026",
+          "region": "CN",
+          "kind": "original",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-corridor-fog"
+            ],
+            "date": "2026-10-22"
+          },
+          "end": {
+            "kind": "date",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "history-wiki-corridor-fog"
+            ],
+            "date": "2026-11-04"
+          },
+          "sourceIds": [
+            "history-wiki-corridor-fog"
+          ],
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "ship-960018",
+          "kind": "ship",
+          "name": "Járnbarðinn",
+          "description": "Available in the limited event construction, exchange shop and as a boss drop.",
+          "sourceIds": [
+            "history-wiki-corridor-fog",
+            "history-wiki-ship-960018"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "tempesta-corridor-of-fog-en-original-2026",
+            "tempesta-corridor-of-fog-jp-original-2026",
+            "tempesta-corridor-of-fog-cn-original-2026"
+          ],
+          "shipId": "960018",
+          "rarity": "Super Rare",
+          "acquisition": "8,000 Flasks of Fog per shop copy; also T6/SP boss drops. Historical event availability."
+        },
+        {
+          "id": "ship-960021",
+          "kind": "ship",
+          "name": "Riyala Bey",
+          "description": "Elite milestone reward; the first copy requires 10,000 Flasks of Fog accumulated.",
+          "sourceIds": [
+            "history-wiki-corridor-fog",
+            "history-wiki-ship-960021"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "tempesta-corridor-of-fog-en-original-2026",
+            "tempesta-corridor-of-fog-jp-original-2026",
+            "tempesta-corridor-of-fog-cn-original-2026"
+          ],
+          "shipId": "960021",
+          "rarity": "Elite",
+          "acquisition": "Accumulate 10,000 event points for the first copy; historical event availability."
+        },
+        {
+          "id": "flasks-of-fog",
+          "kind": "currency",
+          "name": "Flasks of Fog",
+          "description": "Earn event currency by clearing event stages, then exchange it in the event shop or claim accumulation rewards.",
+          "sourceIds": [
+            "history-wiki-corridor-fog"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "tempesta-corridor-of-fog-en-original-2026",
+            "tempesta-corridor-of-fog-jp-original-2026",
+            "tempesta-corridor-of-fog-cn-original-2026"
+          ]
+        },
+        {
+          "id": "gear-skins-fantaisie",
+          "kind": "gear-skin",
+          "name": "Fantaisie of Heaven and Hell gear skins",
+          "description": "Cosmetic gear skins from the event box; no combat statistics are assigned.",
+          "sourceIds": [
+            "history-wiki-corridor-fog",
+            "history-yostar-20261021"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "tempesta-corridor-of-fog-en-original-2026",
+            "tempesta-corridor-of-fog-jp-original-2026",
+            "tempesta-corridor-of-fog-cn-original-2026"
+          ]
+        }
+      ],
+      "stages": [
+        {
+          "id": "tempesta-t6",
+          "name": "T6 — The Final Obstacle",
+          "difficulty": "T stage",
+          "description": "Boss: Ormrinn Langi, level 100. Six escort defeats reveal the boss. A clear awards 180 Flasks of Fog.",
+          "stageSourceId": "2070006",
+          "requirements": "Clear T5.",
+          "boss": {
+            "name": "Ormrinn Langi",
+            "level": 100
+          },
+          "sourceIds": [
+            "history-wiki-corridor-fog"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "tempesta-corridor-of-fog-en-original-2026",
+            "tempesta-corridor-of-fog-jp-original-2026",
+            "tempesta-corridor-of-fog-cn-original-2026"
+          ],
+          "kind": "stage"
+        },
+        {
+          "id": "tempesta-sp",
+          "name": "SP — Echo of the Deep",
+          "difficulty": "SP",
+          "description": "Boss: Ormrinn Langi, level 105. A clear awards 800 Flasks of Fog; SP can be cleared once per day.",
+          "stageSourceId": "2070041",
+          "requirements": "Clear T6; average fleet level above 105.",
+          "boss": {
+            "name": "Ormrinn Langi",
+            "level": 105
+          },
+          "sourceIds": [
+            "history-wiki-corridor-fog"
+          ],
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "tempesta-corridor-of-fog-en-original-2026",
+            "tempesta-corridor-of-fog-jp-original-2026",
+            "tempesta-corridor-of-fog-cn-original-2026"
+          ],
+          "kind": "stage"
+        }
+      ],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/9/94/Tempesta_and_the_Corridor_of_Fog_Event_Banner_EN.jpg",
+        "alt": "Tempesta and the Corridor of Fog Event Banner EN.jpg",
+        "credit": "Original Azur Lane event artwork; rights belong to the game owners. Hosted by Koumakan Wiki.",
+        "sourceIds": [
+          "history-art-tempesta-fog"
+        ]
+      }
+    },
+    {
+      "id": "bayard-blueprint-completion",
+      "title": "Blueprint Completion Plan — Bayard",
+      "category": "research",
+      "description": "Complete research projects during the EN campaign to earn bonus Bayard blueprints.",
+      "sourceIds": [
+        "history-yostar-20261104",
+        "history-wiki-ship-89904"
+      ],
+      "verifiedAt": "2026-11-15T13:04:07Z",
+      "missing": [
+        "JP and CN schedules are not verified.",
+        "The exact maintenance-completion time is not verified."
+      ],
+      "occurrences": [
+        {
+          "id": "bayard-blueprint-completion-en-campaign-2026",
+          "region": "EN",
+          "kind": "campaign",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261104"
+            ],
+            "date": "2026-11-05"
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261104"
+            ],
+            "value": "2026-12-02T23:59:00-07:00"
+          },
+          "sourceIds": [
+            "history-yostar-20261104"
+          ],
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "bayard-blueprints",
+          "kind": "reward",
+          "name": "Bayard blueprints",
+          "description": "Earn up to 30 bonus blueprints by completing research projects during the campaign.",
+          "sourceIds": [
+            "history-yostar-20261104",
+            "history-wiki-ship-89904"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "bayard-blueprint-completion-en-campaign-2026"
+          ],
+          "shipId": "89904",
+          "acquisition": "Complete research projects during the EN campaign; campaign limit 30 blueprints."
+        }
+      ],
+      "stages": []
+    },
+    {
+      "id": "island-development-season-v",
+      "title": "Island Development Season V — Winter Wanderlust",
+      "category": "recurring",
+      "description": "The EN island development season includes specialty-product requests and Development Plans with seasonal rewards.",
+      "sourceIds": [
+        "history-yostar-20261104"
+      ],
+      "verifiedAt": "2026-11-15T13:04:07Z",
+      "missing": [
+        "JP and CN schedules are not verified.",
+        "The exact maintenance-completion time is not verified.",
+        "Complete seasonal reward tables and Stellar Prize Draw contents must be checked in-game."
+      ],
+      "occurrences": [
+        {
+          "id": "island-development-season-v-en-campaign-2026",
+          "region": "EN",
+          "kind": "campaign",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-15T13:04:07Z",
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261104"
+            ],
+            "date": "2026-11-05"
+          },
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "history-yostar-20261104"
+            ],
+            "value": "2027-02-01T23:59:00-07:00"
+          },
+          "sourceIds": [
+            "history-yostar-20261104"
+          ],
+          "phases": [
+            {
+              "id": "season-rewards-expire",
+              "kind": "claim",
+              "label": "Development Plan and accumulated PT rewards expire",
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "history-yostar-20261104"
+                ],
+                "value": "2027-02-01T23:59:00-07:00"
+              },
+              "sourceIds": [
+                "history-yostar-20261104"
+              ]
+            }
+          ]
+        }
+      ],
+      "content": [
+        {
+          "id": "island-unlock",
+          "kind": "requirement",
+          "name": "Island season access",
+          "description": "Island Planner unlocks at Commander level 50. Participation in the season requires Island Development level 5.",
+          "sourceIds": [
+            "history-yostar-20261104"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "island-development-season-v-en-campaign-2026"
+          ]
+        },
+        {
+          "id": "season-orders",
+          "kind": "mission",
+          "name": "Specialty-product requests",
+          "description": "Complete Peary’s seasonal product requests for Island Development Points.",
+          "sourceIds": [
+            "history-yostar-20261104"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "island-development-season-v-en-campaign-2026"
+          ]
+        },
+        {
+          "id": "development-plan-rewards",
+          "kind": "reward",
+          "name": "Development Plan rewards",
+          "description": "Plans include island character training materials and Stellar Tickets. Unclaimed plan and accumulated-point rewards expire at season end.",
+          "sourceIds": [
+            "history-yostar-20261104"
+          ],
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "island-development-season-v-en-campaign-2026"
+          ]
+        }
+      ],
+      "stages": []
+    }
+  ]
+}

@@ -16,6 +16,7 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run test:combat-source
+      - run: npm run test:chronicle-source
       - run: npm run test:research-source
       - run: node scripts/verify-research-progression.mjs
       - run: node scripts/verify-portrait-source.mjs
@@ -31,6 +32,13 @@ jobs:
       - run: npm install --no-save playwright@1.56.1
       - run: google-chrome --version
       - run: node scripts/viewport-smoke.mjs
+      - run: node scripts/events-interaction-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chronicle-ui-screenshots
+          path: .audit/chronicle-screens
+          include-hidden-files: true
       - run: node scripts/combat-interaction-smoke.mjs
       - run: node scripts/research-interaction-smoke.mjs
       - name: Capture pre-unified-bronze PR head for visual comparison

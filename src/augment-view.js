@@ -8,6 +8,7 @@ const statLabel=Object.freeze({
   rld:'Reload',eva:'Evasion',hit:'Accuracy',asw:'Anti-Submarine',spd:'Speed',luck:'Luck'
 });
 export function renderAugmentDetails(augment){
+  if(augment?.source==='avalon-verified')return renderCurrentAugment(augment);
   if(augment?.kind!=='augment'||!['source-augment','official-announcement'].includes(augment?.source))return '';
   const announced=augment.source==='official-announcement';
   const link=E(announced?OFFICIAL_AUGMENT_ANNOUNCEMENT:AUGMENT_SOURCE);
@@ -37,5 +38,9 @@ export function renderAugmentDetails(augment){
     (announced?'No verified icon or internal augment item ID is available.':'Artwork: source icon field '+E(augmentIconKey(augment))+' from the original spweapon asset archive hosted by independent fan project JforPlay (not publisher-hosted).')+'</p>'+
     '</div><div class="picker-footer"><button type="button" class="ghost-btn" data-action="loadout-augment-close">Close</button></div>'+
     '</aside></div>';
+}
+
+function renderCurrentAugment(a){
+  return '<div class="picker-backdrop detail-backdrop" data-action="loadout-augment-close"><aside class="picker-panel detail-panel" role="dialog" aria-modal="true" aria-label="Inspect augment '+E(a.name)+'"><div class="picker-head"><div><span class="eyebrow">EXCLUSIVE AUGMENT</span><h2>'+E(a.name)+'</h2></div><button type="button" class="icon-btn" data-action="loadout-augment-close" aria-label="Close augment details">✕</button></div><div class="detail-scroll"><div class="augment-inspection-art">'+augmentImageMarkup(a,'asset-augment-detail')+'</div><p>'+E(a.rarity)+' · Exclusive to <a class="text-link" href="#/ships/'+E(a.shipGroupId)+'">'+(a.shipGroupId==='1180001'?'Liliel / Ririsa':'Miriella / Mikari')+'</a>.</p><h3>Stat increases · base → +10</h3><div class="profile-table">'+a.stats.map(s=>'<div><span>'+E(statLabel[s.key]||s.key)+'</span><strong>'+E(s.base)+' → '+E(s.max)+'</strong></div>').join('')+'</div><h3>Acquisition</h3><p>'+E(a.acquisition)+'</p><a class="text-link" href="#/events/'+E(a.eventId)+'">Event schedule & missions →</a><h3>Augment effect</h3><p>'+E(a.effect)+'</p><h3>Skill upgrade at +10</h3><p>'+E(a.upgrade)+'</p><p class="equipment-acquisition-provenance">Source ID '+E(a.sourceId)+' · checked '+E(a.sourceDate)+' · <a class="text-link" href="'+E(a.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Koumakan ↗</a>. AVALON maintains these wiki/client-verified records. Skill mechanics are described, not simulated. Historical event acquisition does not establish current availability; check Events. No crafting route is verified.</p></div><div class="picker-footer"><button class="ghost-btn" data-action="loadout-augment-close">Close</button></div></aside></div>';
 }
 
