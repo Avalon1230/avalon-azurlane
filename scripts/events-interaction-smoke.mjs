@@ -87,10 +87,10 @@ try{
  }
  // Scope changes are user navigation, not publisher schedule updates.
  {
-  const {page}=await pageFor(390);await page.goto(url+'/#/events');await page.locator('#event-region').waitFor();
+  const {page}=await pageFor(390);await page.goto(url+'/#/events');await openFilters(page);
   for(const region of ['JP','EN']){await page.getByLabel('Server region').selectOption(region);await page.clock.runFor(1000);assert.doesNotMatch(await page.locator('#toast').innerText(),/Event schedules have updated/);}
   await page.locator('[data-event-card="angels-azur-stage"] h3 a').click();await page.locator('.event-detail-heading').waitFor();await page.clock.runFor(1000);assert.doesNotMatch(await page.locator('#toast').innerText(),/Event schedules have updated/);
-  await page.getByRole('link',{name:'← All events',exact:true}).click();await page.locator('#event-region').waitFor();await page.clock.runFor(1000);assert.doesNotMatch(await page.locator('#toast').innerText(),/Event schedules have updated/);await page.close();
+  await page.getByRole('link',{name:'← All events',exact:true}).click();await openFilters(page);await page.clock.runFor(1000);assert.doesNotMatch(await page.locator('#toast').innerText(),/Event schedules have updated/);await page.close();
   report.push({scope:'EN/JP and index/detail navigation produces no false schedule notifications'});
  }
  // Fail closed, then retry through the actual handler.
