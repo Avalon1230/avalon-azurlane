@@ -29,3 +29,15 @@
 @media(prefers-reduced-motion:reduce){.event-detail,.event-section{scroll-behavior:auto}}
 
 .event-view-switch .filter-chip,.event-detail-nav .filter-chip{border:1px solid #36526b;border-radius:5px;padding:8px 12px;color:#bcd2e3;background:#102336;font-size:12px}.event-view-switch .filter-chip.active{border-color:#69cde9;color:#d7f9ff;background:#194057}.event-view-switch .filter-chip:hover,.event-detail-nav .filter-chip:hover{border-color:#69cde9}.page:has(.event-page-heading):focus-visible,.page:has(.event-detail):focus-visible{outline:none}
+
+/* Compact, accessible event-search disclosure. Only the filters collapse. */
+.event-filter-shell{border:1px solid var(--stroke);border-radius:10px;background:var(--surface);overflow:hidden}
+.event-filter-toggle{width:100%;min-height:57px;display:flex;align-items:center;gap:12px;text-align:left;background:#11283a;color:var(--text);padding:12px 17px;border:0;cursor:pointer}
+.event-filter-toggle>span:first-child{font-weight:750;white-space:nowrap}
+.event-filter-toggle small{color:#a8c4d7;font-size:12px;line-height:1.5;flex:1;text-align:right;min-width:0;overflow-wrap:anywhere}
+.event-filter-toggle>span:last-child{color:var(--aqua);font-weight:800}
+.event-filter-toggle:hover{background:#183449}
+.event-filter-toggle:focus-visible{outline:2px solid var(--aqua);outline-offset:-3px}
+.event-controls[hidden]{display:none}
+.event-filter-shell .event-controls{border:0;border-top:1px solid var(--stroke);border-radius:0}
+@media(max-width:650px){.event-filter-toggle{flex-wrap:wrap;gap:7px}.event-filter-toggle small{flex-basis:100%;order:3;text-align:left}}
