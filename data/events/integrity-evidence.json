@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-18T02:32:50.450Z",
+  "sourceRevisions": [
+    {
+      "title": "It's Showtime! Angels' Azur Stage",
+      "pageId": 99533,
+      "revision": 307891
+    },
+    {
+      "title": "Liliel Angel Paratroopers/Ririsa/Gallery",
+      "pageId": 99563,
+      "revision": 307841
+    },
+    {
+      "title": "Miriella Angel Paratroopers/Mikari/Gallery",
+      "pageId": 99590,
+      "revision": 307844
+    },
+    {
+      "title": "Furniture Sets/Manga Club",
+      "pageId": 99525,
+      "revision": 307716
+    }
+  ],
+  "skinClient": {
+    "path": "EN/sharecfgdata/ship_skin_template.lua",
+    "commit": "479c350c5824b8bc8b385102bdc4d31b310e3e0a",
+    "blob": "7a39ec78b5ebaa80a96d02a18bbad6af1e62af99",
+    "sha256": "0cffcace9ac9d6dd5bab8b5a6d93b9eaf631d203db826dbee61aee85de37b7f9",
+    "repository": "AzurLaneTools/AzurLaneLuaScripts"
+  },
+  "files": [
+    {
+      "title": "File:Liliel Angel ParatroopersRirisa.png",
+      "size": 3414940,
+      "width": 2048,
+      "height": 1723,
+      "url": "https://azurlane.netojuu.com/images/f/f0/Liliel_Angel_ParatroopersRirisa.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisa.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99528",
+      "sha1": "0e1dc781c06badab44bf4841f75affe6d26ef3fd",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaBanner.png",
+      "size": 42270,
+      "width": 360,
+      "height": 80,
+      "url": "https://azurlane.netojuu.com/images/b/b0/Liliel_Angel_ParatroopersRirisaBanner.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaBanner.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99534",
+      "sha1": "0f4cbf3c895caa35241cb59c81001ca3a415046e",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaCasual.png",
+      "size": 2897907,
+      "width": 2048,
+      "height": 1190,
+      "url": "https://azurlane.netojuu.com/images/c/c1/Liliel_Angel_ParatroopersRirisaCasual.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaCasual.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99535",
+      "sha1": "628d401b94c16c58acd72c6e07890327e82d96ee",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaCasualBanner.png",
+      "size": 41387,
+      "width": 360,
+      "height": 80,
+      "url": "https://azurlane.netojuu.com/images/1/15/Liliel_Angel_ParatroopersRirisaCasualBanner.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaCasualBanner.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99536",
+      "sha1": "f492957dd1e3d9a38eaf99f127e4444e8c902bee",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaCasualIcon.png",
+      "size": 24069,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/6/6c/Liliel_Angel_ParatroopersRirisaCasualIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaCasualIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99539",
+      "sha1": "d91e3cb13e7d2598b61b07c28051aaf497d9c1d1",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaCasualWithoutBG.png",
+      "size": 2325588,
+      "width": 2048,
+      "height": 1482,
+      "url": "https://azurlane.netojuu.com/images/d/d6/Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99541",
+      "sha1": "fc6ae3d2347643fb1e556ca3386ee8871c6e4658",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaIcon.png",
+      "size": 27818,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99544",
+      "sha1": "a75bc51a5bb94df1d6d09a15fe12fd7f2fd18495",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Liliel Angel ParatroopersRirisaWithoutBG.png",
+      "size": 1417447,
+      "width": 2048,
+      "height": 1241,
+      "url": "https://azurlane.netojuu.com/images/b/ba/Liliel_Angel_ParatroopersRirisaWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Liliel_Angel_ParatroopersRirisaWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99546",
+      "sha1": "41b30398b7fa5d505b88161066dc4edafee26438",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikari.png",
+      "size": 3802262,
+      "width": 2048,
+      "height": 1793,
+      "url": "https://azurlane.netojuu.com/images/7/7d/Miriella_Angel_ParatroopersMikari.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikari.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99547",
+      "sha1": "e895a3b2310ce198778e959a5cb502f07b3ae8e4",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariBanner.png",
+      "size": 56692,
+      "width": 360,
+      "height": 80,
+      "url": "https://azurlane.netojuu.com/images/d/d0/Miriella_Angel_ParatroopersMikariBanner.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariBanner.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99548",
+      "sha1": "7c9f67dbae737cd38f9d97d5aa2bf73f820764f5",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariCasual.png",
+      "size": 2740165,
+      "width": 2048,
+      "height": 1177,
+      "url": "https://azurlane.netojuu.com/images/2/2e/Miriella_Angel_ParatroopersMikariCasual.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariCasual.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99549",
+      "sha1": "ad0fd40cc5dffcf40e9bc0e97a27926be1f584db",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariCasualBanner.png",
+      "size": 43458,
+      "width": 360,
+      "height": 80,
+      "url": "https://azurlane.netojuu.com/images/a/a3/Miriella_Angel_ParatroopersMikariCasualBanner.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariCasualBanner.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99550",
+      "sha1": "51b3199ce2448a2947ece01ff7eba338bf544b15",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariCasualIcon.png",
+      "size": 29161,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/1/1d/Miriella_Angel_ParatroopersMikariCasualIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariCasualIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99553",
+      "sha1": "8f0340268b85202d595b1fcaeafa9ddf6f3b0591",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariCasualWithoutBG.png",
+      "size": 2115279,
+      "width": 2048,
+      "height": 1287,
+      "url": "https://azurlane.netojuu.com/images/1/15/Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99555",
+      "sha1": "5f429ee15f36620e6aee5dfd7b54e796e26c4459",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariIcon.png",
+      "size": 29095,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99558",
+      "sha1": "95803a5a2ec4488c459e2acbdec848f2b4bf94f1",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Miriella Angel ParatroopersMikariWithoutBG.png",
+      "size": 2303944,
+      "width": 1866,
+      "height": 2048,
+      "url": "https://azurlane.netojuu.com/images/0/0c/Miriella_Angel_ParatroopersMikariWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Miriella_Angel_ParatroopersMikariWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99560",
+      "sha1": "459e581ee073d82c1bd065ab00629aad9a09a841",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Cognitive Chip.png",
+      "size": 38703,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/6/69/Cognitive_Chip.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Cognitive_Chip.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=7951",
+      "sha1": "812b7c83f206bbf51e23b1e74d7901da25532833",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999111.png",
+      "size": 22632,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/9/9a/EquipSkinIcon_999111.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999111.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99493",
+      "sha1": "ec94eab14d8969c502fb6110023eab31f8f9d68a",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999112.png",
+      "size": 24919,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/0/08/EquipSkinIcon_999112.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999112.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99494",
+      "sha1": "6f070761daefa3f1996f04001679a7b3ad78d1e0",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999113.png",
+      "size": 13831,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/a/a4/EquipSkinIcon_999113.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999113.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99495",
+      "sha1": "39ac836e45ee2e92a7f2d341c932187634478b39",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999114.png",
+      "size": 15572,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/3/39/EquipSkinIcon_999114.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999114.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99496",
+      "sha1": "2cba642b9614668ddef2d47a7cb6a6255b56b48c",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999121.png",
+      "size": 27750,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/6/65/EquipSkinIcon_999121.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999121.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99497",
+      "sha1": "f65110e8e39a8058bbe4b6a7f461c63105940f83",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999122.png",
+      "size": 23877,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/d/dd/EquipSkinIcon_999122.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999122.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99498",
+      "sha1": "2ff947a9860983d1c99d58086ef2563d394007c0",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999131.png",
+      "size": 17858,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999131.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99499",
+      "sha1": "875b6fc52cd23121415bc6d8ef3547e0227fbe32",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999141.png",
+      "size": 21011,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/8/8e/EquipSkinIcon_999141.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999141.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99500",
+      "sha1": "f316d25c07b616ae99a2fb726e2f0ab3181f43b3",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:EquipSkinIcon 999142.png",
+      "size": 21378,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/8/80/EquipSkinIcon_999142.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:EquipSkinIcon_999142.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99501",
+      "sha1": "e03f39700f0def10027921ca4c147751a257fb79",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon baibanmyicon.png",
+      "size": 10904,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/9/9b/FurnIcon_baibanmyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_baibanmyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99502",
+      "sha1": "1793c102fcdecf242bf42f872f251a40c6d7ea11",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon diannaozhuomyicon.png",
+      "size": 14778,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/0/0a/FurnIcon_diannaozhuomyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_diannaozhuomyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99503",
+      "sha1": "a6e2c16356e7838c41487a82802496fe9b083826",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon dibanmyicon.png",
+      "size": 9987,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/2/2b/FurnIcon_dibanmyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_dibanmyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99504",
+      "sha1": "9cde178790fa09b716df6620531a1e948d30b211",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon lilishaxunzhangicon.png",
+      "size": 17953,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/4/40/FurnIcon_lilishaxunzhangicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_lilishaxunzhangicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99505",
+      "sha1": "d9cf813d6afcac249eb3b38255ee6839a1616f70",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon mythemeicon.png",
+      "size": 29866,
+      "width": 173,
+      "height": 173,
+      "url": "https://azurlane.netojuu.com/images/e/e4/FurnIcon_mythemeicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_mythemeicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99506",
+      "sha1": "72b197e9ac6fa1d07e7e7bda66024c945d667e3c",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon qiangbimyicon.png",
+      "size": 13407,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/0/06/FurnIcon_qiangbimyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_qiangbimyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99507",
+      "sha1": "40bde0bf4c2bbeeca50c453d4e26fe4b7ce62262",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon shafamyicon.png",
+      "size": 13464,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/3/32/FurnIcon_shafamyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_shafamyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99508",
+      "sha1": "3b67cab2fe25584a27a7e5230214090720de4926",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon shuguimyicon.png",
+      "size": 20999,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/a/af/FurnIcon_shuguimyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_shuguimyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99509",
+      "sha1": "3d06a323806ee76a488f97da1254ba31061918a2",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon wutaimyicon.png",
+      "size": 19210,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/2/29/FurnIcon_wutaimyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_wutaimyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99510",
+      "sha1": "ee1811997e2c273b6ca09e4efc2b6b9d00b1727c",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon xiangzimyicon.png",
+      "size": 13188,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/5/57/FurnIcon_xiangzimyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_xiangzimyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99511",
+      "sha1": "137ae4109d7a2c63edd3991c7649d081cf04290a",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon yizimyicon.png",
+      "size": 12506,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/6/68/FurnIcon_yizimyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_yizimyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99512",
+      "sha1": "c402a165bdcb1e5e188867ac8c3a6d85dd7a09a7",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:FurnIcon zhuomyicon.png",
+      "size": 15233,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/e/e7/FurnIcon_zhuomyicon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:FurnIcon_zhuomyicon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99513",
+      "sha1": "323b6bcce0012a45b6eebef7fef0c72373b96561",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Augment 15960.png",
+      "size": 9596,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/a/ae/Augment_15960.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Augment_15960.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99523",
+      "sha1": "5a2147980364e716ce08f42b1590484ac9d5e313",
+      "mime": "image/png"
+    },
+    {
+      "title": "File:Augment 15980.png",
+      "size": 8662,
+      "width": 128,
+      "height": 128,
+      "url": "https://azurlane.netojuu.com/images/8/8d/Augment_15980.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Augment_15980.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=99524",
+      "sha1": "a8d2549611ae22c6f1c5f81985f8e38bec6cb1c7",
+      "mime": "image/png"
+    }
+  ],
+  "skinIds": [
+    {
+      "shipId": "1180001",
+      "skinId": "11800010",
+      "name": "Default"
+    },
+    {
+      "shipId": "1180001",
+      "skinId": "11800011",
+      "name": "Both in Heart and Mind"
+    },
+    {
+      "shipId": "1180002",
+      "skinId": "11800020",
+      "name": "Default"
+    },
+    {
+      "shipId": "1180002",
+      "skinId": "11800021",
+      "name": "For My Lucky Star"
+    }
+  ],
+  "archiveConflict": {
+    "eventId": "virtual-tower",
+    "wikiRevision": 307578,
+    "withheld": "B3/D3 map drops and 60-clear reward: stage identifiers contradict the SP map layout."
+  },
+  "coverageBefore": {
+    "identities": 66,
+    "occurrences": 221,
+    "withoutContent": 59,
+    "withoutStages": 63,
+    "withoutArtwork": 56
+  },
+  "coverageAfter": {
+    "identities": 66,
+    "occurrences": 221,
+    "withoutContent": 58,
+    "withoutStages": 63,
+    "withoutArtwork": 56
+  }
+}

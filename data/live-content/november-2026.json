@@ -29,6 +29,13 @@
       "blob": "2eaa492bf54a0644f4e24ea5d4aca5ade3f3f852",
       "sha256": "6730e3447cb4f00f92b47bd6d2d2345e35a098a7ff6cd7dbee69f9bd982d85ca",
       "repository": "AzurLaneTools/AzurLaneLuaScripts"
+    },
+    {
+      "path": "EN/sharecfgdata/ship_skin_template.lua",
+      "commit": "479c350c5824b8bc8b385102bdc4d31b310e3e0a",
+      "blob": "7a39ec78b5ebaa80a96d02a18bbad6af1e62af99",
+      "sha256": "0cffcace9ac9d6dd5bab8b5a6d93b9eaf631d203db826dbee61aee85de37b7f9",
+      "repository": "AzurLaneTools/AzurLaneLuaScripts"
     }
   ],
   "ships": {
@@ -161,6 +168,15 @@
           "url": "https://github.com/Fernando2603/AzurLane/tree/main/images/skin/11800010",
           "checkedAt": "2026-11-16T00:25:11Z",
           "identity": "EN ship_skin_template id 11800010; original game art, supplementary host only"
+        },
+        "gallery": {
+          "url": "https://azurlane.koumakan.jp/wiki/Liliel_Angel_Paratroopers%2FRirisa%2FGallery",
+          "revision": 307841,
+          "checkedAt": "2026-11-18T02:32:50.450Z",
+          "skinIds": [
+            "11800010",
+            "11800011"
+          ]
         }
       },
       "index": {
@@ -320,12 +336,35 @@
       },
       "artwork": [
         {
+          "id": "11800010",
+          "shipId": "1180001",
           "name": "Default",
+          "source": "wiki-client",
+          "sourceUrl": "https://azurlane.koumakan.jp/wiki/Liliel_Angel_Paratroopers%2FRirisa%2FGallery",
+          "sourceRevision": 307841,
           "images": {
             "wiki": "https://azurlane.netojuu.com/images/f/f0/Liliel_Angel_ParatroopersRirisa.png",
+            "wikiNoBackground": "https://azurlane.netojuu.com/images/b/ba/Liliel_Angel_ParatroopersRirisaWithoutBG.png",
             "painting": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800010/painting.png",
             "paintingNoBackground": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800010/painting_n.png"
-          }
+          },
+          "icon": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png"
+        },
+        {
+          "id": "11800011",
+          "shipId": "1180001",
+          "name": "Both in Heart and Mind",
+          "source": "wiki-client",
+          "sourceUrl": "https://azurlane.koumakan.jp/wiki/Liliel_Angel_Paratroopers%2FRirisa%2FGallery",
+          "sourceRevision": 307841,
+          "acquisition": "Limited skin shop · 1,000 Gems · EN / JP / CN. Availability follows each server’s event sales window.",
+          "images": {
+            "wiki": "https://azurlane.netojuu.com/images/c/c1/Liliel_Angel_ParatroopersRirisaCasual.png",
+            "wikiNoBackground": "https://azurlane.netojuu.com/images/d/d6/Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+            "painting": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800011/painting.png",
+            "paintingNoBackground": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800011/painting_n.png"
+          },
+          "icon": "https://azurlane.netojuu.com/images/6/6c/Liliel_Angel_ParatroopersRirisaCasualIcon.png"
         }
       ],
       "slots": {
@@ -516,6 +555,15 @@
           "url": "https://github.com/Fernando2603/AzurLane/tree/main/images/skin/11800020",
           "checkedAt": "2026-11-16T00:25:11Z",
           "identity": "EN ship_skin_template id 11800020; original game art, supplementary host only"
+        },
+        "gallery": {
+          "url": "https://azurlane.koumakan.jp/wiki/Miriella_Angel_Paratroopers%2FMikari%2FGallery",
+          "revision": 307844,
+          "checkedAt": "2026-11-18T02:32:50.450Z",
+          "skinIds": [
+            "11800020",
+            "11800021"
+          ]
         }
       },
       "index": {
@@ -672,12 +720,35 @@
       },
       "artwork": [
         {
+          "id": "11800020",
+          "shipId": "1180002",
           "name": "Default",
+          "source": "wiki-client",
+          "sourceUrl": "https://azurlane.koumakan.jp/wiki/Miriella_Angel_Paratroopers%2FMikari%2FGallery",
+          "sourceRevision": 307844,
           "images": {
             "wiki": "https://azurlane.netojuu.com/images/7/7d/Miriella_Angel_ParatroopersMikari.png",
+            "wikiNoBackground": "https://azurlane.netojuu.com/images/0/0c/Miriella_Angel_ParatroopersMikariWithoutBG.png",
             "painting": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800020/painting.png",
             "paintingNoBackground": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800020/painting_n.png"
-          }
+          },
+          "icon": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png"
+        },
+        {
+          "id": "11800021",
+          "shipId": "1180002",
+          "name": "For My Lucky Star",
+          "source": "wiki-client",
+          "sourceUrl": "https://azurlane.koumakan.jp/wiki/Miriella_Angel_Paratroopers%2FMikari%2FGallery",
+          "sourceRevision": 307844,
+          "acquisition": "Limited skin shop · 1,000 Gems · EN / JP / CN. Availability follows each server’s event sales window.",
+          "images": {
+            "wiki": "https://azurlane.netojuu.com/images/2/2e/Miriella_Angel_ParatroopersMikariCasual.png",
+            "wikiNoBackground": "https://azurlane.netojuu.com/images/1/15/Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+            "painting": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800021/painting.png",
+            "paintingNoBackground": "https://raw.githubusercontent.com/Fernando2603/AzurLane/main/images/skin/11800021/painting_n.png"
+          },
+          "icon": "https://azurlane.netojuu.com/images/1/1d/Miriella_Angel_ParatroopersMikariCasualIcon.png"
         }
       ],
       "slots": {

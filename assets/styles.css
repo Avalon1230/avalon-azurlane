@@ -1148,3 +1148,10 @@
 .research-delta{display:block;color:#9ed8d1;font-variant-numeric:tabular-nums}
 .research-comparison-basis{font-size:.85rem;color:#b9cbdc}
 .research-upgrade-changes{margin-top:12px}.research-upgrade-changes li{margin:8px 0}
+
+/* INTEGRITY: source-matched skin variants and provenance. */
+.ship-art-backgrounds{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.ship-art-acquisition{font-size:.8rem;line-height:1.55;margin-top:.7rem;color:var(--muted)}
+.ship-art-acquisition a{display:block;margin-top:.35rem}
+
+.deployment-notice{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 20px;background:#293121;border-bottom:1px solid #b8a564;font-size:13px;line-height:1.5}.deployment-notice span{flex:1;min-width:180px}.build-version{white-space:nowrap}

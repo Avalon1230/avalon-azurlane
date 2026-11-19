@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-17T13:11:32Z",
+  "updatedAt": "2026-11-18T02:32:50.450Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -607,6 +607,30 @@
       "shortTitle": "Koumakan",
       "license": "CC BY-NC-SA 4.0; game artwork retains original rights",
       "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-ririsa-gallery": {
+      "type": "wiki",
+      "url": "https://azurlane.koumakan.jp/wiki/Liliel_Angel_Paratroopers%2FRirisa%2FGallery",
+      "title": "Liliel Angel Paratroopers/Ririsa gallery",
+      "shortTitle": "Koumakan gallery",
+      "revision": "307841",
+      "checkedAt": "2026-11-18T02:32:50.450Z"
+    },
+    "wiki-mikari-gallery": {
+      "type": "wiki",
+      "url": "https://azurlane.koumakan.jp/wiki/Miriella_Angel_Paratroopers%2FMikari%2FGallery",
+      "title": "Miriella Angel Paratroopers/Mikari gallery",
+      "shortTitle": "Koumakan gallery",
+      "revision": "307844",
+      "checkedAt": "2026-11-18T02:32:50.450Z"
+    },
+    "wiki-manga-club": {
+      "type": "wiki",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=307716",
+      "title": "Manga Club furniture set",
+      "shortTitle": "Koumakan",
+      "revision": "307716",
+      "checkedAt": "2026-11-18T02:32:50.450Z"
     }
   },
   "events": [
@@ -628,10 +652,10 @@
         "official-cn-collab-20261112",
         "official-en-collab-launch"
       ],
-      "verifiedAt": "2026-11-15T13:00:41Z",
+      "verifiedAt": "2026-11-18T02:32:50.450Z",
       "missing": [
         "Stage enemy compositions, boss statistics and verified encounter mechanics are not yet cataloged.",
-        "Story synopsis and detailed furniture inventory are not yet cataloged.",
+        "Story synopsis is not yet cataloged.",
         "Exact EN/JP daily mission unlock times have not been confirmed; dates remain date-only.",
         "No event currency shop, drop rates or separate post-event claim grace period has been verified."
       ],
@@ -1133,7 +1157,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png",
+            "alt": "Liliel Angel Paratroopers/Ririsa portrait",
+            "sourceIds": [
+              "wiki-angels-azur-stage",
+              "wiki-liliel"
+            ]
+          }
         },
         {
           "id": "miriella-mikari",
@@ -1154,7 +1186,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png",
+            "alt": "Miriella Angel Paratroopers/Mikari portrait",
+            "sourceIds": [
+              "wiki-angels-azur-stage",
+              "wiki-miriella"
+            ]
+          }
         },
         {
           "id": "liliels-rod",
@@ -1176,7 +1216,16 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/a/ae/Augment_15960.png",
+            "alt": "Augment 15960",
+            "sourceIds": [
+              "wiki-angels-azur-stage",
+              "wiki-liliel-rod",
+              "client-collab-augments"
+            ]
+          }
         },
         {
           "id": "miriellas-bow",
@@ -1198,7 +1247,16 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/8/8d/Augment_15980.png",
+            "alt": "Augment 15980",
+            "sourceIds": [
+              "wiki-angels-azur-stage",
+              "wiki-miriella-bow",
+              "client-collab-augments"
+            ]
+          }
         },
         {
           "id": "augment-common-effect",
@@ -1415,7 +1473,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/8/8e/EquipSkinIcon_999141.png",
+            "alt": "EquipSkinIcon 999141",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1542",
@@ -1440,7 +1506,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/8/80/EquipSkinIcon_999142.png",
+            "alt": "EquipSkinIcon 999142",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1543",
@@ -1466,7 +1540,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/9/9a/EquipSkinIcon_999111.png",
+            "alt": "EquipSkinIcon 999111",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1544",
@@ -1492,7 +1574,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/0/08/EquipSkinIcon_999112.png",
+            "alt": "EquipSkinIcon 999112",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1545",
@@ -1518,7 +1608,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/6/65/EquipSkinIcon_999121.png",
+            "alt": "EquipSkinIcon 999121",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1546",
@@ -1544,7 +1642,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/d/dd/EquipSkinIcon_999122.png",
+            "alt": "EquipSkinIcon 999122",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1547",
@@ -1571,7 +1677,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/a/a4/EquipSkinIcon_999113.png",
+            "alt": "EquipSkinIcon 999113",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1548",
@@ -1598,7 +1712,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/3/39/EquipSkinIcon_999114.png",
+            "alt": "EquipSkinIcon 999114",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1549",
@@ -1623,7 +1745,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+            "alt": "EquipSkinIcon 999131",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1550",
@@ -1648,7 +1778,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+            "alt": "EquipSkinIcon 999131",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1551",
@@ -1673,7 +1811,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+            "alt": "EquipSkinIcon 999131",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1552",
@@ -1698,7 +1844,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+            "alt": "EquipSkinIcon 999131",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1553",
@@ -1723,7 +1877,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+            "alt": "EquipSkinIcon 999131",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "gear-skin-1554",
@@ -1748,7 +1910,15 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/18/EquipSkinIcon_999131.png",
+            "alt": "EquipSkinIcon 999131",
+            "sourceIds": [
+              "client-collab-gear-skins",
+              "wiki-angels-azur-stage"
+            ]
+          }
         },
         {
           "id": "both-in-heart-and-mind",
@@ -1756,7 +1926,8 @@
           "name": "Both in Heart and Mind",
           "description": "Ririsa’s Dynamic outfit, sold separately in the skin shop.",
           "sourceIds": [
-            "official-en-collab-20261112"
+            "official-en-collab-20261112",
+            "wiki-ririsa-gallery"
           ],
           "regions": [
             "EN"
@@ -1764,7 +1935,17 @@
           "shipId": "1180001",
           "occurrenceIds": [
             "angels-azur-stage-2026-en"
-          ]
+          ],
+          "skinId": "11800011",
+          "cost": 1000,
+          "currency": "Gems",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/6/6c/Liliel_Angel_ParatroopersRirisaCasualIcon.png",
+            "alt": "Both in Heart and Mind outfit portrait",
+            "sourceIds": [
+              "wiki-ririsa-gallery"
+            ]
+          }
         },
         {
           "id": "for-my-lucky-star",
@@ -1772,7 +1953,8 @@
           "name": "For My Lucky Star",
           "description": "Mikari’s Dynamic outfit, sold separately in the skin shop.",
           "sourceIds": [
-            "official-en-collab-20261112"
+            "official-en-collab-20261112",
+            "wiki-mikari-gallery"
           ],
           "regions": [
             "EN"
@@ -1780,7 +1962,17 @@
           "shipId": "1180002",
           "occurrenceIds": [
             "angels-azur-stage-2026-en"
-          ]
+          ],
+          "skinId": "11800021",
+          "cost": 1000,
+          "currency": "Gems",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/1d/Miriella_Angel_ParatroopersMikariCasualIcon.png",
+            "alt": "For My Lucky Star outfit portrait",
+            "sourceIds": [
+              "wiki-mikari-gallery"
+            ]
+          }
         },
         {
           "id": "jp-cn-outfits",
@@ -1807,7 +1999,8 @@
           "description": "Limited themed furniture collection; the stage furniture uses gems. Check the regional sales deadline above.",
           "sourceIds": [
             "official-en-collab-20261112",
-            "official-jp-collab-20261112"
+            "official-jp-collab-20261112",
+            "wiki-manga-club"
           ],
           "regions": [
             "EN",
@@ -1818,7 +2011,14 @@
             "angels-azur-stage-2026-en",
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
-          ]
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/e/e4/FurnIcon_mythemeicon.png",
+            "alt": "FurnIcon mythemeicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
         },
         {
           "id": "battle-ui",
@@ -1840,6 +2040,400 @@
             "angels-azur-stage-2026-jp",
             "angels-azur-stage-2026-cn"
           ]
+        },
+        {
+          "id": "outfit-11800011-jp-cn",
+          "kind": "outfit",
+          "name": "Both in Heart and Mind",
+          "description": "Dynamic outfit, sold separately in the limited skin shop. Follow the selected server’s sales deadline.",
+          "shipId": "1180001",
+          "skinId": "11800011",
+          "cost": 1000,
+          "currency": "Gems",
+          "regions": [
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-ririsa-gallery",
+            "official-jp-collab-20261112",
+            "official-cn-collab-20261112"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/6/6c/Liliel_Angel_ParatroopersRirisaCasualIcon.png",
+            "alt": "Both in Heart and Mind outfit portrait",
+            "sourceIds": [
+              "wiki-ririsa-gallery"
+            ]
+          }
+        },
+        {
+          "id": "outfit-11800021-jp-cn",
+          "kind": "outfit",
+          "name": "For My Lucky Star",
+          "description": "Dynamic outfit, sold separately in the limited skin shop. Follow the selected server’s sales deadline.",
+          "shipId": "1180002",
+          "skinId": "11800021",
+          "cost": 1000,
+          "currency": "Gems",
+          "regions": [
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-mikari-gallery",
+            "official-jp-collab-20261112",
+            "official-cn-collab-20261112"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/1d/Miriella_Angel_ParatroopersMikariCasualIcon.png",
+            "alt": "For My Lucky Star outfit portrait",
+            "sourceIds": [
+              "wiki-mikari-gallery"
+            ]
+          }
+        },
+        {
+          "id": "furniture-dibanmyicon",
+          "kind": "furniture",
+          "name": "Manga Club Flooring",
+          "description": "Limited Manga Club floor, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Super Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/2/2b/FurnIcon_dibanmyicon.png",
+            "alt": "FurnIcon dibanmyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-qiangbimyicon",
+          "kind": "furniture",
+          "name": "Manga Club Wallpaper",
+          "description": "Limited Manga Club wallpaper, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Super Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/0/06/FurnIcon_qiangbimyicon.png",
+            "alt": "FurnIcon qiangbimyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-baibanmyicon",
+          "kind": "furniture",
+          "name": "Manga Club Whiteboard",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/9/9b/FurnIcon_baibanmyicon.png",
+            "alt": "FurnIcon baibanmyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-diannaozhuomyicon",
+          "kind": "furniture",
+          "name": "Manga Club Projection Area",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/0/0a/FurnIcon_diannaozhuomyicon.png",
+            "alt": "FurnIcon diannaozhuomyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-shafamyicon",
+          "kind": "furniture",
+          "name": "Manga Club Sofa",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/3/32/FurnIcon_shafamyicon.png",
+            "alt": "FurnIcon shafamyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-shuguimyicon",
+          "kind": "furniture",
+          "name": "Manga Club Bookshelves",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/a/af/FurnIcon_shuguimyicon.png",
+            "alt": "FurnIcon shuguimyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-xiangzimyicon",
+          "kind": "furniture",
+          "name": "Manga Club Supply Boxes",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/5/57/FurnIcon_xiangzimyicon.png",
+            "alt": "FurnIcon xiangzimyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-yizimyicon",
+          "kind": "furniture",
+          "name": "Manga Club Chair",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/6/68/FurnIcon_yizimyicon.png",
+            "alt": "FurnIcon yizimyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-zhuomyicon",
+          "kind": "furniture",
+          "name": "Manga Club Desk",
+          "description": "Limited Manga Club furniture, available from the dorm shop. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/e/e7/FurnIcon_zhuomyicon.png",
+            "alt": "FurnIcon zhuomyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "furniture-wutaimyicon",
+          "kind": "furniture",
+          "name": "Sparkling Angels' Stage",
+          "description": "Gem-purchased stage furniture. Check the selected server’s cosmetic sales deadline.",
+          "rarity": "Super Rare",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-manga-club",
+            "wiki-angels-azur-stage"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/2/29/FurnIcon_wutaimyicon.png",
+            "alt": "FurnIcon wutaimyicon",
+            "sourceIds": [
+              "wiki-manga-club"
+            ]
+          }
+        },
+        {
+          "id": "challenge-commemoration",
+          "kind": "furniture",
+          "name": "Cosplayer’s Journey Commemoration",
+          "description": "One-time reward for clearing the third special challenge.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "official-jp-collab-20261112"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/4/40/FurnIcon_lilishaxunzhangicon.png",
+            "alt": "FurnIcon lilishaxunzhangicon",
+            "sourceIds": [
+              "wiki-angels-azur-stage"
+            ]
+          }
+        },
+        {
+          "id": "challenge-cognitive-chips",
+          "kind": "reward",
+          "name": "Cognitive Chips",
+          "description": "The first special challenge awards 100 Cognitive Chips; the second awards 200. Each reward can be claimed once.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "angels-azur-stage-2026-en",
+            "angels-azur-stage-2026-jp",
+            "angels-azur-stage-2026-cn"
+          ],
+          "sourceIds": [
+            "wiki-angels-azur-stage",
+            "official-jp-collab-20261112"
+          ],
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/6/69/Cognitive_Chip.png",
+            "alt": "Cognitive Chip",
+            "sourceIds": [
+              "wiki-angels-azur-stage"
+            ]
+          }
         }
       ],
       "stages": [
@@ -3526,10 +4120,11 @@
         "wiki-v0812-20231",
         "wiki-v0812-54300"
       ],
-      "verifiedAt": "2026-11-17T13:11:32Z",
+      "verifiedAt": "2026-11-18T02:32:50.450Z",
       "missing": [
         "Full original and rerun history remains incomplete.",
-        "Current regional rewards, ship and equipment drops and maps still need individual verification."
+        "Current regional rewards, ship and equipment drops and maps still need individual verification.",
+        "Virtual Tower map-drop references conflict: the War Archives index lists B3/D3 despite this event using SP maps. Drops and guaranteed-clear rewards are withheld pending corroboration."
       ],
       "occurrences": [
         {
@@ -3751,7 +4346,56 @@
           ]
         }
       ],
-      "content": [],
+      "content": [
+        {
+          "id": "permanent-en-60107",
+          "kind": "ship",
+          "name": "Pompeo Magno",
+          "shipId": "60107",
+          "description": "Added permanently to the EN Light Construction Pool with the Virtual Tower archive update. This is a construction route; no archive map drop or drop rate is asserted.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "virtual-tower-en-war-archives-20250320"
+          ],
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower"
+          ]
+        },
+        {
+          "id": "permanent-en-60304",
+          "kind": "ship",
+          "name": "Trieste",
+          "shipId": "60304",
+          "description": "Added permanently to the EN Heavy Construction Pool with the Virtual Tower archive update. This is a construction route; no archive map drop or drop rate is asserted.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "virtual-tower-en-war-archives-20250320"
+          ],
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower"
+          ]
+        },
+        {
+          "id": "permanent-en-60702",
+          "kind": "ship",
+          "name": "Impero",
+          "shipId": "60702",
+          "description": "Added permanently to the EN Special Construction Pool with the Virtual Tower archive update. This is a construction route; no archive map drop or drop rate is asserted.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "virtual-tower-en-war-archives-20250320"
+          ],
+          "sourceIds": [
+            "en-yostar-20250319-virtual-tower"
+          ]
+        }
+      ],
       "stages": [],
       "artwork": {
         "url": "https://azurlane.netojuu.com/images/1/1e/Virtual_Tower_Event_Banner_EN.jpg",

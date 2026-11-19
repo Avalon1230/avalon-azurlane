@@ -41,3 +41,18 @@
 .event-controls[hidden]{display:none}
 .event-filter-shell .event-controls{border:0;border-top:1px solid var(--stroke);border-radius:0}
 @media(max-width:650px){.event-filter-toggle{flex-wrap:wrap;gap:7px}.event-filter-toggle small{flex-basis:100%;order:3;text-align:left}}
+
+/* INTEGRITY: compact, keyboard-accessible schedules. */
+#event-schedule-details[hidden]{display:none}
+#event-schedule-toggle{width:100%;margin-top:1rem;border:1px solid var(--stroke);border-radius:.5rem}
+#event-schedule-details{padding-top:1rem}
+.event-schedules-compact .event-timer{margin:.5rem 0}
+.event-schedules-compact .event-date-note{margin:.35rem 0 0;font-size:.78rem}
+.event-urgent{border-left:3px solid #efc77e;padding:.7rem 1rem;margin-top:1rem;background:#192936}
+.event-urgent ul{margin:.4rem 0 0;padding-left:1.1rem}
+
+.event-content-item:has(.event-item-art){display:flow-root}
+.event-item-art{position:relative;float:left;display:grid;place-items:center;width:64px;height:64px;flex-shrink:0;border:1px solid var(--stroke);border-radius:7px;background:#142839;margin:0 12px 8px 0;overflow:hidden;color:#819cb5}
+.event-item-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.event-content-item .event-item-source{display:block;clear:both}
+@media(min-width:900px){.event-item-art{width:72px;height:72px}}

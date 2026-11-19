@@ -34,6 +34,13 @@ jobs:
       - run: google-chrome --version
       - run: node scripts/viewport-smoke.mjs
       - run: node scripts/events-interaction-smoke.mjs
+      - run: node scripts/integrity-interaction-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integrity-ui-screenshots
+          path: .audit/integrity-screens
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         if: always()
         with:

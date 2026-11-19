@@ -95,6 +95,8 @@ export function validateEventCatalog(catalog){
       check(CONTENT_KINDS.includes(item.kind)||item.kind==='stage',path+'.'+item.id,'unsupported content kind');
       check(Array.isArray(item.regions)&&item.regions.length>0&&item.regions.every(r=>Object.hasOwn(EVENT_REGIONS,r)),path+'.'+item.id,'verified content regions required');
       check(Array.isArray(item.occurrenceIds)&&item.occurrenceIds.length>0&&item.occurrenceIds.every(id=>Array.isArray(e.occurrences)&&e.occurrences.some(o=>o?.id===id&&item.regions?.includes(o.region))),path+'.'+item.id,'known matching occurrences required');
+      if(item.artwork){check(safeEventUrl(item.artwork.url)&&item.artwork.alt,path+'.'+item.id,'invalid item artwork');refs(item.artwork.sourceIds,path+'.'+item.id+'.artwork');}
+      if(item.skinId)check(item.kind==='outfit'&&/^\d{5,10}$/.test(item.skinId)&&!!item.shipId,path+'.'+item.id,'skin link requires a ship and numeric skin ID');
       if(item.kind==='gear-skin')check(!item.equipmentId&&!item.stats,path+'.'+item.id,'cosmetics cannot be combat equipment');
       for(const key of ['shipId','equipmentId'])if(item[key])check(/^\d{2,8}$/.test(item[key]),path+'.'+item.id,'numeric source ID required');
       if(item.dropRate!=null){check(Number.isFinite(item.dropRate)&&item.dropRate>=0&&item.dropRate<=1&&item.dropRateSourceIds?.length,path+'.'+item.id,'drop rate requires evidence');refs(item.dropRateSourceIds,path+'.'+item.id+'.dropRate');}
@@ -167,7 +169,7 @@ export function eventCountdown(t,now=Date.now()){
   return `${d?d+'d ':''}${h}h ${m}m ${s}s`;
 }
 export function eventStateSignature(catalog,region,now=Date.now()){
-  return (catalog?.events||[]).flatMap(e=>e.occurrences.filter(o=>!region||o.region===region).map(o=>[o.id,occurrenceStatus(o,now),...(o.phases||[]).map(p=>ended(p.at,now))].join(':'))).join('|');
+  return (catalog?.events||[]).flatMap(e=>e.occurrences.filter(o=>!region||o.region===region).map(o=>[o.id,occurrenceStatus(o,now),...(o.phases||[]).map(p=>[ended(p.at,now),['shop','claim'].includes(p.kind)&&p.at.kind==='exact'&&now>=Date.parse(p.at.value)-48*60*60*1000].join('/'))].join(':'))).join('|');
 }
 export const DEFAULT_EVENT_FILTERS=Object.freeze({region:'EN',query:'',year:'all',category:'all',status:'all',sort:'newest',view:'cards',zone:EVENT_ZONE});
 export function parseEventRoute(hash){const match=String(hash).match(/^#\/events(?:\/([a-z0-9][a-z0-9-]{0,95})(?:\?occurrence=([a-z0-9][a-z0-9-]{0,95}))?)?$/);return match?{page:'events',eventId:match[1]||null,...(match[2]?{occurrenceId:match[2]}:{})}:null;}

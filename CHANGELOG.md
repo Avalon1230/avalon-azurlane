@@ -2,6 +2,19 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.13] - 2026-11-18
+
+Unreleased; independent QA and Commander merge authorization required.
+
+### Operation INTEGRITY: Corrective polish
+
+- Merge verified artwork by ship and skin ID. Ririsa and Mikari retain Default plus their verified alternate outfits, with background controls, acquisition notes and exact-skin event links.
+- Keep EN/JP/CN countdowns visible while detailed schedules and mission milestones start collapsed. Confirmed deadlines within 48 hours remain visible.
+- Add authenticated reward thumbnails, the Manga Club furniture inventory and EN Virtual Tower permanent construction routes. Preserve historical/permanent reward and regional boundaries.
+- Align release documentation and add automated release/build consistency checks, safe reload notices and deployment digest verification. Browser storage remains unchanged.
+
+**Still incomplete:** Historical event coverage, most archive rewards/stages/artwork and regional acquisition refreshes. Virtual Tower map-drop references conflict and are withheld. The Bridge and tactical intelligence remain separate releases.
+
 ## [0.8.12] - 2026-11-17
 
 Released on 2026-11-18 after Commander AVALON's explicit approval and independent QA of [PR #35](https://github.com/Avalon1230/avalon-azurlane/pull/35). Squash merge: `b90351f306854238cf813035fe681d2454725a47`. Final head CI passed 325/325 Node tests and complete browser regressions. Historical coverage remains partial.

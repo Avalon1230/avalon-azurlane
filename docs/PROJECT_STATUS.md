@@ -1,6 +1,15 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-18 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-19 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## Active development — v0.8.13 Operation INTEGRITY (unreleased)
+
+- **Base:** Verified main `9d2ab620b875284f8732886fb9ee15634fab2c6e`; PR #35 is merged. Baseline [CI 44134577828](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44134577828) passed. Work continues on `feat/operation-integrity-v0813`.
+- **Scope:** Stable-ID artwork union, Ririsa/Mikari verified skins and background variants; compact event schedules; sourced reward thumbnails and selected acquisition records; release consistency and deployment diagnostics. Preserve architecture and storage contracts.
+- **Initial coverage:** 66 identities / 221 occurrences; 59 without content, 63 without stages, 56 without event artwork. Coverage remains partial.
+- **Implementation:** Recovered the existing local work after the interrupted session. Gallery sources merge by stable ship/skin IDs; reviewed Ririsa/Mikari alternate outfits and background variants remain separate from identity portraits. Regional countdowns stay visible above collapsed schedules; exact shop/claim deadlines surface at 48 hours. Added source-matched reward thumbnails, Manga Club furniture and EN-only Virtual Tower construction records. Static build identity, documentation checks and a reload notice retain all existing storage keys. Browser regression work also corrected direct-profile reload routing and artwork-viewer keyboard focus.
+- **Verification in progress:** Fresh local run passed 334 Node tests, syntax/generated-data/release consistency, event catalog audit, 63 viewport cases and 10 combat sessions. The new four-width INTEGRITY functional suite passed with external sources deliberately unavailable, including schedules, both galleries, exact-skin links, keyboard/lightbox focus, saved loadouts, the real JP 48-hour deadline boundary and changed-build reload. Research regression and complete CI/source/artwork checks are being finalized. Direct external downloads are blocked by this workstation; local placeholder screenshots do not certify original artwork. See [INTEGRITY scope and evidence](INTEGRITY.md). Do not merge or deploy.
+- **Backlog:** Pass 2 encyclopedia completion (historical originals/reruns, War Archives art, stages/bosses/rewards/drops, regional acquisition, galleries); Pass 3 The Bridge / Game Overview CIC (ATAK-inspired intelligence, current/upcoming countdowns, urgent deadlines, official announcements, contextual updates, desktop sidebar/mobile navigation); Pass 4 tactical intelligence (verified Fleet Lab candidates, ship/equipment synergy, damage windows, timing synchronization, scenario evaluation, contextual tiers and concrete loadout reasons). These major features are not part of v0.8.13.
 
 ## Current release — v0.8.12 Operation CHRONICLE (2026-11-18, Commander-approved)
 

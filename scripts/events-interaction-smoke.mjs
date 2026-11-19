@@ -47,6 +47,7 @@ async function capture(page,name,fullPage=false){
  // not an intermediate progressive image, without waiting on off-screen assets.
  const pending=await page.locator('img').evaluateAll(async images=>{
   const visible=images.filter(img=>{const r=img.getBoundingClientRect();return r.width&&r.height&&r.bottom>0&&r.top<innerHeight;});
+  for(const img of visible)img.loading='eager';
   await Promise.all(visible.map(async img=>{
    if(!img.complete)await new Promise(resolve=>{const finish=()=>{clearTimeout(timer);resolve();};const timer=setTimeout(finish,12000);img.addEventListener('load',finish,{once:true});img.addEventListener('error',finish,{once:true});});
    if(img.complete&&img.naturalWidth)await img.decode().catch(()=>{});
@@ -93,7 +94,7 @@ try{
   await page.getByRole('button',{name:'Timeline',exact:true}).click();assert.ok(await page.locator('.event-timeline>li').count()>0);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();await page.getByLabel('Category',{exact:true}).selectOption('research');assert.equal(await page.locator('[data-event-card]').count(),1);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();await page.locator('[data-event-card="angels-azur-stage"] h3 a').click();
-  await page.getByRole('heading',{name:'Schedule & deadlines',exact:true}).waitFor();assert.match(await page.locator('.event-schedules').innerText(),/27 Nov 2026, 14:59/);
+  await page.getByRole('heading',{name:'Schedule & deadlines',exact:true}).waitFor();assert.match(await page.locator('.event-schedules-compact').innerText(),/27 Nov 2026, 14:59/);
   assert.equal(await page.getByLabel('Content for server').inputValue(),'EN');await overflow(page);
   await page.getByRole('button',{name:'Obtainable content',exact:true}).focus();await page.keyboard.press('Enter');
   await page.getByRole('link',{name:'Liliel Angel Paratroopers/Ririsa ↗',exact:true}).click();await page.locator('.ship-profile-overview').waitFor();
@@ -126,6 +127,7 @@ try{
   o.start=at('2026-11-17T14:36:02Z');o.end=at('2026-11-17T14:36:04Z');o.releaseState='announced';o.phases=[{id:'fixture-unlock',label:'Controlled mission unlock',kind:'mission',at:at('2026-11-17T14:36:03Z'),sourceIds:o.sourceIds}];
   const {page,errors}=await pageFor(390,{data:c});await page.goto(url+'/#/events/angels-azur-stage');await page.locator('.event-detail-tools').waitFor();assert.match(await page.locator('.event-detail-tools').innerText(),/Upcoming/);
   await page.clock.runFor(2000);assert.match(await page.locator('.event-detail-tools').innerText(),/Ongoing/);assert.match(await page.locator('#toast').innerText(),/Event schedules have updated/);
+  await page.locator('#event-schedule-toggle').click();
   await page.clock.runFor(1000);assert.match(await page.locator('.event-phases').innerText(),/Unlocked/);
   await page.clock.runFor(1000);assert.match(await page.locator('.event-detail-tools').innerText(),/Ended/);assert.equal(await page.locator('[data-event-countdown]').evaluateAll(ns=>ns.some(n=>/^-/m.test(n.textContent))),false);
   assert.deepEqual(errors,[]);await page.close();report.push({clock:'exact start, unlock and end transitions passed under Playwright controlled clock'});
