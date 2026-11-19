@@ -45,7 +45,7 @@ async function capture(page,name){
  report.captures.push({file,sha256:createHash('sha256').update(readFileSync(out+'/'+file)).digest('hex')});
 }
 async function artResult(page,selector,label){
- await page.evaluate(selector=>document.querySelector(selector)?.scrollIntoView({block:'center'}),selector);
+ await page.evaluate(selector=>document.querySelector(selector)?.scrollIntoView({block:'center',behavior:'instant'}),selector);
  await page.waitForFunction(selector=>{const img=document.querySelector(selector);return !img||img.complete;},selector,{timeout:25000}).catch(()=>{});
  const result=await page.evaluate(selector=>{const img=document.querySelector(selector);return img?{url:img.currentSrc,width:img.naturalWidth,height:img.naturalHeight,loaded:img.complete&&img.naturalWidth>0}:{loaded:false,url:null,width:0,height:0};},selector);
  report.artwork.push({label,...result});
@@ -58,6 +58,7 @@ try{
   await page.goto(origin+'/#/events/angels-azur-stage');const toggle=page.locator('#event-schedule-toggle');await toggle.waitFor();
   assert.equal(await toggle.getAttribute('aria-expanded'),'false');assert.equal(await page.locator('#event-schedule-details').isVisible(),false);
   assert.equal(await page.locator('.event-schedules-compact [role="timer"]').count(),3);
+  assert((await page.locator('.event-schedules-compact').boundingBox()).height<450,'Regional summaries remain compact at every target width');
   await toggle.focus();await page.keyboard.press('Enter');await focused(toggle);assert.equal(await toggle.getAttribute('aria-expanded'),'true');
   await page.getByLabel('Content for server').selectOption('JP');assert.equal(await toggle.getAttribute('aria-expanded'),'true');
   await toggle.focus();await page.keyboard.press('Space');await focused(toggle);assert.equal(await page.locator('#event-schedule-details').isVisible(),false);
@@ -90,7 +91,7 @@ try{
   const {page}=await pageFor(390,{time:new Date(threshold-1000).toISOString()});await page.goto(origin+'/#/events/angels-azur-stage');await page.getByLabel('Content for server').selectOption('JP');
   assert.equal(await page.locator('.event-urgent').count(),0);await page.clock.runFor(1000);await page.locator('.event-urgent').waitFor();
   assert.equal(await page.locator('#event-schedule-details').isVisible(),false);assert.match(await page.locator('.event-urgent').innerText(),/JP.*Closing within 48 hours/);
-  await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start'}));await capture(page,'urgent-deadline-390');await page.close();report.checks.push({clock:'Production JP shop deadline appears at the exact 48-hour threshold while schedules remain collapsed.'});
+  await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'urgent-deadline-390');await page.close();report.checks.push({clock:'Production JP shop deadline appears at the exact 48-hour threshold while schedules remain collapsed.'});
  }
  // A changed build offers a normal reload and never clears stored selections.
  {
@@ -102,12 +103,15 @@ try{
  // Real source URLs, production records and a disclosed fixed clock. No substitute artwork.
  for(const width of process.argv.includes('--offline')?[]:[360,390,768,1280]){
   const {page,errors}=await pageFor(width,{art:true});await page.goto(origin+'/#/events/angels-azur-stage');await page.locator('#event-schedule-toggle').waitFor();
-  await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start'}));await capture(page,'schedule-collapsed-'+width);
-  await page.locator('#event-schedule-toggle').click();await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start'}));await capture(page,'schedule-expanded-'+width);
+  await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'schedule-collapsed-'+width);
+  await page.locator('#event-schedule-toggle').click();await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'schedule-expanded-'+width);
   await page.getByRole('button',{name:'Obtainable content',exact:true}).click();await capture(page,'reward-thumbnails-'+width);
   const thumbnails=await page.locator('.event-item-art img').evaluateAll(images=>images.filter(i=>{const r=i.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0;}).map(i=>({url:i.currentSrc,loaded:i.complete&&i.naturalWidth>0})));
   report.artwork.push({label:'visible reward thumbnails '+width,images:thumbnails});
   for(const i of thumbnails)if(!i.loaded)report.limitations.push('Reward thumbnail unavailable at '+width+': '+i.url);
+  for(const [id,label] of [['gear-skin-1541','cosmetic-gear'],['both-in-heart-and-mind','outfit-rewards'],['furniture-dibanmyicon','furniture-rewards']]){
+   await page.locator('#event-item-'+id).evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,label+'-'+width);
+  }
   if(width===390||width===1280)for(const id of ['1180001','1180002']){
    await page.goto(origin+'/#/ships/'+id);await page.locator('.ship-art-current').waitFor();
    await artResult(page,'.ship-art-preview-image',id+' default '+width);await capture(page,id+'-default-'+width);

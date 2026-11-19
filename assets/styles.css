@@ -1151,6 +1151,10 @@
 
 /* INTEGRITY: source-matched skin variants and provenance. */
 .ship-art-backgrounds{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.ship-art-backgrounds .filter-chip{appearance:none;border:1px solid #5485a1;border-radius:6px;padding:7px 10px;min-height:34px;background:#173a53;color:#e1f3fa;font-family:inherit;font-size:14px;font-weight:600;line-height:1.3;cursor:pointer}
+.ship-art-backgrounds .filter-chip:hover{border-color:#90d7ee;background:#265c7d}
+.ship-art-backgrounds .filter-chip.active{background:#28759b;border-color:#9de3f9;color:#fff;box-shadow:inset 0 -2px 0 #a1ecfc}
+.ship-art-backgrounds .filter-chip:focus-visible{outline:2px solid #a1ecfc;outline-offset:2px}
 .ship-art-acquisition{font-size:.8rem;line-height:1.55;margin-top:.7rem;color:var(--muted)}
 .ship-art-acquisition a{display:block;margin-top:.35rem}
 
