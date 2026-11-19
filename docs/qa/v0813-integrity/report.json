@@ -1,0 +1,405 @@
+{
+  "observationTime": "2026-11-19T02:00:00Z",
+  "browser": "157.0.8103.78",
+  "checks": [
+    {
+      "width": 360,
+      "result": "Schedule keyboard/focus/region changes, exact skin links, both galleries, background controls, lightbox focus, saved loadouts and overflow passed with upstream unavailable."
+    },
+    {
+      "width": 390,
+      "result": "Schedule keyboard/focus/region changes, exact skin links, both galleries, background controls, lightbox focus, saved loadouts and overflow passed with upstream unavailable."
+    },
+    {
+      "width": 768,
+      "result": "Schedule keyboard/focus/region changes, exact skin links, both galleries, background controls, lightbox focus, saved loadouts and overflow passed with upstream unavailable."
+    },
+    {
+      "width": 1280,
+      "result": "Schedule keyboard/focus/region changes, exact skin links, both galleries, background controls, lightbox focus, saved loadouts and overflow passed with upstream unavailable."
+    },
+    {
+      "clock": "Production JP shop deadline appears at the exact 48-hour threshold while schedules remain collapsed."
+    },
+    {
+      "deployment": "Changed-build notice and user-initiated reload preserve saved loadouts."
+    }
+  ],
+  "artwork": [
+    {
+      "label": "visible reward thumbnails 360",
+      "images": [
+        {
+          "url": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/a/ae/Augment_15960.png",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "label": "visible reward thumbnails 390",
+      "images": [
+        {
+          "url": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/a/ae/Augment_15960.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/8d/Augment_15980.png",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "label": "1180001 default 390",
+      "url": "https://azurlane.netojuu.com/images/f/f0/Liliel_Angel_ParatroopersRirisa.png",
+      "width": 2048,
+      "height": 1723,
+      "loaded": true
+    },
+    {
+      "label": "1180001 alternate 390",
+      "url": "https://azurlane.netojuu.com/images/c/c1/Liliel_Angel_ParatroopersRirisaCasual.png",
+      "width": 2048,
+      "height": 1190,
+      "loaded": true
+    },
+    {
+      "label": "1180001 no background 390",
+      "url": "https://azurlane.netojuu.com/images/d/d6/Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1482,
+      "loaded": true
+    },
+    {
+      "label": "1180001 lightbox 390",
+      "url": "https://azurlane.netojuu.com/images/d/d6/Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1482,
+      "loaded": true
+    },
+    {
+      "label": "1180002 default 390",
+      "url": "https://azurlane.netojuu.com/images/7/7d/Miriella_Angel_ParatroopersMikari.png",
+      "width": 2048,
+      "height": 1793,
+      "loaded": true
+    },
+    {
+      "label": "1180002 alternate 390",
+      "url": "https://azurlane.netojuu.com/images/2/2e/Miriella_Angel_ParatroopersMikariCasual.png",
+      "width": 2048,
+      "height": 1177,
+      "loaded": true
+    },
+    {
+      "label": "1180002 no background 390",
+      "url": "https://azurlane.netojuu.com/images/1/15/Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1287,
+      "loaded": true
+    },
+    {
+      "label": "1180002 lightbox 390",
+      "url": "https://azurlane.netojuu.com/images/1/15/Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1287,
+      "loaded": true
+    },
+    {
+      "label": "visible reward thumbnails 768",
+      "images": [
+        {
+          "url": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/a/ae/Augment_15960.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/8d/Augment_15980.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/8e/EquipSkinIcon_999141.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/80/EquipSkinIcon_999142.png",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "label": "visible reward thumbnails 1280",
+      "images": [
+        {
+          "url": "https://azurlane.netojuu.com/images/1/12/Liliel_Angel_ParatroopersRirisaIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/7/75/Miriella_Angel_ParatroopersMikariIcon.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/a/ae/Augment_15960.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/8d/Augment_15980.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/8e/EquipSkinIcon_999141.png",
+          "loaded": true
+        },
+        {
+          "url": "https://azurlane.netojuu.com/images/8/80/EquipSkinIcon_999142.png",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "label": "1180001 default 1280",
+      "url": "https://azurlane.netojuu.com/images/f/f0/Liliel_Angel_ParatroopersRirisa.png",
+      "width": 2048,
+      "height": 1723,
+      "loaded": true
+    },
+    {
+      "label": "1180001 alternate 1280",
+      "url": "https://azurlane.netojuu.com/images/c/c1/Liliel_Angel_ParatroopersRirisaCasual.png",
+      "width": 2048,
+      "height": 1190,
+      "loaded": true
+    },
+    {
+      "label": "1180001 no background 1280",
+      "url": "https://azurlane.netojuu.com/images/d/d6/Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1482,
+      "loaded": true
+    },
+    {
+      "label": "1180001 lightbox 1280",
+      "url": "https://azurlane.netojuu.com/images/d/d6/Liliel_Angel_ParatroopersRirisaCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1482,
+      "loaded": true
+    },
+    {
+      "label": "1180002 default 1280",
+      "url": "https://azurlane.netojuu.com/images/7/7d/Miriella_Angel_ParatroopersMikari.png",
+      "width": 2048,
+      "height": 1793,
+      "loaded": true
+    },
+    {
+      "label": "1180002 alternate 1280",
+      "url": "https://azurlane.netojuu.com/images/2/2e/Miriella_Angel_ParatroopersMikariCasual.png",
+      "width": 2048,
+      "height": 1177,
+      "loaded": true
+    },
+    {
+      "label": "1180002 no background 1280",
+      "url": "https://azurlane.netojuu.com/images/1/15/Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1287,
+      "loaded": true
+    },
+    {
+      "label": "1180002 lightbox 1280",
+      "url": "https://azurlane.netojuu.com/images/1/15/Miriella_Angel_ParatroopersMikariCasualWithoutBG.png",
+      "width": 2048,
+      "height": 1287,
+      "loaded": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "urgent-deadline-390.png",
+      "sha256": "a75cc2dff28c6030aa81b2ba0aba6a6e35a8dbfa9d9b602465089c46b75f96b7"
+    },
+    {
+      "file": "schedule-collapsed-360.png",
+      "sha256": "201c495eb6e9b2e8474b3eae9757baaf9af5e44929fd7cd652b7949a6e3860a7"
+    },
+    {
+      "file": "schedule-expanded-360.png",
+      "sha256": "c426e6d17648e28c1285c6af80a808cc12a7fd889f0d6a48eed15e948126de53"
+    },
+    {
+      "file": "reward-thumbnails-360.png",
+      "sha256": "97ff976ebd99e9c1e0c846849241132896f6f2552b56dcc2ab37d425f67dc430"
+    },
+    {
+      "file": "cosmetic-gear-360.png",
+      "sha256": "893828c91e88c86463da6980b88c7ab4f436ff3cad5b9ddb18283dd085af9ba9"
+    },
+    {
+      "file": "outfit-rewards-360.png",
+      "sha256": "dc2cacea593cb134f2f730ca953849b727fc02e544517526e1a4ba7b50967ae0"
+    },
+    {
+      "file": "furniture-rewards-360.png",
+      "sha256": "45a6fecd3ecb405656163bb2ca2d1dc91f4a9dbe969a5b300b6e1f319497fc01"
+    },
+    {
+      "file": "schedule-collapsed-390.png",
+      "sha256": "4dda3549dd6aa8fa25dbf3ae57026f5beaf6e0908f72de5438d4197968d8a869"
+    },
+    {
+      "file": "schedule-expanded-390.png",
+      "sha256": "868b7a489296be2599aaac8c733553979b40ba82eb454d156c789d070f21d960"
+    },
+    {
+      "file": "reward-thumbnails-390.png",
+      "sha256": "fedbe052e6f94e1876fcaf0a5314ca59d54d9d38058e354692e6d346562ac6d2"
+    },
+    {
+      "file": "cosmetic-gear-390.png",
+      "sha256": "8c3ff625c1f71bb6951977795a38a75ff31bd48762ce2a1db5012bfa08ad4807"
+    },
+    {
+      "file": "outfit-rewards-390.png",
+      "sha256": "7dbde2954757cebe612175035c63d1d83064f5aab16a805409a1b51074f17f99"
+    },
+    {
+      "file": "furniture-rewards-390.png",
+      "sha256": "746ca290d4d0b42ebaf68c94999b3eb119dfaf513f2e9a6977e01451c86d8062"
+    },
+    {
+      "file": "1180001-default-390.png",
+      "sha256": "1d53cf759ac578088a21b2cc31b69d5d153b1244ae37e4a7d5491d63db7fb8fa"
+    },
+    {
+      "file": "1180001-alternate-390.png",
+      "sha256": "806d45b618cab42d07b9d5f1407979bec53dabd9efcd1e02d0ac94c5b9f291d7"
+    },
+    {
+      "file": "1180001-no-background-390.png",
+      "sha256": "036dc8a997e657dcbe965332dcd6b09aef6c01af2191383f90bcf7d8818721f3"
+    },
+    {
+      "file": "1180001-lightbox-390.png",
+      "sha256": "7faaeb9538175d9ed2fd85d4f600a2d43d12c0d4c9dd42a38b5d71a581054548"
+    },
+    {
+      "file": "1180002-default-390.png",
+      "sha256": "25b1575dac30186acbe699209a1017d4336c78a769b027f9b95ba7ab027f187b"
+    },
+    {
+      "file": "1180002-alternate-390.png",
+      "sha256": "5775863119ad3b9433b19b3e2b1ebf4f95c58cf90cd8e883fec037133dced9b2"
+    },
+    {
+      "file": "1180002-no-background-390.png",
+      "sha256": "2ca6393ad3a1f21e37d56faa08088d44d5e7fdf4fc3164ce5fafd6e0fa723add"
+    },
+    {
+      "file": "1180002-lightbox-390.png",
+      "sha256": "09be28e0fcf0536f4153f630dfa7ac409880838d74241168a2338b6a567dcdc7"
+    },
+    {
+      "file": "schedule-collapsed-768.png",
+      "sha256": "7b75cc3ada48ce25b4b4edcfed99572509ef04fe0c1a940a688df08e0959bb18"
+    },
+    {
+      "file": "schedule-expanded-768.png",
+      "sha256": "90d7d8f5325b608564d51583658ffb08d85f014fd7807e080e9d6743e37d7908"
+    },
+    {
+      "file": "reward-thumbnails-768.png",
+      "sha256": "ed2f48b9642ec39b161990db58edb3e0fbc84309c90992264a2f8d9c3ffd1559"
+    },
+    {
+      "file": "cosmetic-gear-768.png",
+      "sha256": "f3eea32fdbeefb4af1424cb21f34c9a9fb8d4aa7092d63d04e1509cd916008b7"
+    },
+    {
+      "file": "outfit-rewards-768.png",
+      "sha256": "ff53df37a494bba651da83d8de61fc98095939155d2720609e841330743798a8"
+    },
+    {
+      "file": "furniture-rewards-768.png",
+      "sha256": "18223c8ed8471c10ddd5b59347e35accbf761d585f3b26b085fc8ac866e4ae78"
+    },
+    {
+      "file": "schedule-collapsed-1280.png",
+      "sha256": "87fe039295310b3437de12491cdd6ff4d96be6e62ed274f1af6a91a85c5889c7"
+    },
+    {
+      "file": "schedule-expanded-1280.png",
+      "sha256": "c9fb699080766c5a978a2aa4f0feb4fe92cc7a05f3278c1870deed6690ac1997"
+    },
+    {
+      "file": "reward-thumbnails-1280.png",
+      "sha256": "b1df7187ae253e00cd07d44bc5b313ab1ccea5ea145ae33bdc9680a2e9b15586"
+    },
+    {
+      "file": "cosmetic-gear-1280.png",
+      "sha256": "0cb0fbc234234268c9aa0a83cfdd29bdf04ddc1c6af5f50b199d133b201417d0"
+    },
+    {
+      "file": "outfit-rewards-1280.png",
+      "sha256": "158a3b1e99e6d1c7e236f090bfc5acd15298243291e18be01df69722c4453128"
+    },
+    {
+      "file": "furniture-rewards-1280.png",
+      "sha256": "f81e08a3a6d943baf1579207719405cd649c659e9901263d7030590e674526c2"
+    },
+    {
+      "file": "1180001-default-1280.png",
+      "sha256": "c326b9361c6412f3d729090e5db8891d1ada95ec50f74ab489731867eaf2b543"
+    },
+    {
+      "file": "1180001-alternate-1280.png",
+      "sha256": "d99ad0dc829e1db5e1db7006292da9265838b6813a8d4983accd962c09c67a45"
+    },
+    {
+      "file": "1180001-no-background-1280.png",
+      "sha256": "d22c1b848dd2df366fc1236a5d0ad44732436bb4609eac47fd22486231edc35d"
+    },
+    {
+      "file": "1180001-lightbox-1280.png",
+      "sha256": "ba43cf753218e7e9d9c11ace210f7a1416ccaab6dbb56bca128fbd684b84a198"
+    },
+    {
+      "file": "1180002-default-1280.png",
+      "sha256": "9b7c25e323ea03bd12bfa5cfe9c4808c79a97db130e2f2b41c3d071652d36f5b"
+    },
+    {
+      "file": "1180002-alternate-1280.png",
+      "sha256": "ca69052754b49f9d78ddfd88824215b8f7ab07a8faa05a81872822bbfc74cab5"
+    },
+    {
+      "file": "1180002-no-background-1280.png",
+      "sha256": "db6c29c0a6658f3606761062681104e69aa25128fe2a0b6ac03b807f0b59f9b5"
+    },
+    {
+      "file": "1180002-lightbox-1280.png",
+      "sha256": "9a54d9524ea3dce6eced53a54b7f04500980469998fc9de5153b0d51c928a08c"
+    }
+  ],
+  "limitations": []
+}
