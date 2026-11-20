@@ -2,9 +2,9 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
-## [0.8.13] - 2026-11-18
+## [0.8.13] - 2026-11-20
 
-Unreleased; independent QA and Commander merge authorization required.
+Released on 2026-11-20; this date records finalization of v0.8.13 on PR #36. Public rollout requires separate Commander approval after independent QA of the finalized commit. [Preparation authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).
 
 ### Operation INTEGRITY: Corrective polish
 

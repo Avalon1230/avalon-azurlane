@@ -6,7 +6,7 @@ Azur Lane has too many ships, skills and equipment choices for a single tier num
 
 **[Open AVALON](https://avalon1230.github.io/avalon-azurlane/)** · [See what's new](CHANGELOG.md) · [Follow development](docs/PROJECT_STATUS.md)
 
-**Release status:** The live release is v0.8.12 (66 event identities / 221 occurrences), released through PR #35. v0.8.13 Operation INTEGRITY is unreleased and awaits independent QA and Commander authorization.
+**Release status:** Once this build is published, the live release is v0.8.13. Its metadata was released on 2026-11-20 (Asia/Manila) for independent QA. At preparation, Pages was on v0.8.12. [Commander authorization for preparation](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).
 
 ## Explore AVALON
 

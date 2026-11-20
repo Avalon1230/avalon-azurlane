@@ -2,7 +2,16 @@
 
 _Last updated: 2026-11-20 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active development — v0.8.13 Operation INTEGRITY (unreleased)
+## Current release — v0.8.13 Operation INTEGRITY (finalized on PR #36)
+
+Released on 2026-11-20; this is the branch metadata finalization date in Asia/Manila. The Commander authorized preparation on PR #36 only. Independent QA accepted the implementation at `8e002c98f38be7b561f5d33b895a691ca86f56dc`. [QA review](https://github.com/Avalon1230/avalon-azurlane/pull/36#pullrequestreview-5987723021) · [Commander authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).
+
+- **Delivered:** Operation INTEGRITY: Corrective polish. See the current [changelog](../CHANGELOG.md).
+- **Verification and release decision.** The released branch must render exactly `v0.8.13`. Independent QA reviews the finalized commit and its full [PR checks](https://github.com/Avalon1230/avalon-azurlane/pull/36/checks). At preparation, released main was v0.8.12 at `9d2ab620b875284f8732886fb9ee15634fab2c6e`. Merge and Pages publication require separate Commander authorization. Record the actual merge, Pages run and served fingerprint after deployment.
+- **Next release.** Start v0.8.14 Operation BLACK FRIDAY from the actual released main after independent verification, authorized merge and deployment of v0.8.13. [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37).
+- **History and limitations:** The preceding development record below retains source evidence, verification results and remaining coverage gaps.
+
+## Historical development — v0.8.13 Operation INTEGRITY (unreleased)
 
 - **Base:** Verified main `9d2ab620b875284f8732886fb9ee15634fab2c6e`; PR #35 is merged. Baseline [CI 44134577828](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44134577828) passed. Work continues on `feat/operation-integrity-v0813`.
 - **Scope:** Stable-ID artwork union, Ririsa/Mikari verified skins and background variants; compact event schedules; sourced reward thumbnails and selected acquisition records; release consistency and deployment diagnostics. Preserve architecture and storage contracts.
@@ -13,7 +22,7 @@ _Last updated: 2026-11-20 (Asia/Manila). This is the permanent cross-conversatio
 - **Correction verification and next step:** Local verification passed 371 Node tests, the complete syntax/generated-data/release check, and the temporary-copy browser release rehearsal, including served-file hashes and the actual footer. Negative regressions cover the exact QA reproduction, stale versions/dates/documents, generated BUILD drift and served-build mismatch. Existing artwork/Events/accessibility functionality is unchanged. The existing PR runs the complete quality pipeline and publishes a release-state rehearsal report; consult its latest exact head and CI for re-review. Follow [RELEASING.md](RELEASING.md) only after Commander authorization. Pages auto-publishes main, so finalization and passing exact-head CI must precede any authorized merge; the main-only diagnostic does not itself gate branch-source Pages.
 - **Backlog:** Pass 2 encyclopedia completion (historical originals/reruns, War Archives art, stages/bosses/rewards/drops, regional acquisition, galleries); Pass 3 The Bridge / Game Overview CIC (ATAK-inspired intelligence, current/upcoming countdowns, urgent deadlines, official announcements, contextual updates, desktop sidebar/mobile navigation); Pass 4 tactical intelligence (verified Fleet Lab candidates, ship/equipment synergy, damage windows, timing synchronization, scenario evaluation, contextual tiers and concrete loadout reasons). These major features are not part of v0.8.13.
 
-## Current release — v0.8.12 Operation CHRONICLE (2026-11-18, Commander-approved)
+## Previous release — v0.8.12 Operation CHRONICLE (2026-11-18, Commander-approved)
 
 - **Release and provenance:** Commander AVALON explicitly approved PR #35 after [independent QA review #5942876480](https://github.com/Avalon1230/avalon-azurlane/pull/35#pullrequestreview-5942876480). [PR #35](https://github.com/Avalon1230/avalon-azurlane/pull/35) at exact QA-reviewed head `69608cb63f9eac26e7e9fb21766f845c940f3593` was squash-merged into `main` as **`b90351f306854238cf813035fe681d2454725a47`**. The subsequent handoff update is documentation-only. The previous PR #35 draft state described below is **historical**, not outstanding work.
 - **Delivered scope:** Source-backed event and War Archives expansion to **66 canonical identities / 221 regional occurrences**. EN **66 identities, 82 occurrences, 53 permanent War Archives**; JP **56 identities, 70 occurrences, 51 permanent and one announced TBA addition**; CN **56 identities, 69 occurrences, 51 permanent**. Past Events are not conflated with permanent content; historical originals/reruns and limited rewards remain associated with their occurrence. Current version remains a **partial historical catalog**, not the complete Azur Lane event history.

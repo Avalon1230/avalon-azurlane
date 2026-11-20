@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "version": "0.8.13",
-  "status": "unreleased",
-  "fingerprint": "8e9f60bae765b4647f9e347764fc456f659b7a10ffc806112c4d89cb9503068f",
+  "status": "released",
+  "fingerprint": "1039a639795b4efa3f0b747df752d382d1282e992fa421cf2e501b396bbaab98",
   "files": {
-    "CHANGELOG.md": "eed80df790cd7f44ec3cc9e1225e8653e2d7a79302327e215015a9a2770da44a",
+    "CHANGELOG.md": "f5c4e99dc7bddff60f0ac1393bfb9e785cdf5bb3e23873858258485854d7a47b",
     "assets/events.css": "260507098aac57ece6b64888d256a8ac39a93e10d4ed90996c14465d8057cfee",
     "assets/styles.css": "5cc95d6e23567b38a0b5fbdd5b830ba34d686557ceac8522692b29d7d112b1d1",
     "data/combat-source.json": "1129b8560d6e9f34f1631859eaff089dc028b353cd73d49ef00b65b865e6fe5d",
@@ -12,7 +12,7 @@
     "data/events/catalog.json": "b4ae82fe48aaa5d8d8fdd6487d440053e5b3f84ec069ed85beb8f94fa966f405",
     "data/events/integrity-evidence.json": "79f18137e4e2b2f00024c4d3d11603491f5a934d1f5d933c84beca0e21c34df9",
     "data/live-content/november-2026.json": "a068703cb74c9d38272ceb3fd5cd6b8fe8ff054f1d14aae4b12b73b489b50d24",
-    "data/release-status.json": "47cd69e3b0dc201d146fff2bb3abbae6d521dcf272f28930325f3fd8ef38e8da",
+    "data/release-status.json": "aafe36c674e9155d0e3478112a99b753d52ffd52ad6e30987e0d169640501d0d",
     "data/ship-artwork.json": "dde1df0b7993f0019f2fd2fe9e91c44cdd286d658def77447b3f6bb697cc33b1",
     "index.html": "0a03b9f4f5de12fd6d340f45cee3f598fceac88c59d6395c70d937d000458bcb",
     "src/app.js": "08f01fd04f6ae869e4079a971a82cf812d0381144efd07f5bd691b666f20df40",
