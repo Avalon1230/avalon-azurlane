@@ -12,6 +12,7 @@ Unreleased; independent QA and Commander merge authorization required.
 - Keep EN/JP/CN countdowns visible while detailed schedules and mission milestones start collapsed. Confirmed deadlines within 48 hours remain visible.
 - Add authenticated reward thumbnails, the Manga Club furniture inventory and EN Virtual Tower permanent construction routes. Preserve historical/permanent reward and regional boundaries.
 - Align release documentation and add automated release/build consistency checks, safe reload notices and deployment digest verification. Browser storage remains unchanged.
+- Close the released-state validation gap: reject stale release documents and generated metadata, provide explicit release finalization, and rehearse both Preview and released labels on an isolated copy before an authorized merge.
 
 **Still incomplete:** Historical event coverage, most archive rewards/stages/artwork and regional acquisition refreshes. Virtual Tower map-drop references conflict and are withheld. The Bridge and tactical intelligence remain separate releases.
 

@@ -65,6 +65,8 @@ Event architecture, the coverage ledger, source IDs, and update procedure are do
 
 ## Notes, sources and development
 
+Release preparation follows the [Commander-authorized release sequence](docs/RELEASING.md). Finalize and validate the existing branch before any authorized merge; Pages publishes `main` automatically.
+
 Want to see what changed, how a calculation works or where the artwork comes from? The details live here rather than crowding the front page.
 
 | Looking for… | Read this |

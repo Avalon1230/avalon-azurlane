@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "version": "0.8.13",
   "status": "unreleased",
-  "fingerprint": "291431f50f10b9dec9ea77da4fd6d87a8930b315c0cd066615e8be868f56cb5d",
+  "fingerprint": "8e9f60bae765b4647f9e347764fc456f659b7a10ffc806112c4d89cb9503068f",
   "files": {
-    "CHANGELOG.md": "5dcb8e1f80fa98a13c29521a925f6250652b0c6a037176e9fc67169745e9bfa1",
+    "CHANGELOG.md": "eed80df790cd7f44ec3cc9e1225e8653e2d7a79302327e215015a9a2770da44a",
     "assets/events.css": "260507098aac57ece6b64888d256a8ac39a93e10d4ed90996c14465d8057cfee",
     "assets/styles.css": "5cc95d6e23567b38a0b5fbdd5b830ba34d686557ceac8522692b29d7d112b1d1",
     "data/combat-source.json": "1129b8560d6e9f34f1631859eaff089dc028b353cd73d49ef00b65b865e6fe5d",
