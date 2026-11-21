@@ -1,14 +1,15 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-20 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-21 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Current release — v0.8.13 Operation INTEGRITY (finalized on PR #36)
+## Current release — v0.8.13 Operation INTEGRITY (Commander-approved, deployed 2026-11-21)
 
 Released on 2026-11-20; this is the branch metadata finalization date in Asia/Manila. The Commander authorized preparation on PR #36 only. Independent QA accepted the implementation at `8e002c98f38be7b561f5d33b895a691ca86f56dc`. [QA review](https://github.com/Avalon1230/avalon-azurlane/pull/36#pullrequestreview-5987723021) · [Commander authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).
 
 - **Delivered:** Operation INTEGRITY: Corrective polish. See the current [changelog](../CHANGELOG.md).
-- **Verification and release decision.** The released branch must render exactly `v0.8.13`. Independent QA reviews the finalized commit and its full [PR checks](https://github.com/Avalon1230/avalon-azurlane/pull/36/checks). At preparation, released main was v0.8.12 at `9d2ab620b875284f8732886fb9ee15634fab2c6e`. Merge and Pages publication require separate Commander authorization. Record the actual merge, Pages run and served fingerprint after deployment.
-- **Next release.** Start v0.8.14 Operation BLACK FRIDAY from the actual released main after independent verification, authorized merge and deployment of v0.8.13. [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37).
+- **Commander-authorized release:** After final independent QA [review #5997735028](https://github.com/Avalon1230/avalon-azurlane/pull/36#pullrequestreview-5997735028), the Commander explicitly approved merging/deployment of finalized head `c316669c0ea465a72da3789507b9b5ee4a36231a`. [PR #36](https://github.com/Avalon1230/avalon-azurlane/pull/36) was squash-merged on 2026-11-21 (Asia/Manila) as **`bdcb34a531b832ac814647c8076ac62f9e48b766`**, replacing v0.8.12 main `9d2ab620b875284f8732886fb9ee15634fab2c6e`.
+- **Post-merge verification:** [Quality checks 44845705794](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44845705794) passed both jobs on merge SHA `bdcb34a5` (371/371 Node tests, release validation, full browser regressions). [Pages deployment 44845704114](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44845704114) reported success for the same SHA. Independently checked the actual Pages deployment artifact: all **73/73** manifest-listed files matched SHA-256, with **zero missing/mismatched files** and release fingerprint **`1039a639795b4efa3f0b747df752d382d1282e992fa421cf2e501b396bbaab98`**; version and status were `0.8.13 / released`, with no Preview flag. The public browser site could not be directly fetched from the QA environment, so live HTTP/cache behavior is **not independently certified**; do not equate artifact integrity with a live browser check. Six remote collaboration logos remain host-throttled (HTTP 429), unverified and nonblocking.
+- **Next release:** v0.8.14 Operation BLACK FRIDAY is tracked in [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37). Work should branch from the actual v0.8.13 released main after checking its latest commit; independent QA reviews, and the Commander alone authorizes the next merge. Preserve all v0.8.13 features and storage state.
 - **History and limitations:** The preceding development record below retains source evidence, verification results and remaining coverage gaps.
 
 ## Historical development — v0.8.13 Operation INTEGRITY (unreleased)
