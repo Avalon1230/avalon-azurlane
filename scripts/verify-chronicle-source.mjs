@@ -25,6 +25,7 @@ for(const [id,ship] of Object.entries(data.ships)){
  }
  for(const skill of ship.detail.skills)assert.equal(record('skill_data_template',skill.id).name,skill.names.en);
  assert.equal(ship.wiki.sourceId,id);
+ for(const skin of ship.artwork){const raw=record('ship_skin_template',skin.id);assert.equal(String(raw.ship_group),id);if(raw.group_index!==0)assert.equal(raw.name,skin.name);}
 }
 for(const [id,augment] of Object.entries(data.augments)){
  const base=record('spweapon_data_statistics',id),max=record('spweapon_data_statistics',Number(id)+10);
@@ -32,4 +33,4 @@ for(const [id,augment] of Object.entries(data.augments)){
  for(let i=0;i<2;i++){assert.equal(base['value_'+(i+1)],augment.stats[i].base);assert.equal(max['value_'+(i+1)],augment.stats[i].max);}
  assert.deepEqual(max.skill_upgrade[0],augment.skillUpgrade);
 }
-console.log('PASS CHRONICLE: '+catalog.events.length+' validated event identities, '+catalog.events.flatMap(e=>e.occurrences).length+' regional occurrences, four SHA256/blob-pinned client files, two ship identities/slots/skill IDs and two exclusive augments. Backfill dates are checked separately against the revision-attributed ledger; wiki-derived stats and prose require independent source review.');
+console.log('PASS CHRONICLE: '+catalog.events.length+' validated event identities, '+catalog.events.flatMap(e=>e.occurrences).length+' regional occurrences, '+data.clientSources.length+' SHA256/blob-pinned client files, two ship identities/slots/skill IDs and two exclusive augments. Backfill dates are checked separately against the revision-attributed ledger; wiki-derived stats and prose require independent source review.');

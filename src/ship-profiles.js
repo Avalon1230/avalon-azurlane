@@ -52,18 +52,20 @@ export function trustedReconstructedPainting(url) {
   return typeof url==='string' &&
     /^https:\/\/raw\.githubusercontent\.com\/Fernando2603\/AzurLane\/main\/images\/skin\/\d{5,10}\/painting(?:_n)?\.png$/.test(url) ? url : null;
 }
-export function resolveSkinArtwork(skin) {
+export function resolveSkinArtwork(skin,variant='default') {
   const wiki=trustedWikiImage(skin?.images?.wiki);
   const reconstructed=trustedReconstructedPainting(skin?.images?.painting);
   const noBg=trustedReconstructedPainting(skin?.images?.paintingNoBackground);
-  const primary=wiki||reconstructed||noBg;
+  const wikiNoBg=trustedWikiImage(skin?.images?.wikiNoBackground);
+  if(variant==='without-background'&&(wikiNoBg||noBg))return {primary:wikiNoBg||noBg,fallback:wikiNoBg&&noBg?noBg:null,secondFallback:null};
+  const primary=wiki||reconstructed||wikiNoBg||noBg;
   const fallback=wiki?(reconstructed||noBg):(reconstructed&&noBg?noBg:null);
   const secondFallback=wiki&&reconstructed&&noBg?noBg:null;
   return {primary:primary||null,fallback:fallback||null,secondFallback:secondFallback||null};
 }
 
-function artImage(skin, className, shipName, lazy = true) {
-  const {primary,fallback,secondFallback} = resolveSkinArtwork(skin);
+function artImage(skin, className, shipName, lazy = true,variant='default') {
+  const {primary,fallback,secondFallback} = resolveSkinArtwork(skin,variant);
   if (!primary) return '';
   return '<img class="' + E(className) + '" src="' + E(primary) + '"' +
     (fallback ? ' data-fallback-src="' + E(fallback) + '"' : '') +
@@ -72,16 +74,29 @@ function artImage(skin, className, shipName, lazy = true) {
     '" ' + (lazy ? 'loading="lazy" ' : '') +
     'decoding="async" referrerpolicy="no-referrer">';
 }
-function artworkPanel(data, skinIndex, artworkSkins=[]) {
+function artworkVariantControls(skin,variant) {
+  if(!(trustedWikiImage(skin?.images?.wikiNoBackground)||trustedReconstructedPainting(skin?.images?.paintingNoBackground))||
+     !(trustedWikiImage(skin?.images?.wiki)||trustedReconstructedPainting(skin?.images?.painting)))return '';
+  return '<div class="ship-art-backgrounds" role="group" aria-label="Artwork background">'+
+    [['default','With background'],['without-background','Without background']].map(([value,label])=>
+      '<button type="button" class="filter-chip'+(variant===value?' active':'')+'" data-action="profile-art-variant" data-variant="'+value+'" aria-pressed="'+(variant===value)+'">'+label+'</button>').join('')+'</div>';
+}
+function artworkAcquisition(skin,data) {
+  if(!skin?.acquisition&&!skin?.sourceUrl)return '';
+  return '<div class="ship-art-acquisition">'+(skin.acquisition?'<p>'+E(skin.acquisition)+'</p>':'')+
+    (data.eventId&&skin.acquisition?'<a class="text-link" href="#/events/'+E(data.eventId)+'">Regional availability & deadlines →</a>':'')+
+    (trustedWikiUrl(skin.sourceUrl)?'<a class="text-link" href="'+E(skin.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Artwork source ↗</a>':'')+'</div>';
+}
+function artworkPanel(data, skinIndex, artworkSkins=[],variant='default') {
   const skins=artworkSkins;
   const index=Math.max(0,Math.min(Math.max(0,skins.length-1),skinIndex));
   const current=skins[index];
   const name=data.names?.en || 'Ship';
-  const image=artImage(current,'ship-art-preview-image',name);
+  const image=artImage(current,'ship-art-preview-image',name,true,variant);
   return '<section class="ship-art-panel" aria-labelledby="ship-artwork-heading">' +
     '<div class="ship-art-panel-head"><div><span class="eyebrow">OFFICIAL ARTWORK</span>' +
     '<h2 id="ship-artwork-heading">Artwork</h2></div>' +
-    '<span class="ship-art-current">' + E(current?.name || 'No artwork available') + '</span></div>' +
+    '<span class="ship-art-current">' + E(current?.name || 'No artwork available') + '</span></div>' + artworkVariantControls(current,variant) +
     '<button type="button" class="ship-art-preview" data-action="profile-art-open" ' +
     (image ? 'aria-label="Enlarge ' + E(current?.name || name) + ' artwork"' : 'disabled') + '>' +
     image +
@@ -91,15 +106,15 @@ function artworkPanel(data, skinIndex, artworkSkins=[]) {
     (skins.length > 1 ? '<div class="ship-art-variants" role="group" aria-label="Choose character artwork">' +
       skins.map((skin,i) => '<button type="button" class="ship-art-variant' +
         (i===index?' active':'') + '" data-action="profile-skin" data-index="' + i +
-        '" aria-pressed="' + (i===index) + '">' + E(skin.name || 'Skin '+(i+1)) +
+        '" data-skin-id="' + E(skin.id) + '" aria-pressed="' + (i===index) + '">' + E(skin.name || 'Skin '+(i+1)) +
         '</button>').join('') + '</div>' : '') +
-    '</section>';
+    artworkAcquisition(current,data) + '</section>';
 }
-function artworkViewer(data, skinIndex, artworkSkins=[]) {
+function artworkViewer(data, skinIndex, artworkSkins=[],variant='default') {
   const skins=artworkSkins;
   const current=skins[Math.max(0,Math.min(skins.length-1,skinIndex))];
   const name=data.names?.en || 'Ship';
-  const image=artImage(current,'ship-art-viewer-image',name,false);
+  const image=artImage(current,'ship-art-viewer-image',name,false,variant);
   return '<div class="ship-art-overlay" data-action="profile-art-close">' +
     '<section id="ship-art-lightbox" class="ship-art-lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer">' +
     '<header class="ship-art-viewer-head"><div><span class="eyebrow">ARTWORK VIEWER</span>' +
@@ -117,7 +132,7 @@ function rarityBadge(rarity) {
     'Elite':'elite','Rare':'rare','Normal':'normal'}[rarity]||'unknown';
   return '<span class="ship-profile-rarity rarity-'+kind+'">'+E(rarity||'Unclassified')+'</span>';
 }
-function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=null) {
+function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=null,artVariant='default') {
   const fallbackName = data?.names?.en || ship?.name || 'Unknown ship';
   const identity = ship ? shipBrowseDisplayNation(ship) : data?.nationality || 'Unclassified';
   const metadata = [identity,data?.class,data?.hullType].filter(Boolean);
@@ -136,7 +151,7 @@ function profileHead(ship, data, skinIndex, artworkSkins=[], wiki=null, loadout=
     '<div class="ship-profile-identity"><span class="eyebrow">SHIP RECORD</span><h1>' + E(fallbackName).replaceAll('/', '/<wbr>') + '</h1>' +
     '<p>' + E(metadata.join(' · ')) + '</p>' + rarityBadge(data?.rarity||ship?.rarity) +
     (data?.stars?.stars ? '<div class="ship-profile-stars" aria-label="' + E(data.stars.value) + ' stars">' + E(data.stars.stars) + '</div>' : '') +
-    (researchShip(ship||data)?'<p class="research-identity">'+researchShip(ship||data).classification+' · Research Series '+researchShip(ship||data).series+'</p>':'')+facts + '</div></section>' + (loadout?renderLoadoutPanel(loadout):'') + '</div>' + artworkPanel(data,skinIndex,artworkSkins) + '</div>';
+    (researchShip(ship||data)?'<p class="research-identity">'+researchShip(ship||data).classification+' · Research Series '+researchShip(ship||data).series+'</p>':'')+facts + '</div></section>' + (loadout?renderLoadoutPanel(loadout):'') + '</div>' + artworkPanel(data,skinIndex,artworkSkins,artVariant) + '</div>';
 }
 
 function statPanel(data, level, wiki=null) {
@@ -274,7 +289,7 @@ function sourcePanel(data, ship, wiki=null) {
     (sourceId?'<small>Ship ID '+E(sourceId)+'</small>':''));
 }
 
-export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, researchState={}, researchView={}, error='' } = {}) {
+export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, artVariant='default', viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, researchState={}, researchView={}, error='' } = {}) {
   const name = data?.names?.en || ship?.name || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
@@ -296,7 +311,7 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
   const actions='<div class="ship-profile-toolbar" role="group" aria-label="Ship profile actions">' + back +
     (ship ? '<button type="button" class="primary-btn compact" data-action="add-ship" data-ship="' + E(ship.id) + '">+ Assign to fleet</button>' : '') +
     '</div>';
-  return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki,loadoutModel)+
+  return '<div class="ship-profile-page">'+actions+profileHead(ship,data,skinIndex,artworkSkins,wiki,loadoutModel,artVariant)+
     '<nav class="ship-profile-nav" aria-label="Ship information sections">' +
     [...(loadoutModel?[['Loadout','#ship-profile-loadout']]:[]),
       [research?'Research & Statistics':'Statistics','#ship-profile-stats'],['Gear','#ship-profile-gear'],['Skills','#ship-profile-skills'],...(progression?[['Progression','#ship-profile-progress']]:[]),['Acquisition','#ship-profile-acquire']]
@@ -305,6 +320,6 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
     (researchModel?renderResearchStats(researchModel,level,ship||data,researchState,researchView):statPanel(data,level,wiki))+
     '</div><div class="ship-profile-side">'+
     acquisitionPanel(data,wiki)+progression+sourcePanel(data,ship,wiki)+
-    '</div></div><div class="ship-profile-details">'+(researchModel?renderResearchGear(researchModel)+renderResearchSkills(researchModel):gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki))+'</div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins):'')+'</div>';
+    '</div></div><div class="ship-profile-details">'+(researchModel?renderResearchGear(researchModel)+renderResearchSkills(researchModel):gearPanel(data,wiki,loadoutModel)+skillsPanel(data,wiki))+'</div>'+(viewerOpen?artworkViewer(data,skinIndex,artworkSkins,artVariant):'')+'</div>';
 }
 

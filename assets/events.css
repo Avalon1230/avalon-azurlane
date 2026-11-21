@@ -41,3 +41,22 @@
 .event-controls[hidden]{display:none}
 .event-filter-shell .event-controls{border:0;border-top:1px solid var(--stroke);border-radius:0}
 @media(max-width:650px){.event-filter-toggle{flex-wrap:wrap;gap:7px}.event-filter-toggle small{flex-basis:100%;order:3;text-align:left}}
+
+/* INTEGRITY: compact, keyboard-accessible schedules. */
+#event-schedule-details[hidden]{display:none}
+#event-schedule-toggle{width:100%;margin-top:1rem;border:1px solid var(--stroke);border-radius:.5rem}
+#event-schedule-details{padding-top:1rem}
+.event-schedules-compact article{display:grid;grid-template-columns:minmax(70px,.7fr) minmax(0,1.3fr);grid-template-areas:"region timer" "status timer" "date date";gap:7px 12px;padding:14px}
+.event-schedules-compact h3{grid-area:region;margin:0;font-size:16px}
+.event-schedules-compact .event-status{grid-area:status;justify-self:start;align-self:start;margin:0}
+.event-schedules-compact .event-timer,.event-schedules-compact .event-date-note:not(:last-child){grid-area:timer;margin:0;padding:5px 0 5px 10px;min-width:0}
+.event-schedules-compact .event-timer strong{font-size:15px;overflow-wrap:anywhere}
+.event-schedules-compact .event-date-note:last-child,.event-schedules-compact article>p:last-child{grid-area:date;margin:0;font-size:14px;line-height:1.45}
+.event-urgent{border-left:3px solid #efc77e;padding:.7rem 1rem;margin-top:1rem;background:#192936}
+.event-urgent ul{margin:.4rem 0 0;padding-left:1.1rem}
+
+.event-content-item:has(.event-item-art){display:flow-root}
+.event-item-art{position:relative;float:left;display:grid;place-items:center;width:64px;height:64px;flex-shrink:0;border:1px solid var(--stroke);border-radius:7px;background:#142839;margin:0 12px 8px 0;overflow:hidden;color:#819cb5}
+.event-item-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.event-content-item .event-item-source{display:block;clear:both}
+@media(min-width:900px){.event-item-art{width:72px;height:72px}}

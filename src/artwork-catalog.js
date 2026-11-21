@@ -23,7 +23,7 @@ export function artworkSkinsForShip(catalog,sourceId) {
     if(!Array.isArray(entry)||entry.length<3)return [];
     const [id,name,hasNoBackground]=entry;
     if(!Number.isSafeInteger(id)||id<10000||id>9999999999||typeof name!=='string'||!name.trim())return [];
-    return [{id:String(id),name:name.trim(),source:'reconstructed',
+    return [{id:String(id),shipId:key,name:name.trim(),source:'reconstructed',
       images:{
         painting:RECONSTRUCTED_ART_ROOT+id+'/painting.png',
         paintingNoBackground:hasNoBackground===1?RECONSTRUCTED_ART_ROOT+id+'/painting_n.png':null
