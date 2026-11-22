@@ -101,6 +101,7 @@ try{
    await page.goto(origin+'/#/events/'+id);await page.locator('.event-detail-tools').waitFor();
    if(id.includes('coupon')){
     assert.match(await page.locator('#event-schedule').innerText(),/14:59:59/);
+    await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
     await capture(page,'black-friday-coupon-'+width);
    }else{
     await page.getByRole('button',{name:'Obtainable content',exact:true}).click();

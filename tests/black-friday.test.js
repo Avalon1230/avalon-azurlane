@@ -33,6 +33,7 @@ test('EN deadlines classify at the published second and render across Manila mid
 });
 test('eligibility, free and paid rewards, daily missions, and rental vouchers stay distinct',()=>{
   assert.match(get(activities[0]).description,/before June 1, 2026.*Collaboration/);
+  assert.match(detail(activities[1]),/Event artwork unavailable/);
   assert.match(get(activities[1]).description,/300 Gems.*one eligible.*with Gems/);
   const cruise=get(activities[2]);assert.match(cruise.content[0].description,/Coupon and blueprints/);assert.match(cruise.content[1].description,/Wisdom Cubes/);
   const stash=get(activities[3]);assert.equal(stash.occurrences[0].phases[0].at.kind,'date');assert.match(stash.content[0].description,/in-game/);assert.doesNotMatch(stash.content[0].description,/880/);

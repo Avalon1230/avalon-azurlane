@@ -9513,7 +9513,7 @@
         "Black Friday 2026"
       ],
       "category": "recurring",
-      "description": "Each coupon takes 300 Gems off one eligible Black Friday rerun outfit bought with Gems. The publisher gives the coupon its own expiry, down to the second.",
+      "description": "Each coupon takes 300 Gems off one eligible Black Friday rerun outfit bought with Gems. The coupon expires December 9 at 23:59:59 EN server time (UTC−7).",
       "verifiedAt": "2026-11-22T05:09:43.035Z",
       "sourceIds": [
         "en-black-friday-notice"

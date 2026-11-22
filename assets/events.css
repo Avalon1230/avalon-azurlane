@@ -60,3 +60,5 @@
 .event-item-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .event-content-item .event-item-source{display:block;clear:both}
 @media(min-width:900px){.event-item-art{width:72px;height:72px}}
+
+.event-art-unavailable{position:absolute;inset:0;display:grid;place-items:center;color:#b1c6d9;font-size:13px}
