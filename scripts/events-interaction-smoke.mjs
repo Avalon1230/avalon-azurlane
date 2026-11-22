@@ -149,6 +149,6 @@ try{
   await page.goto(url+'/#/events');await openFilters(page);await page.getByLabel('Server region').selectOption('CN');await page.getByLabel('Search events & rewards').fill('Visitors Dyed in Red');await page.getByLabel('Year',{exact:true}).selectOption('2018');await page.getByLabel('Status',{exact:true}).selectOption('permanent');await closeFilters(page);await page.evaluate(()=>scrollTo(0,0));await capture(page,'server-summary-'+width);await overflow(page);
   await page.goto(url+'/#/events/divergent-chessboard');await page.getByRole('button',{name:'History',exact:true}).click();await capture(page,'history-'+width);assert.deepEqual(errors,[]);await page.close();
  }
- writeFileSync(out+'/report.json',JSON.stringify({observationTime:'2026-11-17T14:36:00Z',catalog:'production, partial (66 identities / 221 occurrences)',externalData:'unavailable by design; art requested from real source URLs',results:report},null,2));
+ writeFileSync(out+'/report.json',JSON.stringify({observationTime:'2026-11-17T14:36:00Z',catalog:'production, partial (75 identities / 231 occurrences)',externalData:'unavailable by design; art requested from real source URLs',results:report},null,2));
  console.log('PASS CHRONICLE: four responsive interaction sessions; catalog retry; controlled launch/unlock/end transitions; three real-art screenshot sessions (39 captures).');
 }finally{await browser.close();server.close();}

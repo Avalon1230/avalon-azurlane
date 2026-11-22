@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-18T02:32:50.450Z",
+  "updatedAt": "2026-11-22T05:09:43.035Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -631,6 +631,57 @@
       "shortTitle": "Koumakan",
       "revision": "307716",
       "checkedAt": "2026-11-18T02:32:50.450Z"
+    },
+    "en-black-friday-notice": {
+      "type": "official",
+      "title": "EN maintenance notice for November 19",
+      "url": "https://azurlane.yo-star.com/news/2026/11/18/maintenance-notice-11-19-12-a-m-utc-7/",
+      "checkedAt": "2026-11-22T05:09:43.035Z",
+      "publishedAt": "2026-11-18",
+      "shortTitle": "Yostar EN"
+    },
+    "en-napoli-correction": {
+      "type": "official",
+      "title": "Azur Lane EN: corrected Napoli category and price",
+      "url": "https://x.com/AzurLane_EN/status/2123436814354829692",
+      "checkedAt": "2026-11-22T05:09:43.035Z",
+      "publishedAt": "2026-11-19",
+      "shortTitle": "EN correction"
+    },
+    "en-napoli-correction-mirror": {
+      "type": "supplementary",
+      "title": "Mirror of the official EN correction",
+      "url": "https://twiscan.com/en/x/AzurLane_EN/2123436814354829692",
+      "checkedAt": "2026-11-22T05:09:43.035Z",
+      "publishedAt": "2026-11-19",
+      "shortTitle": "Post transcript"
+    },
+    "bf-gallery-69902": {
+      "type": "wiki",
+      "title": "Napoli gallery",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=308719",
+      "checkedAt": "2026-11-22T05:09:43.035Z",
+      "revision": "308719",
+      "pageId": 71137,
+      "shortTitle": "Gallery"
+    },
+    "bf-gallery-80702": {
+      "type": "wiki",
+      "title": "Painlevé gallery",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=308720",
+      "checkedAt": "2026-11-22T05:09:43.035Z",
+      "revision": "308720",
+      "pageId": 67402,
+      "shortTitle": "Gallery"
+    },
+    "bf-gallery-10312": {
+      "type": "wiki",
+      "title": "New Orleans gallery",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=308721",
+      "checkedAt": "2026-11-22T05:09:43.035Z",
+      "revision": "308721",
+      "pageId": 49819,
+      "shortTitle": "Gallery"
     }
   },
   "events": [
@@ -2473,15 +2524,16 @@
       "id": "effulgence-before-eclipse",
       "title": "Effulgence Before Eclipse",
       "category": "major",
-      "description": "Sakura Empire event featuring Unzen. Original and rerun dates share one event identity; JP War Archives addition is announced for a future maintenance.",
+      "description": "Unzen’s Sakura Empire event. EN has permanent War Archives access following the November 19 maintenance. Original and rerun maps remain in regional history.",
       "sourceIds": [
         "wiki-effulgence",
-        "official-jp-collab-20261112"
+        "official-jp-collab-20261112",
+        "en-black-friday-notice"
       ],
-      "verifiedAt": "2026-11-15T13:00:41Z",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
       "missing": [
         "Full historical mission, reward and enemy records are not yet cataloged.",
-        "JP permanent-addition date remains TBA; no EN permanent-addition schedule is inferred."
+        "The JP notice gives no exact permanent-addition date. Current archive map drops still need individual verification."
       ],
       "occurrences": [
         {
@@ -2663,9 +2715,134 @@
             "note": "Official notice: next or later maintenance; exact date not announced."
           },
           "phases": []
+        },
+        {
+          "id": "effulgence-archive-en-20261119",
+          "kind": "war-archives",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
         }
       ],
-      "content": [],
+      "content": [
+        {
+          "id": "light-hatsuzuki",
+          "kind": "ship",
+          "name": "Hatsuzuki · Light Construction",
+          "description": "Permanent EN acquisition through Light Construction after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "light-natori",
+          "kind": "ship",
+          "name": "Natori · Light Construction",
+          "description": "Permanent EN acquisition through Light Construction after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "heavy-unzen",
+          "kind": "ship",
+          "name": "Unzen · Heavy Construction",
+          "description": "Permanent EN acquisition through Heavy Construction after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "heavy-owari",
+          "kind": "ship",
+          "name": "Owari · Heavy Construction",
+          "description": "Permanent EN acquisition through Heavy Construction after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "special-unzen",
+          "kind": "ship",
+          "name": "Unzen · Special Construction",
+          "description": "Permanent EN acquisition through Special Construction after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "ur-exchange-unzen",
+          "kind": "ship",
+          "name": "Unzen · UR Exchange",
+          "description": "Permanent EN acquisition through UR Exchange after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "merit-asanagi",
+          "kind": "ship",
+          "name": "Asanagi · Merit Shop",
+          "description": "Permanent EN acquisition through Merit Shop after November 19 maintenance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
       "stages": [
         {
           "id": "effulgence-map-overview",
@@ -9252,6 +9429,729 @@
         "Full original and rerun history remains incomplete.",
         "Current regional rewards, ship and equipment drops, maps and artwork still need individual verification."
       ]
+    },
+    {
+      "id": "black-friday-rerun-outfits",
+      "title": "Black Friday Rerun Outfits",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Shop returning limited outfits sold before June 1, 2026. Collaboration outfits are excluded. See the publisher’s list for individual eligibility.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "black-friday-rerun-outfits-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "black-friday-bag",
+          "kind": "shop",
+          "name": "Black Friday Lucky Bag (2026)",
+          "description": "One purchase per account. Claim a Skin Discount Coupon from the event page after purchase.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "black-friday-rerun-outfits-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "l2d-surprise-bag",
+          "kind": "shop",
+          "name": "Live2D Surprise Lucky Bag (2026)",
+          "description": "Up to two purchases. The bag awards a random unowned eligible Live2D skin, or 1,080 Gems if you own them all. Claim the coupon on the event page.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "black-friday-rerun-outfits-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "black-friday-skin-coupon",
+      "title": "Black Friday Skin Discount Coupon",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Each coupon takes 300 Gems off one eligible Black Friday rerun outfit bought with Gems. The publisher gives the coupon its own expiry, down to the second.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "black-friday-skin-coupon-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:59-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "earn-coupon",
+          "kind": "mechanic",
+          "name": "Earning and spending coupons",
+          "description": "Earn one per eligible rerun bought at full price or qualifying 2026 Black Friday or Live2D Surprise Lucky Bag. Each coupon can be redeemed once.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "black-friday-skin-coupon-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "black-friday-cruise-missions",
+      "title": "Black Friday Cruise Missions",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Complete missions for free rewards. Buying the Cruise Pass opens an additional reward track.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "black-friday-cruise-missions-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "free-track",
+          "kind": "reward",
+          "name": "Free mission rewards",
+          "description": "Earn a Skin Coupon and blueprints through Cruise Missions.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "black-friday-cruise-missions-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        },
+        {
+          "id": "paid-track",
+          "kind": "reward",
+          "name": "Cruise Pass rewards",
+          "description": "Purchase the Black Friday Cruise Pass and complete missions for additional rewards including Gems, Wisdom Cubes and a Battle UI.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "black-friday-cruise-missions-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "black-friday-returnee-stash",
+      "title": "Black Friday Returnee’s Stash",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "New missions unlock daily beginning November 19. Complete them all for a Limited Static Skin Voucher.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "black-friday-returnee-stash-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": [
+            {
+              "id": "daily-stash-missions",
+              "kind": "mission",
+              "label": "Daily Returnee’s Stash missions begin",
+              "at": {
+                "kind": "date",
+                "date": "2026-11-19",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "en-black-friday-notice"
+                ]
+              },
+              "sourceIds": [
+                "en-black-friday-notice"
+              ]
+            }
+          ]
+        }
+      ],
+      "content": [
+        {
+          "id": "stash-voucher",
+          "kind": "reward",
+          "name": "Limited Static Skin Voucher",
+          "description": "Choose one skin from the selection in the in-game item details.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "black-friday-returnee-stash-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": [
+        "The notice gives no daily unlock hour or complete voucher selection."
+      ]
+    },
+    {
+      "id": "heartful-remedies",
+      "title": "Port Fashion Collection: Heartful Remedies",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Log in each day for one chance to unlock a side story.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "heartful-remedies-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "side-stories",
+          "kind": "mission",
+          "name": "Daily login",
+          "description": "Each login day grants one side-story unlock chance.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "heartful-remedies-outfit-shop",
+      "title": "Heartful Remedies Outfit Shop",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "The three hospital-themed outfits are on sale individually. Open an outfit to see its gallery.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "heartful-remedies-outfit-shop-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "skin-699022",
+          "kind": "outfit",
+          "name": "Lost White Bird",
+          "description": "Napoli · L2D+. Available for individual purchase. The November 19–December 9 sale price is 1,180 Gems. The corrected standard price is 1,260 Gems, expected for future reruns.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice",
+            "en-napoli-correction",
+            "en-napoli-correction-mirror",
+            "bf-gallery-69902"
+          ],
+          "shipId": "69902",
+          "skinId": "699022",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/1c/NapoliHospitalIcon.png",
+            "alt": "Napoli in Lost White Bird",
+            "sourceIds": [
+              "bf-gallery-69902"
+            ]
+          },
+          "cost": 1180,
+          "currency": "Gems"
+        },
+        {
+          "id": "skin-807023",
+          "kind": "outfit",
+          "name": "Angel in White Beneath Clear Skies",
+          "description": "Painlevé · Dynamic. Available for individual purchase.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice",
+            "bf-gallery-80702"
+          ],
+          "shipId": "80702",
+          "skinId": "807023",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/15/Painlev%C3%A9HospitalIcon.png",
+            "alt": "Painlevé in Angel in White Beneath Clear Skies",
+            "sourceIds": [
+              "bf-gallery-80702"
+            ]
+          }
+        },
+        {
+          "id": "skin-103122",
+          "kind": "outfit",
+          "name": "Intimate Midnight Shift",
+          "description": "New Orleans · Dynamic. Available for individual purchase.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice",
+            "bf-gallery-10312"
+          ],
+          "shipId": "10312",
+          "skinId": "103122",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/0/0f/New_OrleansHospitalIcon.png",
+            "alt": "New Orleans in Intimate Midnight Shift",
+            "sourceIds": [
+              "bf-gallery-10312"
+            ]
+          }
+        },
+        {
+          "id": "hospital-bundle",
+          "kind": "shop",
+          "name": "Heartful Hospital Bundle",
+          "description": "The three featured skins come with a Promise Ring. Previously purchased skins reduce the bundle price. Outfit Coupons cannot be used on the bundle.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "heartful-remedies-rentals",
+      "title": "Heartful Remedies Rental Outfits",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Log in during the event for three rental vouchers. Use them to try the featured outfits.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "heartful-remedies-rentals-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-09T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "skin-699022",
+          "kind": "outfit",
+          "name": "Lost White Bird",
+          "description": "Napoli · L2D+. Available with a rental voucher.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-rentals-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice",
+            "en-napoli-correction",
+            "en-napoli-correction-mirror",
+            "bf-gallery-69902"
+          ],
+          "shipId": "69902",
+          "skinId": "699022",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/1c/NapoliHospitalIcon.png",
+            "alt": "Napoli in Lost White Bird",
+            "sourceIds": [
+              "bf-gallery-69902"
+            ]
+          }
+        },
+        {
+          "id": "skin-807023",
+          "kind": "outfit",
+          "name": "Angel in White Beneath Clear Skies",
+          "description": "Painlevé · Dynamic. Available with a rental voucher.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-rentals-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice",
+            "bf-gallery-80702"
+          ],
+          "shipId": "80702",
+          "skinId": "807023",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/1/15/Painlev%C3%A9HospitalIcon.png",
+            "alt": "Painlevé in Angel in White Beneath Clear Skies",
+            "sourceIds": [
+              "bf-gallery-80702"
+            ]
+          }
+        },
+        {
+          "id": "skin-103122",
+          "kind": "outfit",
+          "name": "Intimate Midnight Shift",
+          "description": "New Orleans · Dynamic. Available with a rental voucher.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-rentals-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice",
+            "bf-gallery-10312"
+          ],
+          "shipId": "10312",
+          "skinId": "103122",
+          "artwork": {
+            "url": "https://azurlane.netojuu.com/images/0/0f/New_OrleansHospitalIcon.png",
+            "alt": "New Orleans in Intimate Midnight Shift",
+            "sourceIds": [
+              "bf-gallery-10312"
+            ]
+          }
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "campaign-drop-support-2026",
+      "title": "Campaign Drop Support Plan",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Main Campaign stages have an increased chance to drop Super Rare ships. The publisher gives no numerical rate.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "campaign-drop-support-2026-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-12-02T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "anchorage-haven-of-innocence",
+      "title": "Anchorage: Haven of Innocence",
+      "aliases": [
+        "Black Friday 2026"
+      ],
+      "category": "recurring",
+      "description": "Anchorage’s Private Quarters furniture returns for a shorter window.",
+      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "sourceIds": [
+        "en-black-friday-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "anchorage-haven-of-innocence-en-20261119",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "releaseConfirmedAt": "2026-11-22T05:09:43.035Z",
+          "sourceIds": [
+            "en-black-friday-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "date": "2026-11-19",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "end": {
+            "kind": "exact",
+            "value": "2026-11-25T23:59:00-07:00",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-black-friday-notice"
+            ]
+          },
+          "phases": []
+        }
+      ],
+      "content": [
+        {
+          "id": "haven-of-innocence",
+          "kind": "furniture",
+          "name": "Haven of Innocence",
+          "description": "Rerun Private Quarters furniture for Anchorage.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "anchorage-haven-of-innocence-en-20261119"
+          ],
+          "sourceIds": [
+            "en-black-friday-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
     }
   ]
 }

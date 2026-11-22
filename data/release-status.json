@@ -1,10 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.8.13",
-  "status": "released",
+  "version": "0.8.14",
+  "status": "unreleased",
   "releasedVersion": "0.8.13",
-  "releaseDate": "2026-11-20",
-  "releaseApproval": "https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412",
-  "previousReleasedVersion": "0.8.12",
-  "previousReleasedMain": "9d2ab620b875284f8732886fb9ee15634fab2c6e"
+  "releasedMain": "036b782ec432ce3505f35271e0d62e860d9d5a14"
 }

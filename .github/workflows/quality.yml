@@ -21,6 +21,7 @@ jobs:
       - run: npm test
       - run: npm run test:combat-source
       - run: npm run test:chronicle-source
+      - run: node scripts/verify-black-friday-source.mjs
       - run: npm run test:research-source
       - run: node scripts/verify-research-progression.mjs
       - run: node scripts/verify-portrait-source.mjs

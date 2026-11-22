@@ -64,7 +64,7 @@ test('urgent exact deadlines remain outside disclosure and date-only milestones 
 });
 test('reward thumbnails are source-matched and outfits link to the exact skin',()=>{
  assert.deepEqual(validateEventCatalog(catalog),[]);
- const known=new Set(evidence.files.map(f=>f.url));
+ const known=new Set([...evidence.files,...JSON.parse(read('data/events/black-friday-evidence.json')).files].map(f=>f.url));
  for(const e of catalog.events)for(const item of e.content.filter(i=>i.artwork))assert(known.has(item.artwork.url),item.id);
  const html=detail();
  assert.match(html,/#\/ships\/1180001\?skin=11800011/);

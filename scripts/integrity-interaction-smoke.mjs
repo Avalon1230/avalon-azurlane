@@ -93,6 +93,42 @@ try{
   assert.equal(await page.locator('#event-schedule-details').isVisible(),false);assert.match(await page.locator('.event-urgent').innerText(),/JP.*Closing within 48 hours/);
   await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'urgent-deadline-390');await page.close();report.checks.push({clock:'Production JP shop deadline appears at the exact 48-hour threshold while schedules remain collapsed.'});
  }
+ // Use production EN records and reviewed galleries even when the remote statistics feed is offline.
+ for(const width of [390,1280]){
+  const time='2026-11-22T12:00:00Z',online=!process.argv.includes('--offline');
+  const {page,errors}=await pageFor(width,{time,art:online});
+  for(const id of ['black-friday-skin-coupon','heartful-remedies-outfit-shop','effulgence-before-eclipse?occurrence=effulgence-archive-en-20261119']){
+   await page.goto(origin+'/#/events/'+id);await page.locator('.event-detail-tools').waitFor();
+   if(id.includes('coupon')){
+    assert.match(await page.locator('#event-schedule').innerText(),/14:59:59/);
+    await capture(page,'black-friday-coupon-'+width);
+   }else{
+    await page.getByRole('button',{name:'Obtainable content',exact:true}).click();
+    if(id.includes('shop')){
+     const item=page.locator('#event-item-skin-699022');
+     assert.match(await item.innerText(),/L2D\+.*1,180.*1,260/s);
+     await item.scrollIntoViewIfNeeded();
+     if(online)await artResult(page,'#event-item-skin-699022 img','Napoli shop icon '+width);
+     await capture(page,'black-friday-shop-'+width);
+     await item.getByRole('link',{name:/Lost White Bird/}).click();await page.locator('.ship-art-current').waitFor();
+     assert.equal(await page.locator('.ship-art-current').innerText(),'Lost White Bird');
+     const variant=page.getByRole('button',{name:'Without background',exact:true});
+     await variant.focus();await page.keyboard.press('Enter');await focused(variant);
+     assert.equal(await variant.getAttribute('aria-pressed'),'true');
+     if(online)await artResult(page,'.ship-art-preview-image','Napoli without background '+width);
+     await capture(page,'black-friday-gallery-'+width);
+    }else{
+     assert.equal(await page.locator('#event-item-light-hatsuzuki').count(),1);
+     assert.equal(await page.locator('#event-item-effulgence-map-overview').count(),0);
+     await page.locator('#event-item-light-hatsuzuki').scrollIntoViewIfNeeded();
+     await capture(page,'black-friday-archive-'+width);
+    }
+   }
+  }
+  await preserved(page);assert.deepEqual(errors,[]);await page.close();
+  report.checks.push({operation:'BLACK FRIDAY',width,time,checks:['coupon seconds','shop price and skin link','keyboard gallery variant','permanent acquisition','saved loadout preserved']});
+ }
+
  // A changed build offers a normal reload and never clears stored selections.
  {
   const {page}=await pageFor(390,{deployment:{schemaVersion:1,version:'0.8.13',fingerprint:'controlled-changed-build'}});

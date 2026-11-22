@@ -1,6 +1,6 @@
 # Events & live content — Operation CHRONICLE
 
-v0.8.11 is released. v0.8.12 is an unmerged, source-audited regional backfill (66 identities / 221 occurrences; War Archives: EN 53, JP 51, CN 51); see [backfill ledger](EVENTS_BACKFILL.md). The catalog is deliberately partial. An empty section means no matching verified record is present, not that the game has no events.
+v0.8.13 is the live release. The v0.8.12 regional backfill established the baseline (66 identities / 221 occurrences; War Archives: EN 53, JP 51, CN 51); see [backfill ledger](EVENTS_BACKFILL.md). The catalog is deliberately partial. An empty section means no matching verified record is present, not that the game has no events.
 
 ## Architecture
 
@@ -118,3 +118,7 @@ The Events index explicitly groups CN/JP in one column. That joint source statem
 Search & filters starts collapsed on page load. Its native button exposes `aria-expanded` and `aria-controls`; hidden controls leave keyboard order. The visible summary identifies the region, actual query and active selections. Expansion preserves focus and query/filters; Cards/Timeline remain outside. Only the existing Events preferences key is persisted. A disclosure toggle is not an event-schedule change.
 
 Developer acceptance evidence for v0.8.12 is recorded in [the 39-capture QA index](qa/v0812-chronicle/README.md). It names the exact implementation SHA, fixed observation clock, passing workflow and remaining source/artwork limits. v0.8.12 was released through Commander-authorized PR #35; the eight-identity / 34-occurrence figures above describe the initial v0.8.11 baseline.
+
+## EN November 19 update
+
+Operation BLACK FRIDAY adds nine EN activities and an EN Effulgence Before Eclipse permanent occurrence. See the [source ledger and test coverage](BLACK_FRIDAY.md). Catalog totals are 75 identities and 231 regional occurrences.

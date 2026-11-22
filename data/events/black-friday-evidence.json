@@ -1,0 +1,153 @@
+{
+  "checkedAt": "2026-11-22T05:09:43.035Z",
+  "notice": "https://azurlane.yo-star.com/news/2026/11/18/maintenance-notice-11-19-12-a-m-utc-7/",
+  "officialCorrection": "https://x.com/AzurLane_EN/status/2123436814354829692",
+  "correctionTranscript": "https://twiscan.com/en/x/AzurLane_EN/2123436814354829692",
+  "baselineIdDigest": "b8f3336047adb84ed4113fb5cde701d56a32d76aba423eb1b8fbce011c184b6e",
+  "outfits": [
+    {
+      "ship": "Napoli",
+      "shipId": "69902",
+      "skinId": "699022",
+      "name": "Lost White Bird",
+      "category": "L2D+"
+    },
+    {
+      "ship": "Painlevé",
+      "shipId": "80702",
+      "skinId": "807023",
+      "name": "Angel in White Beneath Clear Skies",
+      "category": "Dynamic"
+    },
+    {
+      "ship": "New Orleans",
+      "shipId": "10312",
+      "skinId": "103122",
+      "name": "Intimate Midnight Shift",
+      "category": "Dynamic"
+    }
+  ],
+  "client": {
+    "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/EN/sharecfgdata/ship_skin_template.lua",
+    "commit": "140a2f109e44972dc302d3f8fdeb683920942876",
+    "sha256": "af38ef5260eb1647dd0609eb3ea2254c15e8e08d463465419c9940fe78934275"
+  },
+  "galleries": [
+    {
+      "title": "Napoli/Gallery",
+      "revision": 308719,
+      "pageId": 71137
+    },
+    {
+      "title": "Painlevé/Gallery",
+      "revision": 308720,
+      "pageId": 67402
+    },
+    {
+      "title": "New Orleans/Gallery",
+      "revision": 308721,
+      "pageId": 49819
+    }
+  ],
+  "files": [
+    {
+      "title": "File:NapoliHospital.png",
+      "timestamp": "2026-11-20T02:43:35Z",
+      "size": 2783145,
+      "width": 2048,
+      "height": 1369,
+      "url": "https://azurlane.netojuu.com/images/2/22/NapoliHospital.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:NapoliHospital.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100355",
+      "sha1": "16ff8d5e3c2f87f7c5363d84175557d2c82431a7"
+    },
+    {
+      "title": "File:NapoliHospitalIcon.png",
+      "timestamp": "2026-11-20T02:43:41Z",
+      "size": 27536,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/1/1c/NapoliHospitalIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:NapoliHospitalIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100359",
+      "sha1": "2ba848658e35ca71be4601ba3923cd65ca0cd64b"
+    },
+    {
+      "title": "File:NapoliHospitalWithoutBG.png",
+      "timestamp": "2026-11-20T02:43:45Z",
+      "size": 2946058,
+      "width": 2048,
+      "height": 1993,
+      "url": "https://azurlane.netojuu.com/images/4/4f/NapoliHospitalWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:NapoliHospitalWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100361",
+      "sha1": "c027f89a36ec69e319c6c5a9c5615b1a81f4f71f"
+    },
+    {
+      "title": "File:New OrleansHospital.png",
+      "timestamp": "2026-11-20T02:43:48Z",
+      "size": 2649638,
+      "width": 2048,
+      "height": 1388,
+      "url": "https://azurlane.netojuu.com/images/0/01/New_OrleansHospital.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:New_OrleansHospital.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100362",
+      "sha1": "0529c46c114b542f388112853e2e10a09fe8b0fa"
+    },
+    {
+      "title": "File:New OrleansHospitalIcon.png",
+      "timestamp": "2026-11-20T02:43:53Z",
+      "size": 25453,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/0/0f/New_OrleansHospitalIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:New_OrleansHospitalIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100366",
+      "sha1": "605246c3f6028606d7d5b41c51a69472d8a95d69"
+    },
+    {
+      "title": "File:New OrleansHospitalWithoutBG.png",
+      "timestamp": "2026-11-20T02:43:58Z",
+      "size": 1941883,
+      "width": 2048,
+      "height": 1741,
+      "url": "https://azurlane.netojuu.com/images/2/24/New_OrleansHospitalWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:New_OrleansHospitalWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100368",
+      "sha1": "8506671b7bf8b6a74b1987145dd66c65f09c9747"
+    },
+    {
+      "title": "File:PainlevéHospital.png",
+      "timestamp": "2026-11-20T02:44:02Z",
+      "size": 2241581,
+      "width": 2048,
+      "height": 1171,
+      "url": "https://azurlane.netojuu.com/images/7/7b/Painlev%C3%A9Hospital.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Painlev%C3%A9Hospital.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100369",
+      "sha1": "09cc1fb662b6c50d55742bbb5f621c5663cb4a1d"
+    },
+    {
+      "title": "File:PainlevéHospitalIcon.png",
+      "timestamp": "2026-11-20T02:44:07Z",
+      "size": 25809,
+      "width": 116,
+      "height": 116,
+      "url": "https://azurlane.netojuu.com/images/1/15/Painlev%C3%A9HospitalIcon.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Painlev%C3%A9HospitalIcon.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100373",
+      "sha1": "6b7e02832b4a1c6387545c5174c07e924fb58f82"
+    },
+    {
+      "title": "File:PainlevéHospitalWithoutBG.png",
+      "timestamp": "2026-11-20T02:44:12Z",
+      "size": 2272517,
+      "width": 1900,
+      "height": 2047,
+      "url": "https://azurlane.netojuu.com/images/7/72/Painlev%C3%A9HospitalWithoutBG.png",
+      "descriptionurl": "https://azurlane.koumakan.jp/wiki/File:Painlev%C3%A9HospitalWithoutBG.png",
+      "descriptionshorturl": "https://azurlane.koumakan.jp/w/index.php?curid=100375",
+      "sha1": "0821fc11c3df4674f8eb9b31bc8111fe094eaea6"
+    }
+  ]
+}

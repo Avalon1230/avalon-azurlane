@@ -1026,6 +1026,17 @@
       "sourceIds": [
         "en-yostar-20250416-pledge-of-the-radiant-court"
       ]
+    },
+    {
+      "eventId": "effulgence-before-eclipse",
+      "occurrenceId": "effulgence-archive-en-20261119",
+      "region": "EN",
+      "kind": "war-archives",
+      "start": "2026-11-19",
+      "end": null,
+      "sourceIds": [
+        "en-black-friday-notice"
+      ]
     }
   ],
   "selectedHistory": [

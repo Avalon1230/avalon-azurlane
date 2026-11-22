@@ -1,6 +1,10 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-21 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-22 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+
+## Active development — v0.8.14 Operation BLACK FRIDAY (unreleased)
+
+Based on released main `036b782ec432ce3505f35271e0d62e860d9d5a14`. The EN catalog adds nine activities and one permanent occurrence. The three source-identified outfits use the existing Ship Profile, art controls and saved-loadout paths. [Source ledger and QA coverage](BLACK_FRIDAY.md) · [Issue #37 and release handoff](https://github.com/Avalon1230/avalon-azurlane/issues/37#issuecomment-7054570838). Local verification passed 376/376 Node tests and the responsive interaction suite, including eight new mobile and desktop captures. The catalog audit counted 54 permanent EN occurrences and 51 each for JP and CN. Independent QA reviews the PR head. Commander AVALON retains merge and deployment authority.
 
 ## Current release — v0.8.13 Operation INTEGRITY (Commander-approved, deployed 2026-11-21)
 

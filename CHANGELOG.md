@@ -2,6 +2,16 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.14] - 2026-11-22
+
+Unreleased; Operation BLACK FRIDAY is in independent QA preparation.
+
+### Events and outfits
+
+- Track the EN rerun, coupon, cruise missions, daily stash, side stories, outfit sales and rentals across their own schedules. Campaign Drop Support and Anchorage furniture have earlier deadlines.
+- Open the three hospital outfit galleries from purchase or rental details. Napoli shows the corrected L2D+ category and both prices.
+- Find Effulgence Before Eclipse in EN War Archives and see the seven permanent acquisition routes separately from limited-run history.
+
 ## [0.8.13] - 2026-11-20
 
 Released on 2026-11-20; this date records finalization of v0.8.13 on PR #36. Public rollout requires separate Commander approval after independent QA of the finalized commit. [Preparation authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).

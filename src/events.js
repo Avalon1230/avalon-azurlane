@@ -155,7 +155,7 @@ export function eventRows(catalog,filters={},now=Date.now()){
 }
 export function formatEventTime(t,zone=EVENT_ZONE){
   if(!t||t.kind==='tba')return 'TBA';
-  if(t.kind==='exact')return new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(new Date(t.value));
+  if(t.kind==='exact')return new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',...(new Date(t.value).getUTCSeconds()?{second:'2-digit'}:{}),timeZoneName:'short'}).format(new Date(t.value));
   const date=new Intl.DateTimeFormat('en-GB',{timeZone:'UTC',day:'2-digit',month:'short',year:'numeric'}).format(new Date(t.date+'T12:00:00Z'));
   const regionZone=({'Etc/GMT+7':'EN server (UTC−7)','Asia/Tokyo':'Japan (UTC+9)','Asia/Shanghai':'China (UTC+8)'})[t.zone]||t.zone;
   return date+' · '+regionZone+(t.kind==='maintenance'?' · after maintenance':' · time TBA');
