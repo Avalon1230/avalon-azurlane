@@ -130,6 +130,29 @@ try{
   report.checks.push({operation:'BLACK FRIDAY',width,time,checks:['coupon seconds','shop price and skin link','keyboard gallery variant','permanent acquisition','saved loadout preserved']});
  }
 
+ // The same detail page must present each server's published closure precision.
+ for(const width of [390,1280]){
+  const {page,errors}=await pageFor(width,{time:'2026-11-27T00:00:00Z',art:!process.argv.includes('--offline')});
+  await page.goto(origin+'/#/events/transfer-student-veritas-academy');
+  const overview=page.locator('.event-schedules-compact');
+  await overview.waitFor();
+  if(!process.argv.includes('--offline'))await artResult(page,'.event-detail > .event-art img','Veritas banner '+width);
+  assert.equal(await overview.locator('[data-event-region="EN"] [data-event-countdown]').count(),1);
+  for(const region of ['JP','CN']){
+   const regional=overview.locator('[data-event-region="'+region+'"]');
+   assert.match(await regional.innerText(),/at maintenance/);
+   assert.equal(await regional.locator('[data-event-countdown]').count(),0);
+  }
+  await page.getByLabel('Content for server').selectOption('CN');
+  const toggle=page.locator('#event-schedule-toggle');
+  await toggle.focus();await page.keyboard.press('Enter');await focused(toggle);
+  assert.match(await page.locator('.event-phases').innerText(),/15 Dec 2026.*23:59/);
+  await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
+  await capture(page,'black-friday-veritas-regions-'+width);
+  await preserved(page);await noOverflow(page);assert.deepEqual(errors,[]);await page.close();
+  report.checks.push({operation:'Veritas Academy',width,checks:['EN timer','JP and CN maintenance dates','CN claim deadline','schedule keyboard focus','saved loadout']});
+ }
+
  // A changed build offers a normal reload and never clears stored selections.
  {
   const {page}=await pageFor(390,{deployment:{schemaVersion:1,version:'0.8.13',fingerprint:'controlled-changed-build'}});

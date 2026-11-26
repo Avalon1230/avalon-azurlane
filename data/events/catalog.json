@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-22T05:09:43.035Z",
+  "updatedAt": "2026-11-26T06:32:48Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -682,6 +682,114 @@
       "revision": "308721",
       "pageId": 49819,
       "shortTitle": "Gallery"
+    },
+    "en-veritas-notice": {
+      "title": "Yostar EN · November 24 update",
+      "url": "https://azurlane.yo-star.com/news/2026/11/23/maintenance-notice-11-24-12-a-m-utc-7-2/",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-23",
+      "shortTitle": "Yostar EN · November 24 update"
+    },
+    "jp-veritas-notice": {
+      "title": "Yostar JP · November 24 update (completed)",
+      "url": "https://azurlane.jp/news/773",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-23",
+      "shortTitle": "Yostar JP · November 24 update (completed)"
+    },
+    "jp-nov19-notice": {
+      "title": "Yostar JP · November 19 update (completed)",
+      "url": "https://azurlane.jp/news/772",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-17",
+      "shortTitle": "Yostar JP · November 19 update (completed)"
+    },
+    "cn-veritas-notice": {
+      "title": "Azur Lane CN · November 24 update",
+      "url": "https://www.taptap.cn/moment/873989096031126872",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-23",
+      "shortTitle": "Azur Lane CN · November 24 update"
+    },
+    "cn-nov19-notice": {
+      "title": "Azur Lane CN · November 19 update",
+      "url": "https://www.taptap.cn/moment/871814659823372045",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-17",
+      "shortTitle": "Azur Lane CN · November 19 update"
+    },
+    "cn-nov25-reminder": {
+      "title": "Azur Lane CN · November 25 deadline reminder",
+      "url": "https://www.taptap.cn/moment/874701316926997530",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-25",
+      "shortTitle": "Azur Lane CN · November 25 deadline reminder"
+    },
+    "cn-veritas-hotfix": {
+      "title": "Azur Lane CN · November 24 live hotfix",
+      "url": "https://www.taptap.cn/moment/874403013089822538",
+      "type": "official",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-24",
+      "shortTitle": "Azur Lane CN · November 24 live hotfix"
+    },
+    "en-veritas-live": {
+      "title": "Oshiverse · EN maintenance completion post (mirror)",
+      "url": "https://oshiverse.gg/articles/azur-lane-20261124-9338",
+      "type": "supplementary",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "publishedAt": "2026-11-24",
+      "shortTitle": "Oshiverse · EN maintenance completion post (mirror)"
+    },
+    "wiki-veritas-nov26": {
+      "title": "Veritas Academy · Azur Lane Wiki",
+      "shortTitle": "Event wiki",
+      "type": "wiki",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=308944",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "revision": "308944",
+      "pageId": 100520,
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "wiki-effulgence-nov26": {
+      "title": "Effulgence Before Eclipse · Azur Lane Wiki",
+      "shortTitle": "Event wiki",
+      "type": "wiki",
+      "url": "https://azurlane.koumakan.jp/w/index.php?oldid=308554",
+      "checkedAt": "2026-11-26T06:32:48Z",
+      "revision": "308554",
+      "pageId": 67783,
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    "archive-client-en": {
+      "type": "client",
+      "title": "EN client · archive ship identities",
+      "shortTitle": "EN ship IDs",
+      "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/EN/sharecfgdata/ship_skin_template.lua",
+      "revision": "140a2f109e44972dc302d3f8fdeb683920942876",
+      "checkedAt": "2026-11-26T06:32:48Z"
+    },
+    "archive-client-cn": {
+      "type": "client",
+      "title": "CN client · archive ship identities",
+      "shortTitle": "CN ship IDs",
+      "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/CN/sharecfgdata/ship_skin_template.lua",
+      "revision": "140a2f109e44972dc302d3f8fdeb683920942876",
+      "checkedAt": "2026-11-26T06:32:48Z"
+    },
+    "archive-client-jp": {
+      "type": "client",
+      "title": "JP client · archive ship identities",
+      "shortTitle": "JP ship IDs",
+      "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/JP/sharecfgdata/ship_skin_template.lua",
+      "revision": "140a2f109e44972dc302d3f8fdeb683920942876",
+      "checkedAt": "2026-11-26T06:32:48Z"
     }
   },
   "events": [
@@ -701,9 +809,11 @@
         "official-en-collab-20261112",
         "official-jp-collab-20261112",
         "official-cn-collab-20261112",
-        "official-en-collab-launch"
+        "official-en-collab-launch",
+        "jp-nov19-notice",
+        "cn-nov25-reminder"
       ],
-      "verifiedAt": "2026-11-18T02:32:50.450Z",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "missing": [
         "Stage enemy compositions, boss statistics and verified encounter mechanics are not yet cataloged.",
         "Story synopsis is not yet cataloged.",
@@ -878,7 +988,8 @@
           "releaseConfirmedAt": "2026-11-15T13:00:41Z",
           "sourceIds": [
             "official-jp-collab-20261112",
-            "wiki-angels-azur-stage"
+            "wiki-angels-azur-stage",
+            "jp-nov19-notice"
           ],
           "start": {
             "kind": "maintenance",
@@ -1002,12 +1113,13 @@
                 "kind": "exact",
                 "zone": "Asia/Tokyo",
                 "sourceIds": [
-                  "official-jp-collab-20261112"
+                  "jp-nov19-notice"
                 ],
-                "value": "2026-11-25T23:59:00+09:00"
+                "value": "2026-11-26T23:59:00+09:00"
               },
               "sourceIds": [
-                "official-jp-collab-20261112"
+                "official-jp-collab-20261112",
+                "jp-nov19-notice"
               ]
             },
             {
@@ -1026,6 +1138,15 @@
                 "official-jp-collab-20261112"
               ]
             }
+          ],
+          "revisions": [
+            {
+              "changedAt": "2026-11-26T06:32:48Z",
+              "note": "The publisher extended the outfit, furniture and Battle UI sale from November 25 to November 26 at 23:59 server time.",
+              "sourceIds": [
+                "jp-nov19-notice"
+              ]
+            }
           ]
         },
         {
@@ -1037,7 +1158,8 @@
           "sourceIds": [
             "official-cn-collab-20261112",
             "wiki-angels-azur-stage",
-            "official-cn-live-20261112"
+            "official-cn-live-20261112",
+            "cn-nov25-reminder"
           ],
           "start": {
             "kind": "maintenance",
@@ -1161,12 +1283,13 @@
                 "kind": "exact",
                 "zone": "Asia/Shanghai",
                 "sourceIds": [
-                  "official-cn-collab-20261112"
+                  "cn-nov25-reminder"
                 ],
-                "value": "2026-11-25T23:59:00+08:00"
+                "value": "2026-11-26T23:59:00+08:00"
               },
               "sourceIds": [
-                "official-cn-collab-20261112"
+                "official-cn-collab-20261112",
+                "cn-nov25-reminder"
               ]
             },
             {
@@ -1183,6 +1306,15 @@
               },
               "sourceIds": [
                 "official-cn-collab-20261112"
+              ]
+            }
+          ],
+          "revisions": [
+            {
+              "changedAt": "2026-11-26T06:32:48Z",
+              "note": "The publisher extended the outfit, furniture and Battle UI sale from November 25 to November 26 at 23:59 server time.",
+              "sourceIds": [
+                "cn-nov25-reminder"
               ]
             }
           ]
@@ -2029,10 +2161,12 @@
           "id": "jp-cn-outfits",
           "kind": "outfit",
           "name": "Collaboration outfits",
-          "description": "Ririsa and Mikari each have a Dynamic outfit. Regional sales close November 25 at 23:59 local server time.",
+          "description": "Ririsa and Mikari each have a Dynamic outfit. Sales close November 26 at 23:59 on the selected server.",
           "sourceIds": [
             "official-jp-collab-20261112",
-            "official-cn-collab-20261112"
+            "official-cn-collab-20261112",
+            "jp-nov19-notice",
+            "cn-nov25-reminder"
           ],
           "regions": [
             "JP",
@@ -2524,16 +2658,19 @@
       "id": "effulgence-before-eclipse",
       "title": "Effulgence Before Eclipse",
       "category": "major",
-      "description": "Unzen’s Sakura Empire event. EN has permanent War Archives access following the November 19 maintenance. Original and rerun maps remain in regional history.",
+      "description": "Unzen’s Sakura Empire event is now in War Archives on EN, JP and CN. Choose a regional run to see its acquisition routes.",
       "sourceIds": [
         "wiki-effulgence",
         "official-jp-collab-20261112",
-        "en-black-friday-notice"
+        "en-black-friday-notice",
+        "jp-nov19-notice",
+        "cn-nov19-notice",
+        "wiki-effulgence-nov26"
       ],
-      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "missing": [
-        "Full historical mission, reward and enemy records are not yet cataloged.",
-        "The JP notice gives no exact permanent-addition date. Current archive map drops still need individual verification."
+        "Full historical missions and stage-by-stage archive drop tables still need review.",
+        "The CN notice lists a supply-shop addition for a subsequent maintenance. Its effective date still needs confirmation."
       ],
       "occurrences": [
         {
@@ -2702,19 +2839,30 @@
           "id": "effulgence-jp-war-archives",
           "kind": "war-archives",
           "region": "JP",
-          "releaseState": "announced",
+          "releaseState": "released",
           "sourceIds": [
-            "official-jp-collab-20261112"
+            "official-jp-collab-20261112",
+            "jp-nov19-notice"
           ],
           "start": {
-            "kind": "tba",
+            "kind": "maintenance",
             "zone": "Asia/Tokyo",
             "sourceIds": [
-              "official-jp-collab-20261112"
+              "jp-nov19-notice"
             ],
-            "note": "Official notice: next or later maintenance; exact date not announced."
+            "date": "2026-11-19"
           },
-          "phases": []
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "revisions": [
+            {
+              "changedAt": "2026-11-26T06:32:48Z",
+              "note": "The earlier undated announcement was confirmed for the November 19 maintenance.",
+              "sourceIds": [
+                "jp-nov19-notice"
+              ]
+            }
+          ]
         },
         {
           "id": "effulgence-archive-en-20261119",
@@ -2734,6 +2882,25 @@
             ]
           },
           "phases": []
+        },
+        {
+          "id": "effulgence-archive-cn-20261119",
+          "kind": "war-archives",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z"
         }
       ],
       "content": [
@@ -2741,106 +2908,189 @@
           "id": "light-hatsuzuki",
           "kind": "ship",
           "name": "Hatsuzuki · Light Construction",
-          "description": "Permanent EN acquisition through Light Construction after November 19 maintenance.",
+          "description": "Permanent acquisition through Light Construction.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives",
+            "effulgence-archive-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp",
+            "archive-client-cn"
+          ],
+          "shipId": "30189"
         },
         {
           "id": "light-natori",
           "kind": "ship",
           "name": "Natori · Light Construction",
-          "description": "Permanent EN acquisition through Light Construction after November 19 maintenance.",
+          "description": "Permanent acquisition through Light Construction.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives",
+            "effulgence-archive-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp",
+            "archive-client-cn"
+          ],
+          "shipId": "30206"
         },
         {
           "id": "heavy-unzen",
           "kind": "ship",
           "name": "Unzen · Heavy Construction",
-          "description": "Permanent EN acquisition through Heavy Construction after November 19 maintenance.",
+          "description": "Permanent acquisition through Heavy Construction.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives",
+            "effulgence-archive-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp",
+            "archive-client-cn"
+          ],
+          "shipId": "30319"
         },
         {
           "id": "heavy-owari",
           "kind": "ship",
           "name": "Owari · Heavy Construction",
-          "description": "Permanent EN acquisition through Heavy Construction after November 19 maintenance.",
+          "description": "Permanent acquisition through Heavy Construction.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives",
+            "effulgence-archive-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp",
+            "archive-client-cn"
+          ],
+          "shipId": "30513"
         },
         {
           "id": "special-unzen",
           "kind": "ship",
           "name": "Unzen · Special Construction",
-          "description": "Permanent EN acquisition through Special Construction after November 19 maintenance.",
+          "description": "Permanent acquisition through Special Construction.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives",
+            "effulgence-archive-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp",
+            "archive-client-cn"
+          ],
+          "shipId": "30319"
         },
         {
           "id": "ur-exchange-unzen",
           "kind": "ship",
           "name": "Unzen · UR Exchange",
-          "description": "Permanent EN acquisition through UR Exchange after November 19 maintenance.",
+          "description": "Permanent acquisition through UR Exchange.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives",
+            "effulgence-archive-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp",
+            "archive-client-cn"
+          ],
+          "shipId": "30319"
         },
         {
           "id": "merit-asanagi",
           "kind": "ship",
           "name": "Asanagi · Merit Shop",
-          "description": "Permanent EN acquisition through Merit Shop after November 19 maintenance.",
+          "description": "Permanent acquisition through Merit Shop.",
           "regions": [
-            "EN"
+            "EN",
+            "JP"
           ],
           "occurrenceIds": [
-            "effulgence-archive-en-20261119"
+            "effulgence-archive-en-20261119",
+            "effulgence-jp-war-archives"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
-          ]
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "archive-client-en",
+            "archive-client-jp"
+          ],
+          "shipId": "30190"
+        },
+        {
+          "id": "jp-final-map-guarantee",
+          "kind": "ship",
+          "name": "Hatsuzuki · final map reward",
+          "description": "Clear the final archive map 60 times to receive Hatsuzuki.",
+          "regions": [
+            "JP"
+          ],
+          "occurrenceIds": [
+            "effulgence-jp-war-archives"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice",
+            "archive-client-jp"
+          ],
+          "shipId": "30189"
         }
       ],
       "stages": [
@@ -2866,7 +3116,14 @@
             "effulgence-2025-cn"
           ]
         }
-      ]
+      ],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/7/73/Effulgence_Before_Eclipse_Event_Banner_EN.jpg",
+        "alt": "Effulgence Before Eclipse · original EN event banner",
+        "sourceIds": [
+          "wiki-effulgence-nov26"
+        ]
+      }
     },
     {
       "id": "divergent-chessboard",
@@ -4116,15 +4373,15 @@
       "id": "bayard-blueprint-completion",
       "title": "Blueprint Completion Plan — Bayard",
       "category": "research",
-      "description": "Complete research projects during the EN campaign to earn bonus Bayard blueprints.",
+      "description": "Complete research projects to earn up to 30 bonus Bayard blueprints.",
       "sourceIds": [
         "history-yostar-20261104",
-        "history-wiki-ship-89904"
+        "history-wiki-ship-89904",
+        "jp-nov19-notice"
       ],
-      "verifiedAt": "2026-11-15T13:04:07Z",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "missing": [
-        "JP and CN schedules are not verified.",
-        "The exact maintenance-completion time is not verified."
+        "The CN campaign schedule still needs verification."
       ],
       "occurrences": [
         {
@@ -4153,6 +4410,33 @@
             "history-yostar-20261104"
           ],
           "phases": []
+        },
+        {
+          "id": "bayard-blueprint-completion-jp-20261105",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-11-05"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "maintenance-close",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-12-03"
+          }
         }
       ],
       "content": [
@@ -4163,16 +4447,19 @@
           "description": "Earn up to 30 bonus blueprints by completing research projects during the campaign.",
           "sourceIds": [
             "history-yostar-20261104",
-            "history-wiki-ship-89904"
+            "history-wiki-ship-89904",
+            "jp-nov19-notice"
           ],
           "regions": [
-            "EN"
+            "EN",
+            "JP"
           ],
           "occurrenceIds": [
-            "bayard-blueprint-completion-en-campaign-2026"
+            "bayard-blueprint-completion-en-campaign-2026",
+            "bayard-blueprint-completion-jp-20261105"
           ],
           "shipId": "89904",
-          "acquisition": "Complete research projects during the EN campaign; campaign limit 30 blueprints."
+          "acquisition": "Complete research projects during the campaign."
         }
       ],
       "stages": []
@@ -9552,7 +9839,7 @@
           "id": "earn-coupon",
           "kind": "mechanic",
           "name": "Earning and spending coupons",
-          "description": "Earn one per eligible rerun bought at full price or qualifying 2026 Black Friday or Live2D Surprise Lucky Bag. Each coupon can be redeemed once.",
+          "description": "Earn a coupon with a full-price eligible rerun or either qualifying 2026 Lucky Bag. The free Cruise Missions track also awards a coupon. Use it once on an eligible rerun bought individually. The Heartful Hospital Bundle does not accept outfit coupons.",
           "regions": [
             "EN"
           ],
@@ -9731,9 +10018,12 @@
       ],
       "category": "recurring",
       "description": "Log in each day for one chance to unlock a side story.",
-      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "sourceIds": [
-        "en-black-friday-notice"
+        "en-black-friday-notice",
+        "jp-nov19-notice",
+        "cn-nov19-notice",
+        "cn-nov25-reminder"
       ],
       "occurrences": [
         {
@@ -9762,6 +10052,62 @@
             ]
           },
           "phases": []
+        },
+        {
+          "id": "heartful-remedies-jp-20261119",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "value": "2026-12-09T23:59:00+09:00"
+          }
+        },
+        {
+          "id": "heartful-remedies-cn-20261119",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-nov19-notice",
+            "cn-nov25-reminder"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice",
+              "cn-nov25-reminder"
+            ],
+            "value": "2026-11-25T23:59:00+08:00"
+          }
         }
       ],
       "content": [
@@ -9771,13 +10117,19 @@
           "name": "Daily login",
           "description": "Each login day grants one side-story unlock chance.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "heartful-remedies-en-20261119"
+            "heartful-remedies-en-20261119",
+            "heartful-remedies-jp-20261119",
+            "heartful-remedies-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice"
           ]
         }
       ],
@@ -9791,10 +10143,13 @@
         "Black Friday 2026"
       ],
       "category": "recurring",
-      "description": "The three hospital-themed outfits are on sale individually. Open an outfit to see its gallery.",
-      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "description": "Napoli, Painlevé and New Orleans each have a hospital outfit available for purchase.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "sourceIds": [
-        "en-black-friday-notice"
+        "en-black-friday-notice",
+        "jp-nov19-notice",
+        "cn-nov19-notice",
+        "cn-nov25-reminder"
       ],
       "occurrences": [
         {
@@ -9823,6 +10178,62 @@
             ]
           },
           "phases": []
+        },
+        {
+          "id": "heartful-remedies-outfit-shop-jp-20261119",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "value": "2026-12-09T23:59:00+09:00"
+          }
+        },
+        {
+          "id": "heartful-remedies-outfit-shop-cn-20261119",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-nov19-notice",
+            "cn-nov25-reminder"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice",
+              "cn-nov25-reminder"
+            ],
+            "value": "2026-11-25T23:59:00+08:00"
+          }
         }
       ],
       "content": [
@@ -9919,6 +10330,91 @@
           "sourceIds": [
             "en-black-friday-notice"
           ]
+        },
+        {
+          "id": "regional-699022",
+          "kind": "outfit",
+          "name": "Lost White Bird",
+          "description": "Napoli wears this hospital-themed outfit.",
+          "regions": [
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-jp-20261119",
+            "heartful-remedies-outfit-shop-cn-20261119"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice",
+            "cn-nov19-notice"
+          ]
+        },
+        {
+          "id": "regional-807023",
+          "kind": "outfit",
+          "name": "Angel in White Beneath Clear Skies",
+          "description": "Painlevé wears this hospital-themed outfit.",
+          "regions": [
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-jp-20261119",
+            "heartful-remedies-outfit-shop-cn-20261119"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice",
+            "cn-nov19-notice"
+          ]
+        },
+        {
+          "id": "regional-103122",
+          "kind": "outfit",
+          "name": "Intimate Midnight Shift",
+          "description": "New Orleans wears this hospital-themed outfit.",
+          "regions": [
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-jp-20261119",
+            "heartful-remedies-outfit-shop-cn-20261119"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice",
+            "cn-nov19-notice"
+          ]
+        },
+        {
+          "id": "cn-napoli-correction",
+          "kind": "mechanic",
+          "name": "Napoli outfit category",
+          "description": "The CN closing reminder lists Lost White Bird as Live2D+.",
+          "regions": [
+            "CN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-cn-20261119"
+          ],
+          "sourceIds": [
+            "cn-nov19-notice",
+            "cn-nov25-reminder"
+          ]
+        },
+        {
+          "id": "cn-trial-packs",
+          "kind": "shop",
+          "name": "Outfit trial packs",
+          "description": "Each 300-Gem pack includes a voucher for its named outfit and a trial ticket. The CN offer requires Commander level 80.",
+          "regions": [
+            "CN"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-outfit-shop-cn-20261119"
+          ],
+          "sourceIds": [
+            "cn-nov19-notice"
+          ]
         }
       ],
       "stages": [],
@@ -9931,10 +10427,11 @@
         "Black Friday 2026"
       ],
       "category": "recurring",
-      "description": "Log in during the event for three rental vouchers. Use them to try the featured outfits.",
-      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "description": "Try the three hospital outfits with rental tickets. EN offers three rental vouchers.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "sourceIds": [
-        "en-black-friday-notice"
+        "en-black-friday-notice",
+        "jp-nov19-notice"
       ],
       "occurrences": [
         {
@@ -9963,6 +10460,33 @@
             ]
           },
           "phases": []
+        },
+        {
+          "id": "heartful-remedies-rentals-jp-20261119",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "value": "2026-12-09T23:59:00+09:00"
+          }
         }
       ],
       "content": [
@@ -10042,6 +10566,51 @@
               "bf-gallery-10312"
             ]
           }
+        },
+        {
+          "id": "regional-699022",
+          "kind": "outfit",
+          "name": "Lost White Bird",
+          "description": "Napoli wears this hospital-themed outfit.",
+          "regions": [
+            "JP"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-rentals-jp-20261119"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice"
+          ]
+        },
+        {
+          "id": "regional-807023",
+          "kind": "outfit",
+          "name": "Angel in White Beneath Clear Skies",
+          "description": "Painlevé wears this hospital-themed outfit.",
+          "regions": [
+            "JP"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-rentals-jp-20261119"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice"
+          ]
+        },
+        {
+          "id": "regional-103122",
+          "kind": "outfit",
+          "name": "Intimate Midnight Shift",
+          "description": "New Orleans wears this hospital-themed outfit.",
+          "regions": [
+            "JP"
+          ],
+          "occurrenceIds": [
+            "heartful-remedies-rentals-jp-20261119"
+          ],
+          "sourceIds": [
+            "jp-nov19-notice"
+          ]
         }
       ],
       "stages": [],
@@ -10055,9 +10624,11 @@
       ],
       "category": "recurring",
       "description": "Main Campaign stages have an increased chance to drop Super Rare ships. The publisher gives no numerical rate.",
-      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "sourceIds": [
-        "en-black-friday-notice"
+        "en-black-friday-notice",
+        "jp-nov19-notice",
+        "cn-nov19-notice"
       ],
       "occurrences": [
         {
@@ -10086,6 +10657,60 @@
             ]
           },
           "phases": []
+        },
+        {
+          "id": "campaign-drop-support-2026-jp-20261119",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "maintenance-close",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-12-03"
+          }
+        },
+        {
+          "id": "campaign-drop-support-2026-cn-20261119",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "maintenance-close",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice"
+            ],
+            "date": "2026-12-03"
+          }
         }
       ],
       "content": [],
@@ -10100,9 +10725,12 @@
       ],
       "category": "recurring",
       "description": "Anchorage’s Private Quarters furniture returns for a shorter window.",
-      "verifiedAt": "2026-11-22T05:09:43.035Z",
+      "verifiedAt": "2026-11-26T06:32:48Z",
       "sourceIds": [
-        "en-black-friday-notice"
+        "en-black-friday-notice",
+        "jp-nov19-notice",
+        "cn-nov19-notice",
+        "cn-nov25-reminder"
       ],
       "occurrences": [
         {
@@ -10131,6 +10759,62 @@
             ]
           },
           "phases": []
+        },
+        {
+          "id": "anchorage-haven-of-innocence-jp-20261119",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-nov19-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-nov19-notice"
+            ],
+            "value": "2026-11-25T23:59:00+09:00"
+          }
+        },
+        {
+          "id": "anchorage-haven-of-innocence-cn-20261119",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-nov19-notice",
+            "cn-nov25-reminder"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice"
+            ],
+            "date": "2026-11-19"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-nov19-notice",
+              "cn-nov25-reminder"
+            ],
+            "value": "2026-11-25T23:59:00+08:00"
+          }
         }
       ],
       "content": [
@@ -10140,18 +10824,1003 @@
           "name": "Haven of Innocence",
           "description": "Rerun Private Quarters furniture for Anchorage.",
           "regions": [
-            "EN"
+            "EN",
+            "JP",
+            "CN"
           ],
           "occurrenceIds": [
-            "anchorage-haven-of-innocence-en-20261119"
+            "anchorage-haven-of-innocence-en-20261119",
+            "anchorage-haven-of-innocence-jp-20261119",
+            "anchorage-haven-of-innocence-cn-20261119"
           ],
           "sourceIds": [
-            "en-black-friday-notice"
+            "en-black-friday-notice",
+            "jp-nov19-notice",
+            "cn-nov19-notice"
           ]
         }
       ],
       "stages": [],
       "missing": []
+    },
+    {
+      "id": "transfer-student-veritas-academy",
+      "title": "The Transfer Student of Veritas Academy",
+      "category": "mini",
+      "description": "Play event stages for points, then claim milestone rewards. Story Mode awards a gear skin.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "wiki-veritas-nov26",
+        "en-veritas-notice",
+        "jp-veritas-notice",
+        "cn-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "transfer-student-veritas-academy-en-20261124",
+          "kind": "original",
+          "region": "EN",
+          "releaseState": "released",
+          "sourceIds": [
+            "en-veritas-notice",
+            "en-veritas-live"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [
+            {
+              "id": "point-claim",
+              "label": "Cumulative point reward claims close",
+              "kind": "claim",
+              "sourceIds": [
+                "en-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "en-veritas-notice"
+                ],
+                "value": "2026-12-16T23:59:00-07:00"
+              }
+            }
+          ],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "transfer-student-veritas-academy-jp-20261124",
+          "kind": "original",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [
+            {
+              "id": "point-claim",
+              "label": "Cumulative point reward claims close",
+              "kind": "claim",
+              "sourceIds": [
+                "jp-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "jp-veritas-notice"
+                ],
+                "value": "2026-12-15T23:59:00+09:00"
+              }
+            }
+          ],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "maintenance-close",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-12-10"
+          }
+        },
+        {
+          "id": "transfer-student-veritas-academy-cn-20261124",
+          "kind": "original",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-veritas-notice",
+            "cn-veritas-hotfix"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [
+            {
+              "id": "point-claim",
+              "label": "Cumulative point reward claims close",
+              "kind": "claim",
+              "sourceIds": [
+                "cn-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "cn-veritas-notice"
+                ],
+                "value": "2026-12-15T23:59:00+08:00"
+              }
+            }
+          ],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "maintenance-close",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "date": "2026-12-10"
+          }
+        }
+      ],
+      "content": [
+        {
+          "id": "limited-construction",
+          "kind": "ship",
+          "name": "Molotov and Sinop",
+          "description": "Both ships appear in the limited event construction pool.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "transfer-student-veritas-academy-en-20261124",
+            "transfer-student-veritas-academy-jp-20261124",
+            "transfer-student-veritas-academy-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        },
+        {
+          "id": "album",
+          "kind": "reward",
+          "name": "Veritas Academy Medal",
+          "description": "Complete commemorative missions and collect stickers for the event medal.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "transfer-student-veritas-academy-en-20261124",
+            "transfer-student-veritas-academy-jp-20261124",
+            "transfer-student-veritas-academy-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": [
+        "Stage enemy statistics and drop rates still need client verification."
+      ],
+      "aliases": [
+        "真理学園の転校生",
+        "真理学院的转校生"
+      ],
+      "artwork": {
+        "url": "https://azurlane.netojuu.com/images/c/c5/The_Transfer_Student_of_Veritas_Academy_Event_Banner_EN.jpg",
+        "alt": "The Transfer Student of Veritas Academy · original EN event banner",
+        "sourceIds": [
+          "wiki-veritas-nov26"
+        ]
+      }
+    },
+    {
+      "id": "veritas-point-rewards",
+      "title": "Veritas Academy · point rewards",
+      "category": "recurring",
+      "description": "Claim Imperatritsa Mariya from cumulative event points. The claim window extends beyond the battle stages.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "en-veritas-notice",
+        "jp-veritas-notice",
+        "cn-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "veritas-point-rewards-en-20261124",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "sourceIds": [
+            "en-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2026-12-16T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "veritas-point-rewards-jp-20261124",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "value": "2026-12-15T23:59:00+09:00"
+          }
+        },
+        {
+          "id": "veritas-point-rewards-cn-20261124",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "value": "2026-12-15T23:59:00+08:00"
+          }
+        }
+      ],
+      "content": [
+        {
+          "id": "mariya",
+          "kind": "ship",
+          "name": "Imperatritsa Mariya",
+          "description": "Earn her by accumulating event points and claim her before the regional reward deadline.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-point-rewards-en-20261124",
+            "veritas-point-rewards-jp-20261124",
+            "veritas-point-rewards-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "autumnal-waterworld",
+      "title": "Port Fashion Collection · Autumnal Waterworld",
+      "category": "recurring",
+      "description": "Use daily login chances to unlock outfit side stories.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "en-veritas-notice",
+        "jp-veritas-notice",
+        "cn-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "autumnal-waterworld-en-20261124",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "sourceIds": [
+            "en-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "autumnal-waterworld-jp-20261124",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00+09:00"
+          }
+        },
+        {
+          "id": "autumnal-waterworld-cn-20261124",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "value": "2026-11-29T23:59:00+08:00"
+          }
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "veritas-outfit-shop",
+      "title": "Veritas Academy · outfit shop",
+      "category": "recurring",
+      "description": "Four summer outfits are available for Molotov, Sinop, Cleopatra and Imperatritsa Mariya.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "en-veritas-notice",
+        "jp-veritas-notice",
+        "cn-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "veritas-outfit-shop-en-20261124",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "sourceIds": [
+            "en-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "veritas-outfit-shop-jp-20261124",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00+09:00"
+          }
+        },
+        {
+          "id": "veritas-outfit-shop-cn-20261124",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "released",
+          "sourceIds": [
+            "cn-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "value": "2026-11-29T23:59:00+08:00"
+          }
+        }
+      ],
+      "content": [
+        {
+          "id": "outfit-molotov",
+          "kind": "outfit",
+          "name": "A Vacation Worth Every Last Point",
+          "description": "Molotov · limited shop outfit.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-outfit-shop-en-20261124",
+            "veritas-outfit-shop-jp-20261124",
+            "veritas-outfit-shop-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        },
+        {
+          "id": "outfit-sinop",
+          "kind": "outfit",
+          "name": "Rippling Delusions",
+          "description": "Sinop · limited shop outfit.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-outfit-shop-en-20261124",
+            "veritas-outfit-shop-jp-20261124",
+            "veritas-outfit-shop-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        },
+        {
+          "id": "outfit-cleopatra",
+          "kind": "outfit",
+          "name": "Trial of Refreshing Blessings",
+          "description": "Cleopatra · limited shop outfit.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-outfit-shop-en-20261124",
+            "veritas-outfit-shop-jp-20261124",
+            "veritas-outfit-shop-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        },
+        {
+          "id": "outfit-imperatritsa-mariya",
+          "kind": "outfit",
+          "name": "Swaying Emotions",
+          "description": "Imperatritsa Mariya · limited shop outfit.",
+          "regions": [
+            "EN",
+            "JP",
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-outfit-shop-en-20261124",
+            "veritas-outfit-shop-jp-20261124",
+            "veritas-outfit-shop-cn-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice",
+            "cn-veritas-notice"
+          ]
+        },
+        {
+          "id": "cn-trial-packs",
+          "kind": "shop",
+          "name": "Level 80 outfit trial packs",
+          "description": "Separate 300-Gem packs for Molotov, Cleopatra and Sinop include an outfit-specific discount voucher and a trial ticket.",
+          "regions": [
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-outfit-shop-cn-20261124"
+          ],
+          "sourceIds": [
+            "cn-veritas-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "veritas-outfit-rentals",
+      "title": "Veritas Academy · rental outfits",
+      "category": "recurring",
+      "description": "Try the featured Molotov, Sinop and Cleopatra outfits with rental vouchers.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "en-veritas-notice",
+        "jp-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "veritas-outfit-rentals-en-20261124",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "sourceIds": [
+            "en-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "veritas-outfit-rentals-jp-20261124",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "value": "2026-12-09T23:59:00+09:00"
+          }
+        }
+      ],
+      "content": [
+        {
+          "id": "en-vouchers",
+          "kind": "reward",
+          "name": "Three rental vouchers",
+          "description": "Log in during the rental period to collect vouchers.",
+          "regions": [
+            "EN"
+          ],
+          "occurrenceIds": [
+            "veritas-outfit-rentals-en-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "rapid-training-november-2026",
+      "title": "Rapid Training Campaign",
+      "category": "recurring",
+      "description": "Finish up to ten Tactical Class lessons instantly each day during the campaign.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "en-veritas-notice",
+        "jp-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "rapid-training-november-2026-en-20261124",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "released",
+          "sourceIds": [
+            "en-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2026-12-15T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "rapid-training-november-2026-jp-20261124",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "released",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "maintenance",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-11-24"
+          },
+          "phases": [],
+          "releaseConfirmedAt": "2026-11-26T06:32:48Z",
+          "end": {
+            "kind": "maintenance-close",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "date": "2026-12-16"
+          }
+        }
+      ],
+      "content": [
+        {
+          "id": "login-bonus",
+          "kind": "reward",
+          "name": "Skill Books and 20 Wisdom Cubes",
+          "description": "Collect the associated login rewards during the training campaign.",
+          "regions": [
+            "EN",
+            "JP"
+          ],
+          "occurrenceIds": [
+            "rapid-training-november-2026-en-20261124",
+            "rapid-training-november-2026-jp-20261124"
+          ],
+          "sourceIds": [
+            "en-veritas-notice",
+            "jp-veritas-notice"
+          ]
+        }
+      ],
+      "stages": [],
+      "missing": []
+    },
+    {
+      "id": "cruise-missions-december-2026",
+      "title": "Cruise Missions · December 2026–January 2027",
+      "category": "recurring",
+      "description": "Earn Kersaint META on the regular reward track. The paid pass adds a U-556 outfit.",
+      "verifiedAt": "2026-11-26T06:32:48Z",
+      "sourceIds": [
+        "en-veritas-notice",
+        "jp-veritas-notice",
+        "cn-veritas-notice"
+      ],
+      "occurrences": [
+        {
+          "id": "cruise-missions-december-2026-en-20261201",
+          "kind": "campaign",
+          "region": "EN",
+          "releaseState": "announced",
+          "sourceIds": [
+            "en-veritas-notice"
+          ],
+          "start": {
+            "kind": "date",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "date": "2026-12-01"
+          },
+          "phases": [
+            {
+              "id": "vampire-meta-shop",
+              "label": "Vampire META joins permanent shop exchange",
+              "kind": "other",
+              "sourceIds": [
+                "en-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Etc/GMT+7",
+                "sourceIds": [
+                  "en-veritas-notice"
+                ],
+                "value": "2026-12-01T00:00:00-07:00"
+              }
+            }
+          ],
+          "end": {
+            "kind": "exact",
+            "zone": "Etc/GMT+7",
+            "sourceIds": [
+              "en-veritas-notice"
+            ],
+            "value": "2027-01-31T23:59:00-07:00"
+          }
+        },
+        {
+          "id": "cruise-missions-december-2026-jp-20261201",
+          "kind": "campaign",
+          "region": "JP",
+          "releaseState": "announced",
+          "sourceIds": [
+            "jp-veritas-notice"
+          ],
+          "start": {
+            "kind": "exact",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ],
+            "value": "2026-12-01T00:00:00+09:00"
+          },
+          "phases": [
+            {
+              "id": "vampire-meta-shop",
+              "label": "Vampire META joins permanent shop exchange",
+              "kind": "other",
+              "sourceIds": [
+                "jp-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "jp-veritas-notice"
+                ],
+                "value": "2026-12-01T00:00:00+09:00"
+              }
+            },
+            {
+              "id": "jp-pass-sales-close",
+              "label": "Cruise Pass sales close",
+              "kind": "shop",
+              "sourceIds": [
+                "jp-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Tokyo",
+                "sourceIds": [
+                  "jp-veritas-notice"
+                ],
+                "value": "2027-01-31T22:59:00+09:00"
+              }
+            }
+          ],
+          "end": {
+            "kind": "tba",
+            "zone": "Asia/Tokyo",
+            "sourceIds": [
+              "jp-veritas-notice"
+            ]
+          },
+          "note": "The JP notice specifies the sales period. The final mission-claim time is unconfirmed."
+        },
+        {
+          "id": "cruise-missions-december-2026-cn-20261201",
+          "kind": "campaign",
+          "region": "CN",
+          "releaseState": "announced",
+          "sourceIds": [
+            "cn-veritas-notice"
+          ],
+          "start": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "value": "2026-12-01T00:00:00+08:00"
+          },
+          "phases": [
+            {
+              "id": "cn-pass-sales-close",
+              "label": "Fair Winds pass sales close",
+              "kind": "shop",
+              "sourceIds": [
+                "cn-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "cn-veritas-notice"
+                ],
+                "value": "2027-01-31T22:59:00+08:00"
+              }
+            },
+            {
+              "id": "vampire-meta-shop",
+              "label": "Vampire META joins permanent shop exchange",
+              "kind": "other",
+              "sourceIds": [
+                "cn-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "cn-veritas-notice"
+                ],
+                "value": "2026-12-01T00:00:00+08:00"
+              }
+            }
+          ],
+          "end": {
+            "kind": "exact",
+            "zone": "Asia/Shanghai",
+            "sourceIds": [
+              "cn-veritas-notice"
+            ],
+            "value": "2027-01-31T23:59:00+08:00"
+          }
+        }
+      ],
+      "content": [],
+      "stages": [],
+      "missing": [
+        "The JP notice times the pass sale separately. A final mission deadline still needs confirmation."
+      ]
     }
   ]
 }

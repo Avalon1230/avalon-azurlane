@@ -15,7 +15,7 @@ function timer(t,label,now){return `<div class="event-timer"><span>${E(label)}</
 function availability(o,now){return occurrenceStatus(o,now)==='permanent'?'Permanent content · available in War Archives':'Planned War Archives addition · not available yet';}
 function eventHref(e,o){return '#/events/'+E(e.id)+'?occurrence='+E(o.id);}
 function period(o,zone,now){return `<span>${E(formatEventTime(o.start,zone))}</span><span>${o.end?'until '+E(formatEventTime(o.end,zone)):E(availability(o,now))}</span>`;}
-function currentTimer(o,status,now){return status==='ongoing'?timer(o.end,'Time remaining',now):status==='upcoming'?timer(o.start,'Launch',now):['pending','unknown','delayed'].includes(status)?`<p class="event-date-note">${status==='delayed'?'Delayed · revised launch TBA':E(eventCountdown(o.start,now))}</p>`:'';}
+function currentTimer(o,status,now){return ['ongoing','maintenance'].includes(status)?timer(o.end,'Time remaining',now):status==='upcoming'?timer(o.start,'Launch',now):['pending','unknown','delayed'].includes(status)?`<p class="event-date-note">${status==='delayed'?'Delayed · revised launch TBA':E(eventCountdown(o.start,now))}</p>`:'';}
 function card(row,filters,now){
   const {event:e,occurrence:o,status}=row;
   return `<article class="event-card${e.featured?' event-featured':''}" data-event-card="${E(e.id)}">${art(e)}<div class="event-card-body"><div class="event-card-meta">${badge(status)}<span>${E(o.region)} · ${E(EVENT_CATEGORIES[e.category])}</span>${e.featured?'<span class="event-featured-label">FEATURED</span>':''}</div><h3><a href="${eventHref(e,o)}">${E(e.title)}</a></h3>${e.franchise?`<p class="event-franchise">${E(e.franchise)}</p>`:''}<p>${E(e.description)}</p><div class="event-period">${period(o,filters.zone,now)}</div>${currentTimer(o,status,now)}<a class="text-link event-card-link" href="${eventHref(e,o)}">Explore event <span aria-hidden="true">→</span></a></div></article>`;
@@ -58,7 +58,7 @@ export function renderEventDetail({catalog,eventId,occurrenceId=null,filters,sta
   const e=catalog.events.find(e=>e.id===eventId);
   if(!e)return `<section class="event-empty"><h1>Event not found</h1><p>This event is not in the current catalog.</p><a class="outline-btn" href="#/events">Return to Events</a></section>`;
   const region=e.occurrences.find(o=>o.id===occurrenceId)?.region||filters.region,zone=filters.zone,runs=e.occurrences.filter(o=>o.region===region).sort((a,b)=>(occurrenceSortTime(b)??Infinity)-(occurrenceSortTime(a)??Infinity));
-  const active=runs.find(o=>o.id===occurrenceId)||runs.find(o=>['ongoing','upcoming','pending','unknown','delayed'].includes(occurrenceStatus(o,now)))||runs[0];
+  const active=runs.find(o=>o.id===occurrenceId)||runs.find(o=>['ongoing','maintenance','upcoming','pending','unknown','delayed'].includes(occurrenceStatus(o,now)))||runs[0];
   const activeStatus=active?occurrenceStatus(active,now):null;
   const visible=item=>item.regions.includes(region)&&item.occurrenceIds?.includes(active?.id);
   const content=(e.content||[]).filter(visible),stages=(e.stages||[]).filter(visible);

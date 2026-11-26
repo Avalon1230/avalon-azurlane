@@ -39,6 +39,7 @@ The source ID in an update must be present in its catalog; use the actual ledger
 | `exact` | ISO timestamp with offset, IANA zone, sources | Manila by default; numeric countdown, clamped at zero |
 | `date` | ISO calendar date, source zone, sources | Original regional date, time TBA; no numeric countdown |
 | `maintenance` | Confirmed calendar date, source zone, sources | After maintenance; planned duration never becomes launch time |
+| `maintenance-close` | Regional maintenance date with no published hour | Closes at maintenance. On the local maintenance day, closure time is unconfirmed. Moves into history once that day has passed. |
 | `tba` | Source zone and announcement sources | TBA; no predicted date or numeric countdown |
 
 `releaseState` is announced/released/delayed. A non-exact launch needs `releaseConfirmedAt` to become ongoing; this is the time AVALON verified release, not a fabricated launch instant. War Archives additions require a valid release observation even when an exact announced date has passed; until then they stay Upcoming/Awaiting launch and say “Planned War Archives addition · not available yet”. Future exact starts remain upcoming; delays suspend the start countdown. An expired end always wins over stale release flags. Date-only ends remain inclusive through that source-zone day and expire at the next day boundary. EN uses fixed UTC−7, not an America/Los_Angeles DST timezone. Historical unknown launch times do not become exact retrospectively.
@@ -64,7 +65,7 @@ Implement that registry through the existing [Fleet Optimizer Specification](FLE
 | Identity | Recorded history | Remaining gaps |
 | --- | --- | --- |
 | It’s Showtime! Angels’ Azur Stage | EN/JP/CN Nov 12–26, 2026, regional sales deadlines, mission unlocks/rewards, 2 ships, 2 augments, 14 cosmetic gear-skin IDs, outfits, furniture theme, Battle UI and challenge rewards | Enemy/boss data, synopsis, furniture item inventory; exact EN/JP unlock hours; no verified currency shop/drop rates/post-event grace period |
-| Effulgence Before Eclipse | Original and rerun for EN/JP/CN; officially announced JP War Archives addition with date TBA | Exact permanent-addition date, unannounced EN/CN additions, rewards/enemies |
+| Effulgence Before Eclipse | Original and rerun for EN/JP/CN; permanent EN/JP/CN releases after November 19 maintenance | Detailed archive stage drops and enemies |
 | Divergent Chessboard / Opposite-Colored | Original and rerun for EN/JP/CN; selected historical ship acquisition | Permanent dates, full stages/shops/drop tables |
 | Visitors Dyed in Red | Original and rerun for EN/JP/CN; selected historical ship acquisition | Permanent dates, full stages/shops/drop tables |
 | The Fool’s Scales | Original and rerun for EN/JP/CN; verified EN War Archives addition Nov 5, 2026; occurrence-scoped historical ship rewards | JP/CN permanent dates, detailed permanent rewards/enemies |
@@ -78,7 +79,7 @@ The full historical catalog, recurring rotations, raids, old collaborations and 
 
 - [Koumakan event revision 307891](https://azurlane.koumakan.jp/w/index.php?oldid=307891), revised November 14, 2026: encyclopedic event/mission history.
 - [EN maintenance notice, November 11](https://azurlane.yo-star.com/news/2026/11/11/maintenance-notice-11-12-12-a-m-utc-7-2/): event end November 26 at 23:59 UTC−7 (November 27, 14:59 Manila). Maintenance duration is not a launch guarantee.
-- [JP maintenance notice 771, November 10](https://azurlane.jp/news/771): event end November 26 at 23:59 JST (22:59 Manila); cosmetic sales end November 25 at 23:59 JST. Also announces the future Effulgence permanent addition without a date.
+- [JP maintenance notice 771, November 10](https://azurlane.jp/news/771): event end November 26 at 23:59 JST (22:59 Manila); its original November 25 cosmetic cutoff was extended to November 26 at 23:59 JST. The November 19 update also confirmed the Effulgence archive. [Superseding JP notice](https://azurlane.jp/news/772).
 - [Official CN notice](https://www.taptap.cn/moment/869277954591424622?group_id=2657) and [live hotfix](https://www.taptap.cn/moment/870039693318688612?group_id=2657): UTC+8 event/sales and midnight unlocks.
 - [Yostar launch release via Games Press](https://www.gamespress.com/Azur-Lane-x-25-Dimensional-Seduction-Collaboration-Its-Showtime-Angels), November 12: observed release and public supporting artwork fallback.
 - Ririsa [wiki revision 307890](https://azurlane.koumakan.jp/w/index.php?oldid=307890), Mikari [307889](https://azurlane.koumakan.jp/w/index.php?oldid=307889); augments [307862](https://azurlane.koumakan.jp/w/index.php?oldid=307862) and [307863](https://azurlane.koumakan.jp/w/index.php?oldid=307863).
@@ -121,4 +122,4 @@ Developer acceptance evidence for v0.8.12 is recorded in [the 39-capture QA inde
 
 ## EN November 19 update
 
-Operation BLACK FRIDAY adds nine EN activities and an EN Effulgence Before Eclipse permanent occurrence. See the [source ledger and test coverage](BLACK_FRIDAY.md). Catalog totals are 75 identities and 231 regional occurrences.
+Operation BLACK FRIDAY covers the EN promotion, the November 24 Veritas update and regional corrections. The catalog contains 82 identities and 261 regional occurrences. War Archives totals are EN 54, JP 52 and CN 52. [Regional evidence and coverage](BLACK_FRIDAY.md).

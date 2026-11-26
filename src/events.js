@@ -2,7 +2,7 @@
 export const EVENT_REGIONS = Object.freeze({EN:'EN · UTC−7',JP:'JP · Japan',CN:'CN · China'});
 export const EVENT_CATEGORIES = Object.freeze({major:'Major event',collaboration:'Collaboration',mini:'Mini-event',raid:'Raid',research:'Research campaign',recurring:'Recurring activity'});
 export const EVENT_ZONE = 'Asia/Manila';
-export const EVENT_STATUSES = Object.freeze({ongoing:'Ongoing',upcoming:'Upcoming',ended:'Ended',permanent:'War Archives',delayed:'Delayed',pending:'Awaiting launch',unknown:'Schedule TBA'});
+export const EVENT_STATUSES = Object.freeze({ongoing:'Ongoing',upcoming:'Upcoming',ended:'Ended',permanent:'War Archives',maintenance:'Maintenance day · closure time unconfirmed',delayed:'Delayed',pending:'Awaiting launch',unknown:'Schedule TBA'});
 const ID = /^[a-z0-9][a-z0-9-]{0,95}$/;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?(?:Z|[+-]\d{2}:\d{2})$/;
@@ -34,14 +34,15 @@ export function validateEventCatalog(catalog){
     check(!!s?.revision||validDate(s?.publishedAt||''),'sources.'+id,'revision or publication date required');
   }
   const refs=(value,path)=>check(Array.isArray(value)&&value.length>0&&value.every(id=>Object.hasOwn(sources,id)),path,'known source references required');
-  const time=(t,path)=>{
-    check(t&&['exact','date','maintenance','tba'].includes(t.kind),path,'invalid date precision');
+  const time=(t,path,{end=false}={})=>{
+    const kinds=end?['exact','date','maintenance-close','tba']:['exact','date','maintenance','tba'];
+    check(t&&kinds.includes(t.kind),path,'invalid date precision');
     if(!t)return;
     check(t.certainty==null||t.certainty==='confirmed',path,'estimates are not confirmed schedules; use TBA');
     refs(t.sourceIds,path+'.sourceIds');
     check(validZone(t.zone),path,'IANA timezone required');
     if(t.kind==='exact')check(validInstant(t.value),path,'exact instant needs timezone offset');
-    if(['date','maintenance'].includes(t.kind))check(validDate(t.date||''),path,'valid calendar date required');
+    if(['date','maintenance','maintenance-close'].includes(t.kind))check(validDate(t.date||''),path,'valid calendar date required');
     if(t.kind!=='exact')check(t.value==null,path,'non-exact date must not carry an instant');
     if(t.kind==='tba')check(t.date==null,path,'TBA must not carry a predicted date');
   };
@@ -67,13 +68,12 @@ export function validateEventCatalog(catalog){
       check(!regionRuns.has(key),p,'duplicate regional occurrence');regionRuns.add(key);
       check(['announced','released','delayed'].includes(o.releaseState),p,'release state required');
       refs(o.sourceIds,p);time(o.start,p+'.start');
-      if(o.kind!=='war-archives')time(o.end,p+'.end');
+      if(o.kind!=='war-archives')time(o.end,p+'.end',{end:true});
       else check(o.end==null,p,'permanent additions cannot expire');
       if(o.start?.kind==='exact'&&o.end?.kind==='exact')check(Date.parse(o.start.value)<Date.parse(o.end.value),p,'end must follow start');
       if(o.start?.date&&o.end?.date)check(o.start.date<=o.end.date,p,'end date must follow start date');
       if(o.start?.date&&o.end?.kind==='exact'&&validInstant(o.end.value)&&validZone(o.start.zone))check(o.start.date<=dateInZone(Date.parse(o.end.value),o.start.zone),p,'end must follow start date');
       if(o.start?.kind==='exact'&&o.end?.date&&validInstant(o.start.value)&&validZone(o.end.zone))check(dateInZone(Date.parse(o.start.value),o.end.zone)<=o.end.date,p,'end date must follow start');
-      if(o.end)check(['exact','date','tba'].includes(o.end.kind),p,'end cannot depend on maintenance completion');
       if(o.releaseState==='released')check(validInstant(o.releaseConfirmedAt),p,'release observation required');
       const phaseIds=new Set();
       check(o.phases==null||Array.isArray(o.phases),p,'phases must be an array');
@@ -112,7 +112,7 @@ function before(t,now){
 }
 function ended(t,now){
   if(t?.kind==='exact')return now>=Date.parse(t.value);
-  if(t?.kind==='date')return dateInZone(now,t.zone)>t.date;
+  if(t?.kind==='date'||t?.kind==='maintenance-close')return dateInZone(now,t.zone)>t.date;
   return false;
 }
 export function occurrenceStatus(o,now=Date.now()){
@@ -126,11 +126,12 @@ export function occurrenceStatus(o,now=Date.now()){
     if(observed)return 'permanent';
     return o.start?.kind==='tba'?'unknown':'pending';
   }
+  if(observed&&o.end?.kind==='maintenance-close'&&dateInZone(now,o.end.zone)===o.end.date)return 'maintenance';
   if(o.start?.kind==='exact'&&before(o.start,now)===false||observed)return 'ongoing';
   if(['date','maintenance'].includes(o.start?.kind))return 'pending';
   return 'unknown';
 }
-export function eventSection(status){return status==='ongoing'?'ongoing':status==='ended'?'past':status==='permanent'?'war-archives':'upcoming';}
+export function eventSection(status){return ['ongoing','maintenance'].includes(status)?'ongoing':status==='ended'?'past':status==='permanent'?'war-archives':'upcoming';}
 export function occurrenceSortTime(o){return o.start?.value?Date.parse(o.start.value):o.start?.date?Date.parse(o.start.date+'T00:00:00Z'):null;}
 export function eventRows(catalog,filters={},now=Date.now()){
   const {region='EN',query='',year='all',category='all',status='all',sort='newest'}=filters;
@@ -138,7 +139,7 @@ export function eventRows(catalog,filters={},now=Date.now()){
   const rows=[];
   for(const event of catalog?.events||[]){
     if(category!=='all'&&event.category!==category)continue;
-    if(term&&![event.title,event.franchise,event.description,...(event.aliases||[]),...(event.content||[]).map(x=>x.name)].join(' ').toLocaleLowerCase().includes(term))continue;
+    if(term&&![event.title,event.franchise,event.description,...(event.aliases||[]),...(event.content||[]).filter(x=>x.regions.includes(region)).map(x=>x.name)].join(' ').toLocaleLowerCase().includes(term))continue;
     const runs=event.occurrences.filter(o=>o.region===region&&(year==='all'||String(o.start.value||o.start.date||'').slice(0,4)===year));
     const ranked=runs.map(o=>({event,occurrence:o,status:occurrenceStatus(o,now)})).filter(r=>status==='all'||r.status===status);
     // One identity per section. Multiple historical reruns live in the detail chronology.
@@ -158,9 +159,11 @@ export function formatEventTime(t,zone=EVENT_ZONE){
   if(t.kind==='exact')return new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',...(new Date(t.value).getUTCSeconds()?{second:'2-digit'}:{}),timeZoneName:'short'}).format(new Date(t.value));
   const date=new Intl.DateTimeFormat('en-GB',{timeZone:'UTC',day:'2-digit',month:'short',year:'numeric'}).format(new Date(t.date+'T12:00:00Z'));
   const regionZone=({'Etc/GMT+7':'EN server (UTC−7)','Asia/Tokyo':'Japan (UTC+9)','Asia/Shanghai':'China (UTC+8)'})[t.zone]||t.zone;
+  if(t.kind==='maintenance-close')return date+' · '+regionZone+' · at maintenance';
   return date+' · '+regionZone+(t.kind==='maintenance'?' · after maintenance':' · time TBA');
 }
 export function eventCountdown(t,now=Date.now()){
+  if(t?.kind==='maintenance-close')return 'Closes at maintenance · exact time TBA';
   if(t?.kind!=='exact')return t?.kind==='maintenance'?'After maintenance · exact time TBA':t?.kind==='date'?(dateInZone(now,t.zone)>t.date?'Scheduled date passed · exact time unconfirmed':'Date confirmed · time TBA'):'TBA';
   if(!validInstant(t.value)||!Number.isFinite(now))return 'TBA';
   const left=Math.max(0,Math.ceil((Date.parse(t.value)-now)/1000));

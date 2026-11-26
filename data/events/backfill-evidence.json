@@ -1037,6 +1037,28 @@
       "sourceIds": [
         "en-black-friday-notice"
       ]
+    },
+    {
+      "eventId": "effulgence-before-eclipse",
+      "occurrenceId": "effulgence-jp-war-archives",
+      "region": "JP",
+      "kind": "war-archives",
+      "start": "2026-11-19",
+      "end": null,
+      "sourceIds": [
+        "jp-nov19-notice"
+      ]
+    },
+    {
+      "eventId": "effulgence-before-eclipse",
+      "occurrenceId": "effulgence-archive-cn-20261119",
+      "region": "CN",
+      "kind": "war-archives",
+      "start": "2026-11-19",
+      "end": null,
+      "sourceIds": [
+        "cn-nov19-notice"
+      ]
     }
   ],
   "selectedHistory": [
