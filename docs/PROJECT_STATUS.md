@@ -1,10 +1,24 @@
 # Project AVALON — Azur Lane Development Status
 
-_Last updated: 2026-11-22 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
+_Last updated: 2026-11-26 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
 ## Active development — v0.8.14 Operation BLACK FRIDAY (unreleased)
 
-Based on released main `036b782ec432ce3505f35271e0d62e860d9d5a14`. The EN catalog adds nine activities and one permanent occurrence. The three source-identified outfits use the existing Ship Profile, art controls and saved-loadout paths. [Source ledger and QA coverage](BLACK_FRIDAY.md) · [Issue #37 and release handoff](https://github.com/Avalon1230/avalon-azurlane/issues/37#issuecomment-7054570838). Local verification passed 376/376 Node tests and the responsive interaction suite, including eight new mobile and desktop captures. The catalog audit counted 54 permanent EN occurrences and 51 each for JP and CN. Independent QA reviews the PR head. Commander AVALON retains merge and deployment authority.
+**Current work.** [PR #38](https://github.com/Avalon1230/avalon-azurlane/pull/38) continues on `feat/black-friday-v0814`. The verified released base remains `036b782ec432ce3505f35271e0d62e860d9d5a14` (v0.8.13). The reviewed implementation is [`ef94bc9d6a29dcabc6a29b7652a9386f94dc387c`](https://github.com/Avalon1230/avalon-azurlane/commit/ef94bc9d6a29dcabc6a29b7652a9386f94dc387c). This handoff follows it on the same branch. The PR head and checks tab identify the exact candidate for independent review. [PR checks](https://github.com/Avalon1230/avalon-azurlane/pull/38/checks) · [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37) · [Master backlog #39](https://github.com/Avalon1230/avalon-azurlane/issues/39).
+
+**Recovery and changes.** Recovered head `cef48775899878aa8750f0d5295ee030b8e2bcab` already contained the nine EN activities, three linked outfit galleries and seven EN permanent acquisition routes. Its source and functional checks passed. The historical screenshot fetch and subsequent artifact upload failed on runner network timeouts. No independent review was posted at recovery. The November 26 pass added the Veritas update, corrected the JP/CN collaboration shop deadlines, and reconciled regional Effulgence availability in place. The Events schema can display a closure at maintenance without inventing an hour. Existing hash routes, storage keys, six-slot loadouts, frames and gallery controls carry forward. [Earlier run](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44989171809) · [Regional evidence and limits](BLACK_FRIDAY.md).
+
+| Development catalog | Event identities | Regional occurrences | War Archives EN / JP / CN |
+| --- | ---: | ---: | --- |
+| Released v0.8.13 | 66 | 221 | 53 / 51 / 51 |
+| Recovered PR #38 | 75 | 231 | 54 / 51 / 51 |
+| November 26 candidate | 82 | 261 | 54 / 52 / 52 |
+
+**Verification.** All 380 Node regressions, `npm run check`, the catalog audit, pinned client audits, and the isolated browser release rehearsal passed locally. Digest tests preserve the original ordered IDs in both baselines. The release rehearsal preserved saved loadouts and validated the unreleased preview. GitHub Actions runs the full viewport, keyboard, gallery, research, combat and release suites. The `integrity-ui-screenshots` artifact includes ten BLACK FRIDAY captures at 390 and 1280 pixels, including the Veritas regional schedule. Use the workflow conclusion and artifacts linked on the PR for final head verification.
+
+**Open evidence.** The EN Napoli correction was available through the official-account mirror. The direct post returned 403. The wiki API identified both event banners at pinned revisions, while direct image requests from the development environment returned 403. The CN Asanagi shop date and JP seasonal mission-claim deadline remain unresolved. The event catalog is partial. See the source ledger for what each promotion and region covers.
+
+**Release gate and next work.** Independent QA reviews the latest PR #38 head and its artifacts. Commander AVALON authorizes the release. After v0.8.14 is released and its new main is verified, the next scoped branch is **v0.8.15 Operation OVERWATCH — The Bridge**. CODEX, FORGE and CARTOGRAPHER follow in the order and with the dependencies specified in Issue #39.
 
 ## Current release — v0.8.13 Operation INTEGRITY (Commander-approved, deployed 2026-11-21)
 
@@ -13,7 +27,7 @@ Released on 2026-11-20; this is the branch metadata finalization date in Asia/Ma
 - **Delivered:** Operation INTEGRITY: Corrective polish. See the current [changelog](../CHANGELOG.md).
 - **Commander-authorized release:** After final independent QA [review #5997735028](https://github.com/Avalon1230/avalon-azurlane/pull/36#pullrequestreview-5997735028), the Commander explicitly approved merging/deployment of finalized head `c316669c0ea465a72da3789507b9b5ee4a36231a`. [PR #36](https://github.com/Avalon1230/avalon-azurlane/pull/36) was squash-merged on 2026-11-21 (Asia/Manila) as **`bdcb34a531b832ac814647c8076ac62f9e48b766`**, replacing v0.8.12 main `9d2ab620b875284f8732886fb9ee15634fab2c6e`.
 - **Post-merge verification:** [Quality checks 44845705794](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44845705794) passed both jobs on merge SHA `bdcb34a5` (371/371 Node tests, release validation, full browser regressions). [Pages deployment 44845704114](https://github.com/Avalon1230/avalon-azurlane/actions/runs/44845704114) reported success for the same SHA. Independently checked the actual Pages deployment artifact: all **73/73** manifest-listed files matched SHA-256, with **zero missing/mismatched files** and release fingerprint **`1039a639795b4efa3f0b747df752d382d1282e992fa421cf2e501b396bbaab98`**; version and status were `0.8.13 / released`, with the released-state footer. The public browser site could not be directly fetched from the QA environment, so live HTTP/cache behavior is **not independently certified**; do not equate artifact integrity with a live browser check. Six remote collaboration logos remain host-throttled (HTTP 429), unverified and nonblocking.
-- **Next release:** v0.8.14 Operation BLACK FRIDAY is tracked in [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37). Work should branch from the actual v0.8.13 released main after checking its latest commit; independent QA reviews, and the Commander alone authorizes the next merge. Preserve all v0.8.13 features and storage state.
+- **Next release:** v0.8.14 Operation BLACK FRIDAY is tracked in [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37). PR #38 carries the development work from that released main. See the active handoff above. Preserve all v0.8.13 features and storage state.
 - **History and limitations:** The preceding development record below retains source evidence, verification results and remaining coverage gaps.
 
 ## Historical development — v0.8.13 Operation INTEGRITY (unreleased)
