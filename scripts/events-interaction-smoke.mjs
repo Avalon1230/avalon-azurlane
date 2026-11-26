@@ -29,7 +29,28 @@ async function pageFor(width,{data=catalog,liveArt=false,failCatalog=false}={}){
 }
 async function overflow(page){assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'No horizontal page overflow');}
 async function wholePersonalName(page,name){
- const result=await page.locator('.ship-profile-identity h1').evaluate((el,name)=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const i=node.textContent.indexOf(name);if(i<0)continue;const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+name.length);const rects=[...range.getClientRects()];return {lines:new Set(rects.map(r=>Math.round(r.top))).size,inside:rects.every(r=>r.left>=el.getBoundingClientRect().left-1&&r.right<=el.getBoundingClientRect().right+1)};}return null;},name);
+ // Loading profile data replaces the heading. Locate and measure it in one browser task.
+ const layout=await page.waitForFunction(name=>{
+  const heading=document.querySelector('.ship-profile-identity h1');
+  if(!heading)return false;
+  const walker=document.createTreeWalker(heading,NodeFilter.SHOW_TEXT);
+  for(let node=walker.nextNode();node;node=walker.nextNode()){
+   const start=node.textContent.indexOf(name);
+   if(start===-1)continue;
+   const range=document.createRange();
+   range.setStart(node,start);range.setEnd(node,start+name.length);
+   const rects=Array.from(range.getClientRects());
+   if(!rects.length)return false;
+   const bounds=heading.getBoundingClientRect();
+   return {
+    lines:new Set(rects.map(rect=>Math.round(rect.top))).size,
+    inside:rects.every(rect=>rect.left>=bounds.left-1&&rect.right<=bounds.right+1)
+   };
+  }
+  return false;
+ },name,{timeout:5000});
+ const result=await layout.jsonValue();
+ await layout.dispose();
  assert.deepEqual(result,{lines:1,inside:true},name+' remains whole inside the profile heading');
 }
 async function openFilters(page){

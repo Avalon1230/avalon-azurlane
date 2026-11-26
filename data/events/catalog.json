@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-26T06:32:48Z",
+  "updatedAt": "2026-11-26T12:57:32Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -790,6 +790,20 @@
       "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/JP/sharecfgdata/ship_skin_template.lua",
       "revision": "140a2f109e44972dc302d3f8fdeb683920942876",
       "checkedAt": "2026-11-26T06:32:48Z"
+    },
+    "cn-merit-shop": {
+      "type": "client",
+      "title": "CN client · Merit Shop inventory",
+      "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/CN/sharecfgdata/shop_template.lua",
+      "revision": "140a2f109e44972dc302d3f8fdeb683920942876",
+      "checkedAt": "2026-11-26T12:57:32Z"
+    },
+    "cn-merit-pool": {
+      "type": "client",
+      "title": "CN client · Merit Shop rotation",
+      "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/CN/sharecfg/arena_data_shop.lua",
+      "revision": "140a2f109e44972dc302d3f8fdeb683920942876",
+      "checkedAt": "2026-11-26T12:57:32Z"
     }
   },
   "events": [
@@ -2667,10 +2681,10 @@
         "cn-nov19-notice",
         "wiki-effulgence-nov26"
       ],
-      "verifiedAt": "2026-11-26T06:32:48Z",
+      "verifiedAt": "2026-11-26T12:57:32Z",
       "missing": [
         "Full historical missions and stage-by-stage archive drop tables still need review.",
-        "The CN notice lists a supply-shop addition for a subsequent maintenance. Its effective date still needs confirmation."
+        "The CN Asanagi exchange is verified in the permanent shop pool. The hour it first became available is unconfirmed."
       ],
       "occurrences": [
         {
@@ -3091,6 +3105,27 @@
             "archive-client-jp"
           ],
           "shipId": "30189"
+        },
+        {
+          "id": "cn-merit-asanagi",
+          "kind": "ship",
+          "name": "Asanagi · Merit Shop",
+          "description": "Asanagi can appear in the CN Merit Shop rotation.",
+          "regions": [
+            "CN"
+          ],
+          "occurrenceIds": [
+            "effulgence-archive-cn-20261119"
+          ],
+          "sourceIds": [
+            "cn-nov19-notice",
+            "archive-client-cn",
+            "cn-merit-shop",
+            "cn-merit-pool"
+          ],
+          "shipId": "30190",
+          "cost": 8000,
+          "currency": "Merit"
         }
       ],
       "stages": [

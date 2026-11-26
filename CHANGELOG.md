@@ -12,7 +12,7 @@ Unreleased; Operation BLACK FRIDAY is in independent QA preparation.
 - Open the three hospital outfit galleries from purchase or rental details. Napoli shows the corrected L2D+ category and both prices.
 - Find Effulgence Before Eclipse in EN War Archives and see the seven permanent acquisition routes separately from limited-run history.
 
-- Updated the November 24 event schedules, separated Veritas Academy stage and reward deadlines, and recorded the JP/CN collaboration shop extensions. Effulgence now has confirmed War Archives access on all three servers.
+- Updated the November 24 event schedules, separated Veritas Academy stage and reward deadlines, and recorded the JP/CN collaboration shop extensions. Effulgence now has confirmed War Archives access on all three servers, including Asanagi’s 8,000-Merit shop route on CN.
 
 ## [0.8.13] - 2026-11-20
 

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {luaRecord} from './lua-data.mjs';
 const evidence=JSON.parse(await readFile(new URL('../data/events/black-friday-evidence.json',import.meta.url)));
 const response=await fetch(evidence.client.url,{signal:AbortSignal.timeout(60000)});
 assert(response.ok,'Pinned EN client HTTP '+response.status);
@@ -48,3 +49,18 @@ for(const tag of Object.values(archiveShips.find(source=>source.region==='CN').n
   assert.equal(row.match(/\bcode = "([^"]+)"/)?.[1],cnNameCodes.codes[id]);
 }
 console.log('PASS archive ship identities in EN, JP and CN, including CN publisher aliases.');
+
+const merit=evidence.regionalReview.cnMeritShop;
+const [shopText,poolText]=await Promise.all([pinnedText(merit.shop),pinnedText(merit.pool)]);
+const shop=luaRecord(shopText,'shop_template',merit.shopId);
+const pool=luaRecord(poolText,'arena_data_shop',merit.poolId);
+assert.equal(shop.genre,'arena_shop');
+assert.equal(shop.time,'always');
+assert.deepEqual(shop.effect_args,[merit.shipFormId]);
+assert.equal(shop.resource_num,merit.price);
+assert(pool[merit.poolList].some(([id,weight])=>id===merit.shopId&&weight>0));
+const item=archive.content.find(i=>i.id==='cn-merit-asanagi');
+assert.equal(item.shipId,String(Math.floor(merit.shipFormId/10)));
+assert.equal(item.cost,shop.resource_num);
+assert.equal(item.currency,'Merit');
+console.log('PASS Asanagi CN Merit Shop exchange and rotation.');

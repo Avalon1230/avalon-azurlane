@@ -381,6 +381,21 @@
         "294": "猃",
         "295": "鳂"
       }
+    },
+    "cnMeritShop": {
+      "shop": {
+        "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/CN/sharecfgdata/shop_template.lua",
+        "sha256": "cb780c5d8fa244b4f66aad75456a7b6d71abbb853dc1135c21202367d6bbc094"
+      },
+      "pool": {
+        "url": "https://raw.githubusercontent.com/AzurLaneTools/AzurLaneLuaScripts/140a2f109e44972dc302d3f8fdeb683920942876/CN/sharecfg/arena_data_shop.lua",
+        "sha256": "d598ab775a9c1393735ee74d66dfeb6b97a4bd24b0073d471d7619b5ad690633"
+      },
+      "poolId": 1,
+      "poolList": "commodity_list_4",
+      "shopId": 43065,
+      "shipFormId": 301901,
+      "price": 8000
     }
   }
 }

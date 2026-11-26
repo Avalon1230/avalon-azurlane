@@ -76,7 +76,9 @@ test('regional archive release reuses the JP bookmark and keeps limited rewards 
     assert.equal(run.start.date,'2026-11-19');
     if(region==='JP')assert.equal(run.id,'effulgence-jp-war-archives');
     const rewards=event.content.filter(item=>item.occurrenceIds.includes(run.id));
-    assert.equal(rewards.some(i=>i.id==='merit-asanagi'),region!=='CN');
+    const merit=rewards.filter(i=>i.name==='Asanagi · Merit Shop');
+    assert.equal(merit.length,1);
+    assert.equal(merit[0].cost,region==='CN'?8000:undefined);
     assert.equal(rewards.some(i=>i.id==='jp-final-map-guarantee'),region==='JP');
     assert(!event.stages.some(s=>s.occurrenceIds.includes(run.id)));
   }
