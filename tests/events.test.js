@@ -16,8 +16,8 @@ const exact=value=>({kind:'exact',zone:'UTC',value,sourceIds:[en.sourceIds[0]]})
 const run={...en,start:exact('2026-11-16T03:00:00Z'),end:exact('2026-11-16T05:00:00Z'),releaseState:'announced'};
 
 test('verified expanded catalog preserves regional releases and source revisions',()=>{
- assert.deepEqual(validateEventCatalog(catalog),[]);assert.equal(catalog.events.length,66);
- assert.equal(new Set(catalog.events.flatMap(e=>e.occurrences.map(o=>o.id))).size,221);
+ assert.deepEqual(validateEventCatalog(catalog),[]);assert.equal(catalog.events.length,82);
+ assert.equal(new Set(catalog.events.flatMap(e=>e.occurrences.map(o=>o.id))).size,261);
  assert.equal(collab.occurrences.length,3);assert.equal(catalog.coverage,'partial');
 });
 test('schema rejects identity, occurrence and regional-run duplicates',()=>{
@@ -85,8 +85,10 @@ test('permanent availability is distinct from expired events and JP announced ad
  const fool=catalog.events.find(e=>e.id==='the-fools-scales').occurrences.find(o=>o.kind==='war-archives');
  assert.equal(occurrenceStatus(fool,now),'permanent');assert.equal(eventSection('permanent'),'war-archives');
  const upcoming=catalog.events.find(e=>e.id==='effulgence-before-eclipse').occurrences.find(o=>o.kind==='war-archives');
- assert.equal(upcoming.region,'JP');assert.equal(occurrenceStatus(upcoming,now),'unknown');
- assert.equal(eventRows(catalog,{region:'EN'},now).some(r=>r.section==='upcoming'),false);
+ assert.equal(upcoming.region,'JP');assert.equal(occurrenceStatus(upcoming,now),'upcoming');
+ const en=eventRows(catalog,{region:'EN'},now).filter(r=>r.section==='upcoming');
+ assert.ok(en.some(r=>r.event.id==='effulgence-before-eclipse'));
+ assert.ok(en.every(r=>Date.parse(r.occurrence.start.value||r.occurrence.start.date)>now));
  assert.ok(eventRows(catalog,{region:'JP'},now).some(r=>r.section==='upcoming'&&r.event.id==='effulgence-before-eclipse'));
 });
 test('search matches franchise, rewards and aliases; year/category/status/region filtering',()=>{
@@ -129,11 +131,11 @@ test('timeline exposes individual regional occurrences; loading, empty and unava
 test('unknown art, incomplete content and malicious source text render safely',()=>{
  const c=clone();c.events[0].artwork=null;c.events[0].title='<script>alert(1)</script>';
  const html=renderEvents({catalog:c,filters,now});assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>/);assert.match(html,/event-art-fallback/);
- const jp=renderEventDetail({catalog,eventId:'bayard-blueprint-completion',filters:{...filters,region:'JP'},now});assert.match(jp,/no verified regional record/);assert.match(jp,/do not yet have verified rewards/);
+ const cn=renderEventDetail({catalog,eventId:'rapid-training-november-2026',filters:{...filters,region:'CN'},now});assert.match(cn,/no verified regional record/);assert.match(cn,/do not yet have verified rewards/);
 });
 test('local catalog loader handles HTTP failures, invalid JSON/schema and timeouts without partial publication',async()=>{
  const response=body=>({ok:true,text:async()=>body});
- assert.equal((await loadEventCatalog(async()=>response(JSON.stringify(catalog)))).events.length,66);
+ assert.equal((await loadEventCatalog(async()=>response(JSON.stringify(catalog)))).events.length,82);
  await assert.rejects(loadEventCatalog(async()=>({ok:false,status:503})),/HTTP 503/);
  await assert.rejects(loadEventCatalog(async()=>response('{bad')));
  await assert.rejects(loadEventCatalog(async()=>response(JSON.stringify({...catalog,schemaVersion:99}))),/validation/);
@@ -191,7 +193,7 @@ test('completed runs and verified permanent availability have independent region
  }
  const jp=eventRows(catalog,{region:'JP'},now).filter(r=>r.event.id==='effulgence-before-eclipse');
  assert.deepEqual(jp.map(r=>r.section).sort(),['past','upcoming']);
- assert.equal(new Set(enRows.map(r=>r.event.id)).size,66);
+ assert.equal(new Set(enRows.map(r=>r.event.id)).size,82);
 });
 test('four sections and counts agree between cards and timeline, with occurrence-specific links',()=>{
  for(const view of ['cards','timeline']){
@@ -220,10 +222,12 @@ test('future permanent addition needs observed release even when its exact plann
 });
 test('cards, timeline, detail and history describe planned availability until observation',()=>{
  const c=clone(),e=c.events.find(e=>e.id==='effulgence-before-eclipse'),o=e.occurrences.find(o=>o.kind==='war-archives');
+ // Isolate the JP transition. The real EN schedule is exercised independently.
+ e.occurrences=e.occurrences.filter(run=>run.region==='JP');
  const f={...filters,region:'JP',query:e.title};
  const render=()=>[...['cards','timeline'].map(view=>renderEvents({catalog:c,filters:{...f,view},now})),renderEventDetail({catalog:c,eventId:e.id,filters:f,now})];
  for(const html of render()){assert.match(html,/Planned War Archives addition · not available yet/);assert.doesNotMatch(html,/Permanent content/);}
- o.releaseState='released';o.releaseConfirmedAt=new Date(now).toISOString();
+ o.start.date='2026-11-17';o.releaseState='released';o.releaseConfirmedAt=new Date(now).toISOString();
  for(const html of render()){assert.match(html,/Permanent content · available in War Archives/);assert.doesNotMatch(html,/Planned War Archives addition/);}
 });
 test('historical shop and reward scopes do not leak into permanent or other regional runs',()=>{
@@ -292,7 +296,7 @@ test('filter disclosure hides controls by default but retains region, search and
 
 const backfill=JSON.parse(readFileSync(new URL('../data/events/backfill-evidence.json',import.meta.url)));
 test('all reviewed source dates and pre-backfill stable IDs agree with the separate evidence ledger',()=>{
- assert.deepEqual(auditBackfillEvidence(catalog,backfill),{indexedIdentities:51,publisherOccurrences:24,selectedHistories:8,verifiedPermanent:155});
+ assert.deepEqual(auditBackfillEvidence(catalog,backfill),{indexedIdentities:51,publisherOccurrences:27,selectedHistories:8,verifiedPermanent:158});
 });
 test('evidence audit rejects regional date drift, invented availability and removed stable history',()=>{
  for(const mutate of [

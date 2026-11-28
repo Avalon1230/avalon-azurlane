@@ -29,7 +29,28 @@ async function pageFor(width,{data=catalog,liveArt=false,failCatalog=false}={}){
 }
 async function overflow(page){assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'No horizontal page overflow');}
 async function wholePersonalName(page,name){
- const result=await page.locator('.ship-profile-identity h1').evaluate((el,name)=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const i=node.textContent.indexOf(name);if(i<0)continue;const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+name.length);const rects=[...range.getClientRects()];return {lines:new Set(rects.map(r=>Math.round(r.top))).size,inside:rects.every(r=>r.left>=el.getBoundingClientRect().left-1&&r.right<=el.getBoundingClientRect().right+1)};}return null;},name);
+ // Loading profile data replaces the heading. Locate and measure it in one browser task.
+ const layout=await page.waitForFunction(name=>{
+  const heading=document.querySelector('.ship-profile-identity h1');
+  if(!heading)return false;
+  const walker=document.createTreeWalker(heading,NodeFilter.SHOW_TEXT);
+  for(let node=walker.nextNode();node;node=walker.nextNode()){
+   const start=node.textContent.indexOf(name);
+   if(start===-1)continue;
+   const range=document.createRange();
+   range.setStart(node,start);range.setEnd(node,start+name.length);
+   const rects=Array.from(range.getClientRects());
+   if(!rects.length)return false;
+   const bounds=heading.getBoundingClientRect();
+   return {
+    lines:new Set(rects.map(rect=>Math.round(rect.top))).size,
+    inside:rects.every(rect=>rect.left>=bounds.left-1&&rect.right<=bounds.right+1)
+   };
+  }
+  return false;
+ },name,{timeout:5000});
+ const result=await layout.jsonValue();
+ await layout.dispose();
  assert.deepEqual(result,{lines:1,inside:true},name+' remains whole inside the profile heading');
 }
 async function openFilters(page){
@@ -85,9 +106,9 @@ try{
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
   await page.getByLabel('Search events & rewards').fill('Mikari');assert.equal(await page.locator('[data-event-card]').count(),1);assert.equal(await page.locator('#event-query').evaluate(el=>el===document.activeElement),true);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
-  await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Status',{exact:true}).selectOption('unknown');
+  await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Search events & rewards').fill('Effulgence');await page.getByLabel('Status',{exact:true}).selectOption('upcoming');
   assert.match(await page.locator('[data-event-card]').innerText(),/Effulgence Before Eclipse/);assert.match(await page.locator('[data-event-card]').innerText(),/Planned War Archives addition · not available yet/);assert.doesNotMatch(await page.locator('[data-event-card]').innerText(),/Permanent content/);assert.equal(await page.locator('[data-event-countdown]').count(),0);
-  await page.reload();await openFilters(page);assert.equal(await page.locator('#event-region').inputValue(),'JP');assert.equal(await page.locator('#event-status').inputValue(),'unknown');
+  await page.reload();await openFilters(page);assert.equal(await page.locator('#event-region').inputValue(),'JP');assert.equal(await page.locator('#event-status').inputValue(),'upcoming');
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();
   await page.getByLabel('Year',{exact:true}).selectOption('2018');await page.getByLabel('Chronology').selectOption('oldest');
   assert.ok(await page.locator('[data-event-card]').count()>0);
@@ -142,13 +163,13 @@ try{
   await page.getByRole('link',{name:'Liliel Angel Paratroopers/Ririsa ↗',exact:true}).click();await page.locator('.ship-profile-overview').waitFor();
   await page.waitForFunction(()=>[...document.querySelectorAll('.ship-art-preview-image,.asset-img')].every(i=>i.complete),{},{timeout:25000}).catch(()=>{});await capture(page,'ririsa-'+width);await overflow(page);
   await page.goto(url+'/#/ships/1180002');await page.locator('.ship-profile-overview').waitFor();await page.waitForFunction(()=>[...document.querySelectorAll('.ship-art-preview-image,.asset-img')].every(i=>i.complete),{},{timeout:25000}).catch(()=>{});await capture(page,'mikari-'+width);
-  await page.goto(url+'/#/events');await openFilters(page);await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Status',{exact:true}).selectOption('unknown');await closeFilters(page);await page.locator('#events-upcoming').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'upcoming-jp-'+width);await openFilters(page);
+  await page.goto(url+'/#/events');await openFilters(page);await page.getByLabel('Server region').selectOption('JP');await page.getByLabel('Search events & rewards').fill('Effulgence');await page.getByLabel('Status',{exact:true}).selectOption('upcoming');await closeFilters(page);await page.locator('#events-upcoming').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'upcoming-jp-'+width);await openFilters(page);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();await page.getByLabel('Status',{exact:true}).selectOption('ended');await page.getByRole('button',{name:'Timeline',exact:true}).click();await closeFilters(page);await page.locator('#events-past').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'past-'+width);await openFilters(page);
   await page.getByRole('button',{name:'Reset filters',exact:true}).click();await closeFilters(page);await page.locator('#events-war-archives').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await capture(page,'war-archives-'+width);
   await page.locator('section[aria-labelledby="events-past"] [data-event-card="the-fools-scales"] h3 a').click();await page.getByRole('button',{name:'Obtainable content',exact:true}).click();await capture(page,'past-detail-'+width);
   await page.goto(url+'/#/events');await openFilters(page);await page.getByLabel('Server region').selectOption('CN');await page.getByLabel('Search events & rewards').fill('Visitors Dyed in Red');await page.getByLabel('Year',{exact:true}).selectOption('2018');await page.getByLabel('Status',{exact:true}).selectOption('permanent');await closeFilters(page);await page.evaluate(()=>scrollTo(0,0));await capture(page,'server-summary-'+width);await overflow(page);
   await page.goto(url+'/#/events/divergent-chessboard');await page.getByRole('button',{name:'History',exact:true}).click();await capture(page,'history-'+width);assert.deepEqual(errors,[]);await page.close();
  }
- writeFileSync(out+'/report.json',JSON.stringify({observationTime:'2026-11-17T14:36:00Z',catalog:'production, partial (66 identities / 221 occurrences)',externalData:'unavailable by design; art requested from real source URLs',results:report},null,2));
+ writeFileSync(out+'/report.json',JSON.stringify({observationTime:'2026-11-17T14:36:00Z',catalog:{coverage:catalog.coverage,identities:catalog.events.length,occurrences:catalog.events.flatMap(e=>e.occurrences).length},externalData:'unavailable by design; art requested from real source URLs',results:report},null,2));
  console.log('PASS CHRONICLE: four responsive interaction sessions; catalog retry; controlled launch/unlock/end transitions; three real-art screenshot sessions (39 captures).');
 }finally{await browser.close();server.close();}

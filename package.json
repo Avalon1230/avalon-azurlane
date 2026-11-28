@@ -1,7 +1,7 @@
 {
   "name": "avalon-azurlane",
   "private": true,
-  "version": "0.8.13",
+  "version": "0.8.14",
   "type": "module",
   "description": "Independent Azur Lane fleet and equipment intelligence — foundation MVP",
   "scripts": {

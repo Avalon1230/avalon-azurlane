@@ -2,6 +2,20 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
+## [0.8.14] - 2026-11-29
+
+Released on 2026-11-29; this is the metadata finalization date for Operation BLACK FRIDAY on PR #38. Public rollout requires separate Commander authorization after independent release-state QA. [Finalization authorization](https://github.com/Avalon1230/avalon-azurlane/pull/38#issuecomment-7243598672).
+
+### Events and outfits
+
+- Track the EN rerun, coupon, cruise missions, daily stash, side stories, outfit sales and rentals across their own schedules. Campaign Drop Support and Anchorage furniture have earlier deadlines.
+- Open the three hospital outfit galleries from purchase or rental details. Napoli shows the corrected L2D+ category and both prices.
+- Find Effulgence Before Eclipse in EN War Archives and see the seven permanent acquisition routes separately from limited-run history.
+
+- Updated the November 24 event schedules, separated Veritas Academy stage and reward deadlines, and recorded the JP/CN collaboration shop extensions. Effulgence now has confirmed War Archives access on all three servers, including Asanagi’s 8,000-Merit shop route on CN.
+
+- Reward searches now open the run that offered the reward in both Cards and Timeline. On CN, the Veritas Academy Medal can be claimed with previously earned stickers until December 15 at 23:59 server time.
+
 ## [0.8.13] - 2026-11-20
 
 Released on 2026-11-20; this date records finalization of v0.8.13 on PR #36. Public rollout requires separate Commander approval after independent QA of the finalized commit. [Preparation authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).

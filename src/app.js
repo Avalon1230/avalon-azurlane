@@ -38,6 +38,7 @@ import { shipBrowseDisplayNation } from './ship-factions.js';
 import { curatedProfile, SCENARIOS, suggestFleet } from './fleet-suggest.js';
 import { renderSuggestedFleet } from './fleet-suggest-view.js';
 import {LIVE_SHIPS,liveShip} from './live-content.js';
+import {blackFridayArtwork} from './black-friday-artwork.js';
 import {renderEvents,renderEventDetail} from './events-view.js';
 import {loadEventCatalog,readEventFilters,saveEventFilters} from './events-store.js';
 import {normalizeEventFilters,parseEventRoute} from './events.js';
@@ -581,7 +582,7 @@ function render() {
     const data=detailedShipRecord(state.shipDetails.data,state.detail.sourceId || ship?.sourceId);
     const recordId=String(state.detail.sourceId || ship?.sourceId || '');
     const wikiPainting=wikiArtCache.get(recordId);
-    const artworkSkins=mergeArtworkSkins(recordId,artworkSkinsForShip(state.shipDetails.artwork,recordId),liveShip(recordId)?.artwork)
+    const artworkSkins=mergeArtworkSkins(recordId,artworkSkinsForShip(state.shipDetails.artwork,recordId),liveShip(recordId)?.artwork,blackFridayArtwork[recordId])
       .map(skin=>skin.id===recordId+'0' && wikiPainting
         ? {...skin,images:{...skin.images,wiki:wikiPainting}}:skin);
     const selectedSkin=artworkSkins.findIndex(s=>s.id===state.profileSkinId);

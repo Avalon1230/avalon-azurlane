@@ -33,7 +33,7 @@ function trustedWikiUrl(url) {
   try {
     const parsed = new URL(url);
     return parsed.protocol === 'https:' && parsed.hostname === 'azurlane.koumakan.jp' &&
-      parsed.pathname.startsWith('/wiki/') ? parsed.href : null;
+      (parsed.pathname.startsWith('/wiki/') || (parsed.pathname==='/w/index.php' && /^\d+$/.test(parsed.searchParams.get('oldid')||''))) ? parsed.href : null;
   } catch { return null; }
 }
 const pct = n => Number.isFinite(n) ? (Math.round(n * 1000) / 10).toLocaleString('en-US') + '%' : '—';
@@ -84,7 +84,7 @@ function artworkVariantControls(skin,variant) {
 function artworkAcquisition(skin,data) {
   if(!skin?.acquisition&&!skin?.sourceUrl)return '';
   return '<div class="ship-art-acquisition">'+(skin.acquisition?'<p>'+E(skin.acquisition)+'</p>':'')+
-    (data.eventId&&skin.acquisition?'<a class="text-link" href="#/events/'+E(data.eventId)+'">Regional availability & deadlines →</a>':'')+
+    ((skin.eventId||data.eventId)&&skin.acquisition?'<a class="text-link" href="#/events/'+E(skin.eventId||data.eventId)+'">Regional availability & deadlines →</a>':'')+
     (trustedWikiUrl(skin.sourceUrl)?'<a class="text-link" href="'+E(skin.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Artwork source ↗</a>':'')+'</div>';
 }
 function artworkPanel(data, skinIndex, artworkSkins=[],variant='default') {
@@ -290,7 +290,8 @@ function sourcePanel(data, ship, wiki=null) {
 }
 
 export function renderShipProfile({ ship = null, data = null, status = 'idle', level='level120', skinIndex=0, artVariant='default', viewerOpen=false, artworkSkins=[], wikiFacts=null, loadoutModel=null, researchState={}, researchView={}, error='' } = {}) {
-  const name = data?.names?.en || ship?.name || 'Ship profile';
+  const reviewedSkin=artworkSkins.find(skin=>skin.shipName && skin.eventId);
+  const name = data?.names?.en || ship?.name || reviewedSkin?.shipName || 'Ship profile';
   const back='<button type="button" class="outline-btn compact" data-action="profile-back">← Back to roster</button>';
   if(!data){
     const message=status==='failed'
@@ -302,7 +303,8 @@ export function renderShipProfile({ ship = null, data = null, status = 'idle', l
       '<h1>'+E(name)+'</h1><p>'+message+'</p>'+back+
       (status==='failed'?'<button type="button" class="outline-btn compact" data-action="profile-retry">Retry loading</button>':'')+
       (error&&status==='failed'?'<small>'+E(error)+'</small>':'')+
-      '</div></div>';
+      '</div>' + (reviewedSkin ? artworkPanel({names:{en:name},eventId:reviewedSkin.eventId},skinIndex,artworkSkins,artVariant) +
+        (viewerOpen ? artworkViewer({names:{en:name}},skinIndex,artworkSkins,artVariant) : '') : '') + '</div>';
   }
   const wiki=wikiFacts && String(wikiFacts.sourceId)===String(data.id)?wikiFacts:null;
   const research=researchShip(ship||data);
