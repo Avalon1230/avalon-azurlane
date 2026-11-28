@@ -2,9 +2,9 @@
 
 All notable AVALON — Azur Lane Intelligence updates are recorded here. Dates are in the Asia/Manila timezone. Version numbers track the fan application's development, not Azur Lane game versions.
 
-## [0.8.14] - 2026-11-22
+## [0.8.14] - 2026-11-29
 
-Unreleased; Operation BLACK FRIDAY is in independent QA preparation.
+Released on 2026-11-29; this is the metadata finalization date for Operation BLACK FRIDAY on PR #38. Public rollout requires separate Commander authorization after independent release-state QA. [Finalization authorization](https://github.com/Avalon1230/avalon-azurlane/pull/38#issuecomment-7243598672).
 
 ### Events and outfits
 

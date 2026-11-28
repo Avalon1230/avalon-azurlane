@@ -2,7 +2,16 @@
 
 _Last updated: 2026-11-29 (Asia/Manila). This is the permanent cross-conversation development handoff. Verify repository state and CI for later changes._
 
-## Active development — v0.8.14 Operation BLACK FRIDAY (unreleased)
+## Current release — v0.8.14 Operation BLACK FRIDAY (finalized on PR #38)
+
+Released on 2026-11-29; this records metadata finalization on the existing PR branch in Asia/Manila. Independent QA accepted implementation commit `bd32bdf62086672a39eb82d5a2e5acb457f21365` after both corrections and 384 passing tests. Commander AVALON authorized release preparation on that branch. [Independent QA](https://github.com/Avalon1230/avalon-azurlane/pull/38#pullrequestreview-6099484971) · [Commander authorization](https://github.com/Avalon1230/avalon-azurlane/pull/38#issuecomment-7243598672) · [Implementation CI](https://github.com/Avalon1230/avalon-azurlane/actions/runs/46170881520).
+
+- **Branch state.** PR #38 carries the released metadata, regenerated deployment manifest and BUILD module. At finalization, main was on v0.8.13 at `036b782ec432ce3505f35271e0d62e860d9d5a14`. The catalog contains 82 event identities and 261 regional occurrences. The preceding release and development history follow below.
+- **Local verification.** All 384 tests, the catalog audit, the release consistency check and all 75 manifest file hashes passed. The browser displayed exactly `v0.8.14` and preserved the seeded loadout. Build fingerprint: `225a889f413daa69f005dfe304d1fd2090528049c67425953c84b41704ebb34a`.
+- **Release-state QA.** Review the finalized commit and its Quality checks on PR #38. The release-state browser report records the footer text, served-file verification and saved-loadout result. [PR checks](https://github.com/Avalon1230/avalon-azurlane/pull/38/checks).
+- **Next decision.** Commander AVALON authorizes merge and deployment separately after final verification. Record the actual merge SHA and verify the served build before starting v0.8.15 Operation OVERWATCH. [Master backlog](https://github.com/Avalon1230/avalon-azurlane/issues/39).
+
+## Historical development — v0.8.14 Operation BLACK FRIDAY (unreleased)
 
 **Current work.** [PR #38](https://github.com/Avalon1230/avalon-azurlane/pull/38) continues on `feat/black-friday-v0814`. The verified released base remains `036b782ec432ce3505f35271e0d62e860d9d5a14` (v0.8.13). Independent QA requested two corrections on `b6db8ccf6db6a9408749c934090aaaecae82b3f8`. The corrected implementation is [`e6039c89c43800bd5248e1c3dc2f2236b38dee74`](https://github.com/Avalon1230/avalon-azurlane/commit/e6039c89c43800bd5248e1c3dc2f2236b38dee74). The following commit records this handoff. The PR head and checks tab identify the exact candidate for independent review. [PR checks](https://github.com/Avalon1230/avalon-azurlane/pull/38/checks) · [Issue #37](https://github.com/Avalon1230/avalon-azurlane/issues/37) · [Master backlog #39](https://github.com/Avalon1230/avalon-azurlane/issues/39).
 
@@ -24,7 +33,7 @@ _Last updated: 2026-11-29 (Asia/Manila). This is the permanent cross-conversatio
 
 **Release gate and next work.** Independent QA reviews the latest PR #38 head and its artifacts. Commander AVALON authorizes the release. After v0.8.14 is released and its new main is verified, the next scoped branch is **v0.8.15 Operation OVERWATCH — The Bridge**. CODEX, FORGE and CARTOGRAPHER follow in the order and with the dependencies specified in Issue #39.
 
-## Current release — v0.8.13 Operation INTEGRITY (Commander-approved, deployed 2026-11-21)
+## Previous release — v0.8.13 Operation INTEGRITY (Commander-approved, deployed 2026-11-21)
 
 Released on 2026-11-20; this is the branch metadata finalization date in Asia/Manila. The Commander authorized preparation on PR #36 only. Independent QA accepted the implementation at `8e002c98f38be7b561f5d33b895a691ca86f56dc`. [QA review](https://github.com/Avalon1230/avalon-azurlane/pull/36#pullrequestreview-5987723021) · [Commander authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).
 

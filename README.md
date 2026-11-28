@@ -6,7 +6,7 @@ Azur Lane has too many ships, skills and equipment choices for a single tier num
 
 **[Open AVALON](https://avalon1230.github.io/avalon-azurlane/)** · [See what's new](CHANGELOG.md) · [Follow development](docs/PROJECT_STATUS.md)
 
-**Release status:** The live release is v0.8.13. v0.8.14 Operation BLACK FRIDAY is unreleased and ready for independent QA.
+**Release status:** Once this build is published, the live release is v0.8.14. The PR metadata was released on 2026-11-29 (Asia/Manila) for independent release-state QA. At finalization, main was on v0.8.13. [Commander authorization for finalization](https://github.com/Avalon1230/avalon-azurlane/pull/38#issuecomment-7243598672).
 
 ## Explore AVALON
 
