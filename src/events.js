@@ -133,20 +133,40 @@ export function occurrenceStatus(o,now=Date.now()){
 }
 export function eventSection(status){return ['ongoing','maintenance'].includes(status)?'ongoing':status==='ended'?'past':status==='permanent'?'war-archives':'upcoming';}
 export function occurrenceSortTime(o){return o.start?.value?Date.parse(o.start.value):o.start?.date?Date.parse(o.start.date+'T00:00:00Z'):null;}
+// An identity match covers every run. A named reward can be offered on only some runs,
+// even when the event description also mentions that reward.
+function matchingRewardRuns(event,region,term){
+  const matches=value=>value?.toLocaleLowerCase().includes(term);
+  if(!term||[event.title,event.franchise,...(event.aliases||[])].some(matches))return null;
+  const items=(event.content||[]).filter(item=>matches(item.name));
+  if(!items.length&&matches(event.description))return null;
+  return new Set(items.filter(item=>item.regions.includes(region)).flatMap(item=>item.occurrenceIds));
+}
 export function eventRows(catalog,filters={},now=Date.now()){
-  const {region='EN',query='',year='all',category='all',status='all',sort='newest'}=filters;
+  const {region='EN',query='',year='all',category='all',status='all',sort='newest',view='cards'}=filters;
   const term=String(query).trim().toLocaleLowerCase();
   const rows=[];
   for(const event of catalog?.events||[]){
     if(category!=='all'&&event.category!==category)continue;
-    if(term&&![event.title,event.franchise,event.description,...(event.aliases||[]),...(event.content||[]).filter(x=>x.regions.includes(region)).map(x=>x.name)].join(' ').toLocaleLowerCase().includes(term))continue;
-    const runs=event.occurrences.filter(o=>o.region===region&&(year==='all'||String(o.start.value||o.start.date||'').slice(0,4)===year));
-    const ranked=runs.map(o=>({event,occurrence:o,status:occurrenceStatus(o,now)})).filter(r=>status==='all'||r.status===status);
-    // One identity per section. Multiple historical reruns live in the detail chronology.
-    for(const section of ['ongoing','upcoming','past','war-archives']){
-      const candidates=ranked.filter(r=>eventSection(r.status)===section).sort((a,b)=>(occurrenceSortTime(b.occurrence)??-Infinity)-(occurrenceSortTime(a.occurrence)??-Infinity));
-      if(candidates.length)rows.push({...candidates[0],section});
+    const rewardRuns=matchingRewardRuns(event,region,term);
+    const latestBySection=new Map();
+    for(const occurrence of event.occurrences){
+      if(occurrence.region!==region||(rewardRuns&&!rewardRuns.has(occurrence.id)))continue;
+      if(year!=='all'&&String(occurrence.start.value||occurrence.start.date||'').slice(0,4)!==year)continue;
+      const runStatus=occurrenceStatus(occurrence,now);
+      if(status!=='all'&&runStatus!==status)continue;
+      const section=eventSection(runStatus);
+      const row={event,occurrence,status:runStatus,section};
+      if(view==='timeline'){
+        rows.push(row);
+        continue;
+      }
+      const latest=latestBySection.get(section);
+      if(!latest||(occurrenceSortTime(occurrence)??-Infinity)>(occurrenceSortTime(latest.occurrence)??-Infinity)){
+        latestBySection.set(section,row);
+      }
     }
+    rows.push(...latestBySection.values());
   }
   return rows.sort((a,b)=>{
     const aTime=occurrenceSortTime(a.occurrence),bTime=occurrenceSortTime(b.occurrence);

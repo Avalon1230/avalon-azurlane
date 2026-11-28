@@ -146,11 +146,40 @@ try{
   await page.getByLabel('Content for server').selectOption('CN');
   const toggle=page.locator('#event-schedule-toggle');
   await toggle.focus();await page.keyboard.press('Enter');await focused(toggle);
-  assert.match(await page.locator('.event-phases').innerText(),/15 Dec 2026.*23:59/);
+  for(const label of ['Cumulative point reward claims close','Commemorative handbook medal claims close']){
+   const phase=page.locator('.event-phases li').filter({hasText:label});
+   assert.match(await phase.innerText(),/15 Dec 2026.*23:59/);
+  }
   await page.locator('#event-schedule').evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
   await capture(page,'black-friday-veritas-regions-'+width);
   await preserved(page);await noOverflow(page);assert.deepEqual(errors,[]);await page.close();
   report.checks.push({operation:'Veritas Academy',width,checks:['EN timer','JP and CN maintenance dates','CN claim deadline','schedule keyboard focus','saved loadout']});
+ }
+
+ // Follow the same reward searches a Commander would use after the CN stages close.
+ for(const width of [390,1280]){
+  const {page,errors}=await pageFor(width,{time:'2026-12-11T04:00:00Z'});
+  await page.goto(origin+'/#/events');
+  await page.locator('[data-action="events-filters-toggle"]').click();
+  await page.getByLabel('Server region').selectOption('CN');
+  const query=page.getByLabel('Search events & rewards');
+  await query.fill('Asanagi · Merit Shop');
+  const links=page.locator('.event-section h3 a');
+  for(const view of ['Cards','Timeline']){
+   await page.getByRole('button',{name:view,exact:true}).click();
+   assert.deepEqual(await links.evaluateAll(items=>items.map(item=>item.hash)),['#/events/effulgence-before-eclipse?occurrence=effulgence-archive-cn-20261119']);
+  }
+  await query.fill('Veritas Academy Medal');
+  await page.getByLabel('Status',{exact:true}).selectOption('ongoing');
+  assert.deepEqual(await links.evaluateAll(items=>items.map(item=>item.hash)),['#/events/veritas-point-rewards?occurrence=veritas-point-rewards-cn-20261124']);
+  await links.click();
+  const medal=page.locator('#event-item-handbook-medal');
+  assert.match(await medal.innerText(),/stickers earned before December 10 maintenance/);
+  assert.match(await medal.innerText(),/December 15 at 23:59/);
+  await medal.scrollIntoViewIfNeeded();
+  await capture(page,'black-friday-cn-medal-claim-'+width);
+  await preserved(page);assert.deepEqual(errors,[]);await page.close();
+  report.checks.push({operation:'CN reward search',width,checks:['archive-only Merit results in both views','ongoing medal claim after stages ended','saved loadout']});
  }
 
  // A changed build offers a normal reload and never clears stored selections.

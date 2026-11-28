@@ -35,8 +35,11 @@ The source review covered the November 19 and November 24 updates in all three r
 | Campaign Drop Support | Dec 2, 23:59 | Dec 3 maintenance | Dec 3 maintenance |
 | Veritas stages and limited construction | Dec 9, 23:59 | Dec 10 maintenance | Dec 10 maintenance |
 | Cumulative point reward claims | Dec 16, 23:59 | Dec 15, 23:59 | Dec 15, 23:59 |
+| Commemorative handbook medal claims after stages end | Unconfirmed | Unconfirmed | Dec 15, 23:59 |
 | Summer outfit shop and side stories | Dec 9, 23:59 | Dec 9, 23:59 | Nov 29, 23:59 |
 | Rapid Training | Dec 15, 23:59 | Dec 16 maintenance | Unconfirmed in the reviewed notices |
+
+On CN, complete sticker missions before December 10 maintenance. Commanders who already earned the stickers can redeem the Veritas Academy Medal in the handbook until December 15 at 23:59 (UTC+8). The CN notice gives the handbook and cumulative point rewards separate claim interfaces with the same deadline. The existing reward-claim entry includes both on CN and retains its original bookmark. EN describes the commemorative album during the event. JP describes medal earning from achievement missions and gives a later deadline only for cumulative points. [CN notice, commemorative handbook section](https://www.taptap.cn/moment/873989096031126872) · [EN notice](https://azurlane.yo-star.com/news/2026/11/23/maintenance-notice-11-24-12-a-m-utc-7-2/) · [JP notice](https://www.azurlane.jp/news/773).
 
 Effulgence now has one confirmed permanent occurrence per region. The JP occurrence keeps its existing bookmark. The CN construction and UR Exchange routes use the publisher’s local ship aliases, reconciled against the pinned CN name-code table and EN/JP/CN ship group IDs. The JP final-map guarantee has its own regional reward. The CN notice describes Asanagi’s supply-shop addition without specifying an exact opening hour. Pinned CN shop entry 43065 exchanges 8,000 Merit for her ship form 301901. The active rotation includes that entry in commodity list 4. The price applies to CN. See the machine-readable ledger above for the source hashes.
 
@@ -46,4 +49,4 @@ The Veritas wiki lists an all-server end date. The three regional publisher noti
 
 ## Independent QA
 
-The Quality checks workflow verifies the EN client rows, the baseline IDs, second-level deadlines, EN scope, archive acquisition routes and original gallery variants. The viewport job captures the coupon, shop, gallery, War Archives detail and regional Veritas schedule at 390 and 1280 pixels in the **integrity-ui-screenshots** artifact. Files begin with `black-friday-`. The report records observed image loads and source-host failures separately. Existing viewport, research, combat, Events, saved-loadout and release-state suites run alongside this coverage.
+The Quality checks workflow verifies the EN client rows, the baseline IDs, second-level deadlines, EN scope, archive acquisition routes and original gallery variants. The viewport job captures the coupon, shop, gallery, War Archives detail regional Veritas schedule and post-stage CN medal claim at 390 and 1280 pixels in the **integrity-ui-screenshots** artifact. Files begin with `black-friday-`. The report records observed image loads and source-host failures separately. Existing viewport, research, combat, Events, saved-loadout and release-state suites run alongside this coverage.

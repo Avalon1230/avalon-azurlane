@@ -14,6 +14,8 @@ Unreleased; Operation BLACK FRIDAY is in independent QA preparation.
 
 - Updated the November 24 event schedules, separated Veritas Academy stage and reward deadlines, and recorded the JP/CN collaboration shop extensions. Effulgence now has confirmed War Archives access on all three servers, including Asanagi’s 8,000-Merit shop route on CN.
 
+- Reward searches now open the run that offered the reward in both Cards and Timeline. On CN, the Veritas Academy Medal can be claimed with previously earned stickers until December 15 at 23:59 server time.
+
 ## [0.8.13] - 2026-11-20
 
 Released on 2026-11-20; this date records finalization of v0.8.13 on PR #36. Public rollout requires separate Commander approval after independent QA of the finalized commit. [Preparation authorization](https://github.com/Avalon1230/avalon-azurlane/pull/36#issuecomment-7030935412).

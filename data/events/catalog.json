@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-26T12:57:32Z",
+  "updatedAt": "2026-11-28T17:29:13Z",
   "coverage": "partial",
   "sources": {
     "official-en-collab-20261112": {
@@ -687,7 +687,7 @@
       "title": "Yostar EN · November 24 update",
       "url": "https://azurlane.yo-star.com/news/2026/11/23/maintenance-notice-11-24-12-a-m-utc-7-2/",
       "type": "official",
-      "checkedAt": "2026-11-26T06:32:48Z",
+      "checkedAt": "2026-11-28T17:29:13Z",
       "publishedAt": "2026-11-23",
       "shortTitle": "Yostar EN · November 24 update"
     },
@@ -695,7 +695,7 @@
       "title": "Yostar JP · November 24 update (completed)",
       "url": "https://azurlane.jp/news/773",
       "type": "official",
-      "checkedAt": "2026-11-26T06:32:48Z",
+      "checkedAt": "2026-11-28T17:29:13Z",
       "publishedAt": "2026-11-23",
       "shortTitle": "Yostar JP · November 24 update (completed)"
     },
@@ -711,7 +711,7 @@
       "title": "Azur Lane CN · November 24 update",
       "url": "https://www.taptap.cn/moment/873989096031126872",
       "type": "official",
-      "checkedAt": "2026-11-26T06:32:48Z",
+      "checkedAt": "2026-11-28T17:29:13Z",
       "publishedAt": "2026-11-23",
       "shortTitle": "Azur Lane CN · November 24 update"
     },
@@ -10883,7 +10883,7 @@
       "title": "The Transfer Student of Veritas Academy",
       "category": "mini",
       "description": "Play event stages for points, then claim milestone rewards. Story Mode awards a gear skin.",
-      "verifiedAt": "2026-11-26T06:32:48Z",
+      "verifiedAt": "2026-11-28T17:29:13Z",
       "sourceIds": [
         "wiki-veritas-nov26",
         "en-veritas-notice",
@@ -11013,6 +11013,22 @@
                 ],
                 "value": "2026-12-15T23:59:00+08:00"
               }
+            },
+            {
+              "id": "medal-claim",
+              "label": "Commemorative handbook medal claims close",
+              "kind": "claim",
+              "sourceIds": [
+                "cn-veritas-notice"
+              ],
+              "at": {
+                "kind": "exact",
+                "zone": "Asia/Shanghai",
+                "sourceIds": [
+                  "cn-veritas-notice"
+                ],
+                "value": "2026-12-15T23:59:00+08:00"
+              }
             }
           ],
           "releaseConfirmedAt": "2026-11-26T06:32:48Z",
@@ -11088,10 +11104,10 @@
     },
     {
       "id": "veritas-point-rewards",
-      "title": "Veritas Academy · point rewards",
+      "title": "Veritas Academy · reward claims",
       "category": "recurring",
-      "description": "Claim Imperatritsa Mariya from cumulative event points. The claim window extends beyond the battle stages.",
-      "verifiedAt": "2026-11-26T06:32:48Z",
+      "description": "Collect rewards you earned during the event. Select your server for its claim window and rewards.",
+      "verifiedAt": "2026-11-28T17:29:13Z",
       "sourceIds": [
         "en-veritas-notice",
         "jp-veritas-notice",
@@ -11201,10 +11217,28 @@
             "jp-veritas-notice",
             "cn-veritas-notice"
           ]
+        },
+        {
+          "id": "handbook-medal",
+          "kind": "reward",
+          "name": "Veritas Academy Medal",
+          "description": "Redeem stickers earned before December 10 maintenance in the commemorative handbook. Medal claims close on December 15 at 23:59 CN server time.",
+          "regions": [
+            "CN"
+          ],
+          "occurrenceIds": [
+            "veritas-point-rewards-cn-20261124"
+          ],
+          "sourceIds": [
+            "cn-veritas-notice"
+          ]
         }
       ],
       "stages": [],
-      "missing": []
+      "missing": [],
+      "aliases": [
+        "Veritas Academy · point rewards"
+      ]
     },
     {
       "id": "autumnal-waterworld",

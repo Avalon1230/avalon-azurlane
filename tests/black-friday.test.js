@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {eventRows,occurrenceStatus,formatEventTime,normalizeEventFilters} from '../src/events.js';
-import {renderEventDetail} from '../src/events-view.js';
+import {renderEventDetail,renderEvents} from '../src/events-view.js';
 import {blackFridayArtwork} from '../src/black-friday-artwork.js';
 import {renderShipProfile} from '../src/ship-profiles.js';
 
@@ -143,4 +143,81 @@ test('Cruise Missions and November outfit trials keep published start precision 
   assert(eventRows(catalog,{region:'CN',query},reviewed).some(r=>r.event.id==='veritas-outfit-shop'));
   assert(!eventRows(catalog,{region:'EN',query},reviewed).length);
   assert(!get('veritas-outfit-rentals').occurrences.some(o=>o.region==='CN'));
+});
+
+function resultRuns(eventId, filters, at=Date.parse(catalog.updatedAt)){
+  const html=renderEvents({catalog,filters:normalizeEventFilters(filters),now:at});
+  const links=[...html.matchAll(/<h3><a href="#\/events\/([^?]+)\?occurrence=([^"]+)"/g)];
+  return links.filter(([,id])=>id===eventId).map(([, ,run])=>run);
+}
+
+test('archive reward searches link only their eligible run in cards and timeline',()=>{
+  const id='effulgence-before-eclipse';
+  for(const view of ['cards','timeline']){
+    for(const [region,query,run] of [
+      ['CN','Asanagi · Merit Shop','effulgence-archive-cn-20261119'],
+      ['JP','Hatsuzuki · final map reward','effulgence-jp-war-archives']
+    ]){
+      const filters={region,query,view};
+      assert.deepEqual(resultRuns(id,filters),[run]);
+      assert.deepEqual(resultRuns(id,{...filters,year:'2026',status:'permanent'}),[run]);
+      assert.deepEqual(resultRuns(id,{...filters,year:'2025'}),[]);
+      assert.deepEqual(resultRuns(id,{...filters,status:'ended'}),[]);
+    }
+    assert.deepEqual(resultRuns(id,{view,region:'CN',query:'final map reward'}),[]);
+  }
+});
+
+test('historical reward searches select the original even when a newer rerun exists',()=>{
+  for(const view of ['cards','timeline']){
+    for(const query of ['Zuikaku','Ema']){
+      const filters={region:'EN',query,view};
+      assert.deepEqual(resultRuns('visitors-dyed-in-red',filters),['visitors-dyed-in-red-en-original-2018']);
+      assert.deepEqual(resultRuns('visitors-dyed-in-red',{...filters,status:'permanent'}),[]);
+      assert.deepEqual(resultRuns('visitors-dyed-in-red',{...filters,year:'2019'}),[]);
+    }
+  }
+});
+
+test('event title and alias searches include all runs and count each identity once per section',()=>{
+  const event=get('divergent-chessboard');
+  for(const query of [event.title,'Opposite-Colored']){
+    const filters={region:'CN',query,view:'timeline',sort:'oldest'};
+    assert.deepEqual(resultRuns(event.id,filters).sort(),event.occurrences.filter(o=>o.region==='CN').map(o=>o.id).sort());
+    const html=renderEvents({catalog,filters:normalizeEventFilters(filters),now:Date.parse(catalog.updatedAt)});
+    assert.match(html,/id="events-past">Past Events<\/h2><span>1 identity<\/span>/);
+    assert.deepEqual(resultRuns(event.id,{...filters,view:'cards',status:'ended'}),['divergent-chessboard-cn-rerun-2018']);
+  }
+});
+
+test('CN can redeem the Veritas medal after sticker missions end, through the exact claim cutoff',()=>{
+  const stages=get('transfer-student-veritas-academy'),claims=get('veritas-point-rewards');
+  const cnRun=stages.occurrences.find(o=>o.region==='CN');
+  const medalPhase=cnRun.phases.find(p=>p.id==='medal-claim');
+  assert.equal(medalPhase?.kind,'claim');
+  assert.equal(medalPhase.at.value,'2026-12-15T23:59:00+08:00');
+  assert.deepEqual(medalPhase.sourceIds,['cn-veritas-notice']);
+  assert.deepEqual(medalPhase.at.sourceIds,['cn-veritas-notice']);
+  const claim=claims.occurrences.find(o=>o.region==='CN');
+  const medal=claims.content.find(i=>i.name==='Veritas Academy Medal');
+  assert.deepEqual(medal.occurrenceIds,[claim.id]);
+  assert.deepEqual(medal.regions,['CN']);
+  assert.deepEqual(medal.sourceIds,['cn-veritas-notice']);
+  assert.equal(claim.end.value,medalPhase.at.value);
+  const cutoff=Date.parse(medalPhase.at.value);
+  for(const view of ['cards','timeline']){
+    const filters={query:medal.name,region:'CN',view,status:'ongoing'};
+    for(const at of [Date.parse('2026-12-11T00:00:00+08:00'),cutoff-1]){
+      assert.deepEqual(resultRuns(stages.id,filters,at),[]);
+      assert.deepEqual(resultRuns(claims.id,filters,at),[claim.id]);
+      assert.deepEqual(resultRuns(stages.id,{...filters,status:'ended'},at),[cnRun.id]);
+    }
+    assert.deepEqual(resultRuns(claims.id,filters,cutoff),[]);
+    assert.deepEqual(resultRuns(claims.id,{...filters,status:'ended'},cutoff),[claim.id]);
+    for(const region of ['EN','JP']){
+      assert.deepEqual(resultRuns(claims.id,{...filters,region},cutoff-1),[]);
+      assert(!stages.occurrences.find(o=>o.region===region).phases.some(p=>p.id==='medal-claim'));
+    }
+  }
+  assert.match(detail(claims.id,claim.id),/stickers earned before December 10 maintenance/);
 });
